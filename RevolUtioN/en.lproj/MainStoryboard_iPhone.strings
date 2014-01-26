@@ -1,0 +1,423 @@
+
+/* Class = "IBUIViewController"; title = "First"; ObjectID = "2"; */
+"2.title" = "First";
+
+/* Class = "IBUIViewController"; title = "Second"; ObjectID = "3"; */
+"3.title" = "Second";
+
+/* Class = "IBUITabBarItem"; title = "约跑"; ObjectID = "6"; */
+"6.title" = "约跑";
+
+/* Class = "IBUILabel"; text = "User Name"; ObjectID = "09A-79-Cwd"; */
+"09A-79-Cwd.text" = "User Name";
+
+/* Class = "IBUITextField"; placeholder = "用户名/邮箱"; ObjectID = "0Sl-s7-pKs"; */
+"0Sl-s7-pKs.placeholder" = "用户名/邮箱";
+
+/* Class = "IBUILabel"; text = "Name"; ObjectID = "17v-A6-HEt"; */
+"17v-A6-HEt.text" = "Name";
+
+/* Class = "IBUILabel"; text = "3km+"; ObjectID = "1Js-c3-ZO8"; */
+"1Js-c3-ZO8.text" = "3km+";
+
+/* Class = "IBUIBarButtonItem"; title = "开始！"; ObjectID = "29h-S7-wg5"; */
+"29h-S7-wg5.title" = "开始！";
+
+/* Class = "IBUILabel"; text = "500"; ObjectID = "2IM-BI-kgO"; */
+"2IM-BI-kgO.text" = "500";
+
+/* Class = "IBUILabel"; text = "-"; ObjectID = "2Qs-ms-6TF"; */
+"2Qs-ms-6TF.text" = "-";
+
+/* Class = "IBUILabel"; text = "使用"; ObjectID = "2cl-cN-9lt"; */
+"2cl-cN-9lt.text" = "使用";
+
+/* Class = "IBUINavigationItem"; title = "准备"; ObjectID = "2eP-Vw-4kQ"; */
+"2eP-Vw-4kQ.title" = "准备";
+
+/* Class = "IBUILabel"; text = "4.6"; ObjectID = "2rM-Ct-sMl"; */
+"2rM-Ct-sMl.text" = "4.6";
+
+/* Class = "IBUIButton"; normalTitle = "约跑"; ObjectID = "3Ct-7y-ctW"; */
+"3Ct-7y-ctW.normalTitle" = "约跑";
+
+/* Class = "IBUILabel"; text = "地点"; ObjectID = "3LU-JB-K9k"; */
+"3LU-JB-K9k.text" = "地点";
+
+/* Class = "IBUIBarButtonItem"; title = "提交"; ObjectID = "3fz-zf-N40"; */
+"3fz-zf-N40.title" = "提交";
+
+/* Class = "IBUITabBarItem"; title = "商城"; ObjectID = "43W-P5-ANZ"; */
+"43W-P5-ANZ.title" = "商城";
+
+/* Class = "IBUILabel"; text = "备注"; ObjectID = "4OG-x8-VfX"; */
+"4OG-x8-VfX.text" = "备注";
+
+/* Class = "IBUILabel"; text = "账号"; ObjectID = "5Bb-24-YAG"; */
+"5Bb-24-YAG.text" = "账号";
+
+/* Class = "IBUIBarButtonItem"; title = "跑步！"; ObjectID = "5VT-nZ-grv"; */
+"5VT-nZ-grv.title" = "跑步！";
+
+/* Class = "IBUILabel"; text = "100"; ObjectID = "6J3-bM-4Vw"; */
+"6J3-bM-4Vw.text" = "100";
+
+/* Class = "IBUIBarButtonItem"; title = "发送"; ObjectID = "6UJ-Zk-XHm"; */
+"6UJ-Zk-XHm.title" = "发送";
+
+/* Class = "IBUILabel"; text = "Date-time"; ObjectID = "6V0-RA-zJ5"; */
+"6V0-RA-zJ5.text" = "Date-time";
+
+/* Class = "IBUIButton"; normalTitle = "约跑"; ObjectID = "6YV-OG-Cph"; */
+"6YV-OG-Cph.normalTitle" = "约跑";
+
+/* Class = "IBUILabel"; text = "日期-时间"; ObjectID = "6ht-sH-sws"; */
+"6ht-sH-sws.text" = "日期-时间";
+
+/* Class = "IBUILabel"; text = "21/30"; ObjectID = "6ki-9m-PFB"; */
+"6ki-9m-PFB.text" = "21/30";
+
+/* Class = "IBUINavigationItem"; title = "登录"; ObjectID = "6oB-b8-jeU"; */
+"6oB-b8-jeU.title" = "登录";
+
+/* Class = "IBUILabel"; text = "任务进程："; ObjectID = "6qP-5S-GS3"; */
+"6qP-5S-GS3.text" = "任务进程：";
+
+/* Class = "IBUILabel"; text = "任务奖励："; ObjectID = "6uV-ci-tgv"; */
+"6uV-ci-tgv.text" = "任务奖励：";
+
+/* Class = "IBUILabel"; text = "60"; ObjectID = "7Cf-Oa-uJv"; */
+"7Cf-Oa-uJv.text" = "60";
+
+/* Class = "IBUILabel"; text = "3"; ObjectID = "8Gt-jT-YhJ"; */
+"8Gt-jT-YhJ.text" = "3";
+
+/* Class = "IBUINavigationItem"; title = "周期任务"; ObjectID = "9DP-LK-YQ3"; */
+"9DP-LK-YQ3.title" = "周期任务";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "9N3-To-74L"; */
+"9N3-To-74L.text" = "Label";
+
+/* Class = "IBUILabel"; text = "66"; ObjectID = "9Qo-v3-lyZ"; */
+"9Qo-v3-lyZ.text" = "66";
+
+/* Class = "IBUIBarButtonItem"; title = "开始！"; ObjectID = "9Qw-2d-xu1"; */
+"9Qw-2d-xu1.title" = "开始！";
+
+/* Class = "IBUIBarButtonItem"; title = "后退"; ObjectID = "A4l-yC-Csy"; */
+"A4l-yC-Csy.title" = "后退";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "A96-xl-xTJ"; */
+"A96-xl-xTJ.text" = "Label";
+
+/* Class = "IBUILabel"; text = "32"; ObjectID = "AJt-aP-AD7"; */
+"AJt-aP-AD7.text" = "32";
+
+/* Class = "IBUITabBarItem"; title = "首页"; ObjectID = "CAG-a4-AiE"; */
+"CAG-a4-AiE.title" = "首页";
+
+/* Class = "IBUILabel"; text = "25.132"; ObjectID = "CBj-lF-pcP"; */
+"CBj-lF-pcP.text" = "25.132";
+
+/* Class = "IBUIButton"; normalTitle = "约跑"; ObjectID = "Cxe-Lk-FZM"; */
+"Cxe-Lk-FZM.normalTitle" = "约跑";
+
+/* Class = "IBUILabel"; text = "500"; ObjectID = "DkN-Ov-5wd"; */
+"DkN-Ov-5wd.text" = "500";
+
+/* Class = "IBUILabel"; text = "里程"; ObjectID = "Dlc-2D-Zf7"; */
+"Dlc-2D-Zf7.text" = "里程";
+
+/* Class = "IBUILabel"; text = "幸运等级"; ObjectID = "E98-ct-hhl"; */
+"E98-ct-hhl.text" = "幸运等级";
+
+/* Class = "IBUINavigationItem"; title = "约跑"; ObjectID = "EHB-kj-GFD"; */
+"EHB-kj-GFD.title" = "约跑";
+
+/* Class = "IBUILabel"; text = "任务目标："; ObjectID = "EjW-Zb-PEX"; */
+"EjW-Zb-PEX.text" = "任务目标：";
+
+/* Class = "IBUILabel"; text = "Time"; ObjectID = "Ezg-Cg-Sco"; */
+"Ezg-Cg-Sco.text" = "Time";
+
+/* Class = "IBUILabel"; text = "3-4"; ObjectID = "FzS-zY-P9K"; */
+"FzS-zY-P9K.text" = "3-4";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "Gkm-uE-aki"; */
+"Gkm-uE-aki.text" = "Label";
+
+/* Class = "IBUILabel"; text = "基础加速"; ObjectID = "GwG-v3-AdD"; */
+"GwG-v3-AdD.text" = "基础加速";
+
+/* Class = "IBUILabel"; text = "Date-time"; ObjectID = "HsO-sq-68H"; */
+"HsO-sq-68H.text" = "Date-time";
+
+/* Class = "IBUIBarButtonItem"; title = "天气-优"; ObjectID = "IVu-FM-rZG"; */
+"IVu-FM-rZG.title" = "天气-优";
+
+/* Class = "IBUINavigationItem"; title = "好友"; ObjectID = "JTD-X9-Vcw"; */
+"JTD-X9-Vcw.title" = "好友";
+
+/* Class = "IBUILabel"; text = "16500"; ObjectID = "JrR-yL-Zvp"; */
+"JrR-yL-Zvp.text" = "16500";
+
+/* Class = "IBUINavigationItem"; title = "首页"; ObjectID = "Jw4-nE-S56"; */
+"Jw4-nE-S56.title" = "首页";
+
+/* Class = "IBUILabel"; text = "打个招呼？"; ObjectID = "KTw-J4-TwI"; */
+"KTw-J4-TwI.text" = "打个招呼？";
+
+/* Class = "IBUISearchBar"; placeholder = "直接搜索用户名"; ObjectID = "LTP-if-uYn"; */
+"LTP-if-uYn.placeholder" = "直接搜索用户名";
+
+/* Class = "IBUISearchBar"; LTP-if-uYn.scopeButtonTitles[0] = "Title"; ObjectID = "LTP-if-uYn"; */
+"LTP-if-uYn.scopeButtonTitles[0]" = "Title";
+
+/* Class = "IBUISearchBar"; LTP-if-uYn.scopeButtonTitles[1] = "Title"; ObjectID = "LTP-if-uYn"; */
+"LTP-if-uYn.scopeButtonTitles[1]" = "Title";
+
+/* Class = "IBUINavigationItem"; title = "设置城市"; ObjectID = "LaW-94-LlB"; */
+"LaW-94-LlB.title" = "设置城市";
+
+/* Class = "IBUILabel"; text = "全部训练完成后将有能力挑战全程马拉松"; ObjectID = "LcX-ak-0k2"; */
+"LcX-ak-0k2.text" = "全部训练完成后将有能力挑战全程马拉松";
+
+/* Class = "IBUIBarButtonItem"; title = "开始！"; ObjectID = "MKC-Z7-T8u"; */
+"MKC-Z7-T8u.title" = "开始！";
+
+/* Class = "IBUILabel"; text = "积分            经验值 "; ObjectID = "Mfn-T8-ZjY"; */
+"Mfn-T8-ZjY.text" = "积分            经验值 ";
+
+/* Class = "IBUILabel"; text = "任务奖励："; ObjectID = "MmK-bM-ZPe"; */
+"MmK-bM-ZPe.text" = "任务奖励：";
+
+/* Class = "IBUILabel"; text = "任务"; ObjectID = "N16-gC-5n6"; */
+"N16-gC-5n6.text" = "任务";
+
+/* Class = "IBUITabBarItem"; title = "更多"; ObjectID = "NHZ-lh-pqU"; */
+"NHZ-lh-pqU.title" = "更多";
+
+/* Class = "IBUILabel"; text = "莲花南路校门"; ObjectID = "O5s-28-Kb2"; */
+"O5s-28-Kb2.text" = "莲花南路校门";
+
+/* Class = "IBUILabel"; text = "等级"; ObjectID = "PP0-X8-Hcn"; */
+"PP0-X8-Hcn.text" = "等级";
+
+/* Class = "IBUINavigationItem"; title = "约跑"; ObjectID = "PeA-O3-nGg"; */
+"PeA-O3-nGg.title" = "约跑";
+
+/* Class = "IBUILabel"; text = "爆击等级"; ObjectID = "Piy-ZK-zVX"; */
+"Piy-ZK-zVX.text" = "爆击等级";
+
+/* Class = "IBUITextField"; text = "S-20', A-22', B-25', C-27', D-30', F-30+"; ObjectID = "QYY-j6-XIm"; */
+"QYY-j6-XIm.text" = "S-20', A-22', B-25', C-27', D-30', F-30+";
+
+/* Class = "IBUILabel"; text = "Details"; ObjectID = "QkY-4d-06k"; */
+"QkY-4d-06k.text" = "Details";
+
+/* Class = "IBUITabBarItem"; title = "约跑"; ObjectID = "RCW-1v-yqo"; */
+"RCW-1v-yqo.title" = "约跑";
+
+/* Class = "IBUILabel"; text = "总："; ObjectID = "S6q-qu-Ymr"; */
+"S6q-qu-Ymr.text" = "总：";
+
+/* Class = "IBUIButton"; normalTitle = "更多"; ObjectID = "Ti1-ZJ-NJ9"; */
+"Ti1-ZJ-NJ9.normalTitle" = "更多";
+
+/* Class = "IBUIButton"; normalTitle = "开始!"; ObjectID = "Tsp-SB-9R5"; */
+"Tsp-SB-9R5.normalTitle" = "开始!";
+
+/* Class = "IBUIBarButtonItem"; title = "确定"; ObjectID = "UNO-vh-gjD"; */
+"UNO-vh-gjD.title" = "确定";
+
+/* Class = "IBUINavigationItem"; title = "日期&时间"; ObjectID = "UYi-56-3Nk"; */
+"UYi-56-3Nk.title" = "日期&时间";
+
+/* Class = "IBUILabel"; text = "惯性加速"; ObjectID = "Uuz-vp-dOu"; */
+"Uuz-vp-dOu.text" = "惯性加速";
+
+/* Class = "IBUILabel"; text = "积分            经验值 "; ObjectID = "V8L-b9-W2U"; */
+"V8L-b9-W2U.text" = "积分            经验值 ";
+
+/* Class = "IBUILabel"; text = "[      ]天内完成"; ObjectID = "VJS-AV-4PQ"; */
+"VJS-AV-4PQ.text" = "[      ]天内完成";
+
+/* Class = "IBUINavigationItem"; title = "打招呼"; ObjectID = "VQh-XV-S9r"; */
+"VQh-XV-S9r.title" = "打招呼";
+
+/* Class = "IBUITextField"; placeholder = "确认密码"; ObjectID = "Vtb-sV-tuV"; */
+"Vtb-sV-tuV.placeholder" = "确认密码";
+
+/* Class = "IBUILabel"; text = "任务奖励："; ObjectID = "W5o-gi-aRv"; */
+"W5o-gi-aRv.text" = "任务奖励：";
+
+/* Class = "IBUILabel"; text = "战胜马拉松"; ObjectID = "Wid-gY-PPa"; */
+"Wid-gY-PPa.text" = "战胜马拉松";
+
+/* Class = "IBUILabel"; text = "25℃"; ObjectID = "Y6P-Pq-4XQ"; */
+"Y6P-Pq-4XQ.text" = "25℃";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "YHf-MK-cIi"; */
+"YHf-MK-cIi.text" = "Label";
+
+/* Class = "IBUILabel"; text = "时间"; ObjectID = "YOS-Qn-yhU"; */
+"YOS-Qn-yhU.text" = "时间";
+
+/* Class = "IBUIButton"; normalTitle = "加好友"; ObjectID = "YQC-84-Ujy"; */
+"YQC-84-Ujy.normalTitle" = "加好友";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "Z8b-JI-Hgu"; */
+"Z8b-JI-Hgu.text" = "Label";
+
+/* Class = "IBUILabel"; text = "下次训练"; ObjectID = "ZoL-gC-Dnd"; */
+"ZoL-gC-Dnd.text" = "下次训练";
+
+/* Class = "IBUILabel"; text = "100"; ObjectID = "ZwB-lU-GW0"; */
+"ZwB-lU-GW0.text" = "100";
+
+/* Class = "IBUINavigationItem"; title = "穿着"; ObjectID = "a2d-Fb-tdU"; */
+"a2d-Fb-tdU.title" = "穿着";
+
+/* Class = "IBUILabel"; text = "秋林阁餐厅"; ObjectID = "aaY-ON-iGf"; */
+"aaY-ON-iGf.text" = "秋林阁餐厅";
+
+/* Class = "IBUILabel"; text = "User Name"; ObjectID = "amu-KD-aQ5"; */
+"amu-KD-aQ5.text" = "User Name";
+
+/* Class = "IBUILabel"; text = "排名"; ObjectID = "aqy-Pr-deG"; */
+"aqy-Pr-deG.text" = "排名";
+
+/* Class = "IBUILabel"; text = "天内完成"; ObjectID = "d9T-RL-pGe"; */
+"d9T-RL-pGe.text" = "天内完成";
+
+/* Class = "IBUIBarButtonItem"; title = "注销"; ObjectID = "dJL-YN-9Ri"; */
+"dJL-YN-9Ri.title" = "注销";
+
+/* Class = "IBUIBarButtonItem"; title = "取消"; ObjectID = "e59-Wb-OZs"; */
+"e59-Wb-OZs.title" = "取消";
+
+/* Class = "IBUILabel"; text = "积分"; ObjectID = "g88-Jw-oN5"; */
+"g88-Jw-oN5.text" = "积分";
+
+/* Class = "IBUILabel"; text = "排名"; ObjectID = "gvK-78-8xt"; */
+"gvK-78-8xt.text" = "排名";
+
+/* Class = "IBUILabel"; text = "预计里程(km)："; ObjectID = "h4o-mZ-u36"; */
+"h4o-mZ-u36.text" = "预计里程(km)：";
+
+/* Class = "IBUILabel"; text = "穿着"; ObjectID = "h53-Kc-GAv"; */
+"h53-Kc-GAv.text" = "穿着";
+
+/* Class = "IBUILabel"; text = "跑在华师大[线路任务]"; ObjectID = "ha3-ZS-qui"; */
+"ha3-ZS-qui.text" = "跑在华师大[线路任务]";
+
+/* Class = "IBUILabel"; text = "10000"; ObjectID = "hfB-A5-L1w"; */
+"hfB-A5-L1w.text" = "10000";
+
+/* Class = "IBUILabel"; text = "User Name"; ObjectID = "ivN-Y8-1eP"; */
+"ivN-Y8-1eP.text" = "User Name";
+
+/* Class = "IBUILabel"; text = "时间"; ObjectID = "kud-jo-5qh"; */
+"kud-jo-5qh.text" = "时间";
+
+/* Class = "IBUINavigationItem"; title = "登录"; ObjectID = "l10-z9-tzt"; */
+"l10-z9-tzt.title" = "登录";
+
+/* Class = "IBUILabel"; text = "3"; ObjectID = "lBf-gV-3qc"; */
+"lBf-gV-3qc.text" = "3";
+
+/* Class = "IBUITabBarItem"; title = "首页"; ObjectID = "lpG-0U-ZDb"; */
+"lpG-0U-ZDb.title" = "首页";
+
+/* Class = "IBUISegmentedControl"; mRf-ge-RyB.segmentTitles[0] = "登录"; ObjectID = "mRf-ge-RyB"; */
+"mRf-ge-RyB.segmentTitles[0]" = "登录";
+
+/* Class = "IBUISegmentedControl"; mRf-ge-RyB.segmentTitles[1] = "注册"; ObjectID = "mRf-ge-RyB"; */
+"mRf-ge-RyB.segmentTitles[1]" = "注册";
+
+/* Class = "IBUILabel"; text = "下次训练:"; ObjectID = "nMo-9J-WSj"; */
+"nMo-9J-WSj.text" = "下次训练:";
+
+/* Class = "IBUIBarButtonItem"; title = "发送"; ObjectID = "nUu-iw-bIi"; */
+"nUu-iw-bIi.title" = "发送";
+
+/* Class = "IBUILabel"; text = "地区"; ObjectID = "nbk-VO-PqI"; */
+"nbk-VO-PqI.text" = "地区";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "nmr-J8-u5K"; */
+"nmr-J8-u5K.text" = "Label";
+
+/* Class = "IBUIBarButtonItem"; title = "登录"; ObjectID = "o3p-t7-48H"; */
+"o3p-t7-48H.title" = "登录";
+
+/* Class = "IBUIBarButtonItem"; title = "提交"; ObjectID = "oLr-AL-SiP"; */
+"oLr-AL-SiP.title" = "提交";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "q1x-sO-rmf"; */
+"q1x-sO-rmf.text" = "Label";
+
+/* Class = "IBUILabel"; text = "跑在华师大"; ObjectID = "q6f-9x-0qi"; */
+"q6f-9x-0qi.text" = "跑在华师大";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "qTj-jr-jRQ"; */
+"qTj-jr-jRQ.text" = "Title";
+
+/* Class = "IBUILabel"; text = "32"; ObjectID = "qYt-yX-Vef"; */
+"qYt-yX-Vef.text" = "32";
+
+/* Class = "IBUILabel"; text = "良"; ObjectID = "rRe-Wc-oM3"; */
+"rRe-Wc-oM3.text" = "良";
+
+/* Class = "IBUINavigationItem"; title = "跑在华师大"; ObjectID = "rTp-b7-pj8"; */
+"rTp-b7-pj8.title" = "跑在华师大";
+
+/* Class = "IBUILabel"; text = "Title"; ObjectID = "sTV-Yz-xa7"; */
+"sTV-Yz-xa7.text" = "Title";
+
+/* Class = "IBUILabel"; text = "积分              经验值 "; ObjectID = "sya-rk-hcy"; */
+"sya-rk-hcy.text" = "积分              经验值 ";
+
+/* Class = "IBUIButton"; normalTitle = "放弃"; ObjectID = "tIN-Hh-GfC"; */
+"tIN-Hh-GfC.normalTitle" = "放弃";
+
+/* Class = "IBUILabel"; text = "20min-"; ObjectID = "tL6-XH-Liu"; */
+"tL6-XH-Liu.text" = "20min-";
+
+/* Class = "IBUINavigationItem"; title = "添加好友"; ObjectID = "tOC-H8-LdT"; */
+"tOC-H8-LdT.title" = "添加好友";
+
+/* Class = "IBUILabel"; text = "跑在华师大[线路任务]"; ObjectID = "tao-tQ-X1D"; */
+"tao-tQ-X1D.text" = "跑在华师大[线路任务]";
+
+/* Class = "IBUILabel"; text = "115"; ObjectID = "teH-gY-5wn"; */
+"teH-gY-5wn.text" = "115";
+
+/* Class = "IBUILabel"; text = "5000"; ObjectID = "vXN-ho-L1w"; */
+"vXN-ho-L1w.text" = "5000";
+
+/* Class = "IBUITextField"; placeholder = "密码"; ObjectID = "vwW-LX-VTP"; */
+"vwW-LX-VTP.placeholder" = "密码";
+
+/* Class = "IBUILabel"; text = "182"; ObjectID = "vxt-yN-nho"; */
+"vxt-yN-nho.text" = "182";
+
+/* Class = "IBUIBarButtonItem"; title = "来点音乐"; ObjectID = "xOS-tq-ybN"; */
+"xOS-tq-ybN.title" = "来点音乐";
+
+/* Class = "IBUILabel"; text = "Date-time"; ObjectID = "xno-hv-BJO"; */
+"xno-hv-BJO.text" = "Date-time";
+
+/* Class = "IBUIButton"; normalTitle = "约跑"; ObjectID = "y3C-LZ-dTz"; */
+"y3C-LZ-dTz.normalTitle" = "约跑";
+
+/* Class = "IBUILabel"; text = "任务"; ObjectID = "y8h-P1-xpg"; */
+"y8h-P1-xpg.text" = "任务";
+
+/* Class = "IBUINavigationItem"; title = "选择任务"; ObjectID = "zDA-Cj-fnX"; */
+"zDA-Cj-fnX.title" = "选择任务";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "zLJ-js-k7M"; */
+"zLJ-js-k7M.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "zww-lm-0AF"; */
+"zww-lm-0AF.text" = "Label";
