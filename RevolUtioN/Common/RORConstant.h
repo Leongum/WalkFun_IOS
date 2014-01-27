@@ -10,7 +10,7 @@
 
 #ifndef URLS
 //define test service host
-#define SERVICE_HOST @"http://localhost:8080/walkfun/service/api"
+#define SERVICE_HOST @"http://121.199.56.231:8080/walkfun/service/api"
 
 #define CURRENT_VERSION_MAIN 1
 #define CURRENT_VERSION_SUB 0
