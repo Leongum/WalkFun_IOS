@@ -16,7 +16,6 @@
 		0F1930221884DEF100E74BB1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1930211884DEF100E74BB1 /* MediaPlayer.framework */; };
 		0F1930261884DF0300E74BB1 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1930251884DF0300E74BB1 /* Social.framework */; };
 		0F1930271884DFD900E74BB1 /* LingQianSDK.framework in Resources */ = {isa = PBXBuildFile; fileRef = 0F1930191884DD8500E74BB1 /* LingQianSDK.framework */; };
-		0F53B43E17F34795006DB4C4 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F53B43C17F34795006DB4C4 /* MainStoryboard_iPhone.storyboard */; };
 		0F53B49617F3481D006DB4C4 /* QQConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F53B44F17F3481D006DB4C4 /* QQConnection.framework */; };
 		0F53B49717F3481D006DB4C4 /* QZoneConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F53B45017F3481D006DB4C4 /* QZoneConnection.framework */; };
 		0F53B49817F3481D006DB4C4 /* RenRenConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F53B45117F3481D006DB4C4 /* RenRenConnection.framework */; };
@@ -113,7 +112,6 @@
 		0FDE82DA18927C390082B1BF /* run_at_speed.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE82D518927C390082B1BF /* run_at_speed.mp3 */; };
 		0FDE82DB18927C390082B1BF /* run_faster.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE82D618927C390082B1BF /* run_faster.mp3 */; };
 		0FDE82DC18927C390082B1BF /* run_slower.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0FDE82D718927C390082B1BF /* run_slower.mp3 */; };
-		0FDE82EB1892C3B70082B1BF /* RORCoreData.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE82EA1892C3B70082B1BF /* RORCoreData.xcdatamodel */; };
 		0FDE82EE189383150082B1BF /* User_Mission_History.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE82ED189383150082B1BF /* User_Mission_History.m */; };
 		0FDE82F4189383160082B1BF /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE82F3189383160082B1BF /* Action.m */; };
 		0FDE82F7189383160082B1BF /* Friend_Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE82F6189383160082B1BF /* Friend_Sort.m */; };
@@ -186,6 +184,8 @@
 		303B87EA1852DE0900FD44AC /* expandButton_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 303B87E61852DE0900FD44AC /* expandButton_bg.png */; };
 		303B87EB1852DE0900FD44AC /* searchTableView_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 303B87E71852DE0900FD44AC /* searchTableView_bg.png */; };
 		303B87EC1852DE0900FD44AC /* searchViewCell_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 303B87E81852DE0900FD44AC /* searchViewCell_bg.png */; };
+		3054673518ADC0FB00CA123C /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3054673318ADC0FB00CA123C /* MainStoryboard_iPhone.storyboard */; };
+		3054673618ADC61C00CA123C /* RORCoreData.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE82EA1892C3B70082B1BF /* RORCoreData.xcdatamodel */; };
 		30594BC417F06B4F00E6A19B /* seg_selected_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30594BC317F06B4F00E6A19B /* seg_selected_bg.png */; };
 		30594BCD17F0851500E6A19B /* last_kilo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 30594BC917F0851500E6A19B /* last_kilo.mp3 */; };
 		30594BCE17F0851500E6A19B /* last_hundred.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 30594BCA17F0851500E6A19B /* last_hundred.mp3 */; };
@@ -347,7 +347,6 @@
 		0F19301F1884DEDF00E74BB1 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		0F1930211884DEF100E74BB1 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0F1930251884DF0300E74BB1 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		0F53B43D17F34795006DB4C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = RevolUtioN/en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		0F53B44F17F3481D006DB4C4 /* QQConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QQConnection.framework; sourceTree = "<group>"; };
 		0F53B45017F3481D006DB4C4 /* QZoneConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QZoneConnection.framework; sourceTree = "<group>"; };
 		0F53B45117F3481D006DB4C4 /* RenRenConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RenRenConnection.framework; sourceTree = "<group>"; };
@@ -596,6 +595,7 @@
 		303B87E61852DE0900FD44AC /* expandButton_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expandButton_bg.png; sourceTree = "<group>"; };
 		303B87E71852DE0900FD44AC /* searchTableView_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchTableView_bg.png; sourceTree = "<group>"; };
 		303B87E81852DE0900FD44AC /* searchViewCell_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchViewCell_bg.png; sourceTree = "<group>"; };
+		3054673418ADC0FB00CA123C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = RevolUtioN/en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		30594BC317F06B4F00E6A19B /* seg_selected_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = seg_selected_bg.png; path = bg/seg_selected_bg.png; sourceTree = "<group>"; };
 		30594BC917F0851500E6A19B /* last_kilo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = last_kilo.mp3; path = Resources/sound/last_kilo.mp3; sourceTree = "<group>"; };
 		30594BCA17F0851500E6A19B /* last_hundred.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = last_hundred.mp3; path = Resources/sound/last_hundred.mp3; sourceTree = "<group>"; };
@@ -1141,6 +1141,7 @@
 		302FCFF81727D870004DA005 = {
 			isa = PBXGroup;
 			children = (
+				3054673318ADC0FB00CA123C /* MainStoryboard_iPhone.storyboard */,
 				0F1930181884DD8500E74BB1 /* lingqian */,
 				30692D5718117C2500DA01EC /* SVProgressHUD */,
 				0F8501DF17C1C68E0005993E /* libsqlite3.dylib */,
@@ -1149,7 +1150,6 @@
 				30F4549017C1296C006CB66C /* Animation */,
 				30BB0BAB176A04A10009A847 /* libz.1.2.5.dylib */,
 				30BB0BA9176A04910009A847 /* libicucore.dylib */,
-				0F53B43C17F34795006DB4C4 /* MainStoryboard_iPhone.storyboard */,
 				301C1F6817378AF30068B43B /* Resources */,
 				30F4546017BCB519006CB66C /* InertiaNavigation */,
 				302FD00A1727D870004DA005 /* RevolUtioN */,
@@ -1912,6 +1912,7 @@
 				307C862317E97A90007C1DE5 /* running_bg.png in Resources */,
 				307C862517E97A90007C1DE5 /* spring_bg.png in Resources */,
 				303707AC1806590B00FE0238 /* stamp_f.png in Resources */,
+				3054673518ADC0FB00CA123C /* MainStoryboard_iPhone.storyboard in Resources */,
 				307C862E17E9A78B007C1DE5 /* details.png in Resources */,
 				307C862F17E9A78B007C1DE5 /* details@2x.png in Resources */,
 				30594BC417F06B4F00E6A19B /* seg_selected_bg.png in Resources */,
@@ -1921,7 +1922,6 @@
 				30978DA317EDA57E00CA58B9 /* history_detail_bg.png in Resources */,
 				3005D01D185855F400D83648 /* infoSpeedIcon.png in Resources */,
 				30978DA717EDAFEA00CA58B9 /* share_btn.png in Resources */,
-				0F53B43E17F34795006DB4C4 /* MainStoryboard_iPhone.storyboard in Resources */,
 				3005CFF218545D0E00D83648 /* trainingMain_bg.png in Resources */,
 				3005D01E185855F400D83648 /* infoTimeIcon.png in Resources */,
 				30103DF2185EE8EE002B65ED /* history_detail_speedButton_bg.png in Resources */,
@@ -1975,6 +1975,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3054673618ADC61C00CA123C /* RORCoreData.xcdatamodel in Sources */,
 				0FA7515C1892796E0037342E /* RORCustomShareItemView.m in Sources */,
 				0FDE830C189503650082B1BF /* RORFriendService.m in Sources */,
 				302FD0151727D870004DA005 /* RORAppDelegate.m in Sources */,
@@ -2077,7 +2078,6 @@
 				30C1218817EA963B0077CBD3 /* RORCountDownCoverView.m in Sources */,
 				0FA7518A189279A90037342E /* Reachability.m in Sources */,
 				30C1219117EC99EA0077CBD3 /* RORBreathingControl.m in Sources */,
-				0FDE82EB1892C3B70082B1BF /* RORCoreData.xcdatamodel in Sources */,
 				0FA751FD18927A0F0037342E /* RORShareViewDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2101,20 +2101,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0F53B43C17F34795006DB4C4 /* MainStoryboard_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0F53B43D17F34795006DB4C4 /* en */,
-			);
-			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
 		0F53B45E17F3481D006DB4C4 /* ShareSDKLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				0F53B45F17F3481D006DB4C4 /* en */,
 			);
 			name = ShareSDKLocalizable.strings;
+			sourceTree = "<group>";
+		};
+		3054673318ADC0FB00CA123C /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3054673418ADC0FB00CA123C /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

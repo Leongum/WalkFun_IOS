@@ -245,8 +245,9 @@
     }
     
     //这里一定要注意，这里的iWeather就是你刚才建立的数据模型的名字，一定要一致。否则会报错。
-    
-    NSURL *modelURL = [[NSBundle mainBundle]URLForResource:@"RORCoreData"withExtension:@"momd"];
+//    NSString *path = @"RORCoreData";
+//    NSURL *modelURL = [NSURL fileURLWithPath:[path stringByAppendingPathExtension:@"momd"]];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"RORCoreData" withExtension:@"mom"];
     
     _managedObjectModel = [[NSManagedObjectModel alloc]initWithContentsOfURL:modelURL];
     

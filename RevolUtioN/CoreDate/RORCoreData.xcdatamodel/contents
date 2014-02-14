@@ -55,11 +55,13 @@
         <attribute name="appPicLink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recommendStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="sequence" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <entity name="System_Message" representedClassName="System_Message" syncable="YES">
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="messageId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="rule" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <entity name="User_Base" representedClassName="User_Base" syncable="YES">
         <attribute name="age" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -138,15 +140,15 @@
         <attribute name="valid" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Action" positionX="-326" positionY="387" width="128" height="150"/>
-        <element name="Friend" positionX="0" positionY="0" width="128" height="135"/>
-        <element name="Friend_Sort" positionX="-135" positionY="129" width="128" height="150"/>
-        <element name="Mission" positionX="16" positionY="171" width="128" height="315"/>
-        <element name="Recommend_App" positionX="-506" positionY="111" width="128" height="150"/>
-        <element name="System_Message" positionX="-162" positionY="0" width="128" height="90"/>
-        <element name="User_Base" positionX="-117" positionY="312" width="128" height="210"/>
-        <element name="User_Detail" positionX="160" positionY="192" width="128" height="375"/>
-        <element name="User_Mission_History" positionX="-326" positionY="126" width="128" height="240"/>
-        <element name="User_Running_History" positionX="-729" positionY="81" width="128" height="375"/>
+        <element name="Action" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Friend" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Friend_Sort" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Mission" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Recommend_App" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="System_Message" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User_Base" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User_Detail" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User_Mission_History" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User_Running_History" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>
