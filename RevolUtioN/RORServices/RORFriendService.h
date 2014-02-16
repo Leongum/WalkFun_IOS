@@ -20,17 +20,17 @@
 //根据user id 和friend id来确定2者关注关系
 +(Friend *)fetchUserFriend:(NSNumber *) userId withFriendId:(NSNumber *) friendId;
 
-//同步获取关注列表
-+(int)syncFriendFollows:(NSNumber *) userId;
-
-//同步粉丝列表
-+(int)syncFriendFans:(NSNumber *) userId;
+//同步用户好友信息
++(int)syncFriends:(NSNumber *) userId;
 
 //创建或者更新好友关系，必须同步完成，如果服务器同步失败，则失败
 +(BOOL)createOrUpdateFriend:(Friend *)friend;
 
-//获得好友排名
-+(NSMutableArray *)fetchFriendSortList;
+//获得我的粉丝按照修改时间修改顺序排序
++(NSArray *)fetchFriendFansList;
+
+//获得我关注的列表按照时间修改顺序
++(NSArray *)fetchFriendFollowsList;
 
 //获取好友初步信息
 +(BOOL)syncFriendSort:(NSNumber *) userId;

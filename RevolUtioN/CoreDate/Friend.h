@@ -18,6 +18,11 @@
 @property (nonatomic, retain) NSDate * updateTime;
 @property (nonatomic, retain) NSNumber * userId;
 
+@property (nonatomic, retain) NSString * sex;
+@property (nonatomic, retain) NSString * userName;
+@property (nonatomic, retain) NSNumber * level;
+@property (nonatomic, retain) NSString * userTitle;
+
 +(Friend *) removeAssociateForEntity:(Friend *)associatedEntity;
 
 -(void)initWithDictionary:(NSDictionary *)dict;

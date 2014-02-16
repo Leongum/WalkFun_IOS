@@ -18,8 +18,6 @@
 @property (nonatomic, retain) NSNumber * level;
 @property (nonatomic, retain) NSString * userTitle;
 @property (nonatomic, retain) NSNumber * totalDistance;
-@property (nonatomic, retain) NSNumber * friendStatus;
-@property (nonatomic, retain) NSDate * lastActiveTime;
 
 +(Friend_Sort *) removeAssociateForEntity:(Friend_Sort *)associatedEntity;
 

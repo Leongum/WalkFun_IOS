@@ -9,6 +9,16 @@
         <attribute name="actionToName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
+    <entity name="Action_Define" representedClassName="Action_Define" syncable="YES">
+        <attribute name="actionAttribute" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="actionDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="actionId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="actionName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="actionRule" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="actionType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="triggerProbability" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
     <entity name="Friend" representedClassName="Friend" syncable="YES">
         <attribute name="addTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="friendEach" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -20,8 +30,6 @@
     <entity name="Friend_Sort" representedClassName="Friend_Sort" syncable="YES">
         <attribute name="friendId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="friendName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="friendStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="lastActiveTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="sex" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalDistance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -86,6 +94,7 @@
         <attribute name="level" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="maxCombo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="picId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="propHaving" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalActiveTimes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="totalCarlorie" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="totalDistance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -152,17 +161,18 @@
         <attribute name="virtualPrice" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Action" positionX="-405" positionY="408" width="128" height="150"/>
-        <element name="Friend" positionX="61" positionY="369" width="128" height="135"/>
-        <element name="Friend_Sort" positionX="-99" positionY="360" width="128" height="165"/>
-        <element name="Mission" positionX="43" positionY="9" width="128" height="315"/>
-        <element name="Recommend_App" positionX="-108" positionY="153" width="128" height="165"/>
-        <element name="System_Message" positionX="-99" positionY="3" width="128" height="105"/>
-        <element name="User_Base" positionX="-245" positionY="375" width="128" height="210"/>
-        <element name="User_Detail" positionX="-549" positionY="153" width="128" height="330"/>
-        <element name="User_Mission_History" positionX="-252" positionY="135" width="128" height="225"/>
-        <element name="User_Prop" positionX="-261" positionY="0" width="128" height="120"/>
-        <element name="User_Running_History" positionX="-405" positionY="-0" width="128" height="390"/>
-        <element name="Virtual_Product" positionX="-549" positionY="0" width="128" height="135"/>
+        <element name="Action" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Friend" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Friend_Sort" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Mission" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Recommend_App" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="System_Message" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User_Base" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User_Detail" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User_Mission_History" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User_Prop" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User_Running_History" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Virtual_Product" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Action_Define" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

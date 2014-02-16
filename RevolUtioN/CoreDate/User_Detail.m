@@ -29,6 +29,7 @@
 @dynamic totalWalkingTimes;
 @dynamic maxCombo;
 @dynamic currentCombo;
+@dynamic propHaving;
 @dynamic updateTime;
 
 +(User_Detail *) removeAssociateForEntity:(User_Detail *)associatedEntity{
@@ -60,6 +61,7 @@
     self.totalWalkingTimes = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalWalkingTimes"]];
     self.maxCombo = [RORDBCommon getNumberFromId:[dict valueForKey:@"maxCombo"]];
     self.currentCombo = [RORDBCommon getNumberFromId:[dict valueForKey:@"currentCombo"]];
+    self.propHaving = [RORDBCommon getStringFromId:[dict valueForKey:@"propHaving"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
 }
 

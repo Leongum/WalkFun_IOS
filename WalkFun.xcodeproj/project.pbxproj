@@ -22,6 +22,7 @@
 		0F1930271884DFD900E74BB1 /* LingQianSDK.framework in Resources */ = {isa = PBXBuildFile; fileRef = 0F1930191884DD8500E74BB1 /* LingQianSDK.framework */; };
 		0F282F8F18B08D36003F44E8 /* RORUserPropsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F282F8E18B08D36003F44E8 /* RORUserPropsService.m */; };
 		0F282F9218B09435003F44E8 /* RORVirtualProductService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F282F9118B09435003F44E8 /* RORVirtualProductService.m */; };
+		0F282F9518B10CF7003F44E8 /* Action_Define.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F282F9418B10CF7003F44E8 /* Action_Define.m */; };
 		0F53B49617F3481D006DB4C4 /* QQConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F53B44F17F3481D006DB4C4 /* QQConnection.framework */; };
 		0F53B49717F3481D006DB4C4 /* QZoneConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F53B45017F3481D006DB4C4 /* QZoneConnection.framework */; };
 		0F53B49817F3481D006DB4C4 /* RenRenConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F53B45117F3481D006DB4C4 /* RenRenConnection.framework */; };
@@ -365,6 +366,8 @@
 		0F282F8E18B08D36003F44E8 /* RORUserPropsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORUserPropsService.m; path = RevolUtioN/RORServices/RORUserPropsService.m; sourceTree = "<group>"; };
 		0F282F9018B09435003F44E8 /* RORVirtualProductService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORVirtualProductService.h; path = RevolUtioN/RORServices/RORVirtualProductService.h; sourceTree = "<group>"; };
 		0F282F9118B09435003F44E8 /* RORVirtualProductService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORVirtualProductService.m; path = RevolUtioN/RORServices/RORVirtualProductService.m; sourceTree = "<group>"; };
+		0F282F9318B10CF7003F44E8 /* Action_Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Action_Define.h; path = CoreDate/Action_Define.h; sourceTree = "<group>"; };
+		0F282F9418B10CF7003F44E8 /* Action_Define.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Action_Define.m; path = CoreDate/Action_Define.m; sourceTree = "<group>"; };
 		0F53B44F17F3481D006DB4C4 /* QQConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QQConnection.framework; sourceTree = "<group>"; };
 		0F53B45017F3481D006DB4C4 /* QZoneConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QZoneConnection.framework; sourceTree = "<group>"; };
 		0F53B45117F3481D006DB4C4 /* RenRenConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RenRenConnection.framework; sourceTree = "<group>"; };
@@ -1345,6 +1348,8 @@
 				0FA751B3189279CB0037342E /* RORDBCommon.m */,
 				0FDE82F2189383160082B1BF /* Action.h */,
 				0FDE82F3189383160082B1BF /* Action.m */,
+				0F282F9318B10CF7003F44E8 /* Action_Define.h */,
+				0F282F9418B10CF7003F44E8 /* Action_Define.m */,
 				0FA75196189279CB0037342E /* Friend.h */,
 				0FA75197189279CB0037342E /* Friend.m */,
 				0FDE82F5189383160082B1BF /* Friend_Sort.h */,
@@ -2070,6 +2075,7 @@
 				0FA7518E189279A90037342E /* RORHttpResponse.m in Sources */,
 				308C166118698D99005B0198 /* RORShareViewController.m in Sources */,
 				0FA75191189279A90037342E /* RORNetWorkUtils.m in Sources */,
+				0F282F9518B10CF7003F44E8 /* Action_Define.m in Sources */,
 				0F282F9218B09435003F44E8 /* RORVirtualProductService.m in Sources */,
 				0FA7521818927A410037342E /* RORLoginViewController.m in Sources */,
 				0FDE82CC18927B4E0082B1BF /* RORUserClientHandler.m in Sources */,

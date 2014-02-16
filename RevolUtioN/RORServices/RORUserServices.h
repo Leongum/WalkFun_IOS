@@ -47,8 +47,6 @@
 //根据昵称查询用户，服务器同步获取。返回Search_Friend
 +(NSArray *)searchFriend:(NSString *) nickName;
 
-
-
 //logout之后删除本地数据
 +(void)clearUserData;
 @end

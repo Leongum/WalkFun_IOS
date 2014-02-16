@@ -121,26 +121,6 @@
 }
 
 //open out
-+(BOOL)submitFeedback:(NSDictionary *)feedbackDic{
-    RORHttpResponse *httpResponse = [RORSystemClientHandler submitFeedback:feedbackDic];
-    if ([httpResponse responseStatus] == 200){
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
-//open out
-+(BOOL)submitDownloaded:(NSDictionary *)downLoadDic{
-    RORHttpResponse *httpResponse = [RORSystemClientHandler submitDownLoaded:downLoadDic];
-    if ([httpResponse responseStatus] == 200){
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
-//open out
 + (BOOL)syncRecommendApp{
     NSError *error = nil;
     NSManagedObjectContext *context = [RORContextUtils getShareContext];
@@ -196,5 +176,60 @@
         [recommendList addObject:newrecommed];
     }
     return [recommendList copy];
+}
+
+//open out
++ (BOOL)syncActionDefine{
+    NSError *error = nil;
+    NSManagedObjectContext *context = [RORContextUtils getShareContext];
+    NSString *lastUpdateTime = [RORUserUtils getLastUpdateTime:@"ActionDefineLastUpdateTime"];
+    
+    RORHttpResponse *httpResponse =[RORSystemClientHandler getActionDefine:lastUpdateTime];
+    
+    if ([httpResponse responseStatus]  == 200){
+        NSArray *actionList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
+        for (NSDictionary *actionDict in actionList){
+            NSNumber *actionId = [actionDict valueForKey:@"actionId"];
+            Action_Define *actionEntity = [self fetchActionDefine:actionId];
+            if(actionEntity == nil)
+                actionEntity = [NSEntityDescription insertNewObjectForEntityForName:@"Action_Define" inManagedObjectContext:context];
+            [actionEntity initWithDictionary:actionDict];
+        }
+        
+        [RORContextUtils saveContext];
+        [RORUserUtils saveLastUpdateTime:@"ActionDefineLastUpdateTime"];
+    } else {
+        NSLog(@"sync with host error: can't get sync action define. Status Code: %d", [httpResponse responseStatus]);
+        return NO;
+    }
+    return YES;
+}
+
++ (Action_Define *)fetchActionDefine:(NSNumber *) actionId {
+    NSString *table=@"Action_Define";
+    NSString *query = @"actionId = %@";
+    NSArray *params = [NSArray arrayWithObjects:actionId, nil];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    if (fetchObject == nil || [fetchObject count] == 0) {
+        return nil;
+    }
+    return  (Action_Define *) [fetchObject objectAtIndex:0];
+}
+
+//open out
++ (NSArray *)fetchAllActionDefine:(ActionDefineEnum) actionType{
+    NSString *table=@"Action_Define";
+    NSString *query = @"actionType = %@";
+    NSArray *params = [NSArray arrayWithObjects:[NSNumber numberWithInteger:(NSInteger)actionType], nil];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    if (fetchObject == nil || [fetchObject count] == 0) {
+        return nil;
+    }
+    NSMutableArray *actionList = [[NSMutableArray alloc] init];
+    for (Action_Define *actionDefine in fetchObject) {
+        Action_Define *newAction = [Action_Define removeAssociateForEntity:actionDefine];
+        [actionList addObject:newAction];
+    }
+    return [actionList copy];
 }
 @end

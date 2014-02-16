@@ -52,10 +52,10 @@
         }
         if([RORUserUtils getDownLoaded].doubleValue == 0){
             NSDictionary *downLoadDict = [[NSDictionary alloc]initWithObjectsAndKeys:@"ios", @"platform",[NSString stringWithFormat:@"%@.%@", version.version,version.subVersion], @"version", nil];
-            BOOL success = [RORSystemService submitDownloaded:downLoadDict];
-            if(success){
-                [RORUserUtils doneDowned];
-            }
+//            BOOL success = [RORSystemService submitDownloaded:downLoadDict];
+//            if(success){
+//                [RORUserUtils doneDowned];
+//            }
         }
     }
     [RORUserUtils syncSystemData];

@@ -45,14 +45,8 @@
     return httpResponse;
 }
 
-+(RORHttpResponse *)getFriendFansInfo:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime{
-    NSString *url = [NSString stringWithFormat:FRIEND_GET_FANS_URL, userId, lastUpdateTime];
-    RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
-    return httpResponse;
-}
-
-+(RORHttpResponse *)getFriendFollowsInfo:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime{
-    NSString *url = [NSString stringWithFormat:FRIEND_GET_FOLLOWER_URL, userId, lastUpdateTime];
++(RORHttpResponse *)getFriendsInfo:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime{
+    NSString *url = [NSString stringWithFormat:FRIEND_GET_URL, userId, lastUpdateTime];
     RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
     return httpResponse;
 }

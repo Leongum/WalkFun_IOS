@@ -24,8 +24,7 @@
 
 // --- firend api ---
 #define FRIEND_CREATE_OR_UPDATE_URL [SERVICE_HOST stringByAppendingString:@"/account/friends/create/%@"]
-#define FRIEND_GET_FANS_URL [SERVICE_HOST stringByAppendingString:@"/account/friends/get/fans/%@?lastUpdateTime=%@"]
-#define FRIEND_GET_FOLLOWER_URL [SERVICE_HOST stringByAppendingString:@"/account/friends/get/follows/%@?lastUpdateTime=%@"]
+#define FRIEND_GET_URL [SERVICE_HOST stringByAppendingString:@"/account/friends/get/%@?lastUpdateTime=%@"]
 #define FRIEND_SEARCH_URL [SERVICE_HOST stringByAppendingString:@"/account/search/get/%@"]
 #define FRIEND_SORT_UPDATE_URL [SERVICE_HOST stringByAppendingString:@"/account/friendsort/get/%@?lastUpdateTime=%@"]
 
@@ -40,9 +39,8 @@
 // --- system api ---
 #define SYSTEM_VERSION_URL [SERVICE_HOST stringByAppendingString:@"/system/version/get/%@"]
 #define SYSTEM_SYSTEM_MESSAGE_URL [SERVICE_HOST stringByAppendingString:@"/system/message/get/%@"]
-#define SYSTEM_FEEDBACK_URL [SERVICE_HOST stringByAppendingString:@"/system/feedback/post"]
-#define SYSTEM_DOWNLOADED_URL [SERVICE_HOST stringByAppendingString:@"/system/download/post"]
 #define SYSTEM_RECOMMEND_APP_URL [SERVICE_HOST stringByAppendingString:@"/system/recommend/get/%@"]
+#define SYSTEM_ACTION_DEFINE_URL [SERVICE_HOST stringByAppendingString:@"/system/actionDefine/get/%@"]
 
 // --- mission api ---
 #define MISSION_GET_URL [SERVICE_HOST stringByAppendingString:@"/missions/mission/get?lastUpdateTime=%@"]
@@ -90,6 +88,7 @@ typedef enum {FriendStatusOnlyFollowed = 0, FriendStatusFollowEachother = 1} Fri
 typedef enum {HistoryStatusExecute = 0, HistoryStatusFinished = 1, HistoryStatusCancled = 2} HistoryStatusEnum;
 typedef enum {OperateUpdate = 0, OperateInsert = 1, OperateDelete = 2} OperateEnum;
 typedef enum {PlanFlagNew = 0, PlanFlagHot = 1, PlanFlagRecommend = 2} PlanFlagEnun;
+typedef enum {ActionDefineRun = 0, ActionDefineUse = 1} ActionDefineEnum;
 
 typedef struct {
     int mainVersion;

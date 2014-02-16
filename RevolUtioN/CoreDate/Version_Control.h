@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSDate * messageLastUpdateTime;
 @property (nonatomic, retain) NSDate *recommendLastUpdateTime;
 @property (nonatomic, retain) NSDate *productLastUpdateTime;
+@property (nonatomic, retain) NSDate *actionDefineUpdateTime;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 @end

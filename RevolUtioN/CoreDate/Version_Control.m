@@ -21,6 +21,7 @@
 @synthesize messageLastUpdateTime;
 @synthesize recommendLastUpdateTime;
 @synthesize productLastUpdateTime;
+@synthesize actionDefineUpdateTime;
 
 -(void)initWithDictionary:(NSDictionary *)dict{
     self.platform = [RORDBCommon getStringFromId:[dict valueForKey:@"platform"]];
@@ -32,6 +33,7 @@
     self.messageLastUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"messageLastUpdateTime"]];
     self.recommendLastUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"recommendLastUpdateTime"]];
     self.productLastUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"productLastUpdateTime"]];
+    self.actionDefineUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"actionDefineUpdateTime"]];
 }
 
 @end

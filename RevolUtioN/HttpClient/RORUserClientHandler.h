@@ -26,9 +26,7 @@
 
 +(RORHttpResponse *)createFriendInfo:(NSNumber *)userId withFriendInfo:(NSDictionary *) friendInfo;
 
-+(RORHttpResponse *)getFriendFansInfo:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime;
-
-+(RORHttpResponse *)getFriendFollowsInfo:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime;
++(RORHttpResponse *)getFriendsInfo:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime;
 
 +(RORHttpResponse *)searchFriendInfo:(NSString *)nickName;
 

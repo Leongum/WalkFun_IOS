@@ -18,9 +18,7 @@
 
 +(RORHttpResponse *)getSystemMessage:(NSString *) lastUpdateTime;
 
-+(RORHttpResponse *)submitFeedback:(NSDictionary *) feedbackDic;
-
-+(RORHttpResponse *)submitDownLoaded:(NSDictionary *) downLoadDic;
-
 +(RORHttpResponse *)getRecommendApp:(NSString *) lastUpdateTime;
+
++(RORHttpResponse *)getActionDefine:(NSString *) lastUpdateTime;
 @end

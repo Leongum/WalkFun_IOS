@@ -30,13 +30,13 @@
 }
 
 //open out
-+(int)syncFriendFollows:(NSNumber *) userId {
++(int)syncFriends:(NSNumber *) userId {
     if(userId.integerValue > 0)
     {
         NSError *error = nil;
         NSManagedObjectContext *context = [RORContextUtils getShareContext];
-        NSString *lastUpdateTime = [RORUserUtils getLastUpdateTime:@"FriendFollowsUpdateTime"];
-        RORHttpResponse *httpResponse =[RORUserClientHandler getFriendFollowsInfo:userId withLastUpdateTime:lastUpdateTime];
+        NSString *lastUpdateTime = [RORUserUtils getLastUpdateTime:@"FriendsUpdateTime"];
+        RORHttpResponse *httpResponse =[RORUserClientHandler getFriendsInfo:userId withLastUpdateTime:lastUpdateTime];
         
         if ([httpResponse responseStatus] == 200){
             NSArray *friendList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
@@ -52,39 +52,7 @@
             }
             
             [RORContextUtils saveContext];
-            [RORUserUtils saveLastUpdateTime:@"FriendFollowsUpdateTime"];
-            return count;
-        } else {
-            NSLog(@"sync with host error: can't get user's friends list. Status Code: %d", [httpResponse responseStatus]);
-        }
-    }
-    return 0;
-}
-
-//open out
-+(int)syncFriendFans:(NSNumber *) userId {
-    if(userId.integerValue > 0)
-    {
-        NSError *error = nil;
-        NSManagedObjectContext *context = [RORContextUtils getShareContext];
-        NSString *lastUpdateTime = [RORUserUtils getLastUpdateTime:@"FriendFansUpdateTime"];
-        RORHttpResponse *httpResponse =[RORUserClientHandler getFriendFansInfo:userId withLastUpdateTime:lastUpdateTime];
-        
-        if ([httpResponse responseStatus] == 200){
-            NSArray *friendList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
-            int count = 0;
-            for (NSDictionary *friendDict in friendList){
-                NSNumber *userIdNum = [friendDict valueForKey:@"userId"];
-                NSNumber *friendIdNum = [friendDict valueForKey:@"friendId"];
-                Friend *friendEntity = [self fetchUserFriend:userIdNum withFriendId:friendIdNum withContext:YES];
-                if(friendEntity == nil)
-                    friendEntity = [NSEntityDescription insertNewObjectForEntityForName:@"Friend" inManagedObjectContext:context];
-                [friendEntity initWithDictionary:friendDict];
-                count ++;
-            }
-            
-            [RORContextUtils saveContext];
-            [RORUserUtils saveLastUpdateTime:@"FriendFansUpdateTime"];
+            [RORUserUtils saveLastUpdateTime:@"FriendsUpdateTime"];
             return count;
         } else {
             NSLog(@"sync with host error: can't get user's friends list. Status Code: %d", [httpResponse responseStatus]);
@@ -113,30 +81,64 @@
     BOOL successed = [self sycnCreateOrUpdateFriend:friend];
     //check uuid
     if(successed){
-        [self syncFriendFans:[RORUserUtils getUserId]];
-        [self syncFriendFollows:[RORUserUtils getUserId]];
+        [self syncFriends:[RORUserUtils getUserId]];
         return YES;
     }
     return NO;
 }
 
 //open out
-+(NSMutableArray *)fetchFriendSortList{
-    NSString *table=@"Friend_Sort";
-    NSString *query = @"friendStatus = %@";
-    NSArray *params = [NSArray arrayWithObjects:[NSNumber numberWithInt:0], nil];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"totalDistance" ascending:NO];
++(NSArray *)fetchFriendFansList{
+    NSNumber *userId = [RORUserUtils getUserId];
+    NSString *table=@"Friend";
+    NSString *query = @"friendId = %@";
+    NSArray *params = [NSArray arrayWithObjects:userId, nil];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"addTime" ascending:NO];
     NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
     NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
-    NSMutableArray *followerDetails = [NSMutableArray arrayWithCapacity:10];
-    for (Friend_Sort *friendSort in fetchObject) {
-        Friend_Sort *newfriendSort = [Friend_Sort removeAssociateForEntity:friendSort];
-        [followerDetails addObject:newfriendSort];
+    NSMutableArray *friendsDetails = [NSMutableArray arrayWithCapacity:10];
+    for (Friend *friend in fetchObject) {
+        Friend *newFriend =[Friend removeAssociateForEntity:friend];
+        Friend_Sort * friendSort = [self fetchFriendSortDetails:newFriend.friendId];
+        if(friendSort != nil){
+            newFriend.sex = friendSort.sex;
+            newFriend.level = friendSort.level;
+            newFriend.userName = friendSort.friendName;
+            newFriend.userTitle = friendSort.userTitle;
+        }
+        [friendsDetails addObject:newFriend];
     }
-    return followerDetails;
+    return [(NSArray*)friendsDetails mutableCopy];
+}
+
+//open out
++(NSArray *)fetchFriendFollowsList{
+    NSNumber *userId = [RORUserUtils getUserId];
+    NSString *table=@"Friend";
+    NSString *query = @"userId = %@";
+    NSArray *params = [NSArray arrayWithObjects:userId, nil];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"addTime" ascending:NO];
+    NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+    if (fetchObject == nil || [fetchObject count] == 0) {
+        return nil;
+    }
+    NSMutableArray *friendsDetails = [NSMutableArray arrayWithCapacity:10];
+    for (Friend *friend in fetchObject) {
+        Friend *newFriend =[Friend removeAssociateForEntity:friend];
+        Friend_Sort * friendSort = [self fetchFriendSortDetails:newFriend.friendId];
+        if(friendSort != nil){
+            newFriend.sex = friendSort.sex;
+            newFriend.level = friendSort.level;
+            newFriend.userName = friendSort.friendName;
+            newFriend.userTitle = friendSort.userTitle;
+        }
+        [friendsDetails addObject:newFriend];
+    }
+    return [(NSArray*)friendsDetails mutableCopy];
 }
 
 //open out
@@ -151,7 +153,7 @@
             NSArray *friendSortList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
             for (NSDictionary *friendDict in friendSortList){
                 NSNumber *friendIdNum = [friendDict valueForKey:@"friendId"];
-                Friend_Sort *friendEntity = [self fetchFriendSortDetails:friendIdNum];
+                Friend_Sort *friendEntity = [self fetchFriendSortDetails:friendIdNum withContext:YES];
                 if(friendEntity == nil)
                     friendEntity = [NSEntityDescription insertNewObjectForEntityForName:@"Friend_Sort" inManagedObjectContext:context];
                 [friendEntity initWithDictionary:friendDict];
@@ -167,12 +169,19 @@
 }
 
 +(Friend_Sort *)fetchFriendSortDetails:(NSNumber *) friendId{
+    return [self fetchFriendSortDetails:friendId withContext:NO];
+}
+
++(Friend_Sort *)fetchFriendSortDetails:(NSNumber *) friendId withContext:(BOOL) needContext{
     NSString *table=@"Friend_Sort";
     NSString *query = @"friendId = %@";
     NSArray *params = [NSArray arrayWithObjects:friendId, nil];
     NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
+    }
+    if (!needContext) {
+        return[Friend_Sort removeAssociateForEntity:(Friend_Sort *) [fetchObject objectAtIndex:0]];
     }
     return (Friend_Sort *) [fetchObject objectAtIndex:0];
 }

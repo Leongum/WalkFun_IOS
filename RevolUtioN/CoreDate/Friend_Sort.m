@@ -11,9 +11,7 @@
 
 @implementation Friend_Sort
 
-@dynamic lastActiveTime;
 @dynamic totalDistance;
-@dynamic friendStatus;
 @dynamic userTitle;
 @dynamic level;
 @dynamic sex;
@@ -37,8 +35,6 @@
     self.level = [RORDBCommon getNumberFromId:[dict valueForKey:@"level"]];
     self.userTitle = [RORDBCommon getStringFromId:[dict valueForKey:@"userTitle"]];
     self.totalDistance = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalDistance"]];
-    self.friendStatus = [RORDBCommon getNumberFromId:[dict valueForKey:@"friendStatus"]];
-    self.lastActiveTime = [RORDBCommon getDateFromId:[dict valueForKey:@"lastActiveTime"]];
 }
 
 @end

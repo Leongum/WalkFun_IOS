@@ -18,6 +18,11 @@
 @dynamic updateTime;
 @dynamic userId;
 
+@synthesize sex;
+@synthesize userName;
+@synthesize userTitle;
+@synthesize level;
+
 +(Friend *) removeAssociateForEntity:(Friend *)associatedEntity{
     NSManagedObjectContext *context = [RORContextUtils getShareContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Friend" inManagedObjectContext:context];

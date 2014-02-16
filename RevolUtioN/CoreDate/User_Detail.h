@@ -30,6 +30,7 @@
 @property (nonatomic, retain) NSNumber * avgSpeed;
 @property (nonatomic, retain) NSNumber * maxCombo;
 @property (nonatomic, retain) NSNumber * currentCombo;
+@property (nonatomic, retain) NSString * propHaving;
 @property (nonatomic, retain) NSDate * updateTime;
 
 +(User_Detail *) removeAssociateForEntity:(User_Detail *)associatedEntity;
