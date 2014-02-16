@@ -143,9 +143,29 @@
         [RORUserUtils saveLastUpdateTime:@"RunningHistoryUpdateTime"];
         return YES;
     } else {
-        NSLog(@"sync with host error: can't get mission list. Status Code: %d", [httpResponse responseStatus]);
+        NSLog(@"sync with host error: can't sync running history. Status Code: %d", [httpResponse responseStatus]);
     }
     return NO;
+}
+
+
+//open out
++ (NSMutableArray *)getSimpleRunningHistories:(NSNumber *)userId{
+    NSError *error = nil;
+    RORHttpResponse *httpResponse =[RORRunHistoryClientHandler getSimpleRunHistories:userId];
+    if ([httpResponse responseStatus]  == 200){
+        NSArray *simpleRunHistoryList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
+        NSMutableArray *simpleHistoryList = [[NSMutableArray alloc] init];
+        for (NSDictionary *simpleRunHistoryDict in simpleRunHistoryList){
+            Simple_User_Run_History *simpleRunHistory = [[Simple_User_Run_History alloc] init];
+            [simpleRunHistory initWithDictionary:simpleRunHistoryDict];
+            [simpleHistoryList addObject:simpleRunHistory];
+        }
+        return simpleHistoryList;
+    } else {
+        NSLog(@"sync with host error: can't get Simple Running Histories. Status Code: %d", [httpResponse responseStatus]);
+    }
+    return nil;
 }
 
 //open out

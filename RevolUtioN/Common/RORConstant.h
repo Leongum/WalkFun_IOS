@@ -33,6 +33,10 @@
 #define ACTION_CREATE_ACTION_URL [SERVICE_HOST stringByAppendingString:@"/account/action/create/%@"]
 #define ACTION_GET_ACTION_URL [SERVICE_HOST stringByAppendingString:@"/account/action/get/%@"]
 
+// --- prop api ---
+#define PROP_GET_URL [SERVICE_HOST stringByAppendingString:@"/account/props/get/%@?lastUpdateTime=%@"]
+#define PROP_CREATE_URL [SERVICE_HOST stringByAppendingString:@"/account/props/create/%@"]
+
 // --- system api ---
 #define SYSTEM_VERSION_URL [SERVICE_HOST stringByAppendingString:@"/system/version/get/%@"]
 #define SYSTEM_SYSTEM_MESSAGE_URL [SERVICE_HOST stringByAppendingString:@"/system/message/get/%@"]
@@ -45,10 +49,15 @@
 
 // --- history api ---
 #define HISTORY_GET_RUNNING_HISTORY_URL [SERVICE_HOST stringByAppendingString:@"/running/history/get/%@?lastUpdateTime=%@"]
+#define HISTORY_GET_SIMPLE_RUNNING_HISTORY_URL [SERVICE_HOST stringByAppendingString:@"/running/history/simple/get/%@"]
 #define HISTORY_POST_RUNNING_HISTORY_URL [SERVICE_HOST stringByAppendingString:@"/running/history/post/%@"]
 #define HISTORY_GET_MISSION_HISTORY_URL [SERVICE_HOST stringByAppendingString:@"/running/history/mission/get/%@?lastUpdateTime=%@"]
 #define HISTORY_GET_USER_USING_MISSION_URL [SERVICE_HOST stringByAppendingString:@"/running/history/mission/using/get/%@"]
 #define HISTORY_POST_MISSION_HISTORY_URL [SERVICE_HOST stringByAppendingString:@"/running/history/mission/put/%@"]
+
+// --- virtual prop api ---
+#define VIRTUAL_PRODUCT_GET_URL [SERVICE_HOST stringByAppendingString:@"/vproduct/product/get?lastUpdateTime=%@"]
+#define VIRTUAL_PRODUCT_BUY_URL [SERVICE_HOST stringByAppendingString:@"/vproduct/history/create/%@"]
 
 // --- third party api ---
 #define THIRD_PARTY_PM25_URL @"http://www.cyberace.cc/service/api/weather/pm25?cityName=%@&provinceName=%@"

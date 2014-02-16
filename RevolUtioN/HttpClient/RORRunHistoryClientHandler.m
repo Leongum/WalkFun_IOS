@@ -22,6 +22,12 @@
     return httpResponse;
 }
 
++(RORHttpResponse *)getSimpleRunHistories:(NSNumber *)userId{
+    NSString *url = [NSString stringWithFormat:HISTORY_GET_SIMPLE_RUNNING_HISTORY_URL, userId];
+    RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
+    return httpResponse;
+}
+
 +(RORHttpResponse *)getMissionHistories:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime{
     NSString *url = [NSString stringWithFormat:HISTORY_GET_MISSION_HISTORY_URL, userId, lastUpdateTime];
     RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];

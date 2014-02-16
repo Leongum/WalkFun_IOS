@@ -23,7 +23,6 @@
 @dynamic totalActiveTimes;
 @dynamic updateTime;
 @dynamic currentCombo;
-@dynamic operate;
 
 +(User_Mission_History *) intiUnassociateEntity{
     NSManagedObjectContext *context = [RORContextUtils getShareContext];

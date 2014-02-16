@@ -37,4 +37,9 @@
 +(RORHttpResponse *)createActionInfo:(NSNumber *)userId withActionInfo:(NSDictionary *) actionInfo;
 
 +(RORHttpResponse *)getActionInfo:(NSNumber *)userId;
+
++(RORHttpResponse *)getUserProps:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime;
+
++(RORHttpResponse *)createOrUpdateUserProp:(NSNumber *)userId withUserProps:(NSMutableArray *) userProps;
+
 @end
