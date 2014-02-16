@@ -193,6 +193,7 @@
 		303B87EC1852DE0900FD44AC /* searchViewCell_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 303B87E81852DE0900FD44AC /* searchViewCell_bg.png */; };
 		3054673518ADC0FB00CA123C /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3054673318ADC0FB00CA123C /* MainStoryboard_iPhone.storyboard */; };
 		3054673618ADC61C00CA123C /* RORCoreData.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE82EA1892C3B70082B1BF /* RORCoreData.xcdatamodel */; };
+		3054673918AE04DF00CA123C /* RORMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3054673818AE04DF00CA123C /* RORMainViewController.m */; };
 		30594BC417F06B4F00E6A19B /* seg_selected_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30594BC317F06B4F00E6A19B /* seg_selected_bg.png */; };
 		30594BCD17F0851500E6A19B /* last_kilo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 30594BC917F0851500E6A19B /* last_kilo.mp3 */; };
 		30594BCE17F0851500E6A19B /* last_hundred.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 30594BCA17F0851500E6A19B /* last_hundred.mp3 */; };
@@ -312,6 +313,7 @@
 		30DBB72317EFE04400552391 /* challenge_pop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB72017EFE04400552391 /* challenge_pop_bg.png */; };
 		30DBB72417EFE04400552391 /* finishrunning_pop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB72117EFE04400552391 /* finishrunning_pop_bg.png */; };
 		30DFE7DF17C6748F00678780 /* submit.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DFE7DD17C6748F00678780 /* submit.png */; };
+		30E01E7E18B09D5A005BF080 /* ItemQuantityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E01E7D18B09D5A005BF080 /* ItemQuantityPicker.m */; };
 		30E6D0FD184F0AD200C93338 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 30E6D0FC184F0AD200C93338 /* lock.png */; };
 		30F4547017BCB519006CB66C /* INConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F4546217BCB519006CB66C /* INConstant.m */; };
 		30F4547117BCB519006CB66C /* INDeviceStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F4546417BCB519006CB66C /* INDeviceStatus.m */; };
@@ -328,6 +330,10 @@
 		30FC2903175EC34200DEC042 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FC2902175EC34200DEC042 /* MapKit.framework */; };
 		30FC292917607F6D00DEC042 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FC292117607F6D00DEC042 /* settings.png */; };
 		30FC29411760861C00DEC042 /* expand.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FC293F1760861C00DEC042 /* expand.png */; };
+		30FC340518AE178B00D3AC3A /* ItemsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FC340418AE178B00D3AC3A /* ItemsStoryboard.storyboard */; };
+		30FC340818AE182500D3AC3A /* ItemsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FC340718AE182500D3AC3A /* ItemsMainViewController.m */; };
+		30FC340B18AE75F300D3AC3A /* ItemMallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FC340A18AE75F300D3AC3A /* ItemMallViewController.m */; };
+		30FC340E18AE791600D3AC3A /* CoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FC340D18AE791600D3AC3A /* CoverView.m */; };
 		30FECBBB17D83AE5002C3C90 /* RORNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FECBBA17D83AE5002C3C90 /* RORNotificationView.m */; };
 		30FECBC117D86C29002C3C90 /* charactor.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FECBC017D86C29002C3C90 /* charactor.png */; };
 		30FECBDA17DD94A6002C3C90 /* paper.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FECBD617DD94A6002C3C90 /* paper.png */; };
@@ -617,6 +623,8 @@
 		303B87E71852DE0900FD44AC /* searchTableView_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchTableView_bg.png; sourceTree = "<group>"; };
 		303B87E81852DE0900FD44AC /* searchViewCell_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchViewCell_bg.png; sourceTree = "<group>"; };
 		3054673418ADC0FB00CA123C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = RevolUtioN/en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		3054673718AE04DF00CA123C /* RORMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORMainViewController.h; path = MainPage/RORMainViewController.h; sourceTree = "<group>"; };
+		3054673818AE04DF00CA123C /* RORMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORMainViewController.m; path = MainPage/RORMainViewController.m; sourceTree = "<group>"; };
 		30594BC317F06B4F00E6A19B /* seg_selected_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = seg_selected_bg.png; path = bg/seg_selected_bg.png; sourceTree = "<group>"; };
 		30594BC917F0851500E6A19B /* last_kilo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = last_kilo.mp3; path = Resources/sound/last_kilo.mp3; sourceTree = "<group>"; };
 		30594BCA17F0851500E6A19B /* last_hundred.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = last_hundred.mp3; path = Resources/sound/last_hundred.mp3; sourceTree = "<group>"; };
@@ -762,6 +770,8 @@
 		30DBB72017EFE04400552391 /* challenge_pop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = challenge_pop_bg.png; path = bg/challenge_pop_bg.png; sourceTree = "<group>"; };
 		30DBB72117EFE04400552391 /* finishrunning_pop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = finishrunning_pop_bg.png; path = bg/finishrunning_pop_bg.png; sourceTree = "<group>"; };
 		30DFE7DD17C6748F00678780 /* submit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = submit.png; sourceTree = "<group>"; };
+		30E01E7C18B09D5A005BF080 /* ItemQuantityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemQuantityPicker.h; path = Items/ItemQuantityPicker.h; sourceTree = "<group>"; };
+		30E01E7D18B09D5A005BF080 /* ItemQuantityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemQuantityPicker.m; path = Items/ItemQuantityPicker.m; sourceTree = "<group>"; };
 		30E6D0FC184F0AD200C93338 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
 		30F4546117BCB519006CB66C /* INConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INConstant.h; sourceTree = "<group>"; };
 		30F4546217BCB519006CB66C /* INConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INConstant.m; sourceTree = "<group>"; };
@@ -785,6 +795,13 @@
 		30FC2902175EC34200DEC042 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		30FC292117607F6D00DEC042 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		30FC293F1760861C00DEC042 /* expand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expand.png; sourceTree = "<group>"; };
+		30FC340418AE178B00D3AC3A /* ItemsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ItemsStoryboard.storyboard; path = Items/ItemsStoryboard.storyboard; sourceTree = "<group>"; };
+		30FC340618AE182500D3AC3A /* ItemsMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemsMainViewController.h; path = Items/ItemsMainViewController.h; sourceTree = "<group>"; };
+		30FC340718AE182500D3AC3A /* ItemsMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemsMainViewController.m; path = Items/ItemsMainViewController.m; sourceTree = "<group>"; };
+		30FC340918AE75F300D3AC3A /* ItemMallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemMallViewController.h; path = Items/ItemMallViewController.h; sourceTree = "<group>"; };
+		30FC340A18AE75F300D3AC3A /* ItemMallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemMallViewController.m; path = Items/ItemMallViewController.m; sourceTree = "<group>"; };
+		30FC340C18AE791600D3AC3A /* CoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoverView.h; path = ReusableControl/CoverView.h; sourceTree = "<group>"; };
+		30FC340D18AE791600D3AC3A /* CoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoverView.m; path = ReusableControl/CoverView.m; sourceTree = "<group>"; };
 		30FECBB917D83AE5002C3C90 /* RORNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORNotificationView.h; path = ReusableControl/RORNotificationView.h; sourceTree = "<group>"; };
 		30FECBBA17D83AE5002C3C90 /* RORNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORNotificationView.m; path = ReusableControl/RORNotificationView.m; sourceTree = "<group>"; };
 		30FECBC017D86C29002C3C90 /* charactor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = charactor.png; sourceTree = "<group>"; };
@@ -1168,7 +1185,6 @@
 		302FCFF81727D870004DA005 = {
 			isa = PBXGroup;
 			children = (
-				3054673318ADC0FB00CA123C /* MainStoryboard_iPhone.storyboard */,
 				0F1930181884DD8500E74BB1 /* lingqian */,
 				30692D5718117C2500DA01EC /* SVProgressHUD */,
 				0F8501DF17C1C68E0005993E /* libsqlite3.dylib */,
@@ -1179,6 +1195,7 @@
 				30BB0BA9176A04910009A847 /* libicucore.dylib */,
 				301C1F6817378AF30068B43B /* Resources */,
 				30F4546017BCB519006CB66C /* InertiaNavigation */,
+				3054673318ADC0FB00CA123C /* MainStoryboard_iPhone.storyboard */,
 				302FD00A1727D870004DA005 /* RevolUtioN */,
 				302FD03C1727D870004DA005 /* RevolUtioNTests */,
 				302FD0031727D870004DA005 /* Frameworks */,
@@ -1228,6 +1245,7 @@
 				0FDE82D118927BCB0082B1BF /* WalkFun-Prefix.pch */,
 				0F07AC1B17E6E4250009C8A8 /* CustomControl */,
 				0F7F39841792DEB600B1C720 /* RORServices */,
+				30FC340118AE16F100D3AC3A /* Items */,
 				30BDBE62182A357A001829D5 /* Friends */,
 				30692D531811327000DA01EC /* Instruction */,
 				30A6D9B817C733F700D1116E /* ReusableControl */,
@@ -1605,6 +1623,8 @@
 				308C166018698D99005B0198 /* RORShareViewController.m */,
 				302399D61887A206007CF5A2 /* RORNavigationButton.h */,
 				302399D71887A206007CF5A2 /* RORNavigationButton.m */,
+				30FC340C18AE791600D3AC3A /* CoverView.h */,
+				30FC340D18AE791600D3AC3A /* CoverView.m */,
 			);
 			name = ReusableControl;
 			sourceTree = "<group>";
@@ -1647,6 +1667,8 @@
 				0FA7521318927A410037342E /* RORLoadingViewController.m */,
 				0FA7521418927A410037342E /* RORLoginViewController.h */,
 				0FA7521518927A410037342E /* RORLoginViewController.m */,
+				3054673718AE04DF00CA123C /* RORMainViewController.h */,
+				3054673818AE04DF00CA123C /* RORMainViewController.m */,
 			);
 			name = MainPage;
 			sourceTree = "<group>";
@@ -1721,6 +1743,20 @@
 			);
 			name = icons;
 			path = Resources/icons;
+			sourceTree = "<group>";
+		};
+		30FC340118AE16F100D3AC3A /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				30FC340418AE178B00D3AC3A /* ItemsStoryboard.storyboard */,
+				30FC340618AE182500D3AC3A /* ItemsMainViewController.h */,
+				30FC340718AE182500D3AC3A /* ItemsMainViewController.m */,
+				30FC340918AE75F300D3AC3A /* ItemMallViewController.h */,
+				30FC340A18AE75F300D3AC3A /* ItemMallViewController.m */,
+				30E01E7C18B09D5A005BF080 /* ItemQuantityPicker.h */,
+				30E01E7D18B09D5A005BF080 /* ItemQuantityPicker.m */,
+			);
+			name = Items;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1971,6 +2007,7 @@
 				0F53B4AE17F3481D006DB4C4 /* RennSDK.bundle in Resources */,
 				30989CC817F7356300CA9F83 /* running_end_bg.png in Resources */,
 				30E6D0FD184F0AD200C93338 /* lock.png in Resources */,
+				30FC340518AE178B00D3AC3A /* ItemsStoryboard.storyboard in Resources */,
 				0F53B4B217F3481D006DB4C4 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				0F53B4BA17F3481D006DB4C4 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				3005CFFB1854B1C000D83648 /* traineeExpandTable_bg.png in Resources */,
@@ -2049,6 +2086,7 @@
 				0F282F8F18B08D36003F44E8 /* RORUserPropsService.m in Sources */,
 				0FA751FC18927A0F0037342E /* RORMoreViewController.m in Sources */,
 				0FA751EC189279E70037342E /* RORHistoryViewController.m in Sources */,
+				30FC340818AE182500D3AC3A /* ItemsMainViewController.m in Sources */,
 				30F4547217BCB519006CB66C /* INKalmanFilter.m in Sources */,
 				30F4547317BCB519006CB66C /* INMatrix.m in Sources */,
 				0FDE83061893A3930082B1BF /* RORRunHistoryClientHandler.m in Sources */,
@@ -2068,6 +2106,7 @@
 				0FA75139189278E30037342E /* FTUtils+NSObject.m in Sources */,
 				0FDE82EE189383150082B1BF /* User_Mission_History.m in Sources */,
 				30692D47180E70B400DA01EC /* RORFiveCounterView.m in Sources */,
+				3054673918AE04DF00CA123C /* RORMainViewController.m in Sources */,
 				0F07A2B818AE15C2003774B9 /* User_Prop.m in Sources */,
 				0FA751D4189279CB0037342E /* RORDBCommon.m in Sources */,
 				30FFFE5918433412001EA4F1 /* RORChallengeCongratsCoverView.m in Sources */,
@@ -2101,7 +2140,9 @@
 				30989CCE17F80FB000CA9F83 /* RORAboutViewController.m in Sources */,
 				0F07A2C418B08131003774B9 /* RORVirtualProductClientHandler.m in Sources */,
 				0FDE82C918927B4E0082B1BF /* RORMissionClientHandler.m in Sources */,
+				30FC340B18AE75F300D3AC3A /* ItemMallViewController.m in Sources */,
 				0FA75137189278E30037342E /* FTAnimation+UIView.m in Sources */,
+				30FC340E18AE791600D3AC3A /* CoverView.m in Sources */,
 				30621D2117DF00220063A007 /* RORPageViewController.m in Sources */,
 				0FA751731892798F0037342E /* RORViewController.m in Sources */,
 				30FFFE5F1845A213001EA4F1 /* RORFriendsViewController.m in Sources */,
@@ -2111,6 +2152,7 @@
 				30621D4817E45EB70063A007 /* RORPlaySound.m in Sources */,
 				0FA751711892798F0037342E /* RORMapAnnotation.m in Sources */,
 				308C1666186EF1FB005B0198 /* RORPaperSegmentControl.m in Sources */,
+				30E01E7E18B09D5A005BF080 /* ItemQuantityPicker.m in Sources */,
 				0FA7514E1892791A0037342E /* RORRunHistoryServices.m in Sources */,
 				307C860217E6F445007C1DE5 /* RORSegmentControl.m in Sources */,
 				0FA751DB189279CB0037342E /* User_Running_History.m in Sources */,
