@@ -28,6 +28,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.backButton.alpha = 0;
+    
     noMoreData = NO;
     pageCount = 0;
     //[RORUserServices syncFollowersDetails:[RORUserUtils getUserId] withPageNo:[NSNumber numberWithInt:pageCount]];

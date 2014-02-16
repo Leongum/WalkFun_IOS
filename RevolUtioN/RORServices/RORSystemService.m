@@ -154,7 +154,7 @@
             NSNumber *appId = [recommendDict valueForKey:@"appId"];
             Recommend_App *recommendEntity = [self fetchRecommedInfo:appId];
             if(recommendEntity == nil)
-                recommendEntity = [NSEntityDescription insertNewObjectForEntityForName:@"Recommend_App" inManagedObjectContext:context];
+                recommendEntity = (Recommend_App *)[NSEntityDescription insertNewObjectForEntityForName:@"Recommend_App" inManagedObjectContext:context];
             [recommendEntity initWithDictionary:recommendDict];
         }
         

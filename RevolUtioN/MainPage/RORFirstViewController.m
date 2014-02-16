@@ -47,11 +47,11 @@
     
     [self.userInfoView addTarget:self action:@selector(userInfoViewClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    //sync system data
-    NSDate * lastupdateTime = [RORUtils getDateFromString:[RORUserUtils getLastUpdateTime:@"lastSyncSystemDataTime"]];
-    if([[NSDate date] timeIntervalSinceDate:lastupdateTime] >= 86400){
-        [RORUserUtils syncSystemData];
-    }
+//    //sync system data
+//    NSDate * lastupdateTime = [RORUtils getDateFromString:[RORUserUtils getLastUpdateTime:@"lastSyncSystemDataTime"]];
+//    if([[NSDate date] timeIntervalSinceDate:lastupdateTime] >= 86400){
+//        [RORUserUtils syncSystemData];
+//    }
 
     [LingQianSDK trackActionWithName:@"visit"];
 }
