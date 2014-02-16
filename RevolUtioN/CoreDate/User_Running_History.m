@@ -27,13 +27,14 @@
 @dynamic steps;
 @dynamic distance;
 @dynamic missionGrade;
-@dynamic scores;
+@dynamic goldCoin;
 @dynamic experience;
 @dynamic extraExperience;
 @dynamic comment;
 @dynamic valid;
 @dynamic missionUuid;
 @dynamic sequence;
+@dynamic propGet;
 @dynamic commitTime;
 
 +(User_Running_History *) intiUnassociateEntity{
@@ -67,7 +68,7 @@
     self.spendCarlorie = [RORDBCommon getNumberFromId:[dict valueForKey:@"spendCarlorie"]];
     self.duration = [RORDBCommon getNumberFromId:[dict valueForKey:@"duration"]];
     self.missionGrade = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionGrade"]];
-    self.scores = [RORDBCommon getNumberFromId:[dict valueForKey:@"scores"]];
+    self.goldCoin = [RORDBCommon getNumberFromId:[dict valueForKey:@"goldCoin"]];
     self.experience = [RORDBCommon getNumberFromId:[dict valueForKey:@"experience"]];
     self.extraExperience = [RORDBCommon getNumberFromId:[dict valueForKey:@"extraExperience"]];
     self.missionId = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionId"]];
@@ -76,6 +77,7 @@
     self.valid = [RORDBCommon getNumberFromId:[dict valueForKey:@"valid"]];
     self.missionUuid = [RORDBCommon getStringFromId:[dict valueForKey:@"missionUuid"]];
     self.sequence = [RORDBCommon getNumberFromId:[dict valueForKey:@"sequence"]];
+    self.propGet = [RORDBCommon getStringFromId:[dict valueForKey:@"propGet"]];
     self.speedList = [RORDBCommon getStringFromId:[dict valueForKey:@"speedList"]];
 }
 
@@ -95,7 +97,7 @@
     [tempoDict setValue:self.duration forKey:@"duration"];
     [tempoDict setValue:self.steps forKey:@"steps"];
     [tempoDict setValue:self.missionGrade forKey:@"missionGrade"];
-    [tempoDict setValue:self.scores forKey:@"scores"];
+    [tempoDict setValue:self.goldCoin forKey:@"goldCoin"];
     [tempoDict setValue:self.experience forKey:@"experience"];
     [tempoDict setValue:self.extraExperience forKey:@"extraExperience"];
     [tempoDict setValue:self.missionId forKey:@"missionId"];
@@ -103,6 +105,7 @@
     [tempoDict setValue:self.valid forKey:@"valid"];
     [tempoDict setValue:self.missionUuid forKey:@"missionUuid"];
     [tempoDict setValue:self.sequence forKey:@"sequence"];
+    [tempoDict setValue:self.propGet forKey:@"propGet"];
     [tempoDict setValue:self.speedList forKey:@"speedList"];
     return tempoDict;
 }

@@ -80,4 +80,16 @@
     RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
     return httpResponse;
 }
+
++(RORHttpResponse *)getUserProps:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime{
+    NSString *url = [NSString stringWithFormat:PROP_GET_URL, userId, lastUpdateTime];
+    RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
+    return httpResponse;
+}
+
++(RORHttpResponse *)createOrUpdateUserProp:(NSNumber *)userId withUserProps:(NSMutableArray *) userProps{
+    NSString *requestUrl = [NSString stringWithFormat:PROP_CREATE_URL, userId];
+    RORHttpResponse *httpResponse = [RORHttpClientHandler postRequest:requestUrl withRequstBody:[RORUtils toJsonFormObject:userProps]];
+    return httpResponse;
+}
 @end

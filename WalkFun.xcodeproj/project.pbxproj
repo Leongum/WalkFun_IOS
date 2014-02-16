@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F07A2B818AE15C2003774B9 /* User_Prop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07A2B718AE15C2003774B9 /* User_Prop.m */; };
+		0F07A2BB18AE15C2003774B9 /* Virtual_Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07A2BA18AE15C2003774B9 /* Virtual_Product.m */; };
+		0F07A2BE18AE1844003774B9 /* Simple_User_Run_History.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07A2BD18AE1844003774B9 /* Simple_User_Run_History.m */; };
+		0F07A2C418B08131003774B9 /* RORVirtualProductClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07A2C318B08131003774B9 /* RORVirtualProductClientHandler.m */; };
 		0F07AC4217E98FA00009C8A8 /* switch_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F07AC4017E98FA00009C8A8 /* switch_off.png */; };
 		0F07AC4317E98FA00009C8A8 /* switch_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F07AC4117E98FA00009C8A8 /* switch_on.png */; };
 		0F19301A1884DD8500E74BB1 /* LingQianSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1930191884DD8500E74BB1 /* LingQianSDK.framework */; };
@@ -16,6 +20,8 @@
 		0F1930221884DEF100E74BB1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1930211884DEF100E74BB1 /* MediaPlayer.framework */; };
 		0F1930261884DF0300E74BB1 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F1930251884DF0300E74BB1 /* Social.framework */; };
 		0F1930271884DFD900E74BB1 /* LingQianSDK.framework in Resources */ = {isa = PBXBuildFile; fileRef = 0F1930191884DD8500E74BB1 /* LingQianSDK.framework */; };
+		0F282F8F18B08D36003F44E8 /* RORUserPropsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F282F8E18B08D36003F44E8 /* RORUserPropsService.m */; };
+		0F282F9218B09435003F44E8 /* RORVirtualProductService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F282F9118B09435003F44E8 /* RORVirtualProductService.m */; };
 		0F53B49617F3481D006DB4C4 /* QQConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F53B44F17F3481D006DB4C4 /* QQConnection.framework */; };
 		0F53B49717F3481D006DB4C4 /* QZoneConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F53B45017F3481D006DB4C4 /* QZoneConnection.framework */; };
 		0F53B49817F3481D006DB4C4 /* RenRenConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F53B45117F3481D006DB4C4 /* RenRenConnection.framework */; };
@@ -339,6 +345,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F07A2B618AE15C2003774B9 /* User_Prop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User_Prop.h; path = CoreDate/User_Prop.h; sourceTree = "<group>"; };
+		0F07A2B718AE15C2003774B9 /* User_Prop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User_Prop.m; path = CoreDate/User_Prop.m; sourceTree = "<group>"; };
+		0F07A2B918AE15C2003774B9 /* Virtual_Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Virtual_Product.h; path = CoreDate/Virtual_Product.h; sourceTree = "<group>"; };
+		0F07A2BA18AE15C2003774B9 /* Virtual_Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Virtual_Product.m; path = CoreDate/Virtual_Product.m; sourceTree = "<group>"; };
+		0F07A2BC18AE1844003774B9 /* Simple_User_Run_History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Simple_User_Run_History.h; path = CoreDate/Simple_User_Run_History.h; sourceTree = "<group>"; };
+		0F07A2BD18AE1844003774B9 /* Simple_User_Run_History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Simple_User_Run_History.m; path = CoreDate/Simple_User_Run_History.m; sourceTree = "<group>"; };
+		0F07A2C218B08131003774B9 /* RORVirtualProductClientHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORVirtualProductClientHandler.h; path = HttpClient/RORVirtualProductClientHandler.h; sourceTree = "<group>"; };
+		0F07A2C318B08131003774B9 /* RORVirtualProductClientHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORVirtualProductClientHandler.m; path = HttpClient/RORVirtualProductClientHandler.m; sourceTree = "<group>"; };
 		0F07AC4017E98FA00009C8A8 /* switch_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch_off.png; path = bg/switch_off.png; sourceTree = "<group>"; };
 		0F07AC4117E98FA00009C8A8 /* switch_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch_on.png; path = bg/switch_on.png; sourceTree = "<group>"; };
 		0F1930191884DD8500E74BB1 /* LingQianSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LingQianSDK.framework; sourceTree = "<group>"; };
@@ -347,6 +361,10 @@
 		0F19301F1884DEDF00E74BB1 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		0F1930211884DEF100E74BB1 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		0F1930251884DF0300E74BB1 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		0F282F8D18B08D36003F44E8 /* RORUserPropsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORUserPropsService.h; path = RevolUtioN/RORServices/RORUserPropsService.h; sourceTree = "<group>"; };
+		0F282F8E18B08D36003F44E8 /* RORUserPropsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORUserPropsService.m; path = RevolUtioN/RORServices/RORUserPropsService.m; sourceTree = "<group>"; };
+		0F282F9018B09435003F44E8 /* RORVirtualProductService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORVirtualProductService.h; path = RevolUtioN/RORServices/RORVirtualProductService.h; sourceTree = "<group>"; };
+		0F282F9118B09435003F44E8 /* RORVirtualProductService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORVirtualProductService.m; path = RevolUtioN/RORServices/RORVirtualProductService.m; sourceTree = "<group>"; };
 		0F53B44F17F3481D006DB4C4 /* QQConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QQConnection.framework; sourceTree = "<group>"; };
 		0F53B45017F3481D006DB4C4 /* QZoneConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QZoneConnection.framework; sourceTree = "<group>"; };
 		0F53B45117F3481D006DB4C4 /* RenRenConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RenRenConnection.framework; sourceTree = "<group>"; };
@@ -976,8 +994,12 @@
 				0FDE83081894E3AA0082B1BF /* RORMissionHistoyService.m */,
 				0FA7514A1892791A0037342E /* RORUserServices.h */,
 				0FA7514B1892791A0037342E /* RORUserServices.m */,
+				0F282F8D18B08D36003F44E8 /* RORUserPropsService.h */,
+				0F282F8E18B08D36003F44E8 /* RORUserPropsService.m */,
 				0FDE830A189503650082B1BF /* RORFriendService.h */,
 				0FDE830B189503650082B1BF /* RORFriendService.m */,
+				0F282F9018B09435003F44E8 /* RORVirtualProductService.h */,
+				0F282F9118B09435003F44E8 /* RORVirtualProductService.m */,
 			);
 			name = RORServices;
 			path = ..;
@@ -1026,6 +1048,8 @@
 				0FDE82C618927B4E0082B1BF /* RORThirdPartyClientHandler.m */,
 				0FDE82C718927B4E0082B1BF /* RORUserClientHandler.h */,
 				0FDE82C818927B4E0082B1BF /* RORUserClientHandler.m */,
+				0F07A2C218B08131003774B9 /* RORVirtualProductClientHandler.h */,
+				0F07A2C318B08131003774B9 /* RORVirtualProductClientHandler.m */,
 			);
 			name = HttpClient;
 			sourceTree = "<group>";
@@ -1335,14 +1359,20 @@
 				0FA751BB189279CB0037342E /* User_Base.m */,
 				0FDE82FE189387BB0082B1BF /* User_Detail.h */,
 				0FDE82FF189387BB0082B1BF /* User_Detail.m */,
+				0F07A2B618AE15C2003774B9 /* User_Prop.h */,
+				0F07A2B718AE15C2003774B9 /* User_Prop.m */,
 				0FA751C0189279CB0037342E /* User_Running_History.h */,
 				0FA751C1189279CB0037342E /* User_Running_History.m */,
+				0F07A2BC18AE1844003774B9 /* Simple_User_Run_History.h */,
+				0F07A2BD18AE1844003774B9 /* Simple_User_Run_History.m */,
 				0FDE82EC189383150082B1BF /* User_Mission_History.h */,
 				0FDE82ED189383150082B1BF /* User_Mission_History.m */,
 				0FA751AC189279CB0037342E /* Recommend_App.h */,
 				0FA751AD189279CB0037342E /* Recommend_App.m */,
 				0FA751C4189279CB0037342E /* Version_Control.h */,
 				0FA751C5189279CB0037342E /* Version_Control.m */,
+				0F07A2B918AE15C2003774B9 /* Virtual_Product.h */,
+				0F07A2BA18AE15C2003774B9 /* Virtual_Product.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -2011,6 +2041,7 @@
 				0FA7515E1892796E0037342E /* RORCustomShareViewToolbar.m in Sources */,
 				30F4547017BCB519006CB66C /* INConstant.m in Sources */,
 				30F4547117BCB519006CB66C /* INDeviceStatus.m in Sources */,
+				0F282F8F18B08D36003F44E8 /* RORUserPropsService.m in Sources */,
 				0FA751FC18927A0F0037342E /* RORMoreViewController.m in Sources */,
 				0FA751EC189279E70037342E /* RORHistoryViewController.m in Sources */,
 				30F4547217BCB519006CB66C /* INKalmanFilter.m in Sources */,
@@ -2024,6 +2055,7 @@
 				0FA7513D189278FA0037342E /* Animations.m in Sources */,
 				0FA751FB18927A0F0037342E /* RORBodyViewController.m in Sources */,
 				0FA751D2189279CB0037342E /* Recommend_App.m in Sources */,
+				0F07A2BB18AE15C2003774B9 /* Virtual_Product.m in Sources */,
 				0FA75193189279A90037342E /* RORUtils.m in Sources */,
 				0FA751EB189279E70037342E /* RORHistoryPageViewController.m in Sources */,
 				0FA75138189278E30037342E /* FTAnimationManager.m in Sources */,
@@ -2031,12 +2063,14 @@
 				0FA75139189278E30037342E /* FTUtils+NSObject.m in Sources */,
 				0FDE82EE189383150082B1BF /* User_Mission_History.m in Sources */,
 				30692D47180E70B400DA01EC /* RORFiveCounterView.m in Sources */,
+				0F07A2B818AE15C2003774B9 /* User_Prop.m in Sources */,
 				0FA751D4189279CB0037342E /* RORDBCommon.m in Sources */,
 				30FFFE5918433412001EA4F1 /* RORChallengeCongratsCoverView.m in Sources */,
 				0FA751EA189279E70037342E /* RORHistoryDetailViewController.m in Sources */,
 				0FA7518E189279A90037342E /* RORHttpResponse.m in Sources */,
 				308C166118698D99005B0198 /* RORShareViewController.m in Sources */,
 				0FA75191189279A90037342E /* RORNetWorkUtils.m in Sources */,
+				0F282F9218B09435003F44E8 /* RORVirtualProductService.m in Sources */,
 				0FA7521818927A410037342E /* RORLoginViewController.m in Sources */,
 				0FDE82CC18927B4E0082B1BF /* RORUserClientHandler.m in Sources */,
 				0FA7514C1892791A0037342E /* RORMissionServices.m in Sources */,
@@ -2052,12 +2086,14 @@
 				0FA7518C189279A90037342E /* RORContextUtils.m in Sources */,
 				30984937186207780079E236 /* RORIntroCoverView.m in Sources */,
 				0FA7520418927A230037342E /* RORRunningViewController.m in Sources */,
+				0F07A2BE18AE1844003774B9 /* Simple_User_Run_History.m in Sources */,
 				0FDE8300189387BB0082B1BF /* User_Detail.m in Sources */,
 				0FA751FE18927A0F0037342E /* RORStatisticsViewController.m in Sources */,
 				0FA7516E1892798F0037342E /* RORChallengeLevelView.m in Sources */,
 				302399D81887A206007CF5A2 /* RORNavigationButton.m in Sources */,
 				30FECBBB17D83AE5002C3C90 /* RORNotificationView.m in Sources */,
 				30989CCE17F80FB000CA9F83 /* RORAboutViewController.m in Sources */,
+				0F07A2C418B08131003774B9 /* RORVirtualProductClientHandler.m in Sources */,
 				0FDE82C918927B4E0082B1BF /* RORMissionClientHandler.m in Sources */,
 				0FA75137189278E30037342E /* FTAnimation+UIView.m in Sources */,
 				30621D2117DF00220063A007 /* RORPageViewController.m in Sources */,

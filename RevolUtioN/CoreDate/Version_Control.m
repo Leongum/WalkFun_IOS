@@ -20,6 +20,7 @@
 @synthesize missionLastUpdateTime;
 @synthesize messageLastUpdateTime;
 @synthesize recommendLastUpdateTime;
+@synthesize productLastUpdateTime;
 
 -(void)initWithDictionary:(NSDictionary *)dict{
     self.platform = [RORDBCommon getStringFromId:[dict valueForKey:@"platform"]];
@@ -30,6 +31,7 @@
     self.missionLastUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"missionLastUpdateTime"]];
     self.messageLastUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"messageLastUpdateTime"]];
     self.recommendLastUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"recommendLastUpdateTime"]];
+    self.productLastUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"productLastUpdateTime"]];
 }
 
 @end

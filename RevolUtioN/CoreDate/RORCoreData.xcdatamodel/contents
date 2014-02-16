@@ -80,22 +80,19 @@
         <attribute name="avgSpeed" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="currentCombo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="experience" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lastActiveTime" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="lastWalkingAddress" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="lastWalkingDistance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lastWalkingPoint" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="lastWalkingSteps" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lastWalkingTime" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="fatness" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="goldCoin" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="health" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="maxCombo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="picId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="scores" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="totalActiveTimes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="totalCarlorie" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="totalDistance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="totalSteps" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="totalWalkingTimes" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="userFatDesc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="userTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userTitleId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -108,12 +105,18 @@
         <attribute name="missionId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="missionName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="missionUuid" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="operate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="totalActiveTimes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="User_Prop" representedClassName="User_Prop" syncable="YES">
+        <attribute name="ownNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="producId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="User_Running_History" representedClassName="User_Running_History" syncable="YES">
         <attribute name="avgSpeed" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -123,6 +126,7 @@
         <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0.0" syncable="YES"/>
         <attribute name="experience" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="extraExperience" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="goldCoin" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="missionDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="missionEndTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="missionGrade" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -131,13 +135,21 @@
         <attribute name="missionStartTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="missionTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="missionUuid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="propGet" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="runUuid" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="scores" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="sequence" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="spendCarlorie" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="steps" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="valid" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Virtual_Product" representedClassName="Virtual_Product" syncable="YES">
+        <attribute name="dropFlag" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="productDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="virtualPrice" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <elements>
         <element name="Action" positionX="0" positionY="0" width="0" height="0"/>
@@ -149,6 +161,8 @@
         <element name="User_Base" positionX="0" positionY="0" width="0" height="0"/>
         <element name="User_Detail" positionX="0" positionY="0" width="0" height="0"/>
         <element name="User_Mission_History" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User_Prop" positionX="0" positionY="0" width="0" height="0"/>
         <element name="User_Running_History" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Virtual_Product" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

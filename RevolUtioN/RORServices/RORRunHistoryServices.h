@@ -10,6 +10,7 @@
 #import "RORAppDelegate.h"
 #import "RORHttpResponse.h"
 #import "User_Running_History.h"
+#import "Simple_User_Run_History.h"
 #import "RORRunHistoryClientHandler.h"
 #import "RORContextUtils.h"
 
@@ -26,6 +27,9 @@
 
 //根据用户userid从本地数据库拿去该用户的跑步历史数据
 + (NSArray*)fetchRunHistoryByUserId:(NSNumber*)userId;
+
+//根据用户userid获取服务器用户最新的3条跑步的记录
++ (NSMutableArray *)getSimpleRunningHistories:(NSNumber *)userId;
 
 //保存一条新的历史记录到本地数据库，并且更新用户的基础数据。
 + (BOOL)saveRunInfoToDB:(User_Running_History*)runHistory;

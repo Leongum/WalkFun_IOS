@@ -24,7 +24,6 @@
 @property (nonatomic, retain) NSNumber * totalActiveTimes;
 @property (nonatomic, retain) NSNumber * currentCombo;
 @property (nonatomic, retain) NSDate * updateTime;
-@property (nonatomic, retain) NSNumber * operate;
 
 +(User_Mission_History *) intiUnassociateEntity;
 

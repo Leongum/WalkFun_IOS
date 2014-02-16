@@ -18,6 +18,8 @@
 
 +(RORHttpResponse *)getRunHistories:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime;
 
++(RORHttpResponse *)getSimpleRunHistories:(NSNumber *)userId;
+
 +(RORHttpResponse *)getMissionHistories:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime;
 
 +(RORHttpResponse *)getUsingMissionHistories:(NSNumber *)userId;

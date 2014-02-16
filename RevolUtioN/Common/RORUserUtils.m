@@ -9,6 +9,7 @@
 #import "RORUserUtils.h"
 #import "RORMissionServices.h"
 #import "RORUserServices.h"
+#import "RORVirtualProductService.h"
 
 static NSNumber *userId = nil;
 
@@ -287,9 +288,11 @@ static NSDate *syncTime;
         NSString *missionLastUpdateTime = [RORUserUtils getLastUpdateTime:@"MissionUpdateTime"];
         NSString *messageLastUpdateTime = [RORUserUtils getLastUpdateTime:@"SystemMessageUpdateTime"];
         NSString *recommendLastUpdateTime = [RORUserUtils getLastUpdateTime:@"RecommendLastUpdateTime"];
+        NSString *productLastUpdateTime = [RORUserUtils getLastUpdateTime:@"VirtualProductUpdateTime"];
         NSTimeInterval messageScape = [version.messageLastUpdateTime timeIntervalSinceDate:[RORUtils getDateFromString:messageLastUpdateTime]];
         NSTimeInterval missionScape = [version.missionLastUpdateTime timeIntervalSinceDate:[RORUtils getDateFromString:missionLastUpdateTime]];
         NSTimeInterval recommendScape = [version.recommendLastUpdateTime timeIntervalSinceDate:[RORUtils getDateFromString:recommendLastUpdateTime]];
+        NSTimeInterval productScape = [version.productLastUpdateTime timeIntervalSinceDate:[RORUtils getDateFromString:productLastUpdateTime]];
         if(messageScape > 0){
             //sync message
             [RORSystemService syncSystemMessage];
@@ -303,6 +306,11 @@ static NSDate *syncTime;
         {
             //sync missions
             [RORSystemService syncRecommendApp];
+        }
+        if(productScape > 0)
+        {
+            //sync missions
+            [RORVirtualProductService syncVProduct];
         }
         [self saveLastUpdateTimeUseLocalTime:@"lastSyncSystemDataTime"];
     }

@@ -26,13 +26,14 @@
 @property (nonatomic, retain) NSNumber * steps;
 @property (nonatomic, retain) NSNumber * distance;
 @property (nonatomic, retain) NSNumber * missionGrade;
-@property (nonatomic, retain) NSNumber * scores;
+@property (nonatomic, retain) NSNumber * goldCoin;
 @property (nonatomic, retain) NSNumber * experience;
 @property (nonatomic, retain) NSNumber * extraExperience;
 @property (nonatomic, retain) NSString * comment;
 @property (nonatomic, retain) NSNumber * valid;
 @property (nonatomic, retain) NSString * missionUuid;
 @property (nonatomic, retain) NSNumber * sequence;
+@property (nonatomic, retain) NSString * propGet;
 @property (nonatomic, retain) NSDate * commitTime;
 
 +(User_Running_History *) intiUnassociateEntity;
