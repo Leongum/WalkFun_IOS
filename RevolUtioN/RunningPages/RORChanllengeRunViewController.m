@@ -493,7 +493,7 @@
         //runHistory.missionTypeId = [NSNumber numberWithInteger:NormalRun];
         //runHistory.grade = [self calculateGrade];
         runHistory.experience =[self calculateExperience:runHistory];
-        runHistory.scores =[self calculateScore:runHistory];
+        runHistory.goldCoin =[self calculateScore:runHistory];
     }
     
     runHistory.spendCarlorie = [self calculateCalorie];
@@ -502,7 +502,7 @@
     
     if(runHistory.valid.integerValue != 1 || runHistory.userId.integerValue < 0){
         runHistory.experience =[NSNumber numberWithDouble:0];
-        runHistory.scores =[NSNumber  numberWithDouble:0];
+        runHistory.goldCoin =[NSNumber  numberWithDouble:0];
         runHistory.extraExperience =[NSNumber  numberWithDouble:0];
     }
     

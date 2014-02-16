@@ -1,6 +1,4 @@
-^{
-    <#code#>
-}//
+//
 //  RORUserServices.m
 //  RevolUtioN
 //
