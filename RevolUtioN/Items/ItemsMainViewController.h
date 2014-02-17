@@ -8,9 +8,17 @@
 
 #import "RORViewController.h"
 #import "CoverView.h"
+#import "UserItemScrollView.h"
+#import "RORUserPropsService.h"
 
-@interface ItemsMainViewController : RORViewController
+@interface ItemsMainViewController : RORViewController<UIScrollViewDelegate>{
+    NSArray *itemList;
+    UIViewController *parentController;
+    CoverView *mallCoverView;
+}
 
-@property (strong, nonatomic) IBOutlet CoverView *mallCoverView;
+@property (strong, nonatomic) IBOutlet CoverView *itemDetailCoverView;
+
+@property (strong, nonatomic) IBOutlet UserItemScrollView *userItemScrollView;
 
 @end

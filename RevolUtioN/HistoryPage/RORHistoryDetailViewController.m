@@ -92,7 +92,7 @@
 
     }
     
-    speedList = [RORDBCommon getSpeedListFromString:record.speedList];
+//    speedList = [RORDBCommon getSpeedListFromString:record.speedList];
     self.tableContrainerView.alpha = 0;
     
     NSDateFormatter *formattter = [[NSDateFormatter alloc] init];

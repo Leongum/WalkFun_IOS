@@ -19,7 +19,7 @@
 @interface RORLoginViewController : RORViewController
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (strong, nonatomic) RORSegmentControl *switchButton;
+@property (strong, nonatomic) RORPaperSegmentControl *switchButton;
 @property (weak, nonatomic) IBOutlet UITextField *nicknameTextField;
 @property (strong, nonatomic) IBOutlet RORCheckBox *showPWCheckBox;
 @property (strong, nonatomic) IBOutlet UIView *snsContainerView;

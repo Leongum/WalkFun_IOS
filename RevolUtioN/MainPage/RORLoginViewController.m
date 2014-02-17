@@ -131,7 +131,8 @@
         [self syncDataAfterLogin];
         [self endIndicator:self];
     } else { //注册
-        NSDictionary *regDict = [[NSDictionary alloc]initWithObjectsAndKeys:usernameTextField.text, @"userEmail",[RORUtils md5:passwordTextField.text], @"password", nicknameTextField.text, @"nickName", nil];
+        //todo
+        NSDictionary *regDict = [[NSDictionary alloc]initWithObjectsAndKeys:usernameTextField.text, @"userName",[RORUtils md5:passwordTextField.text], @"password", nicknameTextField.text, @"nickName", @"unknow device id", @"deviceId",@"ios", @"platformInfo", nil];
         [self startIndicator:self];
 
         User_Base *user = [RORUserServices registerUser:regDict];
@@ -143,7 +144,7 @@
         } else {
             [self sendAlart:REGISTER_FAIL];
             [self endIndicator:self];
-            return;
+//            return;
         }
     }
     passwordTextField.text = @"";

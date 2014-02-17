@@ -16,7 +16,6 @@
 @property (nonatomic, retain) NSNumber * missionId;
 @property (nonatomic, retain) NSNumber * missionTypeId;
 @property (nonatomic, retain) NSString * missionRoute;
-@property (nonatomic, retain) NSString * speedList;
 @property (nonatomic, retain) NSDate * missionStartTime;
 @property (nonatomic, retain) NSDate * missionEndTime;
 @property (nonatomic, retain) NSDate * missionDate;

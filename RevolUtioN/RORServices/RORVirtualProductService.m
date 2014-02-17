@@ -63,7 +63,7 @@
 }
 
 +(NSArray *)fetchAllVProduct:(BOOL) needContext{
-    NSString *table=@"Mission";
+    NSString *table=@"Virtual_Product";
     NSString *query = @"1 = %@";
     NSArray *params = [NSArray arrayWithObjects:[NSNumber numberWithInteger:1], nil];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"productId" ascending:YES];

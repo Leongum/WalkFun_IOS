@@ -426,7 +426,7 @@
     runHistory.experience =[self calculateExperience:runHistory];
     runHistory.goldCoin =[self calculateScore:runHistory];
     runHistory.extraExperience =[NSNumber  numberWithDouble:0];
-    runHistory.speedList = [RORDBCommon getStringFromSpeedList:avgSpeedPerKMList];
+//    runHistory.speedList = [RORDBCommon getStringFromSpeedList:avgSpeedPerKMList];
     
     if(runHistory.valid.integerValue != 1 || runHistory.userId.integerValue < 0){
         runHistory.experience =[NSNumber numberWithDouble:0];

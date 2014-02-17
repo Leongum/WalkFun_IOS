@@ -14,7 +14,7 @@
 
 @property (nonatomic, retain) NSNumber * ownNumber;
 @property (nonatomic, retain) NSString * productName;
-@property (nonatomic, retain) NSNumber * producId;
+@property (nonatomic, retain) NSNumber * productId;
 @property (nonatomic, retain) NSNumber * userId;
 @property (nonatomic, retain) NSDate * updateTime;
 
