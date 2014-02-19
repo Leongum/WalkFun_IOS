@@ -10,7 +10,6 @@
 #import "Reachability.h"
 #import <CoreMotion/CoreMotion.h>
 #import <CoreLocation/CoreLocation.h>
-#import <LingQianSDK/LingQianSDK.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>  
 #import "MobClick.h"
