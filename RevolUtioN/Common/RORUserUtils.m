@@ -266,6 +266,7 @@ static NSDate *syncTime;
         {
             //sync action define
             [RORSystemService syncActionDefine];
+            
         }
         [self saveLastUpdateTimeUseLocalTime:@"lastSyncSystemDataTime"];
     }

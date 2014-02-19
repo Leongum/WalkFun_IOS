@@ -43,6 +43,7 @@
     CLLocation *latestUserLocation;
     vec_3 OldVn;
     INStepCounting *stepCounting;
+    NSInteger currentStep;
     
     RORCountDownCoverView *countDownView;
     RORPlaySound *sound;
@@ -61,9 +62,12 @@
     NSMutableArray *routePoints;
     MKPolyline *routeLine;
     
-    NSMutableArray *avgSpeedPerKMList;
-    double timeOfLatest1KM;
-    int kmCounter;
+    //事件列表
+    NSArray *eventWillList;
+    NSMutableArray *eventHappenedList;
+    NSMutableArray *eventTimeList;
+    int eventHappenedCount;
+    NSIndexPath *bottomIndex;
     
     NSTimer *repeatingTimer;
     BOOL isStarted;

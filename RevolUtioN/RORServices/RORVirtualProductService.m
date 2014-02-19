@@ -79,14 +79,23 @@
     return [(NSArray*)vProductsDetails mutableCopy];
 }
 
++(NSString *)getFileNameFrom:(NSURL *)URL{
+    NSMutableString *strURL = [NSMutableString stringWithFormat:@"%@",URL];
+    NSArray *comps = [strURL componentsSeparatedByString:@"/"];
+    return [comps objectAtIndex:comps.count-1];
+}
+
 +(UIImage *)getImageOf:(Virtual_Product *)item{
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     // If you go to the folder below, you will find those pictures
-    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png",docDir, item.productId];
+    NSURL *imageUrl = [NSURL URLWithString:item.picLink];
+    NSString *fileName = [self getFileNameFrom:imageUrl];
+    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",docDir, fileName];
     UIImage *image = [UIImage imageWithContentsOfFile:pngFilePath];
     
     if (!image) {
         NSURL *imageUrl = [NSURL URLWithString:item.picLink];
+        [self getFileNameFrom:imageUrl];
         image = [[UIImage alloc]initWithData:[NSData dataWithContentsOfURL:imageUrl]];
         if (image){
             NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];

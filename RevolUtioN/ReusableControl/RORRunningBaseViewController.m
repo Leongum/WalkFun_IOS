@@ -56,15 +56,18 @@
     routes = [[NSMutableArray alloc]init ];
     [self resetRoutePoints];
     
-    kmCounter = 0;
-    avgSpeedPerKMList = [[NSMutableArray alloc]init];
-    timeOfLatest1KM = 0;
+    //初始化事件列表
+    eventWillList = [RORSystemService fetchAllActionDefine:ActionDefineRun];
+    eventHappenedList = [[NSMutableArray alloc]init];
+    eventTimeList = [[NSMutableArray alloc]init];
+    
+    currentStep = 0;
+    eventHappenedCount = 0;
 }
 
 -(void)viewDidUnload{
     [super viewDidUnload];
     [self stopUpdates];
-
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -93,21 +96,10 @@
 }
 
 -(void)timerDotCommon{
-    timeOfLatest1KM +=TIMER_INTERVAL;
 }
 
 -(void)timerSecondDot{
     
-}
-
--(void)pushAvgSpeedPerKM{
-    if (((int)distance/1000) > avgSpeedPerKMList.count){
-        [avgSpeedPerKMList addObject:[NSNumber numberWithDouble:timeOfLatest1KM]];
-//        //debug
-//        NSLog(@"第%d km用时:%.2f,平均速度为:%@", avgSpeedPerKMList.count, timeOfLatest1KM, [avgSpeedPerKMList objectAtIndex:avgSpeedPerKMList.count-1]);
-        
-        timeOfLatest1KM = 0;
-    }
 }
 
 -(void)stopTimer{
@@ -126,49 +118,9 @@
 
 - (void)startDeviceLocation{
     locationManager = [(RORAppDelegate *)[[UIApplication sharedApplication] delegate] sharedLocationManager];
-//    if (locationManager == nil)
-//        locationManager = [[CLLocationManager alloc]init];
-//    locationManager.delegate = self;
-    
-//    [locationManager setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
-//    locationManager.distanceFilter = 1;
-//    NSLog(@"%u %c",[CLLocationManager  authorizationStatus],[CLLocationManager  locationServicesEnabled]);
-//    if (! ([CLLocationManager  locationServicesEnabled])
-//        || ( [CLLocationManager  authorizationStatus] == kCLAuthorizationStatusDenied))
-//    {
-//        [self sendAlart:GPS_SETTING_ERROR];
-//        return;
-//    }
-//    else{
-//        // start the compass
-//        [locationManager startUpdatingLocation];
-//    }
-//    
-//	if ([CLLocationManager headingAvailable] == NO) {
-//		// No compass is available. This application cannot function without a compass,
-//        // so a dialog will be displayed and no magnetic data will be measured.
-//        NSLog(@"Magnet is not available.");
-//	} else {
-//        // heading service configuration
-//        locationManager.headingFilter = kCLHeadingFilterNone;
-//        
-//        [locationManager startUpdatingHeading];
-//    }
-}
-
-- (void)initOffset:(MKUserLocation *)userLocation{
-    CLLocation *cl = [locationManager location];
-    offset.latitude = userLocation.coordinate.latitude - cl.coordinate.latitude;
-    offset.longitude = userLocation.coordinate.longitude - cl.coordinate.longitude;
-}
-
-- (CLLocation *)transToRealLocation:(CLLocation *)orginalLocation{
-    CLLocation *absoluteLocation = [[CLLocation alloc] initWithLatitude:orginalLocation.coordinate.latitude + offset.latitude longitude:orginalLocation.coordinate.longitude + offset.longitude];
-    return absoluteLocation;
 }
 
 -(CLLocation *)getNewRealLocation{
-//    return [self transToRealLocation:[locationManager location]];
     return [locationManager location];
 }
 
@@ -203,9 +155,6 @@
     if ([motionManager isDeviceMotionActive] == YES) {
         [motionManager stopDeviceMotionUpdates];
     }
-//    locationManager.delegate = nil;
-//    [locationManager stopUpdatingLocation];
-//    [locationManager stopUpdatingHeading];
 }
 
 - (void)initNavi{
@@ -232,6 +181,10 @@
 
     //step counting
     [stepCounting pushNewLAcc:[INMatrix modOfVec_3:newDeviceStatus.an] GAcc:newDeviceStatus.an.v3 speed:currentSpeed];
+    if (stepCounting.counter>currentSpeed) {
+        currentSpeed = stepCounting.counter;
+        [self isEventHappen];
+    }
 }
 
 - (void)startDeviceMotion
@@ -273,21 +226,26 @@
     return [NSNumber numberWithInteger:1];
 }
 
-//#pragma CLLocationManager Delegate
-//
-//- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-//{
-//    if([newLocation.timestamp timeIntervalSinceNow] <= (60 * 2)){
-//        if (!wasFound){
-//            wasFound = YES;
-//        }
-//    }
-//}
-//
-//- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-//{
-//    
-//}
+
+#pragma mark - Event Methods
+
+//如果触发了事件，返回事件，否则返回nil
+-(void)isEventHappen{
+    for (int i=0; i<eventWillList.count; i++){
+        Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
+        int x = arc4random() % 1000000;
+        double roll = ((double)x)/10000.f;
+        if (roll < event.triggerProbability.doubleValue*500){//todebug
+            [self eventDidHappened:event];
+            return;
+        }
+    }
+}
+
+-(void)eventDidHappened:(Action_Define *)event{
+    [eventHappenedList addObject:event];
+    [eventTimeList addObject: [NSNumber numberWithInteger:duration]];
+}
 
 
 @end

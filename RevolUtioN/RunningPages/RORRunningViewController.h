@@ -21,6 +21,7 @@
     BOOL MKwasFound;
     User_Running_History *runHistory;
 }
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
 @property (weak, nonatomic) IBOutlet UIButton *endButton;

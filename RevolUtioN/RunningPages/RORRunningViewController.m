@@ -60,8 +60,9 @@
     self.coverView.alpha = 0;
     self.backButton.alpha = 0;
     
-    [self.startButton setEnabled:NO];
-    [startButton setTitle:SEARCHING_LOCATION forState:UIControlStateNormal];
+    [self.startButton setEnabled:YES];
+//    [startButton setTitle:SEARCHING_LOCATION forState:UIControlStateNormal];
+    [startButton setTitle:START_RUNNING_BUTTON forState:UIControlStateNormal];
     UIImage *image = [UIImage imageNamed:@"green_btn_bg.png"];
     [startButton setBackgroundImage:image forState:UIControlStateNormal];
     
@@ -182,8 +183,12 @@
             
             //the first point after started
                         //            [self pushPoint];
-            [sound play];
-            [countDownView show];
+            
+            //debug
+//            [sound play];
+//            [countDownView show];
+            
+            [self.tableView reloadData];
         }
         //init former location
         latestUserLocation = [self getNewRealLocation];
@@ -238,6 +243,12 @@
     [self pushPoint];
     distanceLabel.text = [RORUtils outputDistance:distance];
     speedLabel.text = [RORUserUtils formatedSpeed:(double)(currentSpeed*3.6)];
+    
+    if (eventHappenedList.count > eventHappenedCount){
+        eventHappenedCount = eventHappenedList.count;
+        [self.tableView reloadData];
+        [self.tableView scrollToRowAtIndexPath:bottomIndex atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    }
 }
 
 - (void)pushPoint{
@@ -381,6 +392,42 @@
     if ([destination respondsToSelector:@selector(setRecord:)]){
         [destination setValue:record forKey:@"record"];
     }
+}
+
+#pragma mark -
+#pragma mark Table view data source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    int rows = eventHappenedList.count + (isStarted?1:0);
+    return rows;
+}
+
+- (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *identifier = nil;
+    UITableViewCell *cell = nil;
+    identifier = @"eventCell";
+    cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+    UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+    UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+    
+    if (indexPath.row == 0) {
+        eventTimeLabel.text = @"0分0秒的时候";
+        eventLabel.text = @"开始散步";
+        effectLabel.text = @"一切看起来都那么美好～";
+    } else {
+        int timeInt = ((NSNumber *)[eventTimeList objectAtIndex:indexPath.row-1]).integerValue;
+        eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
+        
+        Action_Define *event = [eventHappenedList objectAtIndex:indexPath.row-1];
+        eventLabel.text = event.actionDescription;
+        effectLabel.text = [NSString stringWithFormat:@"获得：%@",event.actionAttribute];
+        //为cell填内容
+    }
+    bottomIndex = indexPath;
+    
+    return cell;
 }
 
 

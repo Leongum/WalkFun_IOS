@@ -221,7 +221,9 @@
     NSString *table=@"Action_Define";
     NSString *query = @"actionType = %@ and inUsing = 0";
     NSArray *params = [NSArray arrayWithObjects:[NSNumber numberWithInteger:(NSInteger)actionType], nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"triggerProbability" ascending:YES];
+    NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
@@ -232,4 +234,5 @@
     }
     return [actionList copy];
 }
+
 @end
