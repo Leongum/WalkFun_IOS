@@ -345,7 +345,6 @@
 
 -(void)creatRunningHistory{
     runHistory = [User_Running_History intiUnassociateEntity];
-    runHistory.steps = [NSNumber numberWithInt:stepCounting.counter / 0.8];
     runHistory.distance = [NSNumber numberWithDouble:distance];
     runHistory.duration = [NSNumber numberWithDouble:duration];
     runHistory.avgSpeed = [NSNumber numberWithDouble:(double)(distance/duration*3.6)];

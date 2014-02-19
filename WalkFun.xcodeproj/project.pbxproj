@@ -2286,8 +2286,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/p/Xcode/WalkFun_IOS/UMeng/UMSocial_Extra_Frameworks/TencentOpenAPI,
-					/Users/p/Xcode/WalkFun_IOS/lingqian,
+					"${SRCROOT}/UMeng/UMSocial_Extra_Frameworks/TencentOpenAPI",
+					"${SRCROOT}/lingqian",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RevolUtioN/WalkFun-Prefix.pch";
@@ -2295,12 +2295,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/p/Xcode/WalkFun_IOS/UMeng/UMFeedback,
-					/Users/p/Xcode/WalkFun_IOS/UMeng/UMAnalytics,
-					/Users/p/Xcode/WalkFun_IOS/UMeng/UMSocial/frameworks/Wechat,
-					/Users/p/Xcode/WalkFun_IOS/UMeng/UMSocial,
-					/Users/p/Xcode/WalkFun_IOS/UMeng/UMSocial_Extra_Frameworks/UMSocial_ScreenShot_Sdk,
-					/Users/p/Xcode/WalkFun_IOS/UMeng/UMSocial_Extra_Frameworks/UMSocial_Shake_Sdk,
+					"${SRCROOT}/UMeng/UMFeedback",
+					"${SRCROOT}/UMeng/UMAnalytics",
+					"${SRCROOT}/UMeng/UMSocial/frameworks/Wechat",
+					"${SRCROOT}/UMeng/UMSocial",
+					"${SRCROOT}/UMeng/UMSocial_Extra_Frameworks/UMSocial_ScreenShot_Sdk",
+					"${SRCROOT}/UMeng/UMSocial_Extra_Frameworks/UMSocial_Shake_Sdk",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
@@ -2318,8 +2318,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/p/Xcode/WalkFun_IOS/UMeng/UMSocial_Extra_Frameworks/TencentOpenAPI,
-					/Users/p/Xcode/WalkFun_IOS/lingqian,
+					"${SRCROOT}/UMeng/UMSocial_Extra_Frameworks/TencentOpenAPI",
+					"${SRCROOT}/lingqian",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RevolUtioN/WalkFun-Prefix.pch";
@@ -2327,12 +2327,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/p/Xcode/WalkFun_IOS/UMeng/UMFeedback,
-					/Users/p/Xcode/WalkFun_IOS/UMeng/UMAnalytics,
-					/Users/p/Xcode/WalkFun_IOS/UMeng/UMSocial/frameworks/Wechat,
-					/Users/p/Xcode/WalkFun_IOS/UMeng/UMSocial,
-					/Users/p/Xcode/WalkFun_IOS/UMeng/UMSocial_Extra_Frameworks/UMSocial_ScreenShot_Sdk,
-					/Users/p/Xcode/WalkFun_IOS/UMeng/UMSocial_Extra_Frameworks/UMSocial_Shake_Sdk,
+					"${SRCROOT}/UMeng/UMFeedback",
+					"${SRCROOT}/UMeng/UMAnalytics",
+					"${SRCROOT}/UMeng/UMSocial/frameworks/Wechat",
+					"${SRCROOT}/UMeng/UMSocial",
+					"${SRCROOT}/UMeng/UMSocial_Extra_Frameworks/UMSocial_ScreenShot_Sdk",
+					"${SRCROOT}/UMeng/UMSocial_Extra_Frameworks/UMSocial_Shake_Sdk",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
