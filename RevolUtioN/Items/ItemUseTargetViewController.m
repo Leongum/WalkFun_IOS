@@ -29,6 +29,7 @@
 	// Do any additional setup after loading the view.
     
     //todo:load content
+    contentList = [RORFriendService fetchFriendFansList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,8 +59,8 @@
 #pragma mark Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
-//    return contentList.count;
+//    return 3;
+    return contentList.count;
 }
 
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -67,6 +68,10 @@
     UITableViewCell *cell = nil;
     identifier = @"friendCell";
     cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    Friend *friend = [contentList objectAtIndex:indexPath.row];
+    UILabel *friendNameLabel = (UILabel *)[cell viewWithTag:100];
+    friendNameLabel.text = friend.userName;
     
     return cell;
 }

@@ -24,4 +24,6 @@
 //查询本地所有道具的信息
 +(NSArray *)fetchAllVProduct;
 
+//返回item对应的图片，缓存到本地
++(UIImage *)getImageOf:(Virtual_Product *)item;
 @end

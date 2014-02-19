@@ -32,13 +32,12 @@
     
 	// Do any additional setup after loading the view.
     
-	// Do any additional setup after loading the view.
     NSMutableArray *controllers = [[NSMutableArray alloc] init];
-    for (NSUInteger i = 0; i <3; i++)
+    for (NSUInteger i = 0; i <PAGE_QUANTITY; i++)
 		[controllers addObject:[NSNull null]];
     
     self.contentViews = controllers;
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+    mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
     UIStoryboard *friendStoryboard = [UIStoryboard storyboardWithName:@"FriendsStoryboard" bundle:[NSBundle mainBundle]];
     
     firstViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"firstViewContoller"];
@@ -61,11 +60,19 @@
     self.pageControl.numberOfPages = numberPages;
     self.pageControl.currentPage = 1;
     
-    [self loadPage:0];
-    [self loadPage:1];
-    [self loadPage:2];
+    for (int i=0; i<PAGE_QUANTITY; i++)
+        [self loadPage:i];
+//    [self loadPage:1];
+//    [self loadPage:2];
     
     [self gotoPage:NO];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    for (int i=0; i<PAGE_QUANTITY; i++){
+        UIViewController *controller =(UIViewController *)[contentViews objectAtIndex:i];
+        [controller viewWillAppear:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,31 +83,17 @@
 
 
 -(void)loadPage:(NSInteger)page{
-    UIViewController *controller =(UIViewController *)[contentViews objectAtIndex:page];
+    MainPageViewController *controller =(MainPageViewController *)[contentViews objectAtIndex:page];
     UIView *view = controller.view;
     CGRect frame = self.scrollView.frame;
     frame.origin.x = CGRectGetWidth(frame) * page;
     frame.origin.y = 0;
     view.frame = frame;
     
-    //let the page controller know which page switch button it should have
-    //    if (page ==0){
-    //        viewController.page = PAGE_POINTER_RIGHT;
-    //    } else if (page == contentViews.count-1){
-    //        viewController.page = PAGE_POINTER_LEFT;
-    //    } else{
-    //        viewController.page = PAGE_POINTER_LEFT + PAGE_POINTER_RIGHT;
-    //    }
-    //
-    //    //add button action
-    //    if (viewController.formerButton != nil)
-    //        [viewController.formerButton addTarget:self action:@selector(gotoFormerPage) forControlEvents:UIControlEventTouchUpInside];
-    //    if (viewController.nextButton != nil)
-    //        [viewController.nextButton addTarget:self action:@selector(gotoNextPage) forControlEvents:UIControlEventTouchUpInside];
-    
     [self addChildViewController:controller];
     [self.scrollView addSubview:view];
     [controller didMoveToParentViewController:self];
+    [controller setPage:page];
 }
 
 -(IBAction)gotoFormerPage:(id)sender{
@@ -117,32 +110,38 @@
 
 // at the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 //    CGFloat pageWidth = CGRectGetWidth(self.scrollView.frame);
 //    if (self.pageControl.currentPage <=1)
 //        self.formerPageButton.alpha = scrollView.contentOffset.x/pageWidth / 2;
 //    if (self.pageControl.currentPage >=contentViews.count-2)
 //        self.nextPageButton.alpha = (pageWidth * (contentViews.count-1) - scrollView.contentOffset.x)/pageWidth /2;
-//}
+    [self refreshPageTitles:scrollView];
+}
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     // switch the indicator when more than 50% of the previous/next page is visible
     CGFloat pageWidth = CGRectGetWidth(self.scrollView.frame);
     NSUInteger page = floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    [self refreshPageTitles:scrollView];
     self.pageControl.currentPage = page;
+}
+
+-(void)refreshPageTitles:(UIScrollView *)scrollView{
+    CGFloat pageWidth = CGRectGetWidth(self.scrollView.frame);
+    for (int i=0; i<PAGE_QUANTITY; i++){
+        MainPageViewController *controller =(MainPageViewController *)[contentViews objectAtIndex:i];
+        double offset = self.scrollView.contentOffset.x - i*pageWidth;
+        [controller refreshTitleLayout:offset];
+    }
 }
 
 - (void)gotoPage:(BOOL)animated
 {
     NSInteger page = self.pageControl.currentPage;
     // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
-    //    [self loadUserInfoBasicPage:0];
-    //    [self loadUserInfoRunHistoryPage:1];
-    //    [self loadUserInfoDoneMissionsPage:2];
-    //    [self loadPage:0];
-    //    [self loadPage:1];
-    //
+
 	// update the scroll view to the appropriate page
     CGRect bounds = self.scrollView.bounds;
     CGPoint offset;
@@ -158,10 +157,14 @@
     [self gotoPage:YES];    // YES = animate
 }
 
-- (IBAction)historyAction:(id)sender {
+- (IBAction)missionAction:(id)sender {
+    UIViewController *historyViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"historyListViewController"];
+    [self presentViewController:historyViewController animated:YES completion:^(){}];
 }
 
 - (IBAction)settingsAction:(id)sender {
+    UIViewController *moreViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"moreViewController"];
+    [self presentViewController:moreViewController animated:YES completion:^(){}];
 }
 
 @end

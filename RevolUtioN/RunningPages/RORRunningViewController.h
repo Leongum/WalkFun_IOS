@@ -17,14 +17,14 @@
 #import "Mission.h"
 #import "RORRunningBaseViewController.h"
 
-@interface RORRunningViewController : RORRunningBaseViewController<MKMapViewDelegate> {
+@interface RORRunningViewController : RORRunningBaseViewController {
     BOOL MKwasFound;
     User_Running_History *runHistory;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
 @property (weak, nonatomic) IBOutlet UIButton *endButton;
-@property (strong, nonatomic) IBOutlet MKMapView *mapView;
+
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *speedLabel;

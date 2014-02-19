@@ -34,8 +34,9 @@
     item = [RORVirtualProductService fetchVProduct:userItem.productId];
     
     //todo
-    NSURL *imageUrl = [NSURL URLWithString:item.picLink];
-    UIImage *iconImage = [[UIImage alloc]initWithData:[NSData dataWithContentsOfURL:imageUrl]];
+//    NSURL *imageUrl = [NSURL URLWithString:item.picLink];
+//    UIImage *iconImage = [[UIImage alloc]initWithData:[NSData dataWithContentsOfURL:imageUrl]];
+    UIImage *iconImage = [RORVirtualProductService getImageOf:item];
     [itemIconImageView setImage:iconImage];
     itemQuantityLabel.text = [NSString stringWithFormat:@"x %@",userItem.ownNumber];
 }

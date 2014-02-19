@@ -20,8 +20,8 @@
         item = [RORVirtualProductService fetchVProduct:newUserItem.productId];;
         
         //todo:图片
-        NSURL *imageUrl = [NSURL URLWithString:item.picLink];
-        UIImage *iconImage = [[UIImage alloc]initWithData:[NSData dataWithContentsOfURL:imageUrl]];
+        UIImage *iconImage = [RORVirtualProductService getImageOf:item];
+
         itemImageView = [[UIImageView alloc]initWithImage:iconImage];
         itemImageView.frame = CGRectMake(CGRectGetWidth(frame)/2-BIG_ITEM_SIZE/2, 105, BIG_ITEM_SIZE, BIG_ITEM_SIZE);
         [self addSubview:itemImageView];

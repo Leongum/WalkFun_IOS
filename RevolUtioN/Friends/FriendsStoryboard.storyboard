@@ -33,6 +33,25 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <view contentMode="scaleToFill" id="ibY-OL-z5Y">
+                                <rect key="frame" x="20" y="0.0" width="280" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RmS-3i-N2v">
+                                        <rect key="frame" x="20" y="25" width="72" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="7" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="添加" backgroundImage="expandButton_bg.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="expandAction:" destination="dAC-yB-dRr" eventType="touchUpInside" id="rsX-In-bQi"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="zNU-K6-pfJ">
                                 <rect key="frame" x="33" y="205" width="253" height="296"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -115,18 +134,6 @@
                                         <rect key="frame" x="33" y="54" width="260" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RmS-3i-N2v">
-                                        <rect key="frame" x="98" y="269" width="124" height="69"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="7" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="添加" backgroundImage="expandButton_bg.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="expandAction:" destination="dAC-yB-dRr" eventType="touchUpInside" id="rsX-In-bQi"/>
-                                        </connections>
-                                    </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入选手编号" minimumFontSize="17" id="Ju7-R7-H5W">
                                         <rect key="frame" x="46" y="57" width="229" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -192,6 +199,7 @@
                     <connections>
                         <outlet property="addButton" destination="hxd-O8-luO" id="bNe-9N-yjr"/>
                         <outlet property="expandButton" destination="RmS-3i-N2v" id="qD2-1J-5Dz"/>
+                        <outlet property="friendTitleView" destination="ibY-OL-z5Y" id="txi-Zn-jdv"/>
                         <outlet property="searchFriendView" destination="jsX-bg-Kc8" id="9xR-RX-HNv"/>
                         <outlet property="searchResultUserIdLabel" destination="hvi-f6-ISd" id="E5V-jG-b63"/>
                         <outlet property="searchResultUserLvLabel" destination="SOh-RA-M4L" id="gWk-Sn-tq2"/>

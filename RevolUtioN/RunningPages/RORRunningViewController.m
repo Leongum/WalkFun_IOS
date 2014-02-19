@@ -23,7 +23,7 @@
 @synthesize record;
 @synthesize doCollect;
 @synthesize kalmanFilter, inDistance;
-@synthesize mapView, coverView;
+@synthesize coverView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,8 +60,6 @@
     self.coverView.alpha = 0;
     self.backButton.alpha = 0;
     
-    self.mapView.delegate = self;
-    
     [self.startButton setEnabled:NO];
     [startButton setTitle:SEARCHING_LOCATION forState:UIControlStateNormal];
     UIImage *image = [UIImage imageNamed:@"green_btn_bg.png"];
@@ -88,10 +86,6 @@
 }
 
 -(void)navigationInit{
-    //    [mapView setUserTrackingMode:MKUserTrackingModeFollow];
-    [mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-    [mapView removeOverlays:[mapView overlays]];
-
     MKwasFound = NO;
     timerCount = 0;
     distance = 0;
@@ -150,25 +144,7 @@
     [self navigationInit];
 }
 
-////center the map to userLocation of MKMapView
-- (IBAction)center_map:(id)sender{
-    CLLocation *loc = [mapView userLocation].location;
-    float zoomLevel = 0.005;
-    MKCoordinateRegion region = MKCoordinateRegionMake(loc.coordinate, MKCoordinateSpanMake(zoomLevel, zoomLevel));
-    [mapView setRegion:[mapView regionThatFits:region] animated:NO];
-
-}
-
--(void)createAnnotationWithCoords:(CLLocationCoordinate2D) coords withTitle:(NSString *)title andSubTitle:(NSString *) subTitle {
-    RORMapAnnotation *annotation = [[RORMapAnnotation alloc] initWithCoordinate:
-                                    coords];
-    annotation.title = title;
-    annotation.subtitle = subTitle;
-    [mapView addAnnotation:annotation];
-}
-
 - (void)viewDidUnload {
-    [self setMapView:nil];
     [self setDistanceLabel:nil];
     [self setTimeLabel:nil];
     [self setSpeedLabel:nil];
@@ -184,37 +160,6 @@
     [self setDataContainer:nil];
     [super viewDidUnload];
 }
-
-//- (IBAction)expandAction:(id)sender {
-//    [UIView beginAnimations:nil context:nil];
-//    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-//    [UIView setAnimationDuration:0.6];
-//    
-//    expandButton.alpha = 0;
-//    collapseButton.alpha = 0.7;
-//    mapView.frame = [ UIScreen mainScreen ].bounds;
-//    
-//    [UIView setAnimationDelegate:self];
-//    [UIView setAnimationDidStopSelector:@selector(animationFinished)];
-//    [UIView commitAnimations];
-//    
-//}
-//
-//- (IBAction)collapseAction:(id)sender {
-//    [UIView beginAnimations:nil context:nil];
-//    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-//    [UIView setAnimationDuration:0.3];
-//    
-//    collapseButton.alpha = 0;
-//    expandButton.alpha = 0.7;
-//    mapView.frame = SCALE_SMALL;
-//    
-//    [UIView setAnimationDelegate:self];
-//    [UIView setAnimationDidStopSelector:@selector(animationFinished)];
-//    [UIView commitAnimations];
-//    
-//}
-
 
 - (IBAction)startButtonAction:(id)sender {
     if (!isStarted){
@@ -236,7 +181,6 @@
             [self startDeviceMotion];
             
             //the first point after started
-            [self initOffset:[mapView userLocation]];
                         //            [self pushPoint];
             [sound play];
             [countDownView show];
@@ -245,7 +189,6 @@
         latestUserLocation = [self getNewRealLocation];
         formerLocation = latestUserLocation;
         [routePoints addObject:formerLocation];
-        [self drawLineWithLocationArray:routePoints];
         
         NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(timerDot) userInfo:nil repeats:YES];
         repeatingTimer = timer;
@@ -265,15 +208,10 @@
 
 - (void)initNavi{
     [super initNavi];
-    [mapView removeOverlays:[mapView overlays]];
 }
 
 - (void)inertiaNavi{
     [super inertiaNavi];
-    
-//    self.stepLabel.text = [NSString stringWithFormat:@"%d", stepCounting.counter];
-//    self.avgTimePerStep.text = [NSString stringWithFormat:@"%.2f s", duration/((double)stepCounting.counter)];
-//    self.avgDisPerStep.text = [NSString stringWithFormat:@"%.2f m", distance/((double)stepCounting.counter)];
 }
 
 - (void)timerDot{
@@ -291,6 +229,8 @@
     }
 
     timeLabel.text = [RORUtils transSecondToStandardFormat:duration];
+    
+    distanceLabel.text = [RORUtils formattedSteps:stepCounting.counter/0.7];
 }
 
 -(void)timerSecondDot{
@@ -312,12 +252,10 @@
         NSLog(@"%f",deltaDistance);
         distance += [formerLocation distanceFromLocation:currentLocation];
         formerLocation = currentLocation;
-        
         [routePoints addObject:currentLocation];
-        [self drawLineWithLocationArray:routePoints];
         
-        //记录每KM平均速度
-        [self pushAvgSpeedPerKM];
+//        //记录每KM平均速度
+//        [self pushAvgSpeedPerKM];
     }
 }
 
@@ -355,13 +293,10 @@
     
     if (self.endTime == nil)
         self.endTime = [NSDate date];
-//    [[UIApplication sharedApplication] setIdleTimerDisabled: NO];
-//    [startButton setEnabled:NO];
-    
     
     [self prepareForQuit];
     [self saveRunInfo];
-//    [self endIndicator:self];
+
     [self performSegue];
     [self endIndicator:self];
 }
@@ -371,16 +306,17 @@
 }
 
 -(void)prepareForQuit{
+    //stop globle location manager
     [(RORAppDelegate *)[[UIApplication sharedApplication] delegate] setRunningStatus:NO];
     
+    //stop timer
     [repeatingTimer invalidate];
     repeatingTimer = nil;
 }
 
 - (IBAction)btnDeleteRunHistory:(id)sender {
     [self prepareForQuit];
-
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^(){}];
 }
 
 -(NSNumber *)calculateGrade{
@@ -409,6 +345,7 @@
 
 -(void)creatRunningHistory{
     runHistory = [User_Running_History intiUnassociateEntity];
+    runHistory.steps = [NSNumber numberWithInt:stepCounting.counter / 0.8];
     runHistory.distance = [NSNumber numberWithDouble:distance];
     runHistory.duration = [NSNumber numberWithDouble:duration];
     runHistory.avgSpeed = [NSNumber numberWithDouble:(double)(distance/duration*3.6)];
@@ -445,73 +382,6 @@
     if ([destination respondsToSelector:@selector(setRecord:)]){
         [destination setValue:record forKey:@"record"];
     }
-}
-
-- (void)drawLineWithLocationArray:(NSArray *)locationArray
-{
-    //    [self updateLocation];
-    if (routeLine!=nil){
-        [mapView removeOverlay:routeLine];
-    }
-    
-    int pointCount = [locationArray count];
-    //debug
-//    NSLog(@"%d", pointCount);
-    CLLocationCoordinate2D *coordinateArray = (CLLocationCoordinate2D *)malloc(pointCount * sizeof(CLLocationCoordinate2D));
-    
-    for (int i = 0; i < pointCount; ++i) {
-        CLLocation *location = [locationArray objectAtIndex:i];
-        coordinateArray[i] = [location coordinate];
-    }
-    
-    routeLine = [MKPolyline polylineWithCoordinates:coordinateArray count:pointCount];
-//    self.routeLineShadow = [MKPolyline polylineWithCoordinates:coordinateArray count:pointCount];
-    
-    //    [mapView setVisibleMapRect:[routeLine boundingMapRect]];
-//    [mapView addOverlay:self.routeLineShadow];
-    [mapView addOverlay:routeLine];
-    free(coordinateArray);
-    coordinateArray = NULL;
-}
-
-
-#pragma mark - MKMapViewDelegate
-
-
--(void) mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    if (!MKwasFound){
-        MKwasFound = YES;
-        [self center_map:self];
-        formerCenterMapLocation = [self getNewRealLocation];
-        [startButton setTitle:START_RUNNING_BUTTON forState:UIControlStateNormal];
-        [self.startButton setEnabled:YES];
-    }
-    if ([formerCenterMapLocation distanceFromLocation:[self getNewRealLocation]]>20){
-        [self center_map:self];
-        formerCenterMapLocation = [self getNewRealLocation];
-        //to-do
-    }
-}
-
-- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay {
-    MKOverlayView* overlayView = nil;
-    
-    if(overlay == routeLine)
-    {
-        //if we have not yet created an overlay view for this overlay, create it now.
-        //        if(nil == self.routeLineView)
-        //        {
-        self.routeLineView = [[MKPolylineView alloc] initWithPolyline:routeLine];
-        //        self.routeLineView.fillColor = [UIColor colorWithRed:223 green:8 blue:50 alpha:1];
-        self.routeLineView.strokeColor = [UIColor colorWithRed:(46.0/255.0) green:(170.0/255.0) blue:(218.0/255.0) alpha:1];
-        self.routeLineView.lineWidth = 10;
-        //        }
-        overlayView = self.routeLineView;
-    }
-
-    return overlayView;
-    
 }
 
 

@@ -29,6 +29,8 @@
 
 - (void)viewDidLoad
 {
+    titleView = self.selfTitleView;
+    
     [super viewDidLoad];
     
 //    [RORUtils setFontFamily:CHN_PRINT_FONT forView:self.view andSubViews:YES];
@@ -45,13 +47,6 @@
     UIImage *image = [UIImage imageNamed:@"main_trafficlight_none.png"];
     [weatherInfoButtonView setImage:image forState:UIControlStateNormal];
     
-    [self.userInfoView addTarget:self action:@selector(userInfoViewClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-//    //sync system data
-//    NSDate * lastupdateTime = [RORUtils getDateFromString:[RORUserUtils getLastUpdateTime:@"lastSyncSystemDataTime"]];
-//    if([[NSDate date] timeIntervalSinceDate:lastupdateTime] >= 86400){
-//        [RORUserUtils syncSystemData];
-//    }
 
     [LingQianSDK trackActionWithName:@"visit"];
 }
@@ -75,29 +70,9 @@
 }
 
 -(void)prepareControlsForAnimation{
-    hasAnimated = NO;
-    
-//    self.chactorView.alpha = 0;
-//    self.charactorWindView.alpha = 0;
-//    self.weatherInfoButtonView.alpha = 0;
-//    self.userInfoView.alpha = 0;
-//    self.runButton.alpha = 0;
-//    self.challenge.alpha = 0;
-//    self.historyButton.alpha = 0;
-//    self.settingButton.alpha = 0;
-//    self.mallButton.alpha = 0;
-//    self.friendsButton.alpha = 0;
-    
-    self.chactorView.alpha = 1;
-    self.charactorWindView.alpha = 1;
     self.weatherInfoButtonView.alpha = 1;
     self.userInfoView.alpha = 1;
     self.runButton.alpha = 1;
-    self.challenge.alpha = 1;
-    self.historyButton.alpha = 1;
-    self.settingButton.alpha = 1;
-    self.mallButton.alpha = 1;
-    self.friendsButton.alpha = 1;
 }
 
 - (void)initLocationServcie{
@@ -142,23 +117,9 @@
 
 - (void)initControlsLayout{
     [self.backButton setAlpha:0];
-    
-//    CGRect rx = [ UIScreen mainScreen ].applicationFrame;
-//    if (rx.size.height == 460){
-//        self.runButton.frame = RUN_BUTTON_FRAME_NORMAL;
-//        self.challenge.frame = CHALLENGE_BUTTON_FRAME_NORMAL;
-//    } else {
-//        self.runButton.frame = RUN_BUTTON_FRAME_RATINA;
-//        self.challenge.frame = CHALLENGE_BUTTON_FRAME_RATINA;
-//    }
 }
 
 - (void)initPageData{
-    //    [self.loginButton.titleLabel setFont: [UIFont fontWithName:@"FZKaTong-M19S" size:20]];
-    //    [self.levelLabel setFont:[UIFont fontWithName:@"FZKaTong-M19S" size:15]];
-    //    [self.scoreLabel setFont:[UIFont fontWithName:@"FZKaTong-M19S" size:15]];
-    //    [self.usernameLabel setFont:[UIFont fontWithName:@"FZKaTong-M19S" size:20]];
-    
     //初始化用户名
     NSNumber *thisUserId = [RORUserUtils getUserId];
     if (thisUserId.integerValue>=0){
@@ -172,32 +133,23 @@
         if (l>=8)
             [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:16]];
         self.levelLabel.text = [NSString stringWithFormat:@"Lv. %d", userInfo.userDetail.level.integerValue];
-//        self.scoreLabel.text = [NSString stringWithFormat:@"%d", userInfo.attributes.scores.integerValue];
-        self.userIdLabel.text = [NSString stringWithFormat:@"%@号选手",[RORUtils addEggache:thisUserId]];
+
+        User_Detail *userDetail = [RORUserServices fetchUserDetailByUserId:userInfo.userId];
+        self.fatLabel.text = [NSString stringWithFormat:@"肥肉：%@", userDetail.fatness];
+        self.healthLabel.text = [NSString stringWithFormat:@"健康：%@", userDetail.health];
     } else {
         self.loginButton.alpha = 1;
+        UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+        UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"RORLoginViewController"];
+        [[self parentViewController] presentViewController:itemViewController animated:NO completion:^(){}];
     }
-    
-//    planNext = [RORPlanService fetchUserRunningPlanHistory];
-//    if (planNext){
-//        NSInteger ld = [RORPlanService fillCountDownIconForView:self.trainingCountDownView withPlanNext:planNext];
-//        self.trainingCountDownView.alpha = ld<0?0:1;
-//    } else
-//        self.trainingCountDownView.alpha = 0;
+
 }
 
--(void) viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self initPageData];
-    if (!hasAnimated){
-        hasAnimated = YES;
-//        [self charactorAnimation];
-        
-//        [self controlsInAction];
-    }
-    //    [Animations zoomIn:self.chactorView andAnimationDuration:2 andWait:YES];
     [self initLocationServcie];
-    
 }
 
 - (IBAction)segueToLogin:(id)sender{
@@ -287,58 +239,12 @@
     [self setWeatherInfoButtonView:nil];
     [self setUserName:nil];
     [self setUserId:nil];
-    
     [self setRunButton:nil];
-    [self setChallenge:nil];
     [self setUsernameLabel:nil];
     [self setLevelLabel:nil];
-    [self setScoreLabel:nil];
     [self setUserInfoView:nil];
     [self setLoginButton:nil];
-    [self setChactorView:nil];
-    [self setHistoryButton:nil];
-    [self setSettingButton:nil];
-    [self setCharactorWindView:nil];
     [super viewDidUnload];
-}
-
--(void)charactorAnimation{
-    self.chactorView.alpha = 1;
-    [self.chactorView popIn:2 delegate:self startSelector:nil stopSelector:@selector(controlsInAction)];
-
-    [Animations moveUp:self.chactorView andAnimationDuration:1 andWait:NO andLength:20];
-
-    self.charactorWindView.alpha = 1;
-    [self.charactorWindView fadeIn:4 delegate:self];
-}
-
--(void)controlsInAction{
-    //    self.weatherInfoButtonView
-    
-    [self.runButton fallIn:0.5 delegate:self];
-    [self.challenge fallIn:0.5 delegate:self];
-    self.runButton.alpha = 1;
-    self.challenge.alpha = 1;
-    //    [Animations fadeIn:self.runButton andAnimationDuration:1 toAlpha:1 andWait:NO];
-    //    [Animations fadeIn:self.challenge andAnimationDuration:1 toAlpha:1 andWait:YES];
-    self.historyButton.alpha =1;
-    self.settingButton.alpha = 1;
-    self.mallButton.alpha = 1;
-    self.friendsButton.alpha = 1;
-    [self.historyButton slideInFrom:kFTAnimationRight duration:0.5 delegate:self];
-    [self.settingButton slideInFrom:kFTAnimationLeft duration:0.5 delegate:self];
-    [self.mallButton fadeIn:0.5 delegate:self];
-    [self.friendsButton fadeIn:0.5 delegate:self];
-    //    [Animations fadeIn:self.settingButton andAnimationDuration:1.5 toAlpha:1 andWait:YES];
-    self.weatherInfoButtonView.alpha = 1;
-    self.userInfoView.alpha = 1;
-    [self.weatherInfoButtonView slideInFrom:kFTAnimationLeft duration:0.5 delegate:self];
-    [self.userInfoView slideInFrom:kFTAnimationRight duration:0.5 delegate:self];
-//    [Animations moveRight:self.weatherInfoButtonView andAnimationDuration:0.4 andWait:NO andLength:110];
-//    [Animations moveLeft:self.userInfoView andAnimationDuration:0.4 andWait:NO andLength:220];
-    
-//    [Animations moveLeft:self.weatherInfoButtonView andAnimationDuration:0.1 andWait:NO andLength:10];
-//    [Animations moveRight:self.userInfoView andAnimationDuration:0.1 andWait:NO andLength:10];
 }
 
 - (IBAction)weatherPopAction:(id)sender{
@@ -346,26 +252,6 @@
         [self sendNotification:weatherInformation];
     } else
         [self sendAlart:weatherInformation];
-//    [SVProgressHUD dismiss];
-    //    [self charactorAnimation];
-}
-
--(IBAction)userInfoViewClick:(id)sender{
-    //[self sendNotification:[NSString stringWithFormat:@"选手编号: %@\n金币: %d\n",[RORUtils addEggache:[RORUserUtils getUserId]], userInfo.attributes.scores.intValue]];
-}
-
-- (IBAction)normalRunAction:(id)sender {
-}
-
-- (IBAction)challengeRunAction:(id)sender{
-}
-
-- (IBAction)mallUnderDeveloping:(id)sender {
-    [LingQianSDK openRewardStore];
-    //[self sendNotification:@"【装备商城】\n\n正在哼哧哼哧开发中"];
-}
-- (IBAction)friendsUnderDeveloping:(id)sender {
-//    [self sendNotification:@"【我的跑友】\n\n正在窟嚓窟嚓开发中"];
 }
 
 - (IBAction)trainingAction:(id)sender {
@@ -381,6 +267,12 @@
     UIViewController *trainingViewController = [secondStoryboard instantiateViewControllerWithIdentifier:@"FriendsMainViewController"];
     
     [self.navigationController pushViewController:trainingViewController animated:YES];
+}
+
+- (IBAction)showHistoryAction:(id)sender {
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+    UIViewController *historyViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"historyListViewController"];
+    [self presentViewController:historyViewController animated:YES completion:^(){}];
 }
 
 @end

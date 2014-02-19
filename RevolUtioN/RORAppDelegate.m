@@ -140,7 +140,10 @@
      此方法必须在启动时调用，否则会限制SDK的使用。
      **/
     [ShareSDK registerApp:@"738183f3e91"];
-    [LingQianSDK didFinishLaunchingWithAppID:@"824cf793a15d5a76b92ca74ae533529f" applicationSecret:@"84aedf8fda5ab5bc2ee8881f17758642"];
+    
+//========================
+//launch lingqian service
+//    [LingQianSDK didFinishLaunchingWithAppID:@"824cf793a15d5a76b92ca74ae533529f" applicationSecret:@"84aedf8fda5ab5bc2ee8881f17758642"];
     
     [self initializePlat];
     

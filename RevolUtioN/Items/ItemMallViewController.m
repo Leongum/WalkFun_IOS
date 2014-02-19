@@ -65,6 +65,7 @@
     [self.view addSubview:self.itemQuantityCoverView];
     [self.itemQuantityCoverView appear:self];
     self.totalCost.text = [NSString stringWithFormat:@"$ %d", selectedItem.virtualPrice.integerValue];
+    self.selectedItemNameLabel.text = selectedItem.productName;
 }
 
 #pragma mark -
@@ -83,11 +84,16 @@
     Virtual_Product *item = [contentList objectAtIndex:indexPath.row];
 
     //为cell填内容
+    UIImageView *itemIcon = (UIImageView *)[cell viewWithTag:100];
+    UIImage *iconImage = [RORVirtualProductService getImageOf:item];
+    itemIcon.image = iconImage;
+    
     UILabel *itemNameLabel = (UILabel *)[cell viewWithTag:101];
     itemNameLabel.text = item.productName;
     
     UILabel *itemDescLabel = (UILabel *)[cell viewWithTag:102];
     itemDescLabel.text = item.productDescription;
+    
     
     return cell;
 }

@@ -15,44 +15,36 @@
 #import "User_Base.h"
 #import "RORNormalButton.h"
 #import <MapKit/MapKit.h>
-#import "RORViewController.h"
+#import "MainPageViewController.h"
 
-@interface RORFirstViewController : RORViewController<CLLocationManagerDelegate>{
+@interface RORFirstViewController : MainPageViewController<CLLocationManagerDelegate>{
     BOOL wasFound;
     CLLocation *userLocation;
     NSString *cityName;
     NSString *weatherInformation;
-    BOOL hasAnimated;
     User_Base *userInfo;
     
     CLLocationManager *locationManager;
 }
+@property (strong, nonatomic) IBOutlet UIView *selfTitleView;
 
 //@property (strong,nonatomic)NSManagedObjectContext *context;
 @property (copy, nonatomic) NSString *userName;
 @property (nonatomic) NSNumber *userId;
 @property (strong, nonatomic) IBOutlet RORNavigationButton *runButton;
-@property (strong, nonatomic) IBOutlet RORNavigationButton *trainingButton;
-@property (strong, nonatomic) IBOutlet RORNavigationButton *challenge;
 //@property (strong, nonatomic) IBOutlet UIImageView *testView;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *levelLabel;
-@property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) IBOutlet UIControl *userInfoView;
-@property (strong, nonatomic) IBOutlet UILabel *userIdLabel;
+//todo
+@property (strong, nonatomic) IBOutlet UILabel *fatLabel;
+@property (strong, nonatomic) IBOutlet UILabel *healthLabel;
+
 
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
 @property (strong, nonatomic) IBOutlet UIButton *weatherInfoButtonView;
-@property (strong, nonatomic) IBOutlet UIImageView *chactorView;
-@property (strong, nonatomic) IBOutlet UIImageView *charactorWindView;
-@property (strong, nonatomic) IBOutlet RORNavigationButton *historyButton;
-@property (strong, nonatomic) IBOutlet RORNavigationButton *settingButton;
-@property (strong, nonatomic) IBOutlet RORNavigationButton *mallButton;
-@property (strong, nonatomic) IBOutlet RORNavigationButton *friendsButton;
+
 
 @property (strong, nonatomic) IBOutlet UIView *trainingCountDownView;
-
-- (IBAction)normalRunAction:(id)sender;
-- (IBAction)challengeRunAction:(id)sender;
 
 @end

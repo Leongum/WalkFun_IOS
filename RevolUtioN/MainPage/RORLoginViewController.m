@@ -38,6 +38,7 @@
 {
     [super viewDidLoad];
 //    [self endIndicator:self];
+    self.backButton.alpha = 0;
     
     switchButton = [[RORPaperSegmentControl alloc]initWithFrame:SEGMENT_FRAME andSegmentNumber:2];
     switchButton.delegate = self;
@@ -149,7 +150,9 @@
     }
     passwordTextField.text = @"";
     nicknameTextField.text = @"";
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    [self dismissViewControllerAnimated:YES completion:^(){}];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (BOOL) isLegalInput {

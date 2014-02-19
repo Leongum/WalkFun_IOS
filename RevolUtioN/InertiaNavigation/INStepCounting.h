@@ -11,13 +11,8 @@
 #define SC_WINDOW_SIZE 20
 
 @interface INStepCounting : NSObject{
-//    double gAccTrend, lAccTrend;
-//    int p;
-//    BOOL gHasPeak, lHasPeak;
     double gWindow[SC_WINDOW_SIZE], lWindow[SC_WINDOW_SIZE];
     int head, tail, lastGPeak, lPeak, totalPoints;
-//    double gPeakSum, lPeakSum;
-//    int duration;
 }
 
 @property (strong, nonatomic) NSMutableArray *levelAccList;
