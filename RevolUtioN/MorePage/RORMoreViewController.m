@@ -11,6 +11,7 @@
 #import "RORAppDelegate.h"
 #import "RORSegmentControl.h"
 #import "RORCheckBox.h"
+#import "UMFeedback.h"
 
 @interface RORMoreViewController ()
 
@@ -210,4 +211,7 @@
     [RORUserUtils writeToUserInfoPList:settingDict];
 }
 
+- (IBAction)feedbackAction:(id)sender {
+    [UMFeedback showFeedback:self withAppkey:UMENG_APPKEY];
+}
 @end

@@ -61,6 +61,7 @@
 #define THIRD_PARTY_PM25_URL @"http://www.cyberace.cc/service/api/weather/pm25?cityName=%@&provinceName=%@"
 #define THIRD_PARTY_WEATHER_URL @"http://www.weather.com.cn/data/sk/%@.html"
 
+#define UMENG_APPKEY @"5300735056240b04531ca01a"
 
 #define DEFAULT_NET_WORK_MODE @"All_Mode"
 #define NET_WORK_MODE_WIFI @"Only_Wifi"

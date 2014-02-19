@@ -31,9 +31,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnSinaLogin;
-@property (weak, nonatomic) IBOutlet UIButton *btnTencentLogin;
 @property (weak, nonatomic) IBOutlet UIButton *btnQQLogin;
-@property (weak, nonatomic) IBOutlet UIButton *btnRenRenLogin;
 
 
 - (IBAction)loginAction:(id)sender;

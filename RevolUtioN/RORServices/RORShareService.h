@@ -7,16 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <ShareSDK/ShareSDK.h>
 #import "User_Base.h"
 #import "RORUserServices.h"
-#import "RORShareViewDelegate.h"
 #import "User_Running_History.h"
 
 @interface RORShareService : NSObject
 
 //login return YES, register return NO.
-+ (BOOL)loginFromSNS:(id<ISSUserInfo>)userInfo withSNSType:(ShareType) type;
++ (BOOL)loginFromSNS:(UMSocialAccountEntity *)userInfo;
 
 //lingqian shwo reward
 +(void)LQ_Runreward:(User_Running_History *)bestRecord;

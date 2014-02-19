@@ -44,7 +44,7 @@
 }
 
 - (IBAction)lingqianAction:(id)sender {
-    [LingQianSDK openRewardStore];
+    //[LingQianSDK openRewardStore];
     
     [self.mallCoverView bgTap:self];
 }

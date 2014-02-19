@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>20440CE5-32EE-4699-A3ED-2EFFCB71251F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>WalkFun</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3D8A3AE3-425C-4DD6-944E-66A0F5CD5553</key>
+		<string>https://github.com/Leongum/WalkFun_IOS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>WalkFun.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3D8A3AE3-425C-4DD6-944E-66A0F5CD5553</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Leongum/WalkFun_IOS.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3D8A3AE3-425C-4DD6-944E-66A0F5CD5553</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3D8A3AE3-425C-4DD6-944E-66A0F5CD5553</string>
+			<key>IDESourceControlWCCName</key>
+			<string>WalkFun_IOS</string>
+		</dict>
+	</array>
+</dict>
+</plist>

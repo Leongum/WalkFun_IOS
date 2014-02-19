@@ -53,7 +53,7 @@
 //        [RORUserUtils syncSystemData];
 //    }
 
-    [LingQianSDK trackActionWithName:@"visit"];
+    //[LingQianSDK trackActionWithName:@"visit"];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -361,7 +361,7 @@
 }
 
 - (IBAction)mallUnderDeveloping:(id)sender {
-    [LingQianSDK openRewardStore];
+    //[LingQianSDK openRewardStore];
     //[self sendNotification:@"【装备商城】\n\n正在哼哧哼哧开发中"];
 }
 - (IBAction)friendsUnderDeveloping:(id)sender {

@@ -42,11 +42,9 @@
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>sinaweibosso.1650188941</string>
-				<string>tencent100504316</string>
-				<string>wb801401136</string>
-				<string>rm239934com.5432.${PRODUCT_NAME:rfc1034identifier}</string>
-				<string>wxfff11cf8dc68b3a8</string>
+				<string>tencent101022066</string>
+				<string>wx44395fcdd8983c6b</string>
+				<string>sina.5300735056240b04531ca01a</string>
 			</array>
 		</dict>
 	</array>

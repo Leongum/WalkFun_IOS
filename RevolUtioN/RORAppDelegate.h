@@ -7,22 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WXApi.h"
-#import "WBApi.h"
-#import <TencentOpenAPI/QQApi.h>
-#import <TencentOpenAPI/QQApiInterface.h>
-#import <TencentOpenAPI/TencentOAuth.h>
-#import <RennSDK/RennSDK.h>
-#import <ShareSDK/ShareSDK.h>
-#import "RORShareViewDelegate.h"
 #import "Reachability.h"
 #import <CoreMotion/CoreMotion.h>
 #import <CoreLocation/CoreLocation.h>
 #import <LingQianSDK/LingQianSDK.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>  
+#import "MobClick.h"
+#import "UMSocial.h"
 
-@interface RORAppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
+@interface RORAppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate,WXApiDelegate>
 {
-    RORShareViewDelegate *_viewDelegate;
     Reachability* hostReach;
     CMMotionManager *motionmanager;
     CLLocationManager *locationManager;
@@ -35,7 +30,6 @@
 @property (readonly,strong,nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (strong, nonatomic) NSDictionary *userInfo;
 @property (readonly) NetworkStatus networkStatus;
-@property (nonatomic,readonly) RORShareViewDelegate *viewDelegate;
 @property (strong, nonatomic, readonly) CMMotionManager *sharedMotionManager;
 @property (strong, nonatomic, readonly) CLLocationManager *sharedLocationManager;
 

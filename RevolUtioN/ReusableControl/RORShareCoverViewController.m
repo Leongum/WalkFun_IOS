@@ -64,45 +64,45 @@
 }
 
 - (IBAction)shareToWeixin:(id)sender {
-    //发送内容给微信
-//    weixinSharing = YES;
-    [self hideCoverViewAction:self];
-    id<ISSContent> content = [ShareSDK content:nil
-                                defaultContent:nil
-                                         image:[ShareSDK jpegImageWithImage:shareImage quality:1]
-                                         title:nil
-                                           url:nil
-                                   description:nil
-                                     mediaType:SSPublishContentMediaTypeImage];
-    
-    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
-                                                         allowCallback:YES
-                                                         authViewStyle:SSAuthViewStyleFullScreenPopup
-                                                          viewDelegate:nil
-                                               authManagerViewDelegate:nil];
-    
-    
-    [ShareSDK shareContent:content
-                      type:ShareTypeWeixiTimeline
-               authOptions:authOptions
-             statusBarTips:YES
-                    result:^(ShareType type, SSPublishContentState state, id<ISSStatusInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                        if (state == SSPublishContentStateSuccess)
-                        {
-                            NSLog(@"success");
-                        }
-                        else if (state == SSPublishContentStateFail)
-                        {
-                            if ([error errorCode] == -22003)
-                            {
-                                if ([parent respondsToSelector:@selector(sendAlart:)])
-                                    [parent sendAlart:[error errorDescription]];
-                            }
-                        }
-//                        weixinSharing = NO;
-//                        [self removeFromParentViewController];
-//                         self.view.alpha = 0;
-                    }];
+//    //发送内容给微信
+////    weixinSharing = YES;
+//    [self hideCoverViewAction:self];
+//    id<ISSContent> content = [ShareSDK content:nil
+//                                defaultContent:nil
+//                                         image:[ShareSDK jpegImageWithImage:shareImage quality:1]
+//                                         title:nil
+//                                           url:nil
+//                                   description:nil
+//                                     mediaType:SSPublishContentMediaTypeImage];
+//    
+//    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
+//                                                         allowCallback:YES
+//                                                         authViewStyle:SSAuthViewStyleFullScreenPopup
+//                                                          viewDelegate:nil
+//                                               authManagerViewDelegate:nil];
+//    
+//    
+//    [ShareSDK shareContent:content
+//                      type:ShareTypeWeixiTimeline
+//               authOptions:authOptions
+//             statusBarTips:YES
+//                    result:^(ShareType type, SSPublishContentState state, id<ISSStatusInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+//                        if (state == SSPublishContentStateSuccess)
+//                        {
+//                            NSLog(@"success");
+//                        }
+//                        else if (state == SSPublishContentStateFail)
+//                        {
+//                            if ([error errorCode] == -22003)
+//                            {
+//                                if ([parent respondsToSelector:@selector(sendAlart:)])
+//                                    [parent sendAlart:[error errorDescription]];
+//                            }
+//                        }
+////                        weixinSharing = NO;
+////                        [self removeFromParentViewController];
+////                         self.view.alpha = 0;
+//                    }];
 }
 
 - (IBAction)hideCoverViewAction:(id)sender {

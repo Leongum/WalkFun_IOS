@@ -16,4 +16,6 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *moreTableView;
 
+- (IBAction)feedbackAction:(id)sender;
+
 @end

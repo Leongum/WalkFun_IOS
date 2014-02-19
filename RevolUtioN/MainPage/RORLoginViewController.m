@@ -10,7 +10,6 @@
 #import "RORRunHistoryServices.h"
 #import "RORShareService.h"
 #import "RORNetWorkUtils.h"
-#import <AGCommon/UIImage+Common.h>
 
 #define SEGMENT_FRAME CGRectMake(95, 370, 150, 30)
 @interface RORLoginViewController ()
@@ -201,69 +200,61 @@
 }
 
 - (IBAction)sinaWeiboLogin:(id)sender {
-    [self authLoginFromSNS:ShareTypeSinaWeibo];
-}
-
-- (IBAction)tencentWeiboLogin:(id)sender {
-    [self authLoginFromSNS:ShareTypeTencentWeibo];
+    [self authLoginFromSNS: UMShareToSina];
 }
 
 - (IBAction)qqAccountLogin:(id)sender {
-    [self authLoginFromSNS:ShareTypeQQSpace];
-}
-
-- (IBAction)renrenAccountLogin:(id)sender {
-    [self authLoginFromSNS:ShareTypeRenren];
+    [self authLoginFromSNS: UMShareToQzone];
 }
 
 - (void)viewDidUnload {
     [self setScrollView:nil];
     
-    [self setBtnRenRenLogin:nil];
     [self setBtnQQLogin:nil];
-    [self setBtnTencentLogin:nil];
     [self setBtnSinaLogin:nil];
     [self setUsernameTextField:nil];
     [self setPasswordTextField:nil];
     [self setSwitchButton:nil];
     [self setNicknameTextField:nil];
     //[super viewDidUnload];
-    
 }
 
-- (void)authLoginFromSNS:(ShareType) type{
-    RORAppDelegate *appDelegate = (RORAppDelegate *)[UIApplication sharedApplication].delegate;
+- (void)authLoginFromSNS:(NSString *) type{
+    BOOL isOauth = [UMSocialAccountManager isOauthWithPlatform:type];
+    if(!isOauth){
+        UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:type];
+        snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response)
+                                      {
+                                          NSLog(@"response is %@",response);
+                                          [[UMSocialDataService defaultDataService] requestSocialAccountWithCompletion:^(UMSocialResponseEntity *accountResponse){
+                                              NSLog(@"SNS account response %@", accountResponse);
+                                              NSDictionary *snsAccountDic = [UMSocialAccountManager socialAccountDictionary];
+                                              UMSocialAccountEntity *account = [snsAccountDic valueForKey:type];
+                                              
+                                              BOOL islogin = [RORShareService loginFromSNS:account];
+                                              if(islogin){
+                                                  [self syncDataAfterLogin];
+                                                  [self.navigationController popViewControllerAnimated:YES];
+                                              }
+                                              else{
+                                                  [self performSegueWithIdentifier:@"bodySetting" sender:self];
+                                              }
+                                          }];
+                                      });
+    }else {
+        NSDictionary *snsAccountDic = [UMSocialAccountManager socialAccountDictionary];
+        UMSocialAccountEntity *account = [snsAccountDic valueForKey:type];
+        
+        BOOL islogin = [RORShareService loginFromSNS:account];
+        if(islogin){
+            [self syncDataAfterLogin];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else{
+            [self performSegueWithIdentifier:@"bodySetting" sender:self];
+        }
+    }
     
-    //RORShareViewDelegate *shareViewDelegate = [[RORShareViewDelegate alloc] init];
-    
-    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
-                                                         allowCallback:YES
-                                                         authViewStyle:SSAuthViewStyleFullScreenPopup
-                                                          viewDelegate:appDelegate.viewDelegate
-                                               authManagerViewDelegate:nil];
-    
-    [authOptions setPowerByHidden:true];
-    
-    [ShareSDK getUserInfoWithType:type
-                      authOptions:authOptions
-                           result:^(BOOL result, id<ISSUserInfo> userInfo, id<ICMErrorInfo> error) {
-                               if (result)
-                               {
-                                   BOOL islogin = [RORShareService loginFromSNS:userInfo withSNSType: type];
-                                   [RORUserUtils userInfoUpdateHandler:userInfo withSNSType: type];
-                                   if(islogin){
-                                       [self syncDataAfterLogin];
-                                       [self.navigationController popViewControllerAnimated:YES];
-                                   }
-                                   else{
-                                       [self performSegueWithIdentifier:@"bodySetting" sender:self];
-                                   }
-                               }
-                               else
-                               {
-                                   [self sendAlart:error.errorDescription];
-                               }
-                           }];
 }
 
 -(void)syncDataAfterLogin{
@@ -272,18 +263,6 @@
     if(!history){
         history = [RORRunHistoryServices syncRunningHistories:[RORUserUtils getUserId]];
     }
-//    BOOL collect = [RORPlanService syncUserCollect:[RORUserUtils getUserId]];
-//    if(!collect){
-//        collect = [RORPlanService syncUserCollect:[RORUserUtils getUserId]];
-//    }
-//    BOOL follow = [RORPlanService syncUserFollow:[RORUserUtils getUserId]];
-//    if(!follow){
-//        follow = [RORPlanService syncUserFollow:[RORUserUtils getUserId]];
-//    }
-//    BOOL plan = [RORPlanService syncUserPlanHistory:[RORUserUtils getUserId]];
-//    if(!plan){
-//        plan = [RORPlanService syncUserPlanHistory:[RORUserUtils getUserId]];
-//    }
     [self endIndicator:self];
     if(!history){
         [self sendAlart:@"个人信息加载失败"];

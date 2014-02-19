@@ -16,13 +16,10 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize runningStatus;
 
-@synthesize viewDelegate = _viewDelegate;
-
 - (id)init
 {
     if(self = [super init])
     {
-        _viewDelegate = [[RORShareViewDelegate alloc] init];
         runningStatus = NO;
     }
     return self;
@@ -60,6 +57,8 @@
 }
 
 -(void)applicationDidBecomeActive:(UIApplication *)application{
+    
+    [UMSocialSnsService  applicationDidBecomeActive];
     application.applicationIconBadgeNumber = 0;
 
     [[self sharedLocationManager] setDesiredAccuracy:kCLLocationAccuracyBest];
@@ -84,65 +83,28 @@
         [locationManager stopUpdatingLocation];
 }
 
-- (void)initializePlat
-{
-    /**
-     连接新浪微博开放平台应用以使用相关功能，此应用需要引用SinaWeiboConnection.framework
-     http://open.weibo.com上注册新浪微博开放平台应用，并将相关信息填写到以下字段
-     **/
-    [ShareSDK connectSinaWeiboWithAppKey:@"1650188941"
-                               appSecret:@"1062ef996950870fc7322fc1a4d6716e"
-                             redirectUri:@"http://www.cyberace.cc"];
-    
-    /**
-     连接微信应用以使用相关功能，此应用需要引用WeChatConnection.framework和微信官方SDK
-     http://open.weixin.qq.com上注册应用，并将相关信息填写以下字段
-     **/
-    [ShareSDK connectWeChatWithAppId:@"wxfff11cf8dc68b3a8" wechatCls:[WXApi class]];
-    
-    
-    /**
-     连接腾讯微博开放平台应用以使用相关功能，此应用需要引用TencentWeiboConnection.framework
-     http://dev.t.qq.com上注册腾讯微博开放平台应用，并将相关信息填写到以下字段
-     
-     如果需要实现SSO，需要导入libWeiboSDK.a，并引入WBApi.h，将WBApi类型传入接口
-     **/
-    [ShareSDK connectTencentWeiboWithAppKey:@"801401136"
-                                  appSecret:@"b90baa51d8e2bd0a5ab5a7c1a9115ab8"
-                                redirectUri:@"http://www.cyberace.cc"
-                                   wbApiCls:[WBApi class]];
-    /**
-     连接QQ空间应用以使用相关功能，此应用需要引用QZoneConnection.framework
-     http://connect.qq.com/intro/login/上申请加入QQ登录，并将相关信息填写到以下字段
-     
-     如果需要实现SSO，需要导入TencentOpenAPI.framework,并引入QQApiInterface.h和TencentOAuth.h，将QQApiInterface和TencentOAuth的类型传入接口
-     **/
-    [ShareSDK connectQZoneWithAppKey:@"100504316"
-                           appSecret:@"41796cc32c1dec21061ab7a9d221cd34"
-                   qqApiInterfaceCls:[QQApiInterface class]
-                     tencentOAuthCls:[TencentOAuth class]];
-    
-    /**
-     连接人人网应用以使用相关功能，此应用需要引用RenRenConnection.framework
-     http://dev.renren.com上注册人人网开放平台应用，并将相关信息填写到以下字段
-     **/
-    [ShareSDK connectRenRenWithAppId:@"239934"
-                              appKey:@"b2c37b4889c9434d8e19086c1b4d6074"
-                           appSecret:@"42530538fea74a9f9ccd169d3cacb88a"
-                   renrenClientClass:[RennClient class]];
-}
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    /**
-     注册SDK应用，此应用请到http://www.sharesdk.cn中进行注册申请。
-     此方法必须在启动时调用，否则会限制SDK的使用。
-     **/
-    [ShareSDK registerApp:@"738183f3e91"];
-    [LingQianSDK didFinishLaunchingWithAppID:@"824cf793a15d5a76b92ca74ae533529f" applicationSecret:@"84aedf8fda5ab5bc2ee8881f17758642"];
+    //todo:: need remove
+    //umeng analytics
+    [MobClick setLogEnabled:YES];  // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
+    [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+    [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:(ReportPolicy) REALTIME channelId:nil];
     
-    [self initializePlat];
+    //sns share umeng
+    [UMSocialData setAppKey:UMENG_APPKEY];
+    //设置微信AppId
+    [UMSocialConfig setWXAppId:@"wx44395fcdd8983c6b" url:nil];
+    //打开Qzone的SSO开关
+    [UMSocialConfig setSupportQzoneSSO:YES importClasses:@[[QQApiInterface class],[TencentOAuth class]]];
+    //设置手机QQ的AppId，指定你的分享url，若传nil，将使用友盟的网址
+    [UMSocialConfig setQQAppId:@"101022066" url:@"http://www.cyberace.cc" importClasses:@[[QQApiInterface class],[TencentOAuth class]]];
+    //打开新浪微博的SSO开关
+    [UMSocialConfig setSupportSinaSSO:YES];
+    //设置是否使用QQ互联的SDK来分享
+    [UMSocialConfig setShareQzoneWithQQSDK:YES url:@"http://www.cyberace.cc" importClasses:@[[QQApiInterface class],[TencentOAuth class]]];
+    
+    //[LingQianSDK didFinishLaunchingWithAppID:@"824cf793a15d5a76b92ca74ae533529f" applicationSecret:@"84aedf8fda5ab5bc2ee8881f17758642"];
     
     // Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the
     // method "reachabilityChanged" will be called.
@@ -155,18 +117,11 @@
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
-    return [ShareSDK handleOpenURL:url
-                        wxDelegate:self];
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return  [UMSocialSnsService handleOpenURL:url wxApiDelegate:nil];
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    return [ShareSDK handleOpenURL:url
-                 sourceApplication:sourceApplication
-                        annotation:annotation
-                        wxDelegate:self];
-}
-							
 //- (void)applicationWillResignActive:(UIApplication *)application
 //{
 //    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -183,11 +138,6 @@
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
-
-//- (void)applicationDidBecomeActive:(UIApplication *)application
-//{
-//    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-//}
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
