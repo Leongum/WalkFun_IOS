@@ -219,7 +219,7 @@
 //open out
 + (NSArray *)fetchAllActionDefine:(ActionDefineEnum) actionType{
     NSString *table=@"Action_Define";
-    NSString *query = @"actionType = %@";
+    NSString *query = @"actionType = %@ and inUsing = 0";
     NSArray *params = [NSArray arrayWithObjects:[NSNumber numberWithInteger:(NSInteger)actionType], nil];
     NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
     if (fetchObject == nil || [fetchObject count] == 0) {

@@ -12,12 +12,14 @@
 @implementation Action_Define
 
 @dynamic actionType;
+@dynamic inUsing;
 @dynamic actionName;
 @dynamic actionDescription;
 @dynamic actionAttribute;
 @dynamic actionRule;
 @dynamic actionId;
 @dynamic triggerProbability;
+@dynamic soundLink;
 @dynamic updateTime;
 
 +(Action_Define *) removeAssociateForEntity:(Action_Define *)associatedEntity{
@@ -33,11 +35,13 @@
 -(void)initWithDictionary:(NSDictionary *)dict{
     self.actionId = [RORDBCommon getNumberFromId:[dict valueForKey:@"actionId"]];
     self.actionType = [RORDBCommon getNumberFromId:[dict valueForKey:@"actionType"]];
+    self.inUsing = [RORDBCommon getNumberFromId:[dict valueForKey:@"inUsing"]];
     self.actionName = [RORDBCommon getStringFromId:[dict valueForKey:@"actionName"]];
     self.actionDescription = [RORDBCommon getStringFromId:[dict valueForKey:@"actionDescription"]];
     self.actionAttribute = [RORDBCommon getStringFromId:[dict valueForKey:@"actionAttribute"]];
     self.actionRule = [RORDBCommon getStringFromId:[dict valueForKey:@"actionRule"]];
     self.triggerProbability = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerProbability"]];
+    self.soundLink = [RORDBCommon getStringFromId:[dict valueForKey:@"soundLink"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
 }
 

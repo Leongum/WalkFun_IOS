@@ -14,6 +14,8 @@
 
 @property (nonatomic, retain) NSNumber * actionType;
 @property (nonatomic, retain) NSString * actionName;
+@property (nonatomic, retain) NSNumber * inUsing;
+@property (nonatomic, retain) NSString * soundLink;
 @property (nonatomic, retain) NSString * actionDescription;
 @property (nonatomic, retain) NSString * actionAttribute;
 @property (nonatomic, retain) NSString * actionRule;
