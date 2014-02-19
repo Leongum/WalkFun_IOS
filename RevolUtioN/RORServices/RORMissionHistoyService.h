@@ -21,9 +21,6 @@
 //根据用户userid获取该用户已经完成的mission 记录。（仅能获取自己的数据）
 +(NSArray*)fetchFinishedMissionHistoryByUserId:(NSNumber*)userId;
 
-//根据用户userid获取该用户正在执行的的mission记录。（可以获取除自己以外的别的用户）
-+(NSArray*)fetchUsingMissionHistoryByUserId:(NSNumber*)userId;
-
 //上传本地更新过未上传的数据
 +(BOOL)uploadMissionHistories;
 
@@ -32,7 +29,4 @@
 
 //新建或者更新mission history到本地数据库，并更新用户信息。未上传，需单独调用上传接口
 +(BOOL)saveMissionHistoryInfoToDB:(User_Mission_History *)missionHistory;
-
-//获取当前时间段最时候的跑步的任务。
-+(User_Mission_History *)fetchMatchedMissionHistorySinceNow;
 @end

@@ -23,4 +23,7 @@
 
 //同步服务器mission信息
 + (BOOL)syncMissions;
+
+//同步服务器每日daily mission
++ (Mission *)fetchDailyMission;
 @end

@@ -80,5 +80,43 @@
     return [(NSArray*)missionDetails mutableCopy];
 }
 
-
+//open out
++ (Mission *)fetchDailyMission{
+    NSError *error = nil;
+    NSManagedObjectContext *context = [RORContextUtils getShareContext];
+    NSString *lastUpdateTime = [RORUserUtils getLastUpdateTime:@"DailyMissionGetTime"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY/MM/dd"]; //设置日期格式
+    NSDate *today = [NSDate date]; //当前日期
+    NSDate *fetchDay = [dateFormatter dateFromString:lastUpdateTime];
+    BOOL b = [today isEqualToDate:fetchDay];//日期相同返回YES
+    if(b){
+        NSMutableDictionary *userDict = [RORUserUtils getUserInfoPList];
+        NSNumber * missionId =  [userDict valueForKey:@"dailyMissionId"];
+        return [self fetchMission:missionId];
+    }
+    else{
+        RORHttpResponse *httpResponse =[RORMissionClientHandler getDailyMission:[RORUserUtils getUserId]];
+        
+        if ([httpResponse responseStatus]  == 200){
+            NSDictionary *missionDict = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
+            NSNumber *missionId = [missionDict valueForKey:@"missionId"];
+            Mission *missionEntity = [self fetchMission:missionId withContext:YES];
+            if(missionEntity == nil)
+                missionEntity = [NSEntityDescription insertNewObjectForEntityForName:@"Mission" inManagedObjectContext:context];
+            [missionEntity initWithDictionary:missionDict];
+            
+            [RORContextUtils saveContext];
+            [RORUserUtils saveLastUpdateTime:@"DailyMissionGetTime"];
+            NSMutableDictionary *userDict = [RORUserUtils getUserInfoPList];
+            [userDict setValue:missionId forKey:@"dailyMissionId"];
+            [RORUserUtils writeToUserInfoPList:userDict];
+            return [Mission removeAssociateForEntity:missionEntity];
+        } else {
+            NSLog(@"sync with host error: can't get daily mission. Status Code: %d", [httpResponse responseStatus]);
+            return NO;
+        }
+        return nil;
+    }
+}
 @end

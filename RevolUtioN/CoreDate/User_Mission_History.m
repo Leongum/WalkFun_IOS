@@ -15,14 +15,13 @@
 @dynamic userId;
 @dynamic userName;
 @dynamic missionId;
+@dynamic missionTypeId;
 @dynamic missionName;
 @dynamic startTime;
 @dynamic endTime;
-@dynamic lastRunTime;
-@dynamic historyStatus;
-@dynamic totalActiveTimes;
+@dynamic missionStatus;
+@dynamic missionStatusComment;
 @dynamic updateTime;
-@dynamic currentCombo;
 
 +(User_Mission_History *) intiUnassociateEntity{
     NSManagedObjectContext *context = [RORContextUtils getShareContext];
@@ -46,14 +45,13 @@
     self.userId = [RORDBCommon getNumberFromId:[dict valueForKey:@"userId"]];
     self.userName = [RORDBCommon getStringFromId:[dict valueForKey:@"userName"]];
     self.missionId = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionId"]];
+    self.missionTypeId = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionTypeId"]];
     self.missionName= [RORDBCommon getStringFromId:[dict valueForKey:@"missionName"]];
     self.startTime = [RORDBCommon getDateFromId:[dict valueForKey:@"startTime"]];
     self.endTime = [RORDBCommon getDateFromId:[dict valueForKey:@"endTime"]];
-    self.lastRunTime = [RORDBCommon getDateFromId:[dict valueForKey:@"lastRunTime"]];
-    self.historyStatus = [RORDBCommon getNumberFromId:[dict valueForKey:@"historyStatus"]];
-    self.totalActiveTimes = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalActiveTimes"]];
+    self.missionStatus = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionStatus"]];
+    self.missionStatusComment = [RORDBCommon getStringFromId:[dict valueForKey:@"missionStatusComment"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
-    self.currentCombo = [RORDBCommon getNumberFromId:[dict valueForKey:@"currentCombo"]];
 }
 
 -(NSMutableDictionary *)transToDictionary{
@@ -62,13 +60,12 @@
     [tempDict setValue:self.userId forKey:@"userId"];
     [tempDict setValue:self.userName forKey:@"userName"];
     [tempDict setValue:self.missionId forKey:@"missionId"];
+    [tempDict setValue:self.missionTypeId forKey:@"missionTypeId"];
     [tempDict setValue:self.missionName forKey:@"missionName"];
     [tempDict setValue:[RORDBCommon getStringFromId:self.startTime] forKey:@"startTime"];
     [tempDict setValue:[RORDBCommon getStringFromId:self.endTime] forKey:@"endTime"];
-    [tempDict setValue:[RORDBCommon getStringFromId:self.lastRunTime] forKey:@"lastRunTime"];
-    [tempDict setValue:self.historyStatus forKey:@"historyStatus"];
-    [tempDict setValue:self.totalActiveTimes forKey:@"totalActiveTimes"];
-    [tempDict setValue:self.currentCombo forKey:@"currentCombo"];
+    [tempDict setValue:self.missionStatus forKey:@"missionStatus"];
+    [tempDict setValue:self.missionStatusComment forKey:@"missionStatusComment"];
     return tempDict;
 }
 

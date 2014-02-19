@@ -47,7 +47,9 @@
     NSString *table=@"User_Running_History";
     NSString *query = @"userId = %@";
     NSArray *params = [NSArray arrayWithObjects:userId, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"missionStartTime" ascending:NO];
+    NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
@@ -92,7 +94,7 @@
     
     NSNumber *userId = [RORUserUtils getUserId];
     NSString *table=@"User_Running_History";
-    NSString *query = @"(userId = %@ or userId = -1) and commitTime = nil";
+    NSString *query = @"userId = %@ and commitTime = nil";
     NSArray *params = [NSArray arrayWithObjects:userId, nil];
     NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
     if (fetchObject == nil || [fetchObject count] == 0) {

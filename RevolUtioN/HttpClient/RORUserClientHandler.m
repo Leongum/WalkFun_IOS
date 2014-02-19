@@ -51,6 +51,13 @@
     return httpResponse;
 }
 
++(RORHttpResponse *)getRecommendFriends:(NSNumber *)pageNo{
+    NSString *url = [NSString stringWithFormat:FRIEND_RECOMMEND_URL, pageNo];
+    RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
+    return httpResponse;
+}
+
+
 +(RORHttpResponse *)searchFriendInfo:(NSString *)nickName{
     NSString *url = [NSString stringWithFormat:FRIEND_SEARCH_URL, nickName];
     RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];

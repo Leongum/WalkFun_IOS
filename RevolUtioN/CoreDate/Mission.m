@@ -12,23 +12,19 @@
 @implementation Mission
 
 @dynamic missionId;
-@dynamic missionTypeId;
+@dynamic missionTypeId;//0 for steps times limit 1 for prop drop limit 2 for prop use for user
 @dynamic missionName;
+@dynamic missionRule;
 @dynamic missionDescription;
-@dynamic scores;
+@dynamic triggerSteps;
+@dynamic triggerTimes;
+@dynamic triggerDistances;
+@dynamic triggerPropId;
+@dynamic triggerPropNumbers;
+@dynamic triggerUserNumbers;
+@dynamic goldCoin;
 @dynamic experience;
-@dynamic missionFlag;
-@dynamic levelLimited;
-@dynamic missionTimeLimited;
-@dynamic missionDistanceLimited;
-@dynamic missionToTimeLimited;
-@dynamic missionFromTimeLimited;
-@dynamic cycleTime;
-@dynamic suggestionMaxSpeed;
-@dynamic suggestionMinSpeed;
-@dynamic sequence;
 @dynamic updateTime;
-
 
 +(Mission *) removeAssociateForEntity:(Mission *)associatedEntity{
     NSManagedObjectContext *context = [RORContextUtils getShareContext];
@@ -44,19 +40,16 @@
     self.missionId = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionId"]];
     self.missionName = [RORDBCommon getStringFromId:[dict valueForKey:@"missionName"]];
     self.missionTypeId = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionTypeId"]];
+    self.missionRule = [RORDBCommon getStringFromId:[dict valueForKey:@"missionRule"]];
     self.missionDescription = [RORDBCommon getStringFromId:[dict valueForKey:@"missionDescription"]];
-    self.scores = [RORDBCommon getNumberFromId:[dict valueForKey:@"scores"]];
+    self.triggerSteps = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerSteps"]];
+    self.triggerTimes = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerTimes"]];
+    self.triggerDistances = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerDistances"]];
+    self.triggerPropId = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerPropId"]];
+    self.triggerPropNumbers = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerPropNumbers"]];
+    self.triggerUserNumbers = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerUserNumbers"]];
+    self.goldCoin = [RORDBCommon getNumberFromId:[dict valueForKey:@"goldCoin"]];
     self.experience = [RORDBCommon getNumberFromId:[dict valueForKey:@"experience"]];
-    self.missionFlag = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionFlag"]];
-    self.levelLimited = [RORDBCommon getNumberFromId:[dict valueForKey:@"levelLimited"]];
-    self.missionTimeLimited = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionTimeLimited"]];
-    self.missionDistanceLimited = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionDistanceLimited"]];
-    self.missionFromTimeLimited = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionFromTimeLimited"]];
-    self.missionToTimeLimited = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionToTimeLimited"]];
-    self.cycleTime = [RORDBCommon getNumberFromId:[dict valueForKey:@"cycleTime"]];
-    self.suggestionMaxSpeed = [RORDBCommon getNumberFromId:[dict valueForKey:@"suggestionMaxSpeed"]];
-    self.suggestionMinSpeed = [RORDBCommon getNumberFromId:[dict valueForKey:@"suggestionMinSpeed"]];
-    self.sequence = [RORDBCommon getNumberFromId:[dict valueForKey:@"sequence"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
 }
 @end

@@ -38,49 +38,11 @@
 
 +(NSArray*)fetchFinishedMissionHistoryByUserId:(NSNumber*)userId withContext:(BOOL) needContext{
     NSString *table=@"User_Mission_History";
-    NSString *query = @"userId = %@ and historyStatus != 0";
+    NSString *query = @"userId = %@";
     NSArray *params = [NSArray arrayWithObjects:userId, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
-    if (fetchObject == nil || [fetchObject count] == 0) {
-        return nil;
-    }
-    if(!needContext){
-        NSMutableArray *historyList = [[NSMutableArray alloc] init];
-        for (User_Mission_History *histroy in fetchObject) {
-            [historyList addObject:[User_Mission_History removeAssociateForEntity:histroy]];
-        }
-        return [historyList copy];
-    }
-    return fetchObject;
-}
-
-//open out
-+(NSArray*)fetchUsingMissionHistoryByUserId:(NSNumber*)userId{
-    if(userId.integerValue == [RORUserUtils getUserId].integerValue){
-        return [self fetchUsingMissionHistoryByUserId:userId withContext:NO];
-    }
-    else{
-        NSError *error = nil;
-        RORHttpResponse *httpResponse =[RORRunHistoryClientHandler getUsingMissionHistories:userId];
-        if ([httpResponse responseStatus]  == 200){
-            NSArray *missionHistoryList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
-            NSMutableArray *historyList = [[NSMutableArray alloc] init];
-            for (NSDictionary *missionHistoryDict in missionHistoryList){
-                User_Mission_History * missionHistory = [User_Mission_History intiUnassociateEntity];
-                [missionHistory initWithDictionary:missionHistoryDict];
-                [historyList addObject:missionHistory];
-            }
-            return historyList;
-        }
-        return nil;
-    }
-}
-
-+(NSArray*)fetchUsingMissionHistoryByUserId:(NSNumber*)userId withContext:(BOOL) needContext{
-    NSString *table=@"User_Mission_History";
-    NSString *query = @"userId = %@ and historyStatus = 0";
-    NSArray *params = [NSArray arrayWithObjects:userId, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:NO];
+    NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
@@ -204,15 +166,5 @@
         //todo:: add update user info.
     }
     return YES;
-}
-
-//open out
-+(User_Mission_History *)fetchMatchedMissionHistorySinceNow{
-    NSNumber * userId = [RORUserUtils getUserId];
-    NSArray *usingMissionHistoryList = [self fetchUsingMissionHistoryByUserId:userId];
-    for (User_Mission_History *info in usingMissionHistoryList) {
-       //todo :: add filter logic
-    }
-    return nil;
 }
 @end

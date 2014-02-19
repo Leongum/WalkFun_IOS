@@ -34,12 +34,6 @@
     return httpResponse;
 }
 
-+(RORHttpResponse *)getUsingMissionHistories:(NSNumber *)userId{
-    NSString *url = [NSString stringWithFormat:HISTORY_GET_USER_USING_MISSION_URL, userId];
-    RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
-    return httpResponse;
-}
-
 +(RORHttpResponse *)createMissionHistories:(NSNumber *)userId withMissionHistories:(NSMutableArray *) missionHistories{
     NSString *requestUrl = [NSString stringWithFormat:HISTORY_POST_MISSION_HISTORY_URL, userId];
     RORHttpResponse *httpResponse = [RORHttpClientHandler postRequest:requestUrl withRequstBody:[RORUtils toJsonFormObject:missionHistories]];

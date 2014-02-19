@@ -14,19 +14,16 @@
 @property (nonatomic, retain) NSNumber * missionId;
 @property (nonatomic, retain) NSNumber * missionTypeId;
 @property (nonatomic, retain) NSString * missionName;
+@property (nonatomic, retain) NSString * missionRule;
 @property (nonatomic, retain) NSString * missionDescription;
-@property (nonatomic, retain) NSNumber * scores;
+@property (nonatomic, retain) NSNumber * triggerSteps;
+@property (nonatomic, retain) NSNumber * triggerTimes;
+@property (nonatomic, retain) NSNumber * triggerDistances;
+@property (nonatomic, retain) NSNumber * triggerPropId;
+@property (nonatomic, retain) NSNumber * triggerPropNumbers;
+@property (nonatomic, retain) NSNumber * triggerUserNumbers;
+@property (nonatomic, retain) NSNumber * goldCoin;
 @property (nonatomic, retain) NSNumber * experience;
-@property (nonatomic, retain) NSNumber * missionFlag;
-@property (nonatomic, retain) NSNumber * levelLimited;
-@property (nonatomic, retain) NSNumber * missionTimeLimited;
-@property (nonatomic, retain) NSNumber * missionDistanceLimited;
-@property (nonatomic, retain) NSNumber * missionToTimeLimited;
-@property (nonatomic, retain) NSNumber * missionFromTimeLimited;
-@property (nonatomic, retain) NSNumber * cycleTime;
-@property (nonatomic, retain) NSNumber *suggestionMaxSpeed;
-@property (nonatomic, retain) NSNumber *suggestionMinSpeed;
-@property (nonatomic, retain) NSNumber * sequence;
 @property (nonatomic, retain) NSDate * updateTime;
 
 +(Mission *) removeAssociateForEntity:(Mission *)associatedEntity;

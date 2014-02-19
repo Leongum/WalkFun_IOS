@@ -29,6 +29,7 @@
 @dynamic totalWalkingTimes;
 @dynamic maxCombo;
 @dynamic currentCombo;
+@dynamic missionCombo;
 @dynamic propHaving;
 @dynamic updateTime;
 
@@ -61,6 +62,7 @@
     self.totalWalkingTimes = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalWalkingTimes"]];
     self.maxCombo = [RORDBCommon getNumberFromId:[dict valueForKey:@"maxCombo"]];
     self.currentCombo = [RORDBCommon getNumberFromId:[dict valueForKey:@"currentCombo"]];
+    self.missionCombo = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionCombo"]];
     self.propHaving = [RORDBCommon getStringFromId:[dict valueForKey:@"propHaving"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
 }
@@ -85,6 +87,7 @@
     [tempDict setValue:self.totalWalkingTimes forKey:@"totalWalkingTimes"];
     [tempDict setValue:self.maxCombo forKey:@"maxCombo"];
     [tempDict setValue:self.currentCombo forKey:@"currentCombo"];
+    [tempDict setValue:self.missionCombo forKey:@"missionCombo"];
     return tempDict;
 }
 

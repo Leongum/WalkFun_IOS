@@ -16,4 +16,10 @@
     return httpResponse;
 }
 
++(RORHttpResponse *)getDailyMission:(NSNumber *) userId{
+    NSString *url = [NSString stringWithFormat:MISSION_DAILY_GET_URL, userId];
+    RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
+    return httpResponse;
+}
+
 @end

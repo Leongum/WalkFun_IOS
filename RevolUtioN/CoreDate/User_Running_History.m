@@ -27,6 +27,7 @@
 @dynamic distance;
 @dynamic missionGrade;
 @dynamic goldCoin;
+@dynamic extraGoldCoin;
 @dynamic experience;
 @dynamic extraExperience;
 @dynamic comment;
@@ -68,6 +69,7 @@
     self.duration = [RORDBCommon getNumberFromId:[dict valueForKey:@"duration"]];
     self.missionGrade = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionGrade"]];
     self.goldCoin = [RORDBCommon getNumberFromId:[dict valueForKey:@"goldCoin"]];
+    self.extraGoldCoin = [RORDBCommon getNumberFromId:[dict valueForKey:@"extraGoldCoin"]];
     self.experience = [RORDBCommon getNumberFromId:[dict valueForKey:@"experience"]];
     self.extraExperience = [RORDBCommon getNumberFromId:[dict valueForKey:@"extraExperience"]];
     self.missionId = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionId"]];
@@ -96,6 +98,7 @@
     [tempoDict setValue:self.steps forKey:@"steps"];
     [tempoDict setValue:self.missionGrade forKey:@"missionGrade"];
     [tempoDict setValue:self.goldCoin forKey:@"goldCoin"];
+    [tempoDict setValue:self.extraGoldCoin forKey:@"extraGoldCoin"];
     [tempoDict setValue:self.experience forKey:@"experience"];
     [tempoDict setValue:self.extraExperience forKey:@"extraExperience"];
     [tempoDict setValue:self.missionId forKey:@"missionId"];

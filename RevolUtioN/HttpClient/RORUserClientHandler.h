@@ -30,6 +30,8 @@
 
 +(RORHttpResponse *)searchFriendInfo:(NSString *)nickName;
 
++(RORHttpResponse *)getRecommendFriends:(NSNumber *)pageNo;
+
 +(RORHttpResponse *)getFriendSortInfo:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime;
 
 +(RORHttpResponse *)createActionInfo:(NSNumber *)userId withActionInfo:(NSDictionary *) actionInfo;

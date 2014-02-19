@@ -16,4 +16,6 @@
 
 +(RORHttpResponse *)getMissions:(NSString *) lastUpdateTime;
 
++(RORHttpResponse *)getDailyMission:(NSNumber *) userId;
+
 @end

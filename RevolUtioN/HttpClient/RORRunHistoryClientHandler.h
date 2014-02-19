@@ -22,8 +22,6 @@
 
 +(RORHttpResponse *)getMissionHistories:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime;
 
-+(RORHttpResponse *)getUsingMissionHistories:(NSNumber *)userId;
-
 +(RORHttpResponse *)createMissionHistories:(NSNumber *)userId withMissionHistories:(NSMutableArray *) missionHistories;
 
 @end

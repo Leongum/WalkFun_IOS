@@ -231,10 +231,4 @@
     }
     return nil;
 }
-
-+(void)clearUserData{
-    NSArray *tables = [NSArray arrayWithObjects:@"User_Base",@"User_Detail",@"Action",@"Friend",@"Friend_Sort",@"User_Running_History",@"User_Mission_History", nil];
-    [RORContextUtils clearTableData:tables];
-}
-
 @end

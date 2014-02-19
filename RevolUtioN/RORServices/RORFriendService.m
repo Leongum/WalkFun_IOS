@@ -142,6 +142,33 @@
 }
 
 //open out
++(NSArray *)fetchFriendEachFansList{
+    NSNumber *userId = [RORUserUtils getUserId];
+    NSString *table=@"Friend";
+    NSString *query = @"userId = %@ and friendEach = 1";
+    NSArray *params = [NSArray arrayWithObjects:userId, nil];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"addTime" ascending:NO];
+    NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+    if (fetchObject == nil || [fetchObject count] == 0) {
+        return nil;
+    }
+    NSMutableArray *friendsDetails = [NSMutableArray arrayWithCapacity:10];
+    for (Friend *friend in fetchObject) {
+        Friend *newFriend =[Friend removeAssociateForEntity:friend];
+        Friend_Sort * friendSort = [self fetchFriendSortDetails:newFriend.friendId];
+        if(friendSort != nil){
+            newFriend.sex = friendSort.sex;
+            newFriend.level = friendSort.level;
+            newFriend.userName = friendSort.friendName;
+            newFriend.userTitle = friendSort.userTitle;
+        }
+        [friendsDetails addObject:newFriend];
+    }
+    return [(NSArray*)friendsDetails mutableCopy];
+}
+
+//open out
 +(BOOL)syncFriendSort:(NSNumber *) userId{
     if(userId.integerValue > 0){
         NSError *error = nil;
@@ -262,6 +289,26 @@
         [actionList addObject:newAction];
     }
     return actionList;
+}
+
+//open out
++(NSArray *)fetchRecommendFriends:(NSNumber *) pageNo {
+    if(pageNo == nil){
+        pageNo = [NSNumber numberWithInt:0];
+    }
+    NSError *error = nil;
+    RORHttpResponse *httpResponse =[RORUserClientHandler getRecommendFriends:pageNo];
+    if ([httpResponse responseStatus]  == 200){
+        NSArray *searchFriendList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
+        NSMutableArray *friendList = [[NSMutableArray alloc] init];
+        for (NSDictionary *searchDict in searchFriendList){
+            Search_Friend * searchFriend = [[Search_Friend alloc] init];
+            [searchFriend initWithDictionary:searchDict];
+            [friendList addObject:searchFriend];
+        }
+        return friendList;
+    }
+    return nil;
 }
 
 @end

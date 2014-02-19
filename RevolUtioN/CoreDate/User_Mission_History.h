@@ -16,13 +16,12 @@
 @property (nonatomic, retain) NSNumber * userId;
 @property (nonatomic, retain) NSString * userName;
 @property (nonatomic, retain) NSNumber * missionId;
+@property (nonatomic, retain) NSNumber * missionTypeId;
 @property (nonatomic, retain) NSString * missionName;
 @property (nonatomic, retain) NSDate * startTime;
 @property (nonatomic, retain) NSDate * endTime;
-@property (nonatomic, retain) NSDate * lastRunTime;
-@property (nonatomic, retain) NSNumber * historyStatus;
-@property (nonatomic, retain) NSNumber * totalActiveTimes;
-@property (nonatomic, retain) NSNumber * currentCombo;
+@property (nonatomic, retain) NSNumber * missionStatus;//0 success 1 failed
+@property (nonatomic, retain) NSString * missionStatusComment;
 @property (nonatomic, retain) NSDate * updateTime;
 
 +(User_Mission_History *) intiUnassociateEntity;

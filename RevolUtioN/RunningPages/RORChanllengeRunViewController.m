@@ -86,17 +86,17 @@
     
     timeLabel.text = [RORUtils transSecondToStandardFormat:0];
     speedLabel.text = [RORUserUtils formatedSpeed:0];
-    distanceLabel.text = [RORUtils outputDistance:mission.missionDistanceLimited.doubleValue-distance];
+    //distanceLabel.text = [RORUtils outputDistance:mission.missionDistanceLimited.doubleValue-distance];
 //    mapView.frame = SCALE_SMALL;
     
     doCollect = NO;
     
     routePoints = [[NSMutableArray alloc]init];
     
-    if (runMission.missionDistanceLimited.integerValue >= 1000)
-        lastKilo = [[RORPlaySound alloc]initForPlayingSoundEffectWith:@"last_kilo.mp3"];
-    if (runMission.missionDistanceLimited.integerValue >= 100)
-        lastHundred = [[RORPlaySound alloc]initForPlayingSoundEffectWith:@"last_hundred.mp3"];
+//    if (runMission.missionDistanceLimited.integerValue >= 1000)
+//        lastKilo = [[RORPlaySound alloc]initForPlayingSoundEffectWith:@"last_kilo.mp3"];
+//    if (runMission.missionDistanceLimited.integerValue >= 100)
+//        lastHundred = [[RORPlaySound alloc]initForPlayingSoundEffectWith:@"last_hundred.mp3"];
     
     self.titleLabel.text = runMission.missionName;
 }
@@ -304,23 +304,23 @@
     if (duration - intTime < 0.001){ //1 second
         //    if (time % 3 == 0){
         [self pushPoint];
-        if (mission.missionDistanceLimited.doubleValue-distance < 1000 && !lastKiloPlayed){
-            lastKiloPlayed = YES;
-            [lastKilo play];
-        }
-        if (mission.missionDistanceLimited.doubleValue-distance < 100 && !lastHundredPlayed){
-            lastHundredPlayed = YES;
-            [lastHundred play];
-        }
-        double leftDistance = mission.missionDistanceLimited.doubleValue-distance;
-        distanceLabel.text = [RORUtils outputDistance:leftDistance<0?0:leftDistance];
-        speedLabel.text = [RORUserUtils formatedSpeed:currentSpeed*3.6];
+//        if (mission.missionDistanceLimited.doubleValue-distance < 1000 && !lastKiloPlayed){
+//            lastKiloPlayed = YES;
+//            [lastKilo play];
+//        }
+//        if (mission.missionDistanceLimited.doubleValue-distance < 100 && !lastHundredPlayed){
+//            lastHundredPlayed = YES;
+//            [lastHundred play];
+//        }
+//        double leftDistance = mission.missionDistanceLimited.doubleValue-distance;
+//        distanceLabel.text = [RORUtils outputDistance:leftDistance<0?0:leftDistance];
+//        speedLabel.text = [RORUserUtils formatedSpeed:currentSpeed*3.6];
         
-        if (leftDistance<=0){
-            [finishSound play];
-            [endButton setTitle:FINISH_RUNNING_BUTTON forState:UIControlStateNormal];
-            [self endButtonAction:self];
-        }
+//        if (leftDistance<=0){
+//            [finishSound play];
+//            [endButton setTitle:FINISH_RUNNING_BUTTON forState:UIControlStateNormal];
+//            [self endButtonAction:self];
+//        }
         //    }
     }
     
@@ -368,16 +368,16 @@
 
 - (IBAction)endButtonAction:(id)sender {
 //    [startButton setTitle:CONTINUE_RUNNING_BUTTON forState:UIControlStateNormal];
-    if (runMission.missionDistanceLimited.doubleValue - distance <= 0){
-        [self stopTimer];
-        [self.saveButton setEnabled:YES];
-        [self.saveButton setTitle:@"保存" forState:UIControlStateNormal];
-        coverView.alpha = 1;
-//        [Animations fadeIn:coverView andAnimationDuration:0.3 toAlpha:1 andWait:NO];
-//        NSLog(@"%d", stepCounting.counter);
-    } else {
-        [self abortConfirm];
-    }
+//    if (runMission.missionDistanceLimited.doubleValue - distance <= 0){
+//        [self stopTimer];
+//        [self.saveButton setEnabled:YES];
+//        [self.saveButton setTitle:@"保存" forState:UIControlStateNormal];
+//        coverView.alpha = 1;
+////        [Animations fadeIn:coverView andAnimationDuration:0.3 toAlpha:1 andWait:NO];
+////        NSLog(@"%d", stepCounting.counter);
+//    } else {
+//        [self abortConfirm];
+//    }
 }
 
 - (IBAction)btnCoverInside:(id)sender {
@@ -466,7 +466,7 @@
 
 - (void)saveRunInfo{
     User_Running_History *runHistory = [User_Running_History intiUnassociateEntity];
-    runHistory.distance = runMission.missionDistanceLimited;
+    //runHistory.distance = runMission.missionDistanceLimited;
     runHistory.duration = [NSNumber numberWithDouble:duration];
     runHistory.avgSpeed = [NSNumber numberWithDouble:(double)(distance/duration*3.6)];
     runHistory.missionRoute = [RORDBCommon getStringFromRoutes:routes];

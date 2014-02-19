@@ -26,6 +26,7 @@
 @property (nonatomic, retain) NSNumber * distance;
 @property (nonatomic, retain) NSNumber * missionGrade;
 @property (nonatomic, retain) NSNumber * goldCoin;
+@property (nonatomic, retain) NSNumber * extraGoldCoin;
 @property (nonatomic, retain) NSNumber * experience;
 @property (nonatomic, retain) NSNumber * extraExperience;
 @property (nonatomic, retain) NSString * comment;

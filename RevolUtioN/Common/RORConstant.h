@@ -27,6 +27,7 @@
 #define FRIEND_GET_URL [SERVICE_HOST stringByAppendingString:@"/account/friends/get/%@?lastUpdateTime=%@"]
 #define FRIEND_SEARCH_URL [SERVICE_HOST stringByAppendingString:@"/account/search/get/%@"]
 #define FRIEND_SORT_UPDATE_URL [SERVICE_HOST stringByAppendingString:@"/account/friendsort/get/%@?lastUpdateTime=%@"]
+#define FRIEND_RECOMMEND_URL [SERVICE_HOST stringByAppendingString:@"/account/friends/recommend/%@"]//page no form 0
 
 // --- action api ---
 #define ACTION_CREATE_ACTION_URL [SERVICE_HOST stringByAppendingString:@"/account/action/create/%@"]
@@ -44,13 +45,13 @@
 
 // --- mission api ---
 #define MISSION_GET_URL [SERVICE_HOST stringByAppendingString:@"/missions/mission/get?lastUpdateTime=%@"]
+#define MISSION_DAILY_GET_URL [SERVICE_HOST stringByAppendingString:@"/missions/dailymission/get/%@"]
 
 // --- history api ---
 #define HISTORY_GET_RUNNING_HISTORY_URL [SERVICE_HOST stringByAppendingString:@"/running/history/get/%@?lastUpdateTime=%@"]
 #define HISTORY_GET_SIMPLE_RUNNING_HISTORY_URL [SERVICE_HOST stringByAppendingString:@"/running/history/simple/get/%@"]
 #define HISTORY_POST_RUNNING_HISTORY_URL [SERVICE_HOST stringByAppendingString:@"/running/history/post/%@"]
 #define HISTORY_GET_MISSION_HISTORY_URL [SERVICE_HOST stringByAppendingString:@"/running/history/mission/get/%@?lastUpdateTime=%@"]
-#define HISTORY_GET_USER_USING_MISSION_URL [SERVICE_HOST stringByAppendingString:@"/running/history/mission/using/get/%@"]
 #define HISTORY_POST_MISSION_HISTORY_URL [SERVICE_HOST stringByAppendingString:@"/running/history/mission/put/%@"]
 
 // --- virtual prop api ---

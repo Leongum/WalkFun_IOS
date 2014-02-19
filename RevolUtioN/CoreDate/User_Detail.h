@@ -30,6 +30,7 @@
 @property (nonatomic, retain) NSNumber * avgSpeed;
 @property (nonatomic, retain) NSNumber * maxCombo;
 @property (nonatomic, retain) NSNumber * currentCombo;
+@property (nonatomic, retain) NSNumber * missionCombo;
 @property (nonatomic, retain) NSString * propHaving;
 @property (nonatomic, retain) NSDate * updateTime;
 
