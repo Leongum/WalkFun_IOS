@@ -205,6 +205,12 @@
     return [NSString stringWithFormat:@"%.2f km", distance/1000];
 }
 
++ (NSString *)formattedSteps:(NSInteger)stepCount{
+    NSInteger outputStep;
+    outputStep = round((double)stepCount/10.f)*10;
+    return [NSString stringWithFormat:@"约%d步", outputStep];
+}
+
 +(void)setFontFamily:(NSString*)fontFamily forView:(UIView*)view andSubViews:(BOOL)isSubViews
 {
     if ([view isKindOfClass:[UILabel class]])

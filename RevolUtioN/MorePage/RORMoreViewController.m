@@ -59,12 +59,13 @@
     [super viewDidUnload];
 }
 
-//-(IBAction)changeSpeedType:(id)sender{
-//    NSMutableDictionary *settinglist = [RORUserUtils getUserSettingsPList];
-//    RORSegmentControl *seg = (RORSegmentControl*)sender;
-//    [settinglist setValue:[NSNumber numberWithInteger:[seg selectionIndex]] forKey:@"speedType"];
-//    [RORUserUtils writeToUserSettingsPList:settinglist];
-//}
+#pragma mark - Action
+
+-(IBAction)backAction:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:^(){}];
+}
+
+#pragma mark - Custom Segment Delegate
 
 - (void) SegmentValueChanged:(NSUInteger)segmentIndex{
     NSMutableDictionary *settinglist = [RORUserUtils getUserSettingsPList];

@@ -17,7 +17,7 @@
 @dynamic productDescription;
 @dynamic productName;
 @dynamic productId;
-
+@dynamic picLink;
 
 +(Virtual_Product *) removeAssociateForEntity:(Virtual_Product *)associatedEntity{
     NSManagedObjectContext *context = [RORContextUtils getShareContext];
@@ -36,6 +36,7 @@
     self.virtualPrice = [RORDBCommon getNumberFromId:[dict valueForKey:@"virtualPrice"]];
     self.dropFlag = [RORDBCommon getNumberFromId:[dict valueForKey:@"dropFlag"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
+    self.picLink = [RORDBCommon getStringFromId:[dict valueForKey:@"picLink"]];
 }
 
 @end

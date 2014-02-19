@@ -13,7 +13,7 @@
 
 @dynamic ownNumber;
 @dynamic productName;
-@dynamic producId;
+@dynamic productId;
 @dynamic userId;
 @dynamic updateTime;
 
@@ -36,7 +36,7 @@
 
 -(void)initWithDictionary:(NSDictionary *)dict{
     self.userId = [RORDBCommon getNumberFromId:[dict valueForKey:@"userId"]];
-    self.producId = [RORDBCommon getNumberFromId:[dict valueForKey:@"producId"]];
+    self.productId = [RORDBCommon getNumberFromId:[dict valueForKey:@"productId"]];
     self.productName= [RORDBCommon getStringFromId:[dict valueForKey:@"productName"]];
     self.ownNumber = [RORDBCommon getNumberFromId:[dict valueForKey:@"ownNumber"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
@@ -45,7 +45,7 @@
 -(NSMutableDictionary *)transToDictionary{
     NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
     [tempDict setValue:self.userId forKey:@"userId"];
-    [tempDict setValue:self.producId forKey:@"producId"];
+    [tempDict setValue:self.productId forKey:@"productId"];
     [tempDict setValue:self.productName forKey:@"productName"];
     [tempDict setValue:self.ownNumber forKey:@"ownNumber"];
     return tempDict;

@@ -17,7 +17,6 @@
 @dynamic missionId;
 @dynamic missionTypeId;
 @dynamic missionRoute;
-@dynamic speedList;
 @dynamic missionStartTime;
 @dynamic missionEndTime;
 @dynamic missionDate;
@@ -78,7 +77,6 @@
     self.missionUuid = [RORDBCommon getStringFromId:[dict valueForKey:@"missionUuid"]];
     self.sequence = [RORDBCommon getNumberFromId:[dict valueForKey:@"sequence"]];
     self.propGet = [RORDBCommon getStringFromId:[dict valueForKey:@"propGet"]];
-    self.speedList = [RORDBCommon getStringFromId:[dict valueForKey:@"speedList"]];
 }
 
 -(NSMutableDictionary *)transToDictionary{
@@ -106,7 +104,6 @@
     [tempoDict setValue:self.missionUuid forKey:@"missionUuid"];
     [tempoDict setValue:self.sequence forKey:@"sequence"];
     [tempoDict setValue:self.propGet forKey:@"propGet"];
-    [tempoDict setValue:self.speedList forKey:@"speedList"];
     return tempoDict;
 }
 @end

@@ -26,6 +26,8 @@
 
 - (void)viewDidLoad
 {
+    titleView = self.friendTitleView;
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.backButton.alpha = 0;
@@ -49,6 +51,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
     [self initSearchField];
 }
 

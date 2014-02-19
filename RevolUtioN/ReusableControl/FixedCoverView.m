@@ -1,15 +1,15 @@
 //
-//  ItemQuantityPicker.m
+//  FixedCoverView.m
 //  WalkFun
 //
-//  Created by Bjorn on 14-2-16.
+//  Created by Bjorn on 14-2-17.
 //  Copyright (c) 2014年 Beyond. All rights reserved.
 //
 
-#import "ItemQuantityPicker.h"
+#import "FixedCoverView.h"
 #import "Animations.h"
 
-@implementation ItemQuantityPicker
+@implementation FixedCoverView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -28,6 +28,7 @@
     // Drawing code
 }
 */
+
 -(IBAction)bgTap:(id)sender{
     [Animations fadeOut:self andAnimationDuration:0.2 fromAlpha:1 andWait:0];
 }

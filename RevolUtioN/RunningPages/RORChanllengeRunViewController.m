@@ -470,7 +470,7 @@
     runHistory.duration = [NSNumber numberWithDouble:duration];
     runHistory.avgSpeed = [NSNumber numberWithDouble:(double)(distance/duration*3.6)];
     runHistory.missionRoute = [RORDBCommon getStringFromRoutes:routes];
-    runHistory.speedList = [RORDBCommon getStringFromSpeedList:avgSpeedPerKMList];
+//    runHistory.speedList = [RORDBCommon getStringFromSpeedList:avgSpeedPerKMList];
     runHistory.missionDate = [NSDate date];
     runHistory.missionEndTime = self.endTime;
     runHistory.missionStartTime = self.startTime;

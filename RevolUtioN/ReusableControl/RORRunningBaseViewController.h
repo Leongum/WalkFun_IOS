@@ -29,7 +29,7 @@
 #define TIMER_INTERVAL delta_T
 #define MIN_PUSHPOINT_DISTANCE 5
 
-@interface RORRunningBaseViewController : RORViewController{
+@interface RORRunningBaseViewController : RORViewController<CLLocationManagerDelegate>{
     BOOL wasFound;
     BOOL isNetworkOK;
     double duration; // seconds

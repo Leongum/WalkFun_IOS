@@ -58,7 +58,7 @@
 //            }
         }
     }
-//    [RORUserUtils syncSystemData];
+    [RORUserUtils syncSystemData];
     
     [self endIndicator:self];
 }

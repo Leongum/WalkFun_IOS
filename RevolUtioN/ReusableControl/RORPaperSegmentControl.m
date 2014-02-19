@@ -9,8 +9,7 @@
 #import "RORPaperSegmentControl.h"
 
 @implementation RORPaperSegmentControl
-@synthesize segment, selectionIndex;
-@synthesize delegate;
+//@synthesize segment, selectionIndex;
 
 - (id)initWithFrame:(CGRect)frame
 {

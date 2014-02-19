@@ -7,9 +7,13 @@
 //
 
 #import "RORViewController.h"
+#import "MainPageViewController.h"
+
+#define PAGE_QUANTITY 3
 
 @interface RORMainViewController : RORViewController<UIScrollViewDelegate>{
-    UIViewController *friendViewController, *firstViewController, *itemViewController;
+    MainPageViewController *friendViewController, *firstViewController, *itemViewController;
+    UIStoryboard *mainStoryboard;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;

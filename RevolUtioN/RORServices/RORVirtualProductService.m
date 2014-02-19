@@ -63,7 +63,7 @@
 }
 
 +(NSArray *)fetchAllVProduct:(BOOL) needContext{
-    NSString *table=@"Mission";
+    NSString *table=@"Virtual_Product";
     NSString *query = @"1 = %@";
     NSArray *params = [NSArray arrayWithObjects:[NSNumber numberWithInteger:1], nil];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"productId" ascending:YES];
@@ -77,6 +77,24 @@
         [vProductsDetails addObject:[Virtual_Product removeAssociateForEntity:vProduct]];
     }
     return [(NSArray*)vProductsDetails mutableCopy];
+}
+
++(UIImage *)getImageOf:(Virtual_Product *)item{
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    // If you go to the folder below, you will find those pictures
+    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png",docDir, item.productId];
+    UIImage *image = [UIImage imageWithContentsOfFile:pngFilePath];
+    
+    if (!image) {
+        NSURL *imageUrl = [NSURL URLWithString:item.picLink];
+        image = [[UIImage alloc]initWithData:[NSData dataWithContentsOfURL:imageUrl]];
+        if (image){
+            NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
+            [data1 writeToFile:pngFilePath atomically:YES];
+            NSLog(@"load pic [id:%@] from server", item.productId);
+        }
+    }
+    return image;
 }
 
 @end

@@ -168,7 +168,8 @@
 }
 
 -(CLLocation *)getNewRealLocation{
-    return [self transToRealLocation:[locationManager location]];
+//    return [self transToRealLocation:[locationManager location]];
+    return [locationManager location];
 }
 
 -(NSNumber *)calculateCalorie

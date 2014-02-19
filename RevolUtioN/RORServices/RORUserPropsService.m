@@ -40,7 +40,7 @@
 
 +(User_Prop *)fetchUserPropByPropId:(NSNumber *) userId withPropId:(NSNumber *) propId withContext:(BOOL) needContext{
     NSString *table=@"User_Prop";
-    NSString *query = @"userId = %@ and producId = %@";
+    NSString *query = @"userId = %@ and productId = %@";
     NSArray *params = [NSArray arrayWithObjects:userId,propId, nil];
     NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
     if (fetchObject == nil || [fetchObject count] == 0) {
@@ -63,7 +63,7 @@
         NSArray *userPropsList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
         for (NSDictionary *userPropDict in userPropsList){
             NSNumber *userId = [userPropDict valueForKey:@"userId"];
-            NSNumber *propId = [userPropDict valueForKey:@"producId"];
+            NSNumber *propId = [userPropDict valueForKey:@"productId"];
             User_Prop *userPropEntity = [self fetchUserPropByPropId:userId withPropId:propId withContext:YES];
             //use local data insteade of service data when update in local.
             if(userPropEntity!= nil && userPropEntity.updateTime == nil){
@@ -86,9 +86,9 @@
 //open out
 + (BOOL) saveUserPropInfoToDB:(User_Prop *)userProp{
     //check userid and productid
-    if(userProp.userId != nil && userProp.producId != nil){
+    if(userProp.userId != nil && userProp.productId != nil){
         NSNumber *userId = userProp.userId;
-        NSNumber *propId = userProp.producId;
+        NSNumber *propId = userProp.productId;
         User_Prop *currentUserProp = [self fetchUserPropByPropId:userId withPropId:propId withContext:YES];;
         if(currentUserProp == nil)
             currentUserProp = [NSEntityDescription insertNewObjectForEntityForName:@"User_Prop" inManagedObjectContext:[RORContextUtils getShareContext]];

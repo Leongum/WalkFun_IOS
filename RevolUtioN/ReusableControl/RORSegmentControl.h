@@ -17,6 +17,8 @@
 
 @interface RORSegmentControl : UIControl{
     int count;
+    NSInteger selectionIndex;
+    NSMutableArray *segment;
 }
 
 //@property (nonatomic) NSInteger count;

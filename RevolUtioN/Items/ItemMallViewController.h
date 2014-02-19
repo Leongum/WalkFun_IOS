@@ -8,13 +8,17 @@
 
 #import "RORViewController.h"
 #import "ItemQuantityPicker.h"
+#import "RORVirtualProductService.h"
 
 @interface ItemMallViewController : RORViewController{
-    NSMutableArray *contentList;
+    NSArray *contentList;
+    Virtual_Product *selectedItem;
 }
 
 @property (strong, nonatomic) IBOutlet ItemQuantityPicker *itemQuantityCoverView;
 @property (strong, nonatomic) IBOutlet UILabel *totalCost;
+@property (strong, nonatomic) IBOutlet UILabel *selectedItemNameLabel;
 @property (strong, nonatomic) IBOutlet RORNormalButton *buyButton;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

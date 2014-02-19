@@ -37,6 +37,7 @@
 {
     [super viewDidLoad];
 //    [self endIndicator:self];
+    self.backButton.alpha = 0;
     
     switchButton = [[RORPaperSegmentControl alloc]initWithFrame:SEGMENT_FRAME andSegmentNumber:2];
     switchButton.delegate = self;
@@ -130,7 +131,8 @@
         [self syncDataAfterLogin];
         [self endIndicator:self];
     } else { //注册
-        NSDictionary *regDict = [[NSDictionary alloc]initWithObjectsAndKeys:usernameTextField.text, @"userEmail",[RORUtils md5:passwordTextField.text], @"password", nicknameTextField.text, @"nickName", nil];
+        //todo
+        NSDictionary *regDict = [[NSDictionary alloc]initWithObjectsAndKeys:usernameTextField.text, @"userName",[RORUtils md5:passwordTextField.text], @"password", nicknameTextField.text, @"nickName", @"unknow device id", @"deviceId",@"ios", @"platformInfo", nil];
         [self startIndicator:self];
 
         User_Base *user = [RORUserServices registerUser:regDict];
@@ -142,12 +144,14 @@
         } else {
             [self sendAlart:REGISTER_FAIL];
             [self endIndicator:self];
-            return;
+//            return;
         }
     }
     passwordTextField.text = @"";
     nicknameTextField.text = @"";
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    [self dismissViewControllerAnimated:YES completion:^(){}];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (BOOL) isLegalInput {

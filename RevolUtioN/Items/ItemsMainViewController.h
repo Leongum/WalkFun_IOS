@@ -6,11 +6,20 @@
 //  Copyright (c) 2014年 Beyond. All rights reserved.
 //
 
-#import "RORViewController.h"
+#import "MainPageViewController.h"
 #import "CoverView.h"
+#import "UserItemScrollView.h"
+#import "RORUserPropsService.h"
 
-@interface ItemsMainViewController : RORViewController
+@interface ItemsMainViewController : MainPageViewController<UIScrollViewDelegate>{
+    NSArray *itemList;
+    UIViewController *parentController;
+    CoverView *mallCoverView;
+}
 
-@property (strong, nonatomic) IBOutlet CoverView *mallCoverView;
+@property (strong, nonatomic) IBOutlet CoverView *itemDetailCoverView;
+
+@property (strong, nonatomic) IBOutlet UserItemScrollView *userItemScrollView;
+@property (strong, nonatomic) IBOutlet UIView *itemMainTitleView;
 
 @end

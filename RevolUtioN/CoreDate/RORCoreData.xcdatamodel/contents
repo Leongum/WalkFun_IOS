@@ -79,6 +79,7 @@
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="platformInfo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sex" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
@@ -122,7 +123,7 @@
     </entity>
     <entity name="User_Prop" representedClassName="User_Prop" syncable="YES">
         <attribute name="ownNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="producId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="productId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="productName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -154,6 +155,7 @@
     </entity>
     <entity name="Virtual_Product" representedClassName="Virtual_Product" syncable="YES">
         <attribute name="dropFlag" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="picLink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="productDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="productId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="productName" optional="YES" attributeType="String" syncable="YES"/>
@@ -162,6 +164,7 @@
     </entity>
     <elements>
         <element name="Action" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Action_Define" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Friend" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Friend_Sort" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Mission" positionX="0" positionY="0" width="0" height="0"/>
@@ -173,6 +176,5 @@
         <element name="User_Prop" positionX="0" positionY="0" width="0" height="0"/>
         <element name="User_Running_History" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Virtual_Product" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Action_Define" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

@@ -6,9 +6,11 @@
 //  Copyright (c) 2013年 Beyond. All rights reserved.
 //
 
-#import "RORFriendsViewController.h"
+#import "MainPageViewController.h"
+#import "RORUserServices.h"
+#import "RORDBCommon.h"
 
-@interface RORFriendsMainViewController : RORFriendsViewController{
+@interface RORFriendsMainViewController : MainPageViewController{
     double searchViewTop;
     User_Base *userInfo;
     NSMutableArray *contentList;
@@ -16,6 +18,7 @@
     int pageCount;
     BOOL noMoreData;
 }
+@property (strong, nonatomic) IBOutlet UIView *friendTitleView;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIButton *addButton;
