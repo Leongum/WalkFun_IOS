@@ -41,23 +41,6 @@
     [RORNetWorkUtils initCheckNetWork];
     NSLog(@"%hhd",[RORNetWorkUtils getIsConnetioned]);
 
-	// Do any additional setup after loading the view.
-    //sync version
-    Version_Control *version = [RORSystemService syncVersion:@"ios"];
-    if(version != nil){
-        if (CURRENT_VERSION_MAIN < version.version.integerValue ||
-            CURRENT_VERSION_SUB < version.subVersion.integerValue){
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"新版本" message:[NSString stringWithFormat:@"发现Cyberace的最新版本%d.%d（当前版本%d.%d），现在就去app store更新？",version.version.integerValue, version.subVersion.integerValue, CURRENT_VERSION_MAIN, CURRENT_VERSION_SUB] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"前往", nil];
-            [alertView show];
-        }
-        if([RORUserUtils getDownLoaded].doubleValue == 0){
-            NSDictionary *downLoadDict = [[NSDictionary alloc]initWithObjectsAndKeys:@"ios", @"platform",[NSString stringWithFormat:@"%@.%@", version.version,version.subVersion], @"version", nil];
-//            BOOL success = [RORSystemService submitDownloaded:downLoadDict];
-//            if(success){
-//                [RORUserUtils doneDowned];
-//            }
-        }
-    }
     [RORUserUtils syncSystemData];
     
     [self endIndicator:self];

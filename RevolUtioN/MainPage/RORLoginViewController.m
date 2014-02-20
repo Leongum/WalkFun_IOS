@@ -9,6 +9,9 @@
 #import "RORLoginViewController.h"
 #import "RORRunHistoryServices.h"
 #import "RORShareService.h"
+#import "RORFriendService.h"
+#import "RORUserPropsService.h"
+#import "RORMissionHistoyService.h"
 #import "RORNetWorkUtils.h"
 
 #define SEGMENT_FRAME CGRectMake(95, 370, 150, 30)
@@ -231,20 +234,22 @@
         snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response)
                                       {
                                           NSLog(@"response is %@",response);
-                                          [[UMSocialDataService defaultDataService] requestSocialAccountWithCompletion:^(UMSocialResponseEntity *accountResponse){
-                                              NSLog(@"SNS account response %@", accountResponse);
-                                              NSDictionary *snsAccountDic = [UMSocialAccountManager socialAccountDictionary];
-                                              UMSocialAccountEntity *account = [snsAccountDic valueForKey:type];
-                                              
-                                              BOOL islogin = [RORShareService loginFromSNS:account];
-                                              if(islogin){
-                                                  [self syncDataAfterLogin];
-                                                  [self.navigationController popViewControllerAnimated:YES];
-                                              }
-                                              else{
-                                                  [self performSegueWithIdentifier:@"bodySetting" sender:self];
-                                              }
-                                          }];
+                                          if(response.responseCode == UMSResponseCodeSuccess){
+                                              [[UMSocialDataService defaultDataService] requestSocialAccountWithCompletion:^(UMSocialResponseEntity *accountResponse){
+                                                  NSLog(@"SNS account response %@", accountResponse);
+                                                  NSDictionary *snsAccountDic = [UMSocialAccountManager socialAccountDictionary];
+                                                  UMSocialAccountEntity *account = [snsAccountDic valueForKey:type];
+                                                  
+                                                  BOOL islogin = [RORShareService loginFromSNS:account];
+                                                  if(islogin){
+                                                      [self syncDataAfterLogin];
+                                                      [self.navigationController popViewControllerAnimated:YES];
+                                                  }
+                                                  else{
+                                                      [self performSegueWithIdentifier:@"bodySetting" sender:self];
+                                                  }
+                                              }];
+                                          }
                                       });
     }else {
         NSDictionary *snsAccountDic = [UMSocialAccountManager socialAccountDictionary];
@@ -264,12 +269,38 @@
 
 -(void)syncDataAfterLogin{
     [self startIndicator:self];
+    //用户历史
     BOOL history = [RORRunHistoryServices syncRunningHistories:[RORUserUtils getUserId]];
     if(!history){
         history = [RORRunHistoryServices syncRunningHistories:[RORUserUtils getUserId]];
     }
+    //用户好友信息
+    BOOL friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
+    if(!friends){
+        friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
+    }
+    //好友初步信息
+    BOOL friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
+    if(!friendsort){
+        friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
+    }
+    //好友action信息
+    BOOL action = [RORFriendService syncActions:[RORUserUtils getUserId]];
+    if(!action){
+        action = [RORFriendService syncActions:[RORUserUtils getUserId]];
+    }
+    //用户mission list
+    BOOL missionHistory = [RORMissionHistoyService syncMissionHistories:[RORUserUtils getUserId]];
+    if(!missionHistory){
+        missionHistory = [RORMissionHistoyService syncMissionHistories:[RORUserUtils getUserId]];
+    }
+    //用户道具
+    BOOL userPorp = [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
+    if(!userPorp){
+        userPorp = [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
+    }
     [self endIndicator:self];
-    if(!history){
+    if(!history || !friends || !friendsort || !action || !missionHistory || !userPorp){
         [self sendAlart:@"个人信息加载失败"];
         [RORUserUtils logout];
     }
