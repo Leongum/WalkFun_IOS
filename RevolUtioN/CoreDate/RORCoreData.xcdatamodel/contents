@@ -7,7 +7,6 @@
         <attribute name="actionName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="actionToId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="actionToName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="inUsing" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <entity name="Action_Define" representedClassName="Action_Define" syncable="YES">
@@ -17,6 +16,7 @@
         <attribute name="actionName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="actionRule" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="actionType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="inUsing" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="soundLink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="triggerProbability" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>

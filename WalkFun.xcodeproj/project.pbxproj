@@ -237,7 +237,6 @@
 		30804E9A17F56D6E00F1A353 /* weibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 30804E9217F56D6E00F1A353 /* weibo.png */; };
 		3083DC7517F5248F009A50F6 /* entsani.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3083DC7417F5248F009A50F6 /* entsani.ttf */; };
 		308C165E186982F4005B0198 /* RORShareCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 308C165D186982F4005B0198 /* RORShareCoverViewController.m */; };
-		308C166118698D99005B0198 /* RORShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 308C166018698D99005B0198 /* RORShareViewController.m */; };
 		308C1663186EA507005B0198 /* icon@2x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 308C1662186EA507005B0198 /* icon@2x120.png */; };
 		308C1666186EF1FB005B0198 /* RORPaperSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 308C1665186EF1FB005B0198 /* RORPaperSegmentControl.m */; };
 		30978DA317EDA57E00CA58B9 /* history_detail_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30978DA117EDA57E00CA58B9 /* history_detail_bg.png */; };
@@ -688,8 +687,6 @@
 		3083DC7417F5248F009A50F6 /* entsani.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = entsani.ttf; path = Resources/entsani.ttf; sourceTree = "<group>"; };
 		308C165C186982F4005B0198 /* RORShareCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORShareCoverViewController.h; path = ReusableControl/RORShareCoverViewController.h; sourceTree = "<group>"; };
 		308C165D186982F4005B0198 /* RORShareCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORShareCoverViewController.m; path = ReusableControl/RORShareCoverViewController.m; sourceTree = "<group>"; };
-		308C165F18698D99005B0198 /* RORShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORShareViewController.h; path = ReusableControl/RORShareViewController.h; sourceTree = "<group>"; };
-		308C166018698D99005B0198 /* RORShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORShareViewController.m; path = ReusableControl/RORShareViewController.m; sourceTree = "<group>"; };
 		308C1662186EA507005B0198 /* icon@2x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x120.png"; sourceTree = "<group>"; };
 		308C1664186EF1FB005B0198 /* RORPaperSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORPaperSegmentControl.h; path = ReusableControl/RORPaperSegmentControl.h; sourceTree = "<group>"; };
 		308C1665186EF1FB005B0198 /* RORPaperSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORPaperSegmentControl.m; path = ReusableControl/RORPaperSegmentControl.m; sourceTree = "<group>"; };
@@ -1617,8 +1614,6 @@
 				30984936186207780079E236 /* RORIntroCoverView.m */,
 				308C165C186982F4005B0198 /* RORShareCoverViewController.h */,
 				308C165D186982F4005B0198 /* RORShareCoverViewController.m */,
-				308C165F18698D99005B0198 /* RORShareViewController.h */,
-				308C166018698D99005B0198 /* RORShareViewController.m */,
 				302399D61887A206007CF5A2 /* RORNavigationButton.h */,
 				302399D71887A206007CF5A2 /* RORNavigationButton.m */,
 				30FC340C18AE791600D3AC3A /* CoverView.h */,
@@ -2125,7 +2120,6 @@
 				30FFFE5918433412001EA4F1 /* RORChallengeCongratsCoverView.m in Sources */,
 				0FA751EA189279E70037342E /* RORHistoryDetailViewController.m in Sources */,
 				0FA7518E189279A90037342E /* RORHttpResponse.m in Sources */,
-				308C166118698D99005B0198 /* RORShareViewController.m in Sources */,
 				0FA75191189279A90037342E /* RORNetWorkUtils.m in Sources */,
 				0F282F9518B10CF7003F44E8 /* Action_Define.m in Sources */,
 				30750A6818B1FB5800EC7B51 /* ItemDetailCoverView.m in Sources */,

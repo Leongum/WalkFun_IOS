@@ -20,6 +20,13 @@
 @property (strong, nonatomic) IBOutlet UILabel *shareTitleView;
 @property (strong , nonatomic ) NSString *shareTitle;
 
-+(void)present2SharePagefrom:(UIViewController*)delegate withImage:(UIImage *)image andMessage:(NSString *)msg;
+- (IBAction)btnShareToWeibo:(id)sender;
 
+- (IBAction)btnShareToRenren:(id)sender;
+
+- (IBAction)btnShareToTencentWeibo:(id)sender;
+
+- (IBAction)btnShareToWeixin:(id)sender;
+
+- (IBAction)btnShareToQQ:(id)sender;
 @end
