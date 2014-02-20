@@ -12,6 +12,8 @@
 #import "RORContextUtils.h"
 #import "RORHttpResponse.h"
 #import "RORVirtualProductClientHandler.h"
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface RORVirtualProductService : NSObject
 

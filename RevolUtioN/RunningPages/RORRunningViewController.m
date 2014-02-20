@@ -18,7 +18,7 @@
 @implementation RORRunningViewController
 //@synthesize locationManager, motionManager;
 @synthesize timerCount;
-@synthesize timeLabel, speedLabel, distanceLabel, startButton, endButton;
+@synthesize timeLabel, speedLabel, distanceLabel, endButton;
 @synthesize routeLineView;
 @synthesize record;
 @synthesize doCollect;
@@ -60,16 +60,10 @@
     self.coverView.alpha = 0;
     self.backButton.alpha = 0;
     
-    [self.startButton setEnabled:YES];
-//    [startButton setTitle:SEARCHING_LOCATION forState:UIControlStateNormal];
-    [startButton setTitle:START_RUNNING_BUTTON forState:UIControlStateNormal];
-    UIImage *image = [UIImage imageNamed:@"green_btn_bg.png"];
-    [startButton setBackgroundImage:image forState:UIControlStateNormal];
-    
-    image = [UIImage imageNamed:@"redbutton_bg.png"];
-    [endButton setBackgroundImage:image forState:UIControlStateNormal];
-    [endButton setTitle:CANCEL_RUNNING_BUTTON forState:UIControlStateNormal];
-    [endButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+//    UIImage *image = [UIImage imageNamed:@"redbutton_bg.png"];
+//    [endButton setBackgroundImage:image forState:UIControlStateNormal];
+
+    [self startButtonAction:self];
     
 //    collapseButton.alpha = 0;
     
@@ -149,7 +143,6 @@
     [self setDistanceLabel:nil];
     [self setTimeLabel:nil];
     [self setSpeedLabel:nil];
-    [self setStartButton:nil];
     [self setEndButton:nil];
     [self setRouteLineView:nil];
     [self setStartTime:nil];
@@ -172,18 +165,19 @@
             
 //            [[UIApplication sharedApplication] setIdleTimerDisabled: YES];
 
+            UIImage* image = [UIImage imageNamed:@"redbutton_bg.png"];
+            [endButton setBackgroundImage:image forState:UIControlStateNormal];
+            [endButton setTitle:CANCEL_RUNNING_BUTTON forState:UIControlStateNormal];
+            [endButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+            
             [endButton setTitle:FINISH_RUNNING_BUTTON forState:UIControlStateNormal];
-            [endButton removeTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
             [endButton addTarget:self action:@selector(endButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             
             //init inertia navigation
             [self initNavi];
             
             [self startDeviceMotion];
-            
-            //the first point after started
-                        //            [self pushPoint];
-            
+
             //debug
 //            [sound play];
 //            [countDownView show];
@@ -197,18 +191,7 @@
         
         NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(timerDot) userInfo:nil repeats:YES];
         repeatingTimer = timer;
-        
-        UIImage *image = [UIImage imageNamed:@"redbutton_bg.png"];
-        [startButton setBackgroundImage:image forState:UIControlStateNormal];
-        [startButton setTitle:PAUSSE_RUNNING_BUTTON forState:UIControlStateNormal];
-        [endButton setEnabled:YES];
-    } else {
-        [self stopTimer];
-        UIImage *image = [UIImage imageNamed:@"green_btn_bg.png"];
-        [startButton setBackgroundImage:image forState:UIControlStateNormal];
-        [startButton setTitle:CONTINUE_RUNNING_BUTTON forState:UIControlStateNormal];
     }
-    //    [[NSRunLoop  currentRunLoop] addTimer:myTimer forMode:NSDefaultRunLoopMode];
 }
 
 - (void)initNavi{
@@ -249,6 +232,13 @@
         [self.tableView reloadData];
         [self.tableView scrollToRowAtIndexPath:bottomIndex atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     }
+    if (!isAWalking && currentStep >50) {
+        UIImage* image = [UIImage imageNamed:@"green_btn_bg.png"];
+        [endButton setBackgroundImage:image forState:UIControlStateNormal];
+        [endButton setTitle:FINISH_RUNNING_BUTTON forState:UIControlStateNormal];
+        [endButton removeTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+        [endButton addTarget:self action:@selector(endButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 - (void)pushPoint{
@@ -271,11 +261,9 @@
 }
 
 - (IBAction)endButtonAction:(id)sender {
-    [self stopTimer];
-
-    [startButton setTitle:CONTINUE_RUNNING_BUTTON forState:UIControlStateNormal];
+//    [self stopTimer];
     
-    if (distance > 30){
+    if (currentStep > 50){
         [self.saveButton setEnabled:YES];
         [self.saveButton setTitle:@"保存" forState:UIControlStateNormal];
         [self.saveButton setBackgroundImage:[UIImage imageNamed:@"running_end_bg.png"] forState:UIControlStateNormal];
@@ -299,7 +287,6 @@
 }
 
 - (IBAction)btnSaveRun:(id)sender {
-
     [self stopUpdates];
     
     if (self.endTime == nil)
@@ -317,6 +304,8 @@
 }
 
 -(void)prepareForQuit{
+    [self stopTimer];
+
     //stop globle location manager
     [(RORAppDelegate *)[[UIApplication sharedApplication] delegate] setRunningStatus:NO];
     

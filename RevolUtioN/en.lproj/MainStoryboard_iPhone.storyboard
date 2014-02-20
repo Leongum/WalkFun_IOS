@@ -246,17 +246,17 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="随便跑跑" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MJh-K4-7XW">
-                                <rect key="frame" x="90" y="20" width="141" height="33"/>
+                                <rect key="frame" x="90" y="32" width="141" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" id="fXg-FT-fiu">
-                                <rect key="frame" x="20" y="61" width="280" height="293"/>
+                                <rect key="frame" x="20" y="73" width="280" height="293"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventCell" rowHeight="62" id="KTC-dg-ZSc">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="eventCell" rowHeight="62" id="KTC-dg-ZSc">
                                         <rect key="frame" x="0.0" y="22" width="280" height="62"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -293,7 +293,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" id="0Pp-US-kgT" userLabel="data-container">
-                                <rect key="frame" x="50" y="362" width="220" height="84"/>
+                                <rect key="frame" x="50" y="374" width="220" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BuL-4o-B7w" userLabel="distance-label">
@@ -331,24 +331,8 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Tsp-SB-9R5" customClass="RORNormalButton">
-                                <rect key="frame" x="165" y="454" width="110" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                <state key="normal" title="开始" backgroundImage="green_btn_bg.png">
-                                    <color key="titleColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" red="0.80000001192092896" green="0.80000001192092896" blue="0.80000001192092896" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="startButtonAction:" destination="PbC-RF-pa6" eventType="touchUpInside" id="g6O-G8-JAC"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qoe-ah-y3F" customClass="RORNormalButton">
-                                <rect key="frame" x="48" y="454" width="110" height="49"/>
+                                <rect key="frame" x="105" y="475" width="110" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
@@ -364,7 +348,7 @@
                                 </connections>
                             </button>
                             <view alpha="0.99999999999999989" contentMode="scaleToFill" id="jG1-qd-bC8" customClass="UIControl">
-                                <rect key="frame" x="0.0" y="568" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coverview_bg.png" id="zII-PF-76j">
@@ -431,7 +415,6 @@
                         <outlet property="distanceLabel" destination="BuL-4o-B7w" id="S0H-Jq-bD3"/>
                         <outlet property="endButton" destination="qoe-ah-y3F" id="grz-eW-chY"/>
                         <outlet property="saveButton" destination="qER-8T-7Iy" id="VLv-YI-UwV"/>
-                        <outlet property="startButton" destination="Tsp-SB-9R5" id="xxh-Zg-lzy"/>
                         <outlet property="tableView" destination="fXg-FT-fiu" id="bES-Za-5gc"/>
                         <outlet property="timeLabel" destination="bcw-6Y-9it" id="yZr-wz-Pag"/>
                         <segue destination="59h-pf-nvn" kind="push" identifier="NormalRunResultSegue" id="wyF-zp-Z04"/>

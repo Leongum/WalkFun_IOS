@@ -20,10 +20,10 @@
 @interface RORRunningViewController : RORRunningBaseViewController {
     BOOL MKwasFound;
     User_Running_History *runHistory;
+    BOOL isAWalking;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
-@property (weak, nonatomic) IBOutlet UIButton *startButton;
 @property (weak, nonatomic) IBOutlet UIButton *endButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
