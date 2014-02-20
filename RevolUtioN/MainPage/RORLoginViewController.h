@@ -38,9 +38,7 @@
 - (IBAction)backgroundTap:(id)sender;
 - (IBAction)visibilityOfPW:(id)sender;
 - (IBAction)sinaWeiboLogin:(id)sender;
-- (IBAction)tencentWeiboLogin:(id)sender;
 - (IBAction)qqAccountLogin:(id)sender;
-- (IBAction)renrenAccountLogin:(id)sender;
 
 
 @end

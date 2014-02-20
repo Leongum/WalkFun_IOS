@@ -28,5 +28,6 @@
 
 - (IBAction)btnShareToWeixin:(id)sender;
 
-- (IBAction)btnShareToQQ:(id)sender;
+- (IBAction)btnShareToWFriend:(id)sender;
+
 @end

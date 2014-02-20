@@ -1236,8 +1236,6 @@
 		302FD00A1727D870004DA005 /* RevolUtioN */ = {
 			isa = PBXGroup;
 			children = (
-				0FDE82D018927BCB0082B1BF /* WalkFun-Info.plist */,
-				0FDE82D118927BCB0082B1BF /* WalkFun-Prefix.pch */,
 				0F07AC1B17E6E4250009C8A8 /* CustomControl */,
 				0F7F39841792DEB600B1C720 /* RORServices */,
 				30FC340118AE16F100D3AC3A /* Items */,
@@ -1252,6 +1250,8 @@
 				30151A7A174488C8009BCADB /* RORRunningPage */,
 				302FD0131727D870004DA005 /* RORAppDelegate.h */,
 				302FD0141727D870004DA005 /* RORAppDelegate.m */,
+				0FDE82D018927BCB0082B1BF /* WalkFun-Info.plist */,
+				0FDE82D118927BCB0082B1BF /* WalkFun-Prefix.pch */,
 				302FD00B1727D870004DA005 /* Supporting Files */,
 				30D21E8D173CE525006B24A8 /* MainPage */,
 			);

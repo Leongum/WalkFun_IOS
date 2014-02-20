@@ -94,15 +94,13 @@
     //sns share umeng
     [UMSocialData setAppKey:UMENG_APPKEY];
     //设置微信AppId
-    [UMSocialConfig setWXAppId:@"wx44395fcdd8983c6b" url:nil];
+    [UMSocialConfig setWXAppId:@"wx44395fcdd8983c6b" url:@"http://www.cyberace.cc"];
     //打开Qzone的SSO开关
     [UMSocialConfig setSupportQzoneSSO:YES importClasses:@[[QQApiInterface class],[TencentOAuth class]]];
     //设置手机QQ的AppId，指定你的分享url，若传nil，将使用友盟的网址
     [UMSocialConfig setQQAppId:@"101022066" url:@"http://www.cyberace.cc" importClasses:@[[QQApiInterface class],[TencentOAuth class]]];
     //打开新浪微博的SSO开关
     [UMSocialConfig setSupportSinaSSO:YES];
-    //设置是否使用QQ互联的SDK来分享
-    [UMSocialConfig setShareQzoneWithQQSDK:YES url:@"http://www.cyberace.cc" importClasses:@[[QQApiInterface class],[TencentOAuth class]]];
     
     //[LingQianSDK didFinishLaunchingWithAppID:@"824cf793a15d5a76b92ca74ae533529f" applicationSecret:@"84aedf8fda5ab5bc2ee8881f17758642"];
     
@@ -118,6 +116,11 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return  [UMSocialSnsService handleOpenURL:url wxApiDelegate:nil];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     return  [UMSocialSnsService handleOpenURL:url wxApiDelegate:nil];
 }

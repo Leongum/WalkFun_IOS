@@ -56,20 +56,34 @@
 }
 
 - (IBAction)btnShareToWeibo:(id)sender {
-    [[UMSocialControllerService defaultControllerService] setShareText:shareMessage shareImage:shareImage socialUIDelegate:nil];
-    //设置分享内容和回调对象
-    [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
+    [self shareToSNS:UMShareToSina];
 }
 
 - (IBAction)btnShareToRenren:(id)sender {
+    [self shareToSNS:UMShareToRenren];
 }
 
 - (IBAction)btnShareToWeixin:(id)sender {
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
+    [[UMSocialControllerService defaultControllerService] setShareText:shareMessage shareImage:shareImage socialUIDelegate:nil];
+    //设置分享内容和回调对象
+    [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatTimeline].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
 }
 
-- (IBAction)btnShareToQQ:(id)sender {
+- (IBAction)btnShareToWFriend:(id)sender {
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
+    [[UMSocialControllerService defaultControllerService] setShareText:shareMessage shareImage:shareImage socialUIDelegate:nil];
+    //设置分享内容和回调对象
+    [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
 }
 
 - (IBAction)btnShareToTencentWeibo:(id)sender {
+    [self shareToSNS:UMShareToTencent];
+}
+
+-(void)shareToSNS:(NSString *)platform {
+    [[UMSocialControllerService defaultControllerService] setShareText:shareMessage shareImage:shareImage socialUIDelegate:nil];
+    //设置分享内容和回调对象
+    [UMSocialSnsPlatformManager getSocialPlatformWithName:platform].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
 }
 @end
