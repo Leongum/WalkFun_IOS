@@ -47,8 +47,8 @@
 
 - (void)play:(int)i {
     if(fileNameQueue != nil){
-        
-        player = [[AVAudioPlayer alloc] initWithContentsOfURL:[[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:[fileNameQueue objectAtIndex:i] ofType:nil]] error:nil];
+        player = [[AVAudioPlayer alloc]initWithData:[NSData dataWithContentsOfFile:[fileNameQueue objectAtIndex:i]] error:nil];
+//        player = [[AVAudioPlayer alloc] initWithContentsOfURL:[[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:[fileNameQueue objectAtIndex:i] ofType:nil]] error:nil];
         player.delegate = self;
         [player setVolume:1];
         [player prepareToPlay];

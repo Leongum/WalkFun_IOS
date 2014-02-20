@@ -78,6 +78,8 @@
     routePoints = [[NSMutableArray alloc]init];
     
 //    self.saveButton.delegate = self;
+    
+    isAWalking = NO;
 }
 
 -(void)navigationInit{
@@ -168,9 +170,6 @@
             UIImage* image = [UIImage imageNamed:@"redbutton_bg.png"];
             [endButton setBackgroundImage:image forState:UIControlStateNormal];
             [endButton setTitle:CANCEL_RUNNING_BUTTON forState:UIControlStateNormal];
-            [endButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
-            
-            [endButton setTitle:FINISH_RUNNING_BUTTON forState:UIControlStateNormal];
             [endButton addTarget:self action:@selector(endButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             
             //init inertia navigation
@@ -232,12 +231,11 @@
         [self.tableView reloadData];
         [self.tableView scrollToRowAtIndexPath:bottomIndex atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     }
-    if (!isAWalking && currentStep >50) {
+    if (!isAWalking && currentStep > 40) {
+        isAWalking = YES;
         UIImage* image = [UIImage imageNamed:@"green_btn_bg.png"];
         [endButton setBackgroundImage:image forState:UIControlStateNormal];
         [endButton setTitle:FINISH_RUNNING_BUTTON forState:UIControlStateNormal];
-        [endButton removeTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
-        [endButton addTarget:self action:@selector(endButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
@@ -263,13 +261,13 @@
 - (IBAction)endButtonAction:(id)sender {
 //    [self stopTimer];
     
-    if (currentStep > 50){
+    if (isAWalking){
         [self.saveButton setEnabled:YES];
         [self.saveButton setTitle:@"保存" forState:UIControlStateNormal];
         [self.saveButton setBackgroundImage:[UIImage imageNamed:@"running_end_bg.png"] forState:UIControlStateNormal];
     } else {
         [self.saveButton setEnabled:NO];
-        [self.saveButton setTitle:@"你确定你跑了么？" forState:UIControlStateNormal];
+        [self.saveButton setTitle:@"你走的也太少了吧" forState:UIControlStateNormal];
         [self.saveButton setBackgroundImage:nil forState:UIControlStateNormal];
     }
     [Animations fadeIn:coverView andAnimationDuration:0.3 toAlpha:1 andWait:NO];

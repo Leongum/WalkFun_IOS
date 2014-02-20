@@ -249,7 +249,6 @@
             [[UIApplication sharedApplication] setIdleTimerDisabled: YES];
             
             [(RORAppDelegate *)[[UIApplication sharedApplication] delegate] setRunningStatus:YES];
-
             
             [endButton setTitle:@"放弃" forState:UIControlStateNormal];
             [endButton removeTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -261,14 +260,11 @@
             [self startDeviceMotion];
             
             //the first point after started
-            [self initOffset:[mapView userLocation]];
             latestUserLocation = [self getNewRealLocation];
             formerLocation = latestUserLocation;
             [routePoints addObject:formerLocation];
             [self drawLineWithLocationArray:routePoints];
             
-            [sound play];
-            [countDownView show];
         }
         
         NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(timerDot) userInfo:nil repeats:YES];
@@ -341,8 +337,6 @@
         [routePoints addObject:currentLocation];
         [self drawLineWithLocationArray:routePoints];
         
-        //记录每KM平均速度
-        [self pushAvgSpeedPerKM];
     }
 }
 

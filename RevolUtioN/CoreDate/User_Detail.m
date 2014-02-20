@@ -20,7 +20,6 @@
 @dynamic goldCoin;
 @dynamic health;
 @dynamic fatness;
-@dynamic avgSpeed;
 @dynamic experience;
 @dynamic totalActiveTimes;
 @dynamic totalCarlorie;
@@ -53,7 +52,6 @@
     self.goldCoin = [RORDBCommon getNumberFromId:[dict valueForKey:@"goldCoin"]];
     self.health = [RORDBCommon getNumberFromId:[dict valueForKey:@"health"]];
     self.fatness = [RORDBCommon getNumberFromId:[dict valueForKey:@"fatness"]];
-    self.avgSpeed = [RORDBCommon getNumberFromId:[dict valueForKey:@"avgSpeed"]];
     self.experience = [RORDBCommon getNumberFromId:[dict valueForKey:@"experience"]];
     self.totalActiveTimes = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalActiveTimes"]];
     self.totalCarlorie = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalCarlorie"]];
@@ -78,7 +76,6 @@
     [tempDict setValue:self.goldCoin forKey:@"goldCoin"];
     [tempDict setValue:self.health forKey:@"health"];
     [tempDict setValue:self.fatness forKey:@"fatness"];
-    [tempDict setValue:self.avgSpeed forKey:@"avgSpeed"];
     [tempDict setValue:self.experience forKey:@"experience"];
     [tempDict setValue:self.totalActiveTimes forKey:@"totalActiveTimes"];
     [tempDict setValue:self.totalCarlorie forKey:@"totalCarlorie"];

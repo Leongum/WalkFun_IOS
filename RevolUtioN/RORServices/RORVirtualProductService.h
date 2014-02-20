@@ -26,6 +26,17 @@
 //查询本地所有道具的信息
 +(NSArray *)fetchAllVProduct;
 
+//从服务器获取所有item的图片
++(void)syncAllItemImages;
+
 //返回item对应的图片，缓存到本地
 +(UIImage *)getImageOf:(Virtual_Product *)item;
+
+//从服务器获取所有item的图片
++(void)syncAllEventSounds;
+
+//获得event对应的声音文件名
++(NSString *)getSoundFileOf:(Action_Define *)event;
+
+
 @end

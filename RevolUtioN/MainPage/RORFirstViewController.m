@@ -139,11 +139,10 @@
         self.healthLabel.text = [NSString stringWithFormat:@"健康：%@", userDetail.health];
     } else {
         self.loginButton.alpha = 1;
-        UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
-        UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"RORLoginViewController"];
-        [[self parentViewController] presentViewController:itemViewController animated:NO completion:^(){}];
+        UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+        UIViewController *loginViewController =  [loginStoryboard instantiateViewControllerWithIdentifier:@"RORLoginViewController"];
+        [[self parentViewController] presentViewController:loginViewController animated:NO completion:^(){}];
     }
-
 }
 
 -(void) viewWillAppear:(BOOL)animated{

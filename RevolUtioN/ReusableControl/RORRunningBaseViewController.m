@@ -38,21 +38,11 @@
     offset.longitude = 0;
     
 //    CGRect rx = self.view.frame;//[ UIScreen mainScreen ].applicationFrame;
-    countDownView = [[RORCountDownCoverView alloc]initWithFrame:self.view.frame];
-    [countDownView setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin];
-    [self.view addSubview:countDownView];
-    [countDownView hide];
+
+    //初始化声音队列
+    allInOneSound = [[RORMultiPlaySound alloc] init];
     
-    srand(time(NULL));
-    int randomValue = rand();
-    if (randomValue%100<20)
-        sound = [[RORPlaySound alloc]initForPlayingSoundEffectWith:@"all_set.mp3"];
-    else
-        sound = [[RORPlaySound alloc]initForPlayingSoundEffectWith:@"all_set_gun.mp3"];
-    
-    lastKiloPlayed = NO;
-    lastHundredPlayed = NO;
-    
+    //初始化路线列表
     routes = [[NSMutableArray alloc]init ];
     [self resetRoutePoints];
     
@@ -181,8 +171,8 @@
 
     //step counting
     [stepCounting pushNewLAcc:[INMatrix modOfVec_3:newDeviceStatus.an] GAcc:newDeviceStatus.an.v3 speed:currentSpeed];
-    if (stepCounting.counter>currentSpeed) {
-        currentSpeed = stepCounting.counter;
+    if (stepCounting.counter>currentStep) {
+        currentStep = stepCounting.counter;
         [self isEventHappen];
     }
 }
@@ -235,7 +225,7 @@
         Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
         int x = arc4random() % 1000000;
         double roll = ((double)x)/10000.f;
-        if (roll < event.triggerProbability.doubleValue*500){//todebug
+        if (roll < event.triggerProbability.doubleValue*100){//todebug
             [self eventDidHappened:event];
             return;
         }
@@ -245,6 +235,8 @@
 -(void)eventDidHappened:(Action_Define *)event{
     [eventHappenedList addObject:event];
     [eventTimeList addObject: [NSNumber numberWithInteger:duration]];
+    [allInOneSound addFileNametoQueue:[RORVirtualProductService getSoundFileOf:event]];
+    [allInOneSound play];
 }
 
 

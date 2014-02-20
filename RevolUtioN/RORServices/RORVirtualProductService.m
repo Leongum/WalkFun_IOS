@@ -85,6 +85,13 @@
     return [comps objectAtIndex:comps.count-1];
 }
 
++(void)syncAllItemImages{
+    NSArray *itemList = [self fetchAllVProduct];
+    for (Virtual_Product *item in itemList) {
+        [self getImageOf:item];
+    }
+}
+
 +(UIImage *)getImageOf:(Virtual_Product *)item{
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     // If you go to the folder below, you will find those pictures
@@ -106,6 +113,13 @@
     return image;
 }
 
++(void)syncAllEventSounds{
+    NSArray *eventList = [RORSystemService fetchAllActionDefine:ActionDefineRun];
+    for (Action_Define *event in eventList) {
+        [self getSoundFileOf:event];
+    }
+}
+
 +(NSString *)getSoundFileOf:(Action_Define *)event{
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     // If you go to the folder below, you will find those pictures
@@ -113,9 +127,10 @@
     NSString *fileName = [self getFileNameFrom:soundUrl];
     NSString *mp3FilePath = [NSString stringWithFormat:@"%@/%@",docDir, fileName];
 //    [NSData dataWithContentsOfFile:pngFilePath];
-    AVAudioPlayer* player = [[AVAudioPlayer alloc] initWithContentsOfURL:[[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:mp3FilePath ofType:nil]] error:nil];
-    if (!player) {
+    NSData *mp3Data = [[NSData alloc] initWithContentsOfFile:mp3FilePath];
+    if (!mp3Data) {
         [[NSData dataWithContentsOfURL:soundUrl] writeToFile:mp3FilePath atomically:YES];
+        mp3Data = [[NSData alloc] initWithContentsOfFile:mp3FilePath];
     }
     return mp3FilePath;
 }

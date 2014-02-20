@@ -261,12 +261,13 @@ static NSDate *syncTime;
         {
             //sync virtual product
             [RORVirtualProductService syncVProduct];
+            [RORVirtualProductService syncAllItemImages];
         }
         if(actionDefineScape > 0)
         {
             //sync action define
             [RORSystemService syncActionDefine];
-            
+            [RORVirtualProductService syncAllEventSounds];
         }
         [self saveLastUpdateTimeUseLocalTime:@"lastSyncSystemDataTime"];
     }

@@ -139,8 +139,9 @@
         [self endIndicator:self];
         if (user != nil){
             [self sendSuccess:REGISTER_SUCCESS];
-            [self performSegueWithIdentifier:@"bodySetting" sender:self];
-            return;
+            [self endIndicator:self];
+//            [self performSegueWithIdentifier:@"bodySetting" sender:self];
+//            return;
         } else {
             [self sendAlart:REGISTER_FAIL];
             [self endIndicator:self];

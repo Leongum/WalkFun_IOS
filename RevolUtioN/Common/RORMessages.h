@@ -39,7 +39,7 @@
 #define CANCEL_BUTTON @"知道啦！"
 #define SEARCHING_LOCATION @"定位中..."
 #define START_RUNNING_BUTTON @"开始"
-#define CANCEL_RUNNING_BUTTON @"取消"
+#define CANCEL_RUNNING_BUTTON @"放弃"
 #define FINISH_RUNNING_BUTTON @"完成"
 #define PAUSSE_RUNNING_BUTTON @"歇会儿"
 #define CONTINUE_RUNNING_BUTTON @"继续"

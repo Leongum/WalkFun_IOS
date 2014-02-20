@@ -24,7 +24,8 @@
 #import "RORViewController.h"
 #import "Mission.h"
 #import "RORCountDownCoverView.h"
-
+#import "RORMultiPlaySound.h"
+#import "RORVirtualProductService.h"
 
 #define TIMER_INTERVAL delta_T
 #define MIN_PUSHPOINT_DISTANCE 5
@@ -45,14 +46,7 @@
     INStepCounting *stepCounting;
     NSInteger currentStep;
     
-    RORCountDownCoverView *countDownView;
-    RORPlaySound *sound;
-    RORPlaySound *lastHundred;
-    RORPlaySound *lastKilo;
-    
-    BOOL lastHundredPlayed;
-    BOOL lastKiloPlayed;
-    BOOL last5MinPlayed;
+    RORMultiPlaySound *allInOneSound;
     
     CLLocation *formerCenterMapLocation;
     
@@ -78,7 +72,6 @@
 
 @property (strong, nonatomic) INKalmanFilter *kalmanFilter;
 
-- (void)initOffset:(MKUserLocation *)userLocation;
 -(CLLocation *)getNewRealLocation;
 -(NSNumber *)calculateCalorie;
 -(NSNumber *)calculateExperience:(User_Running_History *)runningHistory;
@@ -90,7 +83,6 @@
 -(NSNumber *)isValidRun:(NSInteger)steps;
 -(void)timerDotCommon;
 -(void)timerSecondDot;
--(void)pushAvgSpeedPerKM;
 
 //reset route points after pause
 -(void)resetRoutePoints;
