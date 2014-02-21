@@ -62,6 +62,7 @@
     
     for (int i=0; i<PAGE_QUANTITY; i++)
         [self loadPage:i];
+    
 //    [self loadPage:1];
 //    [self loadPage:2];
     
@@ -69,9 +70,16 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    for (int i=0; i<PAGE_QUANTITY; i++){
-        UIViewController *controller =(UIViewController *)[contentViews objectAtIndex:i];
-        [controller viewWillAppear:NO];
+    [super viewWillAppear:animated];
+    
+    if ([RORUserUtils getUserId].integerValue<0) {
+        UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginViewController"];
+        [self presentViewController:loginViewController animated:NO completion:^(){}];
+    } else {
+        for (int i=0; i<PAGE_QUANTITY; i++){
+            UIViewController *controller =(UIViewController *)[contentViews objectAtIndex:i];
+            [controller viewWillAppear:NO];
+        }
     }
 }
 
@@ -158,8 +166,7 @@
 }
 
 - (IBAction)missionAction:(id)sender {
-    UIViewController *historyViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"historyListViewController"];
-    [self presentViewController:historyViewController animated:YES completion:^(){}];
+    [self sendSuccess:@"同步成功"];
 }
 
 - (IBAction)settingsAction:(id)sender {

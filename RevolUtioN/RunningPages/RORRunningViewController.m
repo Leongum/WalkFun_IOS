@@ -346,9 +346,12 @@
     runHistory.distance = [NSNumber numberWithDouble:distance];
     runHistory.duration = [NSNumber numberWithDouble:duration];
     runHistory.avgSpeed = [NSNumber numberWithDouble:(double)(distance/duration*3.6)];
-    runHistory.valid = [self isValidRun:stepCounting.counter / 0.8];
+    runHistory.valid = [NSNumber numberWithInt:1]; //[self isValidRun:stepCounting.counter / 0.8];
     runHistory.missionRoute = [RORDBCommon getStringFromRoutes:routes];
 //    NSLog(@"%@", [RORDBCommon getStringFromSpeedList:avgSpeedPerKMList]);
+    
+    //todo 存事件列表 eventHappenedList -> runHistory
+    //todo 算获得的道具，存进 - propGet
     
     runHistory.missionDate = [NSDate date];
     runHistory.missionEndTime = self.endTime;
@@ -358,14 +361,10 @@
     runHistory.runUuid = [RORUtils uuidString];
     runHistory.steps = [NSNumber numberWithInteger:stepCounting.counter / 0.8];
     runHistory.experience =[self calculateExperience:runHistory];
+    //todo 走路本身是否有金币奖励
     runHistory.goldCoin =[self calculateScore:runHistory];
     runHistory.extraExperience =[NSNumber  numberWithDouble:0];
 //    runHistory.speedList = [RORDBCommon getStringFromSpeedList:avgSpeedPerKMList];
-    
-    if(runHistory.valid.integerValue != 1 || runHistory.userId.integerValue < 0){
-        runHistory.experience =[NSNumber numberWithDouble:0];
-        runHistory.goldCoin =[NSNumber  numberWithDouble:0];
-    }
     
     NSLog(@"%@", runHistory);
     record = runHistory;

@@ -42,4 +42,9 @@
 //根据action的type获取action的所有信息，(ActionDefineRun 跑步可触发action）（ActionDefineUse 用户可以使用action）
 + (NSArray *)fetchAllActionDefine:(ActionDefineEnum) actionType;
 
+//解析字符串为事件列表
++ (NSArray *)getEventListFromString:(NSString *)eventString;
+
+//压缩事件列表为字符串
++ (NSString *)getStringFromEventList:(NSArray *)eventList;
 @end

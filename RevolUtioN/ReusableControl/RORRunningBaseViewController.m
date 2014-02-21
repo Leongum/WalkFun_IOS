@@ -111,7 +111,8 @@
 }
 
 -(CLLocation *)getNewRealLocation{
-    return [locationManager location];
+    CLLocationCoordinate2D newCoor = [RORLocationUtils transformFromWGSToGCJ:[locationManager location].coordinate];
+    return [[CLLocation alloc]initWithLatitude:newCoor.latitude longitude:newCoor.longitude];
 }
 
 -(NSNumber *)calculateCalorie
@@ -122,10 +123,9 @@
 }
 
 -(NSNumber *)calculateExperience:(User_Running_History *)runningHistory{
-    if (!runningHistory.valid.boolValue)
-        return [NSNumber numberWithDouble:0.f];
-    
-    return [NSNumber numberWithDouble:(runningHistory.distance.doubleValue/1000*200)];
+//    if (!runningHistory.valid.boolValue)
+//        return [NSNumber numberWithDouble:0.f];
+    return [NSNumber numberWithDouble:(runningHistory.steps.doubleValue/1000*200)];
 }
 
 -(NSNumber *)calculateScore:(User_Running_History *)runningHistory{
@@ -225,7 +225,7 @@
         Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
         int x = arc4random() % 1000000;
         double roll = ((double)x)/10000.f;
-        if (roll < event.triggerProbability.doubleValue*100){//todebug
+        if (roll < event.triggerProbability.doubleValue*10){//todebug
             [self eventDidHappened:event];
             return;
         }

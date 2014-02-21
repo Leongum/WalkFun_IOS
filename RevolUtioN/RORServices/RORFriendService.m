@@ -78,6 +78,8 @@
 
 //open out
 + (BOOL) createOrUpdateFriend:(Friend *)friend{
+    if (!friend)
+        return NO;
     BOOL successed = [self sycnCreateOrUpdateFriend:friend];
     //check uuid
     if(successed){
@@ -309,6 +311,36 @@
         return friendList;
     }
     return nil;
+}
+
++ (FollowStatusEnum)getFollowStatus:(NSNumber *)friendId{
+    Friend *friend = [RORFriendService fetchUserFriend:[RORUserUtils getUserId] withFriendId:friendId];
+    if (!friend || friend.friendStatus.integerValue == FollowStatusNotFollowed){
+        return FollowStatusNotFollowed;
+    }
+    return FollowStatusFollowed;
+}
+
++ (BOOL)followFriend:(NSNumber *)friendId{
+    Friend *friend = [RORFriendService fetchUserFriend:[RORUserUtils getUserId] withFriendId:friendId];
+    if (friend){
+        friend.friendStatus = [NSNumber numberWithInteger:FollowStatusFollowed];
+    } else {
+        friend = [Friend intiUnassociateEntity];
+        friend.userId = [RORUserUtils getUserId];
+        friend.friendId = friendId;
+        friend.friendStatus = [NSNumber numberWithInteger:FollowStatusFollowed];
+    }
+    
+    return [RORFriendService createOrUpdateFriend:friend];
+}
+
++(BOOL)deFollowFriend:(NSNumber *)friendId{
+    Friend *friend = [RORFriendService fetchUserFriend:[RORUserUtils getUserId] withFriendId:friendId];
+    if (friend){
+        friend.friendStatus = [NSNumber numberWithInteger:FollowStatusNotFollowed];
+    }
+    return [RORFriendService createOrUpdateFriend:friend];
 }
 
 @end

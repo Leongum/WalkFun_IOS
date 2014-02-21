@@ -21,15 +21,13 @@
 @end
 
 @implementation RORHistoryViewController
-@synthesize runHistoryList, dateList, sortedDateList, syncButtonItem;
+@synthesize runHistoryList, dateList, sortedDateList;
 
 - (void)viewDidUnload{
-    [self setSyncButtonItem:nil];
     [self setRunHistoryList:nil];
     [self setDateList:nil];
     [self setSortedDateList:nil];
     [self setTableView:nil];
-    [self setNoHistoryMessageLabel:nil];
     [super viewDidUnload];
 }
 
@@ -46,8 +44,9 @@
 {
     scrolled = NO;
     [super viewDidLoad];
-    self.noHistoryMessageLabel.text = @"居然一次都没？！";
-    self.noHistoryMessageLabel.alpha = 0;
+    User_Detail *userDetail = [RORUserServices fetchUserDetailByUserId:[RORUserUtils getUserId]];
+    self.userNameLabel.text = [RORUserUtils getUserName];
+    self.levelLabel.text = [NSString stringWithFormat:@"%@",userDetail.level];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -58,7 +57,8 @@
 -(void)initTableData{
     runHistoryList = [[NSMutableDictionary alloc] init];
     dateList = [[NSMutableArray alloc] init];
-
+    NSInteger totalDuration = 0, totalSteps = 0;
+    
     NSArray *fetchObject = [RORRunHistoryServices fetchRunHistoryByUserId:[RORUserUtils getUserId]];
     if (fetchObject>0){
         [self showContent];
@@ -76,6 +76,9 @@
                 record4Date = [[NSMutableArray alloc] init];
             [record4Date addObject:historyObj];
             [runHistoryList setObject:record4Date forKey:formatDateString];
+            
+            totalDuration += historyObj.duration.integerValue;
+            totalSteps += historyObj.steps.integerValue;
         }
     } else {
         [self hideContent];
@@ -84,6 +87,9 @@
     sortedDateList = [dateList sortedArrayUsingComparator:^(NSString *str1, NSString *str2){
         return [str2 compare:str1];
     }];
+    
+    self.totalDurationLabel.text = [RORUtils transSecondToStandardFormat:totalDuration];
+    self.totalStepLabel.text = [RORUtils formattedSteps:totalSteps];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -104,12 +110,10 @@
 
 -(void)showContent{
     self.tableView.alpha = 1;
-    self.noHistoryMessageLabel.alpha = 0;
 }
 
 -(void)hideContent{
     self.tableView.alpha = 0;
-    self.noHistoryMessageLabel.alpha = 1;
 }
 
 #pragma mark - Action
@@ -146,7 +150,7 @@
     NSArray *records4DateList = [runHistoryList objectForKey:date_str];
     User_Running_History *record4Date = [records4DateList objectAtIndex:indexPath.row];
     UILabel *distanceLabel = (UILabel *)[cell viewWithTag:DISTANCE];
-    distanceLabel.text = [NSString stringWithFormat:@"%@步",record4Date.steps];
+    distanceLabel.text = [RORUtils formattedSteps:record4Date.steps.integerValue];
     UILabel *durationLabel = (UILabel *)[cell viewWithTag:DURATION];
     durationLabel.text = [RORUtils transSecondToStandardFormat:[record4Date.duration integerValue]];
     if (record4Date.valid.integerValue<=0){

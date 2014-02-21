@@ -50,4 +50,11 @@
     [tempDict setValue:self.friendEach forKey:@"friendEach"];
     return tempDict;
 }
+
++(Friend *) intiUnassociateEntity{
+    NSManagedObjectContext *context = [RORContextUtils getShareContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Friend" inManagedObjectContext:context];
+    Friend *unassociatedEntity = [[Friend alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
+    return unassociatedEntity;
+}
 @end

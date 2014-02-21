@@ -115,7 +115,9 @@
         return;
     }else if(buttonIndex == 1){
         [RORUserUtils logout];
-        [self.navigationController popViewControllerAnimated:YES];
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+        UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginViewController"];
+        [self.navigationController pushViewController:loginViewController animated:NO];
     }
 }
 

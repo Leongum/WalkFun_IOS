@@ -235,4 +235,36 @@
     return [actionList copy];
 }
 
++(NSArray *)getEventListFromString:(NSString *)eventString{
+    NSMutableArray *eventList = [[NSMutableArray alloc]init];
+    NSMutableArray *eventTimeList = [[NSMutableArray alloc]init];
+    NSArray *eventIdStringList = [eventString componentsSeparatedByString:@"|"];
+    for (int i=0; i<eventIdStringList.count; i++){
+        NSString *eventString = (NSString *)[eventIdStringList objectAtIndex:i];
+        NSArray *eventStringSep = [eventString componentsSeparatedByString:@","];
+        if (eventStringSep.count == 2){
+            NSNumber *eventTime = [RORDBCommon getNumberFromId:[eventStringSep objectAtIndex:0]];
+            NSNumber *eventId = [RORDBCommon getNumberFromId:[eventStringSep objectAtIndex:1]];
+            if (eventId) {
+                [eventList addObject:[self fetchActionDefine:eventId]];
+            }
+            if (eventTime){
+                [eventTimeList addObject:eventTime];
+            }
+        }
+    }
+    return [NSArray arrayWithObjects:eventTimeList, eventList, nil];
+}
+
++ (NSString *)getStringFromEventList:(NSArray *)eventList andTimeList:(NSArray *)timeList{
+    NSMutableString *eventString = [[NSMutableString alloc]init];
+    for (int i=0; i<eventList.count; i++){
+        Action_Define *event = (Action_Define *)[eventList objectAtIndex:i];
+        NSNumber *happendTime = (NSNumber *)[timeList objectAtIndex:i];
+        [eventString appendString:[NSString stringWithFormat:@"%@,%@|", happendTime ,event.actionId]];
+    }
+    return eventString;
+}
+
+
 @end

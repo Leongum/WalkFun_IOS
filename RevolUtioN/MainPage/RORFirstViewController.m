@@ -137,12 +137,7 @@
         User_Detail *userDetail = [RORUserServices fetchUserDetailByUserId:userInfo.userId];
         self.fatLabel.text = [NSString stringWithFormat:@"肥肉：%@", userDetail.fatness];
         self.healthLabel.text = [NSString stringWithFormat:@"健康：%@", userDetail.health];
-    } else {
-        self.loginButton.alpha = 1;
-        UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
-        UIViewController *loginViewController =  [loginStoryboard instantiateViewControllerWithIdentifier:@"RORLoginViewController"];
-        [[self parentViewController] presentViewController:loginViewController animated:NO completion:^(){}];
-    }
+    } 
 }
 
 -(void) viewWillAppear:(BOOL)animated{

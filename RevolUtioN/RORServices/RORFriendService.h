@@ -50,4 +50,14 @@
 
 //根据推荐好友列表，传入pageNo，最多10页。与服务器交互数据。
 +(NSArray *)fetchRecommendFriends:(NSNumber *) pageNo;
+
+//判断和friendId对应用户的关系
++ (FollowStatusEnum)getFollowStatus:(NSNumber *)friendId;
+
+//关注
++ (BOOL)followFriend:(NSNumber *)friendId;
+
+//取消关注
++ (BOOL)deFollowFriend:(NSNumber *)friendId;
+
 @end

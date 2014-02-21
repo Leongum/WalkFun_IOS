@@ -17,5 +17,5 @@
 + (NSString *)getStringFromRoutes:(NSArray *)routes;
 + (NSArray *)getRoutesFromString:(NSString *)route_str;
 + (NSString *)getStringFromSpeedList:(NSArray *)speedList;
-+ (NSMutableArray *)getSpeedListFromString:(NSString *)speedListString;
+
 @end

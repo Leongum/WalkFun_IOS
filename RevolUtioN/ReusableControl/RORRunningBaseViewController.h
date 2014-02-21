@@ -26,6 +26,7 @@
 #import "RORCountDownCoverView.h"
 #import "RORMultiPlaySound.h"
 #import "RORVirtualProductService.h"
+#import "RORLocationUtils.h"
 
 #define TIMER_INTERVAL delta_T
 #define MIN_PUSHPOINT_DISTANCE 5

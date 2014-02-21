@@ -147,6 +147,8 @@
 		30103DEF185ED9F5002B65ED /* history_detail_data_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30103DED185ED9F5002B65ED /* history_detail_data_bg.png */; };
 		30103DF0185ED9F5002B65ED /* history_detail_speed_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30103DEE185ED9F5002B65ED /* history_detail_speed_bg.png */; };
 		30103DF2185EE8EE002B65ED /* history_detail_speedButton_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30103DF1185EE8EE002B65ED /* history_detail_speedButton_bg.png */; };
+		3013D48C18B7191D005F4C07 /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3013D48B18B7191D005F4C07 /* AddFriendViewController.m */; };
+		3013D48F18B7373E005F4C07 /* FriendInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3013D48E18B7373E005F4C07 /* FriendInfoViewController.m */; };
 		30166A9317C3B84C0035C722 /* main_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30166A8817C3B84C0035C722 /* main_bg.jpg */; };
 		30166A9617C3B84C0035C722 /* main_challenge_btn_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30166A8B17C3B84C0035C722 /* main_challenge_btn_bg.png */; };
 		30166A9817C3B84C0035C722 /* main_run_btn_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30166A8D17C3B84C0035C722 /* main_run_btn_bg.png */; };
@@ -572,6 +574,10 @@
 		30103DED185ED9F5002B65ED /* history_detail_data_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history_detail_data_bg.png; sourceTree = "<group>"; };
 		30103DEE185ED9F5002B65ED /* history_detail_speed_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history_detail_speed_bg.png; sourceTree = "<group>"; };
 		30103DF1185EE8EE002B65ED /* history_detail_speedButton_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history_detail_speedButton_bg.png; sourceTree = "<group>"; };
+		3013D48A18B7191D005F4C07 /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddFriendViewController.h; path = Friends/AddFriendViewController.h; sourceTree = "<group>"; };
+		3013D48B18B7191D005F4C07 /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddFriendViewController.m; path = Friends/AddFriendViewController.m; sourceTree = "<group>"; };
+		3013D48D18B7373E005F4C07 /* FriendInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendInfoViewController.h; sourceTree = "<group>"; };
+		3013D48E18B7373E005F4C07 /* FriendInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendInfoViewController.m; sourceTree = "<group>"; };
 		30166A8817C3B84C0035C722 /* main_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = main_bg.jpg; sourceTree = "<group>"; };
 		30166A8B17C3B84C0035C722 /* main_challenge_btn_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_challenge_btn_bg.png; sourceTree = "<group>"; };
 		30166A8D17C3B84C0035C722 /* main_run_btn_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_run_btn_bg.png; sourceTree = "<group>"; };
@@ -1647,6 +1653,10 @@
 				30BDBE68182A3BA4001829D5 /* RORFriendsMainViewController.m */,
 				30FFFE5D1845A213001EA4F1 /* RORFriendsViewController.h */,
 				30FFFE5E1845A213001EA4F1 /* RORFriendsViewController.m */,
+				3013D48A18B7191D005F4C07 /* AddFriendViewController.h */,
+				3013D48B18B7191D005F4C07 /* AddFriendViewController.m */,
+				3013D48D18B7373E005F4C07 /* FriendInfoViewController.h */,
+				3013D48E18B7373E005F4C07 /* FriendInfoViewController.m */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -2074,6 +2084,7 @@
 				30750A6B18B202EF00EC7B51 /* ItemUseTargetViewController.m in Sources */,
 				0FA7521618927A410037342E /* RORFirstViewController.m in Sources */,
 				0FDE8303189393AD0082B1BF /* Search_Friend.m in Sources */,
+				3013D48C18B7191D005F4C07 /* AddFriendViewController.m in Sources */,
 				0FA7521718927A410037342E /* RORLoadingViewController.m in Sources */,
 				0FA751701892798F0037342E /* RORFunnyButton.m in Sources */,
 				30989CCB17F7D72A00CA9F83 /* RORImageView.m in Sources */,
@@ -2089,6 +2100,7 @@
 				0FA7518F189279A90037342E /* RORMessages.m in Sources */,
 				0FA751721892798F0037342E /* RORNormalButton.m in Sources */,
 				30F4547017BCB519006CB66C /* INConstant.m in Sources */,
+				3013D48F18B7373E005F4C07 /* FriendInfoViewController.m in Sources */,
 				30750A6518B1DF8A00EC7B51 /* ItemIconView.m in Sources */,
 				30F4547117BCB519006CB66C /* INDeviceStatus.m in Sources */,
 				0F282F8F18B08D36003F44E8 /* RORUserPropsService.m in Sources */,

@@ -18,12 +18,14 @@ typedef enum {DISTANCE = 1, DURATION = 2, VALID = 3, LEVEL = 4} controlInHistory
     NSMutableDictionary *hasRotated;
 }
 
-@property (weak, nonatomic) IBOutlet UIButton *syncButtonItem;
 @property (strong, nonatomic) NSMutableDictionary *runHistoryList;
 @property (strong, nonatomic) NSMutableArray *dateList;
 @property (strong, nonatomic) NSArray *sortedDateList;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UILabel *noHistoryMessageLabel;
 
+@property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *levelLabel;
+@property (strong, nonatomic) IBOutlet UILabel *totalDurationLabel;
+@property (strong, nonatomic) IBOutlet UILabel *totalStepLabel;
 - (void)refreshTable;
 @end

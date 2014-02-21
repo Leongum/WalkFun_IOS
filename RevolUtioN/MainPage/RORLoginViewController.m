@@ -285,10 +285,10 @@
         friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
     }
     //好友action信息
-    BOOL action = [RORFriendService syncActions:[RORUserUtils getUserId]];
-    if(!action){
-        action = [RORFriendService syncActions:[RORUserUtils getUserId]];
-    }
+//    BOOL action = [RORFriendService syncActions:[RORUserUtils getUserId]];
+//    if(!action){
+//        action = [RORFriendService syncActions:[RORUserUtils getUserId]];
+//    }
     //用户mission list
     BOOL missionHistory = [RORMissionHistoyService syncMissionHistories:[RORUserUtils getUserId]];
     if(!missionHistory){
@@ -300,7 +300,7 @@
         userPorp = [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
     }
     [self endIndicator:self];
-    if(!history || !friends || !friendsort || !action || !missionHistory || !userPorp){
+    if(!history || !friends || !friendsort || !missionHistory || !userPorp){
         [self sendAlart:@"个人信息加载失败"];
         [RORUserUtils logout];
     }

@@ -16,4 +16,6 @@
 @interface RORLocationUtils : NSObject{
 }
 
++(CLLocationCoordinate2D)transformFromWGSToGCJ:(CLLocationCoordinate2D)wgsLoc;
+
 @end

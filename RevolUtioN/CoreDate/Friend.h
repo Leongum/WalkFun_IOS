@@ -29,4 +29,5 @@
 
 -(NSMutableDictionary *)transToDictionary;
 
++(Friend *) intiUnassociateEntity;
 @end
