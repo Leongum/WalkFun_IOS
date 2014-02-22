@@ -17,7 +17,7 @@
 
 // --- user api ---
 #define USER_LOGIN_URL [SERVICE_HOST stringByAppendingString:@"/account/login/%@/%@"]
-#define USER_GETINFO_BY_ID_URL [SERVICE_HOST stringByAppendingString:@"/account/%@?lastUpdateTime=%@"]
+#define USER_GETINFO_BY_ID_URL [SERVICE_HOST stringByAppendingString:@"/account/get/%@?lastUpdateTime=%@"]
 #define USER_REGISTER_URL [SERVICE_HOST stringByAppendingString:@"/account/create"]
 #define USER_BASE_UPDATE_URL [SERVICE_HOST stringByAppendingString:@"/account/update/base/%@"]
 #define USER_DETAIL_UPDATE_URL [SERVICE_HOST stringByAppendingString:@"/account/update/detail/%@"]

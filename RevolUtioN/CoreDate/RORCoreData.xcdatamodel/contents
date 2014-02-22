@@ -104,7 +104,6 @@
         <attribute name="userFatDesc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="userTitle" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="userTitleId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="User_Mission_History" representedClassName="User_Mission_History" syncable="YES">
         <attribute name="endTime" optional="YES" attributeType="Date" syncable="YES"/>

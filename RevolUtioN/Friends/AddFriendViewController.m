@@ -125,10 +125,16 @@
     UIStoryboard *friendsStoryboard = [UIStoryboard storyboardWithName:@"FriendsStoryboard" bundle:[NSBundle mainBundle]];
     UIViewController *friendInfoViewController =  [friendsStoryboard instantiateViewControllerWithIdentifier:@"FriendInfoViewController"];
     if ([friendInfoViewController respondsToSelector:@selector(setUserBase:)]){
-        [friendInfoViewController setValue:[RORUserServices fetchUserBaseById:user.userId] forKey:@"userBase"];
+        User_Base *userBase =[RORUserServices fetchUser:user.userId];
+        if (!userBase)
+            [RORUserServices syncUserInfoById:user.userId];
+        if (userBase){
+            [friendInfoViewController setValue:userBase forKey:@"userBase"];
+            [self.navigationController pushViewController:friendInfoViewController animated:YES];
+        } else {
+            [self sendAlart:@"信息读取失败"];
+        }
     }
-    [self.navigationController pushViewController:friendInfoViewController animated:YES];
-
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

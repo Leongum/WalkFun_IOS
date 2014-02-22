@@ -14,7 +14,6 @@
 @dynamic userId;
 @dynamic picId;
 @dynamic userTitle;
-@dynamic userTitleId;
 @dynamic userFatDesc;
 @dynamic level;
 @dynamic goldCoin;
@@ -46,7 +45,6 @@
     self.userId = [RORDBCommon getNumberFromId:[dict valueForKey:@"userId"]];
     self.picId = [RORDBCommon getNumberFromId:[dict valueForKey:@"picId"]];
     self.userTitle = [RORDBCommon getStringFromId:[dict valueForKey:@"userTitle"]];
-    self.userTitleId = [RORDBCommon getNumberFromId:[dict valueForKey:@"userTitleId"]];
     self.userFatDesc = [RORDBCommon getStringFromId:[dict valueForKey:@"userFatDesc"]];
     self.level = [RORDBCommon getNumberFromId:[dict valueForKey:@"level"]];
     self.goldCoin = [RORDBCommon getNumberFromId:[dict valueForKey:@"goldCoin"]];
@@ -70,7 +68,6 @@
     [tempDict setValue:self.userId forKey:@"userId"];
     [tempDict setValue:self.picId forKey:@"picId"];
     [tempDict setValue:self.userTitle forKey:@"userTitle"];
-    [tempDict setValue:self.userTitleId forKey:@"userTitleId"];
     [tempDict setValue:self.userFatDesc forKey:@"userFatDesc"];
     [tempDict setValue:self.level forKey:@"level"];
     [tempDict setValue:self.goldCoin forKey:@"goldCoin"];

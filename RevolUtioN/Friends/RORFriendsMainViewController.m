@@ -79,7 +79,21 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self sendNotification:@"【好友信息】\n正在哼哧哼哧开发中！\n\n向左划划试试"];
+    Friend *user = (Friend *)[contentList objectAtIndex:indexPath.row];
+
+    UIStoryboard *friendsStoryboard = [UIStoryboard storyboardWithName:@"FriendsStoryboard" bundle:[NSBundle mainBundle]];
+    UIViewController *friendInfoViewController =  [friendsStoryboard instantiateViewControllerWithIdentifier:@"FriendInfoViewController"];
+    if ([friendInfoViewController respondsToSelector:@selector(setUserBase:)]){
+        User_Base *userBase =[RORUserServices fetchUser:user.friendId];
+        if (!userBase)
+            userBase = [RORUserServices syncUserInfoById:user.friendId];
+        if (userBase){
+            [friendInfoViewController setValue:userBase forKey:@"userBase"];
+            [self.navigationController pushViewController:friendInfoViewController animated:YES];
+        } else {
+            [self sendAlart:@"信息读取失败"];
+        }
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

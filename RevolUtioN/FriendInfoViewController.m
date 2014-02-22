@@ -28,9 +28,20 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    self.userNameLabel.text = userBase.nickName;
+    [self refreshView];
+}
 
+-(void)refreshView {
+    self.userNameLabel.text = userBase.nickName;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [self startIndicator:self];
+    
+    userBase = [RORUserServices syncUserInfoById:userBase.userId];
+    [self refreshView];
+    
+    [self endIndicator:self];
 }
 
 - (void)didReceiveMemoryWarning

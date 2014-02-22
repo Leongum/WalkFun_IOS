@@ -14,9 +14,8 @@
 //open out
 + (User_Base *)fetchUser:(NSNumber *) userId{
     User_Base *user = [self fetchUserBaseById:userId];
-    if(user != nil){
+    if (user)
         user.userDetail = [self fetchUserDetailByUserId:userId];
-    }
     return user;
 }
 
@@ -72,7 +71,7 @@
 +(User_Base *)syncUserInfoById:(NSNumber *)userId{
     if(userId <= 0) return nil;
     User_Base *localUser = [self fetchUser:userId];
-    NSString *lastUpdateTime = nil;
+    NSString *lastUpdateTime = @"2000-01-01 00:00:00";
     if(localUser !=nil){
         lastUpdateTime = [RORUtils getStringFromDate:localUser.userDetail.updateTime];
     }

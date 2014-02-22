@@ -15,7 +15,6 @@
 @property (nonatomic, retain) NSNumber * userId;
 @property (nonatomic, retain) NSNumber * picId;
 @property (nonatomic, retain) NSString * userTitle;
-@property (nonatomic, retain) NSNumber * userTitleId;
 @property (nonatomic, retain) NSString * userFatDesc;
 @property (nonatomic, retain) NSNumber * level;
 @property (nonatomic, retain) NSNumber * experience;
