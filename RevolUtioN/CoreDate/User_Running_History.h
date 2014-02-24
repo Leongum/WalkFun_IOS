@@ -29,11 +29,14 @@
 @property (nonatomic, retain) NSNumber * extraGoldCoin;
 @property (nonatomic, retain) NSNumber * experience;
 @property (nonatomic, retain) NSNumber * extraExperience;
+@property (nonatomic, retain) NSNumber * fatness;
+@property (nonatomic, retain) NSNumber * health;
 @property (nonatomic, retain) NSString * comment;
 @property (nonatomic, retain) NSNumber * valid;
 @property (nonatomic, retain) NSString * missionUuid;
 @property (nonatomic, retain) NSNumber * sequence;
 @property (nonatomic, retain) NSString * propGet;
+@property (nonatomic, retain) NSString * actionIds;
 @property (nonatomic, retain) NSDate * commitTime;
 
 +(User_Running_History *) intiUnassociateEntity;

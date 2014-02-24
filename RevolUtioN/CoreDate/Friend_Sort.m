@@ -13,6 +13,7 @@
 
 @dynamic totalDistance;
 @dynamic userTitle;
+@dynamic userTitlePic;
 @dynamic level;
 @dynamic sex;
 @dynamic friendName;
@@ -34,6 +35,7 @@
     self.sex = [RORDBCommon getStringFromId:[dict valueForKey:@"sex"]];
     self.level = [RORDBCommon getNumberFromId:[dict valueForKey:@"level"]];
     self.userTitle = [RORDBCommon getStringFromId:[dict valueForKey:@"userTitle"]];
+    self.userTitlePic = [RORDBCommon getStringFromId:[dict valueForKey:@"userTitlePic"]];
     self.totalDistance = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalDistance"]];
 }
 

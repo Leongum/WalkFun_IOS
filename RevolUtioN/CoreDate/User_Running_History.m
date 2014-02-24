@@ -30,6 +30,9 @@
 @dynamic extraGoldCoin;
 @dynamic experience;
 @dynamic extraExperience;
+@dynamic fatness;
+@dynamic health;
+@dynamic actionIds;
 @dynamic comment;
 @dynamic valid;
 @dynamic missionUuid;
@@ -72,6 +75,8 @@
     self.extraGoldCoin = [RORDBCommon getNumberFromId:[dict valueForKey:@"extraGoldCoin"]];
     self.experience = [RORDBCommon getNumberFromId:[dict valueForKey:@"experience"]];
     self.extraExperience = [RORDBCommon getNumberFromId:[dict valueForKey:@"extraExperience"]];
+    self.fatness = [RORDBCommon getNumberFromId:[dict valueForKey:@"fatness"]];
+    self.health = [RORDBCommon getNumberFromId:[dict valueForKey:@"health"]];
     self.missionId = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionId"]];
     self.steps = [RORDBCommon getNumberFromId:[dict valueForKey:@"steps"]];
     self.commitTime = [RORDBCommon getDateFromId:[dict valueForKey:@"commitTime"]];
@@ -79,6 +84,7 @@
     self.missionUuid = [RORDBCommon getStringFromId:[dict valueForKey:@"missionUuid"]];
     self.sequence = [RORDBCommon getNumberFromId:[dict valueForKey:@"sequence"]];
     self.propGet = [RORDBCommon getStringFromId:[dict valueForKey:@"propGet"]];
+    self.actionIds = [RORDBCommon getStringFromId:[dict valueForKey:@"actionIds"]];
 }
 
 -(NSMutableDictionary *)transToDictionary{
@@ -101,12 +107,15 @@
     [tempoDict setValue:self.extraGoldCoin forKey:@"extraGoldCoin"];
     [tempoDict setValue:self.experience forKey:@"experience"];
     [tempoDict setValue:self.extraExperience forKey:@"extraExperience"];
+    [tempoDict setValue:self.fatness forKey:@"fatness"];
+    [tempoDict setValue:self.health forKey:@"health"];
     [tempoDict setValue:self.missionId forKey:@"missionId"];
     [tempoDict setValue:[RORDBCommon getStringFromId:self.commitTime] forKey:@"commitTime"];
     [tempoDict setValue:self.valid forKey:@"valid"];
     [tempoDict setValue:self.missionUuid forKey:@"missionUuid"];
     [tempoDict setValue:self.sequence forKey:@"sequence"];
     [tempoDict setValue:self.propGet forKey:@"propGet"];
+    [tempoDict setValue:self.actionIds forKey:@"actionIds"];
     return tempoDict;
 }
 @end

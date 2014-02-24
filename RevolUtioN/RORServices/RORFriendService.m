@@ -7,6 +7,8 @@
 //
 
 #import "RORFriendService.h"
+#import "RORUserServices.h"
+#import "RORUserPropsService.h"
 
 @implementation RORFriendService
 
@@ -245,6 +247,8 @@
             [newAction setValue:[action valueForKey:attr] forKey:attr];
         }
         [RORContextUtils saveContext];
+        [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
+        [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
         return YES;
     }
     return NO;
@@ -272,6 +276,30 @@
         }
     }
     return 0;
+}
+
+//
++(NSMutableArray *)fetchUserActionsById:(NSNumber *) userId{
+    NSMutableArray * actions = [[NSMutableArray alloc] init];
+    if(userId.integerValue > 0)
+    {
+        NSError *error = nil;
+        RORHttpResponse *httpResponse =[RORUserClientHandler getUserActionInfoById:userId];
+        
+        if ([httpResponse responseStatus] == 200){
+            NSArray *actionList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
+            
+            for (NSDictionary *actionDict in actionList){
+                Action *newAction = [Action initUnassociateEntity];
+                [newAction initWithDictionary:actionDict];
+                [actions addObject:newAction];
+            }
+            return actions;
+        } else {
+            NSLog(@"sync with host error: can't get user's action list. Status Code: %d", [httpResponse responseStatus]);
+        }
+    }
+    return actions;
 }
 
 //open out

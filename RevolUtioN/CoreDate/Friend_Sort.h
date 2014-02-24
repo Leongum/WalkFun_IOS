@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSString * sex;
 @property (nonatomic, retain) NSNumber * level;
 @property (nonatomic, retain) NSString * userTitle;
+@property (nonatomic, retain) NSString * userTitlePic;
 @property (nonatomic, retain) NSNumber * totalDistance;
 
 +(Friend_Sort *) removeAssociateForEntity:(Friend_Sort *)associatedEntity;

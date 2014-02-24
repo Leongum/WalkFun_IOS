@@ -8,6 +8,7 @@
 
 #import "RORUserServices.h"
 #import "RORNetWorkUtils.h"
+#import "RORUserPropsService.h"
 
 @implementation RORUserServices
 
@@ -226,6 +227,24 @@
                 [friendList addObject:searchFriend];
             }
             return friendList;
+        }
+    }
+    return nil;
+}
+
+//open out
++(Reward_Details *) getRandomReward:(NSNumber *)userId {
+    if(userId.integerValue>0)
+    {
+        NSError *error = nil;
+        RORHttpResponse *httpResponse =[RORUserClientHandler getRandomReward:userId];
+        if ([httpResponse responseStatus]  == 200){
+            NSDictionary *rewaredDict = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
+            Reward_Details * rewardDetails = [[Reward_Details alloc] init];
+            [rewardDetails initWithDictionary:rewaredDict];
+            [self syncUserInfoById:userId];
+            [RORUserPropsService syncUserProps:userId];
+            return rewardDetails;
         }
     }
     return nil;

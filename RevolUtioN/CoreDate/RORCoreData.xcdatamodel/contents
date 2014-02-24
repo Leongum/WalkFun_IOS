@@ -16,6 +16,7 @@
         <attribute name="actionName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="actionRule" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="actionType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="effectiveRule" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="inUsing" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="soundLink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="triggerProbability" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -36,6 +37,7 @@
         <attribute name="sex" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalDistance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="userTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userTitlePic" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Mission" representedClassName="Mission" syncable="YES">
         <attribute name="experience" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
@@ -87,8 +89,10 @@
     <entity name="User_Detail" representedClassName="User_Detail" syncable="YES">
         <attribute name="currentCombo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="experience" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="experienceSpeed" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="fatness" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="goldCoin" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="goldCoinSpeed" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="health" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="maxCombo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -98,12 +102,13 @@
         <attribute name="totalActiveTimes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="totalCarlorie" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="totalDistance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="totalSteps" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
-        <attribute name="totalWalkingTimes" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalSteps" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalWalkingTimes" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="userFatDesc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="userTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userTitlePic" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="User_Mission_History" representedClassName="User_Mission_History" syncable="YES">
         <attribute name="endTime" optional="YES" attributeType="Date" syncable="YES"/>
@@ -126,6 +131,7 @@
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="User_Running_History" representedClassName="User_Running_History" syncable="YES">
+        <attribute name="actionIds" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="avgSpeed" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="commitTime" optional="YES" attributeType="Date" syncable="YES"/>
@@ -134,7 +140,9 @@
         <attribute name="experience" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="extraExperience" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="extraGoldCoin" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fatness" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="goldCoin" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="health" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="missionDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="missionEndTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="missionGrade" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -153,6 +161,9 @@
     </entity>
     <entity name="Virtual_Product" representedClassName="Virtual_Product" syncable="YES">
         <attribute name="dropFlag" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="dropPicList" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="effectiveRule" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="maxDropNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="picLink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="productDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="productId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>

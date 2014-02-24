@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSString * actionDescription;
 @property (nonatomic, retain) NSString * actionAttribute;
 @property (nonatomic, retain) NSString * actionRule;
+@property (nonatomic, retain) NSString * effectiveRule;
 @property (nonatomic, retain) NSNumber * actionId;
 @property (nonatomic, retain) NSNumber * triggerProbability;
 @property (nonatomic, retain) NSDate * updateTime;

@@ -82,6 +82,19 @@
     return httpResponse;
 }
 
++(RORHttpResponse *)getUserActionInfoById:(NSNumber *)userId{
+    NSString *url = [NSString stringWithFormat:ACTION_GET_ACTION_BY_USER_ID_URL, userId];
+    RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
+    return httpResponse;
+}
+
++(RORHttpResponse *)getRandomReward:(NSNumber *)userId{
+    NSString *url = [NSString stringWithFormat:REWARD_GET_RANDOM_URL, userId];
+    RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
+    return httpResponse;
+}
+
+
 +(RORHttpResponse *)getUserProps:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime{
     NSString *url = [NSString stringWithFormat:PROP_GET_URL, userId, lastUpdateTime];
     RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];

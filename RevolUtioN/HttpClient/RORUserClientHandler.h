@@ -38,6 +38,10 @@
 
 +(RORHttpResponse *)getActionInfo:(NSNumber *)userId;
 
++(RORHttpResponse *)getUserActionInfoById:(NSNumber *)userId;
+
++(RORHttpResponse *)getRandomReward:(NSNumber *)userId;
+
 +(RORHttpResponse *)getUserProps:(NSNumber *)userId withLastUpdateTime:(NSString *) lastUpdateTime;
 
 +(RORHttpResponse *)createOrUpdateUserProp:(NSNumber *)userId withUserProps:(NSMutableArray *) userProps;

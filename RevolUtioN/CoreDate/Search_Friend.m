@@ -16,6 +16,7 @@
 @synthesize sex;
 @synthesize level;
 @synthesize userTitle;
+@synthesize userTitlePic;
 @synthesize lastActiveTime;
 
 -(void)initWithDictionary:(NSDictionary *)dict{
@@ -24,6 +25,7 @@
     self.sex = [RORDBCommon getStringFromId:[dict valueForKey:@"sex"]];
     self.level = [RORDBCommon getNumberFromId:[dict valueForKey:@"level"]];
     self.userTitle = [RORDBCommon getStringFromId:[dict valueForKey:@"userTitle"]];
+    self.userTitlePic = [RORDBCommon getStringFromId:[dict valueForKey:@"userTitlePic"]];
     self.lastActiveTime = [RORDBCommon getDateFromId:[dict valueForKey:@"lastActiveTime"]];
 }
 

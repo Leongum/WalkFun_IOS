@@ -15,10 +15,13 @@
 @property (nonatomic, retain) NSNumber * userId;
 @property (nonatomic, retain) NSNumber * picId;
 @property (nonatomic, retain) NSString * userTitle;
+@property (nonatomic, retain) NSString * userTitlePic;
 @property (nonatomic, retain) NSString * userFatDesc;
 @property (nonatomic, retain) NSNumber * level;
 @property (nonatomic, retain) NSNumber * experience;
+@property (nonatomic, retain) NSNumber * experienceSpeed;
 @property (nonatomic, retain) NSNumber * goldCoin;
+@property (nonatomic, retain) NSNumber * goldCoinSpeed;
 @property (nonatomic, retain) NSNumber * health;
 @property (nonatomic, retain) NSNumber * fatness;
 @property (nonatomic, retain) NSNumber * totalActiveTimes;

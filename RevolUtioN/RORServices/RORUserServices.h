@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "User_Base.h"
 #import "User_Detail.h"
+#import "Reward_Details.h"
 #import "Search_Friend.h"
 #import "RORAppDelegate.h"
 #import "RORContextUtils.h"
@@ -34,6 +35,9 @@
 
 //登录。
 +(User_Base *)syncUserInfoByLogin:(NSString *)userName withUserPassword:(NSString *) password;
+
+//服务器索取随机道具
++(Reward_Details *) getRandomReward:(NSNumber *)userId;
 
 //提交本地用户数据
 +(void)uploadUserInfo;

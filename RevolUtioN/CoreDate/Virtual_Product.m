@@ -18,6 +18,9 @@
 @dynamic productName;
 @dynamic productId;
 @dynamic picLink;
+@dynamic effectiveRule;
+@dynamic dropPicList;
+@dynamic maxDropNum;
 
 +(Virtual_Product *) removeAssociateForEntity:(Virtual_Product *)associatedEntity{
     NSManagedObjectContext *context = [RORContextUtils getShareContext];
@@ -37,6 +40,9 @@
     self.dropFlag = [RORDBCommon getNumberFromId:[dict valueForKey:@"dropFlag"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
     self.picLink = [RORDBCommon getStringFromId:[dict valueForKey:@"picLink"]];
+    self.effectiveRule = [RORDBCommon getStringFromId:[dict valueForKey:@"effectiveRule"]];
+    self.dropPicList = [RORDBCommon getStringFromId:[dict valueForKey:@"dropPicList"]];
+    self.maxDropNum = [RORDBCommon getNumberFromId:[dict valueForKey:@"maxDropNum"]];
 }
 
 @end

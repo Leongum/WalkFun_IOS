@@ -7,6 +7,8 @@
 //
 
 #import "RORMissionHistoyService.h"
+#import "RORContextUtils.h"
+#import "RORUserServices.h"
 
 @implementation RORMissionHistoyService
 
@@ -71,6 +73,7 @@
             RORHttpResponse *httpResponse = [RORRunHistoryClientHandler createMissionHistories:userId withMissionHistories:array];
             if ([httpResponse responseStatus] == 200){
                 [self updateUnsyncedMissionHistories];
+                [RORUserServices syncUserInfoById:userId];
                 return YES;
                 
             } else {
@@ -163,7 +166,6 @@
         }
         missionHistoryEntity.updateTime = nil;
         [RORContextUtils saveContext];
-        //todo:: add update user info.
     }
     return YES;
 }

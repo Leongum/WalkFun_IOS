@@ -15,6 +15,7 @@
 @property (nonatomic, retain) NSString * sex;
 @property (nonatomic, retain) NSNumber * level;
 @property (nonatomic, retain) NSString * userTitle;
+@property (nonatomic, retain) NSString * userTitlePic;
 @property (nonatomic, retain) NSDate * lastActiveTime;
 
 -(void)initWithDictionary:(NSDictionary *)dict;

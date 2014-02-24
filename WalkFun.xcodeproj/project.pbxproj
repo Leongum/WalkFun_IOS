@@ -98,6 +98,7 @@
 		0FA7521618927A410037342E /* RORFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7521118927A410037342E /* RORFirstViewController.m */; };
 		0FA7521718927A410037342E /* RORLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7521318927A410037342E /* RORLoadingViewController.m */; };
 		0FA7521818927A410037342E /* RORLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7521518927A410037342E /* RORLoginViewController.m */; };
+		0FB7EAFC18BB3464006E44F7 /* Reward_Details.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7EAFB18BB3464006E44F7 /* Reward_Details.m */; };
 		0FDE82C918927B4E0082B1BF /* RORMissionClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE82C218927B4E0082B1BF /* RORMissionClientHandler.m */; };
 		0FDE82CA18927B4E0082B1BF /* RORSystemClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE82C418927B4E0082B1BF /* RORSystemClientHandler.m */; };
 		0FDE82CB18927B4E0082B1BF /* RORThirdPartyClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE82C618927B4E0082B1BF /* RORThirdPartyClientHandler.m */; };
@@ -511,6 +512,8 @@
 		0FA7521318927A410037342E /* RORLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORLoadingViewController.m; path = MainPage/RORLoadingViewController.m; sourceTree = "<group>"; };
 		0FA7521418927A410037342E /* RORLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORLoginViewController.h; path = MainPage/RORLoginViewController.h; sourceTree = "<group>"; };
 		0FA7521518927A410037342E /* RORLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORLoginViewController.m; path = MainPage/RORLoginViewController.m; sourceTree = "<group>"; };
+		0FB7EAFA18BB3464006E44F7 /* Reward_Details.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reward_Details.h; path = CoreDate/Reward_Details.h; sourceTree = "<group>"; };
+		0FB7EAFB18BB3464006E44F7 /* Reward_Details.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reward_Details.m; path = CoreDate/Reward_Details.m; sourceTree = "<group>"; };
 		0FDE82C118927B4E0082B1BF /* RORMissionClientHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORMissionClientHandler.h; path = HttpClient/RORMissionClientHandler.h; sourceTree = "<group>"; };
 		0FDE82C218927B4E0082B1BF /* RORMissionClientHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORMissionClientHandler.m; path = HttpClient/RORMissionClientHandler.m; sourceTree = "<group>"; };
 		0FDE82C318927B4E0082B1BF /* RORSystemClientHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORSystemClientHandler.h; path = HttpClient/RORSystemClientHandler.h; sourceTree = "<group>"; };
@@ -1397,6 +1400,8 @@
 				0FA751C5189279CB0037342E /* Version_Control.m */,
 				0F07A2B918AE15C2003774B9 /* Virtual_Product.h */,
 				0F07A2BA18AE15C2003774B9 /* Virtual_Product.m */,
+				0FB7EAFA18BB3464006E44F7 /* Reward_Details.h */,
+				0FB7EAFB18BB3464006E44F7 /* Reward_Details.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -2075,6 +2080,7 @@
 				308C165E186982F4005B0198 /* RORShareCoverViewController.m in Sources */,
 				0FA7514F1892791A0037342E /* RORShareService.m in Sources */,
 				30692D5D18117C2500DA01EC /* SVProgressHUD.m in Sources */,
+				0FB7EAFC18BB3464006E44F7 /* Reward_Details.m in Sources */,
 				0FA7513A189278E30037342E /* FTUtils+UIGestureRecognizer.m in Sources */,
 				3037079B180511CB00FE0238 /* RORStartAnnotation.m in Sources */,
 				0FA751FA18927A0F0037342E /* RORAccountViewController.m in Sources */,

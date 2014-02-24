@@ -8,6 +8,8 @@
 
 #import "RORRunHistoryServices.h"
 #import "RORNetWorkUtils.h"
+#import "RORUserServices.h"
+#import "RORUserPropsService.h"
 
 @implementation RORRunHistoryServices
 
@@ -79,6 +81,8 @@
             RORHttpResponse *httpResponse = [RORRunHistoryClientHandler createRunHistories:userId withRunHistories:array];
             if ([httpResponse responseStatus] == 200){
                 [self updateUnsyncedRunHistories];
+                [RORUserServices syncUserInfoById:userId];
+                [RORUserPropsService syncUserProps:userId];
                 return YES;
                 
             } else {
@@ -186,7 +190,6 @@
         }
         runHistory.commitTime = nil;
         [RORContextUtils saveContext];
-        //todo:: add update user info.
     }
     return YES;
 }

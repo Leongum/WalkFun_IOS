@@ -45,6 +45,9 @@
 //获得用户新增动作
 +(int)syncActions:(NSNumber *) userId;
 
+//获得用户动作
++(NSMutableArray *)fetchUserActionsById:(NSNumber *) userId;
+
 //获取本地用户动作
 +(NSArray *)fetchUserAction:(NSNumber *) userId;
 

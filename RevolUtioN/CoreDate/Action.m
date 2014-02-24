@@ -19,6 +19,14 @@
 @dynamic actionName;
 @dynamic updateTime;
 
+
++(Action *) initUnassociateEntity{
+    NSManagedObjectContext *context = [RORContextUtils getShareContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Action" inManagedObjectContext:context];
+    Action *unassociatedEntity = [[Action alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
+    return unassociatedEntity;
+}
+
 +(Action *) removeAssociateForEntity:(Action *)associatedEntity{
     NSManagedObjectContext *context = [RORContextUtils getShareContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Action" inManagedObjectContext:context];

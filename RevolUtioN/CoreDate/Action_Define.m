@@ -17,6 +17,7 @@
 @dynamic actionDescription;
 @dynamic actionAttribute;
 @dynamic actionRule;
+@dynamic effectiveRule;
 @dynamic actionId;
 @dynamic triggerProbability;
 @dynamic soundLink;
@@ -40,6 +41,7 @@
     self.actionDescription = [RORDBCommon getStringFromId:[dict valueForKey:@"actionDescription"]];
     self.actionAttribute = [RORDBCommon getStringFromId:[dict valueForKey:@"actionAttribute"]];
     self.actionRule = [RORDBCommon getStringFromId:[dict valueForKey:@"actionRule"]];
+    self.effectiveRule = [RORDBCommon getStringFromId:[dict valueForKey:@"effectiveRule"]];
     self.triggerProbability = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerProbability"]];
     self.soundLink = [RORDBCommon getStringFromId:[dict valueForKey:@"soundLink"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];

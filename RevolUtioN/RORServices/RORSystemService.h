@@ -46,5 +46,5 @@
 + (NSArray *)getEventListFromString:(NSString *)eventString;
 
 //压缩事件列表为字符串
-+ (NSString *)getStringFromEventList:(NSArray *)eventList;
++ (NSString *)getStringFromEventList:(NSArray *)eventList andTimeList:(NSArray *)timeList;
 @end

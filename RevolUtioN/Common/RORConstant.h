@@ -32,10 +32,14 @@
 // --- action api ---
 #define ACTION_CREATE_ACTION_URL [SERVICE_HOST stringByAppendingString:@"/account/action/create/%@"]
 #define ACTION_GET_ACTION_URL [SERVICE_HOST stringByAppendingString:@"/account/action/get/%@"]
+#define ACTION_GET_ACTION_BY_USER_ID_URL [SERVICE_HOST stringByAppendingString:@"/account/action/others/get/%@"]
 
 // --- prop api ---
 #define PROP_GET_URL [SERVICE_HOST stringByAppendingString:@"/account/props/get/%@?lastUpdateTime=%@"]
 #define PROP_CREATE_URL [SERVICE_HOST stringByAppendingString:@"/account/props/create/%@"]
+
+// --- reward api ---
+#define REWARD_GET_RANDOM_URL [SERVICE_HOST stringByAppendingString:@"/account/reward/get/%@"]
 
 // --- system api ---
 #define SYSTEM_VERSION_URL [SERVICE_HOST stringByAppendingString:@"/system/version/get/%@"]
