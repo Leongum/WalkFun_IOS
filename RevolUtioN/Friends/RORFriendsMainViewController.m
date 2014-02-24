@@ -31,11 +31,18 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.backButton.alpha = 0;
+    self.endDeletingButton.alpha = 0;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    contentList = [RORFriendService fetchFriendFollowsList];
-    [self.tableView reloadData];
+    [super viewWillAppear:animated];
+    
+    followList = [RORFriendService fetchFriendFollowsList];
+    fansList = [RORFriendService fetchFriendFansList];
+    friendList = [RORFriendService fetchFriendEachFansList];
+    
+    [self initFriendDisplayBool];
+    [self refreshTableView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,12 +51,107 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)backAction:(id)sender{
+-(void)initFriendDisplayBool{
+    NSMutableDictionary *settinglist = [RORUserUtils getUserSettingsPList];
+    NSNumber *showFollowNum = (NSNumber *)[settinglist objectForKey:@"showFollow"];
+    NSNumber *showFansNum = (NSNumber *)[settinglist objectForKey:@"showFans"];
+    if ((!showFollowNum)||(!showFansNum)){
+        showFollowNum = [NSNumber numberWithBool:YES];
+        showFansNum = [NSNumber numberWithBool:NO];
+    }
+    showFollow = showFollowNum.boolValue;
+    showFans = showFansNum.boolValue;
+    
+    [self refreshFriendDisplayButton];
+}
+
+-(void)refreshFriendDisplayButton{
+    if (showFollow){
+        [self.showFollowButton setBackgroundColor:[UIColor redColor]];
+    } else
+        [self.showFollowButton setBackgroundColor:[UIColor clearColor]];
+    if (showFans){
+        [self.showFansButton setBackgroundColor:[UIColor redColor]];
+    } else
+        [self.showFansButton setBackgroundColor:[UIColor clearColor]];
+    [self saveFriendDisplayPlist];
+}
+
+#pragma mark - Action
+
+-(IBAction)backAction:(id)sender{
     [self.tableView setEditing:NO];
     [super backAction:sender];
 }
 
 - (IBAction)doSearchAction:(id)sender {
+}
+
+- (IBAction)clickShowFollowButton:(id)sender{
+    showFollow = !showFollow;
+    [self refreshFriendDisplayButton];
+    [self refreshTableView];
+}
+
+- (IBAction)clickShowFansButton:(id)sender{
+    showFans = !showFans;
+    [self refreshFriendDisplayButton];
+    [self refreshTableView];
+}
+
+- (IBAction)startDeletingAction:(id)sender {
+    self.endDeletingButton.alpha = 1;
+    [self refreshTableView];
+}
+
+- (IBAction)endDeletingAction:(id)sender {
+    self.endDeletingButton.alpha = 0;
+    [self refreshTableView];
+}
+
+- (IBAction)deFollowAction:(id)sender{
+    NSInteger row = [self rowOfButton:sender];
+    deletingFriend = (Friend *)[contentList objectAtIndex:row];
+    [self startIndicator:self];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        isDeletingSuccess = [RORFriendService deFollowFriend:deletingFriend.friendId];
+        followList = [RORFriendService fetchFriendFollowsList];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self endIndicator:self];
+            if (!isDeletingSuccess){
+                [self sendAlart:@"取消关注失败，请检查一下网络"];
+            } else {
+                [self refreshTableView];
+            }
+        });
+    });
+}
+
+-(NSInteger )rowOfButton:(UIView *)sender{
+    UIView *tmp = sender;
+    while (![tmp isKindOfClass:[UITableViewCell class]]) {
+        tmp = [tmp superview];
+    }
+    UITableViewCell *cell = (UITableViewCell *)tmp;
+    return [self.tableView indexPathForCell:cell].row;
+}
+
+-(void)refreshTableView{
+    if (showFollow && showFans){
+        contentList = friendList;
+    } else if (showFollow){
+        contentList = followList;
+    } else if (showFans){
+        contentList = fansList;
+    } else {
+        contentList = [[NSArray alloc]init];
+    }
+    [self.tableView reloadData];
+}
+
+-(void)saveFriendDisplayPlist{
+    NSDictionary *saveDict = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:showFollow], @"showFollow", [NSNumber numberWithBool:showFans], @"showFans",nil];
+    [RORUserUtils writeToUserSettingsPList:saveDict];
 }
 
 #pragma mark - Table view data source
@@ -71,28 +173,37 @@
     UILabel *userNameLabel = (UILabel *)[cell viewWithTag:100];
     UILabel *userLevelLabel = (UILabel *)[cell viewWithTag:101];
     UIImageView *userSexImage = (UIImageView *)[cell viewWithTag:103];
+    UIButton *deleteButton = (UIButton *)[cell viewWithTag:200];
     
     userNameLabel.text = user.userName;
     userLevelLabel.text = [NSString stringWithFormat:@"Lv.%d", user.level.integerValue];
     userSexImage.image = [RORUserUtils getImageForUserSex:user.sex];
+    
+    deleteButton.alpha = self.endDeletingButton.alpha;
+    [deleteButton addTarget:self action:@selector(deFollowAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    Friend *user = (Friend *)[contentList objectAtIndex:indexPath.row];
-
-    UIStoryboard *friendsStoryboard = [UIStoryboard storyboardWithName:@"FriendsStoryboard" bundle:[NSBundle mainBundle]];
-    UIViewController *friendInfoViewController =  [friendsStoryboard instantiateViewControllerWithIdentifier:@"FriendInfoViewController"];
-    if ([friendInfoViewController respondsToSelector:@selector(setUserBase:)]){
-        User_Base *userBase =[RORUserServices fetchUser:user.friendId];
-        if (!userBase)
-            userBase = [RORUserServices syncUserInfoById:user.friendId];
-        if (userBase){
-            [friendInfoViewController setValue:userBase forKey:@"userBase"];
-            [self.navigationController pushViewController:friendInfoViewController animated:YES];
-        } else {
-            [self sendAlart:@"信息读取失败"];
+    if (self.endDeletingButton.alpha == 0){
+        Friend *user = (Friend *)[contentList objectAtIndex:indexPath.row];
+        
+        UIStoryboard *friendsStoryboard = [UIStoryboard storyboardWithName:@"FriendsStoryboard" bundle:[NSBundle mainBundle]];
+        UIViewController *friendInfoViewController =  [friendsStoryboard instantiateViewControllerWithIdentifier:@"FriendInfoViewController"];
+        if ([friendInfoViewController respondsToSelector:@selector(setUserBase:)]){
+            User_Base *userBase =[RORUserServices fetchUser:user.friendId];
+            if (!userBase)
+                userBase = [RORUserServices syncUserInfoById:user.friendId];
+            if (userBase){
+                [friendInfoViewController setValue:userBase forKey:@"userBase"];
+                [self.navigationController pushViewController:friendInfoViewController animated:YES];
+            } else {
+                [self sendAlart:@"信息读取失败"];
+            }
         }
+    } else {
+        [self deFollowAction:[self.tableView cellForRowAtIndexPath:indexPath]];
     }
 }
 

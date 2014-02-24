@@ -21,5 +21,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *stepsLabel;
 @property (strong, nonatomic) IBOutlet UILabel *latestWorkoutDateLabel;
 
+@property (strong, nonatomic) IBOutlet UILabel *loadingLabel;
+
 @property (strong, nonatomic) User_Base *userBase;
 @end

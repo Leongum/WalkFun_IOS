@@ -15,14 +15,22 @@
     double searchViewTop;
     User_Base *userInfo;
     NSArray *contentList;
-    NSArray *latestPage;
-    int pageCount;
-    BOOL noMoreData;
+    NSArray *fansList;
+    NSArray *followList;
+    NSArray *friendList;
+    
+    BOOL isDeletingSuccess;
+    Friend *deletingFriend;
+    
+    BOOL showFollow, showFans;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *friendTitleView;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIImageView *tableViewContainer;
 @property (strong, nonatomic) IBOutlet UIButton *expandButton;
+
+@property (strong, nonatomic) IBOutlet UIButton *showFollowButton;
+@property (strong, nonatomic) IBOutlet UIButton *showFansButton;
+@property (strong, nonatomic) IBOutlet UIButton *endDeletingButton;
 
 @end

@@ -86,6 +86,7 @@
     //check uuid
     if(successed){
         [self syncFriends:[RORUserUtils getUserId]];
+        [self syncFriendSort:[RORUserUtils getUserId]];
         return YES;
     }
     return NO;
@@ -95,18 +96,18 @@
 +(NSArray *)fetchFriendFansList{
     NSNumber *userId = [RORUserUtils getUserId];
     NSString *table=@"Friend";
-    NSString *query = @"friendId = %@";
+    NSString *query = @"friendId = %@ and friendEach != nil";
     NSArray *params = [NSArray arrayWithObjects:userId, nil];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"addTime" ascending:NO];
     NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
     NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
     if (fetchObject == nil || [fetchObject count] == 0) {
-        return nil;
+        return [[NSArray alloc]init];
     }
     NSMutableArray *friendsDetails = [NSMutableArray arrayWithCapacity:10];
     for (Friend *friend in fetchObject) {
         Friend *newFriend =[Friend removeAssociateForEntity:friend];
-        Friend_Sort * friendSort = [self fetchFriendSortDetails:newFriend.friendId];
+        Friend_Sort * friendSort = [self fetchFriendSortDetails:newFriend.userId];
         if(friendSort != nil){
             newFriend.sex = friendSort.sex;
             newFriend.level = friendSort.level;
@@ -122,13 +123,13 @@
 +(NSArray *)fetchFriendFollowsList{
     NSNumber *userId = [RORUserUtils getUserId];
     NSString *table=@"Friend";
-    NSString *query = @"userId = %@";
+    NSString *query = @"userId = %@ and friendStatus = 0";
     NSArray *params = [NSArray arrayWithObjects:userId, nil];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"addTime" ascending:NO];
     NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
     NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
     if (fetchObject == nil || [fetchObject count] == 0) {
-        return nil;
+        return [[NSArray alloc]init];
     }
     NSMutableArray *friendsDetails = [NSMutableArray arrayWithCapacity:10];
     for (Friend *friend in fetchObject) {
@@ -155,7 +156,7 @@
     NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
     NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
     if (fetchObject == nil || [fetchObject count] == 0) {
-        return nil;
+        return [[NSArray alloc ]init];
     }
     NSMutableArray *friendsDetails = [NSMutableArray arrayWithCapacity:10];
     for (Friend *friend in fetchObject) {
@@ -334,7 +335,9 @@
         for (NSDictionary *searchDict in searchFriendList){
             Search_Friend * searchFriend = [[Search_Friend alloc] init];
             [searchFriend initWithDictionary:searchDict];
-            [friendList addObject:searchFriend];
+            if (searchFriend.userId.integerValue != [RORUserUtils getUserId].integerValue){
+                [friendList addObject:searchFriend];
+            }
         }
         return friendList;
     }
@@ -350,6 +353,8 @@
 }
 
 + (BOOL)followFriend:(NSNumber *)friendId{
+    if (friendId.integerValue == [RORUserUtils getUserId].integerValue)
+        return NO;
     Friend *friend = [RORFriendService fetchUserFriend:[RORUserUtils getUserId] withFriendId:friendId];
     if (friend){
         friend.friendStatus = [NSNumber numberWithInteger:FollowStatusFollowed];
@@ -364,6 +369,8 @@
 }
 
 +(BOOL)deFollowFriend:(NSNumber *)friendId{
+    if (friendId.integerValue == [RORUserUtils getUserId].integerValue)
+        return NO;
     Friend *friend = [RORFriendService fetchUserFriend:[RORUserUtils getUserId] withFriendId:friendId];
     if (friend){
         friend.friendStatus = [NSNumber numberWithInteger:FollowStatusNotFollowed];

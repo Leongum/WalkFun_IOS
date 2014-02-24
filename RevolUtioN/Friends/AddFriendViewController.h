@@ -14,6 +14,9 @@
 @interface AddFriendViewController : RORViewController{
     NSArray *contentList;
     NSInteger recommendPage;
+    
+    Search_Friend *addingFriend;
+    BOOL isAddingSuccess;
 }
 
 @property (strong, nonatomic) IBOutlet UITextField *searchTextField;

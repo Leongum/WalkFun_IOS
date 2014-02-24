@@ -62,18 +62,36 @@
 
 - (IBAction)follow:(id)sender{
     NSInteger row = [self rowOfButton:sender];
-    Search_Friend *f = (Search_Friend *)[contentList objectAtIndex:row];
-    if (![RORFriendService followFriend:f.userId]){
-        [self sendAlart:@"关注失败，请检查一下网络"];
-    }
+    addingFriend = (Search_Friend *)[contentList objectAtIndex:row];
+    [self startIndicator:self];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        isAddingSuccess = [RORFriendService followFriend:addingFriend.userId];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self endIndicator:self];
+            if (!isAddingSuccess){
+                [self sendAlart:@"关注失败，请检查一下网络"];
+            } else {
+                [self.tableView reloadData];
+            }
+        });
+    });
 }
 
 - (IBAction)deFollow:(id)sender{
     NSInteger row = [self rowOfButton:sender];
-    Search_Friend *f = (Search_Friend *)[contentList objectAtIndex:row];
-    if (![RORFriendService deFollowFriend:f.userId]){
-        [self sendAlart:@"取消关注失败，请检查一下网络"];
-    }
+    addingFriend = (Search_Friend *)[contentList objectAtIndex:row];
+    [self startIndicator:self];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        isAddingSuccess = [RORFriendService deFollowFriend:addingFriend.userId];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self endIndicator:self];
+            if (!isAddingSuccess){
+                [self sendAlart:@"取消关注失败，请检查一下网络"];
+            } else {
+                [self.tableView reloadData];
+            }
+        });
+    });
 }
 
 -(NSInteger )rowOfButton:(UIButton *)sender{
@@ -111,9 +129,11 @@
     userSexImage.image = [RORUserUtils getImageForUserSex:user.sex];
     if ([RORFriendService getFollowStatus:user.userId] == FollowStatusNotFollowed){
         [follow setTitle:@"关注" forState:UIControlStateNormal];
+        [follow removeTarget:self action:@selector(deFollow:) forControlEvents:UIControlEventTouchUpInside];
         [follow addTarget:self action:@selector(follow:) forControlEvents:UIControlEventTouchUpInside];
     } else {
         [follow setTitle:@"取消关注" forState:UIControlStateNormal];
+        [follow removeTarget:self action:@selector(follow:) forControlEvents:UIControlEventTouchUpInside];
         [follow addTarget:self action:@selector(deFollow:) forControlEvents:UIControlEventTouchUpInside];
     }
     return cell;
