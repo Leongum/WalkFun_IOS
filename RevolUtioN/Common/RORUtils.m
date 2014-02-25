@@ -362,4 +362,44 @@
     return viewController;
 }
 
++(NSMutableDictionary *)explainActionEffetiveRule:(NSString *)effectiveRule{
+    NSMutableDictionary * userStatusMap = [[NSMutableDictionary alloc] init];
+    if(effectiveRule != nil && [effectiveRule length] != 0 ){
+        NSArray *ruleArray = [effectiveRule componentsSeparatedByString:@"|"];
+        if([ruleArray count] > 0){
+            for (int i = 0; i< [ruleArray count]; i++)
+            {
+                NSArray *ruleDetails = [(NSString *)[ruleArray objectAtIndex:i] componentsSeparatedByString:@","];
+                if(ruleDetails != nil && [ruleDetails count] == 2){
+                    NSString *effectiveName = (NSString *)[ruleDetails objectAtIndex:0];
+                    NSNumber *numb = (NSNumber *)[ruleDetails objectAtIndex:1];
+                    [userStatusMap setValue:numb forKey:effectiveName];
+                }
+            }
+        }
+    }
+    return userStatusMap;
+}
+
++(NSMutableDictionary *)explainActionRule:(NSString *)actionRule{
+    NSMutableDictionary * vProductIds = [[NSMutableDictionary alloc] init];
+    if(actionRule != nil && [actionRule length] != 0 ){
+        NSArray *ruleArray = [actionRule componentsSeparatedByString:@"|"];
+        if([ruleArray count] > 0){
+            for (int i = 0; i< [ruleArray count]; i++)
+            {
+                NSArray *ruleDetails = [(NSString *)[ruleArray objectAtIndex:i] componentsSeparatedByString:@","];
+                if(ruleDetails != nil && [ruleDetails count] == 4){
+                    NSString *productId = (NSString *)[ruleDetails objectAtIndex:0];
+                    NSNumber *numb = (NSNumber *)[ruleDetails objectAtIndex:2];
+                    NSString *propFlag = (NSString *)[ruleDetails objectAtIndex:3];
+                    if([propFlag isEqualToString:ACTION_RULE_PROP_YES]){
+                        [vProductIds setValue:numb forKey:productId];
+                    }
+                }
+            }
+        }
+    }
+    return vProductIds;
+}
 @end

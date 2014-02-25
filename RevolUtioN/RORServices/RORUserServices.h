@@ -36,17 +36,11 @@
 //登录。
 +(User_Base *)syncUserInfoByLogin:(NSString *)userName withUserPassword:(NSString *) password;
 
+//与服务器更新用户基本信息
++(BOOL)updateUserBase:(User_Base *)userBase;
+
 //服务器索取随机道具
 +(Reward_Details *) getRandomReward:(NSNumber *)userId;
-
-//提交本地用户数据
-+(void)uploadUserInfo;
-
-//保存user base 信息到本地，不包含上传。
-+(BOOL)saveUserBaseInfoToDB:(User_Base *)userBase;
-
-//保存user detail 信息到本地，不包含上传
-+(BOOL)saveUserDetailInfoToDB:(User_Detail *)userDetail;
 
 //根据昵称查询用户，服务器同步获取。返回Search_Friend
 +(NSArray *)searchFriend:(NSString *) nickName;

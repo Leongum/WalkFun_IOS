@@ -88,13 +88,22 @@
 #define COLOR_MOSS [UIColor colorWithRed:0 green:128.f/255.f blue:64.f/255.f alpha:1]
 #endif
 
+#define ACTION_RULE_PROP_YES @"PY"
+#define ACTION_RULE_PROP_NO @"PN"
+#define ACTION_RULE_HEALTH @"H"
+#define ACTION_RULE_FAT @"F"
+#define ACTION_RULE_RANDOM @"R"
+#define ACTION_RULE_MONEY @"M"
+#define ACTION_RULE_SHOW_DROP @"D"
+#define ACTION_RULE_HEAD_BAG @"B"
+
 typedef enum {MissionTypeEasy = 0} MissionTypeEnum;
 typedef enum {FollowStatusFollowed = 0, FollowStatusNotFollowed = 1} FollowStatusEnum;
 typedef enum {FriendStatusOnlyFollowed = 0, FriendStatusFollowEachother = 1} FriendStatusEnum;
 typedef enum {HistoryStatusExecute = 0, HistoryStatusFinished = 1, HistoryStatusCancled = 2} HistoryStatusEnum;
 typedef enum {OperateUpdate = 0, OperateInsert = 1, OperateDelete = 2} OperateEnum;
 typedef enum {PlanFlagNew = 0, PlanFlagHot = 1, PlanFlagRecommend = 2} PlanFlagEnun;
-typedef enum {ActionDefineRun = 0, ActionDefineUse = 1} ActionDefineEnum;
+typedef enum {ActionDefineRun = 0, ActionDefineUse = 1, ActionDefineReward = 2} ActionDefineEnum;
 
 typedef struct {
     int mainVersion;

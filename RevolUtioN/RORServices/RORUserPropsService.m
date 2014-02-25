@@ -83,85 +83,24 @@
     return NO;
 }
 
-//open out
-+ (BOOL) saveUserPropInfoToDB:(User_Prop *)userProp{
-    //check userid and productid
-    if(userProp.userId != nil && userProp.productId != nil){
-        NSNumber *userId = userProp.userId;
-        NSNumber *propId = userProp.productId;
-        User_Prop *currentUserProp = [self fetchUserPropByPropId:userId withPropId:propId withContext:YES];;
-        if(currentUserProp == nil)
-            currentUserProp = [NSEntityDescription insertNewObjectForEntityForName:@"User_Prop" inManagedObjectContext:[RORContextUtils getShareContext]];
-        //loop through all attributes and assign then to the clone
-        NSDictionary *attributes = [[NSEntityDescription
-                                     entityForName:@"User_Prop"
-                                     inManagedObjectContext:[RORContextUtils getShareContext]] attributesByName];
-        
-        for (NSString *attr in [attributes allKeys]) {
-            [currentUserProp setValue:[userProp valueForKey:attr] forKey:attr];
-        }
-        currentUserProp.updateTime = nil;
-        [RORContextUtils saveContext];
-    }
-    return YES;
-}
-
-//open out
-+ (BOOL)uploadUserProps{
-    //if(![RORNetWorkUtils getDoUploadable])return NO;
-    NSNumber *userId = [RORUserUtils getUserId];
-    if(userId.integerValue > 0){
-        NSArray *dataList = [self fetchUnsyncedUserProps:NO];
-        if([dataList count] > 0){
-            NSMutableArray *array = [[NSMutableArray alloc] init];
-            for (User_Prop *userProp in dataList) {
-                userProp.updateTime = [RORUserUtils getSystemTime];
-                [array addObject:userProp.transToDictionary];
-            }
-            RORHttpResponse *httpResponse = [RORUserClientHandler createOrUpdateUserProp:userId withUserProps:array];
-            if ([httpResponse responseStatus] == 200){
-                [self updateUnsyncedUserProps];
-                return YES;
-                
-            } else {
-                NSLog(@"error: statCode = %@", [httpResponse errorMessage]);
-                return NO;
-            }
-        }
-    }
-    return YES;
-}
-
-+(NSArray *)fetchUnsyncedUserProps:(BOOL) needContext{
+//open out 购买道具
++ (BOOL)buyUserProps:(NSNumber *)propId withBuyNumbers:(NSNumber *) numbers{
+    Virtual_Product_Buy * buyEnity = [[Virtual_Product_Buy alloc] init];
+    buyEnity.userId = [RORUserUtils getUserId];
+    buyEnity.productId = propId;
+    buyEnity.numbers = numbers;
+    buyEnity.buyTime = [RORUserUtils getSystemTime];
     
-    NSNumber *userId = [RORUserUtils getUserId];
-    NSString *table=@"User_Prop";
-    NSString *query = @"userId = %@ and updateTime = nil";
-    NSArray *params = [NSArray arrayWithObjects:userId, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
-    if (fetchObject == nil || [fetchObject count] == 0) {
-        return nil;
+    RORHttpResponse *httpResponse = [RORVirtualProductClientHandler createVProductBuyInfo:[RORUserUtils getUserId] withBuyInfo: buyEnity.transToDictionary];
+    if ([httpResponse responseStatus] == 200){
+        [self syncUserProps:[RORUserUtils getUserId]];
+        return YES;
+        
+    } else {
+        NSLog(@"error: statCode = %@", [httpResponse errorMessage]);
+        return NO;
     }
-    if(!needContext){
-        NSMutableArray *userProps = [[NSMutableArray alloc] init];
-        for (User_Prop *userProp in fetchObject) {
-            User_Prop *newUserProp = [User_Prop removeAssociateForEntity:userProp];
-            [userProps addObject:newUserProp];
-        }
-        return [userProps copy];
-    }
-    return fetchObject;
-}
 
-+(void)updateUnsyncedUserProps{
-    NSArray *fetchObject = [self fetchUnsyncedUserProps:YES];
-    if (fetchObject == nil || [fetchObject count] == 0) {
-        return;
-    }
-    for (User_Prop *info in fetchObject) {
-        info.updateTime = [RORUserUtils getSystemTime];
-    }
-    [RORContextUtils saveContext];
+    
 }
-
 @end

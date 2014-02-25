@@ -234,7 +234,15 @@
 }
 
 //open out
-+ (BOOL) createAction:(Action *)action{
++ (BOOL) createAction:(NSNumber *) actionToId withActionToUserName:(NSString *) actionToUserName withActionId:(NSNumber *) actionId{
+    Action *action = [Action initUnassociateEntity];
+    action.actionFromId = [RORUserUtils getUserId];
+    action.actionFromName = [RORUserUtils getUserName];
+    action.actionId = actionId;
+    action.actionToId = actionToId;
+    action.actionToName = actionToUserName;
+    action.updateTime = [RORUserUtils getSystemTime];
+    
     BOOL successed = [self sycnCreateAction:action];
     //check uuid
     if(successed){
@@ -279,7 +287,7 @@
     return 0;
 }
 
-//
+//open out
 +(NSMutableArray *)fetchUserActionsById:(NSNumber *) userId{
     NSMutableArray * actions = [[NSMutableArray alloc] init];
     if(userId.integerValue > 0)

@@ -67,4 +67,9 @@ _Pragma("clang diagnostic pop") \
 
 +(UIViewController *)popShareCoverViewFor:(UIViewController *)delegate withImage:(UIImage *)image title:(NSString *)title andMessage:(NSString *)msg animated:(BOOL)animated;
 
+//解析actio的definition 的effective rule
++(NSMutableDictionary *)explainActionEffetiveRule:(NSString *)effectiveRule;
+
+//解析actio的definition 的action rule
++(NSMutableDictionary *)explainActionRule:(NSString *)actionRule;
 @end

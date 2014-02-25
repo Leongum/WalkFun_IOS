@@ -235,6 +235,27 @@
     return [actionList copy];
 }
 
+//open out
++(Action_Define *)fetchActionDefineByPropId:(NSNumber *)propId{
+    NSArray *actionList = [self fetchAllActionDefine:ActionDefineReward];
+    NSMutableArray * findActionList = [[NSMutableArray alloc] init];
+    for (Action_Define *action in actionList) {
+        NSMutableDictionary *actionDic = [RORUtils explainActionRule:action.actionRule];
+        for (NSString *key in [actionDic allKeys]) {
+            if(((NSNumber *)[actionDic valueForKey:key]).integerValue == propId.integerValue){
+                [findActionList addObject: action];
+            }
+        }
+    }
+    srand(time(NULL));
+    int randomValue = rand();
+    if ([findActionList count]>0){
+        int index = randomValue%[findActionList count];
+        return [findActionList objectAtIndex:index];
+    }
+    return nil;
+}
+
 +(NSArray *)getEventListFromString:(NSString *)eventString{
     NSMutableArray *eventList = [[NSMutableArray alloc]init];
     NSMutableArray *eventTimeList = [[NSMutableArray alloc]init];

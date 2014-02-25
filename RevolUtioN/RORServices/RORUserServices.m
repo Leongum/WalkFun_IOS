@@ -90,76 +90,23 @@
 }
 
 //open out
-+(void)uploadUserInfo{
++(BOOL)updateUserBase:(User_Base *)userBase{
     NSNumber *userId = [RORUserUtils getUserId];
     if(userId.integerValue > 0){
-        User_Base *userBase = [self fetchUserBaseById:userId withContext:YES];
         if(userBase!= nil && userBase.updateTime == nil)
         {
             NSDictionary *updateDic = userBase.transToDictionary;
             RORHttpResponse *httpResponse = [RORUserClientHandler updateUserBaseInfo:userId withUserInfo:updateDic];
             if ([httpResponse responseStatus] == 200){
-                userBase.updateTime = [RORUserUtils getSystemTime];
+                [self syncUserInfoById:userId];
+                return YES;
                 
             } else {
                 NSLog(@"error: statCode = %@", [httpResponse errorMessage]);
             }
         }
-        User_Detail *userDetail = [self fetchUserDetailByUserId:userId];
-        if(userDetail!= nil && userDetail.updateTime == nil)
-        {
-            NSDictionary *updateDic = userDetail.transToDictionary;
-            RORHttpResponse *httpResponse = [RORUserClientHandler updateUserDetailInfo:userId withUserInfo:updateDic];
-            if ([httpResponse responseStatus] == 200){
-                userDetail.updateTime =[RORUserUtils getSystemTime];
-                
-            } else {
-                NSLog(@"error: statCode = %@", [httpResponse errorMessage]);
-            }
-        }
-        [RORContextUtils saveContext];
     }
-}
-
-//open out do all update things.
-+ (BOOL) saveUserBaseInfoToDB:(User_Base *)userBase{
-    //check uuid
-    if(userBase.userId != nil && userBase.userId.integerValue == [RORUserUtils getUserId].integerValue){
-        NSNumber *userId = userBase.userId;
-        User_Base *userBaseEntity = [self fetchUserBaseById:userId withContext:YES];
-        //loop through all attributes and assign then to the clone
-        NSDictionary *attributes = [[NSEntityDescription
-                                     entityForName:@"User_Base"
-                                     inManagedObjectContext:[RORContextUtils getShareContext]] attributesByName];
-        
-        for (NSString *attr in [attributes allKeys]) {
-            [userBaseEntity setValue:[userBase valueForKey:attr] forKey:attr];
-        }
-        userBaseEntity.updateTime = nil;
-        [RORContextUtils saveContext];
-        [self saveUserInfoToList:userBase];
-    }
-    return YES;
-}
-
-//open out do all update things.
-+ (BOOL) saveUserDetailInfoToDB:(User_Detail *)userDetail{
-    //check uuid
-    if(userDetail.userId != nil && userDetail.userId.integerValue == [RORUserUtils getUserId].integerValue){
-        NSNumber *userId = userDetail.userId;
-        User_Detail *userDetailEntity = [self fetchUserDetailByUserId:userId withContext:YES];
-        //loop through all attributes and assign then to the clone
-        NSDictionary *attributes = [[NSEntityDescription
-                                     entityForName:@"User_Detail"
-                                     inManagedObjectContext:[RORContextUtils getShareContext]] attributesByName];
-        
-        for (NSString *attr in [attributes allKeys]) {
-            [userDetailEntity setValue:[userDetail valueForKey:attr] forKey:attr];
-        }
-        userDetailEntity.updateTime = nil;
-        [RORContextUtils saveContext];
-    }
-    return YES;
+    return NO;
 }
 
 + (void) saveUserInfoToList:(User_Base *)user{

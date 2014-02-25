@@ -117,6 +117,7 @@
 		0FDE83061893A3930082B1BF /* RORRunHistoryClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE83051893A3930082B1BF /* RORRunHistoryClientHandler.m */; };
 		0FDE83091894E3AA0082B1BF /* RORMissionHistoyService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE83081894E3AA0082B1BF /* RORMissionHistoyService.m */; };
 		0FDE830C189503650082B1BF /* RORFriendService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE830B189503650082B1BF /* RORFriendService.m */; };
+		0FF314C618BC3AF0001C0D21 /* Virtual_Product_Buy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF314C518BC3AF0001C0D21 /* Virtual_Product_Buy.m */; };
 		3005CFE8185391F900D83648 /* searchTextField_fg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3005CFE6185391F900D83648 /* searchTextField_fg.png */; };
 		3005CFE9185391F900D83648 /* searchTextField_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3005CFE7185391F900D83648 /* searchTextField_bg.png */; };
 		3005CFEB1854518D00D83648 /* collect_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3005CFEA1854518D00D83648 /* collect_bg.png */; };
@@ -546,6 +547,8 @@
 		0FDE83081894E3AA0082B1BF /* RORMissionHistoyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORMissionHistoyService.m; path = RevolUtioN/RORServices/RORMissionHistoyService.m; sourceTree = "<group>"; };
 		0FDE830A189503650082B1BF /* RORFriendService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORFriendService.h; path = RevolUtioN/RORServices/RORFriendService.h; sourceTree = "<group>"; };
 		0FDE830B189503650082B1BF /* RORFriendService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORFriendService.m; path = RevolUtioN/RORServices/RORFriendService.m; sourceTree = "<group>"; };
+		0FF314C418BC3AF0001C0D21 /* Virtual_Product_Buy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Virtual_Product_Buy.h; path = CoreDate/Virtual_Product_Buy.h; sourceTree = "<group>"; };
+		0FF314C518BC3AF0001C0D21 /* Virtual_Product_Buy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Virtual_Product_Buy.m; path = CoreDate/Virtual_Product_Buy.m; sourceTree = "<group>"; };
 		3005CFE6185391F900D83648 /* searchTextField_fg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchTextField_fg.png; sourceTree = "<group>"; };
 		3005CFE7185391F900D83648 /* searchTextField_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchTextField_bg.png; sourceTree = "<group>"; };
 		3005CFEA1854518D00D83648 /* collect_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collect_bg.png; sourceTree = "<group>"; };
@@ -1402,6 +1405,8 @@
 				0F07A2BA18AE15C2003774B9 /* Virtual_Product.m */,
 				0FB7EAFA18BB3464006E44F7 /* Reward_Details.h */,
 				0FB7EAFB18BB3464006E44F7 /* Reward_Details.m */,
+				0FF314C418BC3AF0001C0D21 /* Virtual_Product_Buy.h */,
+				0FF314C518BC3AF0001C0D21 /* Virtual_Product_Buy.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -2158,6 +2163,7 @@
 				0FA7520418927A230037342E /* RORRunningViewController.m in Sources */,
 				0F07A2BE18AE1844003774B9 /* Simple_User_Run_History.m in Sources */,
 				0FDE8300189387BB0082B1BF /* User_Detail.m in Sources */,
+				0FF314C618BC3AF0001C0D21 /* Virtual_Product_Buy.m in Sources */,
 				0FA7516E1892798F0037342E /* RORChallengeLevelView.m in Sources */,
 				302399D81887A206007CF5A2 /* RORNavigationButton.m in Sources */,
 				30FECBBB17D83AE5002C3C90 /* RORNotificationView.m in Sources */,

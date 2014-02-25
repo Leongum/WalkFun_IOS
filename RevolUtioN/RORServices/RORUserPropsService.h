@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "User_Prop.h"
+#import "Virtual_Product_Buy.h"
 #import "RORAppDelegate.h"
 #import "RORContextUtils.h"
 #import "RORHttpResponse.h"
 #import "RORUserClientHandler.h"
+#import "RORVirtualProductClientHandler.h"
 
 @interface RORUserPropsService : NSObject
 
@@ -24,10 +26,7 @@
 //服务器同步用户的道具具体情况
 + (BOOL)syncUserProps:(NSNumber *)userId;
 
-//将更新的后的道具情况保存到数据库。不上传服务器
-+ (BOOL) saveUserPropInfoToDB:(User_Prop *)userProp;
-
-//上传本地未上传过的道具数据
-+ (BOOL)uploadUserProps;
+//购买道具
++ (BOOL)buyUserProps:(NSNumber *)propId withBuyNumbers:(NSNumber *) numbers;
 
 @end
