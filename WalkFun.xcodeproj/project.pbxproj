@@ -151,6 +151,7 @@
 		30103DF2185EE8EE002B65ED /* history_detail_speedButton_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30103DF1185EE8EE002B65ED /* history_detail_speedButton_bg.png */; };
 		3013D48C18B7191D005F4C07 /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3013D48B18B7191D005F4C07 /* AddFriendViewController.m */; };
 		3013D48F18B7373E005F4C07 /* FriendInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3013D48E18B7373E005F4C07 /* FriendInfoViewController.m */; };
+		3013D49218BC6945005F4C07 /* SexSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3013D49118BC6945005F4C07 /* SexSelectionViewController.m */; };
 		30166A9317C3B84C0035C722 /* main_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30166A8817C3B84C0035C722 /* main_bg.jpg */; };
 		30166A9617C3B84C0035C722 /* main_challenge_btn_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30166A8B17C3B84C0035C722 /* main_challenge_btn_bg.png */; };
 		30166A9817C3B84C0035C722 /* main_run_btn_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30166A8D17C3B84C0035C722 /* main_run_btn_bg.png */; };
@@ -584,6 +585,8 @@
 		3013D48B18B7191D005F4C07 /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddFriendViewController.m; path = Friends/AddFriendViewController.m; sourceTree = "<group>"; };
 		3013D48D18B7373E005F4C07 /* FriendInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendInfoViewController.h; sourceTree = "<group>"; };
 		3013D48E18B7373E005F4C07 /* FriendInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendInfoViewController.m; sourceTree = "<group>"; };
+		3013D49018BC6945005F4C07 /* SexSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SexSelectionViewController.h; path = MainPage/SexSelectionViewController.h; sourceTree = "<group>"; };
+		3013D49118BC6945005F4C07 /* SexSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SexSelectionViewController.m; path = MainPage/SexSelectionViewController.m; sourceTree = "<group>"; };
 		30166A8817C3B84C0035C722 /* main_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = main_bg.jpg; sourceTree = "<group>"; };
 		30166A8B17C3B84C0035C722 /* main_challenge_btn_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_challenge_btn_bg.png; sourceTree = "<group>"; };
 		30166A8D17C3B84C0035C722 /* main_run_btn_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_run_btn_bg.png; sourceTree = "<group>"; };
@@ -1684,6 +1687,8 @@
 				3054673818AE04DF00CA123C /* RORMainViewController.m */,
 				30750A7218B3395D00EC7B51 /* MainPageViewController.h */,
 				30750A7318B3395D00EC7B51 /* MainPageViewController.m */,
+				3013D49018BC6945005F4C07 /* SexSelectionViewController.h */,
+				3013D49118BC6945005F4C07 /* SexSelectionViewController.m */,
 			);
 			name = MainPage;
 			sourceTree = "<group>";
@@ -2140,6 +2145,7 @@
 				3054673918AE04DF00CA123C /* RORMainViewController.m in Sources */,
 				0F07A2B818AE15C2003774B9 /* User_Prop.m in Sources */,
 				0FA751D4189279CB0037342E /* RORDBCommon.m in Sources */,
+				3013D49218BC6945005F4C07 /* SexSelectionViewController.m in Sources */,
 				30FFFE5918433412001EA4F1 /* RORChallengeCongratsCoverView.m in Sources */,
 				0FA751EA189279E70037342E /* RORHistoryDetailViewController.m in Sources */,
 				0FA7518E189279A90037342E /* RORHttpResponse.m in Sources */,

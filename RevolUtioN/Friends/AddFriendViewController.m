@@ -29,6 +29,7 @@
 	// Do any additional setup after loading the view.
     recommendPage = 0;
     contentList = [RORFriendService fetchRecommendFriends:[NSNumber numberWithInteger:recommendPage]];
+    recommendList = contentList;
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,7 +46,20 @@
 
 - (IBAction)searchAction:(id)sender {
     //todo searchAction
-    
+    NSString *searchText =self.searchTextField.text;
+    if (![searchText isEqualToString:@""]){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            searchResult = [RORUserServices searchFriend:searchText];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self endIndicator:self];
+                contentList = searchResult;
+                [self.tableView reloadData];
+            });
+        });
+    } else {
+        contentList = recommendList;
+        [self.tableView reloadData];
+    }
 }
 
 - (IBAction)refreshRecommendAction:(id)sender {
@@ -53,6 +67,7 @@
     NSArray *tmpList = [RORFriendService fetchRecommendFriends:[NSNumber numberWithInteger:recommendPage]];
     if (tmpList.count>0){
         contentList = tmpList;
+        recommendList = contentList;
         [self.tableView reloadData];
     } else {
         [self sendNotification:@"今天就这么多\n明天再来试试吧"];

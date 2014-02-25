@@ -68,8 +68,11 @@
 -(void)refreshFriendDisplayButton{
     if (showFollow){
         [self.showFollowButton setBackgroundColor:[UIColor redColor]];
-    } else
+        self.startDeletingButton.enabled = YES;
+    } else{
         [self.showFollowButton setBackgroundColor:[UIColor clearColor]];
+        self.startDeletingButton.enabled = NO;
+    }
     if (showFans){
         [self.showFansButton setBackgroundColor:[UIColor redColor]];
     } else
@@ -116,6 +119,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         isDeletingSuccess = [RORFriendService deFollowFriend:deletingFriend.friendId];
         followList = [RORFriendService fetchFriendFollowsList];
+        friendList = [RORFriendService fetchFriendEachFansList];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self endIndicator:self];
             if (!isDeletingSuccess){

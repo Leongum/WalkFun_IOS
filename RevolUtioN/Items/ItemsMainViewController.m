@@ -43,6 +43,8 @@
         //todo:放到loading里sync
         [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
         itemList = [RORUserPropsService fetchUserProps:[RORUserUtils getUserId]];
+        User_Base *user = [RORUserServices fetchUser:[RORUserUtils getUserId]];
+        self.moneyLabel.text = [NSString stringWithFormat:@"$ %d", user.userDetail.goldCoin.integerValue];
     } else
         itemList = nil;
     
