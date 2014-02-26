@@ -14,6 +14,7 @@
 @end
 
 @implementation ItemMallViewController
+@synthesize userMoney;
 
 #pragma mark ViewController initial
 
@@ -56,9 +57,15 @@
 
 //点“购买”之后执行这里
 - (IBAction)buyAction:(id)sender {
-    [self sendNotification:@"购买成功"];
-    
+//    [self sendNotification:@"购买成功"];
     [self.itemQuantityCoverView bgTap:self];
+    
+    if ([RORUserPropsService buyUserProps:selectedItem.productId withBuyNumbers:[NSNumber numberWithInt:selectedQuantity]]){
+        [self sendNotification:@"购买成功"];
+        [self.itemQuantityCoverView bgTap:self];
+    } else {
+        [self sendNotification:@"购买成功"];
+    }
 }
 
 //选择某件道具后弹出该道具的购买页面
@@ -66,6 +73,7 @@
     [self.view addSubview:self.itemQuantityCoverView];
     [self.itemQuantityCoverView appear:self];
     [self.pickView selectRow:0 inComponent:0 animated:NO];
+    selectedQuantity = 1;
     self.totalCost.text = [NSString stringWithFormat:@"$ %d", selectedItem.virtualPrice.integerValue];
     self.selectedItemNameLabel.text = selectedItem.productName;
 }
@@ -107,7 +115,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     selectedItem = [contentList objectAtIndex:indexPath.row];
-    [self showItemQuantityCover];
+    if (userMoney.integerValue / selectedItem.virtualPrice.integerValue > 0){
+        [self showItemQuantityCover];
+    } else {
+        [self sendAlart:@"好像买不起"];
+    }
 }
 
 #pragma mark -
@@ -117,7 +129,7 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView*)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return 10;
+    return userMoney.integerValue / selectedItem.virtualPrice.integerValue;
 }
 
 #pragma mark Picker Delegate Methods
@@ -141,7 +153,8 @@
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    self.totalCost.text = [NSString stringWithFormat:@"$ %d", (row+1)*selectedItem.virtualPrice.integerValue];
+    selectedQuantity = (row+1);
+    self.totalCost.text = [NSString stringWithFormat:@"$ %d", selectedQuantity*selectedItem.virtualPrice.integerValue];
     [self.totalCost pop:0.5 delegate:self];
 }
 @end

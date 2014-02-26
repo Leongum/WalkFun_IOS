@@ -89,18 +89,16 @@
     buyEnity.userId = [RORUserUtils getUserId];
     buyEnity.productId = propId;
     buyEnity.numbers = numbers;
-    buyEnity.buyTime = [RORUserUtils getSystemTime];
+//    buyEnity.buyTime = [RORUserUtils getSystemTime];
     
     RORHttpResponse *httpResponse = [RORVirtualProductClientHandler createVProductBuyInfo:[RORUserUtils getUserId] withBuyInfo: buyEnity.transToDictionary];
     if ([httpResponse responseStatus] == 200){
         [self syncUserProps:[RORUserUtils getUserId]];
+        [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
         return YES;
-        
     } else {
         NSLog(@"error: statCode = %@", [httpResponse errorMessage]);
         return NO;
     }
-
-    
 }
 @end

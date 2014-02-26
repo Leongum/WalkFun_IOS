@@ -73,7 +73,7 @@
     [super viewWillAppear:animated];
     
     if ([RORUserUtils getUserId].integerValue<0) {
-        UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginViewController"];
+        UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginNavigatorController"];
         [self presentViewController:loginViewController animated:NO completion:^(){}];
     } else {
         for (int i=0; i<PAGE_QUANTITY; i++){

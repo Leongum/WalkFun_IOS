@@ -43,7 +43,8 @@
         //todo:放到loading里sync
         [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
         itemList = [RORUserPropsService fetchUserProps:[RORUserUtils getUserId]];
-        User_Base *user = [RORUserServices fetchUser:[RORUserUtils getUserId]];
+        
+        user = [RORUserServices fetchUser:[RORUserUtils getUserId]];
         self.moneyLabel.text = [NSString stringWithFormat:@"$ %d", user.userDetail.goldCoin.integerValue];
     } else
         itemList = nil;
@@ -90,6 +91,8 @@
 - (IBAction)itemMallAction:(id)sender {
     UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"ItemsStoryboard" bundle:[NSBundle mainBundle]];
     UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"ItemMallViewController"];
+    if ([itemViewController respondsToSelector:@selector(setUserMoney:)])
+        [itemViewController setValue:user.userDetail.goldCoin forKey:@"userMoney"];
     [[self parentViewController] presentViewController:itemViewController animated:YES completion:^(){}];
     
     [mallCoverView bgTap:self];

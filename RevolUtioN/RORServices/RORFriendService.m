@@ -58,6 +58,7 @@
             return count;
         } else {
             NSLog(@"sync with host error: can't get user's friends list. Status Code: %d", [httpResponse responseStatus]);
+            return -1;
         }
     }
     return 0;

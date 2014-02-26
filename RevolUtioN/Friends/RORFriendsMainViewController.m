@@ -112,6 +112,25 @@
     [self refreshTableView];
 }
 
+- (IBAction)followAction:(id)sender{
+    NSInteger row = [self rowOfButton:sender];
+    deletingFriend = (Friend *)[contentList objectAtIndex:row];
+    [self startIndicator:self];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        isDeletingSuccess = [RORFriendService followFriend:deletingFriend.friendId];
+        followList = [RORFriendService fetchFriendFollowsList];
+        friendList = [RORFriendService fetchFriendEachFansList];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self endIndicator:self];
+            if (!isDeletingSuccess){
+                [self sendAlart:@"取消关注失败，请检查一下网络"];
+            } else {
+                [self refreshTableView];
+            }
+        });
+    });
+}
+
 - (IBAction)deFollowAction:(id)sender{
     NSInteger row = [self rowOfButton:sender];
     deletingFriend = (Friend *)[contentList objectAtIndex:row];
@@ -183,8 +202,18 @@
     userLevelLabel.text = [NSString stringWithFormat:@"Lv.%d", user.level.integerValue];
     userSexImage.image = [RORUserUtils getImageForUserSex:user.sex];
     
-    deleteButton.alpha = self.endDeletingButton.alpha;
-    [deleteButton addTarget:self action:@selector(deFollowAction:) forControlEvents:UIControlEventTouchUpInside];
+    if (self.startDeletingButton.enabled){
+        deleteButton.alpha = self.endDeletingButton.alpha;
+        [deleteButton setTitle:@"取消关注" forState:UIControlStateNormal];
+        [deleteButton removeTarget:self action:@selector(followAction:) forControlEvents:UIControlEventTouchUpInside];
+        [deleteButton addTarget:self action:@selector(deFollowAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+//    else if (showFans){
+//        deleteButton.alpha = 1;
+//        [deleteButton setTitle:@"关注" forState:UIControlStateNormal];
+//        [deleteButton removeTarget:self action:@selector(deFollowAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [deleteButton addTarget:self action:@selector(followAction:) forControlEvents:UIControlEventTouchUpInside];
+//    }
     
     return cell;
 }

@@ -16,6 +16,7 @@
 #import "RORContextUtils.h"
 #import "Recommend_App.h"
 #import "RORUtils.h"
+#import "RORVirtualProductService.h"
 
 @interface RORSystemService : NSObject
 
@@ -51,4 +52,12 @@
 
 //压缩事件列表为字符串
 + (NSString *)getStringFromEventList:(NSArray *)eventList andTimeList:(NSArray *)timeList;
+
+//根据事件列表计算出用于本地存储‘一次走路总获得的属性和道具’的字符串
+//attrkey,attrvalue attrkey,attrvalue|itemkey,itemvalue
++ (NSString *)getPropgetStringFromList:(NSArray *)eventList;
+
+//把存于本地的propget中的字符串转成对属性和道具影响的dict
+//返回的array[0]为attrDict，array[1]为itemDict
++ (NSArray *)getPropgetListFromString:(NSString *)propgetString;
 @end

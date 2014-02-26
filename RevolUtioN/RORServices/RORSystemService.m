@@ -237,12 +237,12 @@
 
 //open out
 +(Action_Define *)fetchActionDefineByPropId:(NSNumber *)propId{
-    NSArray *actionList = [self fetchAllActionDefine:ActionDefineReward];
+    NSArray *actionList = [self fetchAllActionDefine:ActionDefineUse];
     NSMutableArray * findActionList = [[NSMutableArray alloc] init];
     for (Action_Define *action in actionList) {
         NSMutableDictionary *actionDic = [RORUtils explainActionRule:action.actionRule];
         for (NSString *key in [actionDic allKeys]) {
-            if(((NSNumber *)[actionDic valueForKey:key]).integerValue == propId.integerValue){
+            if([RORDBCommon getNumberFromId:key].integerValue == propId.integerValue){
                 [findActionList addObject: action];
             }
         }
@@ -287,5 +287,77 @@
     return eventString;
 }
 
++ (NSString *)getPropgetStringFromList:(NSArray *)eventList{
+    NSMutableString *propgetString = [[NSMutableString alloc]init];
+    NSMutableDictionary *itemDict = [[NSMutableDictionary alloc]init];
+    NSMutableDictionary *attrDict = [[NSMutableDictionary alloc]init];
+    
+    for (int i=0; i<eventList.count; i++){
+        Action_Define *event = (Action_Define *)[eventList objectAtIndex:i];
+        NSDictionary *effectDict = [RORUtils explainActionEffetiveRule:event.effectiveRule];
+        for (NSString *key in [effectDict allKeys]){
+            NSNumber *n = [RORDBCommon getNumberFromId:[effectDict objectForKey:key]];
+            NSNumber *current = [RORDBCommon getNumberFromId:[attrDict objectForKey:key]];
+            if (current) {
+                [attrDict setObject:[NSNumber numberWithInteger:current.integerValue + n.integerValue] forKey:key];
+            } else {
+                [attrDict setObject:n forKey:key];
+            }
+        }
+        NSDictionary *actionDict = [RORUtils explainActionRule:event.actionRule];
+        for (NSString *key in [actionDict allKeys]){
+            NSNumber *n = [RORDBCommon getNumberFromId:[effectDict objectForKey:key]];
+            NSNumber *current = [RORDBCommon getNumberFromId:[itemDict objectForKey:key]];
+            if (current) {
+                [itemDict setObject:[NSNumber numberWithInteger:current.integerValue + n.integerValue] forKey:key];
+            } else {
+                [itemDict setObject:n forKey:key];
+            }
+        }
+    }
+    [propgetString appendString:@"属性变化："];
+    NSDictionary *attrNameDict = [NSDictionary dictionaryWithObjectsAndKeys:@"肥肉", @"F", @"健康", @"H", nil];
+    for (NSString *key in [attrDict allKeys]){
+        if (![[attrNameDict allKeys] containsObject:key])
+            continue;
+        NSNumber *num = [attrDict objectForKey:key];
+        if (num>0){
+            [propgetString appendString:[NSString stringWithFormat:@"%@ +%@  ",[attrNameDict objectForKey:key] ,num]];
+        } else {
+            [propgetString appendString:[NSString stringWithFormat:@"%@ %@  ",[attrNameDict objectForKey:key] ,num]];
+        }
+    }
+    [propgetString appendString:@"|获得道具："];
+    for (NSString *key in [itemDict allKeys]){
+        NSNumber *num = [itemDict objectForKey:key];
+        Virtual_Product *item = [RORVirtualProductService fetchVProduct:[RORDBCommon getNumberFromId:key]];
+        [propgetString appendString:[NSString stringWithFormat:@"%@ x%@ ",item.productName, num]];
+    }
+    [propgetString appendString:@"|获得金币："];
+    [propgetString appendString:[NSString stringWithFormat:@"%@",[attrDict objectForKey:ACTION_RULE_MONEY]]];
+    
+    return propgetString;
+}
 
++ (NSArray *)getPropgetListFromString:(NSString *)propgetString{
+    NSArray *propgetStringList = [propgetString componentsSeparatedByString:@"|"];
+    NSMutableDictionary *itemDict = [[NSMutableDictionary alloc]init];
+    NSMutableDictionary *attrDict = [[NSMutableDictionary alloc]init];
+    NSArray *attrStringList = [((NSString *)[propgetStringList objectAtIndex:0]) componentsSeparatedByString:@" "];
+    for (NSString *attrPairStringList in attrStringList){
+        NSArray *attrPairList = [attrPairStringList componentsSeparatedByString:@","];
+        NSString *key = [attrPairList objectAtIndex:0];
+        NSString *value = [attrPairList objectAtIndex:1];
+        [attrDict setObject:value forKey:key];
+    }
+    NSArray *itemStringList = [((NSString *)[propgetStringList objectAtIndex:1]) componentsSeparatedByString:@" "];
+    for (NSString *attrPairStringList in itemStringList){
+        NSArray *attrPairList = [attrPairStringList componentsSeparatedByString:@","];
+        NSString *key = [attrPairList objectAtIndex:0];
+        NSString *value = [attrPairList objectAtIndex:1];
+        [itemDict setObject:value forKey:key];
+    }
+    
+    return [NSArray arrayWithObjects:attrDict, itemDict, nil];
+}
 @end

@@ -131,8 +131,11 @@
         }
         [self startIndicator:self];
 
-        [self syncDataAfterLogin];
+        if ([self syncDataAfterLogin]) {
+            [self dismissViewControllerAnimated:YES completion:^(){}];
+        }
         [self endIndicator:self];
+        
     } else { //注册
         //todo
         NSDictionary *regDict = [[NSDictionary alloc]initWithObjectsAndKeys:usernameTextField.text, @"userName",[RORUtils md5:passwordTextField.text], @"password", nicknameTextField.text, @"nickName", [RORUserUtils getDeviceToken], @"deviceId",@"ios", @"platformInfo", nil];
@@ -143,24 +146,19 @@
         if (user != nil){
             [self sendSuccess:REGISTER_SUCCESS];
             [self endIndicator:self];
-//            [self performSegueWithIdentifier:@"bodySetting" sender:self];
-//            return;
+            [self performSegueWithIdentifier:@"sexSetting" sender:self];
         } else {
             [self sendAlart:REGISTER_FAIL];
             [self endIndicator:self];
-//            return;
         }
     }
     passwordTextField.text = @"";
     nicknameTextField.text = @"";
     
-    [self dismissViewControllerAnimated:YES completion:^(){}];
-//    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (BOOL) isLegalInput {
     if (switchButton.selectionIndex == 0){
-//        NSLog(@"%@,%@",usernameTextField.text,passwordTextField.text);
         if (usernameTextField.text.length<=0 ||
             passwordTextField.text.length <=0) {
             [self sendAlart:LOGIN_INPUT_CHECK];
@@ -174,7 +172,6 @@
             return NO;
         }
         
-//        NSLog(@"%d",nicknameTextField.text.length);
         if ([RORUtils convertToInt:nicknameTextField.text]>6) {
             [self sendAlart:@"昵称太长啦！"];
             return NO;
@@ -242,11 +239,12 @@
                                                   
                                                   BOOL islogin = [RORShareService loginFromSNS:account];
                                                   if(islogin){
-                                                      [self syncDataAfterLogin];
-                                                      [self.navigationController popViewControllerAnimated:YES];
+                                                      if ([self syncDataAfterLogin]) {
+                                                          [self dismissViewControllerAnimated:YES completion:^(){}];
+                                                      }
                                                   }
                                                   else{
-                                                      [self performSegueWithIdentifier:@"bodySetting" sender:self];
+                                                      [self performSegueWithIdentifier:@"sexSetting" sender:self];
                                                   }
                                               }];
                                           }
@@ -257,17 +255,17 @@
         
         BOOL islogin = [RORShareService loginFromSNS:account];
         if(islogin){
-            [self syncDataAfterLogin];
-            [self.navigationController popViewControllerAnimated:YES];
+            if ([self syncDataAfterLogin])
+                [self dismissViewControllerAnimated:YES completion:^(){}];
         }
         else{
-            [self performSegueWithIdentifier:@"bodySetting" sender:self];
+            [self performSegueWithIdentifier:@"sexSetting" sender:self];
         }
     }
     
 }
 
--(void)syncDataAfterLogin{
+-(BOOL)syncDataAfterLogin{
     [self startIndicator:self];
     //用户历史
     BOOL history = [RORRunHistoryServices syncRunningHistories:[RORUserUtils getUserId]];
@@ -275,8 +273,8 @@
         history = [RORRunHistoryServices syncRunningHistories:[RORUserUtils getUserId]];
     }
     //用户好友信息
-    BOOL friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
-    if(!friends){
+    int friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
+    if(friends<0){
         friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
     }
     //好友初步信息
@@ -300,10 +298,12 @@
         userPorp = [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
     }
     [self endIndicator:self];
-    if(!history || !friends || !friendsort || !missionHistory || !userPorp){
-        [self sendAlart:@"个人信息加载失败"];
+    if(!history || friends<0 || !friendsort || !missionHistory || !userPorp){
         [RORUserUtils logout];
+        [self sendAlart:@"个人信息加载失败"];
+        return NO;
     }
+    return YES;
 }
 
 @end

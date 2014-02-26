@@ -51,8 +51,11 @@
     UIViewController *parentController = [((UIViewController*)delegate) parentViewController];
     UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"ItemsStoryboard" bundle:[NSBundle mainBundle]];
     UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"ItemUseTargetViewController"];
+    if ([itemViewController respondsToSelector:@selector(setSelectedItem:)]){
+        [itemViewController setValue:item forKey:@"selectedItem"];
+    }
     [parentController presentViewController:itemViewController animated:YES completion:^(){}];
-    
+
     [self bgTap:self];
 }
 

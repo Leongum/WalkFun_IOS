@@ -21,7 +21,7 @@
     [tempDict setValue:self.userId forKey:@"userId"];
     [tempDict setValue:self.productId forKey:@"productId"];
     [tempDict setValue:self.numbers forKey:@"numbers"];
-    [tempDict setValue:self.buyTime forKey:@"buyTime"];
+//    [tempDict setValue:self.buyTime forKey:@"buyTime"];
     return tempDict;
 }
 

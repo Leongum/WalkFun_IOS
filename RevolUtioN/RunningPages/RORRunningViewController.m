@@ -350,8 +350,10 @@
     runHistory.missionRoute = [RORDBCommon getStringFromRoutes:routes];
 //    NSLog(@"%@", [RORDBCommon getStringFromSpeedList:avgSpeedPerKMList]);
     
-    //todo 存事件列表 eventHappenedList -> runHistory
-    //todo 算获得的道具，存进 - propGet
+    //保存actionList(actionIds)
+    runHistory.actionIds = [RORSystemService getStringFromEventList:eventHappenedList andTimeList:eventTimeList];
+    //保存propget
+    runHistory.propGet = [RORSystemService getPropgetStringFromList:eventHappenedList];
     
     runHistory.missionDate = [NSDate date];
     runHistory.missionEndTime = self.endTime;
@@ -362,7 +364,7 @@
     runHistory.steps = [NSNumber numberWithInteger:stepCounting.counter / 0.8];
     runHistory.experience =[self calculateExperience:runHistory];
     //todo 走路本身是否有金币奖励
-    runHistory.goldCoin =[self calculateScore:runHistory];
+//    runHistory.goldCoin =[self calculateScore:runHistory];
     runHistory.extraExperience =[NSNumber  numberWithDouble:0];
 //    runHistory.speedList = [RORDBCommon getStringFromSpeedList:avgSpeedPerKMList];
     
@@ -399,7 +401,7 @@
     UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
     
     if (indexPath.row == 0) {
-        eventTimeLabel.text = @"0分0秒的时候";
+        eventTimeLabel.text = @"";
         eventLabel.text = @"开始散步";
         effectLabel.text = @"一切看起来都那么美好～";
     } else {

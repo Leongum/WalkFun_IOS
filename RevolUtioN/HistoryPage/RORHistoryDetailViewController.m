@@ -51,6 +51,16 @@
    NSDateFormatter *formattter = [[NSDateFormatter alloc] init];
     [formattter setDateFormat:@"yyyy-MM-dd"];
     self.dateLabel.text = [NSString stringWithFormat:@"%@", [formattter stringFromDate:record.missionDate]];
+    
+    NSArray *tmpList = [RORSystemService getEventListFromString:record.actionIds];
+    eventTimeList = [tmpList objectAtIndex:0];
+    eventList = [tmpList objectAtIndex:1];
+    
+//    [RORSystemService getPropgetListFromString:record.propGet];//debug
+    [self.sumLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    self.sumLabel.numberOfLines = 3;
+    self.sumLabel.text = record.propGet;
+
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -128,7 +138,7 @@
     UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
     
     if (indexPath.row == 0) {
-        eventTimeLabel.text = @"0分0秒的时候";
+        eventTimeLabel.text = @"";
         eventLabel.text = @"开始散步";
         effectLabel.text = @"一切看起来都那么美好～";
     } else {

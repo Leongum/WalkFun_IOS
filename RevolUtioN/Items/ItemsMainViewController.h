@@ -16,6 +16,7 @@
     NSArray *itemList;
     UIViewController *parentController;
     CoverView *mallCoverView;
+    User_Base *user;
 }
 
 @property (strong, nonatomic) IBOutlet CoverView *itemDetailCoverView;

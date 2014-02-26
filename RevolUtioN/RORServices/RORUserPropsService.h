@@ -14,6 +14,7 @@
 #import "RORHttpResponse.h"
 #import "RORUserClientHandler.h"
 #import "RORVirtualProductClientHandler.h"
+#import "RORUserServices.h"
 
 @interface RORUserPropsService : NSObject
 

@@ -27,6 +27,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.backButton.alpha = 0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,18 +41,38 @@
 
 - (IBAction)maleAction:(id)sender {
     userSex = @"男";
+    [self showConfirmView];
 }
 
 - (IBAction)femaleAction:(id)sender {
     userSex = @"女";
+    [self showConfirmView];
+}
+
+-(void)showConfirmView{
+    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"选择性别" message:[NSString stringWithFormat:@"确定选【%@】吗？", userSex] delegate:self cancelButtonTitle:CANCEL_BUTTON_CANCEL otherButtonTitles:OK_BUTTON_OK, nil];
+    [confirmView show];
+    confirmView = nil;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        return;
+    }else if(buttonIndex == 1){
+        [self didSelectSexAction];
+        [self dismissViewControllerAnimated:YES completion:^(){}];
+    }
 }
 
 - (void)didSelectSexAction{
-    NSDictionary *saveDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                              userSex, @"sex", nil];
-    [RORUserUtils writeToUserSettingsPList:saveDict];
-    if([RORUserUtils getUserId].integerValue > 0){
-        [RORUserServices updateUserInfo:saveDict];
+//    NSDictionary *saveDict = [NSDictionary dictionaryWithObjectsAndKeys:
+//                              userSex, @"sex", nil];
+//    [RORUserUtils writeToUserSettingsPList:saveDict];
+    
+    User_Base *userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
+    userBase.sex = userSex;
+    [RORUserServices updateUserBase:userBase];
 }
 
 @end
