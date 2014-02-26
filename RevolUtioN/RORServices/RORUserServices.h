@@ -44,4 +44,7 @@
 
 //根据昵称查询用户，服务器同步获取。返回Search_Friend
 +(NSArray *)searchFriend:(NSString *) nickName;
+
+//向服务器同步用户token 信息
++ (void)updateUserDeviceToken;
 @end

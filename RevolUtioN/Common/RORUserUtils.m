@@ -35,6 +35,11 @@ static NSDate *syncTime;
     return [userDict valueForKey:@"nickName"];
 }
 
++ (NSString *)getDeviceToken{
+    NSMutableDictionary *userDict = [self getUserInfoPList];
+    return [userDict valueForKey:@"deviceToken"];
+}
+
 + (NSNumber *)getDownLoaded{
     NSMutableDictionary *userDict = [self getUserInfoPList];
     return [userDict valueForKey:@"downLoaded"];
@@ -171,7 +176,8 @@ static NSDate *syncTime;
     [logoutDict setValue:[self getLastUpdateTime:@"SystemMessageUpdateTime"] forKey:@"SystemMessageUpdateTime"];
     [logoutDict setValue:[self getLastUpdateTime:@"VirtualProductUpdateTime"] forKey:@"VirtualProductUpdateTime"];
     [logoutDict setValue:[self getLastUpdateTime:@"ActionDefineLastUpdateTime"] forKey:@"ActionDefineLastUpdateTime"];
-     [logoutDict setValue:[self getLastUpdateTime:@"RecommendLastUpdateTime"] forKey:@"RecommendLastUpdateTime"];
+    [logoutDict setValue:[self getLastUpdateTime:@"RecommendLastUpdateTime"] forKey:@"RecommendLastUpdateTime"];
+    [logoutDict setValue:[self getDeviceToken] forKey:@"deviceToken"];
     [logoutDict writeToFile:path atomically:YES];
     userId = [NSNumber numberWithInteger:-1];
     NSArray *tables = [NSArray arrayWithObjects:@"Action",@"Friend",@"Friend_Sort",@"User_Base",@"User_Detail",@"User_Prop",@"User_Running_History",@"User_Mission_History", nil];

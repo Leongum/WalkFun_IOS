@@ -86,6 +86,7 @@
     RORHttpResponse *httpResponse = [RORUserClientHandler getUserInfoByUserNameAndPassword:userName withPassword:password];
     User_Base *userBase = [self syncUserFromResponse:httpResponse];
     [self saveUserInfoToList:userBase];
+    [self updateUserDeviceToken];
     return userBase;
 }
 
@@ -93,7 +94,7 @@
 +(BOOL)updateUserBase:(User_Base *)userBase{
     NSNumber *userId = [RORUserUtils getUserId];
     if(userId.integerValue > 0){
-        if(userBase!= nil && userBase.updateTime == nil)
+        if(userBase!= nil)
         {
             NSDictionary *updateDic = userBase.transToDictionary;
             RORHttpResponse *httpResponse = [RORUserClientHandler updateUserBaseInfo:userId withUserInfo:updateDic];
@@ -195,5 +196,19 @@
         }
     }
     return nil;
+}
+
+//open out
++ (void)updateUserDeviceToken{
+    NSNumber *userId = [RORUserUtils getUserId];
+    if(userId.integerValue > 0){
+        User_Base *userBase = [RORUserServices fetchUserBaseById:userId];
+        if([userBase.deviceId isEqualToString:[RORUserUtils getDeviceToken]])
+        {
+            userBase.deviceId = [RORUserUtils getDeviceToken];
+            userBase.platformInfo = @"ios";
+            [RORUserServices updateUserBase:userBase];
+        }
+    }
 }
 @end

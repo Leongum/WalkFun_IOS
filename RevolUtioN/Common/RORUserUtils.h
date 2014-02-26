@@ -15,6 +15,8 @@
 
 + (NSString *)getUserName;
 
++ (NSString *)getDeviceToken;
+
 + (NSNumber *)getUserWeight;
 
 + (NSString *)getUserUuid;

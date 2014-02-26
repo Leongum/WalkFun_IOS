@@ -135,7 +135,7 @@
         [self endIndicator:self];
     } else { //注册
         //todo
-        NSDictionary *regDict = [[NSDictionary alloc]initWithObjectsAndKeys:usernameTextField.text, @"userName",[RORUtils md5:passwordTextField.text], @"password", nicknameTextField.text, @"nickName", @"unknow device id", @"deviceId",@"ios", @"platformInfo", nil];
+        NSDictionary *regDict = [[NSDictionary alloc]initWithObjectsAndKeys:usernameTextField.text, @"userName",[RORUtils md5:passwordTextField.text], @"password", nicknameTextField.text, @"nickName", [RORUserUtils getDeviceToken], @"deviceId",@"ios", @"platformInfo", nil];
         [self startIndicator:self];
 
         User_Base *user = [RORUserServices registerUser:regDict];

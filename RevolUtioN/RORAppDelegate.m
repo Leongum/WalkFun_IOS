@@ -9,6 +9,8 @@
 #import "RORAppDelegate.h"
 #import "Reachability.h"
 #import "RORNetWorkUtils.h"
+#import "RORUserServices.h"
+#import "User_Base.h"
 
 @implementation RORAppDelegate
 @synthesize managedObjectContext =_managedObjectContext;
@@ -85,12 +87,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [MobClick checkUpdate];
     //todo:: need remove
     //umeng analytics
     [MobClick setLogEnabled:YES];  // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
-    [MobClick setAppVersion:XcodeAppVersion]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+    [MobClick setAppVersion:@"1.0"]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
     [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:(ReportPolicy) REALTIME channelId:nil];
+    [MobClick checkUpdate];
     
     //sns share umeng
     [UMSocialData setAppKey:UMENG_APPKEY];
@@ -112,6 +114,19 @@
 	hostReach = [Reachability reachabilityWithHostName: @"www.baidu.com"];
 	[hostReach startNotifier];
     
+//    //判断是否由远程消息通知触发应用程序启动
+//    if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]!=nil) {
+//        //获取应用程序消息通知标记数（即小红圈中的数字）
+//        int badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+//        if (badge>0) {
+//            //如果应用程序消息通知标记数（即小红圈中的数字）大于0，清除标记。
+//            badge--;
+//            //清除标记。清除小红圈中数字，小红圈中数字为0，小红圈才会消除。
+//            [UIApplication sharedApplication].applicationIconBadgeNumber = badge;
+//        }
+//    }
+    
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge)];
     // Override point for customization after application launch.
     return YES;
 }
@@ -124,6 +139,31 @@
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     return  [UMSocialSnsService handleOpenURL:url wxApiDelegate:nil];
+}
+
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+	NSString *token = [NSString stringWithFormat:@"%@", deviceToken];
+	NSLog(@"My token is:%@", token);
+    NSMutableDictionary *userDict = [RORUserUtils getUserInfoPList];
+    [userDict setValue:token forKey:@"deviceToken"];
+    [RORUserUtils writeToUserInfoPList:userDict];
+    [RORUserServices updateUserDeviceToken];
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+	NSString *error_str = [NSString stringWithFormat: @"%@", error];
+	NSLog(@"Failed to get token, error:%@", error_str);
+    NSMutableDictionary *userDict = [RORUserUtils getUserInfoPList];
+    [userDict setValue:@"no_device_id" forKey:@"deviceToken"];
+    [RORUserUtils writeToUserInfoPList:userDict];
+    [RORUserServices updateUserDeviceToken];
+}
+
+//处理收到的消息推送
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    //在此处理接收到的消息。
+    NSLog(@"Receive remote notification : %@",userInfo);
 }
 
 //- (void)applicationWillResignActive:(UIApplication *)application

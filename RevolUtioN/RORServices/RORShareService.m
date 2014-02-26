@@ -19,7 +19,7 @@
     user.password = [RORUtils md5:user.userName];
     user.platformInfo = @"ios";
     //todo:: add device id.
-    user.deviceId = @"todo add device id";
+    user.deviceId = [RORUserUtils getDeviceToken];
     
     User_Base *loginUser = [RORUserServices syncUserInfoByLogin:user.userName withUserPassword:[RORUtils md5:user.password]];
     
