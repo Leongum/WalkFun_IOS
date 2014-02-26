@@ -164,6 +164,20 @@
 {
     //在此处理接收到的消息。
     NSLog(@"Receive remote notification : %@",userInfo);
+    //用户好友信息
+    int friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
+    if(friends<0){
+        friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
+    }
+    //好友初步信息
+    BOOL friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
+    if(!friendsort){
+        friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
+    }
+    User_Base *user = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
+    if (!user){
+        user = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
+    }
 }
 
 //- (void)applicationWillResignActive:(UIApplication *)application
