@@ -13,6 +13,9 @@
 
 @interface AddFriendViewController : RORViewController{
     NSArray *contentList;
+    NSArray *recommendList;
+    NSArray *searchResult;
+    
     NSInteger recommendPage;
     
     Search_Friend *addingFriend;

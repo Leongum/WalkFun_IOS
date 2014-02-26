@@ -44,6 +44,13 @@
                                             <action selector="mallAction:" destination="AAW-LV-puB" eventType="touchUpInside" id="hTS-EX-kE8"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 1234" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eCq-cI-dW6">
+                                        <rect key="frame" x="170" y="6" width="100" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -58,6 +65,7 @@
                     <navigationItem key="navigationItem" id="1SF-1j-0uU"/>
                     <connections>
                         <outlet property="itemMainTitleView" destination="6dc-nE-MU5" id="0sM-Y5-0at"/>
+                        <outlet property="moneyLabel" destination="eCq-cI-dW6" id="ZKs-Gl-LuZ"/>
                         <outlet property="userItemScrollView" destination="AmJ-Ms-Lng" id="NH4-Xw-KOF"/>
                     </connections>
                 </viewController>
@@ -193,20 +201,26 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="lLW-YB-u2U">
-                                                    <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                                    <rect key="frame" x="10" y="10" width="55" height="55"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ItemName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UXH-OM-cqS">
-                                                    <rect key="frame" x="83" y="0.0" width="217" height="32"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一般六个字够了" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UXH-OM-cqS">
+                                                    <rect key="frame" x="83" y="0.0" width="139" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="102" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HOr-Jm-0pE">
                                                     <rect key="frame" x="83" y="34" width="217" height="41"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="103" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$123" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K4g-qo-VHc">
+                                                    <rect key="frame" x="230" y="0.0" width="70" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -268,6 +282,7 @@
                     <connections>
                         <outlet property="buyButton" destination="ddc-UU-JHe" id="daa-e4-KcF"/>
                         <outlet property="itemQuantityCoverView" destination="zWW-Co-HMS" id="79Z-J2-q0w"/>
+                        <outlet property="pickView" destination="k8V-2Q-cYj" id="U1J-vX-7SR"/>
                         <outlet property="selectedItemNameLabel" destination="tEQ-cc-0fk" id="7cw-vD-oyA"/>
                         <outlet property="tableView" destination="RrS-oP-blt" id="Mhc-XD-E6l"/>
                         <outlet property="totalCost" destination="h1x-ff-DS5" id="7nZ-Ft-z8a"/>

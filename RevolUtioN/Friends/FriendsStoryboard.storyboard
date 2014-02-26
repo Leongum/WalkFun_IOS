@@ -130,9 +130,10 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <button opaque="NO" tag="200" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DOh-2U-VKv">
-                                                    <rect key="frame" x="188" y="12" width="48" height="48"/>
+                                                    <rect key="frame" x="161" y="12" width="75" height="48"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" backgroundImage="eyeClosed.png">
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="取消关注">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
@@ -176,6 +177,7 @@
                         <outlet property="friendTitleView" destination="ibY-OL-z5Y" id="txi-Zn-jdv"/>
                         <outlet property="showFansButton" destination="mZP-tu-avx" id="k5d-Di-9xX"/>
                         <outlet property="showFollowButton" destination="3ce-on-dSI" id="jjB-jS-5kl"/>
+                        <outlet property="startDeletingButton" destination="JIG-X5-c9p" id="NBa-ZP-PNW"/>
                         <outlet property="tableView" destination="zNU-K6-pfJ" id="W03-uL-Hxk"/>
                     </connections>
                 </viewController>
@@ -240,12 +242,12 @@
                                 <rect key="frame" x="20" y="56" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                 <connections>
                                     <action selector="searchAction:" destination="9yw-1K-Y6Z" eventType="editingDidEndOnExit" id="cgW-Vr-9c3"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="向你推荐" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DwX-Mv-Vfl">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最近活跃" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DwX-Mv-Vfl">
                                 <rect key="frame" x="20" y="115" width="80" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -396,7 +398,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="eyeClosed.png" width="128" height="128"/>
         <image name="female.png" width="50" height="50"/>
         <image name="searchViewCell_bg.png" width="541" height="162"/>
     </resources>

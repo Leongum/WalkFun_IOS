@@ -32,5 +32,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *showFollowButton;
 @property (strong, nonatomic) IBOutlet UIButton *showFansButton;
 @property (strong, nonatomic) IBOutlet UIButton *endDeletingButton;
+@property (strong, nonatomic) IBOutlet UIButton *startDeletingButton;
 
 @end

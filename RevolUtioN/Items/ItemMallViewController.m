@@ -57,6 +57,7 @@
 //点“购买”之后执行这里
 - (IBAction)buyAction:(id)sender {
     [self sendNotification:@"购买成功"];
+    
     [self.itemQuantityCoverView bgTap:self];
 }
 
@@ -64,6 +65,7 @@
 -(void)showItemQuantityCover{
     [self.view addSubview:self.itemQuantityCoverView];
     [self.itemQuantityCoverView appear:self];
+    [self.pickView selectRow:0 inComponent:0 animated:NO];
     self.totalCost.text = [NSString stringWithFormat:@"$ %d", selectedItem.virtualPrice.integerValue];
     self.selectedItemNameLabel.text = selectedItem.productName;
 }
@@ -93,7 +95,11 @@
     
     UILabel *itemDescLabel = (UILabel *)[cell viewWithTag:102];
     itemDescLabel.text = item.productDescription;
-    
+    [itemDescLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    itemDescLabel.numberOfLines = 3;
+
+    UILabel *costLabel = (UILabel *)[cell viewWithTag:103];
+    costLabel.text = [NSString stringWithFormat:@"$ %d", item.virtualPrice.integerValue];
     
     return cell;
 }

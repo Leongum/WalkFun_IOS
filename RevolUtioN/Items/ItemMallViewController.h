@@ -20,5 +20,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *selectedItemNameLabel;
 @property (strong, nonatomic) IBOutlet RORNormalButton *buyButton;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIPickerView *pickView;
 
 @end

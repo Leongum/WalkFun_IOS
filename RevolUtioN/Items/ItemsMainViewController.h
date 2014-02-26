@@ -10,6 +10,7 @@
 #import "CoverView.h"
 #import "UserItemScrollView.h"
 #import "RORUserPropsService.h"
+#import "RORUserServices.h"
 
 @interface ItemsMainViewController : MainPageViewController<UIScrollViewDelegate>{
     NSArray *itemList;
@@ -21,5 +22,6 @@
 
 @property (strong, nonatomic) IBOutlet UserItemScrollView *userItemScrollView;
 @property (strong, nonatomic) IBOutlet UIView *itemMainTitleView;
+@property (strong, nonatomic) IBOutlet UILabel *moneyLabel;
 
 @end
