@@ -203,7 +203,7 @@
     NSNumber *userId = [RORUserUtils getUserId];
     if(userId.integerValue > 0){
         User_Base *userBase = [RORUserServices fetchUserBaseById:userId];
-        if([userBase.deviceId isEqualToString:[RORUserUtils getDeviceToken]])
+        if(![userBase.deviceId isEqualToString:[RORUserUtils getDeviceToken]])
         {
             userBase.deviceId = [RORUserUtils getDeviceToken];
             userBase.platformInfo = @"ios";
