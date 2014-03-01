@@ -37,7 +37,15 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [self startIndicator:self];
-    contentList = [RORVirtualProductService fetchAllVProduct];
+    contentList = [[NSMutableArray alloc]initWithArray:[RORVirtualProductService fetchAllVProduct]];
+    
+    NSMutableArray *deletingList = [[NSMutableArray alloc]init];
+    for (Virtual_Product *item in contentList) {
+        if (item.virtualPrice == nil || item.virtualPrice.integerValue == 0)
+            [deletingList addObject:item];
+    }
+    [contentList removeObjectsInArray:deletingList];
+    
     [self.tableView reloadData];
     [self endIndicator:self];
 }
@@ -72,6 +80,7 @@
 -(void)showItemQuantityCover{
     [self.view addSubview:self.itemQuantityCoverView];
     [self.itemQuantityCoverView appear:self];
+    [self.pickView reloadAllComponents];
     [self.pickView selectRow:0 inComponent:0 animated:NO];
     selectedQuantity = 1;
     self.totalCost.text = [NSString stringWithFormat:@"$ %d", selectedItem.virtualPrice.integerValue];
@@ -102,9 +111,12 @@
     itemNameLabel.text = item.productName;
     
     UILabel *itemDescLabel = (UILabel *)[cell viewWithTag:102];
-    itemDescLabel.text = item.productDescription;
     [itemDescLabel setLineBreakMode:NSLineBreakByWordWrapping];
-    itemDescLabel.numberOfLines = 3;
+    itemDescLabel.numberOfLines = 0;
+    NSMutableString *desc = [[NSMutableString alloc]initWithString:item.productDescription];
+    [desc replaceOccurrencesOfString:@"\\n" withString:@"\n" options:NSLiteralSearch|NSCaseInsensitiveSearch range:NSMakeRange(0, [desc length])];
+    itemDescLabel.text = desc;
+
 
     UILabel *costLabel = (UILabel *)[cell viewWithTag:103];
     costLabel.text = [NSString stringWithFormat:@"$ %d", item.virtualPrice.integerValue];

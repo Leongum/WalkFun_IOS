@@ -61,11 +61,15 @@
     NSArray *eventWillList;
     NSMutableArray *eventHappenedList;
     NSMutableArray *eventTimeList;
+    NSMutableArray *eventLocationList;
     int eventHappenedCount;
     NSIndexPath *bottomIndex;
     
     NSTimer *repeatingTimer;
     BOOL isStarted;
+    BOOL isAWalking;
+    
+    User_Base *user;
 }
 
 @property (nonatomic, retain) CLLocationManager *locationManager;
@@ -77,6 +81,9 @@
 -(NSNumber *)calculateCalorie;
 -(NSNumber *)calculateExperience:(User_Running_History *)runningHistory;
 -(NSNumber *)calculateScore:(User_Running_History *)runningHistory;
+-(NSNumber *)calculateFatness;
+-(NSNumber *)calculateHealth;
+
 - (void)stopUpdates;
 - (void)inertiaNavi;
 - (void)initNavi;

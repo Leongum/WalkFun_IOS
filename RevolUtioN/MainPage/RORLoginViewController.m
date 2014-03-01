@@ -23,7 +23,6 @@
 @synthesize usernameTextField;
 @synthesize passwordTextField;
 @synthesize nicknameTextField;
-@synthesize switchButton;
 @synthesize context;
 @synthesize delegate;
 
@@ -42,13 +41,11 @@
 //    [self endIndicator:self];
     self.backButton.alpha = 0;
     
-    switchButton = [[RORPaperSegmentControl alloc]initWithFrame:SEGMENT_FRAME andSegmentNumber:2];
-    switchButton.delegate = self;
-    [switchButton setSegmentTitle:@"登录" withIndex:0];
-    [switchButton setSegmentTitle:@"注册" withIndex:1];
-    [self.view addSubview:switchButton];
+    self.loginInputView.alpha = 0;
     
     self.showPWCheckBox.isChecked = YES;
+    
+    [self.backButton removeTarget:self.backButton action:@selector(pressOn:) forControlEvents:UIControlEventTouchDown];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -70,19 +67,20 @@
 //    
 //}
 
+-(IBAction)backAction:(id)sender{
+    self.loginButtonView.alpha = 1;
+    self.loginInputView.alpha = 0;
+    self.backButton.alpha = 0;
+}
+
 #pragma RORSegmentControl-Delegate======
 
--(void)SegmentValueChanged:(NSInteger)segmentIndex{
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    [UIView setAnimationDuration:0.2];
-    
+-(void)reFreshView{
     nicknameTextField.alpha = segmentIndex;
     self.snsContainerView.alpha = 1-segmentIndex;
-    
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(animationFinished)];
-    [UIView commitAnimations];
+    self.loginButtonView.alpha = 0;
+    self.loginInputView.alpha = 1;
+    self.backButton.alpha = 1;
 }
 //=======
 
@@ -120,7 +118,7 @@
     if (![self isLegalInput]) {
         return;
     }
-    if (switchButton.selectionIndex == 0){ //登录
+    if (segmentIndex == 0){ //登录
         NSString *userName = usernameTextField.text;
         NSString *password = [RORUtils md5:passwordTextField.text];
         User_Base *user = [RORUserServices syncUserInfoByLogin:userName withUserPassword:password];
@@ -158,7 +156,7 @@
 }
 
 - (BOOL) isLegalInput {
-    if (switchButton.selectionIndex == 0){
+    if (segmentIndex == 0){
         if (usernameTextField.text.length<=0 ||
             passwordTextField.text.length <=0) {
             [self sendAlart:LOGIN_INPUT_CHECK];
@@ -219,7 +217,6 @@
     [self setBtnSinaLogin:nil];
     [self setUsernameTextField:nil];
     [self setPasswordTextField:nil];
-    [self setSwitchButton:nil];
     [self setNicknameTextField:nil];
     //[super viewDidUnload];
 }
@@ -305,5 +302,17 @@
     }
     return YES;
 }
+
+- (IBAction)loginButtonAction:(id)sender {
+    segmentIndex = 0;
+    [self reFreshView];
+}
+
+
+- (IBAction)registerButtonAction:(id)sender {
+    segmentIndex = 1;
+    [self reFreshView];
+}
+
 
 @end

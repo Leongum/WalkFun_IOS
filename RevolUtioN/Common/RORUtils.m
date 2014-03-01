@@ -205,7 +205,11 @@
 
 + (NSString *)formattedSteps:(NSInteger)stepCount{
     NSInteger outputStep;
-    outputStep = round((double)stepCount/10.f)*10;
+    if (stepCount<1000)
+        outputStep = round((double)stepCount/10.f)*10;
+    else
+        outputStep = round((double)stepCount/100.f)*100;
+
     return [NSString stringWithFormat:@"约%d步", outputStep];
 }
 

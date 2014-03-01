@@ -18,7 +18,7 @@
     
     UIImageView *itemImageView;
     UILabel *itemDescriptionLabel;
-    UIButton *itemUseButton;
+    RORNavigationButton *itemUseButton;
 }
 
 @property (strong, nonatomic) id delegate;

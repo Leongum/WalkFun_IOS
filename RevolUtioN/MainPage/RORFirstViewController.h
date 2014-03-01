@@ -16,6 +16,7 @@
 #import "RORNormalButton.h"
 #import <MapKit/MapKit.h>
 #import "MainPageViewController.h"
+#import "CharatorViewController.h"
 
 @interface RORFirstViewController : MainPageViewController<CLLocationManagerDelegate>{
     BOOL wasFound;
@@ -25,6 +26,7 @@
     User_Base *userInfo;
     
     CLLocationManager *locationManager;
+    UIViewController *charatorViewController;
 }
 @property (strong, nonatomic) IBOutlet UIView *selfTitleView;
 
@@ -43,6 +45,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
 @property (strong, nonatomic) IBOutlet UIButton *weatherInfoButtonView;
+@property (strong, nonatomic) IBOutlet UIView *charatorView;
 
 
 @property (strong, nonatomic) IBOutlet UIView *trainingCountDownView;

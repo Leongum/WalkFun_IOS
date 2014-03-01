@@ -19,5 +19,6 @@
 
 -(void)setPage:(NSInteger)pageNumber;
 -(double)getCurrentOffset;
+-(void)syncPageFromServer;
 
 @end

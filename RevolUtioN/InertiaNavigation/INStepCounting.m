@@ -65,11 +65,11 @@
 }
 
 -(void)updateGAccPeak:(double)v{
-    int now = gWindow[[self pointerMoveLeft:tail for:3]];
-    int pre = gWindow[[self pointerMoveLeft:tail for:4]];
-    int before = gWindow[[self pointerMoveLeft:tail for:5]];
-    int next = gWindow[[self pointerMoveLeft:tail for:2]];
-    int far = gWindow[[self pointerMoveLeft:tail for:1]];
+    double now = gWindow[[self pointerMoveLeft:tail for:3]];
+    double pre = gWindow[[self pointerMoveLeft:tail for:4]];
+    double before = gWindow[[self pointerMoveLeft:tail for:5]];
+    double next = gWindow[[self pointerMoveLeft:tail for:2]];
+    double far = gWindow[[self pointerMoveLeft:tail for:1]];
     
     if (now<pre && now<before && now<next && now<far){
         if (pre<before || next<far){
@@ -87,8 +87,10 @@
 //                minGAcc = -5;
 //            }
             
-            if (now < minGAcc && stepTime >= 0.25)
+            if (now < minGAcc && stepTime >= 0.27 && now > -17){
+                NSLog(@"%f", now);
                 [self oneStepFound];
+            }
             lastGPeak = totalPoints -1;
         }
     }

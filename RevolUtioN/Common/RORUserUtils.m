@@ -294,4 +294,19 @@ static NSDate *syncTime;
     }
 }
 
++(NSDictionary *)parsePropHavingString:(NSString *)propHaving{
+    NSMutableDictionary *itemsForDisplayDict = [[NSMutableDictionary alloc]init];
+    NSArray *propHavingStringList = [propHaving componentsSeparatedByString:@"|"];
+    for (NSString *propHavingString in propHavingStringList){
+        NSArray *proHavingPair = [propHavingString componentsSeparatedByString:@","];
+        if (proHavingPair.count == 2){
+            NSNumber *itemId = [RORDBCommon getNumberFromId:[proHavingPair objectAtIndex:0]];
+            NSNumber *quantity = [RORDBCommon getNumberFromId:[proHavingPair objectAtIndex:1]];
+            [itemsForDisplayDict setObject:quantity forKey:itemId];
+        }
+    }
+    return itemsForDisplayDict;
+}
+
 @end
+

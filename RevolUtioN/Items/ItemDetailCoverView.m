@@ -30,11 +30,15 @@
         [itemDescriptionLabel setFont:[UIFont systemFontOfSize:14]];
         [itemDescriptionLabel setTextColor:[UIColor whiteColor]];
 //        Virtual_Product *item = [RORVirtualProductService fetchVProduct:userItem.productId];
-        itemDescriptionLabel.text = item.productDescription;
+        NSMutableString *desc = [[NSMutableString alloc]initWithString:item.productDescription];
+        [desc replaceOccurrencesOfString:@"\\n" withString:@"\n" options:NSLiteralSearch|NSCaseInsensitiveSearch range:NSMakeRange(0, [desc length])];
+        itemDescriptionLabel.text = desc;
+        [itemDescriptionLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        itemDescriptionLabel.numberOfLines = 0;
         //todo: 多行显示
         [self addSubview:itemDescriptionLabel];
         
-        itemUseButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 110, 49)];
+        itemUseButton = [[RORNavigationButton alloc]initWithFrame:CGRectMake(0, 0, 110, 49)];
         itemUseButton.center = CGPointMake(CGRectGetWidth(frame)/2, CGRectGetHeight(frame)-75);
         [itemUseButton setTitle:@"使用" forState:UIControlStateNormal];
         [itemUseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

@@ -15,11 +15,6 @@
 #define WEATHER_BUTTON_INITIAL_FRAME CGRectMake(-100, 27, 100, 40)
 #define LOGIN_BUTTON_INITIAL_FRAME CGRectMake(320, 14, 210, 69)
 
-#define RUN_BUTTON_FRAME_NORMAL CGRectMake(92, 120, 136, 60)
-#define RUN_BUTTON_FRAME_RATINA CGRectMake(92, 160, 136, 60)
-#define CHALLENGE_BUTTON_FRAME_NORMAL CGRectMake(0, 190, 320, 94)
-#define CHALLENGE_BUTTON_FRAME_RATINA CGRectMake(0, 250, 320, 94)
-
 @interface RORFirstViewController ()
 
 @end
@@ -47,8 +42,53 @@
     UIImage *image = [UIImage imageNamed:@"main_trafficlight_none.png"];
     [weatherInfoButtonView setImage:image forState:UIControlStateNormal];
     
+    //载入人物视图
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+    charatorViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"CharatorViewController"];
+    UIView *charview = charatorViewController.view;
+    CGRect charframe = self.charatorView.frame;
+    charview.frame = charframe;
+//    if ([charatorViewController respondsToSelector:@selector(setUserBase:)]){
+//        [charatorViewController setValue:[RORUserServices fetchUser:[RORUserUtils getUserId]] forKey:@"userBase"];
+//    }
+    [self addChildViewController:charatorViewController];
+    [self.view addSubview:charview];
+    [charatorViewController didMoveToParentViewController:self];
+}
 
-    //[LingQianSDK trackActionWithName:@"visit"];
+- (void)initControlsLayout{
+    [self.backButton setAlpha:0];
+}
+
+- (void)initPageData{
+    //初始化用户名
+    NSNumber *thisUserId = [RORUserUtils getUserId];
+    if (thisUserId.integerValue>=0){
+        self.loginButton.alpha = 0;
+        
+        userInfo = [RORUserServices fetchUser:[RORUserUtils getUserId]];
+        self.usernameLabel.text = userInfo.nickName;
+        int l = [RORUtils convertToInt:self.usernameLabel.text];
+        if (l<=3)
+            [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:22]];
+        if (l>=8)
+            [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:16]];
+        self.levelLabel.text = [NSString stringWithFormat:@"Lv. %d", userInfo.userDetail.level.integerValue];
+        
+        User_Detail *userDetail = [RORUserServices fetchUserDetailByUserId:userInfo.userId];
+        self.fatLabel.text = [NSString stringWithFormat:@"肥肉：%@", userDetail.fatness];
+        self.healthLabel.text = [NSString stringWithFormat:@"健康：%@", userDetail.health];
+    }
+    if ([charatorViewController respondsToSelector:@selector(setUserBase:)]){
+        [charatorViewController setValue:[RORUserServices fetchUser:[RORUserUtils getUserId]] forKey:@"userBase"];
+    }
+    [charatorViewController viewWillAppear:NO];
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self initPageData];
+    [self initLocationServcie];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -115,36 +155,6 @@
     }
 }
 
-- (void)initControlsLayout{
-    [self.backButton setAlpha:0];
-}
-
-- (void)initPageData{
-    //初始化用户名
-    NSNumber *thisUserId = [RORUserUtils getUserId];
-    if (thisUserId.integerValue>=0){
-        self.loginButton.alpha = 0;
-        
-        userInfo = [RORUserServices fetchUser:[RORUserUtils getUserId]];
-        self.usernameLabel.text = userInfo.nickName;
-        int l = [RORUtils convertToInt:self.usernameLabel.text];
-        if (l<=3)
-            [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:22]];
-        if (l>=8)
-            [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:16]];
-        self.levelLabel.text = [NSString stringWithFormat:@"Lv. %d", userInfo.userDetail.level.integerValue];
-
-        User_Detail *userDetail = [RORUserServices fetchUserDetailByUserId:userInfo.userId];
-        self.fatLabel.text = [NSString stringWithFormat:@"肥肉：%@", userDetail.fatness];
-        self.healthLabel.text = [NSString stringWithFormat:@"健康：%@", userDetail.health];
-    } 
-}
-
--(void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self initPageData];
-    [self initLocationServcie];
-}
 
 - (IBAction)segueToLogin:(id)sender{
     [self performSegueWithIdentifier:@"loginSegue" sender:self];

@@ -231,7 +231,7 @@
         [self.tableView reloadData];
         [self.tableView scrollToRowAtIndexPath:bottomIndex atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
     }
-    if (!isAWalking && currentStep > 40) {
+    if (!isAWalking && currentStep > 40 && distance>50) {
         isAWalking = YES;
         UIImage* image = [UIImage imageNamed:@"green_btn_bg.png"];
         [endButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -351,10 +351,11 @@
 //    NSLog(@"%@", [RORDBCommon getStringFromSpeedList:avgSpeedPerKMList]);
     
     //保存actionList(actionIds)
-    runHistory.actionIds = [RORSystemService getStringFromEventList:eventHappenedList andTimeList:eventTimeList];
+    runHistory.actionIds = [RORSystemService getStringFromEventList:eventHappenedList timeList:eventTimeList andLocationList:eventLocationList];
     //保存propget
     runHistory.propGet = [RORSystemService getPropgetStringFromList:eventHappenedList];
-    
+    runHistory.fatness = [self calculateFatness];
+    runHistory.health = [self calculateHealth];
     runHistory.missionDate = [NSDate date];
     runHistory.missionEndTime = self.endTime;
     runHistory.missionStartTime = self.startTime;
@@ -393,29 +394,50 @@
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *identifier = nil;
     UITableViewCell *cell = nil;
-    identifier = @"eventCell";
-    cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
-    UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
-    UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
     
     if (indexPath.row == 0) {
+        identifier = @"eventCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        
+        UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+        UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+        UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         eventTimeLabel.text = @"";
         eventLabel.text = @"开始散步";
         effectLabel.text = @"一切看起来都那么美好～";
     } else {
-        int timeInt = ((NSNumber *)[eventTimeList objectAtIndex:indexPath.row-1]).integerValue;
-        eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
-        
         Action_Define *event = [eventHappenedList objectAtIndex:indexPath.row-1];
-        eventLabel.text = event.actionDescription;
-        effectLabel.text = [NSString stringWithFormat:@"获得：%@",event.actionAttribute];
-        //为cell填内容
+        if ([event.actionDescription rangeOfString:@"金币"].location != NSNotFound ){
+            identifier = @"coinCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        } else {
+            identifier = @"eventCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            
+            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+            eventLabel.text = event.actionDescription;
+            effectLabel.text = [NSString stringWithFormat:@"获得：%@",event.actionAttribute];
+            
+            int timeInt = ((NSNumber *)[eventTimeList objectAtIndex:indexPath.row-1]).integerValue;
+            eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
+        }
     }
     bottomIndex = indexPath;
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0)
+        return 62;
+    Action_Define *event = [eventHappenedList objectAtIndex:indexPath.row-1];
+    if ([event.actionDescription rangeOfString:@"金币"].location != NSNotFound ){
+        return 30;
+    }
+    return 62;
 }
 
 

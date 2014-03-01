@@ -140,6 +140,20 @@
     return [NSNumber numberWithDouble:scores];
 }
 
+-(NSNumber *)calculateFatness{
+    user = [RORUserServices fetchUser:[RORUserUtils getUserId]];
+    double health = user.userDetail.health.integerValue;
+    double stepsPerFat = (100.f-health)/100.f*500 + 750;
+    return [NSNumber numberWithDouble:-currentStep / stepsPerFat];
+}
+
+-(NSNumber *)calculateHealth{
+    double fat = user.userDetail.fatness.integerValue;
+    double stepsPerHealth = fat/100.f*500 + 750;
+    return [NSNumber numberWithDouble:-currentStep / stepsPerHealth];
+
+}
+
 - (void)stopUpdates
 {
     if ([motionManager isDeviceMotionActive] == YES) {
@@ -173,7 +187,8 @@
     [stepCounting pushNewLAcc:[INMatrix modOfVec_3:newDeviceStatus.an] GAcc:newDeviceStatus.an.v3 speed:currentSpeed];
     if (stepCounting.counter>currentStep) {
         currentStep = stepCounting.counter;
-        [self isEventHappen];
+//        if (isAWalking)
+            [self isEventHappen];
     }
 }
 
@@ -189,18 +204,6 @@
     motionManager.accelerometerUpdateInterval = delta_T;
 	
     [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryZVertical];
-    
-//	//may cause megnet calibrating operation application
-//    if (motionManager.isMagnetometerAvailable){
-//        [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical];
-//        //        [motionManager startAccelerometerUpdates];
-//        NSLog(@"start updating device motion using X true north Z vertical reference frame.");
-//    } else {
-//        [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryZVertical];
-//        //        [motionManager startAccelerometerUpdates];
-//        NSLog(@"start updating device motion using Z vertical reference frame.");
-//    }
-    
 }
 
 -(NSNumber *)isValidRun:(NSInteger)steps {
@@ -221,11 +224,15 @@
 
 //如果触发了事件，返回事件，否则返回nil
 -(void)isEventHappen{
+//    NSNumber *lastEventTime = [eventTimeList objectAtIndex:eventTimeList.count-1];
+//    if (duration - lastEventTime.doubleValue < 5)
+//        return;
+    
     for (int i=0; i<eventWillList.count; i++){
         Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
         int x = arc4random() % 1000000;
         double roll = ((double)x)/10000.f;
-        if (roll < event.triggerProbability.doubleValue*100){//debug
+        if (roll < event.triggerProbability.doubleValue){//debug
             [self eventDidHappened:event];
             return;
         }
@@ -235,6 +242,8 @@
 -(void)eventDidHappened:(Action_Define *)event{
     [eventHappenedList addObject:event];
     [eventTimeList addObject: [NSNumber numberWithInteger:duration]];
+    [eventLocationList addObject:[NSString stringWithFormat:@"%f,%f", formerLocation.coordinate.latitude, formerLocation.coordinate.longitude]];
+    
     [allInOneSound addFileNametoQueue:[RORVirtualProductService getSoundFileOf:event]];
     [allInOneSound play];
 }

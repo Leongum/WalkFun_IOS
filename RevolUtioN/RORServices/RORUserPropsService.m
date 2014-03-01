@@ -17,7 +17,7 @@
 
 +(NSArray*)fetchUserProps:(NSNumber*)userId withContext:(BOOL) needContext{
     NSString *table=@"User_Prop";
-    NSString *query = @"userId = %@";
+    NSString *query = @"userId = %@ and ownNumber>0";
     NSArray *params = [NSArray arrayWithObjects:userId, nil];
     NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
     if (fetchObject == nil || [fetchObject count] == 0) {

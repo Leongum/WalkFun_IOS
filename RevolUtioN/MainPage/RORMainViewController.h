@@ -8,6 +8,9 @@
 
 #import "RORViewController.h"
 #import "MainPageViewController.h"
+#import "RORUserPropsService.h"
+#import "RORMissionHistoyService.h"
+#import "RORRunHistoryServices.h"
 
 #define PAGE_QUANTITY 3
 

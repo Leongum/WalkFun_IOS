@@ -20,7 +20,6 @@
 @interface RORRunningViewController : RORRunningBaseViewController {
     BOOL MKwasFound;
     User_Running_History *runHistory;
-    BOOL isAWalking;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

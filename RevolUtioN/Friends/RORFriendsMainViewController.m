@@ -45,6 +45,17 @@
     [self refreshTableView];
 }
 
+-(void)syncPageFromServer{
+    [super syncPageFromServer];
+//    int friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
+//    
+//    //好友初步信息
+//    BOOL friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
+//    if(!friendsort){
+//        friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
+//    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

@@ -47,12 +47,12 @@
 */
 
 -(IBAction)pressOn:(id)sender{
-    self.transform = CGAffineTransformMakeScale(1, 0.85);
+//    self.transform = CGAffineTransformMakeScale(1, 0.85);
 //    [Animations moveDown:self andAnimationDuration:0 andWait:NO andLength:3];
 }
 
 -(IBAction)touchUp:(id)sender{
-    self.transform = CGAffineTransformMakeScale(1, 1);
+//    self.transform = CGAffineTransformMakeScale(1, 1);
 //    [sound play];
 //    [Animations moveUp:self andAnimationDuration:0 andWait:NO andLength:3];
 }

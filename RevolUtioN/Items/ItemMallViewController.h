@@ -13,7 +13,7 @@
 #import "RORUserServices.h"
 
 @interface ItemMallViewController : RORViewController{
-    NSArray *contentList;
+    NSMutableArray *contentList;
     Virtual_Product *selectedItem;
     int selectedQuantity;
 }

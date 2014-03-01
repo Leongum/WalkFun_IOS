@@ -259,11 +259,12 @@
 +(NSArray *)getEventListFromString:(NSString *)eventString{
     NSMutableArray *eventList = [[NSMutableArray alloc]init];
     NSMutableArray *eventTimeList = [[NSMutableArray alloc]init];
+    NSMutableArray *eventLocationList = [[NSMutableArray alloc]init];
     NSArray *eventIdStringList = [eventString componentsSeparatedByString:@"|"];
     for (int i=0; i<eventIdStringList.count; i++){
         NSString *eventString = (NSString *)[eventIdStringList objectAtIndex:i];
         NSArray *eventStringSep = [eventString componentsSeparatedByString:@","];
-        if (eventStringSep.count == 2){
+        if (eventStringSep.count >= 2){
             NSNumber *eventTime = [RORDBCommon getNumberFromId:[eventStringSep objectAtIndex:0]];
             NSNumber *eventId = [RORDBCommon getNumberFromId:[eventStringSep objectAtIndex:1]];
             if (eventId) {
@@ -272,17 +273,25 @@
             if (eventTime){
                 [eventTimeList addObject:eventTime];
             }
+            if (eventStringSep.count >=4){
+                NSNumber *lati = [RORDBCommon getNumberFromId:[eventStringSep objectAtIndex:2]];
+                NSNumber *longi = [RORDBCommon getNumberFromId: [eventStringSep objectAtIndex:3]];
+                if (lati && longi){
+                    [eventLocationList addObject:[[CLLocation alloc]initWithLatitude:lati.doubleValue longitude:longi.doubleValue]];
+                }
+            }
         }
     }
-    return [NSArray arrayWithObjects:eventTimeList, eventList, nil];
+    return [NSArray arrayWithObjects:eventTimeList, eventList, eventLocationList, nil];
 }
 
-+ (NSString *)getStringFromEventList:(NSArray *)eventList andTimeList:(NSArray *)timeList{
++ (NSString *)getStringFromEventList:(NSArray *)eventList timeList:(NSArray *)timeList andLocationList:(NSArray *)locationList{
     NSMutableString *eventString = [[NSMutableString alloc]init];
     for (int i=0; i<eventList.count; i++){
         Action_Define *event = (Action_Define *)[eventList objectAtIndex:i];
         NSNumber *happendTime = (NSNumber *)[timeList objectAtIndex:i];
-        [eventString appendString:[NSString stringWithFormat:@"%@,%@|", happendTime ,event.actionId]];
+        NSString *locationString = (NSString *)[locationList objectAtIndex:i ];
+        [eventString appendString:[NSString stringWithFormat:@"%@,%@,%@|", happendTime ,event.actionId, locationString]];
     }
     return eventString;
 }
@@ -306,7 +315,7 @@
         }
         NSDictionary *actionDict = [RORUtils explainActionRule:event.actionRule];
         for (NSString *key in [actionDict allKeys]){
-            NSNumber *n = [RORDBCommon getNumberFromId:[effectDict objectForKey:key]];
+            NSNumber *n = [RORDBCommon getNumberFromId:[actionDict objectForKey:key]];
             NSNumber *current = [RORDBCommon getNumberFromId:[itemDict objectForKey:key]];
             if (current) {
                 [itemDict setObject:[NSNumber numberWithInteger:current.integerValue + n.integerValue] forKey:key];
@@ -315,7 +324,7 @@
             }
         }
     }
-    [propgetString appendString:@"属性变化："];
+    [propgetString appendString:@""];
     NSDictionary *attrNameDict = [NSDictionary dictionaryWithObjectsAndKeys:@"肥肉", @"F", @"健康", @"H", nil];
     for (NSString *key in [attrDict allKeys]){
         if (![[attrNameDict allKeys] containsObject:key])
@@ -327,13 +336,13 @@
             [propgetString appendString:[NSString stringWithFormat:@"%@ %@  ",[attrNameDict objectForKey:key] ,num]];
         }
     }
-    [propgetString appendString:@"|获得道具："];
+    [propgetString appendString:@"|"];
     for (NSString *key in [itemDict allKeys]){
         NSNumber *num = [itemDict objectForKey:key];
         Virtual_Product *item = [RORVirtualProductService fetchVProduct:[RORDBCommon getNumberFromId:key]];
         [propgetString appendString:[NSString stringWithFormat:@"%@ x%@ ",item.productName, num]];
     }
-    [propgetString appendString:@"|获得金币："];
+    [propgetString appendString:@"|"];
     [propgetString appendString:[NSString stringWithFormat:@"%@",[attrDict objectForKey:ACTION_RULE_MONEY]]];
     
     return propgetString;

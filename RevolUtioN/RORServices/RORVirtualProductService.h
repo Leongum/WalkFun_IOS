@@ -32,6 +32,9 @@
 //返回item对应的图片，缓存到本地
 +(UIImage *)getImageOf:(Virtual_Product *)item;
 
+//返回一张随机的item在人物形象上的掉落图片
++(UIImage *)getRandomDropImageOf:(Virtual_Product *)item;
+
 //从服务器获取所有item的图片
 +(void)syncAllEventSounds;
 

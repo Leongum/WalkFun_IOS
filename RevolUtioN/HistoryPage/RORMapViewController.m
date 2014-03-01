@@ -19,6 +19,7 @@
 
 @implementation RORMapViewController
 @synthesize mapView, routeLine, routeLineView ,routes;
+@synthesize record;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

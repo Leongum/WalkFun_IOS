@@ -16,10 +16,13 @@
 #import "RORPaperSegmentControl.h"
 #import "RORCheckBox.h"
 
-@interface RORLoginViewController : RORViewController
+@interface RORLoginViewController : RORViewController{
+    NSInteger segmentIndex;
+}
+
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (strong, nonatomic) RORPaperSegmentControl *switchButton;
+//@property (strong, nonatomic) RORPaperSegmentControl *switchButton;
 @property (weak, nonatomic) IBOutlet UITextField *nicknameTextField;
 @property (strong, nonatomic) IBOutlet RORCheckBox *showPWCheckBox;
 @property (strong, nonatomic) IBOutlet UIView *snsContainerView;
@@ -32,6 +35,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btnSinaLogin;
 @property (weak, nonatomic) IBOutlet UIButton *btnQQLogin;
+
+@property (strong, nonatomic) IBOutlet UIView *loginInputView;
+@property (strong, nonatomic) IBOutlet UIView *loginButtonView;
 
 
 - (IBAction)loginAction:(id)sender;

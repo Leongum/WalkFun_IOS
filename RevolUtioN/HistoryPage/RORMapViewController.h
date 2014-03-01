@@ -12,6 +12,7 @@
 #import "RORViewController.h"
 #import "RORStartAnnotation.h"
 #import "ROREndAnnotation.h"
+#import "User_Running_History.h"
 
 @interface RORMapViewController : RORViewController<MKMapViewDelegate>{
     NSMutableArray *improvedRoute;
@@ -23,5 +24,6 @@
 @property (retain, nonatomic) MKPolylineView *routeLineView;
 @property (retain, nonatomic) MKPolylineView *routeLineShadowView;
 
+@property (strong, nonatomic) User_Running_History *record;
 
 @end

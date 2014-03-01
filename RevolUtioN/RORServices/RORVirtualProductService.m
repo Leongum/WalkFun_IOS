@@ -113,6 +113,29 @@
     return image;
 }
 
++(UIImage *)getRandomDropImageOf:(Virtual_Product *)item{
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    // If you go to the folder below, you will find those pictures
+    NSArray *imageURLStringList = [item.dropPicList componentsSeparatedByString:@"|"];
+    int index = arc4random() % imageURLStringList.count;
+    NSURL *imageUrl = [NSURL URLWithString:[RORDBCommon getStringFromId:[imageURLStringList objectAtIndex:index]]];
+    NSString *fileName = [self getFileNameFrom:imageUrl];
+    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",docDir, fileName];
+    UIImage *image = [UIImage imageWithContentsOfFile:pngFilePath];
+    
+    if (!image) {
+        NSURL *imageUrl = [NSURL URLWithString:item.picLink];
+        [self getFileNameFrom:imageUrl];
+        image = [[UIImage alloc]initWithData:[NSData dataWithContentsOfURL:imageUrl]];
+        if (image){
+            NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
+            [data1 writeToFile:pngFilePath atomically:YES];
+            //            NSLog(@"load pic [id:%@] from server", item.productId);
+        }
+    }
+    return image;
+}
+
 +(void)syncAllEventSounds{
     NSArray *eventList = [RORSystemService fetchAllActionDefine:ActionDefineRun];
     for (Action_Define *event in eventList) {

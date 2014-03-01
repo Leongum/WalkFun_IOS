@@ -51,7 +51,7 @@
 + (NSArray *)getEventListFromString:(NSString *)eventString;
 
 //压缩事件列表为字符串
-+ (NSString *)getStringFromEventList:(NSArray *)eventList andTimeList:(NSArray *)timeList;
++ (NSString *)getStringFromEventList:(NSArray *)eventList timeList:(NSArray *)timeList andLocationList:(NSArray *)locationList;
 
 //根据事件列表计算出用于本地存储‘一次走路总获得的属性和道具’的字符串
 //attrkey,attrvalue attrkey,attrvalue|itemkey,itemvalue

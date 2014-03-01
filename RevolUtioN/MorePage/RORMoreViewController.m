@@ -65,19 +65,11 @@
     [self dismissViewControllerAnimated:YES completion:^(){}];
 }
 
-#pragma mark - Custom Segment Delegate
-
-- (void) SegmentValueChanged:(NSUInteger)segmentIndex{
-    NSMutableDictionary *settinglist = [RORUserUtils getUserSettingsPList];
-    [settinglist setValue:[NSNumber numberWithInteger:segmentIndex] forKey:@"speedType"];
-    [RORUserUtils writeToUserSettingsPList:settinglist];
-}
-
 #pragma mark -
 #pragma mark Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return 3;
 }
 
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -100,68 +92,8 @@
         }
         case 1:
         {
-            identifier = @"bodyCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            UILabel *label = (UILabel*)[cell viewWithTag:1];
-            label.text = @"身体参数";
-//            [RORUtils setFontFamily:CHN_PRINT_FONT forView:cell andSubViews:YES];
-            break;
-        }
-        case 2:
-        {
-            NSMutableDictionary *settinglist = [RORUserUtils getUserSettingsPList];
-            NSString *syncMode = [settinglist valueForKey:@"uploadMode"];
-            identifier = @"syncCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            UILabel *label = (UILabel*)[cell viewWithTag:1];
-            label.text = SYNC_MODE_WIFI;
-            RORCheckBox *switchCtrl = (RORCheckBox *)[cell viewWithTag:3];
-            [switchCtrl setTarget:self fun:@selector(syncModeSwitchChangeHandler:)];
-            if([syncMode isEqualToString:DEFAULT_NET_WORK_MODE]){
-                [switchCtrl setIsChecked:NO];
-                //label.text = SYNC_MODE_ALL;
-            }
-            else{
-                [switchCtrl setIsChecked:YES];
-                //label.text = SYNC_MODE_WIFI;
-            }
-//            [RORUtils setFontFamily:CHN_PRINT_FONT forView:cell andSubViews:YES];
-            break;
-        }
-        case 3:
-        {
-            identifier = @"speedCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//            UISegmentedControl *seg = (UISegmentedControl *)[cell viewWithTag:2];
-            RORSegmentControl *seg = (RORSegmentControl *)[cell viewWithTag:2];
-            if (seg == nil){
-                seg = [[RORPaperSegmentControl alloc]initWithFrame:CGRectMake(cell.frame.size.width - 130 - 10, (cell.frame.size.height - 29)/2, 130, 29) andSegmentNumber:2];
-                seg.delegate = self;
-                [seg setSegmentTitle:@"7'41\"/km" withIndex:0];
-                [seg setSegmentTitle:@"7.8km/h" withIndex:1];
-                [seg setTag:2];
-                [cell addSubview:seg];
-            }
-            
-            NSMutableDictionary *settinglist = [RORUserUtils getUserSettingsPList];
-            NSNumber *speedType = [settinglist valueForKey:@"speedType"];
-            if (speedType != nil){
-                NSInteger st = speedType.integerValue;
-                [seg selectSegmentAtIndex:st];
-            }
-            
-//            [RORUtils setFontFamily:CHN_PRINT_FONT forView:cell andSubViews:YES];
-//            [RORUtils setFontFamily:ENG_WRITTEN_FONT forView:seg andSubViews:YES];
-            [RORUtils setSystemFontSize:14 forView:seg andSubViews:YES];
-            break;
-        }
-        case 4:
-        {
             identifier = @"aboutCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//            [RORUtils setFontFamily:CHN_PRINT_FONT forView:[cell viewWithTag:1] andSubViews:NO];
-//            [RORUtils setFontFamily:ENG_WRITTEN_FONT forView:[cell viewWithTag:2] andSubViews:NO];
-//            [RORUtils setFontFamily:CHN_PRINT_FONT forView:[cell viewWithTag:3] andSubViews:NO];
 
             Version_Control *version = [RORSystemService syncVersion:@"ios"];
             if (version.version.integerValue != CURRENT_VERSION_MAIN ||
@@ -171,7 +103,7 @@
                 [cell viewWithTag:3].alpha = 0;
             break;
         }
-        case 5:
+        case 2:
         {
             identifier = @"recommendCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -189,27 +121,6 @@
         RORCheckBox *check = (RORCheckBox*)[[tableView cellForRowAtIndexPath:indexPath] viewWithTag:3];
         [check checkBoxClicked];
     }
-}
-
-- (void)syncModeSwitchChangeHandler:(RORCheckBox *)sender
-{
-    NSMutableDictionary *settingDict = [[NSMutableDictionary alloc] init];
-    if (![sender isChecked])
-    {   
-        [settingDict setValue:DEFAULT_NET_WORK_MODE forKey:@"uploadMode"];
-    }
-    else
-    {
-        [settingDict setValue:NET_WORK_MODE_WIFI forKey:@"uploadMode"];
-    }
-    [RORUserUtils writeToUserSettingsPList:settingDict];
-    //[moreTableView reloadData];
-}
-
-- (void)loadingAnimationChangeHandler:(RORCheckBox *)sender{
-    NSMutableDictionary *settingDict = [[NSMutableDictionary alloc] init];
-    [settingDict setValue:[NSNumber numberWithBool:sender.isChecked] forKey:@"loadingAnimation"];
-    [RORUserUtils writeToUserInfoPList:settingDict];
 }
 
 - (IBAction)feedbackAction:(id)sender {

@@ -29,6 +29,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    //用户好友信息
+    [RORFriendService syncFriends:[RORUserUtils getUserId]];
+    //好友初步信息
+    [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
+
     //todo:load content
     contentList = [RORFriendService fetchFriendEachFansList];
 }
@@ -65,7 +70,6 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         isSucceeded = [RORFriendService createAction:toThisUser.userId withActionToUserName:toThisUser.userName withActionId:action.actionId];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self endIndicator:self];
             if (isSucceeded){
                 [self sendSuccess:@"使用成功"];
             } else {

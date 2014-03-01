@@ -58,8 +58,20 @@
     
 //    [RORSystemService getPropgetListFromString:record.propGet];//debug
     [self.sumLabel setLineBreakMode:NSLineBreakByWordWrapping];
-    self.sumLabel.numberOfLines = 3;
-    self.sumLabel.text = record.propGet;
+    self.sumLabel.numberOfLines = 0;
+    NSString *pgString =record.propGet;
+    NSMutableString *sumString = [[NSMutableString alloc]init];
+    NSArray *pgStringList = [pgString componentsSeparatedByString:@"|"];
+    if (((NSString *)[pgStringList objectAtIndex:0]).length>0){
+        [sumString appendString:[NSString stringWithFormat:@"属性变化：%@\n", [pgStringList objectAtIndex:0]]];
+    }
+    if (((NSString *)[pgStringList objectAtIndex:1]).length>0){
+        [sumString appendString:[NSString stringWithFormat:@"获得道具：%@\n", [pgStringList objectAtIndex:1]]];
+    }
+    if (((NSString *)[pgStringList objectAtIndex:2]).length>0){
+        [sumString appendString:[NSString stringWithFormat:@"获得金币：%@", [pgStringList objectAtIndex:2]]];
+    }
+    self.sumLabel.text = sumString;
 
 }
 
@@ -93,6 +105,10 @@
     if ([destination respondsToSelector:@selector(setShareMessage:)]){
         NSString *shareContent = [NSString stringWithFormat:SHARE_DEFAULT_CONTENT,[RORUtils outputDistance:record.distance.doubleValue],[RORUtils transSecondToStandardFormat:record.duration.doubleValue],[NSString stringWithFormat:@"%.1f kca", record.spendCarlorie.doubleValue]];
         [destination setValue:shareContent forKey:@"shareMessage"];
+    }
+    
+    if ([destination respondsToSelector:@selector(setRecord:)]){
+        [destination setValue:record forKey:@"record"];
     }
 }
 
@@ -130,30 +146,48 @@
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *identifier = nil;
     UITableViewCell *cell = nil;
-    identifier = @"eventCell";
-    cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    
-    UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
-    UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
-    UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
-    
     if (indexPath.row == 0) {
+        identifier = @"eventCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        
+        UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+        UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+        UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         eventTimeLabel.text = @"";
         eventLabel.text = @"开始散步";
         effectLabel.text = @"一切看起来都那么美好～";
     } else {
-        int timeInt = ((NSNumber *)[eventTimeList objectAtIndex:indexPath.row-1]).integerValue;
-        eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
-        
         Action_Define *event = [eventList objectAtIndex:indexPath.row-1];
-        eventLabel.text = event.actionDescription;
-        effectLabel.text = [NSString stringWithFormat:@"获得：%@",event.actionAttribute];
-        //为cell填内容
+        if ([event.actionDescription rangeOfString:@"金币"].location != NSNotFound ){
+            identifier = @"coinCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        } else {
+            identifier = @"eventCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            
+            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+            eventLabel.text = event.actionDescription;
+            effectLabel.text = [NSString stringWithFormat:@"获得：%@",event.actionAttribute];
+            
+            int timeInt = ((NSNumber *)[eventTimeList objectAtIndex:indexPath.row-1]).integerValue;
+            eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
+        }
     }
     
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0)
+        return 62;
+    Action_Define *event = [eventList objectAtIndex:indexPath.row-1];
+    if ([event.actionDescription rangeOfString:@"金币"].location != NSNotFound ){
+        return 30;
+    }
+    return 62;
+}
 
 
 @end

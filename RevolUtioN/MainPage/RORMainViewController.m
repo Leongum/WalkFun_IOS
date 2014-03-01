@@ -125,6 +125,7 @@
 //    if (self.pageControl.currentPage >=contentViews.count-2)
 //        self.nextPageButton.alpha = (pageWidth * (contentViews.count-1) - scrollView.contentOffset.x)/pageWidth /2;
     [self refreshPageTitles:scrollView];
+    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -134,6 +135,11 @@
     NSUInteger page = floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     [self refreshPageTitles:scrollView];
     self.pageControl.currentPage = page;
+    
+    if (page == 2){
+        MainPageViewController *controller =(MainPageViewController *)[contentViews objectAtIndex:self.pageControl.currentPage];
+        [controller viewWillAppear:NO];
+    }
 }
 
 -(void)refreshPageTitles:(UIScrollView *)scrollView{
@@ -163,10 +169,16 @@
 
 - (IBAction)changePage:(id)sender {
     [self gotoPage:YES];    // YES = animate
+    if (self.pageControl.currentPage == 2){
+        MainPageViewController *controller =(MainPageViewController *)[contentViews objectAtIndex:self.pageControl.currentPage];
+        [controller viewWillAppear:NO];
+    }
 }
 
 - (IBAction)missionAction:(id)sender {
     [self sendSuccess:@"同步成功"];
+    [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
+    [firstViewController viewWillAppear:NO];
 }
 
 - (IBAction)settingsAction:(id)sender {

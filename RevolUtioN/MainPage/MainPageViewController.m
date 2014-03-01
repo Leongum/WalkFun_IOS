@@ -30,8 +30,20 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [titleView removeFromSuperview];
-    [[self parentViewController].view addSubview:titleView];
+    [super viewWillAppear:animated];
+//    if ([titleView superview] != self.view){
+        [titleView removeFromSuperview];
+        [[self parentViewController].view addSubview:titleView];
+//    }
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self syncPageFromServer];
+}
+
+-(void)syncPageFromServer{
+    
 }
 
 - (void)didReceiveMemoryWarning

@@ -82,10 +82,10 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         isAddingSuccess = [RORFriendService followFriend:addingFriend.userId];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self endIndicator:self];
             if (!isAddingSuccess){
                 [self sendAlart:@"关注失败，请检查一下网络"];
             } else {
+                [self endIndicator:self];
                 [self.tableView reloadData];
             }
         });
@@ -99,10 +99,10 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         isAddingSuccess = [RORFriendService deFollowFriend:addingFriend.userId];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self endIndicator:self];
             if (!isAddingSuccess){
                 [self sendAlart:@"取消关注失败，请检查一下网络"];
             } else {
+                [self endIndicator:self];
                 [self.tableView reloadData];
             }
         });
