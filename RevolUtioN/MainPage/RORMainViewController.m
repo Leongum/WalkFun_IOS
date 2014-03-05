@@ -5,9 +5,11 @@
 //  Created by Bjorn on 14-2-14.
 //  Copyright (c) 2014年 Beyond. All rights reserved.
 //
-#define kStrokeSize (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 6.0f : 1.0f)
+#define kStrokeSize (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 6.0f : 1.5f)
 
 #import "RORMainViewController.h"
+#import "FTAnimation.h"
+#import "Animations.h"
 
 @interface RORMainViewController ()
 
@@ -66,8 +68,26 @@
     
     [self gotoPage:NO];
     
-//    [self.missionContentLabel setStrokeColor:[UIColor redColor]];
-//    [self.missionContentLabel setStrokeSize:kStrokeSize];
+    missionBoardCenterY = self.missionView.center.y;
+}
+
+-(void)checkDailyMission{
+    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+    NSDate *date = [userInfoList valueForKey:@"lastDailyMissionFinishedDate"];
+    NSDateFormatter *formattter = [[NSDateFormatter alloc] init];
+    [formattter setDateFormat:@"yyyyMMdd"];
+    NSNumber *lastNum = [RORDBCommon getNumberFromId:[formattter stringFromDate:date]];
+    NSNumber *newNem = [RORDBCommon getNumberFromId:[formattter stringFromDate:[NSDate date]]];
+    if (lastNum== nil || newNem.integerValue > lastNum.integerValue){
+        todayMission = [RORMissionServices fetchDailyMission];
+        self.missionContentLabel.text = todayMission.missionDescription;
+        [Animations moveUp:self.missionView andAnimationDuration:1 andWait:NO andLength:100];
+//        [self.missionView moveUp:1 length:100 delegate:self];
+    } else {
+        todayMission = nil;
+    }
+    
+    isFolded = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -83,10 +103,12 @@
             [controller viewWillAppear:NO];
         }
     }
+    self.missionView.center = CGPointMake(self.missionView.center.x, missionBoardCenterY);
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [self checkLevelUp];
+    [self checkDailyMission];
 }
 
 -(void)checkLevelUp{
@@ -101,9 +123,9 @@
         [RORUserUtils writeToUserInfoPList:saveDict];
         return;
     }
-    //    if (userLevel.integerValue<userInfo.userDetail.level.integerValue){
-    [self performLevelUp];
-    //    }
+    if (userLevel.integerValue<userBase.userDetail.level.integerValue){
+        [self performLevelUp];
+    }
 }
 
 -(void)performLevelUp{
@@ -211,4 +233,36 @@
     [self presentViewController:moreViewController animated:YES completion:^(){}];
 }
 
+- (IBAction)closeDailyMissionAction:(id)sender {
+    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"放弃任务" message:@"确定放弃今天的任务吗？" delegate:self cancelButtonTitle:CANCEL_BUTTON_CANCEL otherButtonTitles:OK_BUTTON_OK, nil];
+    [confirmView show];
+    confirmView = nil;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        return;
+    }else if(buttonIndex == 1){
+        [self cancelMission];
+    }
+}
+
+-(void)cancelMission{
+    todayMission = nil;
+    NSDictionary *saveDict = [[NSDictionary alloc]initWithObjectsAndKeys:[NSDate date], @"lastDailyMissionFinishedDate", nil];
+    [RORUserUtils writeToUserInfoPList:saveDict];
+    [Animations moveDown:self.missionView andAnimationDuration:1 andWait:NO andLength:100];
+//    [self.missionView moveUp:1 length:-100 delegate:self];
+}
+
+- (IBAction)hideorshowDailyMissionBoardAction:(id)sender {
+    if (isFolded){
+        [Animations moveUp:self.missionView andAnimationDuration:0 andWait:NO andLength:34];
+        isFolded = NO;
+    } else {
+        [Animations moveDown:self.missionView andAnimationDuration:0 andWait:NO andLength:34];
+        isFolded = YES;
+    }
+}
 @end

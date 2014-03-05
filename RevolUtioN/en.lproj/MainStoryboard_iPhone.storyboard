@@ -1834,7 +1834,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="Chg-g5-l1i">
-                                <rect key="frame" x="0.0" y="600" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
@@ -1847,29 +1847,42 @@
                                 </connections>
                             </pageControl>
                             <view contentMode="scaleToFill" id="EKi-VK-33H" userLabel="mission view">
-                                <rect key="frame" x="0.0" y="448" width="320" height="70"/>
+                                <rect key="frame" x="0.0" y="536" width="320" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_mission_board.png" id="sD6-6z-BV7">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今日任务" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sxe-6K-Cmj">
-                                        <rect key="frame" x="34" y="9" width="184" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="走路20分钟，步数不少于1300" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vlN-Su-uzW">
+                                        <rect key="frame" x="34" y="30" width="253" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="textColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <color key="shadowColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="shadowColor" red="0.80000001192092896" green="0.80000001192092896" blue="0.80000001192092896" alpha="1" colorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="走路20分钟，步数不少于1300" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vlN-Su-uzW" customClass="THLabel">
-                                        <rect key="frame" x="34" y="29" width="253" height="21"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Mb3-69-9LY">
+                                        <rect key="frame" x="262" y="21" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <nil key="highlightedColor"/>
-                                        <size key="shadowOffset" width="0.0" height="0.0"/>
-                                    </label>
+                                        <state key="normal" backgroundImage="eyeClosed.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeDailyMissionAction:" destination="4ja-3u-aSY" eventType="touchUpInside" id="gRx-Ae-m0a"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hJU-E0-cmd">
+                                        <rect key="frame" x="0.0" y="0.0" width="114" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="hideorshowDailyMissionBoardAction:" destination="4ja-3u-aSY" eventType="touchUpInside" id="MCC-v0-5uh"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -1902,9 +1915,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="bP9-Zi-NFg" userLabel="run_Button" customClass="RORNormalButton">
-                                <rect key="frame" x="89" y="507" width="142" height="59"/>
+                                <rect key="frame" x="89" y="511" width="142" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <state key="normal" backgroundImage="main_run_btn_bg.png">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <inset key="contentEdgeInsets" minX="11" minY="-7" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="开走！" backgroundImage="loginButton.png">
+                                    <color key="titleColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1953,6 +1969,7 @@
         <image name="coverview_bg.png" width="640" height="1136"/>
         <image name="details.png" width="32" height="32"/>
         <image name="expand.png" width="137" height="137"/>
+        <image name="eyeClosed.png" width="128" height="128"/>
         <image name="finishrunning_pop_bg.png" width="432" height="364"/>
         <image name="green_btn_bg.png" width="221" height="96"/>
         <image name="levelup_congrats.png" width="640" height="1136"/>
@@ -1963,8 +1980,7 @@
         <image name="main_bg.jpg" width="640" height="1136"/>
         <image name="main_bottom_board.png" width="640" height="137"/>
         <image name="main_login_bg.png" width="430" height="160"/>
-        <image name="main_mission_board.png" width="640" height="135"/>
-        <image name="main_run_btn_bg.png" width="284" height="118"/>
+        <image name="main_mission_board.png" width="640" height="150"/>
         <image name="main_title_board.png" width="640" height="171"/>
         <image name="main_trafficlight_none.png" width="110" height="110"/>
         <image name="normal_female.png" width="640" height="512"/>

@@ -243,7 +243,7 @@ typedef enum {
 		[self setStrokeAttributesInContext:context];
 		
 		// Set stroke color.
-		[self.strokeColor setStroke];
+		[[UIColor blackColor] setStroke];
 		
 		if (self.strokePosition == THLabelStrokePositionInside) {
 			// Invert everything, because CG works with an inverted coordinate system.

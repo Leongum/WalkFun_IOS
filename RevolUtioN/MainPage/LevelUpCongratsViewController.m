@@ -50,7 +50,7 @@
 	
 	rocket.contents			= (id) [[UIImage imageNamed:@"DazRing"] CGImage];
 	rocket.scale			= 0.2;
-	rocket.color			= [[UIColor redColor] CGColor];
+	rocket.color			= [[UIColor yellowColor] CGColor];
 	rocket.greenRange		= 1.0;		// different colors
 	rocket.redRange			= 1.0;
 	rocket.blueRange		= 1.0;
@@ -65,9 +65,9 @@
 	burst.birthRate			= 1.0;		// at the end of travel
 	burst.velocity			= 0;
 	burst.scale				= 2.5;
-//	burst.redSpeed			=+1.5;		// shifting
-//	burst.blueSpeed			=+1.5;		// shifting
-//	burst.greenSpeed		=-1.0;		// shifting
+	burst.redSpeed			=+1.5;		// shifting
+	burst.blueSpeed			=-1.5;		// shifting
+	burst.greenSpeed		=+1.0;		// shifting
 	burst.lifetime			= 0.15;
 	
 	// and finally, the sparks

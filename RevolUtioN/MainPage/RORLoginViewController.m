@@ -53,20 +53,6 @@
     self.nicknameTextField.alpha = 0;
 }
 
-//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-//
-//{
-//    
-//    if([keyPath isEqualToString:@"selectionIndex"])
-//        
-//    {
-//        
-//        NSLog(@"%@",change);
-//        
-//    }  
-//    
-//}
-
 -(IBAction)backAction:(id)sender{
     self.loginButtonView.alpha = 1;
     self.loginInputView.alpha = 0;
@@ -77,7 +63,6 @@
 
 -(void)reFreshView{
     nicknameTextField.alpha = segmentIndex;
-    self.snsContainerView.alpha = 1-segmentIndex;
     self.loginButtonView.alpha = 0;
     self.loginInputView.alpha = 1;
     self.backButton.alpha = 1;

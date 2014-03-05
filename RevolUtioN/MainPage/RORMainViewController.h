@@ -12,7 +12,7 @@
 #import "RORMissionHistoyService.h"
 #import "RORRunHistoryServices.h"
 #import "LevelUpCongratsViewController.h"
-#import "THLabel.h"
+#import "RORMissionServices.h"
 
 #define PAGE_QUANTITY 3
 
@@ -21,11 +21,15 @@
     UIStoryboard *mainStoryboard;
     User_Base *userBase;
     BOOL isLevelUp;
+    
+    double missionBoardCenterY;
+    Mission *todayMission;
+    BOOL isFolded;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
-@property (strong, nonatomic) IBOutlet THLabel *missionContentLabel;
+@property (strong, nonatomic) IBOutlet UILabel *missionContentLabel;
 @property (strong, nonatomic) IBOutlet UIView *missionView;
 @property (strong, nonatomic) NSMutableArray *contentViews;
 
