@@ -34,7 +34,7 @@
     [self addSubview:imageView];
     
     labelView = [[UILabel alloc]initWithFrame:newFrame];
-    labelView.font = [UIFont fontWithName:ENG_WRITTEN_FONT size:15];
+//    labelView.font = [UIFont fontWithName:ENG_WRITTEN_FONT size:15];
     labelView.backgroundColor = [UIColor clearColor];
     labelView.textColor = [UIColor grayColor];
     labelView.alpha = 0;

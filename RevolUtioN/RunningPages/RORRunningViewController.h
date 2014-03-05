@@ -20,6 +20,7 @@
 @interface RORRunningViewController : RORRunningBaseViewController {
     BOOL MKwasFound;
     User_Running_History *runHistory;
+    int newCellHeight;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -47,6 +48,7 @@
 
 //@property (strong, nonatomic) Mission *runMission;
 @property (weak, nonatomic) IBOutlet UIControl *coverView;
+@property (strong, nonatomic) IBOutlet UIView *paperView;
 
 //- (IBAction)expandAction:(id)sender;
 //- (IBAction)collapseAction:(id)sender;

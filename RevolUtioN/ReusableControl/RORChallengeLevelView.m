@@ -49,7 +49,7 @@
         CGRect imageFrame = CGRectMake(self.frame.size.width/2 - cellWidth/2, cellHeight*i, cellHeight, cellHeight);
 
         UILabel *contentLabel = [[UILabel alloc]initWithFrame:labelFrame];
-        [contentLabel setFont:[UIFont fontWithName:ENG_WRITTEN_FONT size:15]];
+        [contentLabel setFont:[UIFont systemFontOfSize:15]];
         [contentLabel setLineBreakMode:NSLineBreakByCharWrapping];
         [contentLabel setTag:i+1];
         [contentLabel setBackgroundColor:[UIColor clearColor]];
@@ -65,7 +65,7 @@
         //[contentImage setText:MissionGradeEnum_toString[i]];
         [contentImage setBackgroundColor:[UIColor clearColor]];
         [contentImage setTextColor:LIGHT_GRAY_COLOR];
-        [contentImage setFont:[UIFont fontWithName:ENG_WRITTEN_FONT size:24]];
+        [contentImage setFont:[UIFont systemFontOfSize:24]];
         [self addSubview:contentImage];
 
 //        [contentImage setImage:[UIImage imageNamed:MissionGradeImageEnum_toString[i]]];

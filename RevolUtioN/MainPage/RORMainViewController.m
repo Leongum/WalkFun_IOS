@@ -5,6 +5,7 @@
 //  Created by Bjorn on 14-2-14.
 //  Copyright (c) 2014年 Beyond. All rights reserved.
 //
+#define kStrokeSize (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 6.0f : 1.0f)
 
 #import "RORMainViewController.h"
 
@@ -63,10 +64,10 @@
     for (int i=0; i<PAGE_QUANTITY; i++)
         [self loadPage:i];
     
-//    [self loadPage:1];
-//    [self loadPage:2];
-    
     [self gotoPage:NO];
+    
+//    [self.missionContentLabel setStrokeColor:[UIColor redColor]];
+//    [self.missionContentLabel setStrokeSize:kStrokeSize];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -76,6 +77,7 @@
         UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginNavigatorController"];
         [self presentViewController:loginViewController animated:NO completion:^(){}];
     } else {
+        userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
         for (int i=0; i<PAGE_QUANTITY; i++){
             UIViewController *controller =(UIViewController *)[contentViews objectAtIndex:i];
             [controller viewWillAppear:NO];
@@ -83,10 +85,33 @@
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewDidAppear:(BOOL)animated{
+    [self checkLevelUp];
+}
+
+-(void)checkLevelUp{
+    if (!userBase)
+        return;
+    
+    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+    NSNumber *userLevel = [userInfoList valueForKey:@"userLevel"];
+
+    if (!userLevel){
+        NSDictionary *saveDict = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithDouble:userBase.userDetail.goldCoinSpeed.doubleValue * 2.5], @"extraGold", userBase.userDetail.level, @"userLevel", nil];
+        [RORUserUtils writeToUserInfoPList:saveDict];
+        return;
+    }
+    //    if (userLevel.integerValue<userInfo.userDetail.level.integerValue){
+    [self performLevelUp];
+    //    }
+}
+
+-(void)performLevelUp{
+    UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+    LevelUpCongratsViewController *levelupViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"levelUpCongratsCoverViewController"];
+    [self addChildViewController:levelupViewController];
+    [self.view addSubview:levelupViewController.view];
+    [self didMoveToParentViewController:levelupViewController];
 }
 
 

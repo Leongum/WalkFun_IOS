@@ -13,7 +13,7 @@
 @interface ItemIconView : UIControl{
     UIImageView *itemIconImageView;
     UILabel *itemQuantityLabel;
-    
+    UIImageView * itemIconBgImageView;
     Virtual_Product *item;
 }
 @property (strong, nonatomic) User_Prop *userItem;

@@ -42,7 +42,7 @@
     
     titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 50, 320, 30)];
     titleLabel.backgroundColor = [UIColor darkGrayColor];
-    titleLabel.font = [UIFont fontWithName:CHN_PRINT_FONT size:18];
+    titleLabel.font = [UIFont systemFontOfSize:18];
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:titleLabel];
@@ -50,7 +50,7 @@
     awardTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, self.frame.size.height - 90, 320, 30)];
     awardTitleLabel.backgroundColor = [UIColor darkGrayColor];
     awardTitleLabel.textColor = [UIColor whiteColor];
-    awardTitleLabel.font = [UIFont fontWithName:CHN_PRINT_FONT size:18];
+    awardTitleLabel.font = [UIFont systemFontOfSize:18];
     awardTitleLabel.text = @"获得额外的经验奖励";
     awardTitleLabel.textAlignment = NSTextAlignmentCenter;
     awardTitleLabel.alpha = 0;

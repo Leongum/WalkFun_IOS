@@ -5,11 +5,10 @@
 //  Created by Beyond on 13-5-16.
 //  Copyright (c) 2013年 Beyond. All rights reserved.
 //
-
-#import "RORRunningViewController.h"
-
 #define SCALE_SMALL CGRectMake(50,70,220,188)
 
+#import "RORRunningViewController.h"
+#import "Animations.h"
 
 @interface RORRunningViewController ()
 
@@ -164,8 +163,6 @@
             self.startTime = [NSDate date];
             
             [(RORAppDelegate *)[[UIApplication sharedApplication] delegate] setRunningStatus:YES];
-            
-//            [[UIApplication sharedApplication] setIdleTimerDisabled: YES];
 
             UIImage* image = [UIImage imageNamed:@"redbutton_bg.png"];
             [endButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -176,10 +173,6 @@
             [self initNavi];
             
             [self startDeviceMotion];
-
-            //debug
-//            [sound play];
-//            [countDownView show];
             
             [self.tableView reloadData];
         }
@@ -188,9 +181,14 @@
         formerLocation = latestUserLocation;
         [routePoints addObject:formerLocation];
         
-        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(timerDot) userInfo:nil repeats:YES];
-        repeatingTimer = timer;
+        [NSThread detachNewThreadSelector:@selector(startTimer) toTarget:self withObject:nil];
     }
+}
+
+-(void)startTimer{
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:TIMER_INTERVAL target:self selector:@selector(timerDot) userInfo:nil repeats:YES];
+    repeatingTimer = timer;
+    [[NSRunLoop currentRunLoop] run];
 }
 
 - (void)initNavi{
@@ -215,9 +213,12 @@
         [self timerSecondDot];
     }
 
+    [self performSelectorOnMainThread:@selector(displayTimerInfo) withObject:nil waitUntilDone:YES];
+}
+
+-(void)displayTimerInfo{
     timeLabel.text = [RORUtils transSecondToStandardFormat:duration];
-    
-    distanceLabel.text = [RORUtils formattedSteps:stepCounting.counter/0.7];
+    distanceLabel.text = [RORUtils formattedSteps:stepCounting.counter/0.8];
 }
 
 -(void)timerSecondDot{
@@ -230,8 +231,11 @@
         eventHappenedCount = eventHappenedList.count;
         [self.tableView reloadData];
         [self.tableView scrollToRowAtIndexPath:bottomIndex atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        if (self.paperView.frame.origin.y>-308){
+            [Animations moveUp:self.paperView andAnimationDuration:0.3 andWait:NO andLength:newCellHeight<self.paperView.frame.origin.y+308?newCellHeight:self.paperView.frame.origin.y+308];
+        }
     }
-    if (!isAWalking && currentStep > 40 && distance>50) {
+    if (!isAWalking && currentStep > 50 && distance>50) {
         isAWalking = YES;
         UIImage* image = [UIImage imageNamed:@"green_btn_bg.png"];
         [endButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -242,19 +246,15 @@
 - (void)pushPoint{
     CLLocation *currentLocation = [self getNewRealLocation];
     double deltaDistance = [formerLocation distanceFromLocation:currentLocation];
-//    NSLog(@"[%@, %@], delta_d = %f", formerLocation, currentLocation, deltaDistance);
     if (formerLocation != currentLocation && deltaDistance>MIN_PUSHPOINT_DISTANCE){
         //calculate real-time speed
-        currentSpeed = deltaDistance / timeFromLastLocation;//[INDeviceStatus getSpeedVectorBetweenLocation1:formerLocation andLocation2:currentLocation deltaTime:timeFromLastLocation];
+        currentSpeed = deltaDistance / timeFromLastLocation;
         timeFromLastLocation = 0;
         
         NSLog(@"%f",deltaDistance);
         distance += [formerLocation distanceFromLocation:currentLocation];
         formerLocation = currentLocation;
         [routePoints addObject:currentLocation];
-        
-//        //记录每KM平均速度
-//        [self pushAvgSpeedPerKM];
     }
 }
 
@@ -418,7 +418,7 @@
             UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
             UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
             UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
-            eventLabel.text = event.actionDescription;
+            eventLabel.text = event.actionName;
             effectLabel.text = [NSString stringWithFormat:@"获得：%@",event.actionAttribute];
             
             int timeInt = ((NSNumber *)[eventTimeList objectAtIndex:indexPath.row-1]).integerValue;
@@ -431,12 +431,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0)
+    if (indexPath.row == 0){
+        newCellHeight = 62;
         return 62;
+    }
     Action_Define *event = [eventHappenedList objectAtIndex:indexPath.row-1];
     if ([event.actionDescription rangeOfString:@"金币"].location != NSNotFound ){
+        newCellHeight = 30;
         return 30;
     }
+    newCellHeight = 62;
     return 62;
 }
 

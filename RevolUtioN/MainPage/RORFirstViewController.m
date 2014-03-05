@@ -35,8 +35,6 @@
     //初始化按钮位置
     [self initControlsLayout];
     
-    [self checkLevelUp];
-    
     weatherInformation = [NSString stringWithFormat:@"天气信息获取中"];
     
     UIImage *image = [UIImage imageNamed:@"main_trafficlight_none.png"];
@@ -70,14 +68,14 @@
         self.usernameLabel.text = userInfo.nickName;
         int l = [RORUtils convertToInt:self.usernameLabel.text];
         if (l<=3)
-            [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:22]];
+            [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:20]];
         if (l>=8)
-            [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:16]];
+            [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:14]];
         self.levelLabel.text = [NSString stringWithFormat:@"Lv. %d", userInfo.userDetail.level.integerValue];
         
         User_Detail *userDetail = [RORUserServices fetchUserDetailByUserId:userInfo.userId];
-        self.fatLabel.text = [NSString stringWithFormat:@"肥肉：%@", userDetail.fatness];
-        self.healthLabel.text = [NSString stringWithFormat:@"健康：%@", userDetail.health];
+        self.fatLabel.text = [NSString stringWithFormat:@"肥肉：%d", userDetail.fatness.intValue];
+        self.healthLabel.text = [NSString stringWithFormat:@"健康：%d", userDetail.health.intValue];
     }
     if ([charatorViewController respondsToSelector:@selector(setUserBase:)]){
         [charatorViewController setValue:[RORUserServices fetchUser:[RORUserUtils getUserId]] forKey:@"userBase"];
@@ -96,18 +94,6 @@
     [super viewWillDisappear:animated];
 }
 
--(void)checkLevelUp{
-    NSMutableDictionary *settinglist = [RORUserUtils getUserSettingsPList];
-    NSNumber *userLevel = [settinglist valueForKey:@"userLevel"];
-    User_Detail *userAttr = [RORUserServices fetchUserDetailByUserId:[RORUserUtils getUserId]];
-    if (userLevel.integerValue<userAttr.level.integerValue){
-        [self performLevelUp];
-    }
-}
-
--(void)performLevelUp{
-    
-}
 
 -(void)prepareControlsForAnimation{
     self.weatherInfoButtonView.alpha = 1;

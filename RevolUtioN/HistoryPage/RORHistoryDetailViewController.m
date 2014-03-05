@@ -168,7 +168,7 @@
             UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
             UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
             UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
-            eventLabel.text = event.actionDescription;
+            eventLabel.text = event.actionName;
             effectLabel.text = [NSString stringWithFormat:@"获得：%@",event.actionAttribute];
             
             int timeInt = ((NSNumber *)[eventTimeList objectAtIndex:indexPath.row-1]).integerValue;

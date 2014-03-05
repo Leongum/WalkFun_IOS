@@ -179,10 +179,6 @@
         sexLabel.text = @"男子";
     }
     
-    [RORUtils setFontFamily:ENG_WRITTEN_FONT forView:titleLabel andSubViews:NO];
-    [RORUtils setFontFamily:ENG_WRITTEN_FONT forView:levelLabel andSubViews:NO];
-    [RORUtils setFontFamily:CHN_PRINT_FONT forView:sexLabel andSubViews:NO];
-    
     return cell;
 }
 

@@ -60,16 +60,13 @@
                 hasNewVersion = YES;
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"%@(点击更新%d.%d)",cell.detailTextLabel.text, version.version.integerValue, version.subVersion.integerValue];
             }
-            [RORUtils setFontFamily:CHN_PRINT_FONT forView:cell andSubViews:YES];
-            [RORUtils setFontFamily:ENG_WRITTEN_FONT forView:cell.detailTextLabel andSubViews:YES];
+
             break;
         }
         case 1:
         {
             identifier = @"siteCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            [RORUtils setFontFamily:CHN_PRINT_FONT forView:cell andSubViews:YES];
-            [RORUtils setFontFamily:ENG_WRITTEN_FONT forView:cell.detailTextLabel andSubViews:NO];
             break;
         }
         default:

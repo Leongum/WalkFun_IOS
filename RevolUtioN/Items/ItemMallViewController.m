@@ -14,7 +14,7 @@
 @end
 
 @implementation ItemMallViewController
-@synthesize userMoney;
+@synthesize userBase;
 
 #pragma mark ViewController initial
 
@@ -31,7 +31,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+    userMoney = userBase.userDetail.goldCoin.integerValue;
+    self.moneyLabel.text = [NSString stringWithFormat:@"%d", userMoney];
     [self.itemQuantityCoverView removeFromSuperview];
 }
 
@@ -67,13 +68,29 @@
 - (IBAction)buyAction:(id)sender {
 //    [self sendNotification:@"购买成功"];
     [self.itemQuantityCoverView bgTap:self];
-    
-    if ([RORUserPropsService buyUserProps:selectedItem.productId withBuyNumbers:[NSNumber numberWithInt:selectedQuantity]]){
-        [self sendNotification:@"购买成功"];
-        [self.itemQuantityCoverView bgTap:self];
-    } else {
-        [self sendNotification:@"购买成功"];
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        isServiceSuccess = [RORUserPropsService buyUserProps:selectedItem.productId withBuyNumbers:[NSNumber numberWithInt:selectedQuantity]];
+        if (isServiceSuccess){
+            userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
+            userMoney = userBase.userDetail.goldCoin.integerValue;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (isServiceSuccess){
+                [self sendNotification:@"购买成功"];
+                [self.itemQuantityCoverView bgTap:self];
+            } else {
+                [self sendNotification:@"网络错误"];
+            }
+            self.moneyLabel.text = [NSString stringWithFormat:@"%d", userMoney];
+        });
+    });
+//    if ([RORUserPropsService buyUserProps:selectedItem.productId withBuyNumbers:[NSNumber numberWithInt:selectedQuantity]]){
+//        [self sendNotification:@"购买成功"];
+//        [self.itemQuantityCoverView bgTap:self];
+//        
+//    } else {
+//        [self sendNotification:@"网络错误"];
+//    }
 }
 
 //选择某件道具后弹出该道具的购买页面
@@ -127,7 +144,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     selectedItem = [contentList objectAtIndex:indexPath.row];
-    if (userMoney.integerValue / selectedItem.virtualPrice.integerValue > 0){
+    if (userMoney / selectedItem.virtualPrice.integerValue > 0){
         [self showItemQuantityCover];
     } else {
         [self sendAlart:@"好像买不起"];
@@ -141,7 +158,7 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView*)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return userMoney.integerValue / selectedItem.virtualPrice.integerValue;
+    return userMoney / selectedItem.virtualPrice.integerValue;
 }
 
 #pragma mark Picker Delegate Methods

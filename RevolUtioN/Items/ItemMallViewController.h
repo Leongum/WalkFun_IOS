@@ -16,6 +16,8 @@
     NSMutableArray *contentList;
     Virtual_Product *selectedItem;
     int selectedQuantity;
+    int userMoney;
+    BOOL isServiceSuccess;
 }
 
 @property (strong, nonatomic) IBOutlet ItemQuantityPicker *itemQuantityCoverView;
@@ -24,7 +26,8 @@
 @property (strong, nonatomic) IBOutlet RORNormalButton *buyButton;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIPickerView *pickView;
+@property (strong, nonatomic) IBOutlet UILabel *moneyLabel;
 
-@property (strong, nonatomic)     NSNumber * userMoney;
+@property (strong, nonatomic)     User_Base * userBase;
 
 @end

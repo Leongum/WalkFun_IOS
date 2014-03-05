@@ -17,6 +17,7 @@
 #import <MapKit/MapKit.h>
 #import "MainPageViewController.h"
 #import "CharatorViewController.h"
+#import "LevelUpCongratsViewController.h"
 
 @interface RORFirstViewController : MainPageViewController<CLLocationManagerDelegate>{
     BOOL wasFound;

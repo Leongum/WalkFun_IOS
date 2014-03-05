@@ -10,9 +10,10 @@
 #import "RORUserServices.h"
 
 @interface FriendInfoViewController : RORViewController{
-
+    UIViewController *charatorViewController;
 }
 
+@property (strong, nonatomic) IBOutlet UIView *charatorView;
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *levelLabel;
 @property (strong, nonatomic) IBOutlet UILabel *fatLabel;

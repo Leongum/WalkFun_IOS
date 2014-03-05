@@ -17,6 +17,8 @@
     User_Prop *userItem;
     
     UIImageView *itemImageView;
+    UILabel *itemNameLabel;
+    UILabel *itemEffectLabel;
     UILabel *itemDescriptionLabel;
     RORNavigationButton *itemUseButton;
 }

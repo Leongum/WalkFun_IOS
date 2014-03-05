@@ -76,10 +76,6 @@
 #define DEFAULT_SPEEDTYPE 0
 #define DEFAULT_ANIMATION [NSNumber numberWithBool:YES]
 
-#define CHN_PRINT_FONT @""
-#define CHN_WRITTEN_FONT @""
-#define ENG_WRITTEN_FONT @""
-#define ENG_PRINT_FONT @""
 #define ENG_GAME_FONT @"EnterSansmanBoldItalic"
 
 #define PLAN_PAGE_SIZE 10

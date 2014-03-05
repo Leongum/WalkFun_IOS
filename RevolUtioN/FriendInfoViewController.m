@@ -28,11 +28,28 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    //载入人物视图
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+    charatorViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"CharatorViewController"];
+    UIView *charview = charatorViewController.view;
+    CGRect charframe = self.charatorView.frame;
+    charview.frame = charframe;
+    //    if ([charatorViewController respondsToSelector:@selector(setUserBase:)]){
+    //        [charatorViewController setValue:[RORUserServices fetchUser:[RORUserUtils getUserId]] forKey:@"userBase"];
+    //    }
+    [self addChildViewController:charatorViewController];
+    [self.view addSubview:charview];
+    [charatorViewController didMoveToParentViewController:self];
+    
     [self refreshView];
 }
 
 -(void)refreshView {
     self.userNameLabel.text = userBase.nickName;
+    if ([charatorViewController respondsToSelector:@selector(setUserBase:)]){
+        [charatorViewController setValue:userBase forKey:@"userBase"];
+    }
+    [charatorViewController viewWillAppear:NO];
 }
 
 -(void)viewDidAppear:(BOOL)animated{

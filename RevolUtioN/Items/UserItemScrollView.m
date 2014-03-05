@@ -34,11 +34,6 @@
     
     itemIconSize = CGSizeMake(SIZE_ITEM_ICON, SIZE_ITEM_ICON);
     marginBetweenItems = (CGRectGetWidth(self.frame) - MARGIN_LEFT_RIGHT * (COUNT_LINE-1) - SIZE_ITEM_ICON*COUNT_LINE) / (COUNT_LINE-1);
-    
-//    UIButton *testButton = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 100, 100)];
-//    [testButton setTitle:@"test" forState:UIControlStateNormal];
-//    [self addSubview:testButton];
-//    [testButton addTarget:self action:@selector(didSelectItem:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 /*

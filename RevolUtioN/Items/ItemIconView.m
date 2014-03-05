@@ -16,13 +16,19 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        itemIconImageView = [[UIImageView alloc]initWithFrame:frame];
-        itemIconImageView.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+        itemIconBgImageView = [[UIImageView alloc]initWithFrame:frame];
+        itemIconBgImageView.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+        itemIconBgImageView.image = [UIImage imageNamed:@"item_icon_cell.png"];
+        [self addSubview:itemIconBgImageView];
+
+        itemIconImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 12, 47, 47)];
+//        itemIconImageView.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
         [self addSubview:itemIconImageView];
         
-        itemQuantityLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), 20)];
-        [itemQuantityLabel setFont:[UIFont boldSystemFontOfSize:14]];
-        [itemQuantityLabel setBackgroundColor:[UIColor redColor]];
+        itemQuantityLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, self.frame.size.height-21, CGRectGetWidth(frame)-40, 20)];
+        [itemQuantityLabel setFont:[UIFont boldSystemFontOfSize:13]];
+        [itemQuantityLabel setBackgroundColor:[UIColor clearColor]];
+        [itemQuantityLabel setTextAlignment:NSTextAlignmentCenter];
         [self addSubview:itemQuantityLabel];
         
     }

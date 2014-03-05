@@ -19,20 +19,36 @@
         // Initialization code
         item = [RORVirtualProductService fetchVProduct:newUserItem.productId];;
         
+        itemNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, frame.size.width, 30)];
+        [itemNameLabel setFont:[UIFont systemFontOfSize:20]];
+        [itemNameLabel setTextColor:[UIColor whiteColor]];
+        itemNameLabel.text = newUserItem.productName;
+        [itemNameLabel setTextAlignment:NSTextAlignmentCenter];
+        [self addSubview:itemNameLabel];
+        
         //todo:图片
         UIImage *iconImage = [RORVirtualProductService getImageOf:item];
-
         itemImageView = [[UIImageView alloc]initWithImage:iconImage];
         itemImageView.frame = CGRectMake(CGRectGetWidth(frame)/2-BIG_ITEM_SIZE/2, 105, BIG_ITEM_SIZE, BIG_ITEM_SIZE);
         [self addSubview:itemImageView];
         
-        itemDescriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, itemImageView.center.y+BIG_ITEM_SIZE/2 + 50, CGRectGetWidth(frame) - 100, 100)];
+        NSArray *itemInfoStringList = [item.productDescription componentsSeparatedByString:@"\\n\\n"];
+        
+        //道具的作用
+        itemEffectLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, itemImageView.frame.origin.y+itemImageView.frame.size.height+20, frame.size.width, 30)];
+        [itemEffectLabel setFont:[UIFont systemFontOfSize:18]];
+        [itemEffectLabel setTextColor:[UIColor whiteColor]];
+        itemEffectLabel.text = [itemInfoStringList objectAtIndex:1];
+        [itemEffectLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        [itemEffectLabel setTextAlignment:NSTextAlignmentCenter];
+        itemEffectLabel.numberOfLines = 0;
+        [self addSubview:itemEffectLabel];
+
+        
+        itemDescriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, itemImageView.center.y+BIG_ITEM_SIZE/2 + 60, CGRectGetWidth(frame) - 100, 100)];
         [itemDescriptionLabel setFont:[UIFont systemFontOfSize:14]];
         [itemDescriptionLabel setTextColor:[UIColor whiteColor]];
-//        Virtual_Product *item = [RORVirtualProductService fetchVProduct:userItem.productId];
-        NSMutableString *desc = [[NSMutableString alloc]initWithString:item.productDescription];
-        [desc replaceOccurrencesOfString:@"\\n" withString:@"\n" options:NSLiteralSearch|NSCaseInsensitiveSearch range:NSMakeRange(0, [desc length])];
-        itemDescriptionLabel.text = desc;
+        itemDescriptionLabel.text = [itemInfoStringList objectAtIndex:0];
         [itemDescriptionLabel setLineBreakMode:NSLineBreakByWordWrapping];
         itemDescriptionLabel.numberOfLines = 0;
         //todo: 多行显示

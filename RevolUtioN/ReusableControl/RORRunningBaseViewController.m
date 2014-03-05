@@ -187,7 +187,7 @@
     [stepCounting pushNewLAcc:[INMatrix modOfVec_3:newDeviceStatus.an] GAcc:newDeviceStatus.an.v3 speed:currentSpeed];
     if (stepCounting.counter>currentStep) {
         currentStep = stepCounting.counter;
-//        if (isAWalking)
+        if (isAWalking)
             [self isEventHappen];
     }
 }
@@ -224,15 +224,21 @@
 
 //如果触发了事件，返回事件，否则返回nil
 -(void)isEventHappen{
-//    NSNumber *lastEventTime = [eventTimeList objectAtIndex:eventTimeList.count-1];
-//    if (duration - lastEventTime.doubleValue < 5)
-//        return;
+    if(eventTimeList.count > 0){
+        NSNumber *lastEventTime = [eventTimeList objectAtIndex:eventTimeList.count-1];
+        if (duration - lastEventTime.doubleValue < 5)
+            return;
+    }
     
     for (int i=0; i<eventWillList.count; i++){
         Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
         int x = arc4random() % 1000000;
         double roll = ((double)x)/10000.f;
-        if (roll < event.triggerProbability.doubleValue){//debug
+        double delta = 1;
+        if ([event.actionName rangeOfString:@"金"].location != NSNotFound) {
+            delta = (user.userDetail.goldCoinSpeed.doubleValue + 1);
+        }
+        if (roll < event.triggerProbability.doubleValue *delta){//debug
             [self eventDidHappened:event];
             return;
         }

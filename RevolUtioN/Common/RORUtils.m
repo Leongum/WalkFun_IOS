@@ -43,7 +43,9 @@
     min = min % 60;
     if (hour>0)
         return [NSString stringWithFormat:@"%d小时%d分%d秒",hour, min, intSeconds];
-    return [NSString stringWithFormat:@"%d分%d秒", min, intSeconds];
+    if (min>0)
+        return [NSString stringWithFormat:@"%d分%d秒", min, intSeconds];
+    return [NSString stringWithFormat:@"%d秒", intSeconds];
 }
 
 + (NSString *)toJsonFormObject:(NSObject *)object{

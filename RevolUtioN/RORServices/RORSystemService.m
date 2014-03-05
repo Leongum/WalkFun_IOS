@@ -330,7 +330,7 @@
         if (![[attrNameDict allKeys] containsObject:key])
             continue;
         NSNumber *num = [attrDict objectForKey:key];
-        if (num>0){
+        if (num.integerValue>0){
             [propgetString appendString:[NSString stringWithFormat:@"%@ +%@  ",[attrNameDict objectForKey:key] ,num]];
         } else {
             [propgetString appendString:[NSString stringWithFormat:@"%@ %@  ",[attrNameDict objectForKey:key] ,num]];

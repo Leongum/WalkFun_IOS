@@ -197,9 +197,6 @@
             UILabel *unitLabel = (UILabel *)[cell viewWithTag:UNIT_TAG];
             unitLabel.text = @"(cm)";
             
-            [RORUtils setFontFamily:CHN_WRITTEN_FONT forView:titleLabel andSubViews:NO];
-            [RORUtils setFontFamily:ENG_WRITTEN_FONT forView:textField andSubViews:YES];
-            
             break;
         }
         case 1:
@@ -219,9 +216,6 @@
             UILabel *unitLabel = (UILabel *)[cell viewWithTag:UNIT_TAG];
             unitLabel.text = @"(kg)";
 
-            [RORUtils setFontFamily:CHN_WRITTEN_FONT forView:titleLabel andSubViews:NO];
-            [RORUtils setFontFamily:ENG_WRITTEN_FONT forView:textField andSubViews:YES];
-            
             break;
         }
         case 2:
