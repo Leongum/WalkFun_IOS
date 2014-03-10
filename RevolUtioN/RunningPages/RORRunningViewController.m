@@ -6,9 +6,11 @@
 //  Copyright (c) 2013年 Beyond. All rights reserved.
 //
 #define SCALE_SMALL CGRectMake(50,70,220,188)
+#define COLOR_DEF_RED [UIColor colorWithRed:213.0/255.0 green:54.0/255.0 blue:10.0/255.0 alpha:1.0]
 
 #import "RORRunningViewController.h"
 #import "Animations.h"
+
 
 @interface RORRunningViewController ()
 
@@ -20,7 +22,6 @@
 @synthesize timeLabel, speedLabel, distanceLabel, endButton;
 @synthesize routeLineView;
 @synthesize record;
-@synthesize doCollect;
 @synthesize kalmanFilter, inDistance;
 @synthesize coverView;
 
@@ -36,9 +37,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-//    [RORUtils setFontFamily:CHN_PRINT_FONT forView:self.view andSubViews:YES];
-//    [RORUtils setFontFamily:ENG_PRINT_FONT forView:self.dataContainer andSubViews:YES];
+    todayMission = [RORMissionServices getTodayMission];
+    [self initTodayMission];
 }
 
 //initial all when view appears
@@ -48,35 +48,19 @@
     [self controllerInit];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0) {
-//        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
-
 -(void)controllerInit{
     self.coverView.alpha = 0;
     self.backButton.alpha = 0;
     
-//    UIImage *image = [UIImage imageNamed:@"redbutton_bg.png"];
-//    [endButton setBackgroundImage:image forState:UIControlStateNormal];
-
+    //进页面后直接开始记步
     [self startButtonAction:self];
     
-//    collapseButton.alpha = 0;
-    
+    //初始化各个标签
     timeLabel.text = [RORUtils transSecondToStandardFormat:0];
     speedLabel.text = [RORUserUtils formatedSpeed:0];
     distanceLabel.text = [RORUtils outputDistance:0];
-//    self.stepLabel.text = @"0";
-//    mapView.frame = SCALE_SMALL;
-    
-    doCollect = NO;
     
     routePoints = [[NSMutableArray alloc]init];
-    
-//    self.saveButton.delegate = self;
     
     isAWalking = NO;
 }
@@ -129,12 +113,6 @@
     
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 -(void)awakeFromNib {
     [super awakeFromNib];
     [self navigationInit];
@@ -155,6 +133,126 @@
     [self setDataContainer:nil];
     [super viewDidUnload];
 }
+
+-(void)newProcessView:(UIView *)v{
+    THProgressView *processView = [[THProgressView alloc] initWithFrame:v.frame];
+    processView.borderTintColor = [UIColor blackColor];
+    processView.progressTintColor = [UIColor blackColor];
+    [processView setProgress:0.f];
+    [self.todayMissionView addSubview:processView];
+    [self.todayMissionView sendSubviewToBack:processView];
+    
+    [processViewList addObject:processView];
+}
+
+-(void)initTodayMission{
+    todayMissionDict = [[NSMutableDictionary alloc]init];
+    processViewList = [[NSMutableArray alloc]init];
+    
+    UILabel *titleLabel = (UILabel *)[self.todayMissionView viewWithTag:1];
+    
+    for (int i=100; i<103; i++) {
+        UILabel *l = (UILabel *)[self.todayMissionView viewWithTag:i];
+        l.alpha = 0;
+    }
+    
+    if (todayMission != nil){
+        
+        titleLabel.text = @"今日任务";
+        switch (todayMission.missionTypeId.integerValue) {
+            case MissionTypeStep:{
+                if (todayMission.triggerDistances){
+                    [todayMissionDict setObject:todayMission.triggerDistances forKey:@"distance"];
+                }
+                if (todayMission.triggerSteps){
+                    [todayMissionDict setObject:todayMission.triggerSteps forKey:@"currentStep"];
+                }
+                if (todayMission.triggerTimes){
+                    [todayMissionDict setObject:todayMission.triggerTimes forKey:@"duration"];
+                }
+                break;
+            }
+            case MissionTypePickItem:{
+                [todayMissionDict setObject:todayMission.triggerPropNumbers forKey:todayMission.triggerPropId];
+                break;
+            }
+            default:
+                break;
+        }
+        int i=100;
+        for (id keys in [todayMissionDict allKeys]){
+            if (i>102)
+                break;
+            if ([keys isKindOfClass:[NSString class]]){
+                NSString *keyString = (NSString *)keys;
+                UILabel *l = (UILabel *)[self.todayMissionView viewWithTag:i];
+                l.alpha = 1;
+                [self newProcessView:l];
+                if ([keyString isEqualToString:@"distance"]){
+                    l.text = [NSString stringWithFormat:@"%gkm",((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue/1000];
+                    continue;
+                }
+                if ([keyString isEqualToString:@"currentStep"]){
+                    l.text = [NSString stringWithFormat:@"%d步",((NSNumber *)[todayMissionDict objectForKey:keys]).integerValue];
+                    i++;
+                }
+                if ([keyString isEqualToString:@"duration"]){
+                    l.text = [NSString stringWithFormat:@"%d分钟",((NSNumber *)[todayMissionDict objectForKey:keys]).integerValue/60];
+                }
+                i++;
+            } else {
+                UILabel *l = (UILabel *)[self.todayMissionView viewWithTag:i];
+                l.text = todayMission.missionRule;
+                l.alpha = 1;
+                [self newProcessView:l];
+                i++;
+            }
+        }
+    } else {
+        titleLabel.text = @"随便走走";
+    }
+    
+    cMissionItemQuantity = 0;
+}
+
+-(void)checkTodayMission{
+    //debug
+    if (todayMission != nil){// && isAWalking){
+        int i=0;
+        for (id keys in [todayMissionDict allKeys]){
+            THProgressView *pv = [processViewList objectAtIndex:i];
+            double p;
+
+            if ([keys isKindOfClass:[NSString class]]){
+                NSString *keyString = (NSString *)keys;
+                if ([keyString isEqualToString:@"distance"]){
+                    p = distance / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
+                }
+                if ([keyString isEqualToString:@"currentStep"]){
+                    p = currentStep / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
+                }
+                if ([keyString isEqualToString:@"duration"]){
+                    p = duration / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
+                }
+                
+            } else {
+                p = cMissionItemQuantity / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
+            }
+            
+            if (p>1)
+                p=1;
+            [pv setProgress:p];
+            if (p==1){
+                UILabel *l = (UILabel *)[self.todayMissionView viewWithTag:100+i];
+                l.text = @"完成";
+            }
+            i++;
+        }
+
+    }
+}
+
+
 
 - (IBAction)startButtonAction:(id)sender {
     if (!isStarted){
@@ -201,10 +299,10 @@
 
 - (void)timerDot{
     [self timerDotCommon];
-    doCollect = YES;
-    
+
     timerCount++;
     duration = timerCount * TIMER_INTERVAL;
+    
     // currently, only do running status judgement here.
     [self inertiaNavi];
     
@@ -241,6 +339,8 @@
         [endButton setBackgroundImage:image forState:UIControlStateNormal];
         [endButton setTitle:FINISH_RUNNING_BUTTON forState:UIControlStateNormal];
     }
+    
+    [self checkTodayMission];
 }
 
 - (void)pushPoint{
@@ -348,8 +448,6 @@
     runHistory.avgSpeed = [NSNumber numberWithDouble:(double)(distance/duration*3.6)];
     runHistory.valid = [NSNumber numberWithInt:1]; //[self isValidRun:stepCounting.counter / 0.8];
     runHistory.missionRoute = [RORDBCommon getStringFromRoutes:routes];
-//    NSLog(@"%@", [RORDBCommon getStringFromSpeedList:avgSpeedPerKMList]);
-    
     //保存actionList(actionIds)
     runHistory.actionIds = [RORSystemService getStringFromEventList:eventHappenedList timeList:eventTimeList andLocationList:eventLocationList];
     //保存propget
@@ -364,13 +462,35 @@
     runHistory.runUuid = [RORUtils uuidString];
     runHistory.steps = [NSNumber numberWithInteger:stepCounting.counter / 0.8];
     runHistory.experience =[self calculateExperience:runHistory];
-    //todo 走路本身是否有金币奖励
-//    runHistory.goldCoin =[self calculateScore:runHistory];
     runHistory.extraExperience =[NSNumber  numberWithDouble:0];
-//    runHistory.speedList = [RORDBCommon getStringFromSpeedList:avgSpeedPerKMList];
+    
+    [self isMissionDone];
     
     NSLog(@"%@", runHistory);
     record = runHistory;
+}
+
+-(void)isMissionDone{
+    BOOL isDone = YES;
+    for (THProgressView *pv in processViewList){
+        if (pv.progress<1)
+            isDone = NO;
+    }
+    if (isDone){
+        runHistory.missionId = todayMission.missionId;
+        runHistory.missionGrade = [NSNumber numberWithInteger:1];
+        runHistory.extraGoldCoin = todayMission.goldCoin;
+        runHistory.extraExperience = todayMission.experience;
+        
+        NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+        NSInteger missionProcess = ((NSNumber *)[userInfoList valueForKey:@"missionProcess"]).integerValue;
+        //todo
+        if (++missionProcess >3)
+            missionProcess = 3;
+        [userInfoList setObject:[NSNumber numberWithInteger:missionProcess] forKey:@"missionProcess"];
+        [userInfoList setObject:[NSDate date] forKey:@"lastDailyMissionFinishedDate"];
+        [RORUserUtils writeToUserInfoPList:userInfoList];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

@@ -70,6 +70,9 @@
     BOOL isAWalking;
     
     User_Base *user;
+    
+    Mission *todayMission;
+    int cMissionItemQuantity;
 }
 
 @property (nonatomic, retain) CLLocationManager *locationManager;

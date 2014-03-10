@@ -9,9 +9,6 @@
 #import "RORFirstViewController.h"
 #import "FTAnimation.h"
 
-//#define CHARACTOR_FRAME_NORMAL CGRectMake(10,300,280,183)
-//#define CHARACTOR_FRAME_RATINA CGRectMake(10,300,280,183)
-
 #define WEATHER_BUTTON_INITIAL_FRAME CGRectMake(-100, 27, 100, 40)
 #define LOGIN_BUTTON_INITIAL_FRAME CGRectMake(320, 14, 210, 69)
 
@@ -214,9 +211,7 @@
         [destination setValue:self.userName forKey:@"userName"];
         [destination setValue:self.userId forKey:@"userId"];
     }
-    if ([destination respondsToSelector:@selector(setMissionType:)]){
-        [destination setValue:[NSNumber numberWithInteger:MissionTypeEasy] forKey:@"missionType"];
-    }
+
 }
 
 - (void)didReceiveMemoryWarning

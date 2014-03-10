@@ -33,6 +33,8 @@
 
 + (void)writeToUserInfoPList:(NSDictionary *) userDict;
 
++ (void)initialUserInfoPlist;
+
 + (void)saveLastUpdateTime: (NSString *) key;
 
 + (NSString *)getLastUpdateTime: (NSString *) key;

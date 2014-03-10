@@ -68,15 +68,6 @@
     [self startDeviceLocation];
 }
 
-//initial all when view appears
-- (void)viewDidAppear:(BOOL)animated{
-    if (![RORNetWorkUtils getIsConnetioned]){
-        isNetworkOK = NO;
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"网络连接错误" message:@"定位精度将受到严重影响，本次跑步将不能获得相应奖励，请检查相关系统设置。  （小声的：启动数据网络可以大大提高定位精度与速度，同时只会产生极小的流量。）" delegate:self cancelButtonTitle:@"知道呢！" otherButtonTitles:nil];
-        [alertView show];
-        alertView = nil;
-    }
-}
 
 -(void)resetRoutePoints{
     if (routePoints) {
@@ -187,6 +178,7 @@
     [stepCounting pushNewLAcc:[INMatrix modOfVec_3:newDeviceStatus.an] GAcc:newDeviceStatus.an.v3 speed:currentSpeed];
     if (stepCounting.counter>currentStep) {
         currentStep = stepCounting.counter;
+        //debug
         if (isAWalking)
             [self isEventHappen];
     }
@@ -238,7 +230,8 @@
         if ([event.actionName rangeOfString:@"金"].location != NSNotFound) {
             delta = (user.userDetail.goldCoinSpeed.doubleValue + 1);
         }
-        if (roll < event.triggerProbability.doubleValue *delta){//debug
+        //debug
+        if (roll < event.triggerProbability.doubleValue *delta){
             [self eventDidHappened:event];
             return;
         }
@@ -246,6 +239,10 @@
 }
 
 -(void)eventDidHappened:(Action_Define *)event{
+    if (event.actionId.integerValue == todayMission.triggerPropId.integerValue){
+        cMissionItemQuantity++;
+    }
+    
     [eventHappenedList addObject:event];
     [eventTimeList addObject: [NSNumber numberWithInteger:duration]];
     [eventLocationList addObject:[NSString stringWithFormat:@"%f,%f", formerLocation.coordinate.latitude, formerLocation.coordinate.longitude]];

@@ -59,8 +59,9 @@
 }
 
 //open out
+//debug
 +(NSArray *)fetchMissionList{
-    return [self fetchMissionList:MissionTypeEasy withContext:NO];
+    return [self fetchMissionList:0 withContext:NO];
 }
 
 +(NSArray *)fetchMissionList:(MissionTypeEnum *) missionType withContext:(BOOL) needContext{
@@ -118,5 +119,24 @@
         }
         return nil;
     }
+}
+
++(Mission *)getTodayMission{
+    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+    //如果已经集满了三次日常任务，但没有兑换奖励，则接不到新的任务
+    NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
+    if (missionProcess.integerValue >= 3)
+        return nil;
+    
+    NSDate *date = [userInfoList valueForKey:@"lastDailyMissionFinishedDate"];
+    NSDateFormatter *formattter = [[NSDateFormatter alloc] init];
+    [formattter setDateFormat:@"yyyyMMdd"];
+    NSNumber *lastNum = [RORDBCommon getNumberFromId:[formattter stringFromDate:date]];
+    NSNumber *newNem = [RORDBCommon getNumberFromId:[formattter stringFromDate:[NSDate date]]];
+    if (lastNum== nil || newNem.integerValue > lastNum.integerValue){
+        Mission *todayMission = [RORMissionServices fetchDailyMission];
+        return todayMission;
+    }
+    return nil;
 }
 @end

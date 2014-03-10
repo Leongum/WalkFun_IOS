@@ -11,7 +11,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "RORRunHistoryServices.h"
 #import "RORViewController.h"
-#import "RORChallengeCongratsCoverView.h"
 #import "RORStartAnnotation.h"
 #import "ROREndAnnotation.h"
 
@@ -22,6 +21,7 @@
     
     NSArray *eventList;
     NSArray *eventTimeList;
+    
 }
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 

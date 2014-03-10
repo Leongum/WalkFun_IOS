@@ -90,7 +90,8 @@
 
 -(void)addItem:(NSNumber *)itemId withQuantity:(NSNumber *)quantity{
     Virtual_Product *item = [RORVirtualProductService fetchVProduct:itemId];
-    if ([item.productName rangeOfString:@"花"].location != NSNotFound){
+    if ([item.productName rangeOfString:@"花"].location != NSNotFound &&
+        [item.productName rangeOfString:@"花盆"].location == NSNotFound){
         //如果是花
         for (int i=0; i<quantity.integerValue; i++){
             [self makeNewFlowerImageView:item];

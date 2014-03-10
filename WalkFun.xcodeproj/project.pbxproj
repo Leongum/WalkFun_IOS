@@ -87,7 +87,6 @@
 		0FA751EA189279E70037342E /* RORHistoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA751DF189279E70037342E /* RORHistoryDetailViewController.m */; };
 		0FA751EC189279E70037342E /* RORHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA751E3189279E70037342E /* RORHistoryViewController.m */; };
 		0FA751ED189279E70037342E /* RORMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA751E5189279E70037342E /* RORMapViewController.m */; };
-		0FA751FA18927A0F0037342E /* RORAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA751F118927A0F0037342E /* RORAccountViewController.m */; };
 		0FA751FB18927A0F0037342E /* RORBodyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA751F318927A0F0037342E /* RORBodyViewController.m */; };
 		0FA751FC18927A0F0037342E /* RORMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA751F518927A0F0037342E /* RORMoreViewController.m */; };
 		0FA7520318927A230037342E /* RORChallengeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7520018927A230037342E /* RORChallengeViewController.m */; };
@@ -334,6 +333,8 @@
 		30DB021618C6C90C008863B8 /* main_bottom_board.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DB021418C6C90C008863B8 /* main_bottom_board.png */; };
 		30DB021718C6C90C008863B8 /* main_mission_board.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DB021518C6C90C008863B8 /* main_mission_board.png */; };
 		30DB021B18C6CF17008863B8 /* THLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DB021A18C6CF17008863B8 /* THLabel.m */; };
+		30DB021F18C85BB5008863B8 /* THProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DB021E18C85BB5008863B8 /* THProgressView.m */; };
+		30DB022218C8C542008863B8 /* StrokeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DB022118C8C542008863B8 /* StrokeLabel.m */; };
 		30DBB71F17EF300E00552391 /* textfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB71E17EF300E00552391 /* textfield.png */; };
 		30DBB72317EFE04400552391 /* challenge_pop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB72017EFE04400552391 /* challenge_pop_bg.png */; };
 		30DBB72417EFE04400552391 /* finishrunning_pop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB72117EFE04400552391 /* finishrunning_pop_bg.png */; };
@@ -523,8 +524,6 @@
 		0FA751E3189279E70037342E /* RORHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORHistoryViewController.m; path = HistoryPage/RORHistoryViewController.m; sourceTree = "<group>"; };
 		0FA751E4189279E70037342E /* RORMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORMapViewController.h; path = HistoryPage/RORMapViewController.h; sourceTree = "<group>"; };
 		0FA751E5189279E70037342E /* RORMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORMapViewController.m; path = HistoryPage/RORMapViewController.m; sourceTree = "<group>"; };
-		0FA751F018927A0F0037342E /* RORAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORAccountViewController.h; path = MorePage/RORAccountViewController.h; sourceTree = "<group>"; };
-		0FA751F118927A0F0037342E /* RORAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORAccountViewController.m; path = MorePage/RORAccountViewController.m; sourceTree = "<group>"; };
 		0FA751F218927A0F0037342E /* RORBodyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORBodyViewController.h; path = MorePage/RORBodyViewController.h; sourceTree = "<group>"; };
 		0FA751F318927A0F0037342E /* RORBodyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORBodyViewController.m; path = MorePage/RORBodyViewController.m; sourceTree = "<group>"; };
 		0FA751F418927A0F0037342E /* RORMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORMoreViewController.h; path = MorePage/RORMoreViewController.h; sourceTree = "<group>"; };
@@ -838,6 +837,10 @@
 		30DB021518C6C90C008863B8 /* main_mission_board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_mission_board.png; sourceTree = "<group>"; };
 		30DB021918C6CF17008863B8 /* THLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLabel.h; sourceTree = "<group>"; };
 		30DB021A18C6CF17008863B8 /* THLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLabel.m; sourceTree = "<group>"; };
+		30DB021D18C85BB5008863B8 /* THProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THProgressView.h; sourceTree = "<group>"; };
+		30DB021E18C85BB5008863B8 /* THProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THProgressView.m; sourceTree = "<group>"; };
+		30DB022018C8C542008863B8 /* StrokeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrokeLabel.h; sourceTree = "<group>"; };
+		30DB022118C8C542008863B8 /* StrokeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrokeLabel.m; sourceTree = "<group>"; };
 		30DBB71E17EF300E00552391 /* textfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = textfield.png; path = bg/textfield.png; sourceTree = "<group>"; };
 		30DBB72017EFE04400552391 /* challenge_pop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = challenge_pop_bg.png; path = bg/challenge_pop_bg.png; sourceTree = "<group>"; };
 		30DBB72117EFE04400552391 /* finishrunning_pop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = finishrunning_pop_bg.png; path = bg/finishrunning_pop_bg.png; sourceTree = "<group>"; };
@@ -1153,8 +1156,6 @@
 		3001498D1750F428005DAF1D /* RORMorePage */ = {
 			isa = PBXGroup;
 			children = (
-				0FA751F018927A0F0037342E /* RORAccountViewController.h */,
-				0FA751F118927A0F0037342E /* RORAccountViewController.m */,
 				0FA751F218927A0F0037342E /* RORBodyViewController.h */,
 				0FA751F318927A0F0037342E /* RORBodyViewController.m */,
 				0FA751F418927A0F0037342E /* RORMoreViewController.h */,
@@ -1282,6 +1283,7 @@
 		302FCFF81727D870004DA005 = {
 			isa = PBXGroup;
 			children = (
+				30DB021C18C85BB5008863B8 /* THProgressView */,
 				30DB021818C6CF17008863B8 /* THLabel */,
 				0F282FEC18B30623003F44E8 /* lingqian */,
 				0F282F9718B19C75003F44E8 /* UMeng */,
@@ -1810,8 +1812,19 @@
 			children = (
 				30DB021918C6CF17008863B8 /* THLabel.h */,
 				30DB021A18C6CF17008863B8 /* THLabel.m */,
+				30DB022018C8C542008863B8 /* StrokeLabel.h */,
+				30DB022118C8C542008863B8 /* StrokeLabel.m */,
 			);
 			path = THLabel;
+			sourceTree = "<group>";
+		};
+		30DB021C18C85BB5008863B8 /* THProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				30DB021D18C85BB5008863B8 /* THProgressView.h */,
+				30DB021E18C85BB5008863B8 /* THProgressView.m */,
+			);
+			path = THProgressView;
 			sourceTree = "<group>";
 		};
 		30F4546017BCB519006CB66C /* InertiaNavigation */ = {
@@ -2251,7 +2264,6 @@
 				0FB7EAFC18BB3464006E44F7 /* Reward_Details.m in Sources */,
 				0FA7513A189278E30037342E /* FTUtils+UIGestureRecognizer.m in Sources */,
 				3037079B180511CB00FE0238 /* RORStartAnnotation.m in Sources */,
-				0FA751FA18927A0F0037342E /* RORAccountViewController.m in Sources */,
 				0FA75190189279A90037342E /* RORMultiPlaySound.m in Sources */,
 				0FA751DD189279CB0037342E /* Version_Control.m in Sources */,
 				307A1D5417F4353B006692DD /* RORCongratsCoverView.m in Sources */,
@@ -2312,6 +2324,7 @@
 				30750A6818B1FB5800EC7B51 /* ItemDetailCoverView.m in Sources */,
 				0F282F9218B09435003F44E8 /* RORVirtualProductService.m in Sources */,
 				0FA7521818927A410037342E /* RORLoginViewController.m in Sources */,
+				30DB021F18C85BB5008863B8 /* THProgressView.m in Sources */,
 				0FDE82CC18927B4E0082B1BF /* RORUserClientHandler.m in Sources */,
 				0FA7514C1892791A0037342E /* RORMissionServices.m in Sources */,
 				0FA7518D189279A90037342E /* RORHttpClientHandler.m in Sources */,
@@ -2341,6 +2354,7 @@
 				30621D2117DF00220063A007 /* RORPageViewController.m in Sources */,
 				0FA751731892798F0037342E /* RORViewController.m in Sources */,
 				30FFFE5F1845A213001EA4F1 /* RORFriendsViewController.m in Sources */,
+				30DB022218C8C542008863B8 /* StrokeLabel.m in Sources */,
 				30621D2717E00ED90063A007 /* RORRunningBaseViewController.m in Sources */,
 				30B3906618322B4C005CE74D /* MLNavigationController.m in Sources */,
 				30750A7118B23F9600EC7B51 /* FixedCoverView.m in Sources */,

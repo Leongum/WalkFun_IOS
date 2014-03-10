@@ -16,12 +16,20 @@
 #import "RORViewController.h"
 #import "Mission.h"
 #import "RORRunningBaseViewController.h"
+#import "THProgressView.h"
+
 
 @interface RORRunningViewController : RORRunningBaseViewController {
     BOOL MKwasFound;
     User_Running_History *runHistory;
     int newCellHeight;
+    
+    
+    NSMutableDictionary *todayMissionDict;
+    NSMutableArray *processViewList;
 }
+
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UIButton *endButton;
@@ -31,6 +39,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *speedLabel;
 @property (strong, nonatomic) IBOutlet RORNavigationButton *saveButton;
 @property (strong, nonatomic) IBOutlet UIView *dataContainer;
+@property (strong, nonatomic) IBOutlet UIView *todayMissionView;
 
 @property (nonatomic) vec_3 inDistance;
 
@@ -44,14 +53,11 @@
 @property (strong, nonatomic) NSDate *endTime;
 @property (strong, nonatomic) User_Running_History* record;
 
-@property (nonatomic) BOOL doCollect;
-
 //@property (strong, nonatomic) Mission *runMission;
 @property (weak, nonatomic) IBOutlet UIControl *coverView;
 @property (strong, nonatomic) IBOutlet UIView *paperView;
 
-//- (IBAction)expandAction:(id)sender;
-//- (IBAction)collapseAction:(id)sender;
+
 - (IBAction)startButtonAction:(id)sender;
 - (IBAction)endButtonAction:(id)sender;
 
