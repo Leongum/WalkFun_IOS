@@ -69,7 +69,7 @@
 #pragma mark Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 2;
 }
 
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -78,19 +78,6 @@
 
     switch (indexPath.row) {
         case 0:
-        {
-            identifier = @"accountCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            UILabel *label = (UILabel*)[cell viewWithTag:1];
-            User_Base *userInfo = [RORUserServices fetchUser:[RORUserUtils getUserId]];
-            if (userInfo.nickName.length<=0)
-                label.text = @"未登录";
-            else
-                label.text =  userInfo.nickName;
-//            [RORUtils setFontFamily:CHN_PRINT_FONT forView:cell andSubViews:YES];
-            break;
-        }
-        case 1:
         {
             identifier = @"aboutCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -103,7 +90,7 @@
                 [cell viewWithTag:3].alpha = 0;
             break;
         }
-        case 2:
+        case 1:
         {
             identifier = @"recommendCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -116,14 +103,35 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 2){
-        RORCheckBox *check = (RORCheckBox*)[[tableView cellForRowAtIndexPath:indexPath] viewWithTag:3];
-        [check checkBoxClicked];
-    }
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    if (indexPath.row == 2){
+//        RORCheckBox *check = (RORCheckBox*)[[tableView cellForRowAtIndexPath:indexPath] viewWithTag:3];
+//        [check checkBoxClicked];
+//    }
 }
 
 - (IBAction)feedbackAction:(id)sender {
     [UMFeedback showFeedback:self withAppkey:UMENG_APPKEY];
+}
+
+
+- (IBAction)logoutAction:(id)sender {
+    //delete core data
+    
+    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:LOGOUT_ALERT_TITLE message:LOGOUT_ALERT_CONTENT delegate:self cancelButtonTitle:CANCEL_BUTTON_CANCEL otherButtonTitles:OK_BUTTON_OK, nil];
+    [confirmView show];
+    confirmView = nil;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        return;
+    }else if(buttonIndex == 1){
+        [RORUserUtils logout];
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+        UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginViewController"];
+        [self.navigationController pushViewController:loginViewController animated:NO];
+    }
 }
 @end

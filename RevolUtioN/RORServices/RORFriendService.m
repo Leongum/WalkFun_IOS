@@ -243,6 +243,8 @@
     action.actionToId = actionToId;
     action.actionToName = actionToUserName;
     action.updateTime = [RORUserUtils getSystemTime];
+    Action_Define *ad = [RORSystemService fetchActionDefine:action.actionId];
+    action.actionName = ad.actionDescription;
     
     BOOL successed = [self sycnCreateAction:action];
     //check uuid
@@ -275,9 +277,13 @@
             NSArray *actionList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
             int count = 0;
             for (NSDictionary *actionDict in actionList){
+                NSNumber *actionFromId = [actionDict valueForKey:@"actionFromId"];
+                NSNumber *actionToId = [actionDict valueForKey:@"actionToId"];
+                if(actionFromId.integerValue != actionToId.integerValue){
                 Action *newAction = [NSEntityDescription insertNewObjectForEntityForName:@"Action" inManagedObjectContext:[RORContextUtils getShareContext]];
                 [newAction initWithDictionary:actionDict];
                 count ++;
+                }
             }
             [RORContextUtils saveContext];
             return count;
@@ -315,8 +321,8 @@
 //open out
 +(NSArray *)fetchUserAction:(NSNumber *) userId{
     NSString *table=@"Action";
-    NSString *query = @"actionFromId = %@ or actionToId = %@";
-    NSArray *params = [NSArray arrayWithObjects:userId,userId, nil];
+    NSString *query = @"actionToId = %@";
+    NSArray *params = [NSArray arrayWithObjects:userId, nil];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateTime" ascending:NO];
     NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
     NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];

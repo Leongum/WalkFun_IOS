@@ -308,5 +308,11 @@ static NSDate *syncTime;
     return itemsForDisplayDict;
 }
 
++(void)initialUserInfoPlist{
+    NSDictionary *saveDict = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInteger:0],@"missionProcess", nil];
+    
+    [self writeToUserInfoPList:saveDict];
+}
+
 @end
 

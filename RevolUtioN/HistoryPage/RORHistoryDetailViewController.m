@@ -77,7 +77,29 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-
+    
+    //如果完成了任务
+    if (record.missionId && [delegate isKindOfClass:[RORRunningViewController class]]){
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+        UIViewController *missionDoneViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"missionCongratsVIewController"];
+        [self.view addSubview:missionDoneViewController.view];
+        
+        UIView *missionCongratsView = missionDoneViewController.view;
+        UILabel *missionNameLabel = (UILabel *)[missionCongratsView viewWithTag:100];
+        UILabel *missionGoldLabel = (UILabel *)[missionCongratsView viewWithTag:101];
+        UILabel *missionExpLabel = (UILabel *)[missionCongratsView viewWithTag:102];
+        UILabel *missionDoneLabel = (UILabel *)[missionCongratsView viewWithTag:103];
+        
+        Mission *doneMission = [RORMissionServices fetchMission:record.missionId];
+        missionNameLabel.text = doneMission.missionDescription;
+        missionGoldLabel.text = [NSString stringWithFormat:@"+%d",doneMission.goldCoin.integerValue];
+        missionExpLabel.text = [NSString stringWithFormat:@"+%d",doneMission.experience.integerValue];
+        
+        NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+        NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
+        if (missionProcess.integerValue >= 3)
+            missionDoneLabel.text = [NSString stringWithFormat:@"%d/%d", missionProcess.integerValue, 3];
+    }
 }
 
 - (void)viewDidUnload {

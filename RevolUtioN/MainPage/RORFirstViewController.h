@@ -42,13 +42,9 @@
 //todo
 @property (strong, nonatomic) IBOutlet UILabel *fatLabel;
 @property (strong, nonatomic) IBOutlet UILabel *healthLabel;
-
-
-@property (strong, nonatomic) IBOutlet UIButton *loginButton;
 @property (strong, nonatomic) IBOutlet UIButton *weatherInfoButtonView;
 @property (strong, nonatomic) IBOutlet UIView *charatorView;
+@property (strong, nonatomic) IBOutlet UIButton *msgButton;
 
-
-@property (strong, nonatomic) IBOutlet UIView *trainingCountDownView;
 
 @end

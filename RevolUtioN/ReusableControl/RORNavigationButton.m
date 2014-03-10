@@ -43,19 +43,9 @@
 }
 
 -(IBAction)touchUpOutside:(id)sender{
-//    if ([delegate respondsToSelector:@selector(endIndicator:)]){
-//        [delegate performSelector:@selector(endIndicator:) withObject:self];
-//    }
     [SVProgressHUD dismiss];
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+
 
 
 @end

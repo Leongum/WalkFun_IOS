@@ -93,7 +93,7 @@
 #define ACTION_RULE_SHOW_DROP @"D"
 #define ACTION_RULE_HEAD_BAG @"B"
 
-typedef enum {MissionTypeEasy = 0} MissionTypeEnum;
+typedef enum {MissionTypeStep = 0, MissionTypePickItem = 1, MissionTypeUseItem = 2} MissionTypeEnum;
 typedef enum {FollowStatusFollowed = 0, FollowStatusNotFollowed = 1} FollowStatusEnum;
 typedef enum {FriendStatusOnlyFollowed = 0, FriendStatusFollowEachother = 1} FriendStatusEnum;
 typedef enum {HistoryStatusExecute = 0, HistoryStatusFinished = 1, HistoryStatusCancled = 2} HistoryStatusEnum;

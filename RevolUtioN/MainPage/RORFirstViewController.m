@@ -9,9 +9,6 @@
 #import "RORFirstViewController.h"
 #import "FTAnimation.h"
 
-//#define CHARACTOR_FRAME_NORMAL CGRectMake(10,300,280,183)
-//#define CHARACTOR_FRAME_RATINA CGRectMake(10,300,280,183)
-
 #define WEATHER_BUTTON_INITIAL_FRAME CGRectMake(-100, 27, 100, 40)
 #define LOGIN_BUTTON_INITIAL_FRAME CGRectMake(320, 14, 210, 69)
 
@@ -46,9 +43,6 @@
     UIView *charview = charatorViewController.view;
     CGRect charframe = self.charatorView.frame;
     charview.frame = charframe;
-//    if ([charatorViewController respondsToSelector:@selector(setUserBase:)]){
-//        [charatorViewController setValue:[RORUserServices fetchUser:[RORUserUtils getUserId]] forKey:@"userBase"];
-//    }
     [self addChildViewController:charatorViewController];
     [self.view addSubview:charview];
     [charatorViewController didMoveToParentViewController:self];
@@ -62,8 +56,6 @@
     //初始化用户名
     NSNumber *thisUserId = [RORUserUtils getUserId];
     if (thisUserId.integerValue>=0){
-        self.loginButton.alpha = 0;
-        
         userInfo = [RORUserServices fetchUser:[RORUserUtils getUserId]];
         self.usernameLabel.text = userInfo.nickName;
         int l = [RORUtils convertToInt:self.usernameLabel.text];
@@ -76,6 +68,12 @@
         User_Detail *userDetail = [RORUserServices fetchUserDetailByUserId:userInfo.userId];
         self.fatLabel.text = [NSString stringWithFormat:@"肥肉：%d", userDetail.fatness.intValue];
         self.healthLabel.text = [NSString stringWithFormat:@"健康：%d", userDetail.health.intValue];
+        
+        //同步好友间的事件
+        int aQuantity = [RORFriendService syncActions:thisUserId];
+        if (aQuantity>0)
+            [self.msgButton setTitle:[NSString stringWithFormat:@"%d", aQuantity] forState:UIControlStateNormal];
+        
     }
     if ([charatorViewController respondsToSelector:@selector(setUserBase:)]){
         [charatorViewController setValue:[RORUserServices fetchUser:[RORUserUtils getUserId]] forKey:@"userBase"];
@@ -214,9 +212,7 @@
         [destination setValue:self.userName forKey:@"userName"];
         [destination setValue:self.userId forKey:@"userId"];
     }
-    if ([destination respondsToSelector:@selector(setMissionType:)]){
-        [destination setValue:[NSNumber numberWithInteger:MissionTypeEasy] forKey:@"missionType"];
-    }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -233,7 +229,6 @@
     [self setUsernameLabel:nil];
     [self setLevelLabel:nil];
     [self setUserInfoView:nil];
-    [self setLoginButton:nil];
     [super viewDidUnload];
 }
 

@@ -34,19 +34,17 @@
     userMoney = userBase.userDetail.goldCoin.integerValue;
     self.moneyLabel.text = [NSString stringWithFormat:@"%d", userMoney];
     [self.itemQuantityCoverView removeFromSuperview];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [self startIndicator:self];
     contentList = [[NSMutableArray alloc]initWithArray:[RORVirtualProductService fetchAllVProduct]];
-    
     NSMutableArray *deletingList = [[NSMutableArray alloc]init];
     for (Virtual_Product *item in contentList) {
         if (item.virtualPrice == nil || item.virtualPrice.integerValue == 0)
             [deletingList addObject:item];
     }
     [contentList removeObjectsInArray:deletingList];
-    
     [self.tableView reloadData];
     [self endIndicator:self];
 }

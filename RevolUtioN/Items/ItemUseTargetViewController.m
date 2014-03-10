@@ -69,6 +69,22 @@
     [self startIndicator:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         isSucceeded = [RORFriendService createAction:toThisUser.userId withActionToUserName:toThisUser.userName withActionId:action.actionId];
+        //触发并完成了任务
+        Mission *todayMission = [RORMissionServices getTodayMission];
+        if (todayMission){
+            if (todayMission.missionTypeId.integerValue == MissionTypeUseItem &&
+                userId.integerValue != [RORUserUtils getUserId].integerValue &&
+                action.actionId.integerValue == todayMission.triggerPropId.integerValue){
+                NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+                NSNumber *missionUseItemQuantity = [userInfoList valueForKey:@"missionUseItemQuantity"];
+                int q = missionUseItemQuantity.integerValue;
+                q--;
+                if (q<0)
+                    q=0;
+                [userInfoList setObject:[NSNumber numberWithInteger:q] forKey:@"missionUseItemQuantity"];
+                [RORUserUtils writeToUserInfoPList:userInfoList];
+            }
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             if (isSucceeded){
                 [self sendSuccess:@"使用成功"];

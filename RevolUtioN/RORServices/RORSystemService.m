@@ -205,6 +205,7 @@
     return YES;
 }
 
+//open out
 + (Action_Define *)fetchActionDefine:(NSNumber *) actionId {
     NSString *table=@"Action_Define";
     NSString *query = @"actionId = %@";

@@ -72,21 +72,52 @@
 }
 
 -(void)checkDailyMission{
-    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
-    NSDate *date = [userInfoList valueForKey:@"lastDailyMissionFinishedDate"];
-    NSDateFormatter *formattter = [[NSDateFormatter alloc] init];
-    [formattter setDateFormat:@"yyyyMMdd"];
-    NSNumber *lastNum = [RORDBCommon getNumberFromId:[formattter stringFromDate:date]];
-    NSNumber *newNem = [RORDBCommon getNumberFromId:[formattter stringFromDate:[NSDate date]]];
-    if (lastNum== nil || newNem.integerValue > lastNum.integerValue){
-        todayMission = [RORMissionServices fetchDailyMission];
+    todayMission = [RORMissionServices getTodayMission];
+    if (todayMission){
+        NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+        NSNumber *missionUseItemQuantity = [userInfoList valueForKey:@"missionUseItemQuantity"];
+        if (todayMission.missionTypeId.integerValue == MissionTypeUseItem){
+            if (missionUseItemQuantity.integerValue<0){
+                //接到使用道具的任务，初始化missionUseItemQuantity为总次数
+                [userInfoList setObject:todayMission.triggerUserNumbers forKey:@"missionUseItemQuantity"];
+                [RORUserUtils writeToUserInfoPList:userInfoList];
+            } else {
+                //如果使用道具的任务完成了
+                if (missionUseItemQuantity.integerValue == 0){
+                    UIViewController *missionDoneViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"missionCongratsVIewController"];
+                    [self.view addSubview:missionDoneViewController.view];
+                    
+                    UIView *missionCongratsView = missionDoneViewController.view;
+                    UILabel *missionNameLabel = (UILabel *)[missionCongratsView viewWithTag:100];
+                    UILabel *missionGoldLabel = (UILabel *)[missionCongratsView viewWithTag:101];
+                    UILabel *missionExpLabel = (UILabel *)[missionCongratsView viewWithTag:102];
+                    UILabel *missionDoneLabel = (UILabel *)[missionCongratsView viewWithTag:103];
+                    
+                    missionNameLabel.text = todayMission.missionDescription;
+                    missionGoldLabel.text = [NSString stringWithFormat:@"+%d",todayMission.goldCoin.integerValue];
+                    missionExpLabel.text = [NSString stringWithFormat:@"+%d",todayMission.experience.integerValue];
+                    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+                    NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
+                    int mp = missionProcess.integerValue;
+                    mp++;
+                    missionDoneLabel.text = [NSString stringWithFormat:@"%d/%d", mp, 3];
+                    [userInfoList setObject:[NSNumber numberWithInteger:mp] forKey:@"missionProcess"];
+                    [userInfoList setObject:[NSNumber numberWithInteger:-1] forKey:@"missionUseItemQuantity"];
+                    [userInfoList setObject:[NSDate date] forKey:@"lastDailyMissionFinishedDate"];
+                    [RORUserUtils writeToUserInfoPList:userInfoList];
+                    return;
+                }
+            }
+        } else {
+            if (missionUseItemQuantity>=0){
+                [userInfoList setObject:[NSNumber numberWithInteger:-1] forKey:@"missionUseItemQuantity"];
+                [RORUserUtils writeToUserInfoPList:userInfoList];
+            }
+        }
+        
         self.missionContentLabel.text = todayMission.missionDescription;
         [Animations moveUp:self.missionView andAnimationDuration:1 andWait:NO andLength:100];
-//        [self.missionView moveUp:1 length:100 delegate:self];
-    } else {
-        todayMission = nil;
     }
-    
     isFolded = NO;
 }
 
@@ -165,14 +196,14 @@
 
 // at the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
 
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if (!isFolded){
+        [self hideorshowDailyMissionBoardAction:self];
+    }
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    CGFloat pageWidth = CGRectGetWidth(self.scrollView.frame);
-//    if (self.pageControl.currentPage <=1)
-//        self.formerPageButton.alpha = scrollView.contentOffset.x/pageWidth / 2;
-//    if (self.pageControl.currentPage >=contentViews.count-2)
-//        self.nextPageButton.alpha = (pageWidth * (contentViews.count-1) - scrollView.contentOffset.x)/pageWidth /2;
     [self refreshPageTitles:scrollView];
-    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -183,8 +214,8 @@
     [self refreshPageTitles:scrollView];
     self.pageControl.currentPage = page;
     
-    if (page == 2){
-        MainPageViewController *controller =(MainPageViewController *)[contentViews objectAtIndex:self.pageControl.currentPage];
+    if (page != 1){
+        UIViewController *controller =[contentViews objectAtIndex:self.pageControl.currentPage];
         [controller viewWillAppear:NO];
     }
 }
@@ -250,10 +281,9 @@
 
 -(void)cancelMission{
     todayMission = nil;
-    NSDictionary *saveDict = [[NSDictionary alloc]initWithObjectsAndKeys:[NSDate date], @"lastDailyMissionFinishedDate", nil];
+    NSDictionary *saveDict = [[NSDictionary alloc]initWithObjectsAndKeys:[NSDate date], @"lastDailyMissionFinishedDate", [NSNumber numberWithInteger:-1], @"missionUseItemQuantity", nil];
     [RORUserUtils writeToUserInfoPList:saveDict];
     [Animations moveDown:self.missionView andAnimationDuration:1 andWait:NO andLength:100];
-//    [self.missionView moveUp:1 length:-100 delegate:self];
 }
 
 - (IBAction)hideorshowDailyMissionBoardAction:(id)sender {
@@ -265,4 +295,19 @@
         isFolded = YES;
     }
 }
+
+
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    UIViewController *destination = segue.destinationViewController;
+    if ([destination respondsToSelector:@selector(setDelegate:)]){
+        [destination setValue:self forKey:@"delegate"];
+    }
+    
+    if ([destination respondsToSelector:@selector(setTodayMission:)]){
+        [destination setValue:todayMission forKey:@"todayMission"];
+    }
+}
+
 @end

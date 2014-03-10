@@ -285,6 +285,8 @@
         [self sendAlart:@"个人信息加载失败"];
         return NO;
     }
+    
+    [RORUserUtils initialUserInfoPlist];
     return YES;
 }
 

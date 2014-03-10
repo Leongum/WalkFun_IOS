@@ -35,9 +35,30 @@
 	// Do any additional setup after loading the view.
     [self addBackButton];
     
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(didAppearNotification:)
+//                                                 name:SVProgressHUDDidAppearNotification
+//                                               object:nil];
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didAppearNotification:)
+                                             selector:@selector(handleNotification:)
+                                                 name:SVProgressHUDWillAppearNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleNotification:)
                                                  name:SVProgressHUDDidAppearNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleNotification:)
+                                                 name:SVProgressHUDWillDisappearNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleNotification:)
+                                                 name:SVProgressHUDDidDisappearNotification
                                                object:nil];
     
     //add pinch gesture
@@ -172,6 +193,12 @@
 
 -(IBAction)didAppearNotification:(id)sender{
 //    [SVProgressHUD dismiss];
+}
+
+- (void)handleNotification:(NSNotification *)notif
+{
+    NSLog(@"Notification recieved: %@", notif.name);
+    NSLog(@"Status user info key: %@", [notif.userInfo objectForKey:SVProgressHUDStatusUserInfoKey]);
 }
 
 /**

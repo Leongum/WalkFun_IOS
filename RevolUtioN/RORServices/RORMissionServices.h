@@ -26,4 +26,8 @@
 
 //同步服务器每日daily mission
 + (Mission *)fetchDailyMission;
+
+//返回日常任务，如果做过了或者放弃了则返回nil
++(Mission *)getTodayMission;
+
 @end
