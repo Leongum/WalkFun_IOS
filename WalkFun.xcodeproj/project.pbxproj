@@ -335,6 +335,7 @@
 		30DB021B18C6CF17008863B8 /* THLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DB021A18C6CF17008863B8 /* THLabel.m */; };
 		30DB021F18C85BB5008863B8 /* THProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DB021E18C85BB5008863B8 /* THProgressView.m */; };
 		30DB022218C8C542008863B8 /* StrokeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DB022118C8C542008863B8 /* StrokeLabel.m */; };
+		30DB022518CD8DB2008863B8 /* ActionHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DB022418CD8DB2008863B8 /* ActionHistoryViewController.m */; };
 		30DBB71F17EF300E00552391 /* textfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB71E17EF300E00552391 /* textfield.png */; };
 		30DBB72317EFE04400552391 /* challenge_pop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB72017EFE04400552391 /* challenge_pop_bg.png */; };
 		30DBB72417EFE04400552391 /* finishrunning_pop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB72117EFE04400552391 /* finishrunning_pop_bg.png */; };
@@ -841,6 +842,8 @@
 		30DB021E18C85BB5008863B8 /* THProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THProgressView.m; sourceTree = "<group>"; };
 		30DB022018C8C542008863B8 /* StrokeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrokeLabel.h; sourceTree = "<group>"; };
 		30DB022118C8C542008863B8 /* StrokeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrokeLabel.m; sourceTree = "<group>"; };
+		30DB022318CD8DB2008863B8 /* ActionHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionHistoryViewController.h; path = HistoryPage/ActionHistoryViewController.h; sourceTree = "<group>"; };
+		30DB022418CD8DB2008863B8 /* ActionHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionHistoryViewController.m; path = HistoryPage/ActionHistoryViewController.m; sourceTree = "<group>"; };
 		30DBB71E17EF300E00552391 /* textfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = textfield.png; path = bg/textfield.png; sourceTree = "<group>"; };
 		30DBB72017EFE04400552391 /* challenge_pop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = challenge_pop_bg.png; path = bg/challenge_pop_bg.png; sourceTree = "<group>"; };
 		30DBB72117EFE04400552391 /* finishrunning_pop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = finishrunning_pop_bg.png; path = bg/finishrunning_pop_bg.png; sourceTree = "<group>"; };
@@ -1752,6 +1755,8 @@
 				0FA751E5189279E70037342E /* RORMapViewController.m */,
 				30FFFE5718433412001EA4F1 /* RORChallengeCongratsCoverView.h */,
 				30FFFE5818433412001EA4F1 /* RORChallengeCongratsCoverView.m */,
+				30DB022318CD8DB2008863B8 /* ActionHistoryViewController.h */,
+				30DB022418CD8DB2008863B8 /* ActionHistoryViewController.m */,
 			);
 			name = RORHistoryPage;
 			sourceTree = "<group>";
@@ -2295,6 +2300,7 @@
 				0FA751EC189279E70037342E /* RORHistoryViewController.m in Sources */,
 				30FC340818AE182500D3AC3A /* ItemsMainViewController.m in Sources */,
 				30F4547217BCB519006CB66C /* INKalmanFilter.m in Sources */,
+				30DB022518CD8DB2008863B8 /* ActionHistoryViewController.m in Sources */,
 				30F4547317BCB519006CB66C /* INMatrix.m in Sources */,
 				0FDE83061893A3930082B1BF /* RORRunHistoryClientHandler.m in Sources */,
 				30F4547517BCB519006CB66C /* INTimeWindow.m in Sources */,

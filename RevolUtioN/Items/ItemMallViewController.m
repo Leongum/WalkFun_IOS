@@ -37,7 +37,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [self startIndicator:self];
+//    [self startIndicator:self];
     contentList = [[NSMutableArray alloc]initWithArray:[RORVirtualProductService fetchAllVProduct]];
     
     NSMutableArray *deletingList = [[NSMutableArray alloc]init];

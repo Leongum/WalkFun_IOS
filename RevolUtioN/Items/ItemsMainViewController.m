@@ -66,8 +66,8 @@
     
     UIButton *itemMallButton = (UIButton *)[mallCoverView viewWithTag:200];
     [itemMallButton addTarget:self action:@selector(itemMallAction:) forControlEvents:UIControlEventTouchUpInside];
-    [itemMallButton addTarget:self action:@selector(startIndicator:) forControlEvents:UIControlEventTouchDown];
-    [itemMallButton addTarget:self action:@selector(endIndicator:) forControlEvents:UIControlEventTouchUpOutside];
+//    [itemMallButton addTarget:self action:@selector(startIndicator:) forControlEvents:UIControlEventTouchDown];
+//    [itemMallButton addTarget:self action:@selector(endIndicator:) forControlEvents:UIControlEventTouchUpOutside];
     UIButton *lingqingButton = (UIButton *)[mallCoverView viewWithTag:201];
     [lingqingButton addTarget:self action:@selector(lingqianAction:) forControlEvents:UIControlEventTouchUpInside];
     

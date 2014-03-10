@@ -37,6 +37,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [self syncPageFromServer];
+    
     followList = [RORFriendService fetchFriendFollowsList];
     fansList = [RORFriendService fetchFriendFansList];
     friendList = [RORFriendService fetchFriendEachFansList];
@@ -47,13 +49,13 @@
 
 -(void)syncPageFromServer{
     [super syncPageFromServer];
-//    int friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
-//    
-//    //好友初步信息
-//    BOOL friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
-//    if(!friendsort){
-//        friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
-//    }
+    int friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
+    
+    //好友初步信息
+    BOOL friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
+    if(!friendsort){
+        friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
+    }
 }
 
 - (void)didReceiveMemoryWarning
