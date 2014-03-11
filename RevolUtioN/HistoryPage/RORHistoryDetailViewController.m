@@ -120,15 +120,6 @@
     if ([destination respondsToSelector:@selector(setRoutes:)]){
         [destination setValue:[RORDBCommon getRoutesFromString:record.missionRoute] forKey:@"routes"];
     }
-    if ([destination respondsToSelector:@selector(setShareImage:)]){
-        [destination setValue:img forKey:@"shareImage"];
-    }
-    
-    if ([destination respondsToSelector:@selector(setShareMessage:)]){
-        NSString *shareContent = [NSString stringWithFormat:SHARE_DEFAULT_CONTENT,[RORUtils outputDistance:record.distance.doubleValue],[RORUtils transSecondToStandardFormat:record.duration.doubleValue],[NSString stringWithFormat:@"%.1f kca", record.spendCarlorie.doubleValue]];
-        [destination setValue:shareContent forKey:@"shareMessage"];
-    }
-    
     if ([destination respondsToSelector:@selector(setRecord:)]){
         [destination setValue:record forKey:@"record"];
     }

@@ -40,8 +40,6 @@
     [super viewWillAppear:animated];
     
     if ([RORUserUtils getUserId].integerValue>0){
-        //todo:放到loading里sync
-        [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
         itemList = [RORUserPropsService fetchUserProps:[RORUserUtils getUserId]];
         
         user = [RORUserServices fetchUser:[RORUserUtils getUserId]];

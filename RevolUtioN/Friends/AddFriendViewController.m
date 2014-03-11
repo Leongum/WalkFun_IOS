@@ -28,14 +28,26 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     recommendPage = 0;
-    contentList = [RORFriendService fetchRecommendFriends:[NSNumber numberWithInteger:recommendPage]];
-    recommendList = contentList;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self startIndicator:self];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        contentList = [RORFriendService fetchRecommendFriends:[NSNumber numberWithInteger:recommendPage]];
+        recommendList = contentList;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self endIndicator:self];
+            [self.tableView reloadData];
+        });
+    });
 }
 
 #pragma mark - Actions
@@ -46,6 +58,7 @@
 
 - (IBAction)searchAction:(id)sender {
     //todo searchAction
+    [self startIndicator:self];
     NSString *searchText =self.searchTextField.text;
     if (![searchText isEqualToString:@""]){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -64,15 +77,22 @@
 
 - (IBAction)refreshRecommendAction:(id)sender {
     recommendPage++;
-    NSArray *tmpList = [RORFriendService fetchRecommendFriends:[NSNumber numberWithInteger:recommendPage]];
-    if (tmpList.count>0){
-        contentList = tmpList;
+    [self startIndicator:self];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSArray *tmpList = [RORFriendService fetchRecommendFriends:[NSNumber numberWithInteger:recommendPage]];
         recommendList = contentList;
-        [self.tableView reloadData];
-    } else {
-        [self sendNotification:@"今天就这么多\n明天再来试试吧"];
-        self.refreshRecommendButton.enabled = NO;
-    }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self endIndicator:self];
+            if (tmpList.count>0){
+                contentList = tmpList;
+                recommendList = contentList;
+                [self.tableView reloadData];
+            } else {
+                [self sendNotification:@"今天就这么多\n明天再来试试吧"];
+                self.refreshRecommendButton.enabled = NO;
+            }
+        });
+    });
 }
 
 - (IBAction)follow:(id)sender{

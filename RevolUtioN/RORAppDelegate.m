@@ -69,8 +69,7 @@
     if (! ([CLLocationManager  locationServicesEnabled])
         || ( [CLLocationManager  authorizationStatus] == kCLAuthorizationStatusDenied))
     {
-        //            [self sendAlart:GPS_SETTING_ERROR];
-        NSLog(@"%@",GPS_SETTING_ERROR);
+        NSLog(@"%@",@"定位失败，请打开GPS定位功能");
         return;
     }
     else{

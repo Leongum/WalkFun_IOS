@@ -64,16 +64,15 @@
 
 //点“购买”之后执行这里
 - (IBAction)buyAction:(id)sender {
-//    [self sendNotification:@"购买成功"];
+    [self startIndicator:self];
     [self.itemQuantityCoverView bgTap:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         isServiceSuccess = [RORUserPropsService buyUserProps:selectedItem.productId withBuyNumbers:[NSNumber numberWithInt:selectedQuantity]];
-        if (isServiceSuccess){
-            userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
-            userMoney = userBase.userDetail.goldCoin.integerValue;
-        }
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self endIndicator:self];
             if (isServiceSuccess){
+                userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
+                userMoney = userBase.userDetail.goldCoin.integerValue;
                 [self sendNotification:@"购买成功"];
                 [self.itemQuantityCoverView bgTap:self];
             } else {
@@ -82,13 +81,6 @@
             self.moneyLabel.text = [NSString stringWithFormat:@"%d", userMoney];
         });
     });
-//    if ([RORUserPropsService buyUserProps:selectedItem.productId withBuyNumbers:[NSNumber numberWithInt:selectedQuantity]]){
-//        [self sendNotification:@"购买成功"];
-//        [self.itemQuantityCoverView bgTap:self];
-//        
-//    } else {
-//        [self sendNotification:@"网络错误"];
-//    }
 }
 
 //选择某件道具后弹出该道具的购买页面
@@ -163,12 +155,6 @@
 - (NSString *)titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return [NSString stringWithFormat:@"%d", row+1];
 }
-
-//- (CGFloat)pickerView:(UIPickerView*)pickerView widthForComponent:(NSInteger)component{
-//    if (component<3)
-//        return 80;
-//    return 40;
-//}
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(12.0f, 0.0f, [pickerView rowSizeForComponent:component].width-12, [pickerView rowSizeForComponent:component].height)];

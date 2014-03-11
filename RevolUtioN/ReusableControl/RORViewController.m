@@ -82,7 +82,7 @@
 }
 
 -(void)addBackButton{
-    backButton = [[RORNavigationButton alloc]initWithFrame:BACKBUTTON_FRAME_TOP ];//[RORNormalButton buttonWithType:UIButtonTypeRoundedRect];
+    backButton = [[UIButton alloc]initWithFrame:BACKBUTTON_FRAME_TOP ];//[RORNormalButton buttonWithType:UIButtonTypeRoundedRect];
 //    [backButton initButtonInteraction];
     backButton.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
     //CGRect rx = [ UIScreen mainScreen ].applicationFrame;

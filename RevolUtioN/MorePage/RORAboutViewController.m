@@ -60,7 +60,6 @@
                 hasNewVersion = YES;
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"%@(点击更新%d.%d)",cell.detailTextLabel.text, version.version.integerValue, version.subVersion.integerValue];
             }
-
             break;
         }
         case 1:
@@ -79,6 +78,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0 && hasNewVersion){
+        //todo:: change url.
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/cyberace/id718299464?ls=1&mt=8"]];
     }
     if (indexPath.row == 1){

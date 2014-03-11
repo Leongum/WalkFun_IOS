@@ -15,7 +15,6 @@
 #import "RORPlaySound.h"
 #import "SVProgressHUD.h"
 #import "RORIntroCoverView.h"
-#import "RORNavigationButton.h"
 
 #define BACKBUTTON_FRAME_TOP CGRectMake(0, 0, 70, 70)
 
@@ -26,7 +25,7 @@
     UIViewController *captureBgView;
 }
 //-(void)addBackButton;
-@property (strong, nonatomic) RORNavigationButton *backButton;
+@property (strong, nonatomic) UIButton *backButton;
 
 @property(retain,nonatomic) UIActivityIndicatorView *activityIndicator;
 @property(retain,nonatomic) UIProgressView *progressView;

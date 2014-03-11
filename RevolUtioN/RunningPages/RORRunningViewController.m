@@ -264,7 +264,7 @@
 
             UIImage* image = [UIImage imageNamed:@"redbutton_bg.png"];
             [endButton setBackgroundImage:image forState:UIControlStateNormal];
-            [endButton setTitle:CANCEL_RUNNING_BUTTON forState:UIControlStateNormal];
+            [endButton setTitle:@"放弃" forState:UIControlStateNormal];
             [endButton addTarget:self action:@selector(endButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             
             //init inertia navigation
@@ -337,7 +337,7 @@
         isAWalking = YES;
         UIImage* image = [UIImage imageNamed:@"green_btn_bg.png"];
         [endButton setBackgroundImage:image forState:UIControlStateNormal];
-        [endButton setTitle:FINISH_RUNNING_BUTTON forState:UIControlStateNormal];
+        [endButton setTitle:@"完成" forState:UIControlStateNormal];
     }
     
     [self checkTodayMission];
@@ -392,9 +392,6 @@
     
     [self prepareForQuit];
     [self saveRunInfo];
-
-    [self performSegue];
-    [self endIndicator:self];
 }
 
 -(void)performSegue{
@@ -423,19 +420,19 @@
 
 - (void)saveRunInfo{
     [self creatRunningHistory];
-    
-    [RORRunHistoryServices saveRunInfoToDB:runHistory];
+    [self startIndicator:self];
     if([RORUserUtils getUserId].integerValue > 0){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [RORRunHistoryServices saveRunInfoToDB:runHistory];
             BOOL updated = [RORRunHistoryServices uploadRunningHistories];
-            [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(updated){
-                    [self sendSuccess:SYNC_DATA_SUCCESS];
+                    [self sendSuccess:@"保存成功"];
                 }
                 else{
-                    [self sendAlart:SYNC_DATA_FAIL];
+                    [self sendAlart:@"上传失败，请手动同步记录"];
                 }
+                [self performSegue];
             });
         });
     }

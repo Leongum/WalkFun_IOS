@@ -28,11 +28,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    //用户好友信息
-    [RORFriendService syncFriends:[RORUserUtils getUserId]];
-    //好友初步信息
-    [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
 
     //todo:load content
     contentList = [RORFriendService fetchFriendEachFansList];
@@ -51,13 +46,10 @@
 }
 
 - (IBAction)use2Self:(id)sender {
-    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"选择目标" message:@"确定对【自己】使用吗？" delegate:self cancelButtonTitle:CANCEL_BUTTON_CANCEL otherButtonTitles:OK_BUTTON_OK, nil];
+    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"选择目标" message:@"确定对【自己】使用吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [confirmView show];
     confirmView = nil;
     toSelf = YES;
-//    selectedUser = [RORUserServices fetchUser:[RORUserUtils getUserId]];
-    //todo
-//    [self useItemTo:[RORUserUtils getUserId]];
 }
 
 -(void)useItemTo:(NSNumber *)userId{
@@ -121,7 +113,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Friend *thisFriend = [contentList objectAtIndex:indexPath.row];
     selectedFriend = thisFriend;
-    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"选择目标" message:[NSString stringWithFormat:@"确定对【%@】使用吗？", thisFriend.userName] delegate:self cancelButtonTitle:CANCEL_BUTTON_CANCEL otherButtonTitles:OK_BUTTON_OK, nil];
+    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"选择目标" message:[NSString stringWithFormat:@"确定对【%@】使用吗？", thisFriend.userName] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     toSelf = NO;
     [confirmView show];
     confirmView = nil;

@@ -37,7 +37,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *speedLabel;
-@property (strong, nonatomic) IBOutlet RORNavigationButton *saveButton;
+@property (strong, nonatomic) IBOutlet UIButton *saveButton;
 @property (strong, nonatomic) IBOutlet UIView *dataContainer;
 @property (strong, nonatomic) IBOutlet UIView *todayMissionView;
 

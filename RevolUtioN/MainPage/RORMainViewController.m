@@ -47,11 +47,11 @@
     friendViewController =  [friendStoryboard instantiateViewControllerWithIdentifier:@"FriendsMainViewController"];
     UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"ItemsStoryboard" bundle:[NSBundle mainBundle]];
     itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"ItemsMainViewController"];
-
+    
     [contentViews replaceObjectAtIndex:0 withObject:itemViewController];
     [contentViews replaceObjectAtIndex:2 withObject:friendViewController];
     [contentViews replaceObjectAtIndex:1 withObject:firstViewController];
-
+    
     NSInteger numberPages = contentViews.count;
     // a page is the width of the scroll view
     
@@ -148,7 +148,7 @@
     
     NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
     NSNumber *userLevel = [userInfoList valueForKey:@"userLevel"];
-
+    
     if (!userLevel){
         NSDictionary *saveDict = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithDouble:userBase.userDetail.goldCoinSpeed.doubleValue * 2.5], @"extraGold", userBase.userDetail.level, @"userLevel", nil];
         [RORUserUtils writeToUserInfoPList:saveDict];
@@ -233,7 +233,7 @@
 {
     NSInteger page = self.pageControl.currentPage;
     // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
-
+    
 	// update the scroll view to the appropriate page
     CGRect bounds = self.scrollView.bounds;
     CGPoint offset;
@@ -254,9 +254,30 @@
 }
 
 - (IBAction)missionAction:(id)sender {
-    [self sendSuccess:@"同步成功"];
-    [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
-    [firstViewController viewWillAppear:NO];
+    [self startIndicator:self];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        BOOL run = [RORRunHistoryServices uploadRunningHistories];
+        BOOL mission = [RORMissionHistoyService uploadMissionHistories];
+        
+        userBase = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
+        //用户好友信息
+        int friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
+        //好友初步信息
+        BOOL friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
+        //用户道具
+        BOOL userPorp = [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(friends>=0 && run && friendsort && userPorp && mission){
+                for (int i=0; i<PAGE_QUANTITY; i++){
+                    UIViewController *controller =(UIViewController *)[contentViews objectAtIndex:i];
+                    [controller viewWillAppear:NO];
+                }
+                [self sendSuccess:@"同步成功"];
+            }else {
+                [self sendAlart:@"同步失败"];
+            }
+        });
+    });
 }
 
 - (IBAction)settingsAction:(id)sender {
@@ -265,7 +286,7 @@
 }
 
 - (IBAction)closeDailyMissionAction:(id)sender {
-    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"放弃任务" message:@"确定放弃今天的任务吗？" delegate:self cancelButtonTitle:CANCEL_BUTTON_CANCEL otherButtonTitles:OK_BUTTON_OK, nil];
+    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"放弃任务" message:@"确定放弃今天的任务吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [confirmView show];
     confirmView = nil;
 }

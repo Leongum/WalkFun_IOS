@@ -50,7 +50,7 @@
 }
 
 -(void)showConfirmView{
-    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"选择性别" message:[NSString stringWithFormat:@"确定选【%@】吗？", userSex] delegate:self cancelButtonTitle:CANCEL_BUTTON_CANCEL otherButtonTitles:OK_BUTTON_OK, nil];
+    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"选择性别" message:[NSString stringWithFormat:@"确定选【%@】吗？", userSex] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [confirmView show];
     confirmView = nil;
 }
@@ -61,18 +61,24 @@
         return;
     }else if(buttonIndex == 1){
         [self didSelectSexAction];
-        [self dismissViewControllerAnimated:YES completion:^(){}];
     }
 }
 
 - (void)didSelectSexAction{
-//    NSDictionary *saveDict = [NSDictionary dictionaryWithObjectsAndKeys:
-//                              userSex, @"sex", nil];
-//    [RORUserUtils writeToUserSettingsPList:saveDict];
-    
     User_Base *userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
     userBase.sex = userSex;
-    [RORUserServices updateUserBase:userBase];
+    [self startIndicator:self];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        BOOL success = [RORUserServices updateUserBase:userBase];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self endIndicator:self];
+            if(success){
+                [self dismissViewControllerAnimated:YES completion:^(){}];
+            }else {
+                [self sendAlart:@"性别设置失败"];
+            }
+        });
+    });
 }
 
 @end

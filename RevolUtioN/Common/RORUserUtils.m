@@ -173,7 +173,6 @@ static NSDate *syncTime;
     NSString *path = [docPath stringByAppendingPathComponent:@"userInfo.plist"];
     NSMutableDictionary *logoutDict = [[NSMutableDictionary alloc] init];
     [logoutDict setValue:[self getLastUpdateTime:@"MissionUpdateTime"] forKey:@"MissionUpdateTime"];
-    [logoutDict setValue:[self getLastUpdateTime:@"SystemMessageUpdateTime"] forKey:@"SystemMessageUpdateTime"];
     [logoutDict setValue:[self getLastUpdateTime:@"VirtualProductUpdateTime"] forKey:@"VirtualProductUpdateTime"];
     [logoutDict setValue:[self getLastUpdateTime:@"ActionDefineLastUpdateTime"] forKey:@"ActionDefineLastUpdateTime"];
     [logoutDict setValue:[self getLastUpdateTime:@"RecommendLastUpdateTime"] forKey:@"RecommendLastUpdateTime"];
@@ -240,19 +239,13 @@ static NSDate *syncTime;
     Version_Control *version = [RORSystemService syncVersion:@"ios"];
     if(version != nil){
         NSString *missionLastUpdateTime = [RORUserUtils getLastUpdateTime:@"MissionUpdateTime"];
-        NSString *messageLastUpdateTime = [RORUserUtils getLastUpdateTime:@"SystemMessageUpdateTime"];
         NSString *recommendLastUpdateTime = [RORUserUtils getLastUpdateTime:@"RecommendLastUpdateTime"];
         NSString *productLastUpdateTime = [RORUserUtils getLastUpdateTime:@"VirtualProductUpdateTime"];
         NSString *actionDefineUpdateTime = [RORUserUtils getLastUpdateTime:@"ActionDefineLastUpdateTime"];
-        NSTimeInterval messageScape = [version.messageLastUpdateTime timeIntervalSinceDate:[RORUtils getDateFromString:messageLastUpdateTime]];
         NSTimeInterval missionScape = [version.missionLastUpdateTime timeIntervalSinceDate:[RORUtils getDateFromString:missionLastUpdateTime]];
         NSTimeInterval recommendScape = [version.recommendLastUpdateTime timeIntervalSinceDate:[RORUtils getDateFromString:recommendLastUpdateTime]];
         NSTimeInterval productScape = [version.productLastUpdateTime timeIntervalSinceDate:[RORUtils getDateFromString:productLastUpdateTime]];
         NSTimeInterval actionDefineScape = [version.actionDefineUpdateTime timeIntervalSinceDate:[RORUtils getDateFromString:actionDefineUpdateTime]];
-        if(messageScape > 0){
-            //sync message
-            [RORSystemService syncSystemMessage];
-        }
         if(missionScape > 0)
         {
             //sync missions

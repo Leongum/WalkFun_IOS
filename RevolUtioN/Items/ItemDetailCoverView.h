@@ -20,7 +20,7 @@
     UILabel *itemNameLabel;
     UILabel *itemEffectLabel;
     UILabel *itemDescriptionLabel;
-    RORNavigationButton *itemUseButton;
+    UIButton *itemUseButton;
 }
 
 @property (strong, nonatomic) id delegate;

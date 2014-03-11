@@ -38,7 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self endIndicator:self];
+    //    [self endIndicator:self];
     self.backButton.alpha = 0;
     
     self.loginInputView.alpha = 0;
@@ -83,7 +83,7 @@
 }
 
 -(IBAction)nickNameTapped:(id)sender{
-//    nicknameTextField.backgroundColor = [UIColor lightGrayColor];
+    //    nicknameTextField.backgroundColor = [UIColor lightGrayColor];
     CGRect rx = [ UIScreen mainScreen ].applicationFrame;
     if (rx.size.height-nicknameTextField.frame.origin.y + nicknameTextField.frame.size.height<=260)
         [Animations moveUp:self.view andAnimationDuration:0.3 andWait:NO andLength:75];
@@ -97,7 +97,7 @@
 - (IBAction)loginAction:(id)sender {
     
     if(![RORNetWorkUtils getIsConnetioned]){
-        [self sendAlart:CONNECTION_ERROR];
+        [self sendAlart:@"网络链接错误"];
         return;
     }
     if (![self isLegalInput]) {
@@ -107,51 +107,51 @@
         NSString *userName = usernameTextField.text;
         NSString *password = [RORUtils md5:passwordTextField.text];
         User_Base *user = [RORUserServices syncUserInfoByLogin:userName withUserPassword:password];
-        
         if (user == nil){
-            [self sendAlart:LOGIN_ERROR];
+            [self sendAlart:@"用户名密码输入错误，请重试"];
             return;
         }
         [self startIndicator:self];
-
-        if ([self syncDataAfterLogin]) {
-            [self dismissViewControllerAnimated:YES completion:^(){}];
-        }
-        [self endIndicator:self];
-        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            BOOL success = [self syncDataAfterLogin];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(success){
+                    [self dismissViewControllerAnimated:YES completion:^(){}];
+                }
+                [self endIndicator:self];
+            });
+        });
     } else { //注册
-        //todo
         NSDictionary *regDict = [[NSDictionary alloc]initWithObjectsAndKeys:usernameTextField.text, @"userName",[RORUtils md5:passwordTextField.text], @"password", nicknameTextField.text, @"nickName", [RORUserUtils getDeviceToken], @"deviceId",@"ios", @"platformInfo", nil];
         [self startIndicator:self];
-
-        User_Base *user = [RORUserServices registerUser:regDict];
-        [self endIndicator:self];
-        if (user != nil){
-            [self sendSuccess:REGISTER_SUCCESS];
-            [self endIndicator:self];
-            [self performSegueWithIdentifier:@"sexSetting" sender:self];
-        } else {
-            [self sendAlart:REGISTER_FAIL];
-            [self endIndicator:self];
-        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            User_Base *user = [RORUserServices registerUser:regDict];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (user != nil){
+                    [self sendSuccess:@"注册成功"];
+                    [self performSegueWithIdentifier:@"sexSetting" sender:self];
+                } else {
+                    [self sendAlart:@"注册失败，用户名已存在"];
+                }
+            });
+        });
     }
     passwordTextField.text = @"";
     nicknameTextField.text = @"";
-    
 }
 
 - (BOOL) isLegalInput {
     if (segmentIndex == 0){
         if (usernameTextField.text.length<=0 ||
             passwordTextField.text.length <=0) {
-            [self sendAlart:LOGIN_INPUT_CHECK];
+            [self sendAlart:@"请填写正确的用户名密码"];
             return NO;
         }
     } else {
         if (usernameTextField.text.length<=0 ||
             passwordTextField.text.length<=0 ||
             nicknameTextField.text.length<=0) {
-            [self sendAlart:REGISTER_INPUT_CHECK];
+            [self sendAlart:@"请填写完整的用户信息"];
             return NO;
         }
         
@@ -221,9 +221,16 @@
                                                   
                                                   BOOL islogin = [RORShareService loginFromSNS:account];
                                                   if(islogin){
-                                                      if ([self syncDataAfterLogin]) {
-                                                          [self dismissViewControllerAnimated:YES completion:^(){}];
-                                                      }
+                                                      [self startIndicator:self];
+                                                      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                                          BOOL success = [self syncDataAfterLogin];
+                                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                                              if(success){
+                                                                  [self dismissViewControllerAnimated:YES completion:^(){}];
+                                                              }
+                                                              [self endIndicator:self];
+                                                          });
+                                                      });
                                                   }
                                                   else{
                                                       [self performSegueWithIdentifier:@"sexSetting" sender:self];
@@ -237,8 +244,16 @@
         
         BOOL islogin = [RORShareService loginFromSNS:account];
         if(islogin){
-            if ([self syncDataAfterLogin])
-                [self dismissViewControllerAnimated:YES completion:^(){}];
+            [self startIndicator:self];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                BOOL success = [self syncDataAfterLogin];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if(success){
+                        [self dismissViewControllerAnimated:YES completion:^(){}];
+                    }
+                    [self endIndicator:self];
+                });
+            });
         }
         else{
             [self performSegueWithIdentifier:@"sexSetting" sender:self];
@@ -248,7 +263,6 @@
 }
 
 -(BOOL)syncDataAfterLogin{
-    [self startIndicator:self];
     //用户历史
     BOOL history = [RORRunHistoryServices syncRunningHistories:[RORUserUtils getUserId]];
     if(!history){
@@ -264,11 +278,6 @@
     if(!friendsort){
         friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
     }
-    //好友action信息
-//    BOOL action = [RORFriendService syncActions:[RORUserUtils getUserId]];
-//    if(!action){
-//        action = [RORFriendService syncActions:[RORUserUtils getUserId]];
-//    }
     //用户mission list
     BOOL missionHistory = [RORMissionHistoyService syncMissionHistories:[RORUserUtils getUserId]];
     if(!missionHistory){
