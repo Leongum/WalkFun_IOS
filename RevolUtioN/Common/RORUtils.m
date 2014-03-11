@@ -409,4 +409,17 @@
     return vProductIds;
 }
 
++(NSInteger)daysBetweenDate1:(NSDate*)date1 andDate2:(NSDate*)date2{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSUInteger unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSDateComponents *components = [gregorian components:unitFlags fromDate:date1 toDate:date2 options:0];
+    NSInteger months = [components month];
+    NSInteger days = [components day];
+    NSInteger year = [components year];
+    if (year<1 && months<1){
+        return days;
+    }
+    return [date1 timeIntervalSinceDate:date2]/86400;
+}
+
 @end

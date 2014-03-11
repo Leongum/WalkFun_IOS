@@ -11,7 +11,7 @@
 
 #define WEATHER_BUTTON_INITIAL_FRAME CGRectMake(-100, 27, 100, 40)
 #define LOGIN_BUTTON_INITIAL_FRAME CGRectMake(320, 14, 210, 69)
-
+#define CUSTOM_COLOR_RED [UIColor colorWithRed:128.f/255.f green:64.f/255.f blue:0 alpha:1]
 @interface RORFirstViewController ()
 
 @end
@@ -42,10 +42,18 @@
     charatorViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"CharatorViewController"];
     UIView *charview = charatorViewController.view;
     CGRect charframe = self.charatorView.frame;
+    if (charframe.size.height<568){
+        double nw = charframe.size.height * 320 / 568;
+        charframe = CGRectMake(0, 0, nw, charframe.size.height);
+    }
     charview.frame = charframe;
+    charview.center = self.charatorView.center;
+    
     [self addChildViewController:charatorViewController];
     [self.view addSubview:charview];
+    [self.view sendSubviewToBack:charview];
     [charatorViewController didMoveToParentViewController:self];
+    
 }
 
 - (void)initControlsLayout{
@@ -64,15 +72,12 @@
         if (l>=8)
             [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:14]];
         self.levelLabel.text = [NSString stringWithFormat:@"Lv. %d", userInfo.userDetail.level.integerValue];
-        
-        User_Detail *userDetail = [RORUserServices fetchUserDetailByUserId:userInfo.userId];
-        self.fatLabel.text = [NSString stringWithFormat:@"肥肉：%d", userDetail.fatness.intValue];
-        self.healthLabel.text = [NSString stringWithFormat:@"健康：%d", userDetail.health.intValue];
-        
+                
         //同步好友间的事件
         int aQuantity = [RORFriendService syncActions:thisUserId];
         if (aQuantity>0)
             [self.msgButton setTitle:[NSString stringWithFormat:@"%d", aQuantity] forState:UIControlStateNormal];
+        
         
     }
     if ([charatorViewController respondsToSelector:@selector(setUserBase:)]){
@@ -208,10 +213,10 @@
     if ([destination respondsToSelector:@selector(setDelegate:)]){
         [destination setValue:self forKey:@"delegate"];
     }
-    if ([destination respondsToSelector:@selector(setSelection:)]){
-        [destination setValue:self.userName forKey:@"userName"];
-        [destination setValue:self.userId forKey:@"userId"];
-    }
+//    if ([destination respondsToSelector:@selector(setSelection:)]){
+//        [destination setValue:self.userName forKey:@"userName"];
+//        [destination setValue:self.userId forKey:@"userId"];
+//    }
 
 }
 

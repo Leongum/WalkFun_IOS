@@ -35,8 +35,21 @@
     frontCharatorView = (UIView *)[self.view viewWithTag:100];
     flowContainerView = (UIView *)[self.view viewWithTag:102];
     
+    fatPV = nil;
+    healthPV = nil;
+    
     if (!userBase)
         self.view.alpha = 0;
+}
+
+-(THProgressView *)newProgressView:(UIView *)v{
+    THProgressView *processView = [[THProgressView alloc] initWithFrame:v.frame];
+    processView.borderTintColor = [UIColor blackColor];
+    processView.progressTintColor = [UIColor blackColor];
+    [processView setProgress:0.f];
+    [self.view addSubview:processView];
+
+    return processView;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -51,7 +64,24 @@
             [view removeFromSuperview];
         [self displayCharator];
         [self displayItems];
+        [self displayProgresses];
     }
+    if (!fatPV){
+        fatPVFrameView = (UILabel *)[self.view viewWithTag:200];
+        healthPVFrameView = (UILabel *)[self.view viewWithTag:201];
+        fatPV = [self newProgressView:fatPVFrameView];
+        healthPV = [self newProgressView:healthPVFrameView];
+        [self.view bringSubviewToFront:fatPVFrameView];
+        [self.view bringSubviewToFront:healthPVFrameView];
+    }
+}
+
+
+#pragma mark - display methods
+
+-(void)displayProgresses{
+    [fatPV setProgress:userBase.userDetail.fatness.doubleValue/100.f];
+    [healthPV setProgress:userBase.userDetail.health.doubleValue/100.f];
 }
 
 -(void)displayCharator{
@@ -148,10 +178,5 @@
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

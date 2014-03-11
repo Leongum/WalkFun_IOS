@@ -10,5 +10,7 @@
 
 @interface StrokeLabel : UILabel
 
+@property(nonatomic) NSInteger lineWidth;
+@property(nonatomic) UIColor *strokeColor;
 
 @end

@@ -68,7 +68,7 @@
     Action_Define *action = [RORSystemService fetchActionDefineByPropId:selectedItem.productId];
     [self startIndicator:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        isSucceeded = [RORFriendService createAction:toThisUser.userId withActionToUserName:toThisUser.userName withActionId:action.actionId];
+        isSucceeded = [RORFriendService createAction:toThisUser.userId withActionToUserName:toThisUser.nickName withActionId:action.actionId];
         //触发并完成了任务
         Mission *todayMission = [RORMissionServices getTodayMission];
         if (todayMission){

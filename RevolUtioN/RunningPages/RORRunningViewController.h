@@ -24,7 +24,7 @@
     User_Running_History *runHistory;
     int newCellHeight;
     
-    
+    BOOL collectingCoin;
     NSMutableDictionary *todayMissionDict;
     NSMutableArray *processViewList;
 }
@@ -36,7 +36,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *speedLabel;
+@property (strong, nonatomic) IBOutlet UILabel *goldLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *goldIcon;
 @property (strong, nonatomic) IBOutlet RORNavigationButton *saveButton;
 @property (strong, nonatomic) IBOutlet UIView *dataContainer;
 @property (strong, nonatomic) IBOutlet UIView *todayMissionView;

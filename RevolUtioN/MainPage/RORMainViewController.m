@@ -84,6 +84,19 @@
             } else {
                 //如果使用道具的任务完成了
                 if (missionUseItemQuantity.integerValue == 0){
+                    //保存任务数据
+                    User_Mission_History *mh = [User_Mission_History intiUnassociateEntity];
+                    mh.userId = [RORUserUtils getUserId];
+                    mh.userName = [RORUserUtils getUserName];
+                    mh.missionId = todayMission.missionId;
+                    mh.missionName = todayMission.missionName;
+                    mh.missionStatus = [NSNumber numberWithInteger: MissionStatusDone];
+                    mh.missionTypeId = todayMission.missionTypeId;
+                    mh.startTime = [NSDate date];
+                    mh.endTime = [NSDate date];
+                    [RORMissionHistoyService saveMissionHistoryInfoToDB:mh];
+                    
+                    //显示任务完成提示
                     UIViewController *missionDoneViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"missionCongratsVIewController"];
                     [self.view addSubview:missionDoneViewController.view];
                     
@@ -101,6 +114,7 @@
                     int mp = missionProcess.integerValue;
                     mp++;
                     missionDoneLabel.text = [NSString stringWithFormat:@"%d/%d", mp, 3];
+                    //修改plist中的任务相关标记
                     [userInfoList setObject:[NSNumber numberWithInteger:mp] forKey:@"missionProcess"];
                     [userInfoList setObject:[NSNumber numberWithInteger:-1] forKey:@"missionUseItemQuantity"];
                     [userInfoList setObject:[NSDate date] forKey:@"lastDailyMissionFinishedDate"];

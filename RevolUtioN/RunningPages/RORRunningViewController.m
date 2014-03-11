@@ -10,7 +10,7 @@
 
 #import "RORRunningViewController.h"
 #import "Animations.h"
-
+#import "FTAnimation.h"
 
 @interface RORRunningViewController ()
 
@@ -19,7 +19,7 @@
 @implementation RORRunningViewController
 //@synthesize locationManager, motionManager;
 @synthesize timerCount;
-@synthesize timeLabel, speedLabel, distanceLabel, endButton;
+@synthesize timeLabel, distanceLabel, endButton;
 @synthesize routeLineView;
 @synthesize record;
 @synthesize kalmanFilter, inDistance;
@@ -57,8 +57,8 @@
     
     //初始化各个标签
     timeLabel.text = [RORUtils transSecondToStandardFormat:0];
-    speedLabel.text = [RORUserUtils formatedSpeed:0];
     distanceLabel.text = [RORUtils outputDistance:0];
+    self.goldLabel.text = @"0";
     
     routePoints = [[NSMutableArray alloc]init];
     
@@ -121,7 +121,7 @@
 - (void)viewDidUnload {
     [self setDistanceLabel:nil];
     [self setTimeLabel:nil];
-    [self setSpeedLabel:nil];
+//    [self setSpeedLabel:nil];
     [self setEndButton:nil];
     [self setRouteLineView:nil];
     [self setStartTime:nil];
@@ -323,17 +323,17 @@
     [super timerSecondDot];
     [self pushPoint];
     distanceLabel.text = [RORUtils outputDistance:distance];
-    speedLabel.text = [RORUserUtils formatedSpeed:(double)(currentSpeed*3.6)];
+//    speedLabel.text = [RORUserUtils formatedSpeed:(double)(currentSpeed*3.6)];
     
-    if (eventHappenedList.count > eventHappenedCount){
-        eventHappenedCount = eventHappenedList.count;
+    if (eventDisplayList.count > eventHappenedCount){
+        eventHappenedCount = eventDisplayList.count;
         [self.tableView reloadData];
         [self.tableView scrollToRowAtIndexPath:bottomIndex atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
         if (self.paperView.frame.origin.y>-308){
             [Animations moveUp:self.paperView andAnimationDuration:0.3 andWait:NO andLength:newCellHeight<self.paperView.frame.origin.y+308?newCellHeight:self.paperView.frame.origin.y+308];
         }
     }
-    if (!isAWalking && currentStep > 50 && distance>50) {
+    if (!isAWalking && currentStep > 70 && distance>50) {
         isAWalking = YES;
         UIImage* image = [UIImage imageNamed:@"green_btn_bg.png"];
         [endButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -416,6 +416,9 @@
     [self prepareForQuit];
     [self dismissViewControllerAnimated:YES completion:^(){}];
 }
+
+
+#pragma mark - Save Data
 
 -(NSNumber *)calculateGrade{
     return [self calculateCalorie];
@@ -507,7 +510,7 @@
 #pragma mark Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int rows = eventHappenedList.count + (isStarted?1:0);
+    int rows = eventDisplayList.count + (isStarted?1:0);
     return rows;
 }
 
@@ -527,7 +530,7 @@
         eventLabel.text = @"开始散步";
         effectLabel.text = @"一切看起来都那么美好～";
     } else {
-        Action_Define *event = [eventHappenedList objectAtIndex:indexPath.row-1];
+        Action_Define *event = [eventDisplayList objectAtIndex:indexPath.row-1];
         if ([event.actionDescription rangeOfString:@"金币"].location != NSNotFound ){
             identifier = @"coinCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -541,7 +544,7 @@
             eventLabel.text = event.actionName;
             effectLabel.text = [NSString stringWithFormat:@"获得：%@",event.actionAttribute];
             
-            int timeInt = ((NSNumber *)[eventTimeList objectAtIndex:indexPath.row-1]).integerValue;
+            int timeInt = ((NSNumber *)[eventDisplayTimeList objectAtIndex:indexPath.row-1]).integerValue;
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
         }
     }
@@ -562,6 +565,53 @@
     }
     newCellHeight = 62;
     return 62;
+}
+
+#pragma mark - Event Methods
+
+//如果触发了事件，返回事件，否则返回nil
+-(void)isEventHappen{
+    if(eventTimeList.count > 0){
+        NSNumber *lastEventTime = [eventTimeList objectAtIndex:eventTimeList.count-1];
+        if (duration - lastEventTime.doubleValue < 5)
+            return;
+    }
+    
+    for (int i=0; i<eventWillList.count; i++){
+        Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
+        int x = arc4random() % 1000000;
+        double roll = ((double)x)/10000.f;
+        double delta = 1;
+        if ([event.actionName rangeOfString:@"金币"].location != NSNotFound) {
+            delta = (user.userDetail.goldCoinSpeed.doubleValue + 1);
+        }
+        //debug
+        if (roll < event.triggerProbability.doubleValue *delta){
+            [self eventDidHappened:event];
+            return;
+        }
+    }
+}
+
+-(void)eventDidHappened:(Action_Define *)event{
+    if (event.actionId.integerValue == todayMission.triggerPropId.integerValue){
+        cMissionItemQuantity++;
+    }
+    
+    if ([event.actionName rangeOfString:@"金币"].location != NSNotFound) {
+        goldCount++;
+        self.goldLabel.text= [NSString stringWithFormat:@"%d", goldCount];
+        [self.goldLabel fallIn:0.5 delegate:self];
+    } else {
+        [eventDisplayList addObject:event];
+        [eventDisplayTimeList addObject:[NSNumber numberWithInteger:duration]];
+    }
+    [eventHappenedList addObject:event];
+    [eventTimeList addObject: [NSNumber numberWithInteger:duration]];
+    [eventLocationList addObject:[NSString stringWithFormat:@"%f,%f", formerLocation.coordinate.latitude, formerLocation.coordinate.longitude]];
+    
+    [allInOneSound addFileNametoQueue:[RORVirtualProductService getSoundFileOf:event]];
+    [allInOneSound play];
 }
 
 

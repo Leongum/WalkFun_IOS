@@ -33,15 +33,16 @@
     charatorViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"CharatorViewController"];
     UIView *charview = charatorViewController.view;
     CGRect charframe = self.charatorView.frame;
+    if (charframe.size.height<568){
+        double nw = charframe.size.height * 320 / 568;
+        charframe = CGRectMake(0, 0, nw, charframe.size.height);
+    }
     charview.frame = charframe;
-    //    if ([charatorViewController respondsToSelector:@selector(setUserBase:)]){
-    //        [charatorViewController setValue:[RORUserServices fetchUser:[RORUserUtils getUserId]] forKey:@"userBase"];
-    //    }
+    charview.center = self.charatorView.center;
     [self addChildViewController:charatorViewController];
-    [self.view addSubview:charview];
+    [self.charatorView addSubview:charview];
+//    [self.view sendSubviewToBack:charview];
     [charatorViewController didMoveToParentViewController:self];
-    
-    [self refreshView];
 }
 
 -(void)refreshView {
@@ -50,11 +51,44 @@
         [charatorViewController setValue:userBase forKey:@"userBase"];
     }
     [charatorViewController viewWillAppear:NO];
+    if (latestFriendAction){
+        int days = [RORUtils daysBetweenDate1:latestFriendAction.updateTime andDate2:[NSDate date]];
+        self.latestFriendActionDateLabel.text = days>0?[NSString stringWithFormat:@"%d天前",days]:@"今天";
+        NSMutableString *actDesString = [[NSMutableString alloc]initWithString:latestFriendAction.actionName];
+        if ([userBase.sex isEqualToString:@"男"]){
+            [actDesString replaceCharactersInRange:[actDesString rangeOfString:@"你"] withString:@"他"];
+        } else {
+            [actDesString replaceCharactersInRange:[actDesString rangeOfString:@"你"] withString:@"她"];
+        }
+        self.latestFriendActionDescriptionLabel.text = [NSString stringWithFormat:@"%@%@", latestFriendAction.actionFromName, actDesString];
+    } else {
+        self.latestFriendActionDateLabel.text = @"";
+        self.latestFriendActionDescriptionLabel.text = @"最近没什么人理这吃货";
+    }
+    if (latestWorkout){
+        int days = [RORUtils daysBetweenDate1:latestWorkout.missionEndTime andDate2:[NSDate date]];
+        self.latestWorkoutDateLabel.text = days>0?[NSString stringWithFormat:@"%d天前",days]:@"今天";
+    } else {
+        self.latestWorkoutDateLabel.text = @"上辈子";
+    }
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self refreshView];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         userBase = [RORUserServices syncUserInfoById:userBase.userId];
+        NSArray *latestFriendActionList = [RORFriendService fetchUserActionsById:userBase.userId];
+        NSArray *latestWorkoutList = [RORRunHistoryServices getSimpleRunningHistories:userBase.userId];
+        if (latestFriendActionList && latestFriendActionList.count>0){
+            latestFriendAction = [latestFriendActionList objectAtIndex:0];
+        }
+        if (latestWorkoutList && latestWorkoutList.count >0){
+            latestWorkout = [latestWorkoutList objectAtIndex:0];
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self refreshView];
             self.loadingLabel.alpha = 0;

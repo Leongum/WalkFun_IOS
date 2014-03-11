@@ -336,6 +336,8 @@
 		30DB021F18C85BB5008863B8 /* THProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DB021E18C85BB5008863B8 /* THProgressView.m */; };
 		30DB022218C8C542008863B8 /* StrokeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DB022118C8C542008863B8 /* StrokeLabel.m */; };
 		30DB022518CD8DB2008863B8 /* ActionHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DB022418CD8DB2008863B8 /* ActionHistoryViewController.m */; };
+		30DB022718CDBBA0008863B8 /* coin.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DB022618CDBBA0008863B8 /* coin.png */; };
+		30DB022918CEB1B7008863B8 /* bump.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DB022818CEB1B7008863B8 /* bump.png */; };
 		30DBB71F17EF300E00552391 /* textfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB71E17EF300E00552391 /* textfield.png */; };
 		30DBB72317EFE04400552391 /* challenge_pop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB72017EFE04400552391 /* challenge_pop_bg.png */; };
 		30DBB72417EFE04400552391 /* finishrunning_pop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB72117EFE04400552391 /* finishrunning_pop_bg.png */; };
@@ -844,6 +846,8 @@
 		30DB022118C8C542008863B8 /* StrokeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrokeLabel.m; sourceTree = "<group>"; };
 		30DB022318CD8DB2008863B8 /* ActionHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionHistoryViewController.h; path = HistoryPage/ActionHistoryViewController.h; sourceTree = "<group>"; };
 		30DB022418CD8DB2008863B8 /* ActionHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionHistoryViewController.m; path = HistoryPage/ActionHistoryViewController.m; sourceTree = "<group>"; };
+		30DB022618CDBBA0008863B8 /* coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coin.png; sourceTree = "<group>"; };
+		30DB022818CEB1B7008863B8 /* bump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bump.png; sourceTree = "<group>"; };
 		30DBB71E17EF300E00552391 /* textfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = textfield.png; path = bg/textfield.png; sourceTree = "<group>"; };
 		30DBB72017EFE04400552391 /* challenge_pop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = challenge_pop_bg.png; path = bg/challenge_pop_bg.png; sourceTree = "<group>"; };
 		30DBB72117EFE04400552391 /* finishrunning_pop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = finishrunning_pop_bg.png; path = bg/finishrunning_pop_bg.png; sourceTree = "<group>"; };
@@ -1186,6 +1190,7 @@
 		3013D49318C040DA005F4C07 /* charactor */ = {
 			isa = PBXGroup;
 			children = (
+				30DB022818CEB1B7008863B8 /* bump.png */,
 				30FE2C8018C1CFCD0077C5A0 /* vase.png */,
 				3013D4A318C0D273005F4C07 /* exfat_female.png */,
 				3013D4A418C0D273005F4C07 /* exfat_male.png */,
@@ -1868,6 +1873,7 @@
 		30FC291A17607F6D00DEC042 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				30DB022618CDBBA0008863B8 /* coin.png */,
 				308C1662186EA507005B0198 /* icon@2x120.png */,
 				30FAA214186417DF00E72650 /* notSure.png */,
 				30FAA210186415E100E72650 /* male.png */,
@@ -2075,6 +2081,7 @@
 				30FAA212186415E100E72650 /* male.png in Resources */,
 				30594BD017F0851500E6A19B /* all_set.mp3 in Resources */,
 				30166A9817C3B84C0035C722 /* main_run_btn_bg.png in Resources */,
+				30DB022718CDBBA0008863B8 /* coin.png in Resources */,
 				30D008D417F53FBB004E6747 /* challenge_normal.m4a in Resources */,
 				303707A91805523900FE0238 /* mall.png in Resources */,
 				3013D49818C040DA005F4C07 /* fat_female.png in Resources */,
@@ -2162,6 +2169,7 @@
 				307C85F417E6BD50007C1DE5 /* filter_btn_bg.png in Resources */,
 				3005CFF018545D0E00D83648 /* bookletButton_bg.png in Resources */,
 				3005D0131856FFAB00D83648 /* certified.png in Resources */,
+				30DB022918CEB1B7008863B8 /* bump.png in Resources */,
 				30989CC617F7291000CA9F83 /* contactUs_bg.png in Resources */,
 				0F282FE518B2FFAD003F44E8 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				307C85F617E6BD50007C1DE5 /* filter_cell_bg.png in Resources */,

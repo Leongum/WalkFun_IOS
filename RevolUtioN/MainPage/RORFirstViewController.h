@@ -18,6 +18,8 @@
 #import "MainPageViewController.h"
 #import "CharatorViewController.h"
 #import "LevelUpCongratsViewController.h"
+#import "THProgressView.h"
+#import "StrokeLabel.h"
 
 @interface RORFirstViewController : MainPageViewController<CLLocationManagerDelegate>{
     BOOL wasFound;
@@ -28,6 +30,7 @@
     
     CLLocationManager *locationManager;
     UIViewController *charatorViewController;
+    
 }
 @property (strong, nonatomic) IBOutlet UIView *selfTitleView;
 
@@ -38,10 +41,11 @@
 //@property (strong, nonatomic) IBOutlet UIImageView *testView;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *levelLabel;
+@property (strong, nonatomic) IBOutlet UILabel *userTitleLabel;
 @property (strong, nonatomic) IBOutlet UIControl *userInfoView;
 //todo
-@property (strong, nonatomic) IBOutlet UILabel *fatLabel;
-@property (strong, nonatomic) IBOutlet UILabel *healthLabel;
+@property (strong, nonatomic) IBOutlet StrokeLabel *fatLabel;
+@property (strong, nonatomic) IBOutlet StrokeLabel *healthLabel;
 @property (strong, nonatomic) IBOutlet UIButton *weatherInfoButtonView;
 @property (strong, nonatomic) IBOutlet UIView *charatorView;
 @property (strong, nonatomic) IBOutlet UIButton *msgButton;

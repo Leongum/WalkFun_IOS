@@ -60,9 +60,12 @@
     //事件列表
     NSArray *eventWillList;
     NSMutableArray *eventHappenedList;
+    NSMutableArray *eventDisplayList;
     NSMutableArray *eventTimeList;
+    NSMutableArray *eventDisplayTimeList;
     NSMutableArray *eventLocationList;
     int eventHappenedCount;
+    int goldCount;
     NSIndexPath *bottomIndex;
     
     NSTimer *repeatingTimer;

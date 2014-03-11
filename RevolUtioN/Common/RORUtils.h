@@ -72,4 +72,7 @@ _Pragma("clang diagnostic pop") \
 
 //解析actio的definition 的action rule
 +(NSMutableDictionary *)explainActionRule:(NSString *)actionRule;
+
+//两个date之间相差多少天的字条串
++(NSInteger)daysBetweenDate1:(NSDate*)date1 andDate2:(NSDate*)date2;
 @end

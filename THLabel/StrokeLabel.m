@@ -9,12 +9,24 @@
 #import "StrokeLabel.h"
 
 @implementation StrokeLabel
+@synthesize lineWidth, strokeColor;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        strokeColor = [UIColor blackColor];
+        lineWidth = 3;
+    }
+    return self;
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        strokeColor = [UIColor blackColor];
+        lineWidth = 3;
     }
     return self;
 }
@@ -25,11 +37,11 @@
     UIColor *textColor = self.textColor;
     
     CGContextRef c = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(c, 3);
+    CGContextSetLineWidth(c, lineWidth);
     CGContextSetLineJoin(c, kCGLineJoinRound);
     
     CGContextSetTextDrawingMode(c, kCGTextStroke);
-    self.textColor = [UIColor blackColor];
+    self.textColor = strokeColor;
     [super drawTextInRect:rect];
     
     CGContextSetTextDrawingMode(c, kCGTextFill);

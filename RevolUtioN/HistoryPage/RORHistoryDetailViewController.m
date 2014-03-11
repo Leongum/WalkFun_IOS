@@ -55,6 +55,16 @@
     NSArray *tmpList = [RORSystemService getEventListFromString:record.actionIds];
     eventTimeList = [tmpList objectAtIndex:0];
     eventList = [tmpList objectAtIndex:1];
+    eventDisplayList = [[NSMutableArray alloc]init];
+    eventDisplayTimeList = [[NSMutableArray alloc]init];
+    for (int i=0; i<eventList.count; i++){
+        Action_Define *e = [eventList objectAtIndex:i];
+        if ([e.actionName rangeOfString:@"金币"].location == NSNotFound){
+            [eventDisplayList addObject:e];
+            [eventDisplayTimeList addObject:[eventTimeList objectAtIndex:i]];
+        }
+    }
+    
     
 //    [RORSystemService getPropgetListFromString:record.propGet];//debug
     [self.sumLabel setLineBreakMode:NSLineBreakByWordWrapping];
@@ -80,6 +90,20 @@
     
     //如果完成了任务
     if (record.missionId && [delegate isKindOfClass:[RORRunningViewController class]]){
+        Mission *doneMission = [RORMissionServices fetchMission:record.missionId];
+
+        //保存任务数据
+        User_Mission_History *mh = [User_Mission_History intiUnassociateEntity];
+        mh.userId = [RORUserUtils getUserId];
+        mh.userName = [RORUserUtils getUserName];
+        mh.missionId = record.missionId;
+        mh.missionName = doneMission.missionName;
+        mh.missionStatus = [NSNumber numberWithInteger: MissionStatusDone];
+        mh.missionTypeId = doneMission.missionTypeId;
+        mh.startTime = record.missionStartTime;
+        mh.endTime = record.missionEndTime;
+        [RORMissionHistoyService saveMissionHistoryInfoToDB:mh];
+        //显示任务完成提示
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
         UIViewController *missionDoneViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"missionCongratsVIewController"];
         [self.view addSubview:missionDoneViewController.view];
@@ -90,7 +114,6 @@
         UILabel *missionExpLabel = (UILabel *)[missionCongratsView viewWithTag:102];
         UILabel *missionDoneLabel = (UILabel *)[missionCongratsView viewWithTag:103];
         
-        Mission *doneMission = [RORMissionServices fetchMission:record.missionId];
         missionNameLabel.text = doneMission.missionDescription;
         missionGoldLabel.text = [NSString stringWithFormat:@"+%d",doneMission.goldCoin.integerValue];
         missionExpLabel.text = [NSString stringWithFormat:@"+%d",doneMission.experience.integerValue];
@@ -161,7 +184,7 @@
 #pragma mark Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int rows = eventList.count + 1;
+    int rows = eventDisplayList.count + 1;
     return rows;
 }
 
@@ -179,7 +202,7 @@
         eventLabel.text = @"开始散步";
         effectLabel.text = @"一切看起来都那么美好～";
     } else {
-        Action_Define *event = [eventList objectAtIndex:indexPath.row-1];
+        Action_Define *event = [eventDisplayList objectAtIndex:indexPath.row-1];
         if ([event.actionDescription rangeOfString:@"金币"].location != NSNotFound ){
             identifier = @"coinCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -193,7 +216,7 @@
             eventLabel.text = event.actionName;
             effectLabel.text = [NSString stringWithFormat:@"获得：%@",event.actionAttribute];
             
-            int timeInt = ((NSNumber *)[eventTimeList objectAtIndex:indexPath.row-1]).integerValue;
+            int timeInt = ((NSNumber *)[eventDisplayTimeList objectAtIndex:indexPath.row-1]).integerValue;
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
         }
     }
@@ -204,7 +227,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0)
         return 62;
-    Action_Define *event = [eventList objectAtIndex:indexPath.row-1];
+    Action_Define *event = [eventDisplayList objectAtIndex:indexPath.row-1];
     if ([event.actionDescription rangeOfString:@"金币"].location != NSNotFound ){
         return 30;
     }

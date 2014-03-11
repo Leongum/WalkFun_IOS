@@ -50,9 +50,12 @@
     eventWillList = [RORSystemService fetchAllActionDefine:ActionDefineRun];
     eventHappenedList = [[NSMutableArray alloc]init];
     eventTimeList = [[NSMutableArray alloc]init];
+    eventDisplayList = [[NSMutableArray alloc]init];
+    eventDisplayTimeList = [[NSMutableArray alloc]init];
     
     currentStep = 0;
     eventHappenedCount = 0;
+    goldCount = 0;
 }
 
 -(void)viewDidUnload{
@@ -179,7 +182,7 @@
     if (stepCounting.counter>currentStep) {
         currentStep = stepCounting.counter;
         //debug
-        if (isAWalking)
+//        if (isAWalking)
             [self isEventHappen];
     }
 }
@@ -216,39 +219,7 @@
 
 //如果触发了事件，返回事件，否则返回nil
 -(void)isEventHappen{
-    if(eventTimeList.count > 0){
-        NSNumber *lastEventTime = [eventTimeList objectAtIndex:eventTimeList.count-1];
-        if (duration - lastEventTime.doubleValue < 5)
-            return;
-    }
-    
-    for (int i=0; i<eventWillList.count; i++){
-        Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
-        int x = arc4random() % 1000000;
-        double roll = ((double)x)/10000.f;
-        double delta = 1;
-        if ([event.actionName rangeOfString:@"金"].location != NSNotFound) {
-            delta = (user.userDetail.goldCoinSpeed.doubleValue + 1);
-        }
-        //debug
-        if (roll < event.triggerProbability.doubleValue *delta){
-            [self eventDidHappened:event];
-            return;
-        }
-    }
-}
 
--(void)eventDidHappened:(Action_Define *)event{
-    if (event.actionId.integerValue == todayMission.triggerPropId.integerValue){
-        cMissionItemQuantity++;
-    }
-    
-    [eventHappenedList addObject:event];
-    [eventTimeList addObject: [NSNumber numberWithInteger:duration]];
-    [eventLocationList addObject:[NSString stringWithFormat:@"%f,%f", formerLocation.coordinate.latitude, formerLocation.coordinate.longitude]];
-    
-    [allInOneSound addFileNametoQueue:[RORVirtualProductService getSoundFileOf:event]];
-    [allInOneSound play];
 }
 
 

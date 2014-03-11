@@ -13,6 +13,7 @@
 #import "RORViewController.h"
 #import "RORStartAnnotation.h"
 #import "ROREndAnnotation.h"
+#import "RORMissionHistoyService.h"
 
 @interface RORHistoryDetailViewController : RORViewController <MKMapViewDelegate>{
     NSMutableArray *improvedRoute;
@@ -21,7 +22,8 @@
     
     NSArray *eventList;
     NSArray *eventTimeList;
-    
+    NSMutableArray *eventDisplayList;
+    NSMutableArray *eventDisplayTimeList;
 }
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 

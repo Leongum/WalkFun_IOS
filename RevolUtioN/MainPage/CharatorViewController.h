@@ -18,12 +18,14 @@
 
 #import "RORViewController.h"
 #import "RORVirtualProductService.h"
-
+#import "THProgressView.h"
 
 @interface CharatorViewController : UIViewController{
     UIView *behindCharatorView, *frontCharatorView, *flowContainerView;
     UIImageView *charatorImageView, *charatorBumpImageView;
-    
+    UILabel *fatPVFrameView, *healthPVFrameView;
+    THProgressView *fatPV, *healthPV;
+
     NSDictionary *itemForDisplayDict;
 }
 
