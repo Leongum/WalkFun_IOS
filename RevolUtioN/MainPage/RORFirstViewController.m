@@ -24,9 +24,6 @@
     titleView = self.selfTitleView;
     
     [super viewDidLoad];
-    
-//    [RORUtils setFontFamily:CHN_PRINT_FONT forView:self.view andSubViews:YES];
-    
     [self prepareControlsForAnimation];
     
     //初始化按钮位置
@@ -116,7 +113,7 @@
     if (! ([CLLocationManager  locationServicesEnabled])
         || ( [CLLocationManager  authorizationStatus] == kCLAuthorizationStatusDenied))
     {
-        [self sendAlart:GPS_SETTING_ERROR];
+        [self sendAlart:@"定位失败，请打开GPS定位功能"];
         return;
     }
     else{
@@ -142,11 +139,6 @@
             [locationManager stopUpdatingLocation];
         }
     }
-}
-
-
-- (IBAction)segueToLogin:(id)sender{
-    [self performSegueWithIdentifier:@"loginSegue" sender:self];
 }
 
 -(void)getCitynameByLocation {
@@ -242,21 +234,6 @@
         [self sendNotification:weatherInformation];
     } else
         [self sendAlart:weatherInformation];
-}
-
-- (IBAction)trainingAction:(id)sender {
-    UIStoryboard *secondStoryboard = [UIStoryboard storyboardWithName:@"TrainingStoryboard" bundle:nil];
-    UIViewController *trainingViewController = [secondStoryboard instantiateViewControllerWithIdentifier:@"TrainingMainViewController"];
-
-    [self.navigationController pushViewController:trainingViewController animated:YES];
-}
-
-- (IBAction)friendsAction:(id)sender {
-    
-    UIStoryboard *secondStoryboard = [UIStoryboard storyboardWithName:@"FriendsStoryboard" bundle:nil];
-    UIViewController *trainingViewController = [secondStoryboard instantiateViewControllerWithIdentifier:@"FriendsMainViewController"];
-    
-    [self.navigationController pushViewController:trainingViewController animated:YES];
 }
 
 - (IBAction)showHistoryAction:(id)sender {

@@ -38,7 +38,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *goldLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *goldIcon;
-@property (strong, nonatomic) IBOutlet RORNavigationButton *saveButton;
+@property (strong, nonatomic) IBOutlet UIButton *saveButton;
 @property (strong, nonatomic) IBOutlet UIView *dataContainer;
 @property (strong, nonatomic) IBOutlet UIView *todayMissionView;
 

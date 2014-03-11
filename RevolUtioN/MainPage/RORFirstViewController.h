@@ -37,7 +37,7 @@
 //@property (strong,nonatomic)NSManagedObjectContext *context;
 @property (copy, nonatomic) NSString *userName;
 @property (nonatomic) NSNumber *userId;
-@property (strong, nonatomic) IBOutlet RORNavigationButton *runButton;
+@property (strong, nonatomic) IBOutlet UIButton *runButton;
 //@property (strong, nonatomic) IBOutlet UIImageView *testView;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *levelLabel;

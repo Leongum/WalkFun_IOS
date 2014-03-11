@@ -40,8 +40,6 @@
     [super viewWillAppear:animated];
     
     if ([RORUserUtils getUserId].integerValue>0){
-        //todo:放到loading里sync
-        [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
         itemList = [RORUserPropsService fetchUserProps:[RORUserUtils getUserId]];
         
         user = [RORUserServices fetchUser:[RORUserUtils getUserId]];
@@ -66,13 +64,12 @@
     
     UIButton *itemMallButton = (UIButton *)[mallCoverView viewWithTag:200];
     [itemMallButton addTarget:self action:@selector(itemMallAction:) forControlEvents:UIControlEventTouchUpInside];
-//    [itemMallButton addTarget:self action:@selector(startIndicator:) forControlEvents:UIControlEventTouchDown];
-//    [itemMallButton addTarget:self action:@selector(endIndicator:) forControlEvents:UIControlEventTouchUpOutside];
     UIButton *lingqingButton = (UIButton *)[mallCoverView viewWithTag:201];
     [lingqingButton addTarget:self action:@selector(lingqianAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [[self parentViewController].view addSubview:mallCoverView];
     [mallCoverView appear:self];
+    
 }
 
 - (IBAction)lingqianAction:(id)sender {
@@ -89,5 +86,6 @@
     [[self parentViewController] presentViewController:itemViewController animated:YES completion:^(){}];
     
     [mallCoverView bgTap:self];
+    [self startIndicator:self];
 }
 @end

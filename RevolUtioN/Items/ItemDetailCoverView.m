@@ -54,7 +54,7 @@
         //todo: 多行显示
         [self addSubview:itemDescriptionLabel];
         
-        itemUseButton = [[RORNavigationButton alloc]initWithFrame:CGRectMake(0, 0, 110, 49)];
+        itemUseButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 110, 49)];
         itemUseButton.center = CGPointMake(CGRectGetWidth(frame)/2, CGRectGetHeight(frame)-75);
         [itemUseButton setTitle:@"使用" forState:UIControlStateNormal];
         [itemUseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

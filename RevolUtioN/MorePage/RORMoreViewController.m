@@ -81,13 +81,6 @@
         {
             identifier = @"aboutCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-
-            Version_Control *version = [RORSystemService syncVersion:@"ios"];
-            if (version.version.integerValue != CURRENT_VERSION_MAIN ||
-                version.subVersion.integerValue != CURRENT_VERSION_SUB){
-                [cell viewWithTag:3].alpha = 1;
-            } else
-                [cell viewWithTag:3].alpha = 0;
             break;
         }
         case 1:
@@ -103,11 +96,7 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    if (indexPath.row == 2){
-//        RORCheckBox *check = (RORCheckBox*)[[tableView cellForRowAtIndexPath:indexPath] viewWithTag:3];
-//        [check checkBoxClicked];
-//    }
+
 }
 
 - (IBAction)feedbackAction:(id)sender {
@@ -118,7 +107,7 @@
 - (IBAction)logoutAction:(id)sender {
     //delete core data
     
-    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:LOGOUT_ALERT_TITLE message:LOGOUT_ALERT_CONTENT delegate:self cancelButtonTitle:CANCEL_BUTTON_CANCEL otherButtonTitles:OK_BUTTON_OK, nil];
+    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"注销" message:@"确定要注销吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [confirmView show];
     confirmView = nil;
 }

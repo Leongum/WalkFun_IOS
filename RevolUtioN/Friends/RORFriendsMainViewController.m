@@ -37,25 +37,12 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self syncPageFromServer];
-    
     followList = [RORFriendService fetchFriendFollowsList];
     fansList = [RORFriendService fetchFriendFansList];
     friendList = [RORFriendService fetchFriendEachFansList];
     
     [self initFriendDisplayBool];
     [self refreshTableView];
-}
-
--(void)syncPageFromServer{
-    [super syncPageFromServer];
-    int friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
-    
-    //好友初步信息
-    BOOL friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
-    if(!friendsort){
-        friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -133,6 +120,7 @@
         isDeletingSuccess = [RORFriendService followFriend:deletingFriend.friendId];
         followList = [RORFriendService fetchFriendFollowsList];
         friendList = [RORFriendService fetchFriendEachFansList];
+        fansList = [RORFriendService fetchFriendFansList];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self endIndicator:self];
             if (!isDeletingSuccess){
@@ -152,6 +140,7 @@
         isDeletingSuccess = [RORFriendService deFollowFriend:deletingFriend.friendId];
         followList = [RORFriendService fetchFriendFollowsList];
         friendList = [RORFriendService fetchFriendEachFansList];
+        fansList = [RORFriendService fetchFriendFansList];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self endIndicator:self];
             if (!isDeletingSuccess){

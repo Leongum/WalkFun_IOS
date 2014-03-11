@@ -23,15 +23,6 @@
 //同步服务器版本信息。
 +(Version_Control *)syncVersion:(NSString *)platform;
 
-//同步提示信息
-+(BOOL)syncSystemMessage;
-
-//根据message id 获取当前应该提示的提示语句
-+(NSString *)getSystemMessage:(NSNumber *)messageId;
-
-//根据message id 和region id获取当前应该提示的提示语句
-+(NSString *)getSystemMessage:(NSNumber *)messageId withRegion:(NSNumber *)region;
-
 //同步推荐app信息
 +(BOOL)syncRecommendApp;
 
