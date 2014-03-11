@@ -38,6 +38,8 @@
     fatPV = nil;
     healthPV = nil;
     
+    haveBump = NO;
+    
     if (!userBase)
         self.view.alpha = 0;
 }
@@ -48,7 +50,7 @@
     processView.progressTintColor = [UIColor blackColor];
     [processView setProgress:0.f];
     [self.view addSubview:processView];
-
+    [self.view sendSubviewToBack:processView];
     return processView;
 }
 
@@ -65,6 +67,7 @@
         [self displayCharator];
         [self displayItems];
         [self displayProgresses];
+        charatorBumpImageView.alpha = haveBump;
     }
     if (!fatPV){
         fatPVFrameView = (UILabel *)[self.view viewWithTag:200];
@@ -72,7 +75,6 @@
         fatPV = [self newProgressView:fatPVFrameView];
         healthPV = [self newProgressView:healthPVFrameView];
         [self.view bringSubviewToFront:fatPVFrameView];
-        [self.view bringSubviewToFront:healthPVFrameView];
     }
 }
 
@@ -133,6 +135,7 @@
             for (int i=0; i<quantity.integerValue; i++){
                 [self makeNewItemImageView:item];
             }
+        haveBump = YES;
     }
 }
 

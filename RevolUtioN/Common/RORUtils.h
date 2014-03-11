@@ -13,6 +13,8 @@
 #import "RORConstant.h"
 #import "RORDBCommon.h"
 #import "RORShareCoverViewController.h"
+#import "RORSystemService.h"
+
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
