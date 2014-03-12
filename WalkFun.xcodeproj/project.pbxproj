@@ -38,7 +38,6 @@
 		0F282FD718B2FE2C003F44E8 /* UMSocialSDKResourcesNew.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0F282FCA18B2FE2C003F44E8 /* UMSocialSDKResourcesNew.bundle */; };
 		0F282FE418B2FFAD003F44E8 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F282FDA18B2FFAD003F44E8 /* TencentOpenAPI.framework */; };
 		0F282FE518B2FFAD003F44E8 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0F282FDB18B2FFAD003F44E8 /* TencentOpenApi_IOS_Bundle.bundle */; };
-		0F282FEE18B30640003F44E8 /* LingQianSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F282FED18B30640003F44E8 /* LingQianSDK.framework */; };
 		0F282FEF18B33403003F44E8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F282FAA18B23EEB003F44E8 /* libz.dylib */; };
 		0F282FF118B33422003F44E8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F282FF018B33422003F44E8 /* Security.framework */; };
 		0F282FF318B3342C003F44E8 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F282FF218B3342C003F44E8 /* libiconv.dylib */; };
@@ -430,7 +429,6 @@
 		0F282FCA18B2FE2C003F44E8 /* UMSocialSDKResourcesNew.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResourcesNew.bundle; sourceTree = "<group>"; };
 		0F282FDA18B2FFAD003F44E8 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		0F282FDB18B2FFAD003F44E8 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
-		0F282FED18B30640003F44E8 /* LingQianSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LingQianSDK.framework; path = lingqian/LingQianSDK.framework; sourceTree = "<group>"; };
 		0F282FF018B33422003F44E8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0F282FF218B3342C003F44E8 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		0F8501D517C1C6160005993E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -901,7 +899,6 @@
 				0F19301E1884DED400E74BB1 /* AdSupport.framework in Frameworks */,
 				3098B4FC1806972300029164 /* AVFoundation.framework in Frameworks */,
 				0F282FA318B23E6F003F44E8 /* libMobClickLibrary.a in Frameworks */,
-				0F282FEE18B30640003F44E8 /* LingQianSDK.framework in Frameworks */,
 				0F282FA818B23E89003F44E8 /* libUMFeedback.a in Frameworks */,
 				0F8501E017C1C68E0005993E /* libsqlite3.dylib in Frameworks */,
 				0F8501DE17C1C63E0005993E /* libstdc++.dylib in Frameworks */,
@@ -1050,14 +1047,6 @@
 				0F282FDB18B2FFAD003F44E8 /* TencentOpenApi_IOS_Bundle.bundle */,
 			);
 			path = TencentOpenAPI;
-			sourceTree = "<group>";
-		};
-		0F282FEC18B30623003F44E8 /* lingqian */ = {
-			isa = PBXGroup;
-			children = (
-				0F282FED18B30640003F44E8 /* LingQianSDK.framework */,
-			);
-			name = lingqian;
 			sourceTree = "<group>";
 		};
 		0F7F39841792DEB600B1C720 /* RORServices */ = {
@@ -1265,7 +1254,6 @@
 			children = (
 				30DB021C18C85BB5008863B8 /* THProgressView */,
 				30DB021818C6CF17008863B8 /* THLabel */,
-				0F282FEC18B30623003F44E8 /* lingqian */,
 				0F282F9718B19C75003F44E8 /* UMeng */,
 				30692D5718117C2500DA01EC /* SVProgressHUD */,
 				0F8501DF17C1C68E0005993E /* libsqlite3.dylib */,
