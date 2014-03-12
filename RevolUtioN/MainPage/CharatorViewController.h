@@ -27,6 +27,7 @@
     THProgressView *fatPV, *healthPV;
 
     NSDictionary *itemForDisplayDict;
+    BOOL haveBump;
 }
 
 @property (strong, nonatomic)    User_Base *userBase;
