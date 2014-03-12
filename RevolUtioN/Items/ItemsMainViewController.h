@@ -17,6 +17,8 @@
     UIViewController *parentController;
     CoverView *mallCoverView;
     User_Base *user;
+    
+    UIImage *coverImage;
 }
 
 @property (strong, nonatomic) IBOutlet CoverView *itemDetailCoverView;

@@ -332,6 +332,7 @@
 		30DB022518CD8DB2008863B8 /* ActionHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DB022418CD8DB2008863B8 /* ActionHistoryViewController.m */; };
 		30DB022718CDBBA0008863B8 /* coin.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DB022618CDBBA0008863B8 /* coin.png */; };
 		30DB022918CEB1B7008863B8 /* bump.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DB022818CEB1B7008863B8 /* bump.png */; };
+		30DB022C18CF53C1008863B8 /* UIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DB022B18CF53C1008863B8 /* UIUtils.m */; };
 		30DBB71F17EF300E00552391 /* textfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB71E17EF300E00552391 /* textfield.png */; };
 		30DBB72317EFE04400552391 /* challenge_pop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB72017EFE04400552391 /* challenge_pop_bg.png */; };
 		30DFE7DF17C6748F00678780 /* submit.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DFE7DD17C6748F00678780 /* submit.png */; };
@@ -829,6 +830,8 @@
 		30DB022418CD8DB2008863B8 /* ActionHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionHistoryViewController.m; path = HistoryPage/ActionHistoryViewController.m; sourceTree = "<group>"; };
 		30DB022618CDBBA0008863B8 /* coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coin.png; sourceTree = "<group>"; };
 		30DB022818CEB1B7008863B8 /* bump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bump.png; sourceTree = "<group>"; };
+		30DB022A18CF53C1008863B8 /* UIUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIUtils.h; path = Common/UIUtils.h; sourceTree = "<group>"; };
+		30DB022B18CF53C1008863B8 /* UIUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIUtils.m; path = Common/UIUtils.m; sourceTree = "<group>"; };
 		30DBB71E17EF300E00552391 /* textfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = textfield.png; path = bg/textfield.png; sourceTree = "<group>"; };
 		30DBB72017EFE04400552391 /* challenge_pop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = challenge_pop_bg.png; path = bg/challenge_pop_bg.png; sourceTree = "<group>"; };
 		30DFE7DD17C6748F00678780 /* submit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = submit.png; sourceTree = "<group>"; };
@@ -1111,6 +1114,8 @@
 				0FA75182189279A90037342E /* RORMultiPlaySound.m */,
 				30750A7518B3B67A00EC7B51 /* RORLocationUtils.h */,
 				30750A7618B3B67A00EC7B51 /* RORLocationUtils.m */,
+				30DB022A18CF53C1008863B8 /* UIUtils.h */,
+				30DB022B18CF53C1008863B8 /* UIUtils.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -2324,6 +2329,7 @@
 				30DB022218C8C542008863B8 /* StrokeLabel.m in Sources */,
 				30621D2717E00ED90063A007 /* RORRunningBaseViewController.m in Sources */,
 				30B3906618322B4C005CE74D /* MLNavigationController.m in Sources */,
+				30DB022C18CF53C1008863B8 /* UIUtils.m in Sources */,
 				30750A7118B23F9600EC7B51 /* FixedCoverView.m in Sources */,
 				30621D4817E45EB70063A007 /* RORPlaySound.m in Sources */,
 				0FA751711892798F0037342E /* RORMapAnnotation.m in Sources */,

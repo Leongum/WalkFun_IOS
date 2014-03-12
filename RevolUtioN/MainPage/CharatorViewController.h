@@ -19,6 +19,7 @@
 #import "RORViewController.h"
 #import "RORVirtualProductService.h"
 #import "THProgressView.h"
+#import "UIUtils.h"
 
 @interface CharatorViewController : UIViewController{
     UIView *behindCharatorView, *frontCharatorView, *flowContainerView;

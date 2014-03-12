@@ -475,11 +475,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view alpha="0.99999999999999989" contentMode="scaleToFill" id="jG1-qd-bC8" customClass="UIControl">
+                            <view alpha="0.99999999999999989" contentMode="scaleToFill" id="jG1-qd-bC8" customClass="CoverView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coverview_bg.png" id="zII-PF-76j">
+                                    <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="UgC-Hd-BCY">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -528,9 +528,6 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="btnCoverInside:" destination="PbC-RF-pa6" eventType="touchUpInside" id="qfv-mP-Ysh"/>
-                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -538,7 +535,7 @@
                     <navigationItem key="navigationItem" title="跑步" id="2eP-Vw-4kQ"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="coverView" destination="jG1-qd-bC8" id="zep-Fp-tcg"/>
+                        <outlet property="coverView" destination="jG1-qd-bC8" id="BXR-4G-62N"/>
                         <outlet property="dataContainer" destination="0Pp-US-kgT" id="OAa-Hz-1Fx"/>
                         <outlet property="distanceLabel" destination="BuL-4o-B7w" id="S0H-Jq-bD3"/>
                         <outlet property="endButton" destination="qoe-ah-y3F" id="grz-eW-chY"/>
@@ -2108,6 +2105,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="r26-ue-wHI"/>
+        <segue reference="wyF-zp-Z04"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -58,9 +58,13 @@
 #pragma mark Actions
 
 - (IBAction)mallAction:(id)sender {
+    
+    
     UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"ItemsStoryboard" bundle:[NSBundle mainBundle]];
     UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"mallCoverViewController"];
     mallCoverView = (CoverView *)itemViewController.view;
+    //debug
+//    [mallCoverView setBgImage:coverImage];
     
     UIButton *itemMallButton = (UIButton *)[mallCoverView viewWithTag:200];
     [itemMallButton addTarget:self action:@selector(itemMallAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -69,7 +73,6 @@
     
     [[self parentViewController].view addSubview:mallCoverView];
     [mallCoverView appear:self];
-    
 }
 
 - (IBAction)lingqianAction:(id)sender {

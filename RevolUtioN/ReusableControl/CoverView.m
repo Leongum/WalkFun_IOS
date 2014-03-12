@@ -11,14 +11,13 @@
 #import "Animations.h"
 
 @implementation CoverView
+@synthesize bgImage;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        [self addCoverBgImage];
-        [self addTarget:self action:@selector(bgTap:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
@@ -26,14 +25,21 @@
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self addCoverBgImage];
-        [self addTarget:self action:@selector(bgTap:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addTarget:self action:@selector(bgTap:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
 
+//-(void)setBgImage:(UIImage *)image{
+//    bgImage = image;
+//    [self addCoverBgImage];
+//}
+
 -(void)addCoverBgImage{
-    bgImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"coverview_bg.png"]];
+    UIImage *image = [RORUtils captureScreen];
+    bgImage = [UIUtils grayscale:image type:1];
+    
+    bgImageView = [[UIImageView alloc]initWithImage:bgImage];
     bgImageView.frame = self.frame;
     bgImageView.center = CGPointMake(bgImageView.frame.size.width/2, bgImageView.frame.size.height/2);
     bgImageView.alpha = 1;
@@ -51,9 +57,15 @@
 */
 
 -(IBAction)appear:(id)sender{
+    [self addCoverBgImage];
+    
     self.alpha = 1;
-    [Animations fadeIn:self andAnimationDuration:0.2 toAlpha:1 andWait:0];
-    [bgImageView fadeIn:0.3 delegate:self];
+    [Animations fadeIn:self andAnimationDuration:0.2 toAlpha:1 andWait:NO];
+    [bgImageView fadeIn:0.3 delegate:self startSelector:nil stopSelector:@selector(addBgAction:)];
+}
+
+-(IBAction)addBgAction:(id)sender{
+    [self addTarget:self action:@selector(bgTap:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(IBAction)bgTap:(id)sender{

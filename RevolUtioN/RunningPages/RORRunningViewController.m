@@ -370,11 +370,22 @@
         [self.saveButton setTitle:@"你走的也太少了吧" forState:UIControlStateNormal];
         [self.saveButton setBackgroundImage:nil forState:UIControlStateNormal];
     }
-    [Animations fadeIn:coverView andAnimationDuration:0.3 toAlpha:1 andWait:NO];
+    UIImageView *iv = (UIImageView*)[coverView viewWithTag:100];
+    iv.image = [UIUtils grayscale:[RORUtils captureScreen] type:1];
+    
+//    [Animations fadeIn:coverView andAnimationDuration:0.3 toAlpha:1 andWait:NO];
+    [coverView fadeIn:0.3 delegate:self startSelector:nil stopSelector:@selector(addBgAction:)];
+    coverView.alpha = 1;
+
+}
+
+-(IBAction)addBgAction:(id)sender{
+    [coverView addTarget:self action:@selector(btnCoverInside:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (IBAction)btnCoverInside:(id)sender {
     [Animations fadeOut:coverView andAnimationDuration:0.3 fromAlpha:1 andWait:NO];
+    [coverView removeTarget:self action:@selector(addBgAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (IBAction)btnSaveRunTouched:(id)sender {
