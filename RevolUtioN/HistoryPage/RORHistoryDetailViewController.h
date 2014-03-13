@@ -14,6 +14,7 @@
 #import "RORStartAnnotation.h"
 #import "ROREndAnnotation.h"
 #import "RORMissionHistoyService.h"
+#import "CoverView.h"
 
 @interface RORHistoryDetailViewController : RORViewController <MKMapViewDelegate>{
     NSMutableArray *improvedRoute;

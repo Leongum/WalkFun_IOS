@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ItemIconView.h"
-#import "ItemDetailCoverView.h"
+#import "CoverView.h"
 
 #define COUNT_LINE 3
 #define MARGIN_TOP_BOTTOM 10
@@ -21,7 +21,9 @@
     CGSize itemIconSize;
     double marginBetweenItems;
     
-    ItemDetailCoverView *itemDetailCoverView;
+    CoverView *itemDetailCoverView;
+    Virtual_Product *item;
+    UIViewController *parentViewController;
 }
 
 -(void)initContent:(NSArray *)content;

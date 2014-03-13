@@ -57,8 +57,6 @@
 */
 
 -(IBAction)appear:(id)sender{
-    [self addCoverBgImage];
-    
     self.alpha = 1;
     [Animations fadeIn:self andAnimationDuration:0.2 toAlpha:1 andWait:NO];
     [bgImageView fadeIn:0.3 delegate:self startSelector:nil stopSelector:@selector(addBgAction:)];

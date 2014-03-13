@@ -17,4 +17,6 @@
 
 -(IBAction)appear:(id)sender;
 -(IBAction)bgTap:(id)sender;
+-(void)addCoverBgImage;
+
 @end

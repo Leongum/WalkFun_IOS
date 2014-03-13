@@ -185,29 +185,6 @@
         }
     }
     
-//    for (y = 0; y < height; y++) {
-//        for (x = 0; x < width; x++) {
-//            UInt8 *tmp2;
-//            tmp2 = newData + y * bytesPerRow + x * 4;
-//            int tmpCount=0;
-//            NSInteger red=0,green=0,blue=0;
-//            int scale = 4;
-//            for (int i = (y-scale<0?0:y-scale); i <= (y+scale>height-1?height-1:y+scale); i++){
-//                for (int j = (x-scale<0?0:x-scale); j <= (x+scale>=width-1?width-1:x+scale); j++){
-//                    UInt8 *tmp1;
-//                    tmp1 = newData + i * bytesPerRow + j * 4;
-//                    tmpCount++;
-//                    red+=*(tmp1 + 0);
-//                    green+=*(tmp1 + 1);
-//                    blue += *(tmp1 + 2);
-//                }
-//            }
-//            *(tmp2 + 0) = red/tmpCount;
-//            *(tmp2 + 1) = green/tmpCount;
-//            *(tmp2 + 2) = blue/tmpCount;
-//        }
-//    }
-    
     // 効果を与えたデータ生成
     CFDataRef   effectedData;
     effectedData = CFDataCreate(NULL, newData, CFDataGetLength(data));

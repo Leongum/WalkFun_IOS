@@ -66,13 +66,47 @@
 }
 
 -(IBAction)didSelectItem:(id)sender{
+    parentViewController = (UIViewController *)self.delegate;
+    while ([parentViewController parentViewController]) {
+        parentViewController = [parentViewController parentViewController];
+    }
     ItemIconView *itemIcon = (ItemIconView *)sender;
     
-    UIViewController *controller = (UIViewController *)self.delegate;
-    itemDetailCoverView = [[ItemDetailCoverView alloc]initWithFrame:controller.view.frame andUserItem:itemIcon.userItem];
-    itemDetailCoverView.delegate = self.delegate;
-    [[controller parentViewController].view addSubview:itemDetailCoverView];
+    UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"ItemsStoryboard" bundle:[NSBundle mainBundle]];
+    UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"itemDetailCoverViewController"];
+    itemDetailCoverView = (CoverView *)itemViewController.view;
+    
+    UILabel *itemNameLabel = (UILabel *)[itemDetailCoverView viewWithTag:100];
+    UIImageView *itemIconView = (UIImageView *)[itemDetailCoverView viewWithTag:101];
+    UILabel *itemEffectLabel = (UILabel *)[itemDetailCoverView viewWithTag:102];
+    UILabel *itemDescLabel = (UILabel *)[itemDetailCoverView viewWithTag:103];
+    UIButton *useButton = (UIButton *)[itemDetailCoverView viewWithTag:104];
+    
+    item = [RORVirtualProductService fetchVProduct:itemIcon.userItem.productId];;
+
+    itemNameLabel.text = item.productName;
+    itemIconView.image = [RORVirtualProductService getImageOf:item];
+    NSArray *itemInfoStringList = [item.productDescription componentsSeparatedByString:@"\\n\\n"];
+    itemEffectLabel.text = [itemInfoStringList objectAtIndex:1];
+    itemDescLabel.text = [itemInfoStringList objectAtIndex:0];
+
+    [useButton addTarget:self action:@selector(useItemAction:) forControlEvents:UIControlEventTouchUpInside];
+    [itemDetailCoverView addCoverBgImage];
+    [parentViewController.view addSubview:itemDetailCoverView];
+    
     [itemDetailCoverView appear:self];
 }
+
+-(IBAction)useItemAction:(id)sender{
+    UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"ItemsStoryboard" bundle:[NSBundle mainBundle]];
+    UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"ItemUseTargetViewController"];
+    if ([itemViewController respondsToSelector:@selector(setSelectedItem:)]){
+        [itemViewController setValue:item forKey:@"selectedItem"];
+    }
+    [parentViewController presentViewController:itemViewController animated:YES completion:^(){}];
+    
+    [itemDetailCoverView bgTap:self];
+}
+
 
 @end

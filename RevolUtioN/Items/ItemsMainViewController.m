@@ -71,6 +71,7 @@
     UIButton *lingqingButton = (UIButton *)[mallCoverView viewWithTag:201];
     [lingqingButton addTarget:self action:@selector(lingqianAction:) forControlEvents:UIControlEventTouchUpInside];
     
+    [mallCoverView addCoverBgImage];
     [[self parentViewController].view addSubview:mallCoverView];
     [mallCoverView appear:self];
 }

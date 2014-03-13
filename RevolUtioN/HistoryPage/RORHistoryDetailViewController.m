@@ -106,7 +106,10 @@
         //显示任务完成提示
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
         UIViewController *missionDoneViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"missionCongratsVIewController"];
-        [self.view addSubview:missionDoneViewController.view];
+        CoverView *congratsCoverView = (CoverView *)missionDoneViewController.view;
+        [congratsCoverView addCoverBgImage];
+        [self.view addSubview:congratsCoverView];
+        [congratsCoverView appear:self];
         
         UIView *missionCongratsView = missionDoneViewController.view;
         UILabel *missionNameLabel = (UILabel *)[missionCongratsView viewWithTag:100];

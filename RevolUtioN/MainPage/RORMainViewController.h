@@ -13,6 +13,8 @@
 #import "RORRunHistoryServices.h"
 #import "LevelUpCongratsViewController.h"
 #import "RORMissionServices.h"
+#import "CoverView.h"
+
 
 #define PAGE_QUANTITY 3
 
