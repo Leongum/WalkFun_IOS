@@ -10,7 +10,6 @@
 
 @interface UIUtils : NSObject
 
-+ (void**)getImageData:(UIImage *)image ;
 + (UIImage*) grayscale:(UIImage*)anImage type:(char)type;
 
 @end

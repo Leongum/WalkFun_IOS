@@ -43,6 +43,26 @@
     [self.charatorView addSubview:charview];
 //    [self.view sendSubviewToBack:charview];
     [charatorViewController didMoveToParentViewController:self];
+    
+    [self.latestWorkoutDateLabel setDrawOutline:YES];
+    [self.latestWorkoutDateLabel setOutlineColor:[UIColor blackColor]];
+    self.latestWorkoutDateLabel.strokeWidth = 4;
+    [self.latestWorkoutDateLabel setDrawGradient:YES];
+    CGFloat colors [] = {
+        255.0f/255.0f, 193.0f / 255.0f, 127.0f/255.0f, 1.0,
+        0.0f/255.0f, 163.0f/255.0f, 64.0f/255.0f, 1.0
+    };
+    [self.latestWorkoutDateLabel setGradientColors:colors];
+    
+    [self.latestFriendActionDateLabel setDrawOutline:YES];
+    [self.latestFriendActionDateLabel setOutlineColor:[UIColor blackColor]];
+    self.latestFriendActionDateLabel.strokeWidth = 4;
+    [self.latestFriendActionDateLabel setDrawGradient:YES];
+    [self.latestFriendActionDateLabel setGradientColors:colors];
+
+    [self.loadingLabel setSpotlightColor:[UIColor whiteColor]];
+    [self.loadingLabel setContentMode:UIViewContentModeBottom];
+    [self.loadingLabel startAnimating];
 }
 
 -(void)refreshView {

@@ -219,12 +219,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0)
-        return 62;
-    Action_Define *event = [eventDisplayList objectAtIndex:indexPath.row-1];
-    if ([event.actionDescription rangeOfString:@"金币"].location != NSNotFound ){
-        return 30;
-    }
+//    if (indexPath.row == 0)
+//        return 62;
+//    Action_Define *event = [eventDisplayList objectAtIndex:indexPath.row-1];
+//    if ([event.actionDescription rangeOfString:@"金币"].location != NSNotFound ){
+//        return 30;
+//    }
     return 62;
 }
 

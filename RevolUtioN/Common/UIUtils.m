@@ -10,66 +10,6 @@
 
 @implementation UIUtils
 
-
-// return bmpData is rgba
-+ (void*)getImageData:(UIImage *)image
-{
-    void* data = NULL;
-    int imgWidth = image.size.width * image.scale;
-    int imgHegiht = image.size.height * image.scale;
-    
-    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-    if (colorspace == NULL) {
-        NSLog(@"Create Colorspace Error!");
-        return NO;
-    }
-    
-    void *imgData = NULL;
-    imgData = malloc(imgWidth * imgHegiht * 4);
-    if (imgData == NULL) {
-        NSLog(@"Memory Error!");
-        return NO;
-    }
-    
-    CGContextRef bmpContext = CGBitmapContextCreate(imgData, imgWidth, imgHegiht, 8, imgWidth * 4, colorspace, kCGImageAlphaPremultipliedLast);
-    CGContextDrawImage(bmpContext, CGRectMake(0, 0, imgWidth, imgHegiht), image.CGImage);
-    
-    data = CGBitmapContextGetData(bmpContext);
-//    *width = imgWidth;
-//    *height = imgHegiht;
-//    *alphaInfo = kCGImageAlphaLast;
-    
-    CGColorSpaceRelease(colorspace);
-    CGContextRelease(bmpContext);
-    
-    return data;
-}
-
-
-// the data should be RGBA format
-+ (UIImage*)createImageWithData:(Byte*)data width:(NSInteger)width height:(NSInteger)height alphaInfo:(CGImageAlphaInfo)alphaInfo
-{
-    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-    if (!colorSpaceRef) {
-        NSLog(@"Create ColorSpace Error!");
-    }
-    CGContextRef bitmapContext = CGBitmapContextCreate(data, width, height, 8, width * 4, colorSpaceRef, kCGImageAlphaPremultipliedLast);
-    if (!bitmapContext) {
-        NSLog(@"Create Bitmap context Error!");
-        CGColorSpaceRelease(colorSpaceRef);
-        return nil;
-    }
-    
-    CGImageRef imageRef = CGBitmapContextCreateImage(bitmapContext);
-    UIImage *image = [[UIImage alloc] initWithCGImage:imageRef];
-    CGImageRelease(imageRef);
-    
-    CGColorSpaceRelease(colorSpaceRef);
-    CGContextRelease(bitmapContext);
-    
-    return image;
-}
-
 + (UIImage*) grayscale:(UIImage*)anImage type:(char)type {
     CGImageRef  imageRef;
     imageRef = anImage.CGImage;
@@ -111,7 +51,7 @@
 //    NSLog(@"%lu", sizeof(buffer));
     UInt8*newData = malloc(height*bytesPerRow + width*4);
     
-    NSInteger  x, y;
+    int x, y;
     
     for (y = 0; y < height; y++) {
         for (x = 0; x < width; x++) {

@@ -77,6 +77,11 @@
         [locationManager startUpdatingLocation];
     }
     
+    NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
+    NSNumber *n = (NSNumber *)[dict objectForKey:@"AppOpenCounter"];
+    n = [NSNumber numberWithInteger:n.integerValue+1];
+    [dict setObject:n forKey:@"AppOpenCounter"];
+    [RORUserUtils writeToUserInfoPList:dict];
 }
 
 -(void)applicationWillResignActive:(UIApplication *)application{

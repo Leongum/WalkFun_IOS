@@ -193,11 +193,11 @@
                     continue;
                 }
                 if ([keyString isEqualToString:@"currentStep"]){
-                    l.text = [NSString stringWithFormat:@"%d步",((NSNumber *)[todayMissionDict objectForKey:keys]).integerValue];
+                    l.text = [NSString stringWithFormat:@"%d步",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
                     i++;
                 }
                 if ([keyString isEqualToString:@"duration"]){
-                    l.text = [NSString stringWithFormat:@"%d分钟",((NSNumber *)[todayMissionDict objectForKey:keys]).integerValue/60];
+                    l.text = [NSString stringWithFormat:@"%d分钟",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue/60];
                 }
                 i++;
             } else {
@@ -341,6 +341,11 @@
     }
     
     [self checkTodayMission];
+    
+    //触发疲劳事件
+    if (duration>3600 && ((int)duration)%120==0){
+        [self eventDidHappened:tiredAction];
+    }
 }
 
 - (void)pushPoint{
@@ -518,7 +523,7 @@
 #pragma mark Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int rows = eventDisplayList.count + (isStarted?1:0);
+    NSInteger rows = eventDisplayList.count + (isStarted?1:0);
     return rows;
 }
 
@@ -539,22 +544,19 @@
         effectLabel.text = @"一切看起来都那么美好～";
     } else {
         Action_Define *event = [eventDisplayList objectAtIndex:indexPath.row-1];
-        if ([event.actionDescription rangeOfString:@"金币"].location != NSNotFound ){
-            identifier = @"coinCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        } else {
-            identifier = @"eventCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            
-            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
-            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
-            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
-            eventLabel.text = event.actionName;
-            effectLabel.text = [NSString stringWithFormat:@"获得：%@",event.actionAttribute];
-            
-            int timeInt = ((NSNumber *)[eventDisplayTimeList objectAtIndex:indexPath.row-1]).integerValue;
-            eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
-        }
+//        if ([event.actionDescription rangeOfString:@"金币"].location == NSNotFound ){
+        identifier = @"eventCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        
+        UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+        UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+        UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+        eventLabel.text = event.actionName;
+        effectLabel.text = [NSString stringWithFormat:@"获得：%@",event.actionAttribute];
+        
+        int timeInt = ((NSNumber *)[eventDisplayTimeList objectAtIndex:indexPath.row-1]).intValue;
+        eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
+//        }
     }
     bottomIndex = indexPath;
     
@@ -562,15 +564,6 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0){
-        newCellHeight = 62;
-        return 62;
-    }
-    Action_Define *event = [eventHappenedList objectAtIndex:indexPath.row-1];
-    if ([event.actionDescription rangeOfString:@"金币"].location != NSNotFound ){
-        newCellHeight = 30;
-        return 30;
-    }
     newCellHeight = 62;
     return 62;
 }
@@ -594,7 +587,7 @@
             delta = (user.userDetail.goldCoinSpeed.doubleValue + 1);
         }
         //debug
-        if (roll < event.triggerProbability.doubleValue *delta){
+        if (roll < event.triggerProbability.doubleValue *delta*10){
             [self eventDidHappened:event];
             return;
         }

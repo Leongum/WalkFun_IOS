@@ -9,6 +9,8 @@
 #import "RORViewController.h"
 #import "RORUserServices.h"
 #import "RORRunHistoryServices.h"
+#import "KSLabel.h"
+#import "CUSFlashLabel.h"
 
 @interface FriendInfoViewController : RORViewController{
     UIViewController *charatorViewController;
@@ -20,11 +22,11 @@
 @property (strong, nonatomic) IBOutlet UIView *charatorView;
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *levelLabel;
-@property (strong, nonatomic) IBOutlet UILabel *latestWorkoutDateLabel;
-@property (strong, nonatomic) IBOutlet UILabel *latestFriendActionDateLabel;
+@property (strong, nonatomic) IBOutlet KSLabel *latestWorkoutDateLabel;
+@property (strong, nonatomic) IBOutlet KSLabel * latestFriendActionDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *latestFriendActionDescriptionLabel;
 
-@property (strong, nonatomic) IBOutlet UILabel *loadingLabel;
+@property (strong, nonatomic) IBOutlet CUSFlashLabel *loadingLabel;
 
 @property (strong, nonatomic) User_Base *userBase;
 @end

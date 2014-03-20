@@ -82,16 +82,9 @@
 }
 
 -(void)addBackButton{
-    backButton = [[UIButton alloc]initWithFrame:BACKBUTTON_FRAME_TOP ];//[RORNormalButton buttonWithType:UIButtonTypeRoundedRect];
-//    [backButton initButtonInteraction];
+    backButton = [[RORNormalButton alloc]initWithFrame:BACKBUTTON_FRAME_TOP ];
     backButton.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
-    //CGRect rx = [ UIScreen mainScreen ].applicationFrame;
-//    backButton.frame = BACKBUTTON_FRAME_TOP;
-//    if (rx.size.height == 460){
-//        backButton.frame = BACKBUTTON_FRAME_NORMAL;
-//    } else {
-//        backButton.frame = BACKBUTTON_FRAME_RETINA;
-//    }
+
     UIImage *image = [UIImage imageNamed:@"back_bg.png"];
     [backButton setBackgroundImage:image forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];

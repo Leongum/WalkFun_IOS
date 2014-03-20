@@ -65,11 +65,9 @@
 //点“购买”之后执行这里
 - (IBAction)buyAction:(id)sender {
     [self startIndicator:self];
-    [self.itemQuantityCoverView bgTap:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         isServiceSuccess = [RORUserPropsService buyUserProps:selectedItem.productId withBuyNumbers:[NSNumber numberWithInt:selectedQuantity]];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self endIndicator:self];
             if (isServiceSuccess){
                 userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
                 userMoney = userBase.userDetail.goldCoin.integerValue;
@@ -78,6 +76,7 @@
             } else {
                 [self sendNotification:@"网络错误"];
             }
+            [self.itemQuantityCoverView bgTap:self];
             self.moneyLabel.text = [NSString stringWithFormat:@"%d", userMoney];
         });
     });
@@ -91,7 +90,7 @@
     [self.pickView reloadAllComponents];
     [self.pickView selectRow:0 inComponent:0 animated:NO];
     selectedQuantity = 1;
-    self.totalCost.text = [NSString stringWithFormat:@"$ %d", selectedItem.virtualPrice.integerValue];
+    self.totalCost.text = [NSString stringWithFormat:@"%d", selectedItem.virtualPrice.integerValue];
     self.selectedItemNameLabel.text = selectedItem.productName;
 }
 
@@ -168,7 +167,7 @@
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     selectedQuantity = (row+1);
-    self.totalCost.text = [NSString stringWithFormat:@"$ %d", selectedQuantity*selectedItem.virtualPrice.integerValue];
+    self.totalCost.text = [NSString stringWithFormat:@"%d", selectedQuantity*selectedItem.virtualPrice.integerValue];
     [self.totalCost pop:0.5 delegate:self];
 }
 @end

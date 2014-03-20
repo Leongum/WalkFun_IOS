@@ -38,13 +38,16 @@
 -(void)addCoverBgImage{
     UIImage *image = [RORUtils captureScreen];
     bgImage = [UIUtils grayscale:image type:1];
-    
-    bgImageView = [[UIImageView alloc]initWithImage:bgImage];
-    bgImageView.frame = self.frame;
-    bgImageView.center = CGPointMake(bgImageView.frame.size.width/2, bgImageView.frame.size.height/2);
-    bgImageView.alpha = 1;
-    [self addSubview:bgImageView];
-    [self sendSubviewToBack:bgImageView];
+    if (!bgImageView){
+        bgImageView = [[UIImageView alloc]initWithImage:bgImage];
+        bgImageView.frame = self.frame;
+        bgImageView.center = CGPointMake(bgImageView.frame.size.width/2, bgImageView.frame.size.height/2);
+        bgImageView.alpha = 1;
+        [self addSubview:bgImageView];
+        [self sendSubviewToBack:bgImageView];
+    } else {
+        bgImageView.image = bgImage;
+    }
 }
 
 /*

@@ -32,6 +32,7 @@
 	// Do any additional setup after loading the view.
     self.backButton.alpha = 0;
     self.endDeletingButton.alpha = 0;
+    [Animations roundedCorners:self.tableView];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -67,16 +68,21 @@
 
 -(void)refreshFriendDisplayButton{
     if (showFollow){
-        [self.showFollowButton setBackgroundColor:[UIColor redColor]];
+//        [self.showFollowButton setBackgroundColor:[UIColor redColor]];
+        [self.showFollowButton setBackgroundImage:[UIImage imageNamed:@"followButton_selected.png"] forState:UIControlStateNormal];
         self.startDeletingButton.enabled = YES;
     } else{
-        [self.showFollowButton setBackgroundColor:[UIColor clearColor]];
+//        [self.showFollowButton setBackgroundColor:[UIColor clearColor]];
+        [self.showFollowButton setBackgroundImage:[UIImage imageNamed:@"followButton_normal.png"] forState:UIControlStateNormal];
         self.startDeletingButton.enabled = NO;
     }
     if (showFans){
-        [self.showFansButton setBackgroundColor:[UIColor redColor]];
+//        [self.showFansButton setBackgroundColor:[UIColor redColor]];
+        [self.showFansButton setBackgroundImage:[UIImage imageNamed:@"fansButton_selected.png"] forState:UIControlStateNormal];
     } else
-        [self.showFansButton setBackgroundColor:[UIColor clearColor]];
+//        [self.showFansButton setBackgroundColor:[UIColor clearColor]];
+    [self.showFansButton setBackgroundImage:[UIImage imageNamed:@"fansButton_normal.png"] forState:UIControlStateNormal];
+
     [self saveFriendDisplayPlist];
 }
 
@@ -104,10 +110,15 @@
 
 - (IBAction)startDeletingAction:(id)sender {
     self.endDeletingButton.alpha = 1;
+    [self.endDeletingButton slideInFrom:kFTAnimationTop duration:0.1 delegate:self];
     [self refreshTableView];
 }
 
 - (IBAction)endDeletingAction:(id)sender {
+    [self.endDeletingButton slideOutTo:kFTAnimationTop duration:0.1 delegate:self startSelector:nil stopSelector:@selector(hideEndDeletingButton:)];
+}
+
+-(IBAction)hideEndDeletingButton:(id)sender{
     self.endDeletingButton.alpha = 0;
     [self refreshTableView];
 }

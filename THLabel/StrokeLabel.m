@@ -50,7 +50,8 @@
     [super drawTextInRect:rect];
     
     self.shadowOffset = shadowOffset;
-    
+    CGContextSaveGState(c);
+
 }
 
 @end

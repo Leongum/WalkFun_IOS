@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "RORUserServices.h"
+#import "PooViewController.h"
 
-@interface LevelUpCongratsViewController : UIViewController{
+@interface LevelUpCongratsViewController : PooViewController{
     User_Base *userBase;
 }
 

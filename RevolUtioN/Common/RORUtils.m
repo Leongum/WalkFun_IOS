@@ -415,8 +415,7 @@
     NSDateComponents *components = [gregorian components:unitFlags fromDate:date1 toDate:date2 options:0];
     NSInteger months = [components month];
     NSInteger days = [components day];
-    NSInteger year = [components year];
-    if (year<1 && months<1){
+    if (months<1){
         return days;
     }
     return [date1 timeIntervalSinceDate:date2]/86400;

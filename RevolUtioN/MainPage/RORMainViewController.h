@@ -14,9 +14,12 @@
 #import "LevelUpCongratsViewController.h"
 #import "RORMissionServices.h"
 #import "CoverView.h"
-
+#import "PooViewController.h"
 
 #define PAGE_QUANTITY 3
+
+#define ALERT_TYPE_TOAPPSTORE 1
+#define ALERT_TYPE_GIVEUPMISSION 2
 
 @interface RORMainViewController : RORViewController<UIScrollViewDelegate>{
     MainPageViewController *friendViewController, *firstViewController, *itemViewController;
@@ -27,12 +30,16 @@
     double missionBoardCenterY;
     Mission *todayMission;
     BOOL isFolded;
+    
+    int alertType;
 }
+@property (strong)			CAEmitterLayer	*heartsEmitter;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet UILabel *missionContentLabel;
 @property (strong, nonatomic) IBOutlet UIView *missionView;
+@property (strong, nonatomic) IBOutlet UIButton *missionStoneButton;
 @property (strong, nonatomic) NSMutableArray *contentViews;
 
 @end

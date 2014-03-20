@@ -72,6 +72,15 @@
 }
 
 -(void)checkDailyMission{
+    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+    //如果已经集满了三次日常任务，但没有兑换奖励，则接不到新的任务
+    NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
+    [self.missionStoneButton setTitle:[NSString stringWithFormat:@"%d/3",missionProcess.integerValue] forState:UIControlStateNormal];
+    if (missionProcess.integerValue >= 3){
+        [self.missionStoneButton setEnabled:YES];
+        return;
+    }
+    [self.missionStoneButton setEnabled:NO];
     todayMission = [RORMissionServices getTodayMission];
     if (todayMission){
         NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
@@ -110,11 +119,11 @@
                     UILabel *missionDoneLabel = (UILabel *)[missionCongratsView viewWithTag:103];
                     
                     missionNameLabel.text = todayMission.missionDescription;
-                    missionGoldLabel.text = [NSString stringWithFormat:@"+%d",todayMission.goldCoin.integerValue];
-                    missionExpLabel.text = [NSString stringWithFormat:@"+%d",todayMission.experience.integerValue];
+                    missionGoldLabel.text = [NSString stringWithFormat:@"+%d",todayMission.goldCoin.intValue];
+                    missionExpLabel.text = [NSString stringWithFormat:@"+%d",todayMission.experience.intValue];
                     NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
                     NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
-                    int mp = missionProcess.integerValue;
+                    int mp = missionProcess.intValue;
                     mp++;
                     missionDoneLabel.text = [NSString stringWithFormat:@"%d/%d", mp, 3];
                     //修改plist中的任务相关标记
@@ -157,6 +166,27 @@
 -(void)viewDidAppear:(BOOL)animated{
     [self checkLevelUp];
     [self checkDailyMission];
+    [self checkSendToAppstore];
+}
+
+-(void)checkSendToAppstore{
+    NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
+    NSNumber *n = (NSNumber *)[dict objectForKey:@"AppOpenCounter"];
+    if (n.integerValue>5 && n.integerValue<1000){
+        alertType = ALERT_TYPE_TOAPPSTORE;
+        n = [NSNumber numberWithInteger:1001];
+        [dict setObject:n forKey:@"AppOpenCounter"];
+        [RORUserUtils writeToUserInfoPList:dict];
+        
+        NSString *msg;
+        if ([userBase.sex isEqualToString:@"男"])
+            msg = @"大爷，帮忙给个评价呗？";
+        else
+            msg = @"美女，帮忙给个评价呗？";
+        UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"求评价" message:msg delegate:self cancelButtonTitle:@"走开" otherButtonTitles:@"好说好说", nil];
+        [confirmView show];
+        confirmView = nil;
+    }
 }
 
 -(void)checkLevelUp{
@@ -176,12 +206,23 @@
     }
 }
 
+//弹出升级提示页面
 -(void)performLevelUp{
-    UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
-    LevelUpCongratsViewController *levelupViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"levelUpCongratsCoverViewController"];
-    [self addChildViewController:levelupViewController];
-    [self.view addSubview:levelupViewController.view];
-    [self didMoveToParentViewController:levelupViewController];
+    PooViewController *pooController = [mainStoryboard instantiateViewControllerWithIdentifier:@"levelUpCongratsCoverViewController"];
+    CoverView *coverView = (CoverView *)pooController.view;
+    [coverView addCoverBgImage];
+    [coverView appear:self];
+    
+    [self addChildViewController:pooController];
+    [self.view addSubview:pooController.view];
+    [self didMoveToParentViewController:pooController];
+    
+    CABasicAnimation *heartsBurst = [CABasicAnimation animationWithKeyPath:@"emitterCells.heart.birthRate"];
+	heartsBurst.fromValue		= [NSNumber numberWithFloat:2.0];
+	heartsBurst.toValue			= [NSNumber numberWithFloat:  0.0];
+	heartsBurst.duration		= 3.0;
+	heartsBurst.timingFunction	= [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+	[pooController.heartsEmitter addAnimation:heartsBurst forKey:@"heartsBurst"];
 }
 
 
@@ -270,7 +311,9 @@
     }
 }
 
+//其实这里是同步按钮的事件 - -
 - (IBAction)missionAction:(id)sender {
+
     [self startIndicator:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         BOOL run = [RORRunHistoryServices uploadRunningHistories];
@@ -313,7 +356,10 @@
     if (buttonIndex == 0) {
         return;
     }else if(buttonIndex == 1){
-        [self cancelMission];
+        if (alertType == ALERT_TYPE_GIVEUPMISSION)
+            [self cancelMission];
+        else if (alertType == ALERT_TYPE_TOAPPSTORE)
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/sai-pao-le-zhuan-ye-you-you/id718299464?mt=8"]];
     }
 }
 
@@ -322,6 +368,16 @@
     NSDictionary *saveDict = [[NSDictionary alloc]initWithObjectsAndKeys:[NSDate date], @"lastDailyMissionFinishedDate", [NSNumber numberWithInteger:-1], @"missionUseItemQuantity", nil];
     [RORUserUtils writeToUserInfoPList:saveDict];
     [Animations moveDown:self.missionView andAnimationDuration:1 andWait:NO andLength:100];
+}
+
+- (IBAction)missionStoneAction:(id)sender {
+//    [self.missionStoneButton setTitle:@"0/3" forState:UIControlStateNormal];
+    [self sendNotification:@"兑换了一个道具奖励"];
+    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+    [userInfoList setObject:[NSNumber numberWithInteger:0] forKey:@"missionProcess"];
+    [RORUserUtils writeToUserInfoPList:userInfoList];
+    
+    [self checkDailyMission];
 }
 
 - (IBAction)hideorshowDailyMissionBoardAction:(id)sender {

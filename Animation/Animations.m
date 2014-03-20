@@ -172,14 +172,18 @@
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
 }
 
-+ (void) frameAndShadow: (UIView *) view
++ (void) frameAndShadow: (UIView *) view{
+    [self frameAndShadow:view withColor:[UIColor blackColor] andOpacity:0.7f];
+}
+
++ (void) frameAndShadow: (UIView *) view withColor:(UIColor *)color andOpacity:(float)opacity
 //Shadow is all Over with a white frame
 {
     CALayer *layer = view.layer;
 //    [layer setBorderColor: [[UIColor whiteColor] CGColor]]; //Frame Color
 //    [layer setBorderWidth:5.0f]; //Frame Border
-    [layer setShadowColor: [[UIColor blackColor] CGColor]]; //Shadow Color
-    [layer setShadowOpacity:0.80f];
+    [layer setShadowColor: [color CGColor]]; //Shadow Color
+    [layer setShadowOpacity:0.70f];
     [layer setShadowOffset: CGSizeMake(1, 3)];
     [layer setShadowRadius:5.0];
     [view setClipsToBounds:NO];

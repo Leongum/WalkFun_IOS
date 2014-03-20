@@ -48,10 +48,17 @@
     
     //初始化事件列表
     eventWillList = [RORSystemService fetchAllActionDefine:ActionDefineRun];
+    for (int i=0; i<eventWillList.count; i++){
+        Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
+        if (event.triggerProbability.integerValue<0){
+            tiredAction = event;
+        }
+    }
     eventHappenedList = [[NSMutableArray alloc]init];
     eventTimeList = [[NSMutableArray alloc]init];
     eventDisplayList = [[NSMutableArray alloc]init];
     eventDisplayTimeList = [[NSMutableArray alloc]init];
+    eventLocationList = [[NSMutableArray alloc]init];
     
     currentStep = 0;
     eventHappenedCount = 0;

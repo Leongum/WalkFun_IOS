@@ -755,9 +755,9 @@ NSString *const kFTAnimationWasInteractionEnabledKey = @"kFTAnimationWasInteract
     CAKeyframeAnimation *scale = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
     scale.duration = duration;
     scale.values = [NSArray arrayWithObjects:[NSNumber numberWithFloat:1.f],
+                    [NSNumber numberWithFloat:1.3f],
+                    [NSNumber numberWithFloat:.85f],
                     [NSNumber numberWithFloat:1.1f],
-                    [NSNumber numberWithFloat:.95f],
-                    [NSNumber numberWithFloat:1.025f],
                     [NSNumber numberWithFloat:1.f],
                     nil];
     
