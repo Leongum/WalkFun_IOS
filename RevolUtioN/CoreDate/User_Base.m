@@ -19,9 +19,6 @@
 @dynamic password;
 @dynamic nickName;
 @dynamic sex;
-@dynamic age;
-@dynamic weight;
-@dynamic height;
 @dynamic platformInfo;
 @dynamic updateTime;
 
@@ -52,9 +49,6 @@
     self.nickName = [RORDBCommon getStringFromId:[dict valueForKey:@"nickName"]];
     self.userName = [RORDBCommon getStringFromId:[dict valueForKey:@"userName"]];
     self.sex = [RORDBCommon getStringFromId:[dict valueForKey:@"sex"]];
-    self.age = [RORDBCommon getNumberFromId:[dict valueForKey:@"age"]];
-    self.weight = [RORDBCommon getNumberFromId:[dict valueForKey:@"weight"]];
-    self.height = [RORDBCommon getNumberFromId:[dict valueForKey:@"height"]];
     self.platformInfo = [RORDBCommon getStringFromId:[dict valueForKey:@"platformInfo"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
 }
@@ -68,9 +62,6 @@
     [tempDict setValue:self.nickName forKey:@"nickName"];
     [tempDict setValue:self.userName forKey:@"userName"];
     [tempDict setValue:self.sex forKey:@"sex"];
-    [tempDict setValue:self.age forKey:@"age"];
-    [tempDict setValue:self.weight forKey:@"weight"];
-    [tempDict setValue:self.height forKey:@"height"];
     [tempDict setValue:self.platformInfo forKey:@"platformInfo"];
     return tempDict;
 }

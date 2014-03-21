@@ -21,6 +21,8 @@
 @dynamic effectiveRule;
 @dynamic dropPicList;
 @dynamic maxDropNum;
+@dynamic maxLevelLimit;
+@dynamic minLevelLimit;
 
 +(Virtual_Product *) removeAssociateForEntity:(Virtual_Product *)associatedEntity{
     NSManagedObjectContext *context = [RORContextUtils getShareContext];
@@ -43,6 +45,8 @@
     self.effectiveRule = [RORDBCommon getStringFromId:[dict valueForKey:@"effectiveRule"]];
     self.dropPicList = [RORDBCommon getStringFromId:[dict valueForKey:@"dropPicList"]];
     self.maxDropNum = [RORDBCommon getNumberFromId:[dict valueForKey:@"maxDropNum"]];
+    self.maxLevelLimit = [RORDBCommon getNumberFromId:[dict valueForKey:@"maxLevelLimit"]];
+    self.minLevelLimit = [RORDBCommon getNumberFromId:[dict valueForKey:@"minLevelLimit"]];
 }
 
 @end

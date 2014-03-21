@@ -17,7 +17,9 @@
 @synthesize level;
 @synthesize userTitle;
 @synthesize userTitlePic;
-@synthesize lastActiveTime;
+@synthesize power;
+@synthesize fatness;
+@synthesize fight;
 
 -(void)initWithDictionary:(NSDictionary *)dict{
     self.userId = [RORDBCommon getNumberFromId:[dict valueForKey:@"userId"]];
@@ -26,7 +28,9 @@
     self.level = [RORDBCommon getNumberFromId:[dict valueForKey:@"level"]];
     self.userTitle = [RORDBCommon getStringFromId:[dict valueForKey:@"userTitle"]];
     self.userTitlePic = [RORDBCommon getStringFromId:[dict valueForKey:@"userTitlePic"]];
-    self.lastActiveTime = [RORDBCommon getDateFromId:[dict valueForKey:@"lastActiveTime"]];
+    self.power = [RORDBCommon getNumberFromId:[dict valueForKey:@"power"]];
+    self.fatness = [RORDBCommon getNumberFromId:[dict valueForKey:@"fatness"]];
+    self.fight = [RORDBCommon getNumberFromId:[dict valueForKey:@"fight"]];
 }
 
 @end

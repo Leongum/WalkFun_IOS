@@ -16,9 +16,10 @@
 
 +(RORHttpResponse *)getVersionInfo:(NSString *) platform;
 
-+(RORHttpResponse *)getSystemMessage:(NSString *) lastUpdateTime;
-
 +(RORHttpResponse *)getRecommendApp:(NSString *) lastUpdateTime;
 
 +(RORHttpResponse *)getActionDefine:(NSString *) lastUpdateTime;
+
++(RORHttpResponse *)getFightDefine:(NSString *) lastUpdateTime;
+
 @end

@@ -16,12 +16,6 @@
     return httpResponse;
 }
 
-+(RORHttpResponse *)getSystemMessage:(NSString *) lastUpdateTime{
-    NSString *url = [NSString stringWithFormat:SYSTEM_SYSTEM_MESSAGE_URL, lastUpdateTime];
-    RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
-    return httpResponse;
-}
-
 +(RORHttpResponse *)getRecommendApp:(NSString *) lastUpdateTime{
     NSString *url = [NSString stringWithFormat:SYSTEM_RECOMMEND_APP_URL, lastUpdateTime];
     RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
@@ -32,7 +26,12 @@
     NSString *url = [NSString stringWithFormat:SYSTEM_ACTION_DEFINE_URL, lastUpdateTime];
     RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
     return httpResponse;
+}
 
++(RORHttpResponse *)getFightDefine:(NSString *) lastUpdateTime{
+    NSString *url = [NSString stringWithFormat:SYSTEM_FIGHT_DEFINE_URL, lastUpdateTime];
+    RORHttpResponse *httpResponse = [RORHttpClientHandler getRequest:url];
+    return httpResponse;
 }
 
 @end

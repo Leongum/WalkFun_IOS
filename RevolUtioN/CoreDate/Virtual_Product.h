@@ -21,6 +21,8 @@
 @property (nonatomic, retain) NSString *picLink;
 @property (nonatomic, retain) NSString *effectiveRule;
 @property (nonatomic, retain) NSString *dropPicList;
+@property (nonatomic, retain) NSNumber * minLevelLimit;
+@property (nonatomic, retain) NSNumber * maxLevelLimit;
 @property (nonatomic, retain) NSNumber *maxDropNum;
 
 +(Virtual_Product *) removeAssociateForEntity:(Virtual_Product *)associatedEntity;

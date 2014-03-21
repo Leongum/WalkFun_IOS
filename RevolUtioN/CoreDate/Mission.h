@@ -19,11 +19,13 @@
 @property (nonatomic, retain) NSNumber * triggerSteps;
 @property (nonatomic, retain) NSNumber * triggerTimes;
 @property (nonatomic, retain) NSNumber * triggerDistances;
-@property (nonatomic, retain) NSNumber * triggerPropId;
-@property (nonatomic, retain) NSNumber * triggerPropNumbers;
-@property (nonatomic, retain) NSNumber * triggerUserNumbers;
+@property (nonatomic, retain) NSNumber * triggerActionId;
+@property (nonatomic, retain) NSNumber * triggerFightId;
+@property (nonatomic, retain) NSNumber * triggerNumbers;
 @property (nonatomic, retain) NSNumber * goldCoin;
 @property (nonatomic, retain) NSNumber * experience;
+@property (nonatomic, retain) NSNumber * minLevelLimit;
+@property (nonatomic, retain) NSNumber * maxLevelLimit;
 @property (nonatomic, retain) NSDate * updateTime;
 
 +(Mission *) removeAssociateForEntity:(Mission *)associatedEntity;

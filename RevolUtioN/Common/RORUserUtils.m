@@ -176,6 +176,7 @@ static NSDate *syncTime;
     [logoutDict setValue:[self getLastUpdateTime:@"VirtualProductUpdateTime"] forKey:@"VirtualProductUpdateTime"];
     [logoutDict setValue:[self getLastUpdateTime:@"ActionDefineLastUpdateTime"] forKey:@"ActionDefineLastUpdateTime"];
     [logoutDict setValue:[self getLastUpdateTime:@"RecommendLastUpdateTime"] forKey:@"RecommendLastUpdateTime"];
+    [logoutDict setValue:[self getLastUpdateTime:@"FightDefineLastUpdateTime"] forKey:@"FightDefineLastUpdateTime"];
     [logoutDict setValue:[self getDeviceToken] forKey:@"deviceToken"];
     [logoutDict writeToFile:path atomically:YES];
     userId = [NSNumber numberWithInteger:-1];
@@ -242,10 +243,12 @@ static NSDate *syncTime;
         NSString *recommendLastUpdateTime = [RORUserUtils getLastUpdateTime:@"RecommendLastUpdateTime"];
         NSString *productLastUpdateTime = [RORUserUtils getLastUpdateTime:@"VirtualProductUpdateTime"];
         NSString *actionDefineUpdateTime = [RORUserUtils getLastUpdateTime:@"ActionDefineLastUpdateTime"];
+        NSString *fightDefineUpdateTime = [RORUserUtils getLastUpdateTime:@"FightDefineLastUpdateTime"];
         NSTimeInterval missionScape = [version.missionLastUpdateTime timeIntervalSinceDate:[RORUtils getDateFromString:missionLastUpdateTime]];
         NSTimeInterval recommendScape = [version.recommendLastUpdateTime timeIntervalSinceDate:[RORUtils getDateFromString:recommendLastUpdateTime]];
         NSTimeInterval productScape = [version.productLastUpdateTime timeIntervalSinceDate:[RORUtils getDateFromString:productLastUpdateTime]];
         NSTimeInterval actionDefineScape = [version.actionDefineUpdateTime timeIntervalSinceDate:[RORUtils getDateFromString:actionDefineUpdateTime]];
+        NSTimeInterval fightDefineScape = [version.fightDefineUpdateTime timeIntervalSinceDate:[RORUtils getDateFromString:fightDefineUpdateTime]];
         if(missionScape > 0)
         {
             //sync missions
@@ -267,6 +270,11 @@ static NSDate *syncTime;
             //sync action define
             [RORSystemService syncActionDefine];
             [RORVirtualProductService syncAllEventSounds];
+        }
+        if(fightDefineScape > 0)
+        {
+            //sync fight define
+            [RORSystemService syncFightDefine];
         }
         [self saveLastUpdateTimeUseLocalTime:@"lastSyncSystemDataTime"];
     }

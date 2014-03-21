@@ -143,7 +143,7 @@
 
 -(NSNumber *)calculateFatness{
     user = [RORUserServices fetchUser:[RORUserUtils getUserId]];
-    double health = user.userDetail.health.integerValue;
+    double health = 100;
     double stepsPerFat = (100.f-health)/100.f*500 + 750;
     return [NSNumber numberWithDouble:-currentStep / stepsPerFat];
 }

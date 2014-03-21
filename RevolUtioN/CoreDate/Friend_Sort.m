@@ -11,13 +11,15 @@
 
 @implementation Friend_Sort
 
-@dynamic totalDistance;
 @dynamic userTitle;
 @dynamic userTitlePic;
 @dynamic level;
 @dynamic sex;
 @dynamic friendName;
 @dynamic friendId;
+@dynamic power;
+@dynamic fatness;
+@dynamic fight;
 
 +(Friend_Sort *) removeAssociateForEntity:(Friend_Sort *)associatedEntity{
     NSManagedObjectContext *context = [RORContextUtils getShareContext];
@@ -36,7 +38,9 @@
     self.level = [RORDBCommon getNumberFromId:[dict valueForKey:@"level"]];
     self.userTitle = [RORDBCommon getStringFromId:[dict valueForKey:@"userTitle"]];
     self.userTitlePic = [RORDBCommon getStringFromId:[dict valueForKey:@"userTitlePic"]];
-    self.totalDistance = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalDistance"]];
+    self.power = [RORDBCommon getNumberFromId:[dict valueForKey:@"power"]];
+    self.fatness = [RORDBCommon getNumberFromId:[dict valueForKey:@"fatness"]];
+    self.fight = [RORDBCommon getNumberFromId:[dict valueForKey:@"fight"]];
 }
 
 @end

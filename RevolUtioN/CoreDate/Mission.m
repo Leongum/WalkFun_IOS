@@ -19,11 +19,13 @@
 @dynamic triggerSteps;
 @dynamic triggerTimes;
 @dynamic triggerDistances;
-@dynamic triggerPropId;
-@dynamic triggerPropNumbers;
-@dynamic triggerUserNumbers;
+@dynamic triggerActionId;
+@dynamic triggerFightId;
+@dynamic triggerNumbers;
 @dynamic goldCoin;
 @dynamic experience;
+@dynamic maxLevelLimit;
+@dynamic minLevelLimit;
 @dynamic updateTime;
 
 +(Mission *) removeAssociateForEntity:(Mission *)associatedEntity{
@@ -45,11 +47,13 @@
     self.triggerSteps = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerSteps"]];
     self.triggerTimes = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerTimes"]];
     self.triggerDistances = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerDistances"]];
-    self.triggerPropId = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerPropId"]];
-    self.triggerPropNumbers = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerPropNumbers"]];
-    self.triggerUserNumbers = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerUserNumbers"]];
+    self.triggerActionId = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerActionId"]];
+    self.triggerFightId = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerFightId"]];
+    self.triggerNumbers = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerNumbers"]];
     self.goldCoin = [RORDBCommon getNumberFromId:[dict valueForKey:@"goldCoin"]];
     self.experience = [RORDBCommon getNumberFromId:[dict valueForKey:@"experience"]];
+    self.maxLevelLimit = [RORDBCommon getNumberFromId:[dict valueForKey:@"maxLevelLimit"]];
+    self.minLevelLimit = [RORDBCommon getNumberFromId:[dict valueForKey:@"minLevelLimit"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
 }
 @end

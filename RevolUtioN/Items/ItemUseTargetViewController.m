@@ -93,7 +93,7 @@
         if (todayMission){
             if (todayMission.missionTypeId.integerValue == MissionTypeUseItem &&
                 userId.integerValue != [RORUserUtils getUserId].integerValue &&
-                action.actionId.integerValue == todayMission.triggerPropId.integerValue){
+                action.actionId.integerValue == todayMission.triggerActionId.integerValue){
                 NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
                 NSNumber *missionUseItemQuantity = [userInfoList valueForKey:@"missionUseItemQuantity"];
                 int q = missionUseItemQuantity.integerValue;

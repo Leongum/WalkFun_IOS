@@ -16,7 +16,9 @@
 @property (nonatomic, retain) NSNumber * level;
 @property (nonatomic, retain) NSString * userTitle;
 @property (nonatomic, retain) NSString * userTitlePic;
-@property (nonatomic, retain) NSDate * lastActiveTime;
+@property (nonatomic, retain) NSNumber * fatness;
+@property (nonatomic, retain) NSNumber * power;
+@property (nonatomic, retain) NSNumber * fight;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 

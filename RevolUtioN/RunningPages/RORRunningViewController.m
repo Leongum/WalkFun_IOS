@@ -173,7 +173,7 @@
                 break;
             }
             case MissionTypePickItem:{
-                [todayMissionDict setObject:todayMission.triggerPropNumbers forKey:todayMission.triggerPropId];
+                [todayMissionDict setObject:todayMission.triggerNumbers forKey:todayMission.triggerActionId];
                 break;
             }
             default:
@@ -583,9 +583,9 @@
         int x = arc4random() % 1000000;
         double roll = ((double)x)/10000.f;
         double delta = 1;
-        if ([event.actionName rangeOfString:@"金币"].location != NSNotFound) {
-            delta = (user.userDetail.goldCoinSpeed.doubleValue + 1);
-        }
+//        if ([event.actionName rangeOfString:@"金币"].location != NSNotFound) {
+//            delta = (user.userDetail.goldCoinSpeed.doubleValue + 1);
+//        }
         //debug
         if (roll < event.triggerProbability.doubleValue *delta){
             [self eventDidHappened:event];
@@ -595,7 +595,7 @@
 }
 
 -(void)eventDidHappened:(Action_Define *)event{
-    if (event.actionId.integerValue == todayMission.triggerPropId.integerValue){
+    if (event.actionId.integerValue == todayMission.triggerActionId.integerValue){
         cMissionItemQuantity++;
     }
     
