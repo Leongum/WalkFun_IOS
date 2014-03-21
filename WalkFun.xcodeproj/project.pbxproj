@@ -14,6 +14,7 @@
 		0F07AC4217E98FA00009C8A8 /* switch_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F07AC4017E98FA00009C8A8 /* switch_off.png */; };
 		0F07AC4317E98FA00009C8A8 /* switch_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F07AC4117E98FA00009C8A8 /* switch_on.png */; };
 		0F0D099818DBEDB7000C8962 /* Fight_Define.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D099718DBEDB7000C8962 /* Fight_Define.m */; };
+		0F0D099B18DC290E000C8962 /* Walk_Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D099A18DC290E000C8962 /* Walk_Event.m */; };
 		0F19301C1884DEAE00E74BB1 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F19301B1884DEAE00E74BB1 /* ImageIO.framework */; };
 		0F19301E1884DED400E74BB1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F19301D1884DED400E74BB1 /* AdSupport.framework */; };
 		0F1930201884DEDF00E74BB1 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F19301F1884DEDF00E74BB1 /* CoreFoundation.framework */; };
@@ -384,6 +385,8 @@
 		0F07AC4117E98FA00009C8A8 /* switch_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch_on.png; path = bg/switch_on.png; sourceTree = "<group>"; };
 		0F0D099618DBEDB7000C8962 /* Fight_Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fight_Define.h; path = CoreDate/Fight_Define.h; sourceTree = "<group>"; };
 		0F0D099718DBEDB7000C8962 /* Fight_Define.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Fight_Define.m; path = CoreDate/Fight_Define.m; sourceTree = "<group>"; };
+		0F0D099918DC290D000C8962 /* Walk_Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Walk_Event.h; path = CoreDate/Walk_Event.h; sourceTree = "<group>"; };
+		0F0D099A18DC290E000C8962 /* Walk_Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Walk_Event.m; path = CoreDate/Walk_Event.m; sourceTree = "<group>"; };
 		0F19301B1884DEAE00E74BB1 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0F19301D1884DED400E74BB1 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		0F19301F1884DEDF00E74BB1 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -1437,6 +1440,8 @@
 				0F282F9418B10CF7003F44E8 /* Action_Define.m */,
 				0F0D099618DBEDB7000C8962 /* Fight_Define.h */,
 				0F0D099718DBEDB7000C8962 /* Fight_Define.m */,
+				0F0D099918DC290D000C8962 /* Walk_Event.h */,
+				0F0D099A18DC290E000C8962 /* Walk_Event.m */,
 				0FA75196189279CB0037342E /* Friend.h */,
 				0FA75197189279CB0037342E /* Friend.m */,
 				0FDE82F5189383160082B1BF /* Friend_Sort.h */,
@@ -2287,6 +2292,7 @@
 				0FA751C7189279CB0037342E /* Friend.m in Sources */,
 				0FA7515B1892796E0037342E /* RORCheckBox.m in Sources */,
 				30D2DF0F188003D40093A426 /* RORRecommendViewController.m in Sources */,
+				0F0D099B18DC290E000C8962 /* Walk_Event.m in Sources */,
 				0FA751521892791A0037342E /* RORUserServices.m in Sources */,
 				0FA7518C189279A90037342E /* RORContextUtils.m in Sources */,
 				30984937186207780079E236 /* RORIntroCoverView.m in Sources */,
