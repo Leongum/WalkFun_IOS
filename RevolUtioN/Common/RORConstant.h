@@ -43,9 +43,9 @@
 
 // --- system api ---
 #define SYSTEM_VERSION_URL [SERVICE_HOST stringByAppendingString:@"/system/version/get/%@"]
-#define SYSTEM_SYSTEM_MESSAGE_URL [SERVICE_HOST stringByAppendingString:@"/system/message/get/%@"]
 #define SYSTEM_RECOMMEND_APP_URL [SERVICE_HOST stringByAppendingString:@"/system/recommend/get/%@"]
 #define SYSTEM_ACTION_DEFINE_URL [SERVICE_HOST stringByAppendingString:@"/system/actionDefine/get/%@"]
+#define SYSTEM_FIGHT_DEFINE_URL [SERVICE_HOST stringByAppendingString:@"/system/fightDefine/get/%@"]
 
 // --- mission api ---
 #define MISSION_GET_URL [SERVICE_HOST stringByAppendingString:@"/missions/mission/get?lastUpdateTime=%@"]
@@ -84,14 +84,21 @@
 #define COLOR_MOSS [UIColor colorWithRed:0 green:128.f/255.f blue:64.f/255.f alpha:1]
 #endif
 
-#define ACTION_RULE_PROP_YES @"PY"
-#define ACTION_RULE_PROP_NO @"PN"
-#define ACTION_RULE_HEALTH @"H"
-#define ACTION_RULE_FAT @"F"
-#define ACTION_RULE_RANDOM @"R"
-#define ACTION_RULE_MONEY @"M"
-#define ACTION_RULE_SHOW_DROP @"D"
-#define ACTION_RULE_HEAD_BAG @"B"
+#define RULE_Drop_Down @"D"
+#define RULE_Fatness @"F"
+#define RULE_Fight_Win @"FW"
+#define RULE_Fight_Loose @"FL"
+#define RULE_Flower_Pot @"FP"
+#define RULE_Fight_Add @"FA"
+#define RULE_Fight_Percent @"FPE"
+#define RULE_Physical_Power_Add @"PPA"
+#define RULE_Physical_Power_Percent @"PPP"
+#define RULE_Prop_Yes @"PY"
+#define RULE_Prop_No @"PN"
+#define RULE_Show_Position @"SP"
+#define RULE_Money @"M"
+#define RULE_Type_Action @"TA"
+#define RULE_Type_Fight @"TF"
 
 typedef enum {MissionTypeStep = 0, MissionTypePickItem = 1, MissionTypeUseItem = 2} MissionTypeEnum;
 typedef enum {MissionStatusDone = 0, MissionStatusUndone = 1} MissionStatusEnum;

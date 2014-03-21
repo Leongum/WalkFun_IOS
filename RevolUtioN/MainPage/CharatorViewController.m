@@ -83,7 +83,7 @@
 
 -(void)displayProgresses{
     [fatPV setProgress:userBase.userDetail.fatness.doubleValue/100.f];
-    [healthPV setProgress:userBase.userDetail.health.doubleValue/100.f];
+    [healthPV setProgress:100/100.f];
 }
 
 -(void)displayCharator{
@@ -131,7 +131,7 @@
     } else {
         //如果是石头之类的
         NSDictionary *effectDict = [RORUtils explainActionEffetiveRule:item.effectiveRule];
-        if ([[effectDict allKeys] containsObject:ACTION_RULE_SHOW_DROP])
+        if ([[effectDict allKeys] containsObject:RULE_Drop_Down])
             for (int i=0; i<quantity.integerValue; i++){
                 [self makeNewItemImageView:item];
             }

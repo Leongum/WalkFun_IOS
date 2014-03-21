@@ -88,7 +88,7 @@
         if (todayMission.missionTypeId.integerValue == MissionTypeUseItem){
             if (missionUseItemQuantity.integerValue<0){
                 //接到使用道具的任务，初始化missionUseItemQuantity为总次数
-                [userInfoList setObject:todayMission.triggerUserNumbers forKey:@"missionUseItemQuantity"];
+                [userInfoList setObject:todayMission.triggerNumbers forKey:@"missionUseItemQuantity"];
                 [RORUserUtils writeToUserInfoPList:userInfoList];
             } else {
                 //如果使用道具的任务完成了
@@ -197,9 +197,9 @@
     NSNumber *userLevel = [userInfoList valueForKey:@"userLevel"];
     
     if (!userLevel){
-        NSDictionary *saveDict = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithDouble:userBase.userDetail.goldCoinSpeed.doubleValue * 2.5], @"extraGold", userBase.userDetail.level, @"userLevel", nil];
-        [RORUserUtils writeToUserInfoPList:saveDict];
-        return;
+//        NSDictionary *saveDict = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithDouble:userBase.userDetail.goldCoinSpeed.doubleValue * 2.5], @"extraGold", userBase.userDetail.level, @"userLevel", nil];
+//        [RORUserUtils writeToUserInfoPList:saveDict];
+//        return;
     }
     if (userLevel.integerValue<userBase.userDetail.level.integerValue){
         [self performLevelUp];

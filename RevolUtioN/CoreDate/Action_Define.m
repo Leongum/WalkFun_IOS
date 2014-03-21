@@ -21,6 +21,8 @@
 @dynamic actionId;
 @dynamic triggerProbability;
 @dynamic soundLink;
+@dynamic maxLevelLimit;
+@dynamic minLevelLimit;
 @dynamic updateTime;
 
 +(Action_Define *) removeAssociateForEntity:(Action_Define *)associatedEntity{
@@ -44,6 +46,8 @@
     self.effectiveRule = [RORDBCommon getStringFromId:[dict valueForKey:@"effectiveRule"]];
     self.triggerProbability = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerProbability"]];
     self.soundLink = [RORDBCommon getStringFromId:[dict valueForKey:@"soundLink"]];
+    self.minLevelLimit = [RORDBCommon getNumberFromId:[dict valueForKey:@"minLevelLimit"]];
+    self.maxLevelLimit = [RORDBCommon getNumberFromId:[dict valueForKey:@"maxLevelLimit"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
 }
 

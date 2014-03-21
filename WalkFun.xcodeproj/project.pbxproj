@@ -13,6 +13,7 @@
 		0F07A2C418B08131003774B9 /* RORVirtualProductClientHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F07A2C318B08131003774B9 /* RORVirtualProductClientHandler.m */; };
 		0F07AC4217E98FA00009C8A8 /* switch_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F07AC4017E98FA00009C8A8 /* switch_off.png */; };
 		0F07AC4317E98FA00009C8A8 /* switch_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F07AC4117E98FA00009C8A8 /* switch_on.png */; };
+		0F0D099818DBEDB7000C8962 /* Fight_Define.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0D099718DBEDB7000C8962 /* Fight_Define.m */; };
 		0F19301C1884DEAE00E74BB1 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F19301B1884DEAE00E74BB1 /* ImageIO.framework */; };
 		0F19301E1884DED400E74BB1 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F19301D1884DED400E74BB1 /* AdSupport.framework */; };
 		0F1930201884DEDF00E74BB1 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F19301F1884DEDF00E74BB1 /* CoreFoundation.framework */; };
@@ -78,7 +79,6 @@
 		0FA751CA189279CB0037342E /* Mission.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7519D189279CB0037342E /* Mission.m */; };
 		0FA751D2189279CB0037342E /* Recommend_App.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA751AD189279CB0037342E /* Recommend_App.m */; };
 		0FA751D4189279CB0037342E /* RORDBCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA751B3189279CB0037342E /* RORDBCommon.m */; };
-		0FA751D6189279CB0037342E /* System_Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA751B7189279CB0037342E /* System_Message.m */; };
 		0FA751D8189279CB0037342E /* User_Base.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA751BB189279CB0037342E /* User_Base.m */; };
 		0FA751DB189279CB0037342E /* User_Running_History.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA751C1189279CB0037342E /* User_Running_History.m */; };
 		0FA751DD189279CB0037342E /* Version_Control.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA751C5189279CB0037342E /* Version_Control.m */; };
@@ -388,6 +388,8 @@
 		0F07A2C318B08131003774B9 /* RORVirtualProductClientHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORVirtualProductClientHandler.m; path = HttpClient/RORVirtualProductClientHandler.m; sourceTree = "<group>"; };
 		0F07AC4017E98FA00009C8A8 /* switch_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch_off.png; path = bg/switch_off.png; sourceTree = "<group>"; };
 		0F07AC4117E98FA00009C8A8 /* switch_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch_on.png; path = bg/switch_on.png; sourceTree = "<group>"; };
+		0F0D099618DBEDB7000C8962 /* Fight_Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fight_Define.h; path = CoreDate/Fight_Define.h; sourceTree = "<group>"; };
+		0F0D099718DBEDB7000C8962 /* Fight_Define.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Fight_Define.m; path = CoreDate/Fight_Define.m; sourceTree = "<group>"; };
 		0F19301B1884DEAE00E74BB1 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0F19301D1884DED400E74BB1 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		0F19301F1884DEDF00E74BB1 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -504,8 +506,6 @@
 		0FA751AD189279CB0037342E /* Recommend_App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Recommend_App.m; path = CoreDate/Recommend_App.m; sourceTree = "<group>"; };
 		0FA751B2189279CB0037342E /* RORDBCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORDBCommon.h; path = CoreDate/RORDBCommon.h; sourceTree = "<group>"; };
 		0FA751B3189279CB0037342E /* RORDBCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORDBCommon.m; path = CoreDate/RORDBCommon.m; sourceTree = "<group>"; };
-		0FA751B6189279CB0037342E /* System_Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = System_Message.h; path = CoreDate/System_Message.h; sourceTree = "<group>"; };
-		0FA751B7189279CB0037342E /* System_Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = System_Message.m; path = CoreDate/System_Message.m; sourceTree = "<group>"; };
 		0FA751BA189279CB0037342E /* User_Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User_Base.h; path = CoreDate/User_Base.h; sourceTree = "<group>"; };
 		0FA751BB189279CB0037342E /* User_Base.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User_Base.m; path = CoreDate/User_Base.m; sourceTree = "<group>"; };
 		0FA751C0189279CB0037342E /* User_Running_History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User_Running_History.h; path = CoreDate/User_Running_History.h; sourceTree = "<group>"; };
@@ -1449,6 +1449,8 @@
 				0FDE82F3189383160082B1BF /* Action.m */,
 				0F282F9318B10CF7003F44E8 /* Action_Define.h */,
 				0F282F9418B10CF7003F44E8 /* Action_Define.m */,
+				0F0D099618DBEDB7000C8962 /* Fight_Define.h */,
+				0F0D099718DBEDB7000C8962 /* Fight_Define.m */,
 				0FA75196189279CB0037342E /* Friend.h */,
 				0FA75197189279CB0037342E /* Friend.m */,
 				0FDE82F5189383160082B1BF /* Friend_Sort.h */,
@@ -1457,8 +1459,6 @@
 				0FDE8302189393AD0082B1BF /* Search_Friend.m */,
 				0FA7519C189279CB0037342E /* Mission.h */,
 				0FA7519D189279CB0037342E /* Mission.m */,
-				0FA751B6189279CB0037342E /* System_Message.h */,
-				0FA751B7189279CB0037342E /* System_Message.m */,
 				0FA751BA189279CB0037342E /* User_Base.h */,
 				0FA751BB189279CB0037342E /* User_Base.m */,
 				0FDE82FE189387BB0082B1BF /* User_Detail.h */,
@@ -2309,7 +2309,6 @@
 				0FDE82CC18927B4E0082B1BF /* RORUserClientHandler.m in Sources */,
 				0FA7514C1892791A0037342E /* RORMissionServices.m in Sources */,
 				0FA7518D189279A90037342E /* RORHttpClientHandler.m in Sources */,
-				0FA751D6189279CB0037342E /* System_Message.m in Sources */,
 				3022DFAC18D96F4300F3A9D5 /* KSLabel.m in Sources */,
 				0FA751ED189279E70037342E /* RORMapViewController.m in Sources */,
 				0FA751C7189279CB0037342E /* Friend.m in Sources */,
@@ -2341,6 +2340,7 @@
 				30621D4817E45EB70063A007 /* RORPlaySound.m in Sources */,
 				0FA751711892798F0037342E /* RORMapAnnotation.m in Sources */,
 				308C1666186EF1FB005B0198 /* RORPaperSegmentControl.m in Sources */,
+				0F0D099818DBEDB7000C8962 /* Fight_Define.m in Sources */,
 				30E01E7E18B09D5A005BF080 /* ItemQuantityPicker.m in Sources */,
 				0FA7514E1892791A0037342E /* RORRunHistoryServices.m in Sources */,
 				307C860217E6F445007C1DE5 /* RORSegmentControl.m in Sources */,

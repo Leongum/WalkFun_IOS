@@ -19,9 +19,6 @@
 @property (nonatomic, retain) NSString * password;
 @property (nonatomic, retain) NSString * nickName;
 @property (nonatomic, retain) NSString * sex;
-@property (nonatomic, retain) NSNumber * age;
-@property (nonatomic, retain) NSNumber * weight;
-@property (nonatomic, retain) NSNumber * height;
 @property (nonatomic, retain) NSString * platformInfo;
 @property (nonatomic, retain) NSDate * updateTime;
 

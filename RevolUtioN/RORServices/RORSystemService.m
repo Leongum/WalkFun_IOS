@@ -36,6 +36,64 @@
 }
 
 //open out
++ (BOOL)syncFightDefine{
+    NSError *error = nil;
+    NSManagedObjectContext *context = [RORContextUtils getShareContext];
+    NSString *lastUpdateTime = [RORUserUtils getLastUpdateTime:@"FightDefineLastUpdateTime"];
+    
+    RORHttpResponse *httpResponse =[RORSystemClientHandler getFightDefine:lastUpdateTime];
+    
+    if ([httpResponse responseStatus]  == 200){
+        NSArray *fightDefineList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
+        for (NSDictionary *fightDict in fightDefineList){
+            NSNumber *fightId = [fightDict valueForKey:@"id"];
+            Fight_Define *fightEntity = [self fetchFightDefineInfo:fightId];
+            if(fightEntity == nil)
+                fightEntity = (Fight_Define *)[NSEntityDescription insertNewObjectForEntityForName:@"Fight_Define" inManagedObjectContext:context];
+            [fightEntity initWithDictionary:fightDict];
+        }
+        
+        [RORContextUtils saveContext];
+        [RORUserUtils saveLastUpdateTime:@"FightDefineLastUpdateTime"];
+    } else {
+        NSLog(@"sync with host error: can't get sync fight define list. Status Code: %d", [httpResponse responseStatus]);
+        return NO;
+    }
+    return YES;
+}
+
++ (Fight_Define *)fetchFightDefineInfo:(NSNumber *) appId {
+    NSString *table=@"Fight_Define";
+    NSString *query = @"fightId = %@";
+    NSArray *params = [NSArray arrayWithObjects:appId, nil];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    if (fetchObject == nil || [fetchObject count] == 0) {
+        return nil;
+    }
+    return  (Fight_Define *) [fetchObject objectAtIndex:0];
+}
+
+//open out
++ (NSArray *)fetchFightDefineByLevel:(NSNumber *) level{
+    NSString *table=@"Fight_Define";
+    NSString *query = @"maxLevelLimit <= %@ and minLevelLimit >= %@ and inUsing = 0";
+    NSArray *params = [NSArray arrayWithObjects:level,level, nil];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"monsterMinFight" ascending:YES];
+    NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+    if (fetchObject == nil || [fetchObject count] == 0) {
+        return nil;
+    }
+    NSMutableArray *fightDefineList = [[NSMutableArray alloc] init];
+    for (Fight_Define *fightDefine in fetchObject) {
+        Fight_Define *newFight = [Fight_Define removeAssociateForEntity:fightDefine];
+        [fightDefineList addObject:newFight];
+    }
+    return [fightDefineList copy];
+}
+
+
+//open out
 + (BOOL)syncRecommendApp{
     NSError *error = nil;
     NSManagedObjectContext *context = [RORContextUtils getShareContext];
@@ -259,7 +317,7 @@
         [propgetString appendString:[NSString stringWithFormat:@"%@ x%@ ",item.productName, num]];
     }
     [propgetString appendString:@"|"];
-    [propgetString appendString:[NSString stringWithFormat:@"%@",[attrDict objectForKey:ACTION_RULE_MONEY]]];
+    [propgetString appendString:[NSString stringWithFormat:@"%@",[attrDict objectForKey:RULE_Money]]];
     
     return propgetString;
 }

@@ -119,8 +119,6 @@
     
     NSMutableDictionary *settingDict = [RORUserUtils getUserSettingsPList];
     [settingDict setValue:user.sex forKey:@"sex"];
-    [settingDict setValue:user.weight forKey:@"weight"];
-    [settingDict setValue:user.height forKey:@"height"];
     [RORUserUtils writeToUserSettingsPList:settingDict];
 }
 

@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSDate * systemTime;
 @property (nonatomic, retain) NSNumber * version;
 @property (nonatomic, retain) NSDate * missionLastUpdateTime;
-@property (nonatomic, retain) NSDate * messageLastUpdateTime;
+@property (nonatomic, retain) NSDate * fightDefineUpdateTime;
 @property (nonatomic, retain) NSDate *recommendLastUpdateTime;
 @property (nonatomic, retain) NSDate *productLastUpdateTime;
 @property (nonatomic, retain) NSDate *actionDefineUpdateTime;

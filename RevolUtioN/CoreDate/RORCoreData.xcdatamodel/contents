@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Action" representedClassName="Action" syncable="YES">
         <attribute name="actionFromId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="actionFromName" optional="YES" attributeType="String" syncable="YES"/>
@@ -18,9 +18,31 @@
         <attribute name="actionType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="effectiveRule" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="inUsing" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="maxLevelLimit" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="minLevelLimit" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="soundLink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="triggerProbability" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="Fight_Define" representedClassName="Fight_Define" syncable="YES">
+        <attribute name="baseExperience" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="baseGold" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="basePowerConsume" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fightId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="fightLoose" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fightName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fightWin" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="inUsing" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="maxLevelLimit" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="minLevelLimit" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="monsterLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="monsterMaxFight" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="monsterMinFight" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="monsterName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="triggerProbability" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="winGot" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="winGotRule" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Friend" representedClassName="Friend" syncable="YES">
         <attribute name="addTime" optional="YES" attributeType="Date" syncable="YES"/>
@@ -31,9 +53,12 @@
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Friend_Sort" representedClassName="Friend_Sort" syncable="YES">
+        <attribute name="fatness" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fight" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="friendId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="friendName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="power" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="sex" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalDistance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="userTitle" optional="YES" attributeType="String" syncable="YES"/>
@@ -42,18 +67,20 @@
     <entity name="Mission" representedClassName="Mission" syncable="YES">
         <attribute name="experience" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="goldCoin" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="maxLevelLimit" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="minLevelLimit" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="missionDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="missionFlag" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="missionId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="missionName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="missionRule" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="missionTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="triggerActionId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="triggerDistances" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="triggerPropId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="triggerPropNumbers" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="triggerFightId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="triggerNumbers" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="triggerSteps" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="triggerTimes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="triggerUserNumbers" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <entity name="Recommend_App" representedClassName="Recommend_App" syncable="YES">
@@ -66,16 +93,8 @@
         <attribute name="sequence" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
-    <entity name="System_Message" representedClassName="System_Message" syncable="YES">
-        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="messageId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="rule" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
-    </entity>
     <entity name="User_Base" representedClassName="User_Base" syncable="YES">
-        <attribute name="age" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="deviceId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="height" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="nickName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="platformInfo" optional="YES" attributeType="String" syncable="YES"/>
@@ -84,20 +103,18 @@
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <entity name="User_Detail" representedClassName="User_Detail" syncable="YES">
-        <attribute name="currentCombo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="experience" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="experienceSpeed" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="fatness" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fight" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fightPlus" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="goldCoin" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="goldCoinSpeed" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="health" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="maxCombo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="missionCombo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="picId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="power" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="powerPlus" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="propHaving" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalActiveTimes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="totalCarlorie" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -105,7 +122,6 @@
         <attribute name="totalSteps" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="totalWalkingTimes" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="userFatDesc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="userTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userTitlePic" optional="YES" attributeType="String" syncable="YES"/>
@@ -164,6 +180,8 @@
         <attribute name="dropPicList" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="effectiveRule" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="maxDropNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="maxLevelLimit" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="minLevelLimit" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="picLink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="productDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="productId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -172,18 +190,18 @@
         <attribute name="virtualPrice" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Action" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Action_Define" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Friend" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Friend_Sort" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Mission" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Recommend_App" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="System_Message" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="User_Base" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="User_Detail" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="User_Mission_History" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="User_Prop" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="User_Running_History" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Virtual_Product" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Action" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="Action_Define" positionX="0" positionY="0" width="128" height="238"/>
+        <element name="Friend" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="Friend_Sort" positionX="0" positionY="0" width="128" height="195"/>
+        <element name="Mission" positionX="0" positionY="0" width="128" height="298"/>
+        <element name="Recommend_App" positionX="0" positionY="0" width="128" height="165"/>
+        <element name="User_Base" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="User_Detail" positionX="0" positionY="0" width="128" height="343"/>
+        <element name="User_Mission_History" positionX="0" positionY="0" width="128" height="210"/>
+        <element name="User_Prop" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="User_Running_History" positionX="0" positionY="0" width="128" height="450"/>
+        <element name="Virtual_Product" positionX="0" positionY="0" width="128" height="225"/>
+        <element name="Fight_Define" positionX="0" positionY="153" width="128" height="313"/>
     </elements>
 </model>

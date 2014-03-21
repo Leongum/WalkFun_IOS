@@ -395,11 +395,11 @@
             for (int i = 0; i< [ruleArray count]; i++)
             {
                 NSArray *ruleDetails = [(NSString *)[ruleArray objectAtIndex:i] componentsSeparatedByString:@","];
-                if(ruleDetails != nil && [ruleDetails count] == 4){
+                if(ruleDetails != nil && [ruleDetails count] >= 3){
                     NSString *productId = (NSString *)[ruleDetails objectAtIndex:0];
-                    NSNumber *numb = (NSNumber *)[ruleDetails objectAtIndex:2];
-                    NSString *propFlag = (NSString *)[ruleDetails objectAtIndex:3];
-                    if([propFlag isEqualToString:ACTION_RULE_PROP_YES]){
+                    NSNumber *numb = (NSNumber *)[ruleDetails objectAtIndex:1];
+                    NSString *propFlag = (NSString *)[ruleDetails objectAtIndex:2];
+                    if([propFlag isEqualToString:RULE_Prop_Yes]){
                         [vProductIds setValue:numb forKey:productId];
                     }
                 }

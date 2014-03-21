@@ -22,6 +22,8 @@
 @property (nonatomic, retain) NSString * effectiveRule;
 @property (nonatomic, retain) NSNumber * actionId;
 @property (nonatomic, retain) NSNumber * triggerProbability;
+@property (nonatomic, retain) NSNumber * minLevelLimit;
+@property (nonatomic, retain) NSNumber * maxLevelLimit;
 @property (nonatomic, retain) NSDate * updateTime;
 
 +(Action_Define *) removeAssociateForEntity:(Action_Define *)associatedEntity;

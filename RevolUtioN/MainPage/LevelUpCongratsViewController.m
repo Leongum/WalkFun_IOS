@@ -96,11 +96,11 @@
     
     userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
     
-    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
-    NSNumber *userExtraGold = [userInfoList valueForKey:@"extraGold"];
-    [self inputOldGold:userExtraGold.doubleValue NewGold:2.5*userBase.userDetail.goldCoinSpeed.doubleValue andLevel:userBase.userDetail.level.integerValue];
-    NSDictionary *saveDict = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithDouble:userBase.userDetail.goldCoinSpeed.doubleValue*2.5], @"extraGold", userBase.userDetail.level, @"userLevel", nil];
-    [RORUserUtils writeToUserInfoPList:saveDict];
+//    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+//    NSNumber *userExtraGold = [userInfoList valueForKey:@"extraGold"];
+//    [self inputOldGold:userExtraGold.doubleValue NewGold:2.5*userBase.userDetail.goldCoinSpeed.doubleValue andLevel:userBase.userDetail.level.integerValue];
+//    NSDictionary *saveDict = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithDouble:userBase.userDetail.goldCoinSpeed.doubleValue*2.5], @"extraGold", userBase.userDetail.level, @"userLevel", nil];
+//    [RORUserUtils writeToUserInfoPList:saveDict];
 }
 
 

@@ -11,8 +11,8 @@
 #import "RORHttpResponse.h"
 #import "RORSystemClientHandler.h"
 #import "Version_Control.h"
-#import "System_Message.h"
 #import "Action_Define.h"
+#import "Fight_Define.h"
 #import "RORContextUtils.h"
 #import "Recommend_App.h"
 #import "RORUtils.h"
@@ -22,6 +22,12 @@
 
 //同步服务器版本信息。
 +(Version_Control *)syncVersion:(NSString *)platform;
+
+//同步战斗信息
++(BOOL)syncFightDefine;
+
+//获取fight 战斗 根据用户的等级
++(NSArray *)fetchFightDefineByLevel:(NSNumber *) level;
 
 //同步推荐app信息
 +(BOOL)syncRecommendApp;
