@@ -587,7 +587,7 @@
             delta = (user.userDetail.goldCoinSpeed.doubleValue + 1);
         }
         //debug
-        if (roll < event.triggerProbability.doubleValue *delta*10){
+        if (roll < event.triggerProbability.doubleValue *delta){
             [self eventDidHappened:event];
             return;
         }

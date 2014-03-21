@@ -346,9 +346,41 @@
 }
 
 - (IBAction)closeDailyMissionAction:(id)sender {
-    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"放弃任务" message:@"确定放弃今天的任务吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    [confirmView show];
-    confirmView = nil;
+    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"放弃任务" andMessage:@"确定放弃今天的任务吗？"];
+    [alertView addButtonWithTitle:@"取消"
+                             type:SIAlertViewButtonTypeCancel
+                          handler:^(SIAlertView *alertView) {
+                              NSLog(@"Cancel Clicked");
+                          }];
+    [alertView addButtonWithTitle:@"确定"
+                             type:SIAlertViewButtonTypeDefault
+                          handler:^(SIAlertView *alertView) {
+                              NSLog(@"OK Clicked");
+                              [self cancelMission];
+                          }];
+//    alertView.titleColor = [UIColor blackColor];
+//    alertView.cornerRadius = 10;
+//    alertView.buttonFont = [UIFont boldSystemFontOfSize:15];
+    alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
+    
+    alertView.willShowHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, willShowHandler2", alertView);
+    };
+    alertView.didShowHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, didShowHandler2", alertView);
+    };
+    alertView.willDismissHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, willDismissHandler2", alertView);
+    };
+    alertView.didDismissHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, didDismissHandler2", alertView);
+    };
+    
+    [alertView show];
+    
+//    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"放弃任务" message:@"确定放弃今天的任务吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+//    [confirmView show];
+//    confirmView = nil;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

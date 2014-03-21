@@ -46,10 +46,37 @@
 }
 
 - (IBAction)use2Self:(id)sender {
-    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"选择目标" message:@"确定对【自己】使用吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    [confirmView show];
-    confirmView = nil;
     toSelf = YES;
+
+    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"选择目标" andMessage:@"确定对【自己】使用吗？"];
+    [alertView addButtonWithTitle:@"取消"
+                             type:SIAlertViewButtonTypeCancel
+                          handler:^(SIAlertView *alertView) {
+                          }];
+    [alertView addButtonWithTitle:@"确定"
+                             type:SIAlertViewButtonTypeDefault
+                          handler:^(SIAlertView *alertView) {
+                              if (toSelf)
+                                  [self useItemTo:[RORUserUtils getUserId]];
+                              else
+                                  [self useItemTo:selectedFriend.friendId];
+                          }];
+    alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
+    
+    alertView.willShowHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, willShowHandler2", alertView);
+    };
+    alertView.didShowHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, didShowHandler2", alertView);
+    };
+    alertView.willDismissHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, willDismissHandler2", alertView);
+    };
+    alertView.didDismissHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, didDismissHandler2", alertView);
+    };
+    
+    [alertView show];
 }
 
 -(void)useItemTo:(NSNumber *)userId{
@@ -113,10 +140,36 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Friend *thisFriend = [contentList objectAtIndex:indexPath.row];
     selectedFriend = thisFriend;
-    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"选择目标" message:[NSString stringWithFormat:@"确定对【%@】使用吗？", thisFriend.userName] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    toSelf = NO;
-    [confirmView show];
-    confirmView = nil;
+    
+    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"选择目标" andMessage:[NSString stringWithFormat:@"确定对【%@】使用吗？", thisFriend.userName]];
+    [alertView addButtonWithTitle:@"取消"
+                             type:SIAlertViewButtonTypeCancel
+                          handler:^(SIAlertView *alertView) {
+                          }];
+    [alertView addButtonWithTitle:@"确定"
+                             type:SIAlertViewButtonTypeDefault
+                          handler:^(SIAlertView *alertView) {
+                              if (toSelf)
+                                  [self useItemTo:[RORUserUtils getUserId]];
+                              else
+                                  [self useItemTo:selectedFriend.friendId];
+                          }];
+    alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
+    
+    alertView.willShowHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, willShowHandler2", alertView);
+    };
+    alertView.didShowHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, didShowHandler2", alertView);
+    };
+    alertView.willDismissHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, willDismissHandler2", alertView);
+    };
+    alertView.didDismissHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, didDismissHandler2", alertView);
+    };
+    
+    [alertView show];
 }
 
 #pragma mark - AlertView Delegate
