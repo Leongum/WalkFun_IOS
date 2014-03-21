@@ -18,7 +18,7 @@
 @synthesize systemTime;
 @synthesize version;
 @synthesize missionLastUpdateTime;
-@synthesize messageLastUpdateTime;
+@synthesize fightDefineUpdateTime;
 @synthesize recommendLastUpdateTime;
 @synthesize productLastUpdateTime;
 @synthesize actionDefineUpdateTime;
@@ -30,7 +30,7 @@
     self.decs = [RORDBCommon getStringFromId:[dict valueForKey:@"description"]];
     self.systemTime = [RORDBCommon getDateFromId:[dict valueForKey:@"systemTime"]];
     self.missionLastUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"missionLastUpdateTime"]];
-    self.messageLastUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"messageLastUpdateTime"]];
+    self.fightDefineUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"fightDefineUpdateTime"]];
     self.recommendLastUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"recommendLastUpdateTime"]];
     self.productLastUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"productLastUpdateTime"]];
     self.actionDefineUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"actionDefineUpdateTime"]];
