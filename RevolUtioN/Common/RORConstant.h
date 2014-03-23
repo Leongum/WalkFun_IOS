@@ -102,6 +102,7 @@
 
 typedef enum {MissionTypeStep = 0, MissionTypePickItem = 1, MissionTypeUseItem = 2} MissionTypeEnum;
 typedef enum {MissionStatusDone = 0, MissionStatusUndone = 1} MissionStatusEnum;
+typedef enum {FightStageFunny = 1, FightStageEasy = 2, FightStageNormal = 3, FightStageHard = 4, FightStageLegend = 5} FightStageEnum;
 
 typedef enum {FollowStatusFollowed = 0, FollowStatusNotFollowed = 1} FollowStatusEnum;
 typedef enum {FriendStatusOnlyFollowed = 0, FriendStatusFollowEachother = 1} FriendStatusEnum;

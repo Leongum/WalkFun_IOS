@@ -13,6 +13,7 @@
 #import "Version_Control.h"
 #import "Action_Define.h"
 #import "Fight_Define.h"
+#import "Walk_Event.h"
 #import "RORContextUtils.h"
 #import "Recommend_App.h"
 #import "RORUtils.h"
@@ -31,6 +32,9 @@
 
 //获取fight 战斗 根据用户的等级
 +(NSArray *)fetchFightDefineByLevel:(NSNumber *) level;
+
+//获取fight 战斗 根据用户的等级和
++ (NSArray *)fetchFightDefineByLevel:(NSNumber *) level andStage:(NSNumber *) stage;
 
 //同步推荐app信息
 +(BOOL)syncRecommendApp;

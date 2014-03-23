@@ -19,6 +19,11 @@
 #import "THProgressView.h"
 
 
+#define WALKING_FIGHT_STAGE_I 500
+#define WALKING_FIGHT_STAGE_II 500
+#define WALKING_FIGHT_STAGE_III 1500
+#define WALKING_FIGHT_STAGE_IV 2500
+#define WALKING_FIGHT_STAGE_V 5000
 @interface RORRunningViewController : RORRunningBaseViewController {
     BOOL MKwasFound;
     User_Running_History *runHistory;
@@ -27,6 +32,10 @@
     BOOL collectingCoin;
     NSMutableDictionary *todayMissionDict;
     NSMutableArray *processViewList;
+    
+    NSInteger userPower;
+    
+    
 }
 
 

@@ -24,8 +24,8 @@
     self.eId = [RORDBCommon getNumberFromId:[dict valueForKey:@"eId"]];
     self.eWin = [RORDBCommon getNumberFromId:[dict valueForKey:@"eWin"]];
     self.times = [RORDBCommon getNumberFromId:[dict valueForKey:@"times"]];
-    self.lati = [RORDBCommon getStringFromId:[dict valueForKey:@"lati"]];
-    self.longi = [RORDBCommon getStringFromId:[dict valueForKey:@"longi"]];
+    self.lati = [RORDBCommon getNumberFromId:[dict valueForKey:@"lati"]];
+    self.longi = [RORDBCommon getNumberFromId:[dict valueForKey:@"longi"]];
     self.power = [RORDBCommon getNumberFromId:[dict valueForKey:@"power"]];
 }
 

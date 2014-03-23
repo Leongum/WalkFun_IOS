@@ -465,7 +465,7 @@
     runHistory.valid = [NSNumber numberWithInt:1]; //[self isValidRun:stepCounting.counter / 0.8];
     runHistory.missionRoute = [RORDBCommon getStringFromRoutes:routes];
     //保存actionList(actionIds)
-    runHistory.actionIds = [RORSystemService getStringFromEventList:eventHappenedList timeList:eventTimeList andLocationList:eventLocationList];
+    runHistory.actionIds = [RORUtils toJsonFormObject:eventHappenedList];//[RORSystemService getStringFromEventList:eventHappenedList timeList:eventTimeList andLocationList:eventLocationList];
     //保存propget
     runHistory.propGet = [RORSystemService getPropgetStringFromList:eventHappenedList];
     runHistory.fatness = [self calculateFatness];
@@ -543,20 +543,23 @@
         eventLabel.text = @"开始散步";
         effectLabel.text = @"一切看起来都那么美好～";
     } else {
-        Action_Define *event = [eventDisplayList objectAtIndex:indexPath.row-1];
-//        if ([event.actionDescription rangeOfString:@"金币"].location == NSNotFound ){
+        Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row-1];
         identifier = @"eventCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        
-        UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
-        UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
-        UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
-        eventLabel.text = event.actionName;
-        effectLabel.text = [NSString stringWithFormat:@"获得：%@",event.actionAttribute];
-        
-        int timeInt = ((NSNumber *)[eventDisplayTimeList objectAtIndex:indexPath.row-1]).intValue;
-        eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
-//        }
+        if ([event.eType isEqualToString:RULE_Type_Action]){
+            Action_Define *actionEvent = [RORSystemService fetchActionDefine:event.eId];
+
+            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+            eventLabel.text = actionEvent.actionName;
+            effectLabel.text = [NSString stringWithFormat:@"获得：%@",actionEvent.actionAttribute];
+            
+            int timeInt = event.times.intValue;
+            eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
+        } else {
+            
+        }
     }
     bottomIndex = indexPath;
     
@@ -578,6 +581,43 @@
             return;
     }
     
+    //10步随机一次战斗事件
+    if (((int)currentStep)%10 == 0){
+        int x = arc4random() % 1000000;
+        double roll = ((double)x)/10000.f;
+        double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0;
+        if (currentStep>WALKING_FIGHT_STAGE_IV){
+            rate5 = 0.1;
+            rate4 = (currentStep - WALKING_FIGHT_STAGE_IV)*2/(WALKING_FIGHT_STAGE_V - WALKING_FIGHT_STAGE_IV) + 1;
+            rate3 = 1;
+            rate2 = 0.5;
+        }
+        if (currentStep>WALKING_FIGHT_STAGE_III){
+            rate3 = (currentStep - WALKING_FIGHT_STAGE_III)*2/(WALKING_FIGHT_STAGE_IV - WALKING_FIGHT_STAGE_III) + 1;
+            rate2 = 0.5;
+        }
+        if (currentStep>WALKING_FIGHT_STAGE_II){
+            rate2 = (currentStep - WALKING_FIGHT_STAGE_II)*2/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 1;
+        }
+        int fightStage = 0;
+        if (roll<rate5){//稀有级怪物
+            fightStage = FightStageLegend;
+        } else if (roll<rate4){//高级怪
+            fightStage = FightStageHard;
+        } else if (roll<rate3){//中级怪
+            fightStage = FightStageNormal;
+        } else if (roll<rate2){//低级怪
+            fightStage = FightStageEasy;
+        }
+        if (fightStage>0){
+            NSArray *fightList = [RORSystemService fetchFightDefineByLevel:userBase.userDetail.level andStage:[NSNumber numberWithInteger:fightStage]];
+            if (fightList){
+                Fight_Define *fightEvent = (Fight_Define *)[fightList objectAtIndex:arc4random() % fightList.count];
+                [self eventDidHappened:[self makeWalkEvent:fightEvent]];
+            }
+        }
+    }
+    
     for (int i=0; i<eventWillList.count; i++){
         Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
         int x = arc4random() % 1000000;
@@ -588,31 +628,82 @@
 //        }
         //debug
         if (roll < event.triggerProbability.doubleValue *delta){
-            [self eventDidHappened:event];
+            [self eventDidHappened:[self makeWalkEvent:event]];
             return;
         }
     }
 }
 
--(void)eventDidHappened:(Action_Define *)event{
-    if (event.actionId.integerValue == todayMission.triggerActionId.integerValue){
+-(Walk_Event *)makeWalkEvent:(id)event{
+    Walk_Event *walkEvent = [[Walk_Event alloc]init];
+    if ([event isKindOfClass:[Action_Define class]]){
+        Action_Define *e = (Action_Define *)event;
+        walkEvent.eId = e.actionId;
+        walkEvent.eType = RULE_Type_Action;
+    } else if ([event isKindOfClass:[Fight_Define class]]){
+        Fight_Define *e = (Fight_Define *)event;
+        walkEvent.eId = e.fightId;
+        walkEvent.eType = RULE_Type_Fight;
+        walkEvent.eWin = [self checkWin:e];
+        walkEvent.power = [self calculatePowerForFight:e];
+    }
+    walkEvent.times = [NSNumber numberWithInteger:duration];
+    walkEvent.lati = [NSNumber numberWithDouble:formerLocation.coordinate.latitude];
+    walkEvent.longi = [NSNumber numberWithDouble:formerLocation.coordinate.longitude];
+    return walkEvent;
+}
+
+-(NSNumber *)calculatePowerForFight:(Fight_Define *)fight{
+    userPower -= 10;
+    
+    return [NSNumber numberWithInteger:10];
+}
+
+-(NSNumber *)checkWin:(Fight_Define *)fight{
+    double userFight = userBase.userDetail.fight.doubleValue + userBase.userDetail.fightPlus.doubleValue;
+    if (userFight > fight.monsterMaxFight.doubleValue){
+        return [NSNumber numberWithInteger:1];
+    }
+    if (userFight > fight.monsterMinFight.doubleValue){
+        double deltaMFight = fight.monsterMaxFight.doubleValue - fight.monsterMinFight.doubleValue;
+        double rate = (userFight - fight.monsterMinFight.doubleValue)*25/deltaMFight + 75;
+        int x = arc4random() % 1000000;
+        double roll = ((double)x)/10000.f;
+        if (roll<rate)
+            return [NSNumber numberWithInteger:1];
+        else
+            return [NSNumber numberWithInteger:0];
+    }
+    return [NSNumber numberWithInteger:0];
+}
+
+-(void)eventDidHappened:(Walk_Event *)event{
+    if (event.eId.integerValue == todayMission.triggerActionId.integerValue){
         cMissionItemQuantity++;
     }
     
-    if ([event.actionName rangeOfString:@"金币"].location != NSNotFound) {
-        goldCount++;
-        self.goldLabel.text= [NSString stringWithFormat:@"%d", goldCount];
-        [self.goldLabel fallIn:0.5 delegate:self];
+    if ([event.eType isEqualToString:RULE_Type_Action]){
+        Action_Define *actionEvent = [RORSystemService fetchActionDefine:event.eId];
+        if ([actionEvent.actionName rangeOfString:@"金币"].location != NSNotFound) {
+            goldCount++;
+            self.goldLabel.text= [NSString stringWithFormat:@"%d", goldCount];
+            [self.goldLabel fallIn:0.5 delegate:self];
+        } else {
+            [eventDisplayList addObject:event];
+//            [eventDisplayTimeList addObject:[NSNumber numberWithInteger:duration]];
+        }
+        [allInOneSound addFileNametoQueue:[RORVirtualProductService getSoundFileOf:actionEvent]];
+        [allInOneSound play];
+
     } else {
         [eventDisplayList addObject:event];
-        [eventDisplayTimeList addObject:[NSNumber numberWithInteger:duration]];
     }
-    [eventHappenedList addObject:event];
-    [eventTimeList addObject: [NSNumber numberWithInteger:duration]];
-    [eventLocationList addObject:[NSString stringWithFormat:@"%f,%f", formerLocation.coordinate.latitude, formerLocation.coordinate.longitude]];
     
-    [allInOneSound addFileNametoQueue:[RORVirtualProductService getSoundFileOf:event]];
-    [allInOneSound play];
+    [eventHappenedList addObject:event];
+    
+//    [eventTimeList addObject: [NSNumber numberWithInteger:duration]];
+//    [eventLocationList addObject:[NSString stringWithFormat:@"%f,%f", formerLocation.coordinate.latitude, formerLocation.coordinate.longitude]];
+    
 }
 
 

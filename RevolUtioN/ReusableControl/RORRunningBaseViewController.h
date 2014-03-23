@@ -73,7 +73,7 @@
     BOOL isStarted;
     BOOL isAWalking;
     
-    User_Base *user;
+    User_Base *userBase;
     
     Mission *todayMission;
     int cMissionItemQuantity;

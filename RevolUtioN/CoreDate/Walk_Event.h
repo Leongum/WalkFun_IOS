@@ -14,8 +14,8 @@
 @property (nonatomic, retain) NSNumber * eId;
 @property (nonatomic, retain) NSNumber * eWin;
 @property (nonatomic, retain) NSNumber * times;
-@property (nonatomic, retain) NSString * lati;
-@property (nonatomic, retain) NSString * longi;
+@property (nonatomic, retain) NSNumber * lati;
+@property (nonatomic, retain) NSNumber * longi;
 @property (nonatomic, retain) NSNumber * power;
 
 @end

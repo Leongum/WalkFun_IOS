@@ -100,6 +100,24 @@
     return [fightDefineList copy];
 }
 
+//open out
++ (NSArray *)fetchFightDefineByLevel:(NSNumber *) level andStage:(NSNumber *) stage{
+    NSString *table=@"Fight_Define";
+    NSString *query = @"maxLevelLimit <= %@ and minLevelLimit >= %@ and inUsing = 0 and stage = %@";
+    NSArray *params = [NSArray arrayWithObjects:level,level, stage, nil];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"monsterMinFight" ascending:YES];
+    NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+    if (fetchObject == nil || [fetchObject count] == 0) {
+        return nil;
+    }
+    NSMutableArray *fightDefineList = [[NSMutableArray alloc] init];
+    for (Fight_Define *fightDefine in fetchObject) {
+        Fight_Define *newFight = [Fight_Define removeAssociateForEntity:fightDefine];
+        [fightDefineList addObject:newFight];
+    }
+    return [fightDefineList copy];
+}
 
 //open out
 + (BOOL)syncRecommendApp{
@@ -268,14 +286,23 @@
 }
 
 + (NSString *)getStringFromEventList:(NSArray *)eventList timeList:(NSArray *)timeList andLocationList:(NSArray *)locationList{
-    NSMutableString *eventString = [[NSMutableString alloc]init];
-    for (int i=0; i<eventList.count; i++){
-        Action_Define *event = (Action_Define *)[eventList objectAtIndex:i];
-        NSNumber *happendTime = (NSNumber *)[timeList objectAtIndex:i];
-        NSString *locationString = (NSString *)[locationList objectAtIndex:i ];
-        [eventString appendString:[NSString stringWithFormat:@"%@,%@,%@|", happendTime ,event.actionId, locationString]];
-    }
-    return eventString;
+//    NSMutableString *eventString = [[NSMutableString alloc]init];
+//    for (int i=0; i<eventList.count; i++){
+//        Walk_Event *event = (Walk_Event *)[eventList objectAtIndex:i];
+////        if ([[eventList objectAtIndex:i] isKindOfClass:[Action_Define class]]){
+////            Action_Define *event = (Action_Define *)[eventList objectAtIndex:i];
+//            NSNumber *happendTime = (NSNumber *)[timeList objectAtIndex:i];
+//            NSString *locationString = (NSString *)[locationList objectAtIndex:i ];
+//            [eventString appendString:[NSString stringWithFormat:@"%@,%@,%@,%@|",RULE_Type_Action, happendTime ,event.actionId, locationString]];
+//        } else {
+//            Fight_Define *event = (Fight_Define *)[eventList objectAtIndex:i];
+//            NSNumber *happendTime = (NSNumber *)[timeList objectAtIndex:i];
+//            NSString *locationString = (NSString *)[locationList objectAtIndex:i ];
+////            [eventString appendString:[NSString stringWithFormat:@"%@,%@,%@,%@,%@|",RULE_Type_Fight, happendTime,event. ,event.fightId, locationString]];
+//        }
+//        [RORUtils toJsonFormObject:eventList];
+//    }
+    return [RORUtils toJsonFormObject:eventList];
 }
 
 + (NSString *)getPropgetStringFromList:(NSArray *)eventList{
@@ -284,26 +311,31 @@
     NSMutableDictionary *attrDict = [[NSMutableDictionary alloc]init];
     
     for (int i=0; i<eventList.count; i++){
-        Action_Define *event = (Action_Define *)[eventList objectAtIndex:i];
-        NSDictionary *effectDict = [RORUtils explainActionEffetiveRule:event.effectiveRule];
-        for (NSString *key in [effectDict allKeys]){
-            NSNumber *n = [RORDBCommon getNumberFromId:[effectDict objectForKey:key]];
-            NSNumber *current = [RORDBCommon getNumberFromId:[attrDict objectForKey:key]];
-            if (current) {
-                [attrDict setObject:[NSNumber numberWithInteger:current.integerValue + n.integerValue] forKey:key];
-            } else {
-                [attrDict setObject:n forKey:key];
+        Walk_Event *we = (Walk_Event *)[eventList objectAtIndex:i];
+        if ([we.eType isEqualToString:RULE_Type_Action]){//事件
+            Action_Define *actionEvent = [RORSystemService fetchActionDefine:we.eId];
+            NSDictionary *effectDict = [RORUtils explainActionEffetiveRule:actionEvent.effectiveRule];
+            for (NSString *key in [effectDict allKeys]){
+                NSNumber *n = [RORDBCommon getNumberFromId:[effectDict objectForKey:key]];
+                NSNumber *current = [RORDBCommon getNumberFromId:[attrDict objectForKey:key]];
+                if (current) {
+                    [attrDict setObject:[NSNumber numberWithInteger:current.integerValue + n.integerValue] forKey:key];
+                } else {
+                    [attrDict setObject:n forKey:key];
+                }
             }
-        }
-        NSDictionary *actionDict = [RORUtils explainActionRule:event.actionRule];
-        for (NSString *key in [actionDict allKeys]){
-            NSNumber *n = [RORDBCommon getNumberFromId:[actionDict objectForKey:key]];
-            NSNumber *current = [RORDBCommon getNumberFromId:[itemDict objectForKey:key]];
-            if (current) {
-                [itemDict setObject:[NSNumber numberWithInteger:current.integerValue + n.integerValue] forKey:key];
-            } else {
-                [itemDict setObject:n forKey:key];
+            NSDictionary *actionDict = [RORUtils explainActionRule:actionEvent.actionRule];
+            for (NSString *key in [actionDict allKeys]){
+                NSNumber *n = [RORDBCommon getNumberFromId:[actionDict objectForKey:key]];
+                NSNumber *current = [RORDBCommon getNumberFromId:[itemDict objectForKey:key]];
+                if (current) {
+                    [itemDict setObject:[NSNumber numberWithInteger:current.integerValue + n.integerValue] forKey:key];
+                } else {
+                    [itemDict setObject:n forKey:key];
+                }
             }
+        } else{ //战斗
+            
         }
     }
     [propgetString appendString:@""];

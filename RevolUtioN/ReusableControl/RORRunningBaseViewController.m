@@ -142,14 +142,14 @@
 }
 
 -(NSNumber *)calculateFatness{
-    user = [RORUserServices fetchUser:[RORUserUtils getUserId]];
+    userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
     double health = 100;
     double stepsPerFat = (100.f-health)/100.f*500 + 750;
     return [NSNumber numberWithDouble:-currentStep / stepsPerFat];
 }
 
 -(NSNumber *)calculateHealth{
-    double fat = user.userDetail.fatness.integerValue;
+    double fat = userBase.userDetail.fatness.integerValue;
     double stepsPerHealth = fat/100.f*500 + 750;
     return [NSNumber numberWithDouble:-currentStep / stepsPerHealth];
 

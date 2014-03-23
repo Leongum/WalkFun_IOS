@@ -223,6 +223,9 @@
 	heartsBurst.duration		= 3.0;
 	heartsBurst.timingFunction	= [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
 	[pooController.heartsEmitter addAnimation:heartsBurst forKey:@"heartsBurst"];
+    
+//    NSMutableDictionary *userInfoList = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:userBase.userDetail.level.integerValue],@"userLevel", nil];
+//    [RORUserUtils writeToUserInfoPList:userInfoList];
 }
 
 
