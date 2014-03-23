@@ -47,7 +47,7 @@
         NSArray *fightDefineList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
         for (NSDictionary *fightDict in fightDefineList){
             NSNumber *fightId = [fightDict valueForKey:@"id"];
-            Fight_Define *fightEntity = [self fetchFightDefineInfo:fightId];
+            Fight_Define *fightEntity = [self fetchFightDefineInfo:fightId withContext:YES];
             if(fightEntity == nil)
                 fightEntity = (Fight_Define *)[NSEntityDescription insertNewObjectForEntityForName:@"Fight_Define" inManagedObjectContext:context];
             [fightEntity initWithDictionary:fightDict];
@@ -62,13 +62,21 @@
     return YES;
 }
 
-+ (Fight_Define *)fetchFightDefineInfo:(NSNumber *) appId {
+//open out
++ (Fight_Define *)fetchFightDefineInfo:(NSNumber *) fightId {
+    return [self fetchFightDefineInfo:fightId withContext:NO];
+}
+
++ (Fight_Define *)fetchFightDefineInfo:(NSNumber *) appId withContext:(BOOL) needContext{
     NSString *table=@"Fight_Define";
     NSString *query = @"fightId = %@";
     NSArray *params = [NSArray arrayWithObjects:appId, nil];
     NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
+    }
+    if (!needContext) {
+        return [Fight_Define removeAssociateForEntity:(Fight_Define *) [fetchObject objectAtIndex:0]];
     }
     return  (Fight_Define *) [fetchObject objectAtIndex:0];
 }

@@ -26,6 +26,9 @@
 //同步战斗信息
 +(BOOL)syncFightDefine;
 
+//根据fight id 获取fight define
++(Fight_Define *)fetchFightDefineInfo:(NSNumber *) fightId;
+
 //获取fight 战斗 根据用户的等级
 +(NSArray *)fetchFightDefineByLevel:(NSNumber *) level;
 
