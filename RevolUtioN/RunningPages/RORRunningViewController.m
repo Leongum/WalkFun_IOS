@@ -157,8 +157,8 @@
     }
     
     if (todayMission != nil){
-        
-        titleLabel.text = @"今日任务";
+        titleLabel.text = @"随便走走";
+
         switch (todayMission.missionTypeId.integerValue) {
             case MissionTypeStep:{
                 if (todayMission.triggerDistances){
@@ -170,10 +170,12 @@
                 if (todayMission.triggerTimes){
                     [todayMissionDict setObject:todayMission.triggerTimes forKey:@"duration"];
                 }
+                titleLabel.text = @"今日任务";
                 break;
             }
             case MissionTypePickItem:{
                 [todayMissionDict setObject:todayMission.triggerNumbers forKey:todayMission.triggerActionId];
+                titleLabel.text = @"今日任务";
                 break;
             }
             default:
@@ -208,8 +210,6 @@
                 i++;
             }
         }
-    } else {
-        titleLabel.text = @"随便走走";
     }
     
     cMissionItemQuantity = 0;
@@ -333,7 +333,7 @@
             [Animations moveUp:self.paperView andAnimationDuration:0.3 andWait:NO andLength:newCellHeight<self.paperView.frame.origin.y+308?newCellHeight:self.paperView.frame.origin.y+308];
         }
     }
-    if (!isAWalking && currentStep > 70 && distance>50) {
+    if (!isAWalking){// && currentStep > 70 && distance>50) {//debug
         isAWalking = YES;
         UIImage* image = [UIImage imageNamed:@"green_btn_bg.png"];
         [endButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -344,7 +344,7 @@
     
     //触发疲劳事件
     if (duration>3600 && ((int)duration)%120==0){
-        [self eventDidHappened:tiredAction];
+//        [self eventDidHappened:tiredAction];
     }
 }
 
@@ -465,7 +465,7 @@
     runHistory.valid = [NSNumber numberWithInt:1]; //[self isValidRun:stepCounting.counter / 0.8];
     runHistory.missionRoute = [RORDBCommon getStringFromRoutes:routes];
     //保存actionList(actionIds)
-    runHistory.actionIds = [RORUtils toJsonFormObject:eventHappenedList];//[RORSystemService getStringFromEventList:eventHappenedList timeList:eventTimeList andLocationList:eventLocationList];
+    runHistory.actionIds = [RORUtils toJsonFormObject:eventSaveList];//[RORSystemService getStringFromEventList:eventHappenedList timeList:eventTimeList andLocationList:eventLocationList];
     //保存propget
     runHistory.propGet = [RORSystemService getPropgetStringFromList:eventHappenedList];
     runHistory.fatness = [self calculateFatness];
@@ -540,25 +540,32 @@
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         eventTimeLabel.text = @"";
-        eventLabel.text = @"开始散步";
+        eventLabel.text = @"出发";
         effectLabel.text = @"一切看起来都那么美好～";
     } else {
         Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row-1];
         identifier = @"eventCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+        UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+        UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+        
         if ([event.eType isEqualToString:RULE_Type_Action]){
             Action_Define *actionEvent = [RORSystemService fetchActionDefine:event.eId];
-
-            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
-            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
-            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
             eventLabel.text = actionEvent.actionName;
             effectLabel.text = [NSString stringWithFormat:@"获得：%@",actionEvent.actionAttribute];
-            
             int timeInt = event.times.intValue;
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
         } else {
-            
+            Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:event.eId];
+            if (event.eWin.integerValue>0){
+                eventLabel.text = fightEvent.fightWin;
+                effectLabel.text = [NSString stringWithFormat:@"获得：%@",fightEvent.winGot];
+            } else{
+                eventLabel.text = fightEvent.fightLoose;
+                effectLabel.text = [NSString stringWithFormat:@""];
+            }
+            eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:event.times.integerValue]];
         }
     }
     bottomIndex = indexPath;
@@ -575,11 +582,11 @@
 
 //如果触发了事件，返回事件，否则返回nil
 -(void)isEventHappen{
-    if(eventTimeList.count > 0){
-        NSNumber *lastEventTime = [eventTimeList objectAtIndex:eventTimeList.count-1];
-        if (duration - lastEventTime.doubleValue < 5)
-            return;
-    }
+//    if(eventTimeList.count > 0){
+//        NSNumber *lastEventTime = [eventTimeList objectAtIndex:eventTimeList.count-1];
+//        if (duration - lastEventTime.doubleValue < 5)
+//            return;
+//    }
     
     //10步随机一次战斗事件
     if (((int)currentStep)%10 == 0){
@@ -588,17 +595,21 @@
         double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0;
         if (currentStep>WALKING_FIGHT_STAGE_IV){
             rate5 = 0.1;
-            rate4 = (currentStep - WALKING_FIGHT_STAGE_IV)*2/(WALKING_FIGHT_STAGE_V - WALKING_FIGHT_STAGE_IV) + 1;
+            rate4 = (currentStep - WALKING_FIGHT_STAGE_IV)*2/(WALKING_FIGHT_STAGE_V - WALKING_FIGHT_STAGE_IV) + 2;
             rate3 = 1;
             rate2 = 0.5;
         }
         if (currentStep>WALKING_FIGHT_STAGE_III){
-            rate3 = (currentStep - WALKING_FIGHT_STAGE_III)*2/(WALKING_FIGHT_STAGE_IV - WALKING_FIGHT_STAGE_III) + 1;
+            rate3 = (currentStep - WALKING_FIGHT_STAGE_III)*2/(WALKING_FIGHT_STAGE_IV - WALKING_FIGHT_STAGE_III) + 2;
             rate2 = 0.5;
         }
         if (currentStep>WALKING_FIGHT_STAGE_II){
-            rate2 = (currentStep - WALKING_FIGHT_STAGE_II)*2/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 1;
+            rate2 = (currentStep - WALKING_FIGHT_STAGE_II)*3/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 2;
         }
+//        if (currentStep>0){
+//            rate2 = 50;
+//            //debug
+//        }
         int fightStage = 0;
         if (roll<rate5){//稀有级怪物
             fightStage = FightStageLegend;
@@ -638,7 +649,7 @@
     Walk_Event *walkEvent = [[Walk_Event alloc]init];
     if ([event isKindOfClass:[Action_Define class]]){
         Action_Define *e = (Action_Define *)event;
-        walkEvent.eId = e.actionId;
+        walkEvent.eId = [RORDBCommon getNumberFromId:e.actionId];
         walkEvent.eType = RULE_Type_Action;
     } else if ([event isKindOfClass:[Fight_Define class]]){
         Fight_Define *e = (Fight_Define *)event;
@@ -700,6 +711,7 @@
     }
     
     [eventHappenedList addObject:event];
+    [eventSaveList addObject:event.transToDictionary];
     
 //    [eventTimeList addObject: [NSNumber numberWithInteger:duration]];
 //    [eventLocationList addObject:[NSString stringWithFormat:@"%f,%f", formerLocation.coordinate.latitude, formerLocation.coordinate.longitude]];

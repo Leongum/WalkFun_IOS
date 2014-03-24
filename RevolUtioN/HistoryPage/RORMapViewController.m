@@ -98,6 +98,7 @@
     CLLocationDegrees maxLon = -180;
     CLLocationDegrees minLat = 90;
     CLLocationDegrees minLon = 180;
+    int count = 0;
     for (NSArray *routePoints in routes){
         for (int i=0; i<routePoints.count; i++){
             CLLocation *currentLocation = [routePoints objectAtIndex:i];
@@ -109,14 +110,15 @@
                 minLat = currentLocation.coordinate.latitude;
             if (currentLocation.coordinate.longitude < minLon)
                 minLon = currentLocation.coordinate.longitude;
+            count++;
         }
     }
     region.center.latitude = (maxLat + minLat)/2;
     region.center.longitude = (maxLon + minLon)/2;
     region.span.latitudeDelta = maxLat - minLat + 0.001;
     region.span.longitudeDelta = maxLon - minLon + 0.001;
-    
-    [mapView setRegion:region animated:YES];
+    if (count)
+        [mapView setRegion:region animated:YES];
 }
 
 - (void)drawLineWithLocationArray:(NSArray *)locationArray withStyle:(NSInteger)style

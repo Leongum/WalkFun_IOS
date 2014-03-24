@@ -68,7 +68,7 @@
             [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:20]];
         if (l>=8)
             [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:14]];
-        self.levelLabel.text = [NSString stringWithFormat:@"Lv. %d", userInfo.userDetail.level.integerValue];
+        self.levelLabel.text = [NSString stringWithFormat:@"Lv. %ld", (long)userInfo.userDetail.level.integerValue];
                 
         //同步好友间的事件
         int aQuantity = [RORFriendService syncActions:thisUserId];

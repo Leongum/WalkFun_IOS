@@ -18,4 +18,7 @@
 @property (nonatomic, retain) NSNumber * longi;
 @property (nonatomic, retain) NSNumber * power;
 
+-(id)initWithDictionary:(NSDictionary *)dict;
+-(NSMutableDictionary *)transToDictionary;
+
 @end

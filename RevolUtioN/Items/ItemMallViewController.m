@@ -30,6 +30,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.backButton.alpha = 0;
+    
 	// Do any additional setup after loading the view.
     userMoney = userBase.userDetail.goldCoin.integerValue;
     self.moneyLabel.text = [NSString stringWithFormat:@"%d", userMoney];
@@ -126,7 +128,7 @@
 
 
     UILabel *costLabel = (UILabel *)[cell viewWithTag:103];
-    costLabel.text = [NSString stringWithFormat:@"$ %d", item.virtualPrice.integerValue];
+    costLabel.text = [NSString stringWithFormat:@"%d", item.virtualPrice.integerValue];
     
     return cell;
 }

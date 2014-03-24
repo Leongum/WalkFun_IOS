@@ -61,10 +61,8 @@
     NSArray *eventWillList;
     Action_Define *tiredAction;
     NSMutableArray *eventHappenedList;
+    NSMutableArray *eventSaveList;
     NSMutableArray *eventDisplayList;
-    NSMutableArray *eventTimeList;
-    NSMutableArray *eventDisplayTimeList;
-    NSMutableArray *eventLocationList;
     NSInteger eventHappenedCount;
     int goldCount;
     NSIndexPath *bottomIndex;

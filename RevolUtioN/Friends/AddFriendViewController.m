@@ -28,6 +28,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     recommendPage = 0;
+    self.backButton.alpha = 0;
+    [self.refreshRecommendButton setBackgroundImage:[UIImage imageNamed:@"friend_add_nextPage_disabled.png"] forState:UIControlStateDisabled];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,9 +60,9 @@
 
 - (IBAction)searchAction:(id)sender {
     //todo searchAction
-    [self startIndicator:self];
     NSString *searchText =self.searchTextField.text;
     if (![searchText isEqualToString:@""]){
+        [self startIndicator:self];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             searchResult = [RORUserServices searchFriend:searchText];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -82,8 +84,8 @@
         NSArray *tmpList = [RORFriendService fetchRecommendFriends:[NSNumber numberWithInteger:recommendPage]];
         recommendList = contentList;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self endIndicator:self];
             if (tmpList.count>0){
+                [self endIndicator:self];
                 contentList = tmpList;
                 recommendList = contentList;
                 [self.tableView reloadData];
@@ -164,10 +166,12 @@
     userSexImage.image = [RORUserUtils getImageForUserSex:user.sex];
     if ([RORFriendService getFollowStatus:user.userId] == FollowStatusNotFollowed){
         [follow setTitle:@"关注" forState:UIControlStateNormal];
+        [follow.titleLabel setTextColor:[UIColor whiteColor]];
         [follow removeTarget:self action:@selector(deFollow:) forControlEvents:UIControlEventTouchUpInside];
         [follow addTarget:self action:@selector(follow:) forControlEvents:UIControlEventTouchUpInside];
     } else {
         [follow setTitle:@"取消关注" forState:UIControlStateNormal];
+        [follow.titleLabel setTextColor:[UIColor blackColor]];
         [follow removeTarget:self action:@selector(follow:) forControlEvents:UIControlEventTouchUpInside];
         [follow addTarget:self action:@selector(deFollow:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -193,9 +197,10 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row<contentList.count)
-        return 77;
-    return 50;
+    return 86;
+//    if (indexPath.row<contentList.count)
+//        return 77;
+//    return 50;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

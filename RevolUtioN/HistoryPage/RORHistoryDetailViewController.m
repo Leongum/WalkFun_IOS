@@ -51,36 +51,38 @@
    NSDateFormatter *formattter = [[NSDateFormatter alloc] init];
     [formattter setDateFormat:@"yyyy-MM-dd"];
     self.dateLabel.text = [NSString stringWithFormat:@"%@", [formattter stringFromDate:record.missionDate]];
-    
-    NSArray *tmpList = [RORSystemService getEventListFromString:record.actionIds];
-    eventTimeList = [tmpList objectAtIndex:0];
-    eventList = [tmpList objectAtIndex:1];
-    eventDisplayList = [[NSMutableArray alloc]init];
-    eventDisplayTimeList = [[NSMutableArray alloc]init];
-    for (int i=0; i<eventList.count; i++){
-        Action_Define *e = [eventList objectAtIndex:i];
-        if ([e.actionName rangeOfString:@"金币"].location == NSNotFound){
-            [eventDisplayList addObject:e];
-            [eventDisplayTimeList addObject:[eventTimeList objectAtIndex:i]];
+    if (record.actionIds){
+        NSArray *objList = [RORUtils toArrayFromJson:record.actionIds];
+        eventList = [[NSMutableArray alloc]init];
+        for (NSDictionary *objDict in objList) {
+            Walk_Event *walkEvent = [[Walk_Event alloc]initWithDictionary:objDict];
+            [eventList addObject:walkEvent];
+        }
+        eventDisplayList = [[NSMutableArray alloc]init];
+        for (Walk_Event *walkEvent in eventList) {
+            if ([walkEvent.eType isEqualToString:RULE_Type_Action]){
+                Action_Define *actionEvent = [RORSystemService fetchActionDefine:walkEvent.eId];
+                if ([actionEvent.actionName rangeOfString:@"金币"].location == NSNotFound){
+                    [eventDisplayList addObject:walkEvent];
+                }
+            } else {
+                [eventDisplayList addObject:walkEvent];
+            }
         }
     }
-    
-    
-//    [RORSystemService getPropgetListFromString:record.propGet];//debug
+
     [self.sumLabel setLineBreakMode:NSLineBreakByWordWrapping];
     self.sumLabel.numberOfLines = 0;
     NSString *pgString =record.propGet;
     NSMutableString *sumString = [[NSMutableString alloc]init];
     NSArray *pgStringList = [pgString componentsSeparatedByString:@"|"];
     if (((NSString *)[pgStringList objectAtIndex:0]).length>0){
-        [sumString appendString:[NSString stringWithFormat:@"属性变化：%@\n", [pgStringList objectAtIndex:0]]];
+        [sumString appendString:[NSString stringWithFormat:@"共获得%@场战斗胜利\n", [pgStringList objectAtIndex:0]]];
     }
     if (((NSString *)[pgStringList objectAtIndex:1]).length>0){
         [sumString appendString:[NSString stringWithFormat:@"获得道具：%@\n", [pgStringList objectAtIndex:1]]];
     }
-    if (((NSString *)[pgStringList objectAtIndex:2]).length>0){
-        [sumString appendString:[NSString stringWithFormat:@"获得金币：%@", [pgStringList objectAtIndex:2]]];
-    }
+
     self.sumLabel.text = sumString;
 
 }
@@ -118,13 +120,13 @@
         UILabel *missionDoneLabel = (UILabel *)[missionCongratsView viewWithTag:103];
         
         missionNameLabel.text = doneMission.missionDescription;
-        missionGoldLabel.text = [NSString stringWithFormat:@"+%d",doneMission.goldCoin.integerValue];
-        missionExpLabel.text = [NSString stringWithFormat:@"+%d",doneMission.experience.integerValue];
+        missionGoldLabel.text = [NSString stringWithFormat:@"+%ld",(long)doneMission.goldCoin.integerValue];
+        missionExpLabel.text = [NSString stringWithFormat:@"+%ld",(long)doneMission.experience.integerValue];
         
         NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
         NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
         if (missionProcess.integerValue >= 3)
-            missionDoneLabel.text = [NSString stringWithFormat:@"%d/%d", missionProcess.integerValue, 3];
+            missionDoneLabel.text = [NSString stringWithFormat:@"%ld/%d", (long)missionProcess.integerValue, 3];
     }
 }
 
@@ -178,7 +180,7 @@
 #pragma mark Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int rows = eventDisplayList.count + 1;
+    NSInteger rows = eventDisplayList.count + 1;
     return rows;
 }
 
@@ -193,25 +195,30 @@
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         eventTimeLabel.text = @"";
-        eventLabel.text = @"开始散步";
+        eventLabel.text = @"从村里出发";
         effectLabel.text = @"一切看起来都那么美好～";
     } else {
-        Action_Define *event = [eventDisplayList objectAtIndex:indexPath.row-1];
-        if ([event.actionDescription rangeOfString:@"金币"].location != NSNotFound ){
-            identifier = @"coinCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        identifier = @"eventCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+        UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+        UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+        Walk_Event *walkEvent = [eventDisplayList objectAtIndex:indexPath.row-1];
+        if ([walkEvent.eType isEqualToString:RULE_Type_Action]){
+            Action_Define *actionEvent = [RORSystemService fetchActionDefine:walkEvent.eId];
+            eventLabel.text = actionEvent.actionName;
+            effectLabel.text = [NSString stringWithFormat:@"获得：%@",actionEvent.actionAttribute];
+            eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:walkEvent.times.integerValue]];
         } else {
-            identifier = @"eventCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            
-            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
-            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
-            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
-            eventLabel.text = event.actionName;
-            effectLabel.text = [NSString stringWithFormat:@"获得：%@",event.actionAttribute];
-            
-            int timeInt = ((NSNumber *)[eventDisplayTimeList objectAtIndex:indexPath.row-1]).integerValue;
-            eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
+            Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:walkEvent.eId];
+            if (walkEvent.eWin.integerValue>0){
+                eventLabel.text = fightEvent.fightWin;
+                effectLabel.text = [NSString stringWithFormat:@"获得：%@",fightEvent.winGot];
+            } else{
+                eventLabel.text = fightEvent.fightLoose;
+                effectLabel.text = [NSString stringWithFormat:@""];
+            }
+            eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:walkEvent.times.integerValue]];
         }
     }
     
@@ -219,12 +226,6 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (indexPath.row == 0)
-//        return 62;
-//    Action_Define *event = [eventDisplayList objectAtIndex:indexPath.row-1];
-//    if ([event.actionDescription rangeOfString:@"金币"].location != NSNotFound ){
-//        return 30;
-//    }
     return 62;
 }
 

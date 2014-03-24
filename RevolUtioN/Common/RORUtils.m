@@ -36,9 +36,9 @@
 + (NSString *)transSecondToStandardFormat:(double) seconds {
     if (seconds <0)
         return @" -";
-    NSInteger min=0, hour=0;
+    int min=0, hour=0;
     min = seconds / 60;
-    NSInteger intSeconds = (NSInteger)seconds % 60;
+    int intSeconds = (NSInteger)seconds % 60;
     hour = min / 60;
     min = min % 60;
     if (hour>0)
@@ -54,6 +54,17 @@
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     NSLog(@"%@",jsonString);
     return jsonString;
+}
+
++ (NSArray *)toArrayFromJson:(NSString *)json{
+    NSData *aData = [json dataUsingEncoding: NSUTF8StringEncoding];
+    NSError *error = nil;
+    NSArray *objList = [NSJSONSerialization JSONObjectWithData:aData options:NSJSONReadingMutableLeaves error:&error];
+    
+    if (!error){
+        return objList;
+    }
+    return nil;
 }
 
 + (NSString*)getCityCodeJSon{
@@ -300,14 +311,6 @@
     return (strlength+1)/2;
 }
 
-+(NSString *)addEggache:(NSNumber *)userID{
-    return [NSString stringWithFormat:@"%d", userID.integerValue+5432];
-}
-
-+(NSNumber *)removeEggache:(NSString *)userID{
-    [RORDBCommon getNumberFromId:userID];
-    return [NSNumber numberWithInt:userID.integerValue-5432];
-}
 
 +(UIImage *)getImageFromView:(UIView *)thisView{
     if(UIGraphicsBeginImageContextWithOptions != NULL)

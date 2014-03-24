@@ -103,7 +103,7 @@
 //open out
 + (NSArray *)fetchFightDefineByLevel:(NSNumber *) level andStage:(NSNumber *) stage{
     NSString *table=@"Fight_Define";
-    NSString *query = @"maxLevelLimit <= %@ and minLevelLimit >= %@ and inUsing = 0 and stage = %@";
+    NSString *query = @"maxLevelLimit >= %@ and minLevelLimit <= %@ and inUsing = 0 and monsterLevel = %@";
     NSArray *params = [NSArray arrayWithObjects:level,level, stage, nil];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"monsterMinFight" ascending:YES];
     NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
@@ -309,21 +309,22 @@
     NSMutableString *propgetString = [[NSMutableString alloc]init];
     NSMutableDictionary *itemDict = [[NSMutableDictionary alloc]init];
     NSMutableDictionary *attrDict = [[NSMutableDictionary alloc]init];
+    int winCount = 0, fightCount = 0;
     
     for (int i=0; i<eventList.count; i++){
         Walk_Event *we = (Walk_Event *)[eventList objectAtIndex:i];
         if ([we.eType isEqualToString:RULE_Type_Action]){//事件
             Action_Define *actionEvent = [RORSystemService fetchActionDefine:we.eId];
-            NSDictionary *effectDict = [RORUtils explainActionEffetiveRule:actionEvent.effectiveRule];
-            for (NSString *key in [effectDict allKeys]){
-                NSNumber *n = [RORDBCommon getNumberFromId:[effectDict objectForKey:key]];
-                NSNumber *current = [RORDBCommon getNumberFromId:[attrDict objectForKey:key]];
-                if (current) {
-                    [attrDict setObject:[NSNumber numberWithInteger:current.integerValue + n.integerValue] forKey:key];
-                } else {
-                    [attrDict setObject:n forKey:key];
-                }
-            }
+//            NSDictionary *effectDict = [RORUtils explainActionEffetiveRule:actionEvent.effectiveRule];
+//            for (NSString *key in [effectDict allKeys]){
+//                NSNumber *n = [RORDBCommon getNumberFromId:[effectDict objectForKey:key]];
+//                NSNumber *current = [RORDBCommon getNumberFromId:[attrDict objectForKey:key]];
+//                if (current) {
+//                    [attrDict setObject:[NSNumber numberWithInteger:current.integerValue + n.integerValue] forKey:key];
+//                } else {
+//                    [attrDict setObject:n forKey:key];
+//                }
+//            }
             NSDictionary *actionDict = [RORUtils explainActionRule:actionEvent.actionRule];
             for (NSString *key in [actionDict allKeys]){
                 NSNumber *n = [RORDBCommon getNumberFromId:[actionDict objectForKey:key]];
@@ -335,29 +336,29 @@
                 }
             }
         } else{ //战斗
-            
+            Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:we.eId];
+            NSDictionary *actionDict = [RORUtils explainActionRule:fightEvent.winGotRule];
+            for (NSString *key in [actionDict allKeys]){
+                NSNumber *n = [RORDBCommon getNumberFromId:[actionDict objectForKey:key]];
+                NSNumber *current = [RORDBCommon getNumberFromId:[itemDict objectForKey:key]];
+                if (current) {
+                    [itemDict setObject:[NSNumber numberWithInteger:current.integerValue + n.integerValue] forKey:key];
+                } else {
+                    [itemDict setObject:n forKey:key];
+                }
+            }
+            fightCount ++;
+            winCount+=we.eWin.integerValue;
         }
     }
-    [propgetString appendString:@""];
-    NSDictionary *attrNameDict = [NSDictionary dictionaryWithObjectsAndKeys:@"肥肉", @"F", @"健康", @"H", nil];
-    for (NSString *key in [attrDict allKeys]){
-        if (![[attrNameDict allKeys] containsObject:key])
-            continue;
-        NSNumber *num = [attrDict objectForKey:key];
-        if (num.integerValue>0){
-            [propgetString appendString:[NSString stringWithFormat:@"%@ +%@  ",[attrNameDict objectForKey:key] ,num]];
-        } else {
-            [propgetString appendString:[NSString stringWithFormat:@"%@ %@  ",[attrNameDict objectForKey:key] ,num]];
-        }
-    }
-    [propgetString appendString:@"|"];
+    [propgetString appendString:[NSString stringWithFormat:@"%d|", winCount]];
     for (NSString *key in [itemDict allKeys]){
         NSNumber *num = [itemDict objectForKey:key];
         Virtual_Product *item = [RORVirtualProductService fetchVProduct:[RORDBCommon getNumberFromId:key]];
-        [propgetString appendString:[NSString stringWithFormat:@"%@ x%@ ",item.productName, num]];
+        [propgetString appendString:[NSString stringWithFormat:@"%@x%@ ",item.productName, num]];
     }
-    [propgetString appendString:@"|"];
-    [propgetString appendString:[NSString stringWithFormat:@"%@",[attrDict objectForKey:RULE_Money]]];
+//    [propgetString appendString:@"|"];
+//    [propgetString appendString:[NSString stringWithFormat:@"%@",[attrDict objectForKey:RULE_Money]]];
     
     return propgetString;
 }

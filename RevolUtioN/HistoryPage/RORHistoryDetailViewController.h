@@ -21,7 +21,7 @@
     BOOL expanded;
     double centerLoc;
     
-    NSArray *eventList;
+    NSMutableArray *eventList;
     NSArray *eventTimeList;
     NSMutableArray *eventDisplayList;
     NSMutableArray *eventDisplayTimeList;

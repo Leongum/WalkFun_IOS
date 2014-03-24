@@ -38,8 +38,10 @@ _Pragma("clang diagnostic pop") \
 + (NSString *)uuidString;
 
 + (NSData *)gzipCompressData:(NSData *)uncompressedData;
-
+//obj转成json
 + (NSString *)toJsonFormObject:(NSObject *)object;
+//json转成array
++ (NSArray *)toArrayFromJson:(NSString *)json;
 
 + (NSString*)getCityCodeJSon;
 
@@ -59,10 +61,6 @@ _Pragma("clang diagnostic pop") \
 +(double)randomBetween:(NSInteger)x1 and:(NSInteger)x2;
 
 + (int)convertToInt:(NSString*)strtemp;
-
-+(NSString *)addEggache:(NSNumber *)userID;
-
-+(NSNumber *)removeEggache:(NSString *)userID;
 
 +(UIImage *)getImageFromView:(UIView *)thisView;
 +(UIImage *) captureScreen;
