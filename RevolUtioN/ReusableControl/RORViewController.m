@@ -190,8 +190,6 @@
 
 - (void)handleNotification:(NSNotification *)notif
 {
-    NSLog(@"Notification recieved: %@", notif.name);
-    NSLog(@"Status user info key: %@", [notif.userInfo objectForKey:SVProgressHUDStatusUserInfoKey]);
 }
 
 /**
