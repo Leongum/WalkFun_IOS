@@ -20,7 +20,7 @@
         item = [RORVirtualProductService fetchVProduct:newUserItem.productId];;
         
         itemNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 70, frame.size.width, 30)];
-        [itemNameLabel setFont:[UIFont systemFontOfSize:20]];
+        [itemNameLabel setFont:[UIFont systemFontOfSize:24]];
         [itemNameLabel setTextColor:[UIColor whiteColor]];
         itemNameLabel.text = newUserItem.productName;
         [itemNameLabel setTextAlignment:NSTextAlignmentCenter];
@@ -36,7 +36,7 @@
         
         //道具的作用
         itemEffectLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, itemImageView.frame.origin.y+itemImageView.frame.size.height+20, frame.size.width, 30)];
-        [itemEffectLabel setFont:[UIFont systemFontOfSize:18]];
+        [itemEffectLabel setFont:[UIFont systemFontOfSize:22]];
         [itemEffectLabel setTextColor:[UIColor whiteColor]];
         itemEffectLabel.text = [itemInfoStringList objectAtIndex:1];
         [itemEffectLabel setLineBreakMode:NSLineBreakByWordWrapping];
@@ -46,7 +46,7 @@
 
         
         itemDescriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, itemImageView.center.y+BIG_ITEM_SIZE/2 + 60, CGRectGetWidth(frame) - 100, 100)];
-        [itemDescriptionLabel setFont:[UIFont systemFontOfSize:14]];
+        [itemDescriptionLabel setFont:[UIFont systemFontOfSize:20]];
         [itemDescriptionLabel setTextColor:[UIColor whiteColor]];
         itemDescriptionLabel.text = [itemInfoStringList objectAtIndex:0];
         [itemDescriptionLabel setLineBreakMode:NSLineBreakByWordWrapping];
@@ -60,6 +60,8 @@
         [itemUseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [itemUseButton addTarget:self action:@selector(useItemAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:itemUseButton];
+        
+        [RORUtils setFontFamily:APP_FONT forView:self andSubViews:YES];
     }
     return self;
 }

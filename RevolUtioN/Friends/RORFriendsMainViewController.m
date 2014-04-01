@@ -221,13 +221,9 @@
         [deleteButton removeTarget:self action:@selector(followAction:) forControlEvents:UIControlEventTouchUpInside];
         [deleteButton addTarget:self action:@selector(deFollowAction:) forControlEvents:UIControlEventTouchUpInside];
     }
-//    else if (showFans){
-//        deleteButton.alpha = 1;
-//        [deleteButton setTitle:@"关注" forState:UIControlStateNormal];
-//        [deleteButton removeTarget:self action:@selector(deFollowAction:) forControlEvents:UIControlEventTouchUpInside];
-//        [deleteButton addTarget:self action:@selector(followAction:) forControlEvents:UIControlEventTouchUpInside];
-//    }
     
+    [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];
+
     return cell;
 }
 
@@ -254,7 +250,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 77;
+    return 72;
 }
 
 @end

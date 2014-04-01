@@ -33,6 +33,15 @@
     
     self.backButton.alpha = 0;
     
+//    NSArray *familyNames =[UIFont familyNames];
+//    for( NSString*familyName in familyNames ){
+//        printf( "Family: %s \n", [familyName UTF8String] );
+//        NSArray *fontNames = [UIFont fontNamesForFamilyName:familyName];
+//        for( NSString *fontName in fontNames ){
+//            printf( "\tFont: %s \n", [fontName UTF8String] );
+//        }
+//    }
+    
 	// Do any additional setup after loading the view.
     
     NSMutableArray *controllers = [[NSMutableArray alloc] init];
@@ -69,18 +78,12 @@
     [self gotoPage:NO];
     
     missionBoardCenterY = self.missionView.center.y;
+    
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
 -(void)checkDailyMission{
-    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
-    //如果已经集满了三次日常任务，但没有兑换奖励，则接不到新的任务
-    NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
-    [self.missionStoneButton setTitle:[NSString stringWithFormat:@"%d/3",missionProcess.integerValue] forState:UIControlStateNormal];
-    if (missionProcess.integerValue >= 3){
-        [self.missionStoneButton setEnabled:YES];
-        return;
-    }
-    [self.missionStoneButton setEnabled:NO];
+    
     todayMission = [RORMissionServices getTodayMission];
     if (todayMission){
         NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
@@ -164,7 +167,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [self checkLevelUp];
+//    [self checkLevelUp];
     [self checkDailyMission];
     [self checkSendToAppstore];
 }
@@ -188,46 +191,6 @@
         confirmView = nil;
     }
 }
-
--(void)checkLevelUp{
-    if (!userBase)
-        return;
-    
-    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
-    NSNumber *userLevel = [userInfoList valueForKey:@"userLevel"];
-    
-    if (!userLevel){
-//        NSDictionary *saveDict = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithDouble:userBase.userDetail.goldCoinSpeed.doubleValue * 2.5], @"extraGold", userBase.userDetail.level, @"userLevel", nil];
-//        [RORUserUtils writeToUserInfoPList:saveDict];
-//        return;
-    }
-    if (userLevel.integerValue<userBase.userDetail.level.integerValue){
-        [self performLevelUp];
-    }
-}
-
-//弹出升级提示页面
--(void)performLevelUp{
-    PooViewController *pooController = [mainStoryboard instantiateViewControllerWithIdentifier:@"levelUpCongratsCoverViewController"];
-    CoverView *coverView = (CoverView *)pooController.view;
-    [coverView addCoverBgImage];
-    [coverView appear:self];
-    
-    [self addChildViewController:pooController];
-    [self.view addSubview:pooController.view];
-    [self didMoveToParentViewController:pooController];
-    
-    CABasicAnimation *heartsBurst = [CABasicAnimation animationWithKeyPath:@"emitterCells.heart.birthRate"];
-	heartsBurst.fromValue		= [NSNumber numberWithFloat:2.0];
-	heartsBurst.toValue			= [NSNumber numberWithFloat:  0.0];
-	heartsBurst.duration		= 3.0;
-	heartsBurst.timingFunction	= [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-	[pooController.heartsEmitter addAnimation:heartsBurst forKey:@"heartsBurst"];
-    
-//    NSMutableDictionary *userInfoList = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:userBase.userDetail.level.integerValue],@"userLevel", nil];
-//    [RORUserUtils writeToUserInfoPList:userInfoList];
-}
-
 
 -(void)loadPage:(NSInteger)page{
     MainPageViewController *controller =(MainPageViewController *)[contentViews objectAtIndex:page];
@@ -301,9 +264,6 @@
     offset.x = CGRectGetWidth(bounds) * page;
     offset.y = 0;
     [self.scrollView setContentOffset:offset animated:YES];
-    //    bounds.origin.x = CGRectGetWidth(bounds) * page;
-    //    bounds.origin.y = 0;
-    //    [self.scrollView scrollRectToVisible:bounds animated:animated];
 }
 
 - (IBAction)changePage:(id)sender {
@@ -316,7 +276,7 @@
 
 //其实这里是同步按钮的事件 - -
 - (IBAction)missionAction:(id)sender {
-
+    
     [self startIndicator:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         BOOL run = [RORRunHistoryServices uploadRunningHistories];
@@ -361,9 +321,7 @@
                               NSLog(@"OK Clicked");
                               [self cancelMission];
                           }];
-//    alertView.titleColor = [UIColor blackColor];
-//    alertView.cornerRadius = 10;
-//    alertView.buttonFont = [UIFont boldSystemFontOfSize:15];
+
     alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
     
     alertView.willShowHandler = ^(SIAlertView *alertView) {
@@ -380,10 +338,6 @@
     };
     
     [alertView show];
-    
-//    UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"放弃任务" message:@"确定放弃今天的任务吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-//    [confirmView show];
-//    confirmView = nil;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -405,16 +359,6 @@
     [Animations moveDown:self.missionView andAnimationDuration:1 andWait:NO andLength:100];
 }
 
-- (IBAction)missionStoneAction:(id)sender {
-//    [self.missionStoneButton setTitle:@"0/3" forState:UIControlStateNormal];
-    [self sendNotification:@"兑换了一个道具奖励"];
-    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
-    [userInfoList setObject:[NSNumber numberWithInteger:0] forKey:@"missionProcess"];
-    [RORUserUtils writeToUserInfoPList:userInfoList];
-    
-    [self checkDailyMission];
-}
-
 - (IBAction)hideorshowDailyMissionBoardAction:(id)sender {
     if (isFolded){
         [Animations moveUp:self.missionView andAnimationDuration:0 andWait:NO andLength:34];
@@ -425,6 +369,16 @@
     }
 }
 
+- (IBAction)ready2StartAction:(id)sender {
+    ReadyToGoViewController *readyController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReadyToGoViewController"];
+    CoverView *coverView = (CoverView *)readyController.view;
+    [coverView addCoverBgImage];
+    [coverView appear:self];
+    
+    [self addChildViewController:readyController];
+    [self.view addSubview:readyController.view];
+    [self didMoveToParentViewController:readyController];
+}
 
 #pragma mark - Segue
 
@@ -432,10 +386,6 @@
     UIViewController *destination = segue.destinationViewController;
     if ([destination respondsToSelector:@selector(setDelegate:)]){
         [destination setValue:self forKey:@"delegate"];
-    }
-    
-    if ([destination respondsToSelector:@selector(setTodayMission:)]){
-        [destination setValue:todayMission forKey:@"todayMission"];
     }
 }
 

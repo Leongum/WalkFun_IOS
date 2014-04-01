@@ -33,6 +33,9 @@
     
     self.backButton.alpha = 0;
     self.userItemScrollView.delegate = self;
+    
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -74,6 +77,9 @@
     [mallCoverView addCoverBgImage];
     [[self parentViewController].view addSubview:mallCoverView];
     [mallCoverView appear:self];
+    
+    [RORUtils setFontFamily:APP_FONT forView:mallCoverView andSubViews:YES];
+
 }
 
 - (IBAction)lingqianAction:(id)sender {
@@ -88,7 +94,6 @@
     if ([itemViewController respondsToSelector:@selector(setUserBase:)])
         [itemViewController setValue:user forKey:@"userBase"];
     [[self parentViewController] presentViewController:itemViewController animated:YES completion:^(){}];
-    
     [mallCoverView bgTap:self];
     [self startIndicator:self];
 }

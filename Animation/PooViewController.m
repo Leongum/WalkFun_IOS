@@ -34,10 +34,11 @@
 	heart.velocityRange = 60;
 	heart.yAcceleration = 20;
 	heart.contents		= (id) [[UIImage imageNamed:@"PooHeart"] CGImage];
-	heart.color			= [[UIColor colorWithRed:0.7 green:0.0 blue:0.3 alpha:0.5] CGColor];
-	heart.redRange		= 0.3;
-	heart.blueRange		= 0.3;
-	heart.alphaSpeed	= -0.5 / heart.lifetime;
+	heart.color			= [[UIColor colorWithRed:0.8 green:0.8 blue:0.2 alpha:1] CGColor];
+	heart.redRange		= 0.5;
+	heart.greenRange	= 0.5;
+    heart.blueRange     = 0.5;
+	heart.alphaSpeed	= -1 / heart.lifetime;
 	heart.scale			= 0.15;
 	heart.scaleSpeed	= 0.5;
 	heart.spinRange		= 2.0 * M_PI;

@@ -64,7 +64,7 @@
     NSMutableArray *eventSaveList;
     NSMutableArray *eventDisplayList;
     NSInteger eventHappenedCount;
-    int goldCount;
+    int goldCount, itemCount;
     NSIndexPath *bottomIndex;
     
     NSTimer *repeatingTimer;

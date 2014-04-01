@@ -65,11 +65,12 @@
         self.usernameLabel.text = userInfo.nickName;
         int l = [RORUtils convertToInt:self.usernameLabel.text];
         if (l<=3)
-            [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:20]];
+            [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:24]];
         if (l>=8)
-            [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:14]];
+            [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:18]];
         self.levelLabel.text = [NSString stringWithFormat:@"Lv. %ld", (long)userInfo.userDetail.level.integerValue];
-                
+        
+        [RORUtils setFontFamily:APP_FONT forView:self.usernameLabel andSubViews:YES];
         //同步好友间的事件
         int aQuantity = [RORFriendService syncActions:thisUserId];
         if (aQuantity>0)
@@ -87,6 +88,7 @@
     [super viewWillAppear:animated];
     [self initPageData];
     [self initLocationServcie];
+    [self checkMissionProcess];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -94,6 +96,28 @@
     [super viewWillDisappear:animated];
 }
 
+-(void)checkMissionProcess{
+    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+    //如果已经集满了三次日常任务，但没有兑换奖励，则接不到新的任务
+    NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
+    [self.missionStoneButton setTitle:[NSString stringWithFormat:@"%ld/3",(long)missionProcess.integerValue] forState:UIControlStateNormal];
+    if (missionProcess.integerValue >= 3){
+        [self.missionStoneButton setEnabled:YES];
+        return;
+    }
+    [self.missionStoneButton setEnabled:NO];
+}
+
+- (IBAction)missionStoneAction:(id)sender {
+    //    [self.missionStoneButton setTitle:@"0/3" forState:UIControlStateNormal];
+    [self sendNotification:@"兑换了一个道具奖励"];
+    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+    [userInfoList setObject:[NSNumber numberWithInteger:0] forKey:@"missionProcess"];
+    [RORUserUtils writeToUserInfoPList:userInfoList];
+    
+//    [self checkDailyMission];
+    //todo:
+}
 
 -(void)prepareControlsForAnimation{
     self.weatherInfoButtonView.alpha = 1;
@@ -205,11 +229,6 @@
     if ([destination respondsToSelector:@selector(setDelegate:)]){
         [destination setValue:self forKey:@"delegate"];
     }
-//    if ([destination respondsToSelector:@selector(setSelection:)]){
-//        [destination setValue:self.userName forKey:@"userName"];
-//        [destination setValue:self.userId forKey:@"userId"];
-//    }
-
 }
 
 - (void)didReceiveMemoryWarning

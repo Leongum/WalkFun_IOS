@@ -14,7 +14,6 @@
 #define MARGIN_TOP_BOTTOM 10
 #define MARGIN_LEFT_RIGHT 20
 #define MARGIN_BETWEEN_LINES 10
-#define SIZE_ITEM_ICON 78
 
 @interface UserItemScrollView : UIScrollView<UIScrollViewDelegate>{
     NSMutableArray *contentList;

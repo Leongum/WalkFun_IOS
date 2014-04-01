@@ -12,10 +12,6 @@
 typedef enum {DISTANCE = 1, DURATION = 2, VALID = 3, LEVEL = 4} controlInHistoryTableCell;
 
 @interface RORHistoryViewController : RORViewController{
-    NSMutableArray *stampList;
-    NSIndexPath *bottomIndexPath;
-    BOOL scrolled;
-    NSMutableDictionary *hasRotated;
 }
 
 @property (strong, nonatomic) NSMutableDictionary *runHistoryList;

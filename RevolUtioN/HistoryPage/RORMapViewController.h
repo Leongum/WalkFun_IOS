@@ -17,6 +17,7 @@
 @interface RORMapViewController : RORViewController<MKMapViewDelegate>{
     NSMutableArray *improvedRoute;
 }
+@property (strong, nonatomic) IBOutlet RORNormalButton *BACKButton;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) MKPolyline *routeLine;
 @property (strong, nonatomic) MKPolyline *routeLineShadow;

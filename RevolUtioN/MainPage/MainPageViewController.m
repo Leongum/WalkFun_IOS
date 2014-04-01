@@ -31,10 +31,10 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    if ([titleView superview] != self.view){
+    if (titleView.superview != [self parentViewController].view){
         [titleView removeFromSuperview];
         [[self parentViewController].view addSubview:titleView];
-//    }
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{

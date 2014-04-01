@@ -39,6 +39,8 @@
 @dynamic sequence;
 @dynamic propGet;
 @dynamic commitTime;
+@dynamic friendId;
+@dynamic friendName;
 
 +(User_Running_History *) intiUnassociateEntity{
     NSManagedObjectContext *context = [RORContextUtils getShareContext];
@@ -58,6 +60,7 @@
 }
 
 -(void)initWithDictionary:(NSDictionary *)dict{
+    NSLog(@"%@",dict);
     self.avgSpeed = [RORDBCommon getNumberFromId:[dict valueForKey:@"avgSpeed"]];
     self.comment = [RORDBCommon getStringFromId:[dict valueForKey:@"comment"]];
     self.distance = [RORDBCommon getNumberFromId:[dict valueForKey:@"distance"]];
@@ -85,9 +88,12 @@
     self.sequence = [RORDBCommon getNumberFromId:[dict valueForKey:@"sequence"]];
     self.propGet = [RORDBCommon getStringFromId:[dict valueForKey:@"propGet"]];
     self.actionIds = [RORDBCommon getStringFromId:[dict valueForKey:@"actionIds"]];
+    self.friendId = [RORDBCommon getNumberFromId:[dict valueForKey:@"friendId"]];
+    self.friendName = [RORDBCommon getStringFromId:[dict valueForKey:@"friendName"]];
 }
 
 -(NSMutableDictionary *)transToDictionary{
+    NSLog(@"%@",self);
     NSMutableDictionary *tempoDict = [[NSMutableDictionary alloc] init];
     [tempoDict setValue:self.avgSpeed forKey:@"avgSpeed"];
     [tempoDict setValue:self.comment forKey:@"comment"];
@@ -116,6 +122,9 @@
     [tempoDict setValue:self.sequence forKey:@"sequence"];
     [tempoDict setValue:self.propGet forKey:@"propGet"];
     [tempoDict setValue:self.actionIds forKey:@"actionIds"];
+    [tempoDict setValue:self.friendId forKeyPath:@"friendId"];
+    [tempoDict setValue:self.friendName forKeyPath:@"friendName"];
     return tempoDict;
 }
+
 @end

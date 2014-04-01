@@ -30,6 +30,8 @@
     recommendPage = 0;
     self.backButton.alpha = 0;
     [self.refreshRecommendButton setBackgroundImage:[UIImage imageNamed:@"friend_add_nextPage_disabled.png"] forState:UIControlStateDisabled];
+    
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,6 +55,19 @@
 }
 
 #pragma mark - Actions
+
+- (IBAction)invateWeixinAction:(id)sender {
+    
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeApp;
+    //分享图文样式到微信朋友圈显示字数比较少，只显示分享标题
+    [UMSocialData defaultData].extConfig.title = @"朋友圈分享内容";
+    //设置微信好友或者朋友圈的分享url,下面是微信好友，微信朋友圈对应wechatTimelineData
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://www.cyberace.cc";
+    
+//    [[UMSocialControllerService defaultControllerService] setShareText:@"123" shareImage:nil socialUIDelegate:nil];
+    //设置分享内容和回调对象
+    [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
+}
 
 -(IBAction)backAction:(id)sender{
     [self dismissViewControllerAnimated:YES completion:^(){}];
@@ -175,6 +190,9 @@
         [follow removeTarget:self action:@selector(follow:) forControlEvents:UIControlEventTouchUpInside];
         [follow addTarget:self action:@selector(deFollow:) forControlEvents:UIControlEventTouchUpInside];
     }
+    
+    [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];
+    
     return cell;
 }
 

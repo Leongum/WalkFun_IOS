@@ -15,6 +15,8 @@
 #import "RORMissionServices.h"
 #import "CoverView.h"
 #import "PooViewController.h"
+#import "ReadyToGoViewController.h"
+
 
 #define PAGE_QUANTITY 3
 
@@ -39,7 +41,7 @@
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet UILabel *missionContentLabel;
 @property (strong, nonatomic) IBOutlet UIView *missionView;
-@property (strong, nonatomic) IBOutlet UIButton *missionStoneButton;
+
 @property (strong, nonatomic) NSMutableArray *contentViews;
 
 @end

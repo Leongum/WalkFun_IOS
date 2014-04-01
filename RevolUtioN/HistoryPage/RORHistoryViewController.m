@@ -42,11 +42,14 @@
 
 - (void)viewDidLoad
 {
-    scrolled = NO;
     [super viewDidLoad];
+    self.backButton.alpha = 0;
+
     User_Detail *userDetail = [RORUserServices fetchUserDetailByUserId:[RORUserUtils getUserId]];
     self.userNameLabel.text = [RORUserUtils getUserName];
     self.levelLabel.text = [NSString stringWithFormat:@"%@",userDetail.level];
+    
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -133,7 +136,10 @@
     // Return the number of rows in the section.
     NSString *date_str = [sortedDateList objectAtIndex:section];
     NSArray *records4Date = [runHistoryList objectForKey:date_str];
-    return records4Date.count;
+    if (section<sortedDateList.count-1) {
+        return records4Date.count;
+    }
+    return records4Date.count+1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -142,49 +148,65 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"plainCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    [RORUtils setFontFamily:ENG_WRITTEN_FONT forView:cell andSubViews:YES];
-    
     NSString *date_str = [sortedDateList objectAtIndex:indexPath.section];
     NSArray *records4DateList = [runHistoryList objectForKey:date_str];
+    
+    if (indexPath.row == records4DateList.count){
+        static NSString *CellIdentifier = @"tailCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        return cell;
+    }
+    static NSString *CellIdentifier = @"plainCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     User_Running_History *record4Date = [records4DateList objectAtIndex:indexPath.row];
     UILabel *distanceLabel = (UILabel *)[cell viewWithTag:DISTANCE];
     distanceLabel.text = [RORUtils formattedSteps:record4Date.steps.integerValue];
     UILabel *durationLabel = (UILabel *)[cell viewWithTag:DURATION];
     durationLabel.text = [RORUtils transSecondToStandardFormat:[record4Date.duration integerValue]];
-    if (record4Date.valid.integerValue<=0){
-        distanceLabel.textColor = [UIColor grayColor];
-        durationLabel.textColor = [UIColor grayColor];
-    }else{
-        distanceLabel.textColor = [UIColor blackColor];
-        durationLabel.textColor = [UIColor darkGrayColor];
-    }
+//    if (record4Date.valid.integerValue<=0){
+//        distanceLabel.textColor = [UIColor grayColor];
+//        durationLabel.textColor = [UIColor grayColor];
+//    }else{
+//        distanceLabel.textColor = [UIColor blackColor];
+//        durationLabel.textColor = [UIColor blackColor];
+//    }
+//    RORImageView *isValidImage = (RORImageView *)[cell viewWithTag:VALID];
+//    isValidImage.alpha = 0;
     
-    RORImageView *isValidImage = (RORImageView *)[cell viewWithTag:VALID];
-
-    isValidImage.alpha = 0;
-    bottomIndexPath = indexPath;
+    [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];
     return cell;
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *result = nil;
+    CGRect headerFrame = CGRectMake(0, 0, tableView.frame.size.width, 22);
+    UIView *result = [[UIView alloc] initWithFrame:headerFrame];
+    
+    UIImageView *headerImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"history_cell_section.png"]];
+    headerImageView.frame = headerFrame;
+    [result addSubview:headerImageView];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, tableView.frame.size.width-50, 22)];
     label.text = (NSString *)[sortedDateList objectAtIndex:section];
-    label.font = [UIFont systemFontOfSize:14];
+    label.font = [UIFont boldSystemFontOfSize:12];
     label.textAlignment = NSTextAlignmentLeft;
-    label.textColor = [UIColor darkGrayColor];
+    label.textColor = [UIColor blackColor];
     label.backgroundColor = [UIColor clearColor];
 
-    result = [[UIView alloc] initWithFrame:label.frame];
     [result addSubview:label];
+    
+    [RORUtils setFontFamily:APP_FONT forView:result andSubViews:YES];
     return result; 
 }
 
 #pragma mark - Table view delegate
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *date_str = [sortedDateList objectAtIndex:indexPath.section];
+    NSArray *records4DateList = [runHistoryList objectForKey:date_str];
+    if (indexPath.row == records4DateList.count){
+        return 35;
+    }
+    return 40;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

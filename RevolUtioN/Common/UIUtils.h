@@ -8,7 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+typedef struct{
+    UInt64 r, g, b;
+}colorType;
+
+colorType colorSum[320][568];
+
 @interface UIUtils : NSObject
+
 
 + (UIImage*) grayscale:(UIImage*)anImage type:(char)type;
 

@@ -22,6 +22,10 @@
 @property (nonatomic, retain) NSString * userName;
 @property (nonatomic, retain) NSNumber * level;
 @property (nonatomic, retain) NSString * userTitle;
+@property (nonatomic, retain) NSNumber * fight;
+@property (nonatomic, retain) NSNumber * fightPlus;
+@property (nonatomic, retain) NSNumber * power;
+@property (nonatomic, retain) NSNumber * powerPlus;
 
 +(Friend *) removeAssociateForEntity:(Friend *)associatedEntity;
 

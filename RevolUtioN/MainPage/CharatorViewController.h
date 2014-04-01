@@ -24,8 +24,8 @@
 @interface CharatorViewController : UIViewController{
     UIView *behindCharatorView, *frontCharatorView, *flowContainerView;
     UIImageView *charatorImageView, *charatorBumpImageView;
-    UILabel *fatPVFrameView, *healthPVFrameView;
-    THProgressView *fatPV, *healthPV;
+    UILabel *fatPVFrameView, *fightPVFrameView;
+    THProgressView *fatPV, *fightPV;
 
     NSDictionary *itemForDisplayDict;
     BOOL haveBump;

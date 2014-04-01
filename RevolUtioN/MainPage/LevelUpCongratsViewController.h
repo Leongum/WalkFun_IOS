@@ -9,16 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "RORUserServices.h"
 #import "PooViewController.h"
+#import "StrokeLabel.h"
 
 @interface LevelUpCongratsViewController : PooViewController{
     User_Base *userBase;
 }
 
 @property (strong, nonatomic) IBOutlet UILabel *levelLabe;
-@property (strong, nonatomic) IBOutlet UILabel *oldGoldLabel;
-@property (strong, nonatomic) IBOutlet UILabel *nExtraGoldLabel;
+@property (strong, nonatomic) IBOutlet UILabel *fightLabel;
+@property (strong, nonatomic) IBOutlet StrokeLabel *titleLabel;
 
--(void)inputOldGold:(double)oldGold NewGold:(double)newGold andLevel:(NSInteger)level;
+@property (strong, nonatomic) IBOutlet UIImageView *congratsBg;
+
+-(void)inputOldFight:(int)oldfight NewFight:(int)newFight andLevel:(int)level;
 
 
 @end

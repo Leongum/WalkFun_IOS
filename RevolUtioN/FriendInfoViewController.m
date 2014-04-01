@@ -27,6 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.backButton.alpha = 0;
 	// Do any additional setup after loading the view.
     //载入人物视图
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
@@ -63,6 +64,8 @@
     [self.loadingLabel setSpotlightColor:[UIColor whiteColor]];
     [self.loadingLabel setContentMode:UIViewContentModeBottom];
     [self.loadingLabel startAnimating];
+    
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
 -(void)refreshView {
@@ -122,4 +125,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Actions
+
+-(IBAction)backAction:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

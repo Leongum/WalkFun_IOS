@@ -63,6 +63,7 @@
     currentStep = 0;
     eventHappenedCount = 0;
     goldCount = 0;
+    itemCount = 0;
 }
 
 -(void)viewDidUnload{

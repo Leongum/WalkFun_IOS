@@ -45,31 +45,73 @@
     UInt8*      buffer;
     data = CGDataProviderCopyData(dataProvider);
     buffer = (UInt8*)CFDataGetBytePtr(data);
-    for (int i=0; i<sizeof(buffer); i++){
-        NSLog(@"%d ",buffer[i]);
-    }
-//    NSLog(@"%lu", sizeof(buffer));
+    
+    //用来存处理后图片像素的数组
     UInt8*newData = malloc(height*bytesPerRow + width*4);
     
     int x, y;
     
+    colorSum[0][0].r = *(buffer+0);//red
+    colorSum[0][0].g = *(buffer+1);//green
+    colorSum[0][0].b = *(buffer+2);//blue
+    for (y=1; y<height; y++) {
+        UInt8 *tmp1 = buffer + y * bytesPerRow;
+        colorSum[0][y].r = colorSum[0][y-1].r + *(tmp1+0);
+        colorSum[0][y].g = colorSum[0][y-1].g + *(tmp1+1);
+        colorSum[0][y].b = colorSum[0][y-1].b + *(tmp1+2);
+    }
+    for (x=1; x<width; x++) {
+        UInt8 *tmp1 = buffer + x * 4;
+        colorSum[x][0].r = colorSum[x-1][0].r + *(tmp1+0);
+        colorSum[x][0].g = colorSum[x-1][0].g + *(tmp1+1);
+        colorSum[x][0].b = colorSum[x-1][0].b + *(tmp1+2);
+    }
+    for (y = 1; y < height; y++) {
+        for (x = 1; x < width; x++) {
+            UInt8 *tmp1 = buffer + y * bytesPerRow + x * 4;
+            colorSum[x][y].r = colorSum[x-1][y].r + colorSum[x][y-1].r + *(tmp1+0) - colorSum[x-1][y-1].r;
+            colorSum[x][y].g = colorSum[x-1][y].g + colorSum[x][y-1].g + *(tmp1+1) - colorSum[x-1][y-1].g;
+            colorSum[x][y].b = colorSum[x-1][y].b + colorSum[x][y-1].b + *(tmp1+2) - colorSum[x-1][y-1].b;
+        }
+    }
     for (y = 0; y < height; y++) {
         for (x = 0; x < width; x++) {
             UInt8 *tmp2;
             tmp2 = newData + y * bytesPerRow + x * 4;
             int tmpCount=0;
             NSInteger red=0,green=0,blue=0;
-            int scale = 2;
-            for (int i = (y-scale<0?0:y-scale); i <= (y+scale>height-1?height-1:y+scale); i++){
-                for (int j = (x-scale<0?0:x-scale); j <= (x+scale>=width-1?width-1:x+scale); j++){
-                    UInt8 *tmp1;
-                    tmp1 = buffer + i * bytesPerRow + j * 4;
-                    tmpCount++;
-                    red+=*(tmp1 + 0);
-                    green+=*(tmp1 + 1);
-                    blue += *(tmp1 + 2);
-                }
-            }
+            int s = 3;//scale， 区域大小为(2*s+1)^2
+            
+            //计算区域内r,g,b各值总和
+            int rightBottomX = ((x+s>=width)?width-1:x+s);
+            int rightBottomY = ((y+s>=height)?height-1:y+s);
+            red = colorSum[rightBottomX][rightBottomY].r +
+                ((x-s-1<0 || y-s-1<0)?0:colorSum[x-s-1][y-s-1].r) -
+                ((x-s-1<0)?0:colorSum[x-s-1][rightBottomY].r) -
+                ((y-s-1<0)?0:colorSum[rightBottomX][y-s-1].r);
+            green = colorSum[rightBottomX][rightBottomY].g +
+                ((x-s-1<0 || y-s-1<0)?0:colorSum[x-s-1][y-s-1].g) -
+                ((x-s-1<0)?0:colorSum[x-s-1][rightBottomY].g) -
+                ((y-s-1<0)?0:colorSum[rightBottomX][y-s-1].g);
+            blue = colorSum[rightBottomX][rightBottomY].b +
+                ((x-s-1<0 || y-s-1<0)?0:colorSum[x-s-1][y-s-1].b) -
+                ((x-s-1<0)?0:colorSum[x-s-1][rightBottomY].b) -
+                ((y-s-1<0)?0:colorSum[rightBottomX][y-s-1].b);
+            
+            //计算区域内像素个数
+            tmpCount = (2*s+1)*(2*s+1);
+            int ofX=0, ofY=0;
+            if (x+s>=width)
+                ofX = x+s-width+1;
+            if (x-s<0)
+                ofX = 0-x+s;
+            if (y+s>=height)
+                ofY = y+s-height+1;
+            if (y-s<0)
+                ofY = 0-y+s;
+            tmpCount = tmpCount - (2*s+1)*(ofX+ofY) + ofX*ofY;
+
+            //算平均值
             *(tmp2 + 0) = red/tmpCount;
             *(tmp2 + 1) = green/tmpCount;
             *(tmp2 + 2) = blue/tmpCount;

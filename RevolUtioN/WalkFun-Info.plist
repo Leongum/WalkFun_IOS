@@ -59,9 +59,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Comic Sans MS.ttf</string>
-		<string>entsani.ttf</string>
-		<string>EHSMB.TTF</string>
+		<string>WawaW5.TTF</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

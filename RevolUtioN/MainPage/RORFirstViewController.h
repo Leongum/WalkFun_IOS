@@ -50,5 +50,5 @@
 @property (strong, nonatomic) IBOutlet UIView *charatorView;
 @property (strong, nonatomic) IBOutlet UIButton *msgButton;
 
-
+@property (strong, nonatomic) IBOutlet UIButton *missionStoneButton;
 @end

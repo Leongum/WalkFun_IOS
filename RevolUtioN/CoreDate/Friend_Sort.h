@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSNumber * fatness;
 @property (nonatomic, retain) NSNumber * power;
 @property (nonatomic, retain) NSNumber * fight;
+@property (nonatomic, retain) NSNumber * fightPlus;
 
 +(Friend_Sort *) removeAssociateForEntity:(Friend_Sort *)associatedEntity;
 

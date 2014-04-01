@@ -82,6 +82,8 @@
 #define FRIENDS_PAGE_SIZE 10
 
 #define COLOR_MOSS [UIColor colorWithRed:0 green:128.f/255.f blue:64.f/255.f alpha:1]
+#define APP_FONT @"DFPWaWaW5"
+
 #endif
 
 #define RULE_Drop_Down @"D"

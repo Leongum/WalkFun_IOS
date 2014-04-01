@@ -7,13 +7,15 @@
 //
 
 #import "LevelUpCongratsViewController.h"
+#import "Animations.h"
+#import "FTAnimation.h"
 
 @interface LevelUpCongratsViewController ()
 
 @end
 
 @implementation LevelUpCongratsViewController
-@synthesize levelLabe, oldGoldLabel, nExtraGoldLabel;
+@synthesize levelLabe, fightLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,82 +29,39 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-	
-//	// Cells spawn in the bottom, moving up
-//	CAEmitterLayer *fireworksEmitter = [CAEmitterLayer layer];
-//	CGRect viewBounds = self.view.layer.bounds;
-//	fireworksEmitter.emitterPosition = CGPointMake(viewBounds.size.width/2.0, viewBounds.size.height);
-//	fireworksEmitter.emitterSize	= CGSizeMake(viewBounds.size.width/2.0, 0.0);
-//	fireworksEmitter.emitterMode	= kCAEmitterLayerOutline;
-//	fireworksEmitter.emitterShape	= kCAEmitterLayerLine;
-//	fireworksEmitter.renderMode		= kCAEmitterLayerAdditive;
-//	fireworksEmitter.seed = (arc4random()%100)+1;
-//	
-//	// Create the rocket
-//	CAEmitterCell* rocket = [CAEmitterCell emitterCell];
-//	
-//	rocket.birthRate		= 0.5;
-//	rocket.emissionRange	= 0.25 * M_PI;  // some variation in angle
-//	rocket.velocity			= 380;
-//	rocket.velocityRange	= 100;
-//	rocket.yAcceleration	= 75;
-//	rocket.lifetime			= 1.02;	// we cannot set the birthrate < 1.0 for the burst
-//	
-//	rocket.contents			= (id) [[UIImage imageNamed:@"DazRing"] CGImage];
-//	rocket.scale			= 0.2;
-//	rocket.color			= [[UIColor yellowColor] CGColor];
-//	rocket.greenRange		= 1.0;		// different colors
-//	rocket.redRange			= 1.0;
-//	rocket.blueRange		= 1.0;
-//	rocket.spinRange		= M_PI;		// slow spin
-//	
-//    
-//	
-//	// the burst object cannot be seen, but will spawn the sparks
-//	// we change the color here, since the sparks inherit its value
-//	CAEmitterCell* burst = [CAEmitterCell emitterCell];
-//	
-//	burst.birthRate			= 1.0;		// at the end of travel
-//	burst.velocity			= 0;
-//	burst.scale				= 2.5;
-//	burst.redSpeed			=+1.5;		// shifting
-//	burst.blueSpeed			=-1.5;		// shifting
-//	burst.greenSpeed		=+1.0;		// shifting
-//	burst.lifetime			= 0.15;
-//	
-//	// and finally, the sparks
-//	CAEmitterCell* spark = [CAEmitterCell emitterCell];
-//	
-//	spark.birthRate			= 300;
-//	spark.velocity			= 150;
-//	spark.emissionRange		= 2* M_PI;	// 360 deg
-//	spark.yAcceleration		= 75;		// gravity
-//	spark.lifetime			= 3;
-//    
-//	spark.contents			= (id) [[UIImage imageNamed:@"DazStarOutline"] CGImage];
-//	spark.scaleSpeed		=-0.2;
-//	spark.greenSpeed		= 0.4;
-//	spark.redSpeed			= 0.1;
-//	spark.blueSpeed			=-0.4;
-//	spark.alphaSpeed		=-0.25;
-//	spark.spin				= 2* M_PI;
-//	spark.spinRange			= 2* M_PI;
-//	
-//	// putting it together
-//	fireworksEmitter.emitterCells	= [NSArray arrayWithObject:rocket];
-//	rocket.emitterCells				= [NSArray arrayWithObject:burst];
-//	burst.emitterCells				= [NSArray arrayWithObject:spark];
-//	[self.view.layer addSublayer:fireworksEmitter];
-    
+	self.titleLabel.alpha = 0;
     userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
     
     NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
-    NSNumber *userExtraGold = [userInfoList valueForKey:@"fightPower"];
-    [self inputOldGold:userExtraGold.doubleValue NewGold:2.5*userBase.userDetail.fight.doubleValue andLevel:userBase.userDetail.level.integerValue];
-    NSDictionary *saveDict = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithDouble:userBase.userDetail.fight.doubleValue*2.5], @"fightPower", userBase.userDetail.level, @"userLevel", nil];
+    NSNumber *userFightNum = [userInfoList valueForKey:@"fightPower"];
+    [self inputOldFight:userFightNum.intValue NewFight:userBase.userDetail.fight.intValue andLevel:userBase.userDetail.level.intValue];
+
+    NSDictionary *saveDict = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithDouble:userBase.userDetail.fight.doubleValue], @"fightPower", userBase.userDetail.level, @"userLevel", nil];
     [RORUserUtils writeToUserInfoPList:saveDict];
+    
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
+    
+    self.congratsBg.alpha =0;
+    //背景光转动的动画
+//    [self startBgAnimation];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    self.titleLabel.alpha = 1;
+    [Animations rotate:self.titleLabel andAnimationDuration:0 andWait:NO andAngle:-18];
+    [self.congratsBg popIn:0.2 delegate:self];
+}
+
+-(void)startBgAnimation{
+    CABasicAnimation* rotationAnimation;
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 ];
+    rotationAnimation.duration = 4;
+    rotationAnimation.cumulative = YES;
+    rotationAnimation.repeatCount = HUGE_VALF;
+    
+    [self.congratsBg.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+}
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -110,10 +69,9 @@
 }
 
 
--(void)inputOldGold:(double)oldGold NewGold:(double)newGold andLevel:(NSInteger)level{
-    self.oldGoldLabel.text = [NSString stringWithFormat:@"%.3f%%", oldGold];
-    self.nExtraGoldLabel.text = [NSString stringWithFormat:@"%.3f%%", newGold];
-    self.levelLabe.text = [NSString stringWithFormat:@"%d",level];
+-(void)inputOldFight:(int)oldfight NewFight:(int)newFight andLevel:(int)level{
+    self.fightLabel.text = [NSString stringWithFormat:@"%d → %d",oldfight, newFight];
+    self.levelLabe.text = [NSString stringWithFormat:@"%d → %d",level-1, level];
 }
 
 - (IBAction)bgTap:(id)sender {

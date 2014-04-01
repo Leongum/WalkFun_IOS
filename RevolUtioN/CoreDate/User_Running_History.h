@@ -38,6 +38,8 @@
 @property (nonatomic, retain) NSString * propGet;
 @property (nonatomic, retain) NSString * actionIds;
 @property (nonatomic, retain) NSDate * commitTime;
+@property (nonatomic, retain) NSNumber * friendId;
+@property (nonatomic, retain) NSString * friendName;
 
 +(User_Running_History *) intiUnassociateEntity;
 

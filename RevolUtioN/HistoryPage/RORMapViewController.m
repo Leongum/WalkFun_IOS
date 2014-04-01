@@ -34,6 +34,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.backButton.alpha = 0;
+    
+    [self.BACKButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     CLLocation *startLoc=nil;
     CLLocation *endLoc=nil;
     for (int j = 0; j<routes.count; j++){

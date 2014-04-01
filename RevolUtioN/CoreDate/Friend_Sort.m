@@ -19,7 +19,7 @@
 @dynamic friendId;
 @dynamic power;
 @dynamic fatness;
-@dynamic fight;
+@dynamic fight,fightPlus;
 
 +(Friend_Sort *) removeAssociateForEntity:(Friend_Sort *)associatedEntity{
     NSManagedObjectContext *context = [RORContextUtils getShareContext];
@@ -41,6 +41,7 @@
     self.power = [RORDBCommon getNumberFromId:[dict valueForKey:@"power"]];
     self.fatness = [RORDBCommon getNumberFromId:[dict valueForKey:@"fatness"]];
     self.fight = [RORDBCommon getNumberFromId:[dict valueForKey:@"fight"]];
+    self.fightPlus = [RORDBCommon getNumberFromId:[dict valueForKey:@"fightPlus"]];
 }
 
 @end

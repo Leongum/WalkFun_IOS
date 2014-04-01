@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/Items/ItemsMainViewController.m"
-            timestampString = "416310034.650874"
+            timestampString = "417602678.334248"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "-itemMallAction:"
             landmarkType = "5">
             <Locations>
@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/Items/ItemMallViewController.m"
-            timestampString = "417327067.009911"
+            timestampString = "417612535.388817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "-numberOfComponentsInPickerView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -120,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/Items/ItemIconView.m"
-            timestampString = "415444457.789978"
+            timestampString = "417965381.367232"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "-fillContentWith:"
             landmarkType = "5">
          </BreakpointContent>
@@ -168,11 +168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/RunningPages/RORRunningViewController.m"
-            timestampString = "416470953.761853"
+            timestampString = "418023978.38868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "369"
-            endingLineNumber = "369"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
             landmarkName = "-endButtonAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -216,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/RORServices/RORFriendService.m"
-            timestampString = "416130051.074755"
+            timestampString = "417497772.403902"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "353"
-            endingLineNumber = "353"
+            startingLineNumber = "362"
+            endingLineNumber = "362"
             landmarkName = "+fetchRecommendFriends:"
             landmarkType = "5">
          </BreakpointContent>
@@ -248,11 +248,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/ReusableControl/RORRunningBaseViewController.m"
-            timestampString = "417257066.035074"
+            timestampString = "418023978.38868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "-isEventHappen"
             landmarkType = "5">
          </BreakpointContent>
@@ -263,28 +263,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RevolUtioN/Items/ItemMallViewController.m"
-            timestampString = "417327067.009911"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "-showItemQuantityCover"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "RevolUtioN/RunningPages/RORRunningViewController.m"
-            timestampString = "416811894.253681"
+            timestampString = "418023978.38868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "468"
-            endingLineNumber = "468"
+            startingLineNumber = "487"
+            endingLineNumber = "487"
             landmarkName = "-creatRunningHistory"
             landmarkType = "5">
          </BreakpointContent>
@@ -296,11 +280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/RunningPages/RORRunningViewController.m"
-            timestampString = "417259252.991371"
+            timestampString = "418024540.848683"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "649"
-            endingLineNumber = "649"
+            startingLineNumber = "681"
+            endingLineNumber = "681"
             landmarkName = "-makeWalkEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -311,13 +295,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RevolUtioN/RunningPages/RORRunningViewController.m"
-            timestampString = "417259252.991371"
+            filePath = "RevolUtioN/HistoryPage/RORMapViewController.m"
+            timestampString = "417366200.841285"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "624"
-            endingLineNumber = "624"
-            landmarkName = "-isEventHappen"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "-center_map"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -327,13 +311,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RevolUtioN/HistoryPage/RORMapViewController.m"
-            timestampString = "417257570.21486"
+            filePath = "RevolUtioN/RunningPages/ReadyToGoViewController.m"
+            timestampString = "417630243.302234"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "-center_map"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "-calculateItemEffect"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

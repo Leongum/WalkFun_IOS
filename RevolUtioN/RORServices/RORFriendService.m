@@ -114,6 +114,9 @@
             newFriend.level = friendSort.level;
             newFriend.userName = friendSort.friendName;
             newFriend.userTitle = friendSort.userTitle;
+            newFriend.fight = friendSort.fight;
+            newFriend.fightPlus = friendSort.fightPlus;
+            newFriend.power = friendSort.power;
         }
         [friendsDetails addObject:newFriend];
     }
@@ -141,6 +144,9 @@
             newFriend.level = friendSort.level;
             newFriend.userName = friendSort.friendName;
             newFriend.userTitle = friendSort.userTitle;
+            newFriend.fight = friendSort.fight;
+            newFriend.fightPlus = friendSort.fightPlus;
+            newFriend.power = friendSort.power;
         }
         [friendsDetails addObject:newFriend];
     }
@@ -168,6 +174,9 @@
             newFriend.level = friendSort.level;
             newFriend.userName = friendSort.friendName;
             newFriend.userTitle = friendSort.userTitle;
+            newFriend.fight = friendSort.fight;
+            newFriend.fightPlus = friendSort.fightPlus;
+            newFriend.power = friendSort.power;
         }
         [friendsDetails addObject:newFriend];
     }

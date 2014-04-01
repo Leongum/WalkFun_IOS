@@ -15,6 +15,10 @@
 #import "ROREndAnnotation.h"
 #import "RORMissionHistoyService.h"
 #import "CoverView.h"
+#import "PooViewController.h"
+#import "ItemIconView.h"
+
+#define ICON_SIZE_ITEM 50
 
 @interface RORHistoryDetailViewController : RORViewController <MKMapViewDelegate>{
     NSMutableArray *improvedRoute;
@@ -25,6 +29,8 @@
     NSArray *eventTimeList;
     NSMutableArray *eventDisplayList;
     NSMutableArray *eventDisplayTimeList;
+    
+    User_Base *userBase;
 }
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
@@ -40,5 +46,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *sumLabel;
 
+@property (strong, nonatomic) IBOutlet UIScrollView *itemGetScrollView;
 
 @end

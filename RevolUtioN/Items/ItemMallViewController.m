@@ -35,8 +35,9 @@
 	// Do any additional setup after loading the view.
     userMoney = userBase.userDetail.goldCoin.integerValue;
     self.moneyLabel.text = [NSString stringWithFormat:@"%d", userMoney];
-    [self.itemQuantityCoverView removeFromSuperview];
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
     
+    [self.itemQuantityCoverView removeFromSuperview];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -129,6 +130,8 @@
 
     UILabel *costLabel = (UILabel *)[cell viewWithTag:103];
     costLabel.text = [NSString stringWithFormat:@"%d", item.virtualPrice.integerValue];
+    
+    [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];
     
     return cell;
 }

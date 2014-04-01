@@ -22,6 +22,7 @@
 @synthesize userName;
 @synthesize userTitle;
 @synthesize level;
+@synthesize fight,fightPlus,power,powerPlus;
 
 +(Friend *) removeAssociateForEntity:(Friend *)associatedEntity{
     NSManagedObjectContext *context = [RORContextUtils getShareContext];

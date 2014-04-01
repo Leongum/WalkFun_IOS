@@ -308,23 +308,13 @@
 + (NSString *)getPropgetStringFromList:(NSArray *)eventList{
     NSMutableString *propgetString = [[NSMutableString alloc]init];
     NSMutableDictionary *itemDict = [[NSMutableDictionary alloc]init];
-    NSMutableDictionary *attrDict = [[NSMutableDictionary alloc]init];
+//    NSMutableDictionary *attrDict = [[NSMutableDictionary alloc]init];
     int winCount = 0, fightCount = 0;
     
     for (int i=0; i<eventList.count; i++){
         Walk_Event *we = (Walk_Event *)[eventList objectAtIndex:i];
         if ([we.eType isEqualToString:RULE_Type_Action]){//事件
             Action_Define *actionEvent = [RORSystemService fetchActionDefine:we.eId];
-//            NSDictionary *effectDict = [RORUtils explainActionEffetiveRule:actionEvent.effectiveRule];
-//            for (NSString *key in [effectDict allKeys]){
-//                NSNumber *n = [RORDBCommon getNumberFromId:[effectDict objectForKey:key]];
-//                NSNumber *current = [RORDBCommon getNumberFromId:[attrDict objectForKey:key]];
-//                if (current) {
-//                    [attrDict setObject:[NSNumber numberWithInteger:current.integerValue + n.integerValue] forKey:key];
-//                } else {
-//                    [attrDict setObject:n forKey:key];
-//                }
-//            }
             NSDictionary *actionDict = [RORUtils explainActionRule:actionEvent.actionRule];
             for (NSString *key in [actionDict allKeys]){
                 NSNumber *n = [RORDBCommon getNumberFromId:[actionDict objectForKey:key]];
@@ -351,15 +341,13 @@
             winCount+=we.eWin.integerValue;
         }
     }
-    [propgetString appendString:[NSString stringWithFormat:@"%d|", winCount]];
+    [propgetString appendString:[NSString stringWithFormat:@"%d-", winCount]];
     for (NSString *key in [itemDict allKeys]){
         NSNumber *num = [itemDict objectForKey:key];
         Virtual_Product *item = [RORVirtualProductService fetchVProduct:[RORDBCommon getNumberFromId:key]];
-        [propgetString appendString:[NSString stringWithFormat:@"%@x%@ ",item.productName, num]];
+        [propgetString appendString:[NSString stringWithFormat:@"%@,%@|",item.productId, num]];
     }
-//    [propgetString appendString:@"|"];
-//    [propgetString appendString:[NSString stringWithFormat:@"%@",[attrDict objectForKey:RULE_Money]]];
-    
+
     return propgetString;
 }
 

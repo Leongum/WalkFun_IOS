@@ -17,13 +17,16 @@
 #import "Mission.h"
 #import "RORRunningBaseViewController.h"
 #import "THProgressView.h"
+#import "StrokeLabel.h"
 
-
-#define WALKING_FIGHT_STAGE_I 500
-#define WALKING_FIGHT_STAGE_II 500
-#define WALKING_FIGHT_STAGE_III 1500
-#define WALKING_FIGHT_STAGE_IV 2500
+#define WALKING_FIGHT_STAGE_I 300
+#define WALKING_FIGHT_STAGE_II 10
+#define WALKING_FIGHT_STAGE_III 30
+#define WALKING_FIGHT_STAGE_IV 40
 #define WALKING_FIGHT_STAGE_V 5000
+
+#define WALKING_FIGHT_POWERLIMIT_V 40
+
 @interface RORRunningViewController : RORRunningBaseViewController {
     BOOL MKwasFound;
     User_Running_History *runHistory;
@@ -33,11 +36,15 @@
     NSMutableDictionary *todayMissionDict;
     NSMutableArray *processViewList;
     
-    NSInteger userPower;
+    NSInteger userPower, userPowerMax, fightPowerCost;
+    double userFight;
+    NSInteger walkExperience;
     
-    
+    THProgressView *powerPV;
 }
 
+@property (strong, nonatomic) NSNumber *friendAddFight;
+@property (strong, nonatomic) NSString *friendAddName;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
@@ -47,9 +54,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *goldLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *goldIcon;
+@property (strong, nonatomic) IBOutlet StrokeLabel *itemLabel;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
 @property (strong, nonatomic) IBOutlet UIView *dataContainer;
 @property (strong, nonatomic) IBOutlet UIView *todayMissionView;
+@property (strong, nonatomic) IBOutlet StrokeLabel *powerFrame;
+@property (strong, nonatomic) IBOutlet UILabel *fightLabel;
+@property (strong, nonatomic) IBOutlet UILabel *friendLabel;
 
 @property (nonatomic) vec_3 inDistance;
 

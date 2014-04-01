@@ -43,12 +43,14 @@
 //===============================================
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
+    self.backButton.alpha = 0;
 
     stepLabel.text = [RORUtils formattedSteps:record.steps.integerValue];
     durationLabel.text = [RORUtils transSecondToStandardFormat:record.duration.integerValue];
 
-   NSDateFormatter *formattter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *formattter = [[NSDateFormatter alloc] init];
     [formattter setDateFormat:@"yyyy-MM-dd"];
     self.dateLabel.text = [NSString stringWithFormat:@"%@", [formattter stringFromDate:record.missionDate]];
     if (record.actionIds){
@@ -75,58 +77,86 @@
     self.sumLabel.numberOfLines = 0;
     NSString *pgString =record.propGet;
     NSMutableString *sumString = [[NSMutableString alloc]init];
-    NSArray *pgStringList = [pgString componentsSeparatedByString:@"|"];
+    NSArray *pgStringList = [pgString componentsSeparatedByString:@"-"];
     if (((NSString *)[pgStringList objectAtIndex:0]).length>0){
-        [sumString appendString:[NSString stringWithFormat:@"共获得%@场战斗胜利\n", [pgStringList objectAtIndex:0]]];
+        [sumString appendString:[NSString stringWithFormat:@"%@", [pgStringList objectAtIndex:0]]];
     }
+    //展示获得的道具
     if (((NSString *)[pgStringList objectAtIndex:1]).length>0){
-        [sumString appendString:[NSString stringWithFormat:@"获得道具：%@\n", [pgStringList objectAtIndex:1]]];
+        NSDictionary *itemDict = [RORUtils explainActionEffetiveRule:[pgStringList objectAtIndex:1]];
+        self.itemGetScrollView.contentSize = CGSizeMake(5 + [itemDict allKeys].count*(ICON_SIZE_ITEM + 5), 0);
+        int i=0;
+        for (NSString *key in [itemDict allKeys]){
+            NSNumber *thisItemId = [RORDBCommon getNumberFromId:key];
+            Virtual_Product *thisItem = [RORVirtualProductService fetchVProduct:thisItemId];
+            NSNumber *itemQuantity = (NSNumber *)[itemDict valueForKey:key];
+            ItemIconView *itemIconView = [[ItemIconView alloc]initWithFrame:CGRectMake(5 + i*(ICON_SIZE_ITEM + 5), 1, ICON_SIZE_ITEM, ICON_SIZE_ITEM)];
+            itemIconView.delegate = self;
+            itemIconView.isUsable = NO;//只显示道具信息，不可使用
+            [itemIconView fillContentWith:thisItem andQuantity:itemQuantity.integerValue];
+            [self.itemGetScrollView addSubview:itemIconView];
+            i++;
+        }
+//        [sumString appendString:[NSString stringWithFormat:@"获得道具：%@\n", [pgStringList objectAtIndex:1]]];
     }
-
+    
     self.sumLabel.text = sumString;
 
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
+    
+    userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
+    //debug
+    [self performLevelUp];
+    
     //如果完成了任务
-    if (record.missionId && [delegate isKindOfClass:[RORRunningViewController class]]){
-        Mission *doneMission = [RORMissionServices fetchMission:record.missionId];
+    if ([delegate isKindOfClass:[RORRunningViewController class]]){
+        //判断升级
+        [self checkLevelUp];
+        
+        //判断完成任务
+        if (record.missionId){
+            Mission *doneMission = [RORMissionServices fetchMission:record.missionId];
 
-        //保存任务数据
-        User_Mission_History *mh = [User_Mission_History intiUnassociateEntity];
-        mh.userId = [RORUserUtils getUserId];
-        mh.userName = [RORUserUtils getUserName];
-        mh.missionId = record.missionId;
-        mh.missionName = doneMission.missionName;
-        mh.missionStatus = [NSNumber numberWithInteger: MissionStatusDone];
-        mh.missionTypeId = doneMission.missionTypeId;
-        mh.startTime = record.missionStartTime;
-        mh.endTime = record.missionEndTime;
-        [RORMissionHistoyService saveMissionHistoryInfoToDB:mh];
-        //显示任务完成提示
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
-        UIViewController *missionDoneViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"missionCongratsVIewController"];
-        CoverView *congratsCoverView = (CoverView *)missionDoneViewController.view;
-        [congratsCoverView addCoverBgImage];
-        [self.view addSubview:congratsCoverView];
-        [congratsCoverView appear:self];
-        
-        UIView *missionCongratsView = missionDoneViewController.view;
-        UILabel *missionNameLabel = (UILabel *)[missionCongratsView viewWithTag:100];
-        UILabel *missionGoldLabel = (UILabel *)[missionCongratsView viewWithTag:101];
-        UILabel *missionExpLabel = (UILabel *)[missionCongratsView viewWithTag:102];
-        UILabel *missionDoneLabel = (UILabel *)[missionCongratsView viewWithTag:103];
-        
-        missionNameLabel.text = doneMission.missionDescription;
-        missionGoldLabel.text = [NSString stringWithFormat:@"+%ld",(long)doneMission.goldCoin.integerValue];
-        missionExpLabel.text = [NSString stringWithFormat:@"+%ld",(long)doneMission.experience.integerValue];
-        
-        NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
-        NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
-        if (missionProcess.integerValue >= 3)
-            missionDoneLabel.text = [NSString stringWithFormat:@"%ld/%d", (long)missionProcess.integerValue, 3];
+            //保存任务数据
+            User_Mission_History *mh = [User_Mission_History intiUnassociateEntity];
+            mh.userId = [RORUserUtils getUserId];
+            mh.userName = [RORUserUtils getUserName];
+            mh.missionId = record.missionId;
+            mh.missionName = doneMission.missionName;
+            mh.missionStatus = [NSNumber numberWithInteger: MissionStatusDone];
+            mh.missionTypeId = doneMission.missionTypeId;
+            mh.startTime = record.missionStartTime;
+            mh.endTime = record.missionEndTime;
+            [RORMissionHistoyService saveMissionHistoryInfoToDB:mh];
+            //显示任务完成提示
+            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+            UIViewController *missionDoneViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"missionCongratsVIewController"];
+            CoverView *congratsCoverView = (CoverView *)missionDoneViewController.view;
+            [congratsCoverView addCoverBgImage];
+            [self.view addSubview:congratsCoverView];
+            [congratsCoverView appear:self];
+            
+            UIView *missionCongratsView = missionDoneViewController.view;
+            UILabel *missionNameLabel = (UILabel *)[missionCongratsView viewWithTag:100];
+            UILabel *missionGoldLabel = (UILabel *)[missionCongratsView viewWithTag:101];
+            UILabel *missionExpLabel = (UILabel *)[missionCongratsView viewWithTag:102];
+            UILabel *missionDoneLabel = (UILabel *)[missionCongratsView viewWithTag:103];
+            
+            missionNameLabel.text = doneMission.missionDescription;
+            missionGoldLabel.text = [NSString stringWithFormat:@"+%ld",(long)doneMission.goldCoin.integerValue];
+            missionExpLabel.text = [NSString stringWithFormat:@"+%ld",(long)doneMission.experience.integerValue];
+            
+            NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+            NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
+            if (missionProcess.integerValue >= 3)
+                missionDoneLabel.text = [NSString stringWithFormat:@"%ld/%d", (long)missionProcess.integerValue, 3];
+        }
     }
 }
 
@@ -138,6 +168,39 @@
     [self setDateLabel:nil];
 
     [super viewDidUnload];
+}
+
+-(void)checkLevelUp{
+    if (!userBase)
+        return;
+    
+    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+    NSNumber *userLevel = [userInfoList valueForKey:@"userLevel"];
+    
+    if (userLevel.integerValue<userBase.userDetail.level.integerValue){
+        [self performLevelUp];
+    }
+}
+
+//弹出升级提示页面
+-(void)performLevelUp{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+
+    PooViewController *pooController = [mainStoryboard instantiateViewControllerWithIdentifier:@"levelUpCongratsCoverViewController"];
+    CoverView *coverView = (CoverView *)pooController.view;
+    [coverView addCoverBgImage];
+    [coverView appear:self];
+    
+    [self addChildViewController:pooController];
+    [self.view addSubview:pooController.view];
+    [self didMoveToParentViewController:pooController];
+    
+    CABasicAnimation *heartsBurst = [CABasicAnimation animationWithKeyPath:@"emitterCells.heart.birthRate"];
+	heartsBurst.fromValue		= [NSNumber numberWithFloat:2.0];
+	heartsBurst.toValue			= [NSNumber numberWithFloat:  0.0];
+	heartsBurst.duration		= 3.0;
+	heartsBurst.timingFunction	= [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+	[pooController.heartsEmitter addAnimation:heartsBurst forKey:@"heartsBurst"];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -221,12 +284,12 @@
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:walkEvent.times.integerValue]];
         }
     }
-    
+    [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 62;
+    return 75;
 }
 
 

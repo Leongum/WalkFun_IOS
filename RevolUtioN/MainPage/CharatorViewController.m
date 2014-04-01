@@ -36,7 +36,7 @@
     flowContainerView = (UIView *)[self.view viewWithTag:102];
     
     fatPV = nil;
-    healthPV = nil;
+    fightPV = nil;
     
     haveBump = NO;
     
@@ -71,9 +71,9 @@
     }
     if (!fatPV){
         fatPVFrameView = (UILabel *)[self.view viewWithTag:200];
-        healthPVFrameView = (UILabel *)[self.view viewWithTag:201];
+        fightPVFrameView = (UILabel *)[self.view viewWithTag:201];
         fatPV = [self newProgressView:fatPVFrameView];
-        healthPV = [self newProgressView:healthPVFrameView];
+        fightPV = [self newProgressView:fightPVFrameView];
         [self.view bringSubviewToFront:fatPVFrameView];
     }
 }
@@ -82,8 +82,9 @@
 #pragma mark - display methods
 
 -(void)displayProgresses{
-    [fatPV setProgress:userBase.userDetail.fatness.doubleValue/100.f];
-    [healthPV setProgress:100/100.f];
+    [fatPV setProgress:userBase.userDetail.power.doubleValue/100.f];
+    //todo
+    [fightPV setProgress:userBase.userDetail.fight.doubleValue/300.f];
 }
 
 -(void)displayCharator{
