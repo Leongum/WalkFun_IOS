@@ -18,7 +18,7 @@
 @end
 
 @implementation RORMapViewController
-@synthesize mapView, routeLine, routeLineView ,routes;
+@synthesize mapView, routeLine, routeLineView ,routes, eventList;
 @synthesize record;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -83,6 +83,26 @@
     ROREndAnnotation *annotation = [[ROREndAnnotation alloc]initWithCoordinate:endLoc.coordinate];
     annotation.title = @"终点";
     [mapView addAnnotation:annotation];
+    
+    for (Walk_Event *we in eventList) {
+        CLLocationCoordinate2D eventCoor;
+        eventCoor.latitude = we.lati.doubleValue;
+        eventCoor.longitude = we.longi.doubleValue;
+        RORMapAnnotation *anno;
+        if ([we.eType isEqualToString:RULE_Type_Fight]){
+            anno = [[RORFightAnnotation alloc]initWithCoordinate:eventCoor];
+            anno.title = [NSString stringWithFormat:@"战斗%@",we.eWin.intValue>0?@"胜利":@"失败"];
+        } else {
+            Action_Define *actionEvent = [RORSystemService fetchActionDefine:we.eId];
+            if ([actionEvent.actionName rangeOfString:@"金币"].location != NSNotFound) {//金币事件
+                anno = [[CoinAnnotation alloc]initWithCoordinate:eventCoor];
+            } else {//普通事件
+                anno = [[EventAnnotation alloc]initWithCoordinate:eventCoor];
+            }
+            anno.title = actionEvent.actionName;
+        }
+        [mapView addAnnotation:anno];
+    }
     
     [self center_map];
 }
@@ -230,10 +250,17 @@
             //            pulsingView.rightCalloutAccessoryView = rightButton;
             //
             UIImage *image;
-            if ([annotation isKindOfClass:[RORStartAnnotation class]])
+            if ([annotation isKindOfClass:[RORStartAnnotation class]]){
                 image = [UIImage imageNamed:@"start_annotation.png"];
-            else
+            } else if ([annotation isKindOfClass:[ROREndAnnotation class]]){
                 image = [UIImage imageNamed:@"end_annotation.png"];
+            } else if ([annotation isKindOfClass:[RORFightAnnotation class]]){
+                image = [UIImage imageNamed:@"fight_icon.png"];
+            } else if ([annotation isKindOfClass:[EventAnnotation class]]){
+                image = [UIImage imageNamed:@"event_icon.png"];
+            } else if ([annotation isKindOfClass:[CoinAnnotation class]]){
+                image = [UIImage imageNamed:@"item_coin.png"];
+            }
             
             pulsingView.image = image;
             pulsingView.canShowCallout = YES;

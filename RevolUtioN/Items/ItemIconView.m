@@ -38,6 +38,7 @@
         
         [RORUtils setFontFamily:APP_FONT forView:self andSubViews:YES];
         
+        //添加单击事件
         [self addTarget:self action:@selector(didSelectItem:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
@@ -64,10 +65,13 @@
 
 
 -(IBAction)didSelectItem:(id)sender{
-    UIViewController *parentViewController = (UIViewController *)self.delegate;
+    
+    //获得mainViewController
+    parentViewController = (UIViewController *)self.delegate;
     while ([parentViewController parentViewController]) {
         parentViewController = [parentViewController parentViewController];
     }
+    
 //    ItemIconView *itemIcon = (ItemIconView *)sender;
     
     UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"ItemsStoryboard" bundle:[NSBundle mainBundle]];
@@ -84,8 +88,8 @@
     
     [itemDescLabel setLineBreakMode:NSLineBreakByWordWrapping];
     itemDescLabel.numberOfLines = 0;
-    
-//    item = [RORVirtualProductService fetchVProduct:itemIcon.userItem.productId];
+    [itemEffectLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    itemEffectLabel.numberOfLines = 0;
     
     itemNameLabel.text = item.productName;
     itemIconView.image = [RORVirtualProductService getImageOf:item];
@@ -101,6 +105,17 @@
     [RORUtils setFontFamily:APP_FONT forView:itemDetailCoverView andSubViews:YES];
     
     [itemDetailCoverView appear:self];
+}
+
+-(IBAction)useItemAction:(id)sender{
+    UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"ItemsStoryboard" bundle:[NSBundle mainBundle]];
+    UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"ItemUseTargetViewController"];
+    if ([itemViewController respondsToSelector:@selector(setSelectedItem:)]){
+        [itemViewController setValue:item forKey:@"selectedItem"];
+    }
+    [parentViewController presentViewController:itemViewController animated:YES completion:^(){}];
+    
+    [itemDetailCoverView bgTap:self];
 }
 
 

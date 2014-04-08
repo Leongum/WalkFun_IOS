@@ -421,7 +421,7 @@
     if (months<1){
         return days;
     }
-    return [date1 timeIntervalSinceDate:date2]/86400;
+    return [date2 timeIntervalSinceDate:date1]/86400;
 }
 
 @end

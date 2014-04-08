@@ -325,7 +325,7 @@
                     [itemDict setObject:n forKey:key];
                 }
             }
-        } else{ //战斗
+        } else if ([we.eType isEqualToString:RULE_Type_Fight]){ //战斗
             Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:we.eId];
             NSDictionary *actionDict = [RORUtils explainActionRule:fightEvent.winGotRule];
             for (NSString *key in [actionDict allKeys]){
@@ -338,7 +338,9 @@
                 }
             }
             fightCount ++;
-            winCount+=we.eWin.integerValue;
+            
+            if (we.eWin.integerValue>0)
+                winCount++;
         }
     }
     [propgetString appendString:[NSString stringWithFormat:@"%d-", winCount]];

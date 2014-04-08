@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "RORUtils.h"
+@protocol WFCoverViewDelegate
+@optional
+- (void) coverViewDidDismissed:(id)view;
+@end
 
 @interface CoverView : UIControl{
     UIImageView *bgImageView;
 }
 
+@property (strong, nonatomic) id delegate;
 @property (strong, nonatomic)     UIImage *bgImage;
 
 -(IBAction)appear:(id)sender;

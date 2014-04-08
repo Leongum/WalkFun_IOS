@@ -133,13 +133,6 @@
     if ([destination respondsToSelector:@selector(setDelegate:)]){
         [destination setValue:self forKey:@"delegate"];
     }
-    if ([destination respondsToSelector:@selector(setFriendAddFight:)]){
-        double addFight = (selectedFriend.userDetail.fight.doubleValue + selectedFriend.userDetail.fightPlus.doubleValue)/5;
-        [destination setValue:[NSNumber numberWithDouble:addFight] forKey:@"friendAddFight"];
-    }
-    if ([destination respondsToSelector:@selector(setFriendAddName:)]){
-        [destination setValue:selectedFriend.nickName forKey:@"friendAddName"];
-    }
 }
 
 - (IBAction)startAction:(id)sender {
@@ -155,6 +148,14 @@
             isSucceeded = [RORFriendService createAction:toThisUser.userId withActionToUserName:toThisUser.nickName withActionId:action.actionId];
         } else
             isSucceeded = YES;
+        if (selectedFriend) {
+            //记录选择的伙伴id
+            [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:selectedFriend.userId, @"thisWalkFriendId", nil]];
+        } else {
+            [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:-1], @"thisWalkFriendId", nil]];
+        }
+        
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             CoverView *coverView = (CoverView *)self.view;
             [coverView bgTap:self];

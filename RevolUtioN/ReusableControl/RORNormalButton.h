@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RORPlaySound.h"
+#import "StrokeLabel.h"
 
 @interface RORNormalButton : UIButton{
     CGRect originFrame;

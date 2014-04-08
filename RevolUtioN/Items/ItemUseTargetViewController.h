@@ -17,6 +17,7 @@
     NSArray *contentList;
     
     Friend *selectedFriend;
+    BOOL isItemAboutFight;
     BOOL toSelf;
     BOOL isSucceeded;
 }

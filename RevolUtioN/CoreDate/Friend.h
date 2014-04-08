@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSNumber * friendEach;
 @property (nonatomic, retain) NSDate * updateTime;
 @property (nonatomic, retain) NSNumber * userId;
+@property (nonatomic, retain) NSDate * lastWalkTime;
 
 @property (nonatomic, retain) NSString * sex;
 @property (nonatomic, retain) NSString * userName;
@@ -26,6 +27,7 @@
 @property (nonatomic, retain) NSNumber * fightPlus;
 @property (nonatomic, retain) NSNumber * power;
 @property (nonatomic, retain) NSNumber * powerPlus;
+
 
 +(Friend *) removeAssociateForEntity:(Friend *)associatedEntity;
 

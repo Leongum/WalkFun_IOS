@@ -68,7 +68,9 @@
     NSNumber *userId = [RORUserUtils getUserId];
     if(userId.integerValue > 0)
     {
-        RORHttpResponse *httpResponse =[RORUserClientHandler createFriendInfo:userId withFriendInfo:friend.transToDictionary];
+        NSDictionary *dict = friend.transToDictionary;
+        [dict setValue:[RORUtils getStringFromDate:friend.lastWalkTime] forKey:@"lastWalkTime"];
+        RORHttpResponse *httpResponse =[RORUserClientHandler createFriendInfo:userId withFriendInfo:dict];
         
         if ([httpResponse responseStatus] == 200){
             return YES;

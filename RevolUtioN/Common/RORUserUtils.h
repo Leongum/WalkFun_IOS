@@ -63,4 +63,9 @@
 
 //解析propHaving字段为道具id及显示个数的dictionary
 +(NSDictionary *)parsePropHavingString:(NSString *)propHaving;
+
+//获得用户当前体力值
++(NSInteger)getUserPowerLeft;
++(void)saveUserPowerLeft:(NSInteger)powerLeft;
+
 @end

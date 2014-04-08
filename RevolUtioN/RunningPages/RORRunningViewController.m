@@ -24,7 +24,6 @@
 @synthesize record;
 @synthesize kalmanFilter, inDistance;
 @synthesize coverView;
-@synthesize friendAddFight, friendAddName;//伙伴带来的附加战斗力
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,19 +50,30 @@
 }
 
 -(void)controllerInit{
+    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+    NSNumber *thisWalkFriendId = [userInfoList objectForKey:@"thisWalkFriendId"];
+    if (thisWalkFriendId.intValue<0) {
+        thisWalkFriend = nil;
+        friendAddFight = 0;
+    } else {
+        thisWalkFriend = [RORUserServices fetchUser:thisWalkFriendId];
+        friendAddFight = (thisWalkFriend.userDetail.fight.intValue + thisWalkFriend.userDetail.fightPlus.intValue)/5;
+    }
+    
     self.coverView.alpha = 0;
     self.backButton.alpha = 0;
     
     //初始化战斗力
-    userFight = userBase.userDetail.fight.doubleValue + userBase.userDetail.fightPlus.doubleValue + friendAddFight.doubleValue;
-    self.fightLabel.text = [NSString stringWithFormat:@"%.0f", userFight];
+    userFight = userBase.userDetail.fight.doubleValue + userBase.userDetail.fightPlus.doubleValue + friendAddFight;
+    self.fightLabel.text = @"";
+//    self.fightLabel.text = [NSString stringWithFormat:@"%.0f", userFight];
     
     //初始化各个标签
     timeLabel.text = [RORUtils transSecondToStandardFormat:0];
     distanceLabel.text = [RORUtils outputDistance:0];
     self.goldLabel.text = @"0";
     self.itemLabel.text = @"0";
-    self.friendLabel.text = friendAddName;
+    self.friendLabel.text = thisWalkFriend.nickName;
     
     //初始化体力
     powerPV = [[THProgressView alloc] initWithFrame:self.powerFrame.frame];
@@ -73,9 +83,9 @@
     [self.view addSubview:powerPV];
     [self.view bringSubviewToFront:self.powerFrame];
     
-    userPowerMax = userBase.userDetail.power.intValue + userBase.userDetail.powerPlus.intValue;
+    userPowerMax = [RORUserUtils getUserPowerLeft];
     userPower = userPowerMax;
-    self.powerFrame.text = [NSString stringWithFormat:@"%d",userPower];
+    self.powerFrame.text = [NSString stringWithFormat:@"%ld",(long)userPower];
     walkExperience = 0;
     
     //进页面后直接开始记步
@@ -267,7 +277,6 @@
             }
             i++;
         }
-
     }
 }
 
@@ -398,6 +407,7 @@
     iv.image = [UIUtils grayscale:[RORUtils captureScreen] type:1];
     
 //    [Animations fadeIn:coverView andAnimationDuration:0.3 toAlpha:1 andWait:NO];
+    [self.view bringSubviewToFront:coverView];
     [coverView fadeIn:0.3 delegate:self startSelector:nil stopSelector:@selector(addBgAction:)];
     coverView.alpha = 1;
 
@@ -457,12 +467,23 @@
 }
 
 - (void)saveRunInfo{
+    //判断是不是走的距离太短还未触发事件
+    if (distance<WALKING_FIGHT_STAGE_II){
+        NSArray *fightList = [RORSystemService fetchFightDefineByLevel:userBase.userDetail.level andStage:[NSNumber numberWithInteger:FightStageFunny]];
+        if (fightList){
+            Fight_Define *fightEvent = (Fight_Define *)[fightList objectAtIndex:arc4random() % fightList.count];
+            [self eventDidHappened:[self makeWalkEvent:fightEvent]];
+        }
+    }
+    
     [self creatRunningHistory];
     [self startIndicator:self];
     if([RORUserUtils getUserId].integerValue > 0){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [RORRunHistoryServices saveRunInfoToDB:runHistory];
             BOOL updated = [RORRunHistoryServices uploadRunningHistories];
+            if (updated)
+                [RORFriendService syncFriends:[RORUserUtils getUserId]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(updated){
                     [self sendSuccess:@"保存成功"];
@@ -497,9 +518,20 @@
     runHistory.runUuid = [RORUtils uuidString];
     runHistory.steps = [NSNumber numberWithInteger:stepCounting.counter / 0.8];
     runHistory.experience = [NSNumber numberWithInteger:walkExperience];//[self calculateExperience:runHistory];
+    runHistory.goldCoin = [NSNumber numberWithInt:goldCount];
+    
     runHistory.extraExperience =[NSNumber  numberWithDouble:0];
     
+    if (thisWalkFriend) {
+        runHistory.friendId = thisWalkFriend.userId;
+        runHistory.friendName = thisWalkFriend.nickName;
+    }
+    
+    //检查任务是否完成
     [self isMissionDone];
+    
+    //保存用户体力
+    [RORUserUtils saveUserPowerLeft:userPower];
     
     NSLog(@"%@", runHistory);
     record = runHistory;
@@ -525,6 +557,8 @@
         [userInfoList setObject:[NSNumber numberWithInteger:missionProcess] forKey:@"missionProcess"];
         [userInfoList setObject:[NSDate date] forKey:@"lastDailyMissionFinishedDate"];
         [RORUserUtils writeToUserInfoPList:userInfoList];
+    } else {
+        runHistory.missionId = nil;
     }
 }
 
@@ -559,34 +593,51 @@
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         eventTimeLabel.text = @"";
-        eventLabel.text = @"出发";
+        if (thisWalkFriend!=nil)
+            eventLabel.text = [NSString stringWithFormat:@"与小伙伴%@一起从村里出发了",thisWalkFriend.nickName];
+        else
+            eventLabel.text = @"从村里出发了";
         effectLabel.text = @"一切看起来都那么美好～";
     } else {
         Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row-1];
-        identifier = @"eventCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
-        UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
-        UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         
         if ([event.eType isEqualToString:RULE_Type_Action]){
+            identifier = @"eventCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+            
             Action_Define *actionEvent = [RORSystemService fetchActionDefine:event.eId];
             eventLabel.text = actionEvent.actionName;
             effectLabel.text = [NSString stringWithFormat:@"获得：%@",actionEvent.actionAttribute];
             int timeInt = event.times.intValue;
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
         } else {
+            identifier = @"fightCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+            [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
+            eventLabel.numberOfLines = 0;
+            
             Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:event.eId];
+            NSMutableString *fightText = [[NSMutableString alloc]init];
+            if (event.eWin.integerValue==3)
+                [fightText appendString:@"你拼尽余下全部体力发出奋力一击，"];
+            
             if (event.eWin.integerValue>0){
-                eventLabel.text = fightEvent.fightWin;
+                [fightText appendString:fightEvent.fightWin];
                 if (event.eWin.integerValue>1)
                     effectLabel.text = [NSString stringWithFormat:@"获得：%@",fightEvent.winGot];
                 else
                     effectLabel.text = [NSString stringWithFormat:@""];
             } else{
-                eventLabel.text = fightEvent.fightLoose;
+                [fightText appendString:fightEvent.fightLoose];
                 effectLabel.text = [NSString stringWithFormat:@""];
             }
+            eventLabel.text = fightText;
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:event.times.integerValue]];
         }
     }
@@ -598,8 +649,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    newCellHeight = 62;
-    return 62;
+    newCellHeight = 75;
+    if (indexPath.row>0){
+        Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row-1];
+        if ([event.eType isEqualToString:RULE_Type_Fight]){
+            newCellHeight = 110;
+        }
+    }
+    return newCellHeight;
 }
 
 #pragma mark - Event Methods
@@ -614,7 +671,7 @@
     if (((int)currentStep)%10 == 0){
         int x = arc4random() % 1000000;
         double roll = ((double)x)/10000.f;
-        double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0;
+        double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0, rateEvent = 10;
         if (currentStep>WALKING_FIGHT_STAGE_II){
             rate2 = 30;// (currentStep - WALKING_FIGHT_STAGE_II)*3/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 2;
         }
@@ -642,12 +699,19 @@
             fightStage = FightStageNormal;
         } else if (roll<rate2+rate3+rate4+rate5){//低级怪
             fightStage = FightStageEasy;
+        } else if (roll<rate2+rate3+rate4+rate5 + rateEvent){
+            fightStage = -1;
         }
         if (fightStage>0){
             NSArray *fightList = [RORSystemService fetchFightDefineByLevel:userBase.userDetail.level andStage:[NSNumber numberWithInteger:fightStage]];
             if (fightList){
                 Fight_Define *fightEvent = (Fight_Define *)[fightList objectAtIndex:arc4random() % fightList.count];
                 [self eventDidHappened:[self makeWalkEvent:fightEvent]];
+            }
+        } else if (fightStage<0) {
+            if (eventWillList){
+                Action_Define *actionEvent = (Action_Define *)[eventWillList objectAtIndex:arc4random() % eventWillList.count];
+                [self eventDidHappened:[self makeWalkEvent:actionEvent]];
             }
         }
     }
@@ -679,17 +743,7 @@
         walkEvent.eWin = [self checkWin:e];
         walkEvent.power = [NSNumber numberWithInteger:fightPowerCost];
         if (walkEvent.eWin.intValue>1) {//战斗胜利且得到战利品
-            NSDictionary *ruleDict = [RORUtils explainActionRule:e.winGotRule];
-            int tmpCount=0;
-            for (NSString *key in [ruleDict allKeys]) {
-                if ([RORDBCommon getNumberFromId:key]){
-                    tmpCount += [RORDBCommon getNumberFromId:[ruleDict valueForKey:key]].intValue;
-                }
-            }
-            itemCount += tmpCount;
-            
-            self.itemLabel.text = [NSString stringWithFormat:@"%d", itemCount];
-            [self.itemLabel fallIn:0.5 delegate:self];
+            [self refreshItemCount:e.winGotRule];
         }
         if (walkEvent.eWin.intValue>0) {
             walkExperience += e.baseExperience.intValue;
@@ -705,6 +759,20 @@
     walkEvent.lati = [NSNumber numberWithDouble:formerLocation.coordinate.latitude];
     walkEvent.longi = [NSNumber numberWithDouble:formerLocation.coordinate.longitude];
     return walkEvent;
+}
+
+-(void)refreshItemCount:(NSString *)rule{
+    NSDictionary *ruleDict = [RORUtils explainActionRule:rule];
+    int tmpCount=0;
+    for (NSString *key in [ruleDict allKeys]) {
+        if ([RORDBCommon getNumberFromId:key]){
+            tmpCount += [RORDBCommon getNumberFromId:[ruleDict valueForKey:key]].intValue;
+        }
+    }
+    itemCount += tmpCount;
+    
+    self.itemLabel.text = [NSString stringWithFormat:@"%d", itemCount];
+    [self.itemLabel fallIn:0.5 delegate:self];
 }
 
 -(void)calculatePowerForFight:(Fight_Define *)fight{
@@ -725,15 +793,17 @@
 }
 
 -(NSNumber *)checkWin:(Fight_Define *)fight{
-//    double userFight = userBase.userDetail.fight.doubleValue + userBase.userDetail.fightPlus.doubleValue + friendAddFight.doubleValue;
+
     //非传说级，只要用户战斗力>怪物战斗力上限则直接胜利
     if (fight.monsterLevel.intValue<5){
         if (userFight > fight.monsterMaxFight.doubleValue)
             return [NSNumber numberWithInteger:2];
     }
-    //在耗尽体力时的奋力一战必胜
+    
+    //在耗尽体力时的奋力一战必胜，并记录奋力一击
     if (fightPowerCost>=userPower)
-        return [NSNumber numberWithInteger:1];
+        return [NSNumber numberWithInteger:3];
+    
     if (userFight > fight.monsterMinFight.doubleValue){
         double deltaMFight = fight.monsterMaxFight.doubleValue - fight.monsterMinFight.doubleValue;
         //传说级胜率50%-75%，普通级胜率75%-100%
@@ -741,13 +811,14 @@
         int x = arc4random() % 1000000;
         double roll = ((double)x)/10000.f;
         if (roll<rate){
-            //胜利
+            //胜利&战利品
             return [NSNumber numberWithInteger:2];
         } else {
-            //怪物淘跑
+            //只胜利
             return [NSNumber numberWithInteger:1];
         }
     }
+    
     //战斗未发生
     fightPowerCost = 0;
     return [NSNumber numberWithInteger:0];
@@ -765,6 +836,7 @@
             self.goldLabel.text= [NSString stringWithFormat:@"%d", goldCount];
             [self.goldLabel fallIn:0.5 delegate:self];
         } else {
+            [self refreshItemCount:actionEvent.actionRule];
             [eventDisplayList addObject:event];
 //            [eventDisplayTimeList addObject:[NSNumber numberWithInteger:duration]];
         }

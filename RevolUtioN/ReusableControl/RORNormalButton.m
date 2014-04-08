@@ -14,7 +14,9 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
-    [self initButtonInteraction];
+    if (self) {
+        [self initButtonInteraction];
+    }
     return self;
 }
 

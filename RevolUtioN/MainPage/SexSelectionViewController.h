@@ -13,4 +13,5 @@
     NSString *userSex;
 }
 
+@property (strong, nonatomic) IBOutlet UIImageView *bgImage;
 @end

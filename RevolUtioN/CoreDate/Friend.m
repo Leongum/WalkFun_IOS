@@ -17,6 +17,7 @@
 @dynamic friendEach;
 @dynamic updateTime;
 @dynamic userId;
+@dynamic lastWalkTime;
 
 @synthesize sex;
 @synthesize userName;
@@ -41,6 +42,7 @@
     self.friendEach = [RORDBCommon getNumberFromId:[dict valueForKey:@"friendEach"]];
     self.addTime = [RORDBCommon getDateFromId:[dict valueForKey:@"addTime"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
+    self.lastWalkTime = [RORDBCommon getDateFromId:[dict valueForKey:@"lastWalkTime"]];
 }
 
 -(NSMutableDictionary *)transToDictionary{
@@ -49,6 +51,7 @@
     [tempDict setValue:self.friendId forKey:@"friendId"];
     [tempDict setValue:self.friendStatus forKey:@"friendStatus"];
     [tempDict setValue:self.friendEach forKey:@"friendEach"];
+    [tempDict setValue:self.lastWalkTime forKey:@"lastWalkTime"];
     return tempDict;
 }
 

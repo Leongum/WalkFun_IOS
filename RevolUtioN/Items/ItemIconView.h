@@ -19,7 +19,8 @@
     UIImageView * itemIconBgImageView;
     Virtual_Product *item;
     
-     CoverView *itemDetailCoverView;
+    CoverView *itemDetailCoverView;
+    UIViewController *parentViewController;
 }
 
 @property (strong, nonatomic) id delegate;

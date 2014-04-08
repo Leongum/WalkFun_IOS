@@ -41,8 +41,8 @@
 }
 
 
-- (void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+- (void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [self startIndicator:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         contentList = [RORFriendService fetchRecommendFriends:[NSNumber numberWithInteger:recommendPage]];
@@ -181,12 +181,12 @@
     userSexImage.image = [RORUserUtils getImageForUserSex:user.sex];
     if ([RORFriendService getFollowStatus:user.userId] == FollowStatusNotFollowed){
         [follow setTitle:@"关注" forState:UIControlStateNormal];
-        [follow.titleLabel setTextColor:[UIColor whiteColor]];
+        [follow setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [follow removeTarget:self action:@selector(deFollow:) forControlEvents:UIControlEventTouchUpInside];
         [follow addTarget:self action:@selector(follow:) forControlEvents:UIControlEventTouchUpInside];
     } else {
         [follow setTitle:@"取消关注" forState:UIControlStateNormal];
-        [follow.titleLabel setTextColor:[UIColor blackColor]];
+        [follow setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [follow removeTarget:self action:@selector(follow:) forControlEvents:UIControlEventTouchUpInside];
         [follow addTarget:self action:@selector(deFollow:) forControlEvents:UIControlEventTouchUpInside];
     }

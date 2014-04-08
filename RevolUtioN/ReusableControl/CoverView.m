@@ -11,7 +11,7 @@
 #import "Animations.h"
 
 @implementation CoverView
-@synthesize bgImage;
+@synthesize bgImage, delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -70,8 +70,12 @@
 }
 
 -(IBAction)bgTap:(id)sender{
-    [self fadeOut:0.2 delegate:self startSelector:nil stopSelector:@selector(removeFromSuperview)];
-//    [Animations fadeOut:self andAnimationDuration:0.2 fromAlpha:1 andWait:0];
+    [self fadeOut:0.2 delegate:self startSelector:nil stopSelector:@selector(afterDismissed:)];
+}
+
+-(IBAction)afterDismissed:(id)sender{
+    [delegate coverViewDidDismissed:self];
+    [self removeFromSuperview];
 }
 
 

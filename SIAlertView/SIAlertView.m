@@ -9,6 +9,7 @@
 #import "SIAlertView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FTAnimation.h"
+#import "StrokeLabel.h"
 
 NSString *const SIAlertViewWillShowNotification = @"SIAlertViewWillShowNotification";
 NSString *const SIAlertViewDidShowNotification = @"SIAlertViewDidShowNotification";
@@ -44,7 +45,7 @@ static SIAlertView *__si_alert_current_view;
 @property (nonatomic, assign, getter = isVisible) BOOL visible;
 
 @property (nonatomic, strong) UIImageView *winBgImageView;
-@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) StrokeLabel *titleLabel;
 @property (nonatomic, strong) UILabel *messageLabel;
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) NSMutableArray *buttons;
@@ -178,11 +179,11 @@ static SIAlertView *__si_alert_current_view;
     
     SIAlertView *appearance = [self appearance];
     appearance.viewBackgroundColor = [UIColor whiteColor];
-    appearance.titleColor = [UIColor blackColor];
+    appearance.titleColor = [UIColor yellowColor];
     appearance.messageColor = [UIColor colorWithWhite:0.9 alpha:1];
-    appearance.titleFont = [UIFont boldSystemFontOfSize:17];
-    appearance.messageFont = [UIFont systemFontOfSize:15];
-    appearance.buttonFont = [UIFont boldSystemFontOfSize:15];
+    appearance.titleFont = [UIFont boldSystemFontOfSize:20];
+    appearance.messageFont = [UIFont systemFontOfSize:16];
+    appearance.buttonFont = [UIFont boldSystemFontOfSize:18];
     appearance.cornerRadius = 2;
     appearance.shadowRadius = 8;
 }
@@ -635,6 +636,7 @@ static SIAlertView *__si_alert_current_view;
 
 - (void)validateLayout
 {
+    [RORUtils setFontFamily:APP_FONT forView:self andSubViews:YES];
     if (!self.isLayoutDirty) {
         return;
     }
@@ -672,14 +674,19 @@ static SIAlertView *__si_alert_current_view;
         }
         self.messageLabel.text = self.message;
         CGFloat height = [self heightForMessageLabel];
-        self.messageLabel.frame = CGRectMake(CONTENT_PADDING_LEFT, y, self.containerView.bounds.size.width - CONTENT_PADDING_LEFT * 2, height);
+        self.messageLabel.frame = CGRectMake(CONTENT_PADDING_LEFT+10, y, self.containerView.bounds.size.width - (10+CONTENT_PADDING_LEFT) * 2, height);
         y += height;
     }
     if (self.items.count > 0) {
         if (y > CONTENT_PADDING_TOP) {
             y += GAP;
         }
-        if (self.items.count == 2) {
+        if (self.items.count == 1){
+            CGFloat width = (self.containerView.bounds.size.width - CONTENT_PADDING_LEFT * 2 - GAP) * 0.5;
+            UIButton *button = self.buttons[0];
+            button.frame = CGRectMake(CONTENT_PADDING_LEFT, y, width, BUTTON_HEIGHT);
+            button.center = CGPointMake(self.containerView.frame.size.width/2, button.center.y);
+        } else if (self.items.count == 2) {
             CGFloat width = (self.containerView.bounds.size.width - CONTENT_PADDING_LEFT * 2 - GAP) * 0.5;
             UIButton *button = self.buttons[0];
             button.frame = CGRectMake(CONTENT_PADDING_LEFT, y, width, BUTTON_HEIGHT);
@@ -805,7 +812,7 @@ static SIAlertView *__si_alert_current_view;
 {
 	if (self.title) {
 		if (!self.titleLabel) {
-			self.titleLabel = [[UILabel alloc] initWithFrame:self.bounds];
+			self.titleLabel = [[StrokeLabel alloc] initWithFrame:self.bounds];
 			self.titleLabel.textAlignment = NSTextAlignmentCenter;
             self.titleLabel.backgroundColor = [UIColor clearColor];
 			self.titleLabel.font = self.titleFont;
@@ -874,7 +881,7 @@ static SIAlertView *__si_alert_current_view;
 	switch (item.type) {
 		case SIAlertViewButtonTypeCancel:
 			normalImage = [UIImage imageNamed:@"running_end_bg.png"];
-            [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
+            [button.titleLabel setFont:[UIFont systemFontOfSize:16]];
 			[button setTitleColor:[UIColor colorWithWhite:0.2 alpha:1] forState:UIControlStateNormal];
             [button setTitleColor:[UIColor colorWithWhite:0.2 alpha:0.8] forState:UIControlStateHighlighted];
 			break;
@@ -886,7 +893,7 @@ static SIAlertView *__si_alert_current_view;
 		case SIAlertViewButtonTypeDefault:
 		default:
 			normalImage = [UIImage imageNamed:@"running_end_bg.png"];
-            [button.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
+            [button.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
 			[button setTitleColor:[UIColor colorWithWhite:0 alpha:1] forState:UIControlStateNormal];
             [button setTitleColor:[UIColor colorWithWhite:0.2 alpha:0.8] forState:UIControlStateHighlighted];
 			break;

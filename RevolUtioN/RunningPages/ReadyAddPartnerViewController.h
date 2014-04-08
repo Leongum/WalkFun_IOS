@@ -10,6 +10,7 @@
 
 @interface ReadyAddPartnerViewController : RORViewController{
     NSArray *contentList;
+    NSMutableDictionary *cdDict;
 }
 
 @property (strong, nonatomic) id delegate;

@@ -17,10 +17,11 @@
 #import "CoverView.h"
 #import "PooViewController.h"
 #import "ItemIconView.h"
+#import "ReportViewController.h"
 
 #define ICON_SIZE_ITEM 50
 
-@interface RORHistoryDetailViewController : RORViewController <MKMapViewDelegate>{
+@interface RORHistoryDetailViewController : RORViewController <MKMapViewDelegate, WFCoverViewDelegate>{
     NSMutableArray *improvedRoute;
     BOOL expanded;
     double centerLoc;
@@ -29,8 +30,12 @@
     NSArray *eventTimeList;
     NSMutableArray *eventDisplayList;
     NSMutableArray *eventDisplayTimeList;
+    int totalItems;
     
     User_Base *userBase;
+    
+    UIStoryboard *mainStoryboard;
+    NSMutableArray *coverViewQueue;
 }
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 

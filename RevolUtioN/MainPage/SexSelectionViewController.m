@@ -28,6 +28,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.backButton.alpha = 0;
+    self.bgImage.image = [UIUtils grayscale:self.bgImage.image type:1];
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
 - (void)didReceiveMemoryWarning

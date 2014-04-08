@@ -32,6 +32,10 @@
     self.backButton.alpha = 0;
     //todo:load content
     contentList = [RORFriendService fetchFriendFansList];
+    
+    isItemAboutFight = (selectedItem.dropFlag.intValue==ItemTypeFight);
+    
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,44 +146,58 @@
     UILabel *friendNameLabel = (UILabel *)[cell viewWithTag:100];
     friendNameLabel.text = friend.userName;
     
+    [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];
+    
     return cell;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Friend *thisFriend = [contentList objectAtIndex:indexPath.row];
-    User_Base *friendInfo = [RORUserServices syncUserInfoById:thisFriend.friendId];
-    
-    if (friendInfo.userDetail.fightPlus.integerValue==0 &&
-        friendInfo.userDetail.powerPlus.integerValue==0){
-        selectedFriend = thisFriend;
-        
-        SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"选择目标" andMessage:[NSString stringWithFormat:@"确定对【%@】使用吗？", thisFriend.userName]];
-        [alertView addButtonWithTitle:@"取消"
-                                 type:SIAlertViewButtonTypeCancel
-                              handler:^(SIAlertView *alertView) {
-                              }];
-        [alertView addButtonWithTitle:@"确定"
-                                 type:SIAlertViewButtonTypeDefault
-                              handler:^(SIAlertView *alertView) {
-                                  if (toSelf)
-                                      [self useItemTo:[RORUserUtils getUserId]];
-                                  else
-                                      [self useItemTo:selectedFriend.friendId];
-                              }];
-        alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
-        
-        [alertView show];
+    if (isItemAboutFight) {
+        [self startIndicator:self];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            User_Base *friendInfo = [RORUserServices syncUserInfoById:thisFriend.userId];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self endIndicator:self];
+                if (friendInfo.userDetail.fightPlus.integerValue==0 &&
+                    friendInfo.userDetail.powerPlus.integerValue==0){
+                    selectedFriend = thisFriend;
+                    [self popMakesureAlertView];
+                } else {
+                    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"选择目标" andMessage:[NSString stringWithFormat:@"%@今天已经被增强过了", thisFriend.userName]];
+                    [alertView addButtonWithTitle:@"确定"
+                                             type:SIAlertViewButtonTypeCancel
+                                          handler:^(SIAlertView *alertView) {
+                                          }];
+                    alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
+                    [alertView show];
+                }
+            });
+        });
     } else {
-        SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"选择目标" andMessage:[NSString stringWithFormat:@"%@今天已经被增强过了", thisFriend.userName]];
-        [alertView addButtonWithTitle:@"确定"
-                                 type:SIAlertViewButtonTypeCancel
-                              handler:^(SIAlertView *alertView) {
-                              }];
-        alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
-        
-        [alertView show];
+        selectedFriend = thisFriend;
+        [self popMakesureAlertView];
     }
+}
+
+-(void)popMakesureAlertView{
+    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"选择目标" andMessage:[NSString stringWithFormat:@"确定对“%@”使用“%@”吗？", selectedFriend.userName, selectedItem.productName]];
+    [alertView addButtonWithTitle:@"取消"
+                             type:SIAlertViewButtonTypeCancel
+                          handler:^(SIAlertView *alertView) {
+                          }];
+    [alertView addButtonWithTitle:@"确定"
+                             type:SIAlertViewButtonTypeDefault
+                          handler:^(SIAlertView *alertView) {
+                              if (toSelf)
+                                  [self useItemTo:[RORUserUtils getUserId]];
+                              else
+                                  [self useItemTo:selectedFriend.friendId];
+                          }];
+    alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
+    
+    [alertView show];
 }
 
 #pragma mark - AlertView Delegate

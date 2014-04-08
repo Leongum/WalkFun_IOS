@@ -49,6 +49,7 @@
         <attribute name="friendEach" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="friendId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="friendStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="lastWalkTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
@@ -196,7 +197,7 @@
         <element name="Action" positionX="0" positionY="0" width="128" height="150"/>
         <element name="Action_Define" positionX="0" positionY="0" width="128" height="238"/>
         <element name="Fight_Define" positionX="0" positionY="153" width="128" height="313"/>
-        <element name="Friend" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="Friend" positionX="0" positionY="0" width="128" height="148"/>
         <element name="Friend_Sort" positionX="0" positionY="0" width="128" height="210"/>
         <element name="Mission" positionX="0" positionY="0" width="128" height="298"/>
         <element name="Recommend_App" positionX="0" positionY="0" width="128" height="165"/>

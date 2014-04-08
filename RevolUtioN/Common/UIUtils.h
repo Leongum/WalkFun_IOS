@@ -12,7 +12,7 @@ typedef struct{
     UInt64 r, g, b;
 }colorType;
 
-colorType colorSum[320][568];
+colorType colorSum[640][1136];
 
 @interface UIUtils : NSObject
 

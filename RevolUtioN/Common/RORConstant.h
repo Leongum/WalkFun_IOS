@@ -101,6 +101,7 @@
 #define RULE_Money @"M"
 #define RULE_Type_Action @"TA"
 #define RULE_Type_Fight @"TF"
+#define RULE_Type_Gold @"TG"
 
 typedef enum {MissionTypeStep = 0, MissionTypePickItem = 1, MissionTypeUseItem = 2} MissionTypeEnum;
 typedef enum {MissionStatusDone = 0, MissionStatusUndone = 1} MissionStatusEnum;
@@ -112,6 +113,7 @@ typedef enum {HistoryStatusExecute = 0, HistoryStatusFinished = 1, HistoryStatus
 typedef enum {OperateUpdate = 0, OperateInsert = 1, OperateDelete = 2} OperateEnum;
 typedef enum {PlanFlagNew = 0, PlanFlagHot = 1, PlanFlagRecommend = 2} PlanFlagEnun;
 typedef enum {ActionDefineRun = 0, ActionDefineUse = 1, ActionDefineReward = 2} ActionDefineEnum;
+typedef enum {ItemTypeNormal = 1, ItemTypeFight = 2} ItemTypeEnum;
 
 typedef struct {
     int mainVersion;

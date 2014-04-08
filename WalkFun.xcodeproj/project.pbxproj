@@ -188,6 +188,18 @@
 		3022DFEF18E19BF800F3A9D5 /* ReadyUseItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3022DFEE18E19BF800F3A9D5 /* ReadyUseItemViewController.m */; };
 		3022DFF218E19C4100F3A9D5 /* ReadyAddPartnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3022DFF118E19C4100F3A9D5 /* ReadyAddPartnerViewController.m */; };
 		3022DFF418E2764600F3A9D5 /* WawaW5.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 3022DFF318E2764600F3A9D5 /* WawaW5.TTF */; };
+		3022DFF618EABB8600F3A9D5 /* fight_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022DFF518EABB8600F3A9D5 /* fight_icon.png */; };
+		3022DFF818EBEE8D00F3A9D5 /* friend_add_cell_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022DFF718EBEE8D00F3A9D5 /* friend_add_cell_disabled.png */; };
+		3022DFFB18ED3B3700F3A9D5 /* MissionDoneCongratsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3022DFFA18ED3B3700F3A9D5 /* MissionDoneCongratsViewController.m */; };
+		3022E00218EDC1BD00F3A9D5 /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3022E00118EDC1BD00F3A9D5 /* ReportViewController.m */; };
+		3022E00418EDC1EE00F3A9D5 /* history_report_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E00318EDC1EE00F3A9D5 /* history_report_normal.png */; };
+		3022E00A18F2940300F3A9D5 /* RORFightAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3022E00918F2940300F3A9D5 /* RORFightAnnotation.m */; };
+		3022E00D18F2942200F3A9D5 /* EventAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3022E00C18F2942200F3A9D5 /* EventAnnotation.m */; };
+		3022E01018F2943600F3A9D5 /* CoinAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3022E00F18F2943600F3A9D5 /* CoinAnnotation.m */; };
+		3022E01218F2A16200F3A9D5 /* cunzhang.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E01118F2A16200F3A9D5 /* cunzhang.png */; };
+		3022E01418F2C29600F3A9D5 /* event_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E01318F2C29600F3A9D5 /* event_icon.png */; };
+		3022E01618F2D2E300F3A9D5 /* running_ready_friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E01518F2D2E300F3A9D5 /* running_ready_friend.png */; };
+		3022E01818F2D3DE00F3A9D5 /* running_ready_item.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E01718F2D3DE00F3A9D5 /* running_ready_item.png */; };
 		302FD0051727D870004DA005 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302FD0041727D870004DA005 /* UIKit.framework */; };
 		302FD0071727D870004DA005 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302FD0061727D870004DA005 /* Foundation.framework */; };
 		302FD0091727D870004DA005 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302FD0081727D870004DA005 /* CoreGraphics.framework */; };
@@ -660,6 +672,23 @@
 		3022DFF018E19C4100F3A9D5 /* ReadyAddPartnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReadyAddPartnerViewController.h; path = RunningPages/ReadyAddPartnerViewController.h; sourceTree = "<group>"; };
 		3022DFF118E19C4100F3A9D5 /* ReadyAddPartnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReadyAddPartnerViewController.m; path = RunningPages/ReadyAddPartnerViewController.m; sourceTree = "<group>"; };
 		3022DFF318E2764600F3A9D5 /* WawaW5.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = WawaW5.TTF; path = Resources/WawaW5.TTF; sourceTree = "<group>"; };
+		3022DFF518EABB8600F3A9D5 /* fight_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fight_icon.png; sourceTree = "<group>"; };
+		3022DFF718EBEE8D00F3A9D5 /* friend_add_cell_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_add_cell_disabled.png; sourceTree = "<group>"; };
+		3022DFF918ED3B3700F3A9D5 /* MissionDoneCongratsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MissionDoneCongratsViewController.h; path = HistoryPage/MissionDoneCongratsViewController.h; sourceTree = "<group>"; };
+		3022DFFA18ED3B3700F3A9D5 /* MissionDoneCongratsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissionDoneCongratsViewController.m; path = HistoryPage/MissionDoneCongratsViewController.m; sourceTree = "<group>"; };
+		3022E00018EDC1BD00F3A9D5 /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportViewController.h; path = HistoryPage/ReportViewController.h; sourceTree = "<group>"; };
+		3022E00118EDC1BD00F3A9D5 /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReportViewController.m; path = HistoryPage/ReportViewController.m; sourceTree = "<group>"; };
+		3022E00318EDC1EE00F3A9D5 /* history_report_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history_report_normal.png; sourceTree = "<group>"; };
+		3022E00818F2940300F3A9D5 /* RORFightAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORFightAnnotation.h; path = HistoryPage/RORFightAnnotation.h; sourceTree = "<group>"; };
+		3022E00918F2940300F3A9D5 /* RORFightAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORFightAnnotation.m; path = HistoryPage/RORFightAnnotation.m; sourceTree = "<group>"; };
+		3022E00B18F2942200F3A9D5 /* EventAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventAnnotation.h; path = HistoryPage/EventAnnotation.h; sourceTree = "<group>"; };
+		3022E00C18F2942200F3A9D5 /* EventAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventAnnotation.m; path = HistoryPage/EventAnnotation.m; sourceTree = "<group>"; };
+		3022E00E18F2943600F3A9D5 /* CoinAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoinAnnotation.h; sourceTree = "<group>"; };
+		3022E00F18F2943600F3A9D5 /* CoinAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoinAnnotation.m; sourceTree = "<group>"; };
+		3022E01118F2A16200F3A9D5 /* cunzhang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cunzhang.png; sourceTree = "<group>"; };
+		3022E01318F2C29600F3A9D5 /* event_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = event_icon.png; sourceTree = "<group>"; };
+		3022E01518F2D2E300F3A9D5 /* running_ready_friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = running_ready_friend.png; sourceTree = "<group>"; };
+		3022E01718F2D3DE00F3A9D5 /* running_ready_item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = running_ready_item.png; sourceTree = "<group>"; };
 		302FD0011727D870004DA005 /* WalkFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		302FD0041727D870004DA005 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		302FD0061727D870004DA005 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1160,6 +1189,7 @@
 		3013D49318C040DA005F4C07 /* charactor */ = {
 			isa = PBXGroup;
 			children = (
+				3022E01118F2A16200F3A9D5 /* cunzhang.png */,
 				30DB022818CEB1B7008863B8 /* bump.png */,
 				30FE2C8018C1CFCD0077C5A0 /* vase.png */,
 				3013D4A318C0D273005F4C07 /* exfat_female.png */,
@@ -1538,6 +1568,10 @@
 		307C861617E97A90007C1DE5 /* running */ = {
 			isa = PBXGroup;
 			children = (
+				3022E01718F2D3DE00F3A9D5 /* running_ready_item.png */,
+				3022E01518F2D2E300F3A9D5 /* running_ready_friend.png */,
+				3022E01318F2C29600F3A9D5 /* event_icon.png */,
+				3022DFF518EABB8600F3A9D5 /* fight_icon.png */,
 				30DB020018C45F68008863B8 /* finishrunning_pop_bg.png */,
 				30DB020118C45F68008863B8 /* running_machine.png */,
 				30DB020218C45F68008863B8 /* running_paper.png */,
@@ -1574,6 +1608,7 @@
 		30978DA017EDA57E00CA58B9 /* history */ = {
 			isa = PBXGroup;
 			children = (
+				3022E00318EDC1EE00F3A9D5 /* history_report_normal.png */,
 				3022DFE418E076DC00F3A9D5 /* history_cell_normal.png */,
 				3022DFE518E076DC00F3A9D5 /* history_cell_section.png */,
 				3022DFE618E076DC00F3A9D5 /* history_cell_tail.png */,
@@ -1591,6 +1626,7 @@
 		3098492D1860E4580079E236 /* friends */ = {
 			isa = PBXGroup;
 			children = (
+				3022DFF718EBEE8D00F3A9D5 /* friend_add_cell_disabled.png */,
 				3022DFD818E012BC00F3A9D5 /* friend_add_nextPage_disabled.png */,
 				3022DFD018E00C6600F3A9D5 /* friend_add_cell.png */,
 				3022DFD618E00D1F00F3A9D5 /* friend_add_nextPage.png */,
@@ -1730,6 +1766,16 @@
 				0FA751E5189279E70037342E /* RORMapViewController.m */,
 				30DB022318CD8DB2008863B8 /* ActionHistoryViewController.h */,
 				30DB022418CD8DB2008863B8 /* ActionHistoryViewController.m */,
+				3022DFF918ED3B3700F3A9D5 /* MissionDoneCongratsViewController.h */,
+				3022DFFA18ED3B3700F3A9D5 /* MissionDoneCongratsViewController.m */,
+				3022E00018EDC1BD00F3A9D5 /* ReportViewController.h */,
+				3022E00118EDC1BD00F3A9D5 /* ReportViewController.m */,
+				3022E00818F2940300F3A9D5 /* RORFightAnnotation.h */,
+				3022E00918F2940300F3A9D5 /* RORFightAnnotation.m */,
+				3022E00B18F2942200F3A9D5 /* EventAnnotation.h */,
+				3022E00C18F2942200F3A9D5 /* EventAnnotation.m */,
+				3022E00E18F2943600F3A9D5 /* CoinAnnotation.h */,
+				3022E00F18F2943600F3A9D5 /* CoinAnnotation.m */,
 			);
 			name = RORHistoryPage;
 			sourceTree = "<group>";
@@ -2028,6 +2074,7 @@
 				0F282FD118B2FE2C003F44E8 /* UMSCommentInputControlleriPad.xib in Resources */,
 				30FC29411760861C00DEC042 /* expand.png in Resources */,
 				3098492F1860E4580079E236 /* friendSearch_bg.png in Resources */,
+				3022E01818F2D3DE00F3A9D5 /* running_ready_item.png in Resources */,
 				30989CB517F5F7C800CA9F83 /* S.png in Resources */,
 				3022DFCD18DFDEA000F3A9D5 /* item_mall_bg.png in Resources */,
 				30692D3F180D800200DA01EC /* logo.png in Resources */,
@@ -2089,6 +2136,7 @@
 				30D92080186F36F600C0528F /* scrollPicker_bg.png in Resources */,
 				3022DFA418D6EC5300F3A9D5 /* finish_editing.png in Resources */,
 				303B87EC1852DE0900FD44AC /* searchViewCell_bg.png in Resources */,
+				3022E01218F2A16200F3A9D5 /* cunzhang.png in Resources */,
 				30A6D9F317CDD58700D1116E /* main_trafficlight_yellow.png in Resources */,
 				3022DFD418E00C6600F3A9D5 /* friend_add_followButton.png in Resources */,
 				0FDE82D818927C390082B1BF /* kilo_tip.mp3 in Resources */,
@@ -2123,6 +2171,7 @@
 				30DB021718C6C90C008863B8 /* main_mission_board.png in Resources */,
 				30621D1B17DEFFA00063A007 /* red_left.png in Resources */,
 				30D008D517F53FBB004E6747 /* challenge_F.m4a in Resources */,
+				3022DFF618EABB8600F3A9D5 /* fight_icon.png in Resources */,
 				30989CE317F91C6F00CA9F83 /* main_trafficlight_none.png in Resources */,
 				30FE2C8518C1EA7D0077C5A0 /* loginButton.png in Resources */,
 				30621D1C17DEFFA00063A007 /* red_right.png in Resources */,
@@ -2142,6 +2191,7 @@
 				307C85F417E6BD50007C1DE5 /* filter_btn_bg.png in Resources */,
 				3005CFF018545D0E00D83648 /* bookletButton_bg.png in Resources */,
 				3005D0131856FFAB00D83648 /* certified.png in Resources */,
+				3022E01618F2D2E300F3A9D5 /* running_ready_friend.png in Resources */,
 				30DB022918CEB1B7008863B8 /* bump.png in Resources */,
 				30989CC617F7291000CA9F83 /* contactUs_bg.png in Resources */,
 				3022DFCB18DFDEA000F3A9D5 /* item_coin.png in Resources */,
@@ -2151,6 +2201,7 @@
 				307C85FE17E6E8DE007C1DE5 /* logout_btn_bg.png in Resources */,
 				30DB020718C45F68008863B8 /* running_rope.png in Resources */,
 				3098492C1860E12C0079E236 /* advTrainingCell.png in Resources */,
+				3022E00418EDC1EE00F3A9D5 /* history_report_normal.png in Resources */,
 				30989CAB17F5D87800CA9F83 /* Default-568h@2x.png in Resources */,
 				30DB020418C45F68008863B8 /* finishrunning_pop_bg.png in Resources */,
 				308C1663186EA507005B0198 /* icon@2x120.png in Resources */,
@@ -2171,11 +2222,13 @@
 				3022DFD518E00C6600F3A9D5 /* friend_add_title.png in Resources */,
 				3054673518ADC0FB00CA123C /* MainStoryboard_iPhone.storyboard in Resources */,
 				307C862E17E9A78B007C1DE5 /* details.png in Resources */,
+				3022E01418F2C29600F3A9D5 /* event_icon.png in Resources */,
 				30DB01FB18C32652008863B8 /* item_table_bg.png in Resources */,
 				307C862F17E9A78B007C1DE5 /* details@2x.png in Resources */,
 				30594BC417F06B4F00E6A19B /* seg_selected_bg.png in Resources */,
 				0F07AC4217E98FA00009C8A8 /* switch_off.png in Resources */,
 				30FAA215186417DF00E72650 /* notSure.png in Resources */,
+				3022DFF818EBEE8D00F3A9D5 /* friend_add_cell_disabled.png in Resources */,
 				0F07AC4317E98FA00009C8A8 /* switch_on.png in Resources */,
 				30978DA317EDA57E00CA58B9 /* history_detail_bg.png in Resources */,
 				30978DA717EDAFEA00CA58B9 /* share_btn.png in Resources */,
@@ -2291,6 +2344,7 @@
 				0F07A2BB18AE15C2003774B9 /* Virtual_Product.m in Sources */,
 				0FA75193189279A90037342E /* RORUtils.m in Sources */,
 				0FA75138189278E30037342E /* FTAnimationManager.m in Sources */,
+				3022E00A18F2940300F3A9D5 /* RORFightAnnotation.m in Sources */,
 				0FDE82CB18927B4E0082B1BF /* RORThirdPartyClientHandler.m in Sources */,
 				0FA75139189278E30037342E /* FTUtils+NSObject.m in Sources */,
 				0FDE82EE189383150082B1BF /* User_Mission_History.m in Sources */,
@@ -2303,11 +2357,14 @@
 				0FA751EA189279E70037342E /* RORHistoryDetailViewController.m in Sources */,
 				0FA7518E189279A90037342E /* RORHttpResponse.m in Sources */,
 				0FA75191189279A90037342E /* RORNetWorkUtils.m in Sources */,
+				3022E00218EDC1BD00F3A9D5 /* ReportViewController.m in Sources */,
 				0F282F9518B10CF7003F44E8 /* Action_Define.m in Sources */,
 				30750A6818B1FB5800EC7B51 /* ItemDetailCoverView.m in Sources */,
 				0F282F9218B09435003F44E8 /* RORVirtualProductService.m in Sources */,
 				0FA7521818927A410037342E /* RORLoginViewController.m in Sources */,
+				3022E00D18F2942200F3A9D5 /* EventAnnotation.m in Sources */,
 				30DB021F18C85BB5008863B8 /* THProgressView.m in Sources */,
+				3022E01018F2943600F3A9D5 /* CoinAnnotation.m in Sources */,
 				0FDE82CC18927B4E0082B1BF /* RORUserClientHandler.m in Sources */,
 				0FA7514C1892791A0037342E /* RORMissionServices.m in Sources */,
 				3022DFF218E19C4100F3A9D5 /* ReadyAddPartnerViewController.m in Sources */,
@@ -2318,6 +2375,7 @@
 				0FA7515B1892796E0037342E /* RORCheckBox.m in Sources */,
 				30D2DF0F188003D40093A426 /* RORRecommendViewController.m in Sources */,
 				0F0D099B18DC290E000C8962 /* Walk_Event.m in Sources */,
+				3022DFFB18ED3B3700F3A9D5 /* MissionDoneCongratsViewController.m in Sources */,
 				0FA751521892791A0037342E /* RORUserServices.m in Sources */,
 				0FA7518C189279A90037342E /* RORContextUtils.m in Sources */,
 				30984937186207780079E236 /* RORIntroCoverView.m in Sources */,

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-
+#import "StrokeLabel.h"
 
 @interface Virtual_Product : NSManagedObject
 

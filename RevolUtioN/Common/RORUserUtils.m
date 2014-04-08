@@ -315,5 +315,32 @@ static NSDate *syncTime;
     [self writeToUserInfoPList:saveDict];
 }
 
++(NSInteger)getUserPowerLeft{
+    NSMutableDictionary *userDict = [RORUserUtils getUserInfoPList];
+    NSDate *latestDate = [userDict objectForKey:@"latestUserPowerDate"];
+    User_Base *userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
+    NSInteger powerMax = userBase.userDetail.power.intValue + userBase.userDetail.powerPlus.intValue;
+    
+    if (!latestDate){//初始化
+        [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:powerMax], @"latestUserPowerLeft", [NSDate date], @"latestUserPowerDate",nil]];
+        return powerMax;
+    }
+    
+    NSNumber *latestPowerLeft = [userDict objectForKey:@"latestUserPowerLeft"];
+    int delta = -(int)([latestDate timeIntervalSinceNow]/120);
+    if (delta>1){
+        
+        NSInteger powerLeft = latestPowerLeft.integerValue + delta;
+        if (powerLeft>powerMax)
+            powerLeft = powerMax;
+        [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:powerLeft], @"latestUserPowerLeft", [NSDate date], @"latestUserPowerDate",nil]];
+        return powerLeft;
+    }
+    return latestPowerLeft.integerValue;
+}
+
++(void)saveUserPowerLeft:(NSInteger)powerLeft{
+    [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:powerLeft], @"latestUserPowerLeft", [NSDate date], @"latestUserPowerDate",nil]];
+}
 @end
 

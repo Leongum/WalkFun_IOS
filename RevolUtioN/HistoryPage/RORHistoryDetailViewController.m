@@ -45,8 +45,12 @@
 {
     
     [super viewDidLoad];
+    coverViewQueue = [[NSMutableArray alloc]init];
+    
     self.backButton.alpha = 0;
 
+    mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+    
     stepLabel.text = [RORUtils formattedSteps:record.steps.integerValue];
     durationLabel.text = [RORUtils transSecondToStandardFormat:record.duration.integerValue];
 
@@ -86,6 +90,7 @@
         NSDictionary *itemDict = [RORUtils explainActionEffetiveRule:[pgStringList objectAtIndex:1]];
         self.itemGetScrollView.contentSize = CGSizeMake(5 + [itemDict allKeys].count*(ICON_SIZE_ITEM + 5), 0);
         int i=0;
+        totalItems=0;
         for (NSString *key in [itemDict allKeys]){
             NSNumber *thisItemId = [RORDBCommon getNumberFromId:key];
             Virtual_Product *thisItem = [RORVirtualProductService fetchVProduct:thisItemId];
@@ -96,8 +101,9 @@
             [itemIconView fillContentWith:thisItem andQuantity:itemQuantity.integerValue];
             [self.itemGetScrollView addSubview:itemIconView];
             i++;
+            
+            totalItems += itemQuantity.integerValue;
         }
-//        [sumString appendString:[NSString stringWithFormat:@"获得道具：%@\n", [pgStringList objectAtIndex:1]]];
     }
     
     self.sumLabel.text = sumString;
@@ -108,16 +114,21 @@
     
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    
-    //debug
-    [self performLevelUp];
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
     //如果完成了任务
     if ([delegate isKindOfClass:[RORRunningViewController class]]){
-        //判断升级
-        [self checkLevelUp];
+        
+        //显示结果页面
+        ReportViewController *reportViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"ReportViewController"];
+        [reportViewController customInit:[NSString stringWithFormat:@"x%@", self.sumLabel.text]
+                                     Exp:[NSString stringWithFormat:@"x%d", record.experience.intValue]
+                                    Coin:[NSString stringWithFormat:@"x%d", record.goldCoin.intValue]
+                                 andItem:[NSString stringWithFormat:@"x%d", totalItems]];
+
+        [coverViewQueue addObject:reportViewController];
+        
         
         //判断完成任务
         if (record.missionId){
@@ -135,12 +146,13 @@
             mh.endTime = record.missionEndTime;
             [RORMissionHistoyService saveMissionHistoryInfoToDB:mh];
             //显示任务完成提示
-            UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
             UIViewController *missionDoneViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"missionCongratsVIewController"];
-            CoverView *congratsCoverView = (CoverView *)missionDoneViewController.view;
-            [congratsCoverView addCoverBgImage];
-            [self.view addSubview:congratsCoverView];
-            [congratsCoverView appear:self];
+            //加入队列
+            [coverViewQueue addObject:missionDoneViewController];
+//            CoverView *congratsCoverView = (CoverView *)missionDoneViewController.view;
+//            [congratsCoverView addCoverBgImage];
+//            [self.view addSubview:congratsCoverView];
+//            [congratsCoverView appear:self];
             
             UIView *missionCongratsView = missionDoneViewController.view;
             UILabel *missionNameLabel = (UILabel *)[missionCongratsView viewWithTag:100];
@@ -157,6 +169,29 @@
             if (missionProcess.integerValue >= 3)
                 missionDoneLabel.text = [NSString stringWithFormat:@"%ld/%d", (long)missionProcess.integerValue, 3];
         }
+        
+        //判断升级
+        [self checkLevelUp];
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [self dequeueCoverView];
+}
+
+-(void)dequeueCoverView{
+    for (UIViewController *viewController in coverViewQueue){
+        CoverView *congratsCoverView = (CoverView *)viewController.view;
+        congratsCoverView.delegate = self;
+        [congratsCoverView addCoverBgImage];
+        [congratsCoverView appear:self];
+        
+        [self addChildViewController:viewController];
+        [self.view addSubview:congratsCoverView];
+        [self didMoveToParentViewController:viewController];
+
+        [coverViewQueue removeObject:viewController];
+        break;
     }
 }
 
@@ -184,16 +219,16 @@
 
 //弹出升级提示页面
 -(void)performLevelUp{
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
-
     PooViewController *pooController = [mainStoryboard instantiateViewControllerWithIdentifier:@"levelUpCongratsCoverViewController"];
-    CoverView *coverView = (CoverView *)pooController.view;
-    [coverView addCoverBgImage];
-    [coverView appear:self];
-    
-    [self addChildViewController:pooController];
-    [self.view addSubview:pooController.view];
-    [self didMoveToParentViewController:pooController];
+    [coverViewQueue addObject:pooController];
+
+//    CoverView *coverView = (CoverView *)pooController.view;
+//    [coverView addCoverBgImage];
+//    [coverView appear:self];
+//    
+//    [self addChildViewController:pooController];
+//    [self.view addSubview:pooController.view];
+//    [self didMoveToParentViewController:pooController];
     
     CABasicAnimation *heartsBurst = [CABasicAnimation animationWithKeyPath:@"emitterCells.heart.birthRate"];
 	heartsBurst.fromValue		= [NSNumber numberWithFloat:2.0];
@@ -213,6 +248,9 @@
     }
     if ([destination respondsToSelector:@selector(setRecord:)]){
         [destination setValue:record forKey:@"record"];
+    }
+    if ([destination respondsToSelector:@selector(setEventList:)]){
+        [destination setValue:eventList forKeyPath:@"eventList"]; //eventDisplayList
     }
 }
 
@@ -258,21 +296,33 @@
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         eventTimeLabel.text = @"";
-        eventLabel.text = @"从村里出发";
+        if (record.friendName!=nil)
+            eventLabel.text = [NSString stringWithFormat:@"与小伙伴%@一起从村里出发了",record.friendName];
+        else
+            eventLabel.text = @"从村里出发了";
+//        eventLabel.text = @"从村里出发";
         effectLabel.text = @"一切看起来都那么美好～";
     } else {
-        identifier = @"eventCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
-        UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
-        UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+        
         Walk_Event *walkEvent = [eventDisplayList objectAtIndex:indexPath.row-1];
         if ([walkEvent.eType isEqualToString:RULE_Type_Action]){
+            identifier = @"eventCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+            
             Action_Define *actionEvent = [RORSystemService fetchActionDefine:walkEvent.eId];
             eventLabel.text = actionEvent.actionName;
             effectLabel.text = [NSString stringWithFormat:@"获得：%@",actionEvent.actionAttribute];
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:walkEvent.times.integerValue]];
         } else {
+            identifier = @"fightCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+            
             Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:walkEvent.eId];
             if (walkEvent.eWin.integerValue>0){
                 eventLabel.text = fightEvent.fightWin;
@@ -289,8 +339,20 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 75;
+    double newCellHeight = 75;
+    if (indexPath.row>0){
+        Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row-1];
+        if ([event.eType isEqualToString:RULE_Type_Fight]){
+            newCellHeight = 110;
+        }
+    }
+    return newCellHeight;
 }
 
+#pragma mark - Cover View Delegate
+
+-(void)coverViewDidDismissed:(id)view{
+    [self dequeueCoverView];
+}
 
 @end

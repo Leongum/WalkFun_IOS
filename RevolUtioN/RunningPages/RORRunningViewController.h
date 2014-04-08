@@ -41,10 +41,10 @@
     NSInteger walkExperience;
     
     THProgressView *powerPV;
+    
+    User_Base *thisWalkFriend;
+    NSInteger friendAddFight;
 }
-
-@property (strong, nonatomic) NSNumber *friendAddFight;
-@property (strong, nonatomic) NSString *friendAddName;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

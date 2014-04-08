@@ -33,15 +33,6 @@
     
     self.backButton.alpha = 0;
     
-//    NSArray *familyNames =[UIFont familyNames];
-//    for( NSString*familyName in familyNames ){
-//        printf( "Family: %s \n", [familyName UTF8String] );
-//        NSArray *fontNames = [UIFont fontNamesForFamilyName:familyName];
-//        for( NSString *fontName in fontNames ){
-//            printf( "\tFont: %s \n", [fontName UTF8String] );
-//        }
-//    }
-    
 	// Do any additional setup after loading the view.
     
     NSMutableArray *controllers = [[NSMutableArray alloc] init];
@@ -89,7 +80,7 @@
         NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
         NSNumber *missionUseItemQuantity = [userInfoList valueForKey:@"missionUseItemQuantity"];
         if (todayMission.missionTypeId.integerValue == MissionTypeUseItem){
-            if (missionUseItemQuantity.integerValue<0){
+            if (missionUseItemQuantity.integerValue<0 || missionUseItemQuantity==nil){
                 //接到使用道具的任务，初始化missionUseItemQuantity为总次数
                 [userInfoList setObject:todayMission.triggerNumbers forKey:@"missionUseItemQuantity"];
                 [RORUserUtils writeToUserInfoPList:userInfoList];
@@ -137,11 +128,11 @@
                     return;
                 }
             }
-        } else {
-            if (missionUseItemQuantity>=0){
-                [userInfoList setObject:[NSNumber numberWithInteger:-1] forKey:@"missionUseItemQuantity"];
-                [RORUserUtils writeToUserInfoPList:userInfoList];
-            }
+        }
+        
+        if (missionUseItemQuantity.intValue>0){
+            [userInfoList setObject:[NSNumber numberWithInteger:-1] forKey:@"missionUseItemQuantity"];
+            [RORUserUtils writeToUserInfoPList:userInfoList];
         }
         
         self.missionContentLabel.text = todayMission.missionDescription;
@@ -153,14 +144,22 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    //未登录
     if ([RORUserUtils getUserId].integerValue<0) {
         UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginNavigatorController"];
         [self presentViewController:loginViewController animated:NO completion:^(){}];
     } else {
         userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
-        for (int i=0; i<PAGE_QUANTITY; i++){
-            UIViewController *controller =(UIViewController *)[contentViews objectAtIndex:i];
-            [controller viewWillAppear:NO];
+        //还未设置性别
+        if ([userBase.sex isEqualToString:@"未知"]){
+            UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"SexSelectionViewController"];
+            [self presentViewController:loginViewController animated:NO completion:^(){}];
+        } else {
+            //刷新页面
+            for (int i=0; i<PAGE_QUANTITY; i++){
+                UIViewController *controller =(UIViewController *)[contentViews objectAtIndex:i];
+                [controller viewWillAppear:NO];
+            }
         }
     }
     self.missionView.center = CGPointMake(self.missionView.center.x, missionBoardCenterY);

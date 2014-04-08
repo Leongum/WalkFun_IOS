@@ -32,6 +32,8 @@
 	// Do any additional setup after loading the view.
     self.backButton.alpha = 0;
     self.endDeletingButton.alpha = 0;
+    self.startDeletingButton.enabled = YES;
+    
     [Animations roundedCorners:self.tableView];
 }
 
@@ -70,11 +72,11 @@
     if (showFollow){
 //        [self.showFollowButton setBackgroundColor:[UIColor redColor]];
         [self.showFollowButton setBackgroundImage:[UIImage imageNamed:@"followButton_selected.png"] forState:UIControlStateNormal];
-        self.startDeletingButton.enabled = YES;
+//        self.startDeletingButton.enabled = YES;
     } else{
 //        [self.showFollowButton setBackgroundColor:[UIColor clearColor]];
         [self.showFollowButton setBackgroundImage:[UIImage imageNamed:@"followButton_normal.png"] forState:UIControlStateNormal];
-        self.startDeletingButton.enabled = NO;
+//        self.startDeletingButton.enabled = NO;
     }
     if (showFans){
 //        [self.showFansButton setBackgroundColor:[UIColor redColor]];
@@ -128,15 +130,18 @@
     deletingFriend = (Friend *)[contentList objectAtIndex:row];
     [self startIndicator:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        isDeletingSuccess = [RORFriendService followFriend:deletingFriend.friendId];
+        if (contentList == fansList)
+            isDeletingSuccess = [RORFriendService followFriend:deletingFriend.userId];
+        else
+            isDeletingSuccess = [RORFriendService followFriend:deletingFriend.friendId];
         followList = [RORFriendService fetchFriendFollowsList];
         friendList = [RORFriendService fetchFriendEachFansList];
         fansList = [RORFriendService fetchFriendFansList];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self endIndicator:self];
             if (!isDeletingSuccess){
-                [self sendAlart:@"取消关注失败，请检查一下网络"];
+                [self sendAlart:@"关注失败，请检查一下网络"];
             } else {
+                [self endIndicator:self];
                 [self refreshTableView];
             }
         });
@@ -148,15 +153,18 @@
     deletingFriend = (Friend *)[contentList objectAtIndex:row];
     [self startIndicator:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        isDeletingSuccess = [RORFriendService deFollowFriend:deletingFriend.friendId];
+        if (contentList == fansList)
+            isDeletingSuccess = [RORFriendService deFollowFriend:deletingFriend.userId];
+        else
+            isDeletingSuccess = [RORFriendService deFollowFriend:deletingFriend.friendId];
         followList = [RORFriendService fetchFriendFollowsList];
         friendList = [RORFriendService fetchFriendEachFansList];
         fansList = [RORFriendService fetchFriendFansList];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self endIndicator:self];
             if (!isDeletingSuccess){
                 [self sendAlart:@"取消关注失败，请检查一下网络"];
             } else {
+                [self endIndicator:self];
                 [self refreshTableView];
             }
         });
@@ -190,6 +198,14 @@
     [RORUserUtils writeToUserSettingsPList:saveDict];
 }
 
+-(BOOL)didFollowed:(NSInteger)friendId{
+    for (Friend *f in followList){
+        if (f.friendId.intValue == friendId)
+            return YES;
+    }
+    return NO;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -209,17 +225,39 @@
     UILabel *userNameLabel = (UILabel *)[cell viewWithTag:100];
     UILabel *userLevelLabel = (UILabel *)[cell viewWithTag:101];
     UIImageView *userSexImage = (UIImageView *)[cell viewWithTag:103];
+    UILabel *friendStatusLabel = (UILabel *)[cell viewWithTag:104];
     UIButton *deleteButton = (UIButton *)[cell viewWithTag:200];
     
     userNameLabel.text = user.userName;
     userLevelLabel.text = [NSString stringWithFormat:@"Lv.%d", user.level.integerValue];
     userSexImage.image = [RORUserUtils getImageForUserSex:user.sex];
+    if (user.friendEach.intValue == FriendStatusOnlyFollowed){
+        if (contentList == fansList)
+            friendStatusLabel.text = @"";
+        else
+            friendStatusLabel.text = @"已关注";
+    } else if (user.friendEach.intValue == FriendStatusFollowEachother){
+        friendStatusLabel.text = @"互相关注";
+    }
     
-    if (self.startDeletingButton.enabled){
-        deleteButton.alpha = self.endDeletingButton.alpha;
+    if (self.endDeletingButton.alpha){
+//        deleteButton.enabled = self.endDeletingButton.alpha;
+        if (showFans && user.friendEach.intValue != FriendStatusFollowEachother)
+            deleteButton.alpha = 0;
+        else
+            deleteButton.alpha = 1;
+//        deleteButton.alpha = self.endDeletingButton.alpha;
         [deleteButton setTitle:@"取消关注" forState:UIControlStateNormal];
         [deleteButton removeTarget:self action:@selector(followAction:) forControlEvents:UIControlEventTouchUpInside];
         [deleteButton addTarget:self action:@selector(deFollowAction:) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [deleteButton setTitle:@"关注" forState:UIControlStateNormal];
+        [deleteButton removeTarget:self action:@selector(deFollowAction:) forControlEvents:UIControlEventTouchUpInside];
+        [deleteButton addTarget:self action:@selector(followAction:) forControlEvents:UIControlEventTouchUpInside];
+        if (showFans && user.friendEach.intValue != FriendStatusFollowEachother)
+            deleteButton.alpha = 1;
+        else
+            deleteButton.alpha = 0;
     }
     
     [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];

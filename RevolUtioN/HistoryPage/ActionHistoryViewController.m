@@ -27,7 +27,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.backButton.alpha = 0;
+    
     contentList = [RORFriendService fetchUserAction:[RORUserUtils getUserId]];
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,6 +69,7 @@
     UILabel *desLabel = (UILabel *)[cell viewWithTag:101];
     desLabel.text = [NSString stringWithFormat:@"%@%@",action.actionFromId.integerValue==[RORUserUtils getUserId].integerValue?@"你":action.actionFromName, action.actionName];
 
+    [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];
     return cell;
 }
 

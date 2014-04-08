@@ -36,6 +36,7 @@
     [RORNetWorkUtils initCheckNetWork];
     NSLog(@"%hhd",[RORNetWorkUtils getIsConnetioned]);
     
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
     [RORUserUtils syncSystemData];
 }
 

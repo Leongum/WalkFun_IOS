@@ -104,16 +104,16 @@
 //    [itemDetailCoverView appear:self];
 //}
 
--(IBAction)useItemAction:(id)sender{
-    UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"ItemsStoryboard" bundle:[NSBundle mainBundle]];
-    UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"ItemUseTargetViewController"];
-    if ([itemViewController respondsToSelector:@selector(setSelectedItem:)]){
-        [itemViewController setValue:item forKey:@"selectedItem"];
-    }
-    [parentViewController presentViewController:itemViewController animated:YES completion:^(){}];
-    
-    [itemDetailCoverView bgTap:self];
-}
+//-(IBAction)useItemAction:(id)sender{
+//    UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"ItemsStoryboard" bundle:[NSBundle mainBundle]];
+//    UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"ItemUseTargetViewController"];
+//    if ([itemViewController respondsToSelector:@selector(setSelectedItem:)]){
+//        [itemViewController setValue:item forKey:@"selectedItem"];
+//    }
+//    [parentViewController presentViewController:itemViewController animated:YES completion:^(){}];
+//    
+//    [itemDetailCoverView bgTap:self];
+//}
 
 
 @end
