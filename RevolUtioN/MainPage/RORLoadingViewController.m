@@ -33,11 +33,7 @@
 {
     [super viewDidLoad];
     self.backButton.alpha = 0;
-    [RORNetWorkUtils initCheckNetWork];
-    NSLog(@"%hhd",[RORNetWorkUtils getIsConnetioned]);
-    
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
-    [RORUserUtils syncSystemData];
 }
 
 -(BOOL)prefersStatusBarHidden{
@@ -45,11 +41,18 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
-    UINavigationController *navigationController =  [storyboard instantiateViewControllerWithIdentifier:@"RORMainViewController"];
-
-    [self presentViewController:navigationController animated:NO completion:NULL];
-    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [RORNetWorkUtils initCheckNetWork];
+        NSLog(@"%hhd",[RORNetWorkUtils getIsConnetioned]);
+        
+        [RORUserUtils syncSystemData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+            UINavigationController *navigationController =  [storyboard instantiateViewControllerWithIdentifier:@"RORMainViewController"];
+            
+            [self presentViewController:navigationController animated:NO completion:NULL];
+        });
+    });
 }
 
 - (void)didReceiveMemoryWarning

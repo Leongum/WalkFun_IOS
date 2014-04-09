@@ -64,12 +64,12 @@
                               if (toSelf){
                                   [self useItemTo:[RORUserUtils getUserId]];
                                   //save today's item
-                                  NSMutableDictionary *userInfoPList = [RORUserUtils getUserInfoPList];
-//                                  NSDate *itemDate = [RORDBCommon getDateFromId:[userInfoPList objectForKey:@"LatestUseItemDate"]];
-//                                  NSNumber *latestUseItemId = [RORDBCommon getNumberFromId:[userInfoPList objectForKey:@"LatestUseItemId"]];
-                                  [userInfoPList setObject:[NSDate date] forKey:@"LatestUseItemDate"];
-                                  [userInfoPList setObject:selectedItem.productId forKey:@"LatestUseItemId"];
-                                  [RORUserUtils writeToUserInfoPList:userInfoPList];
+                                  if (selectedItem.dropFlag.intValue == ItemTypeFight){
+                                      NSMutableDictionary *userInfoPList = [RORUserUtils getUserInfoPList];
+                                      [userInfoPList setObject:[NSDate date] forKey:@"LatestUseItemDate"];
+                                      [userInfoPList setObject:selectedItem.productId forKey:@"LatestUseItemId"];
+                                      [RORUserUtils writeToUserInfoPList:userInfoPList];
+                                  }
                               }
                               else
                                   [self useItemTo:selectedFriend.friendId];

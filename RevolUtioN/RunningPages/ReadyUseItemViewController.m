@@ -29,11 +29,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.backButton.alpha = 0;
-    contentList = [RORUserPropsService fetchUserProps:[RORUserUtils getUserId]];
+    NSArray *tmpList = [RORUserPropsService fetchUserProps:[RORUserUtils getUserId]];
     itemList = [[NSMutableArray alloc]init];
-    for (int i=0; i<contentList.count; i++){
-        User_Prop *userItem = (User_Prop *)[contentList objectAtIndex:i];
-        [itemList addObject:[RORVirtualProductService fetchVProduct:userItem.productId]];
+    contentList = [[NSMutableArray alloc]init];
+    for (int i=0; i<tmpList.count; i++){
+        User_Prop *userItem = (User_Prop *)[tmpList objectAtIndex:i];
+        Virtual_Product *thisItem = [RORVirtualProductService fetchVProduct:userItem.productId];
+        if (thisItem.dropFlag.intValue == ItemTypeFight){
+            [contentList addObject:userItem];
+            [itemList addObject:thisItem];
+        }
     }
     
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
@@ -69,7 +74,17 @@
     UILabel *propNameLabel = (UILabel *)[cell viewWithTag:100];
     propNameLabel.text = userProp.productName;
     
+    UILabel *propQuantityLabel = (UILabel *)[cell viewWithTag:102];
+    propQuantityLabel.text = [NSString stringWithFormat:@"x%d", userProp.ownNumber.intValue];
+    
     Virtual_Product *thisItem = [itemList objectAtIndex:indexPath.row];
+    UILabel *itemEffectLabel = (UILabel *)[cell viewWithTag:101];
+    NSArray *itemInfoStringList = [thisItem.productDescription componentsSeparatedByString:@"\\n\\n"];
+    if (itemInfoStringList.count>1)
+        itemEffectLabel.text = [itemInfoStringList objectAtIndex:1];
+    else
+        itemEffectLabel.text = @"";
+
     UIImageView *itemIcon = (UIImageView *)[cell viewWithTag:200];
     UIImage *iconImage = [RORVirtualProductService getImageOf:thisItem];
     itemIcon.image = iconImage;

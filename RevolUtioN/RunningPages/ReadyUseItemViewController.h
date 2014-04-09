@@ -10,7 +10,7 @@
 #import "RORUserPropsService.h"
 
 @interface ReadyUseItemViewController : RORViewController{
-    NSArray *contentList;
+    NSMutableArray *contentList;
     NSMutableArray *itemList;
 }
 

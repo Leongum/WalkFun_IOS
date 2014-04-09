@@ -296,6 +296,7 @@ CGFloat SVProgressHUDRingThickness = 6;
             self.backgroundRingLayer.position = self.ringLayer.position = CGPointMake((CGRectGetWidth(self.hudView.bounds)/2), CGRectGetHeight(self.hudView.bounds)/2);
     }
     
+    [RORUtils setFontFamily:APP_FONT forView:self andSubViews:YES];
 }
 
 - (void)setStatus:(NSString *)string {

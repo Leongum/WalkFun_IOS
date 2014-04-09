@@ -79,7 +79,8 @@
     }
     
     if (selectedItem){
-        [self.buffButton setTitle:selectedItem.productName forState:UIControlStateNormal];
+        [self.buffButton setTitle:@"" forState:UIControlStateNormal];
+        [self.buffButton setBackgroundImage:[RORVirtualProductService getImageOf:selectedItem] forState:UIControlStateNormal];
         self.cancelBuffButton.alpha = 1;
         
         [self calculateItemEffect];
@@ -87,9 +88,11 @@
         self.extraPowerLabel.text = [NSString stringWithFormat:@"%d", powerAdded];
     } else {
         if (todayItem){
-            [self.buffButton setTitle:todayItem.productName forState:UIControlStateNormal];
+            [self.buffButton setTitle:@"" forState:UIControlStateNormal];
+            [self.buffButton setBackgroundImage:[RORVirtualProductService getImageOf:todayItem] forState:UIControlStateNormal];
         } else {
             [self.buffButton setTitle:@"加强一下" forState:UIControlStateNormal];
+            [self.buffButton setBackgroundImage:nil forState:UIControlStateNormal];
         }
         
         self.extraFightLabel.text = [NSString stringWithFormat:@"%d",fightAdded + userBase.userDetail.fightPlus.intValue];

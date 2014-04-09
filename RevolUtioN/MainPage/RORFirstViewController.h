@@ -19,7 +19,7 @@
 #import "CharatorViewController.h"
 #import "LevelUpCongratsViewController.h"
 #import "THProgressView.h"
-#import "StrokeLabel.h"
+#import "MissionStoneCongratsViewController.h"
 
 @interface RORFirstViewController : MainPageViewController<CLLocationManagerDelegate>{
     BOOL wasFound;
@@ -30,7 +30,7 @@
     
     CLLocationManager *locationManager;
     UIViewController *charatorViewController;
-    
+    UIStoryboard *mainStoryboard;
 }
 @property (strong, nonatomic) IBOutlet UIView *selfTitleView;
 

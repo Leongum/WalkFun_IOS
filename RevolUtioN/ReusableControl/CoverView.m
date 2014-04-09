@@ -50,6 +50,19 @@
     }
 }
 
+-(void)addCoverBgImage:(UIImage *)bg{
+    if (!bgImageView){
+        bgImageView = [[UIImageView alloc]initWithImage:bg];
+        bgImageView.frame = self.frame;
+        bgImageView.center = CGPointMake(bgImageView.frame.size.width/2, bgImageView.frame.size.height/2);
+        bgImageView.alpha = 1;
+        [self addSubview:bgImageView];
+        [self sendSubviewToBack:bgImageView];
+    } else {
+        bgImageView.image = bg;
+    }
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -35,7 +35,7 @@
     [weatherInfoButtonView setImage:image forState:UIControlStateNormal];
     
     //载入人物视图
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+    mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
     charatorViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"CharatorViewController"];
     UIView *charview = charatorViewController.view;
     CGRect charframe = self.charatorView.frame;
@@ -101,7 +101,7 @@
     //如果已经集满了三次日常任务，但没有兑换奖励，则接不到新的任务
     NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
     [self.missionStoneButton setTitle:[NSString stringWithFormat:@"%ld/3",(long)missionProcess.integerValue] forState:UIControlStateNormal];
-    if (missionProcess.integerValue >= 3){
+    if (missionProcess.integerValue >= 0){//todo
         [self.missionStoneButton setEnabled:YES];
         return;
     }
@@ -109,14 +109,28 @@
 }
 
 - (IBAction)missionStoneAction:(id)sender {
-    //    [self.missionStoneButton setTitle:@"0/3" forState:UIControlStateNormal];
-    [self sendNotification:@"兑换了一个道具奖励"];
+    Reward_Details *thisReward = [RORUserServices getRandomReward:userInfo.userId];
+    while (!thisReward) {
+        thisReward = [RORUserServices getRandomReward:userInfo.userId];
+    }
+    
+    MissionStoneCongratsViewController *missionStoneCongratsViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"MissionStoneCongratsViewController"];
+    CoverView *congratsCoverView = (CoverView *)missionStoneCongratsViewController.view;
+    [congratsCoverView addCoverBgImage];
+    [[self parentViewController].view addSubview:congratsCoverView];
+    [congratsCoverView appear:self];
+    
+    if (thisReward.rewardMoney){
+        [missionStoneCongratsViewController showGold:thisReward.rewardMoney];
+    } else {
+        [missionStoneCongratsViewController showItem:[RORVirtualProductService fetchVProduct:thisReward.rewardPropId]];
+    }
+    
+    //重置
+    [self.missionStoneButton setTitle:@"0/3" forState:UIControlStateNormal];
     NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
     [userInfoList setObject:[NSNumber numberWithInteger:0] forKey:@"missionProcess"];
     [RORUserUtils writeToUserInfoPList:userInfoList];
-    
-//    [self checkDailyMission];
-    //todo:
 }
 
 -(void)prepareControlsForAnimation{
@@ -187,7 +201,7 @@
                 }
                 if(pm25info != nil){
                     pm25 = [[pm25info objectForKey:@"aqi"] integerValue];
-                    weatherInformation = [NSString stringWithFormat:@"%@\n AQI: %d%@  ", weatherInformation,  pm25,[pm25info objectForKey:@"quality"]];
+                    weatherInformation = [NSString stringWithFormat:@"%@\n PM2.5: %d%@  ", weatherInformation,  pm25,[pm25info objectForKey:@"pm2_5"]];
                 }
                 int index = -1;
                 if(temp < 38 && pm25 < 300){
@@ -256,7 +270,7 @@
 }
 
 - (IBAction)showHistoryAction:(id)sender {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+    mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
     UIViewController *historyViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"historyListViewController"];
     [self presentViewController:historyViewController animated:YES completion:^(){}];
 }

@@ -148,7 +148,7 @@
 - (void)drawLineWithLocationArray:(NSArray *)locationArray withStyle:(NSInteger)style
 {
     
-    int pointCount = [locationArray count];
+    NSUInteger pointCount = [locationArray count];
     CLLocationCoordinate2D *coordinateArray = (CLLocationCoordinate2D *)malloc(pointCount * sizeof(CLLocationCoordinate2D));
     
     for (int i = 0; i < pointCount; ++i) {
