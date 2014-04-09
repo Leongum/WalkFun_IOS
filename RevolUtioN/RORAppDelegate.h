@@ -14,10 +14,11 @@
 #import <TencentOpenAPI/QQApiInterface.h>  
 #import "MobClick.h"
 #import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
 #import "RORFriendService.h"
 #import "RORUserServices.h"
 
-@interface RORAppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate,WXApiDelegate>
+@interface RORAppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 {
     Reachability* hostReach;
     CMMotionManager *motionmanager;
