@@ -55,6 +55,9 @@
         if (event.triggerProbability.integerValue<0){
             tiredAction = event;
         }
+        if ([event.actionName rangeOfString:@"金币"].location != NSNotFound){
+            goldAction = event;
+        }
     }
     eventHappenedList = [[NSMutableArray alloc]init];
     eventDisplayList = [[NSMutableArray alloc]init];
@@ -64,6 +67,8 @@
     eventHappenedCount = 0;
     goldCount = 0;
     itemCount = 0;
+    fightCount = 0;
+    stepsSinceLastFight = 0;
 }
 
 -(void)viewDidUnload{
@@ -143,6 +148,9 @@
 }
 
 -(NSNumber *)calculateFatness{
+    if (fightCount==0){
+        return [NSNumber numberWithInt:0];
+    }
     userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
     double health = 100;
     double stepsPerFat = (100.f-health)/100.f*500 + 750;

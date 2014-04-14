@@ -473,25 +473,19 @@ NSString *const kFTAnimationWasInteractionEnabledKey = @"kFTAnimationWasInteract
   CAKeyframeAnimation *scale = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
   scale.duration = duration;
   scale.values = [NSArray arrayWithObjects:[NSNumber numberWithFloat:.0f],
-//                  [NSNumber numberWithFloat:1.2f],
+                  [NSNumber numberWithFloat:1.2f],
                   [NSNumber numberWithFloat:.5f],
                   [NSNumber numberWithFloat:1.f],
                   nil];
-  
-    CABasicAnimation *moveUp = [CABasicAnimation animationWithKeyPath:@"position"];
-    moveUp.duration = duration/3;
-    moveUp.toValue = [NSValue valueWithCGPoint:CGPointMake(view.center.x, view.center.y-10)];
-    moveUp.fromValue = [NSValue valueWithCGPoint:view.center];
     
-    
-//  CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
-//  fadeIn.duration = duration * .4f;
-//  fadeIn.fromValue = [NSNumber numberWithFloat:0.f];
-//  fadeIn.toValue = [NSNumber numberWithFloat:1.f];
-//  fadeIn.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-//  fadeIn.fillMode = kCAFillModeForwards;
+  CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
+  fadeIn.duration = duration * .4f;
+  fadeIn.fromValue = [NSNumber numberWithFloat:0.f];
+  fadeIn.toValue = [NSNumber numberWithFloat:1.f];
+  fadeIn.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+  fadeIn.fillMode = kCAFillModeForwards;
   
-  CAAnimationGroup *group = [self animationGroupFor:[NSArray arrayWithObjects:scale, nil] withView:view duration:duration
+  CAAnimationGroup *group = [self animationGroupFor:[NSArray arrayWithObjects:scale, fadeIn, nil] withView:view duration:duration
                                            delegate:delegate startSelector:startSelector stopSelector:stopSelector 
                                                name:kFTAnimationPopIn type:kFTAnimationTypeIn];
   group.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];

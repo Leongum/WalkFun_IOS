@@ -122,10 +122,10 @@
         
         //显示结果页面
         ReportViewController *reportViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"ReportViewController"];
-        [reportViewController customInit:[NSString stringWithFormat:@"x%@", self.sumLabel.text]
-                                     Exp:[NSString stringWithFormat:@"x%d", record.experience.intValue]
-                                    Coin:[NSString stringWithFormat:@"x%d", record.goldCoin.intValue]
-                                 andItem:[NSString stringWithFormat:@"x%d", totalItems]];
+        [reportViewController customInit:[NSString stringWithFormat:@"%@", self.sumLabel.text]
+                                     Exp:[NSString stringWithFormat:@"%d", record.experience.intValue]
+                                    Coin:[NSString stringWithFormat:@"%d", record.goldCoin.intValue]
+                                 andItem:[NSString stringWithFormat:@"%d", totalItems]];
 
         [coverViewQueue addObject:reportViewController];
         

@@ -92,6 +92,7 @@
     [self startButtonAction:self];
     routePoints = [[NSMutableArray alloc]init];
     isAWalking = NO;
+    
 }
 
 -(void)navigationInit{
@@ -610,7 +611,10 @@
             
             Action_Define *actionEvent = [RORSystemService fetchActionDefine:event.eId];
             eventLabel.text = actionEvent.actionName;
-            effectLabel.text = [NSString stringWithFormat:@"获得：%@",actionEvent.actionAttribute];
+            if (actionEvent.actionAttribute)
+                effectLabel.text = [NSString stringWithFormat:@"获得：%@",actionEvent.actionAttribute];
+            else
+                effectLabel.text = @"";
             int timeInt = event.times.intValue;
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
         } else {
@@ -629,7 +633,7 @@
             
             if (event.eWin.integerValue>0){
                 [fightText appendString:fightEvent.fightWin];
-                if (event.eWin.integerValue>1)
+                if (event.eWin.integerValue>1 && fightEvent.winGot)
                     effectLabel.text = [NSString stringWithFormat:@"获得：%@",fightEvent.winGot];
                 else
                     effectLabel.text = [NSString stringWithFormat:@""];
@@ -673,17 +677,30 @@
         double roll = ((double)x)/10000.f;
         double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0, rateEvent = 10;
         if (currentStep>WALKING_FIGHT_STAGE_II){
-            rate2 = 30;// (currentStep - WALKING_FIGHT_STAGE_II)*3/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 2;
+            stepsSinceLastFight++;
+            
+            if (fightCount==0){//没有战斗发生，则先判断是否遇到稀有怪
+                double k = stepsSinceLastFight/(WALKING_FIGHT_STAGE_V - WALKING_FIGHT_STAGE_II);
+                rate5 = k*k*10+0.1;
+                if (roll<rate5){//发生稀有战斗
+                    NSArray *fightList = [RORSystemService fetchFightDefineByLevel:userBase.userDetail.level andStage:[NSNumber numberWithInteger:FightStageLegend]];
+                    if (fightList){
+                        Fight_Define *fightEvent = (Fight_Define *)[fightList objectAtIndex:arc4random() % fightList.count];
+                        [self eventDidHappened:[self makeWalkEvent:fightEvent]];
+                    }
+                    return;
+                }
+            }
+            rate2 = stepsSinceLastFight*3/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 2;
         }
         if (currentStep>WALKING_FIGHT_STAGE_III){
-            rate3 = 10;//(currentStep - WALKING_FIGHT_STAGE_III)*5/(WALKING_FIGHT_STAGE_IV - WALKING_FIGHT_STAGE_III) + 2;
-            rate2 = 20;//0.5;
+            rate3 = 1.25 + stepsSinceLastFight*3/(WALKING_FIGHT_STAGE_IV - WALKING_FIGHT_STAGE_III);
+            rate2 = 0.75;//0.5;
         }
         if (currentStep>WALKING_FIGHT_STAGE_IV){
-            rate5 = 5;////0.1;
-            rate4 = 10;//(currentStep - WALKING_FIGHT_STAGE_IV)*5/(WALKING_FIGHT_STAGE_V - WALKING_FIGHT_STAGE_IV) + 2;
-            rate3 = 20;//1;
-            rate2 = 10;//0.5;
+            rate4 = 0.5;//(currentStep - WALKING_FIGHT_STAGE_IV)*5/(WALKING_FIGHT_STAGE_V - WALKING_FIGHT_STAGE_IV) + 2;
+            rate3 = 0.5;//1;
+            rate2 = 0.3;//0.5;
         }
         
 //        if (currentStep>0){
@@ -691,15 +708,13 @@
 //            //debug
 //        }
         int fightStage = 0;
-        if (roll<rate5){//稀有级怪物
-            fightStage = FightStageLegend;
-        } else if (roll<rate4+rate5){//高级怪
+        if (roll<rate4){//高级怪
             fightStage = FightStageHard;
-        } else if (roll<rate3+rate4+rate5){//中级怪
+        } else if (roll<rate3+rate4){//中级怪
             fightStage = FightStageNormal;
-        } else if (roll<rate2+rate3+rate4+rate5){//低级怪
+        } else if (roll<rate2+rate3+rate4){//低级怪
             fightStage = FightStageEasy;
-        } else if (roll<rate2+rate3+rate4+rate5 + rateEvent){
+        } else if (roll<rate2+rate3+rate4 + rateEvent){//事件
             fightStage = -1;
         }
         if (fightStage>0){
@@ -711,22 +726,34 @@
         } else if (fightStage<0) {
             if (eventWillList){
                 Action_Define *actionEvent = (Action_Define *)[eventWillList objectAtIndex:arc4random() % eventWillList.count];
+                while (actionEvent==goldAction) {
+                    actionEvent = (Action_Define *)[eventWillList objectAtIndex:arc4random() % eventWillList.count];
+                }
                 [self eventDidHappened:[self makeWalkEvent:actionEvent]];
             }
         }
     }
     
-    for (int i=0; i<eventWillList.count; i++){
-        Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
-        int x = arc4random() % 1000000;
-        double roll = ((double)x)/10000.f;
-        double delta = 1;
-
-        if (roll < event.triggerProbability.doubleValue *delta){
-            [self eventDidHappened:[self makeWalkEvent:event]];
-            return;
-        }
+    //捡金币
+    int x = arc4random() % 1000000;
+    double roll = ((double)x)/10000.f;
+    double delta = 1;
+    if (roll < goldAction.triggerProbability.doubleValue * delta){
+        [self eventDidHappened:[self makeWalkEvent:goldAction]];
+        return;
     }
+
+//    for (int i=0; i<eventWillList.count; i++){
+//        Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
+//        int x = arc4random() % 1000000;
+//        double roll = ((double)x)/10000.f;
+//        double delta = 1;
+//
+//        if (roll < event.triggerProbability.doubleValue *delta){
+//            [self eventDidHappened:[self makeWalkEvent:event]];
+//            return;
+//        }
+//    }
 }
 
 -(Walk_Event *)makeWalkEvent:(id)event{
@@ -754,6 +781,9 @@
             userPower = 0;
         [powerPV setProgress:((double)userPower/(double)userPowerMax) animated:YES];
         self.powerFrame.text = [NSString stringWithFormat:@"%d", userPower];
+        
+        fightCount++;
+        stepsSinceLastFight = 0;
     }
     walkEvent.times = [NSNumber numberWithInteger:duration];
     walkEvent.lati = [NSNumber numberWithDouble:formerLocation.coordinate.latitude];
@@ -831,25 +861,22 @@
         }
         
         Action_Define *actionEvent = [RORSystemService fetchActionDefine:event.eId];
-        if ([actionEvent.actionName rangeOfString:@"金币"].location != NSNotFound) {
+        if (goldAction.actionId.intValue == event.eId.intValue) {
             goldCount++;
             self.goldLabel.text= [NSString stringWithFormat:@"%d", goldCount];
             [self.goldLabel fallIn:0.5 delegate:self];
         } else {
             [self refreshItemCount:actionEvent.actionRule];
             [eventDisplayList addObject:event];
-//            [eventDisplayTimeList addObject:[NSNumber numberWithInteger:duration]];
         }
         [allInOneSound addFileNametoQueue:[RORVirtualProductService getSoundFileOf:actionEvent]];
         [allInOneSound play];
-
     } else {
         [eventDisplayList addObject:event];
     }
     
     [eventHappenedList addObject:event];
     [eventSaveList addObject:event.transToDictionary];
-    
 }
 
 

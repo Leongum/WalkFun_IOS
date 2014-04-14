@@ -272,9 +272,14 @@
         UIStoryboard *friendsStoryboard = [UIStoryboard storyboardWithName:@"FriendsStoryboard" bundle:[NSBundle mainBundle]];
         UIViewController *friendInfoViewController =  [friendsStoryboard instantiateViewControllerWithIdentifier:@"FriendInfoViewController"];
         if ([friendInfoViewController respondsToSelector:@selector(setUserBase:)]){
-            User_Base *userBase =[RORUserServices fetchUser:user.friendId];
+            NSNumber *fId;
+            if (contentList == fansList)
+                fId = user.userId;
+            else
+                fId = user.friendId;
+            User_Base *userBase =[RORUserServices fetchUser:fId];
             if (!userBase)
-                userBase = [RORUserServices syncUserInfoById:user.friendId];
+                userBase = [RORUserServices syncUserInfoById:fId];
             if (userBase){
                 [friendInfoViewController setValue:userBase forKey:@"userBase"];
                 [self.navigationController pushViewController:friendInfoViewController animated:YES];

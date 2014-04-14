@@ -59,12 +59,13 @@
     
     //事件列表
     NSArray *eventWillList;
+    Action_Define *goldAction;
     Action_Define *tiredAction;
     NSMutableArray *eventHappenedList;
     NSMutableArray *eventSaveList;
     NSMutableArray *eventDisplayList;
     NSInteger eventHappenedCount;
-    int goldCount, itemCount;
+    int goldCount, itemCount, fightCount, stepsSinceLastFight;
     NSIndexPath *bottomIndex;
     
     NSTimer *repeatingTimer;

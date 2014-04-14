@@ -46,7 +46,7 @@
     
     CGContextSetTextDrawingMode(c, kCGTextFill);
     self.textColor = textColor;
-    self.shadowOffset = CGSizeMake(0, 0);
+    self.shadowOffset = CGSizeMake(0, 2);
     [super drawTextInRect:rect];
     
     self.shadowOffset = shadowOffset;

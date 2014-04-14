@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AvailabilityMacros.h>
+#import "RORUtils.h"
 
 extern NSString * const SVProgressHUDDidReceiveTouchEventNotification;
 extern NSString * const SVProgressHUDWillDisappearNotification;

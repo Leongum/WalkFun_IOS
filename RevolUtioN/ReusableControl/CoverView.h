@@ -23,5 +23,6 @@
 -(IBAction)appear:(id)sender;
 -(IBAction)bgTap:(id)sender;
 -(void)addCoverBgImage;
+-(void)addCoverBgImage:(UIImage *)bg;
 
 @end
