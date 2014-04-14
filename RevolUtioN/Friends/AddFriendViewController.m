@@ -59,12 +59,11 @@
 - (IBAction)invateWeixinAction:(id)sender {
     
     [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeApp;
-    //分享图文样式到微信朋友圈显示字数比较少，只显示分享标题
-    [UMSocialData defaultData].extConfig.title = @"朋友圈分享内容";
+    
     //设置微信好友或者朋友圈的分享url,下面是微信好友，微信朋友圈对应wechatTimelineData
     [UMSocialData defaultData].extConfig.wechatSessionData.url = @"http://www.cyberace.cc";
-    
-//    [[UMSocialControllerService defaultControllerService] setShareText:@"123" shareImage:nil socialUIDelegate:nil];
+    [UMSocialData defaultData].extConfig.wechatSessionData.shareText = @"2.一款不错的app，一起来用吧，哦哈哈哈哈！";
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"1.一款不错的app，一起来用吧，哦哈哈哈哈";
     //设置分享内容和回调对象
     [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
 }
@@ -204,7 +203,7 @@
     if ([friendInfoViewController respondsToSelector:@selector(setUserBase:)]){
         User_Base *userBase =[RORUserServices fetchUser:user.userId];
         if (!userBase)
-            [RORUserServices syncUserInfoById:user.userId];
+           userBase = [RORUserServices syncUserInfoById:user.userId];
         if (userBase){
             [friendInfoViewController setValue:userBase forKey:@"userBase"];
             [self.navigationController pushViewController:friendInfoViewController animated:YES];
