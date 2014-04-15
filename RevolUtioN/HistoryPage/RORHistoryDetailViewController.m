@@ -121,11 +121,20 @@
     if (1){//[delegate isKindOfClass:[RORRunningViewController class]]){
         
         //显示结果页面
+        NSString *commentText;
+        if (record.steps.intValue<200){
+            commentText = @"你是猴子请来的逗B么？";
+        } else if (record.steps.intValue<1200){
+            commentText = @"少年还需努力！";
+        } else {
+            commentText = @"干得漂亮！";
+        }
         ReportViewController *reportViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"ReportViewController"];
         [reportViewController customInit:[NSString stringWithFormat:@"%@", self.sumLabel.text]
                                      Exp:[NSString stringWithFormat:@"%d", record.experience.intValue]
                                     Coin:[NSString stringWithFormat:@"%d", record.goldCoin.intValue]
-                                 andItem:[NSString stringWithFormat:@"%d", totalItems]];
+                                    Item:[NSString stringWithFormat:@"%d", totalItems]
+                                    andComment:commentText];
 
         [coverViewQueue addObject:reportViewController];
         
@@ -315,16 +324,29 @@
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
             UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+            [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
+            eventLabel.numberOfLines = 0;
             UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
             
             Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:walkEvent.eId];
+            NSArray *meetText = [fightEvent.fightName componentsSeparatedByString:@"。"];
+            NSMutableString *fightText = [[NSMutableString alloc]initWithString:[meetText objectAtIndex:0]];
+            
             if (walkEvent.eWin.integerValue>0){
-                eventLabel.text = fightEvent.fightWin;
-                effectLabel.text = [NSString stringWithFormat:@"获得：%@",fightEvent.winGot];
-            } else{
-                eventLabel.text = fightEvent.fightLoose;
+                NSArray *winTextList = [fightEvent.fightWin componentsSeparatedByString:@"|"];
+                [fightText appendString:[NSString stringWithFormat:@"，%@",(NSString *)[winTextList objectAtIndex:walkEvent.eWin.intValue/10]]];
+                
+                if (walkEvent.eWin.integerValue%10>1 && fightEvent.winGot)
+                    effectLabel.text = [NSString stringWithFormat:@"获得：%@",fightEvent.winGot];
+                else
+                    effectLabel.text = [NSString stringWithFormat:@""];
+            } else {
+                NSArray *winTextList = [fightEvent.fightLoose componentsSeparatedByString:@"|"];
+                [fightText appendString:[NSString stringWithFormat:@"，%@",(NSString *)[winTextList objectAtIndex:abs(walkEvent.eWin.intValue/10)]]];
                 effectLabel.text = [NSString stringWithFormat:@""];
             }
+            [fightText appendString:[meetText objectAtIndex:1]];
+            eventLabel.text = fightText;
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:walkEvent.times.integerValue]];
         }
     }

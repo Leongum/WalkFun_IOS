@@ -692,20 +692,22 @@
             eventLabel.numberOfLines = 0;
             
             Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:event.eId];
-            NSMutableString *fightText = [[NSMutableString alloc]init];
-            if (event.eWin.integerValue==3)
-                [fightText appendString:@"你拼尽余下全部体力发出奋力一击，"];
-            
+            NSArray *meetText = [fightEvent.fightName componentsSeparatedByString:@"。"];
+            NSMutableString *fightText = [[NSMutableString alloc]initWithString:[meetText objectAtIndex:0]];
             if (event.eWin.integerValue>0){
-                [fightText appendString:fightEvent.fightWin];
-                if (event.eWin.integerValue>1 && fightEvent.winGot)
+                NSArray *winTextList = [fightEvent.fightWin componentsSeparatedByString:@"|"];
+                [fightText appendString:[NSString stringWithFormat:@"，%@",(NSString *)[winTextList objectAtIndex:event.eWin.intValue/10]]];
+                
+                if (event.eWin.integerValue%10>1 && fightEvent.winGot)
                     effectLabel.text = [NSString stringWithFormat:@"获得：%@",fightEvent.winGot];
                 else
                     effectLabel.text = [NSString stringWithFormat:@""];
-            } else{
-                [fightText appendString:fightEvent.fightLoose];
+            } else {
+                NSArray *winTextList = [fightEvent.fightLoose componentsSeparatedByString:@"|"];
+                [fightText appendString:[NSString stringWithFormat:@"，%@",(NSString *)[winTextList objectAtIndex:abs(event.eWin.intValue/10)]]];
                 effectLabel.text = [NSString stringWithFormat:@""];
             }
+            [fightText appendString:[meetText objectAtIndex:1]];
             eventLabel.text = fightText;
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:event.times.integerValue]];
         }
@@ -833,6 +835,7 @@
         walkEvent.eType = RULE_Type_Fight;
         [self calculatePowerForFight:e];
         walkEvent.eWin = [self checkWin:e];
+        
         walkEvent.power = [NSNumber numberWithInteger:fightPowerCost];
         if (walkEvent.eWin.intValue>1) {//战斗胜利且得到战利品
             [self refreshItemCount:e.winGotRule];
@@ -897,7 +900,7 @@
     
     //在耗尽体力时的奋力一战必胜，并记录奋力一击
     if (fightPowerCost>=userPower)
-        return [NSNumber numberWithInteger:3];
+        return [NSNumber numberWithInteger:([fight.fightWin componentsSeparatedByString:@"|"].count-1)*10+2];
     
     if (userFight >= fight.monsterMinFight.doubleValue){
         double deltaMFight = fight.monsterMaxFight.doubleValue - fight.monsterMinFight.doubleValue;
@@ -907,16 +910,16 @@
         double roll = ((double)x)/10000.f;
         if (roll<rate){
             //胜利&战利品
-            return [NSNumber numberWithInteger:2];
+            return [NSNumber numberWithInteger:2 + (arc4random() % ([fight.fightWin componentsSeparatedByString:@"|"].count-1))*10];
         } else {
             //只胜利
-            return [NSNumber numberWithInteger:1];
+            return [NSNumber numberWithInteger:1 + (arc4random() % ([fight.fightWin componentsSeparatedByString:@"|"].count-1))*10];
         }
     }
     
     //战斗未发生
     fightPowerCost = 0;
-    return [NSNumber numberWithInteger:0];
+    return [NSNumber numberWithInteger:-(arc4random() % ([fight.fightWin componentsSeparatedByString:@"|"].count-1))*10];
 }
 
 -(void)eventDidHappened:(Walk_Event *)event{

@@ -123,11 +123,12 @@
     UILabel *itemDescLabel = (UILabel *)[cell viewWithTag:102];
     [itemDescLabel setLineBreakMode:NSLineBreakByWordWrapping];
     itemDescLabel.numberOfLines = 0;
-    NSMutableString *desc = [[NSMutableString alloc]initWithString:item.productDescription];
-    [desc replaceOccurrencesOfString:@"\\n" withString:@"\n" options:NSLiteralSearch|NSCaseInsensitiveSearch range:NSMakeRange(0, [desc length])];
-    itemDescLabel.text = desc;
-
-
+    
+    NSArray *itemInfoStringList = [item.productDescription componentsSeparatedByString:@"\\n\\n"];
+    if (itemInfoStringList.count>1)
+        itemDescLabel.text = [itemInfoStringList objectAtIndex:1];
+    else
+        itemDescLabel.text = @"";
     UILabel *costLabel = (UILabel *)[cell viewWithTag:103];
     costLabel.text = [NSString stringWithFormat:@"%d", item.virtualPrice.integerValue];
     

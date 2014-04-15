@@ -34,4 +34,5 @@
 @property (strong, nonatomic) IBOutlet UIButton *endDeletingButton;
 @property (strong, nonatomic) IBOutlet UIButton *startDeletingButton;
 
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @end

@@ -95,7 +95,7 @@
     itemIconView.image = [RORVirtualProductService getImageOf:item];
     NSArray *itemInfoStringList = [item.productDescription componentsSeparatedByString:@"\\n\\n"];
     if (itemInfoStringList.count>1)
-        itemEffectLabel.text = [itemInfoStringList objectAtIndex:1];
+        itemEffectLabel.text = [RORUtils explainItemEffectString:[itemInfoStringList objectAtIndex:1]];
     itemDescLabel.text = [itemInfoStringList objectAtIndex:0];
     
     [useButton addTarget:self action:@selector(useItemAction:) forControlEvents:UIControlEventTouchUpInside];

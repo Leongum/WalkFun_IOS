@@ -69,6 +69,16 @@
 }
 
 -(void)refreshFriendDisplayButton{
+    if (showFollow && showFans){
+        self.titleLabel.text = @"我的好友";
+    } else if (showFollow) {
+        self.titleLabel.text = @"我的关注";
+    } else if (showFans) {
+        self.titleLabel.text = @"我的粉丝";
+    } else {
+        self.titleLabel.text = @"";
+    }
+    
     if (showFollow){
 //        [self.showFollowButton setBackgroundColor:[UIColor redColor]];
         [self.showFollowButton setBackgroundImage:[UIImage imageNamed:@"followButton_selected.png"] forState:UIControlStateNormal];

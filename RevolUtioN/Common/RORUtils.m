@@ -432,4 +432,10 @@
     return [day1String isEqualToString:day2String];
 }
 
++(NSString *)explainItemEffectString:(NSString *)originalString{
+    NSMutableString *tmp = [[NSMutableString alloc]initWithString:originalString];
+    [tmp replaceOccurrencesOfString:@"，" withString:@"\n" options:NSRegularExpressionSearch range:NSMakeRange(0, [tmp length])];
+    return tmp;
+}
+
 @end

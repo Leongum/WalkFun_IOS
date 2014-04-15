@@ -97,7 +97,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     User_Prop *userProp = [contentList objectAtIndex:indexPath.row];
     Virtual_Product *item = [RORVirtualProductService fetchVProduct:userProp.productId];
-    NSString *alertMessage = [NSString stringWithFormat:@"确定要使用【%@】吗？\n\n战斗力: +4->+5\n体力: +3->+1\n  ", userProp.productName];
+    NSString *alertMessage = [NSString stringWithFormat:@"确定要使用【%@】吗？\n\n%@\n  ", userProp.productName, item.productDescription];
+    
     SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"使用道具" andMessage:alertMessage];
     [alertView addButtonWithTitle:@"取消"
                              type:SIAlertViewButtonTypeCancel

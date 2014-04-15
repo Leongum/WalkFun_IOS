@@ -29,6 +29,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     hasNewVersion = NO;
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,7 +72,7 @@
         default:
             break;
     }
-    
+    [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];
     return cell;
 }
 

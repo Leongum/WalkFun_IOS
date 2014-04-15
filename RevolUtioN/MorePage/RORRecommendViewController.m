@@ -28,12 +28,18 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     contentList = [RORSystemService fetchAllRecommedInfo];
+    self.backButton.alpha = 0;
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)backAction:(id)sender{
+    [super backAction:sender];
 }
 
 #pragma mark - UITableViewDataSource
@@ -65,6 +71,7 @@
     appDescriptionLabel.numberOfLines = 3;
     appDescriptionLabel.text = app.appDescription;
     
+    [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];
     return cell;
 }
 

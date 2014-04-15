@@ -168,6 +168,19 @@
                                     <outlet property="delegate" destination="dAC-yB-dRr" id="jk8-xG-m2o"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginButton.png" id="eAQ-fd-V9N">
+                                <rect key="frame" x="108" y="90" width="104" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2HG-Rx-Jca">
+                                <rect key="frame" x="114" y="96" width="92" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.80000001192092896" green="0.80000001192092896" blue="0.80000001192092896" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
@@ -180,6 +193,7 @@
                         <outlet property="showFollowButton" destination="3ce-on-dSI" id="jjB-jS-5kl"/>
                         <outlet property="startDeletingButton" destination="JIG-X5-c9p" id="NBa-ZP-PNW"/>
                         <outlet property="tableView" destination="zNU-K6-pfJ" id="W03-uL-Hxk"/>
+                        <outlet property="titleLabel" destination="2HG-Rx-Jca" id="a8Y-KM-KaX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uD5-1c-Auf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -481,6 +495,7 @@
         <image name="item_mall_backButton.png" width="115" height="115"/>
         <image name="item_mall_bg.png" width="640" height="1136"/>
         <image name="item_table_bg.png" width="640" height="1136"/>
+        <image name="loginButton.png" width="325" height="108"/>
         <image name="main_bg.jpg" width="640" height="1136"/>
         <image name="redbutton_bg.png" width="221" height="96"/>
         <image name="searchViewCell_bg.png" width="541" height="154"/>

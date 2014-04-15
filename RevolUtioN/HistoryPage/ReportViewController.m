@@ -14,7 +14,7 @@
 @end
 
 @implementation ReportViewController
-@synthesize winLabel, expLabel, coinLabel, itemLabel;
+@synthesize winLabel, expLabel, coinLabel, itemLabel, commentLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +34,10 @@
     expLabel.alpha = 0;
     coinLabel.alpha = 0;
     itemLabel.alpha = 0;
+    [commentLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    [commentLabel setTextAlignment:NSTextAlignmentCenter];
+    commentLabel.numberOfLines = 0;
+
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
@@ -48,6 +52,7 @@
     expLabel.text = expText;
     coinLabel.text = coinText;
     itemLabel.text = itemText;
+    commentLabel.text = commentText;
     winLabel.alpha = 1;
     [winLabel popIn:0.25 delegate:self startSelector:nil stopSelector:@selector(expLabelAnimation)];
 }
@@ -67,11 +72,12 @@
     [itemLabel popIn:0.25 delegate:self];
 }
 
--(void)customInit:(NSString *)win Exp:(NSString *)exp Coin:(NSString *)coin andItem:(NSString *)item{
+-(void)customInit:(NSString *)win Exp:(NSString *)exp Coin:(NSString *)coin Item:(NSString *)item andComment:(NSString *)comment{
     winText = win;
     expText = exp;
     coinText= coin;
     itemText = item;
+    commentText = comment;
     [self viewWillAppear:NO];
 }
 

@@ -79,4 +79,7 @@ _Pragma("clang diagnostic pop") \
 //两个date是否是同一天
 +(BOOL)isTheDay:(NSDate *)day1 equalTo:(NSDate *)day2;
 
+//解析获得道具效果的字符串
++(NSString *)explainItemEffectString:(NSString *)originalString;
+
 @end

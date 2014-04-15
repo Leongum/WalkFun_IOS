@@ -78,7 +78,7 @@
     }
     
     if (selectedItem){
-        self.itemLabel.text = @"";
+        self.itemLabel.text = selectedItem.productName;
         self.itemImage.image = [RORVirtualProductService getImageOf:selectedItem];
         [self.cancelBuffButton setBackgroundImage:[UIImage imageNamed:@"running_ready_del.png"] forState:UIControlStateNormal];
         
@@ -87,7 +87,7 @@
         self.extraPowerLabel.text = [NSString stringWithFormat:@"%d", powerAdded];
     } else {
         if (todayItem){
-            self.itemLabel.text = @"";
+            self.itemLabel.text = todayItem.productName;
             self.itemImage.image = [RORVirtualProductService getImageOf:todayItem];
         } else {
             self.itemLabel.text = @"加强一下";

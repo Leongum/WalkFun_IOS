@@ -91,7 +91,7 @@
             break;
         }
     }
-
+    [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];
     return cell;
 }
 

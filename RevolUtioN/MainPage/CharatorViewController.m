@@ -30,6 +30,7 @@
 	// Do any additional setup after loading the view.
     charatorImageView = (UIImageView *)[self.view viewWithTag:1];
     charatorBumpImageView = (UIImageView *)[self.view viewWithTag:2];
+    maleGrassImageView = (UIImageView *)[self.view viewWithTag:3];
     
     onFaceView = (UIView *)[self.view viewWithTag:101];
     frontCharatorView = (UIView *)[self.view viewWithTag:100];
@@ -122,8 +123,10 @@
     
     if ([userBase.sex isEqualToString:@"男"]){
         [charFileName appendString:@"male.png"];
+        maleGrassImageView.alpha = 1;
     } else {
         [charFileName appendString:@"female.png"];
+        maleGrassImageView.alpha = 0;
     }
     
     charatorImageView.image = [UIImage imageNamed:charFileName];

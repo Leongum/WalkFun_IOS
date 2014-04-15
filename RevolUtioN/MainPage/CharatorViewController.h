@@ -17,7 +17,7 @@
 
 @interface CharatorViewController : UIViewController{
     UIView *onFaceView, *frontCharatorView, *flowContainerView;
-    UIImageView *charatorImageView, *charatorBumpImageView;
+    UIImageView *charatorImageView, *charatorBumpImageView, *maleGrassImageView;
     UILabel *fatPVFrameView, *fightPVFrameView;
     THProgressView *fatPV, *fightPV;
 
