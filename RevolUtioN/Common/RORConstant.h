@@ -87,6 +87,7 @@
 #endif
 
 #define RULE_Drop_Down @"D"
+#define RULE_On_Face @"OF"
 #define RULE_Fatness @"F"
 #define RULE_Fight_Win @"FW"
 #define RULE_Fight_Loose @"FL"
@@ -114,6 +115,7 @@ typedef enum {OperateUpdate = 0, OperateInsert = 1, OperateDelete = 2} OperateEn
 typedef enum {PlanFlagNew = 0, PlanFlagHot = 1, PlanFlagRecommend = 2} PlanFlagEnun;
 typedef enum {ActionDefineRun = 0, ActionDefineUse = 1, ActionDefineReward = 2} ActionDefineEnum;
 typedef enum {ItemTypeNormal = 1, ItemTypeFight = 2} ItemTypeEnum;
+typedef enum {MissionDirectionNone = 0, MissionDirectionEast = 1, MissionDirectionSouth = 2,MissionDirectionWest = 3, MissionDirectionNorth = 4} MissionDirectionEnum;
 
 typedef struct {
     int mainVersion;

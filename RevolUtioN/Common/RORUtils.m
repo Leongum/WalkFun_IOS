@@ -424,4 +424,12 @@
     return [date2 timeIntervalSinceDate:date1]/86400;
 }
 
++(BOOL)isTheDay:(NSDate *)day1 equalTo:(NSDate *)day2{
+    NSDateFormatter *formattter = [[NSDateFormatter alloc] init];
+    [formattter setDateFormat:@"yyyyMMdd"];
+    NSString *day1String = [formattter stringFromDate:day1];
+    NSString *day2String = [formattter stringFromDate:day2];
+    return [day1String isEqualToString:day2String];
+}
+
 @end

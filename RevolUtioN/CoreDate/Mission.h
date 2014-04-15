@@ -22,6 +22,7 @@
 @property (nonatomic, retain) NSNumber * triggerActionId;
 @property (nonatomic, retain) NSNumber * triggerFightId;
 @property (nonatomic, retain) NSNumber * triggerNumbers;
+@property (nonatomic, retain) NSNumber * triggerDirection;
 @property (nonatomic, retain) NSNumber * goldCoin;
 @property (nonatomic, retain) NSNumber * experience;
 @property (nonatomic, retain) NSNumber * minLevelLimit;

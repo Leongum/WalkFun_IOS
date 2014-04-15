@@ -13,7 +13,7 @@
 @interface Virtual_Product : NSManagedObject
 
 @property (nonatomic, retain) NSDate * updateTime;
-@property (nonatomic, retain) NSNumber * dropFlag;
+@property (nonatomic, retain) NSNumber * propFlag;
 @property (nonatomic, retain) NSNumber * virtualPrice;
 @property (nonatomic, retain) NSString * productDescription;
 @property (nonatomic, retain) NSString * productName;

@@ -12,7 +12,7 @@
 @implementation Virtual_Product
 
 @dynamic updateTime;
-@dynamic dropFlag;
+@dynamic propFlag;
 @dynamic virtualPrice;
 @dynamic productDescription;
 @dynamic productName;
@@ -39,7 +39,7 @@
     self.productName = [RORDBCommon getStringFromId:[dict valueForKey:@"productName"]];
     self.productDescription = [RORDBCommon getStringFromId:[dict valueForKey:@"productDescription"]];
     self.virtualPrice = [RORDBCommon getNumberFromId:[dict valueForKey:@"virtualPrice"]];
-    self.dropFlag = [RORDBCommon getNumberFromId:[dict valueForKey:@"dropFlag"]];
+    self.propFlag = [RORDBCommon getNumberFromId:[dict valueForKey:@"propFlag"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
     self.picLink = [RORDBCommon getStringFromId:[dict valueForKey:@"picLink"]];
     self.effectiveRule = [RORDBCommon getStringFromId:[dict valueForKey:@"effectiveRule"]];

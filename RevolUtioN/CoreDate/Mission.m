@@ -22,6 +22,7 @@
 @dynamic triggerActionId;
 @dynamic triggerFightId;
 @dynamic triggerNumbers;
+@dynamic triggerDirection;
 @dynamic goldCoin;
 @dynamic experience;
 @dynamic maxLevelLimit;
@@ -50,6 +51,7 @@
     self.triggerActionId = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerActionId"]];
     self.triggerFightId = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerFightId"]];
     self.triggerNumbers = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerNumbers"]];
+    self.triggerDirection = [RORDBCommon getNumberFromId:[dict valueForKey:@"triggerDirection"]];
     self.goldCoin = [RORDBCommon getNumberFromId:[dict valueForKey:@"goldCoin"]];
     self.experience = [RORDBCommon getNumberFromId:[dict valueForKey:@"experience"]];
     self.maxLevelLimit = [RORDBCommon getNumberFromId:[dict valueForKey:@"maxLevelLimit"]];

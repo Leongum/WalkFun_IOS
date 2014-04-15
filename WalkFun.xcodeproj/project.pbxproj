@@ -189,7 +189,6 @@
 		3022DFEF18E19BF800F3A9D5 /* ReadyUseItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3022DFEE18E19BF800F3A9D5 /* ReadyUseItemViewController.m */; };
 		3022DFF218E19C4100F3A9D5 /* ReadyAddPartnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3022DFF118E19C4100F3A9D5 /* ReadyAddPartnerViewController.m */; };
 		3022DFF418E2764600F3A9D5 /* WawaW5.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 3022DFF318E2764600F3A9D5 /* WawaW5.TTF */; };
-		3022DFF618EABB8600F3A9D5 /* fight_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022DFF518EABB8600F3A9D5 /* fight_icon.png */; };
 		3022DFF818EBEE8D00F3A9D5 /* friend_add_cell_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022DFF718EBEE8D00F3A9D5 /* friend_add_cell_disabled.png */; };
 		3022DFFB18ED3B3700F3A9D5 /* MissionDoneCongratsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3022DFFA18ED3B3700F3A9D5 /* MissionDoneCongratsViewController.m */; };
 		3022E00218EDC1BD00F3A9D5 /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3022E00118EDC1BD00F3A9D5 /* ReportViewController.m */; };
@@ -198,11 +197,17 @@
 		3022E00D18F2942200F3A9D5 /* EventAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3022E00C18F2942200F3A9D5 /* EventAnnotation.m */; };
 		3022E01018F2943600F3A9D5 /* CoinAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3022E00F18F2943600F3A9D5 /* CoinAnnotation.m */; };
 		3022E01218F2A16200F3A9D5 /* cunzhang.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E01118F2A16200F3A9D5 /* cunzhang.png */; };
-		3022E01418F2C29600F3A9D5 /* event_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E01318F2C29600F3A9D5 /* event_icon.png */; };
 		3022E01618F2D2E300F3A9D5 /* running_ready_friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E01518F2D2E300F3A9D5 /* running_ready_friend.png */; };
 		3022E01818F2D3DE00F3A9D5 /* running_ready_item.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E01718F2D3DE00F3A9D5 /* running_ready_item.png */; };
 		3022E01D18F51FC900F3A9D5 /* MissionStoneCongratsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3022E01C18F51FC900F3A9D5 /* MissionStoneCongratsViewController.m */; };
 		3022E01F18F541E600F3A9D5 /* intro_Pinch.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E01E18F541E600F3A9D5 /* intro_Pinch.png */; };
+		3022E02218F6568600F3A9D5 /* running_ready_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E02018F6568600F3A9D5 /* running_ready_add.png */; };
+		3022E02318F6568600F3A9D5 /* running_ready_del.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E02118F6568600F3A9D5 /* running_ready_del.png */; };
+		3022E02518F7961200F3A9D5 /* intro_History.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E02418F7961200F3A9D5 /* intro_History.png */; };
+		3022E02B18F7ACCF00F3A9D5 /* anno_coin.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E02818F7ACCF00F3A9D5 /* anno_coin.png */; };
+		3022E02C18F7ACCF00F3A9D5 /* event_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E02918F7ACCF00F3A9D5 /* event_icon.png */; };
+		3022E02D18F7ACCF00F3A9D5 /* fight_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E02A18F7ACCF00F3A9D5 /* fight_icon.png */; };
+		3022E02F18F7EBE900F3A9D5 /* running_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E02E18F7EBE900F3A9D5 /* running_title.png */; };
 		302FD0051727D870004DA005 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302FD0041727D870004DA005 /* UIKit.framework */; };
 		302FD0071727D870004DA005 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302FD0061727D870004DA005 /* Foundation.framework */; };
 		302FD0091727D870004DA005 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302FD0081727D870004DA005 /* CoreGraphics.framework */; };
@@ -674,7 +679,6 @@
 		3022DFF018E19C4100F3A9D5 /* ReadyAddPartnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReadyAddPartnerViewController.h; path = RunningPages/ReadyAddPartnerViewController.h; sourceTree = "<group>"; };
 		3022DFF118E19C4100F3A9D5 /* ReadyAddPartnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReadyAddPartnerViewController.m; path = RunningPages/ReadyAddPartnerViewController.m; sourceTree = "<group>"; };
 		3022DFF318E2764600F3A9D5 /* WawaW5.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = WawaW5.TTF; path = Resources/WawaW5.TTF; sourceTree = "<group>"; };
-		3022DFF518EABB8600F3A9D5 /* fight_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fight_icon.png; sourceTree = "<group>"; };
 		3022DFF718EBEE8D00F3A9D5 /* friend_add_cell_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_add_cell_disabled.png; sourceTree = "<group>"; };
 		3022DFF918ED3B3700F3A9D5 /* MissionDoneCongratsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MissionDoneCongratsViewController.h; path = HistoryPage/MissionDoneCongratsViewController.h; sourceTree = "<group>"; };
 		3022DFFA18ED3B3700F3A9D5 /* MissionDoneCongratsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissionDoneCongratsViewController.m; path = HistoryPage/MissionDoneCongratsViewController.m; sourceTree = "<group>"; };
@@ -688,12 +692,18 @@
 		3022E00E18F2943600F3A9D5 /* CoinAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoinAnnotation.h; sourceTree = "<group>"; };
 		3022E00F18F2943600F3A9D5 /* CoinAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoinAnnotation.m; sourceTree = "<group>"; };
 		3022E01118F2A16200F3A9D5 /* cunzhang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cunzhang.png; sourceTree = "<group>"; };
-		3022E01318F2C29600F3A9D5 /* event_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = event_icon.png; sourceTree = "<group>"; };
 		3022E01518F2D2E300F3A9D5 /* running_ready_friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = running_ready_friend.png; sourceTree = "<group>"; };
 		3022E01718F2D3DE00F3A9D5 /* running_ready_item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = running_ready_item.png; sourceTree = "<group>"; };
 		3022E01B18F51FC900F3A9D5 /* MissionStoneCongratsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MissionStoneCongratsViewController.h; path = MainPage/MissionStoneCongratsViewController.h; sourceTree = "<group>"; };
 		3022E01C18F51FC900F3A9D5 /* MissionStoneCongratsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissionStoneCongratsViewController.m; path = MainPage/MissionStoneCongratsViewController.m; sourceTree = "<group>"; };
 		3022E01E18F541E600F3A9D5 /* intro_Pinch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_Pinch.png; sourceTree = "<group>"; };
+		3022E02018F6568600F3A9D5 /* running_ready_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = running_ready_add.png; sourceTree = "<group>"; };
+		3022E02118F6568600F3A9D5 /* running_ready_del.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = running_ready_del.png; sourceTree = "<group>"; };
+		3022E02418F7961200F3A9D5 /* intro_History.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_History.png; sourceTree = "<group>"; };
+		3022E02818F7ACCF00F3A9D5 /* anno_coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = anno_coin.png; path = Resources/icons/annotation/anno_coin.png; sourceTree = "<group>"; };
+		3022E02918F7ACCF00F3A9D5 /* event_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_icon.png; path = Resources/icons/annotation/event_icon.png; sourceTree = "<group>"; };
+		3022E02A18F7ACCF00F3A9D5 /* fight_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fight_icon.png; path = Resources/icons/annotation/fight_icon.png; sourceTree = "<group>"; };
+		3022E02E18F7EBE900F3A9D5 /* running_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = running_title.png; sourceTree = "<group>"; };
 		302FD0011727D870004DA005 /* WalkFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WalkFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		302FD0041727D870004DA005 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		302FD0061727D870004DA005 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1246,6 +1256,7 @@
 		301C1F6817378AF30068B43B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3022E02618F7ACBD00F3A9D5 /* annotation */,
 				30978DA017EDA57E00CA58B9 /* history */,
 				30DB01F518C32652008863B8 /* item */,
 				3098492D1860E4580079E236 /* friends */,
@@ -1295,6 +1306,16 @@
 				3022DFC118DAEC2300F3A9D5 /* SIAlertView.m */,
 			);
 			path = SIAlertView;
+			sourceTree = "<group>";
+		};
+		3022E02618F7ACBD00F3A9D5 /* annotation */ = {
+			isa = PBXGroup;
+			children = (
+				3022E02818F7ACCF00F3A9D5 /* anno_coin.png */,
+				3022E02918F7ACCF00F3A9D5 /* event_icon.png */,
+				3022E02A18F7ACCF00F3A9D5 /* fight_icon.png */,
+			);
+			name = annotation;
 			sourceTree = "<group>";
 		};
 		302FCFF81727D870004DA005 = {
@@ -1565,10 +1586,11 @@
 		307C861617E97A90007C1DE5 /* running */ = {
 			isa = PBXGroup;
 			children = (
+				3022E02E18F7EBE900F3A9D5 /* running_title.png */,
+				3022E02018F6568600F3A9D5 /* running_ready_add.png */,
+				3022E02118F6568600F3A9D5 /* running_ready_del.png */,
 				3022E01718F2D3DE00F3A9D5 /* running_ready_item.png */,
 				3022E01518F2D2E300F3A9D5 /* running_ready_friend.png */,
-				3022E01318F2C29600F3A9D5 /* event_icon.png */,
-				3022DFF518EABB8600F3A9D5 /* fight_icon.png */,
 				30DB020018C45F68008863B8 /* finishrunning_pop_bg.png */,
 				30DB020118C45F68008863B8 /* running_machine.png */,
 				30DB020218C45F68008863B8 /* running_paper.png */,
@@ -1648,6 +1670,7 @@
 		30984932186206750079E236 /* instruction */ = {
 			isa = PBXGroup;
 			children = (
+				3022E02418F7961200F3A9D5 /* intro_History.png */,
 				3022E01E18F541E600F3A9D5 /* intro_Pinch.png */,
 			);
 			name = instruction;
@@ -2054,6 +2077,7 @@
 				0FA75189189279A90037342E /* CityCode.geojson in Resources */,
 				30C832AD1859CCD100EEE2F9 /* trainingButton_bg.png in Resources */,
 				0FA7520E18927A300037342E /* userInfo.plist in Resources */,
+				3022E02D18F7ACCF00F3A9D5 /* fight_icon.png in Resources */,
 				30FC292917607F6D00DEC042 /* settings.png in Resources */,
 				3005D00518561A6900D83648 /* creatSimple_bg.png in Resources */,
 				3005D00D1856B4EC00D83648 /* trainingTypeSeg_bg1.png in Resources */,
@@ -2062,6 +2086,7 @@
 				3005CFF118545D0E00D83648 /* traineeButton_bg.png in Resources */,
 				30D9207A186F0F3000C0528F /* trainingHistoryPageCell_bg.png in Resources */,
 				3005D00918561BC000D83648 /* creatAdvAddButton.png in Resources */,
+				3022E02218F6568600F3A9D5 /* running_ready_add.png in Resources */,
 				30989CAE17F5D87800CA9F83 /* Default@2x.png in Resources */,
 				30989CAC17F5D87800CA9F83 /* Default.png in Resources */,
 				30BDBE66182A3603001829D5 /* FriendsStoryboard.storyboard in Resources */,
@@ -2100,7 +2125,6 @@
 				3022DF9D18D6C00900F3A9D5 /* add_friend.png in Resources */,
 				3022DF9F18D6C00900F3A9D5 /* fansButton_normal.png in Resources */,
 				30C832AF1859CCD100EEE2F9 /* trainingDetailSimple_bg.png in Resources */,
-				30358B511871B3DB00AF6C95 /* introCustomPage.png in Resources */,
 				0F0B64CE18F3E27C003B0E15 /* UMSShareListController.xib in Resources */,
 				3022DF9B18D6C00900F3A9D5 /* fansButton_selected.png in Resources */,
 				30DBB72317EFE04400552391 /* challenge_pop_bg.png in Resources */,
@@ -2108,6 +2132,7 @@
 				30989CB317F5F7C800CA9F83 /* A.png in Resources */,
 				0F0B64C518F3E27C003B0E15 /* UMSocialLocalizable.strings in Resources */,
 				30DB020518C45F68008863B8 /* running_machine.png in Resources */,
+				3022E02518F7961200F3A9D5 /* intro_History.png in Resources */,
 				30DFE7DF17C6748F00678780 /* submit.png in Resources */,
 				30D008D317F53FBB004E6747 /* challenge_S.m4a in Resources */,
 				30FAA24918688A4000E72650 /* countDown_bg.png in Resources */,
@@ -2163,7 +2188,6 @@
 				30DB021718C6C90C008863B8 /* main_mission_board.png in Resources */,
 				30621D1B17DEFFA00063A007 /* red_left.png in Resources */,
 				30D008D517F53FBB004E6747 /* challenge_F.m4a in Resources */,
-				3022DFF618EABB8600F3A9D5 /* fight_icon.png in Resources */,
 				0F0B64CB18F3E27C003B0E15 /* UMShareEditViewControlleriPad.xib in Resources */,
 				30989CE317F91C6F00CA9F83 /* main_trafficlight_none.png in Resources */,
 				30FE2C8518C1EA7D0077C5A0 /* loginButton.png in Resources */,
@@ -2203,6 +2227,7 @@
 				3013D49E18C05CBD005F4C07 /* normal_female.png in Resources */,
 				3022DFCF18DFDEA000F3A9D5 /* item_mall_title.png in Resources */,
 				30DB01FD18C32652008863B8 /* itemmall_button.png in Resources */,
+				3022E02B18F7ACCF00F3A9D5 /* anno_coin.png in Resources */,
 				3005CFEB1854518D00D83648 /* collect_bg.png in Resources */,
 				307C861F17E97A90007C1DE5 /* green_btn_bg.png in Resources */,
 				30804E8817F566DD00F1A353 /* loading_bg.jpg in Resources */,
@@ -2215,7 +2240,8 @@
 				3022DFD518E00C6600F3A9D5 /* friend_add_title.png in Resources */,
 				3054673518ADC0FB00CA123C /* MainStoryboard_iPhone.storyboard in Resources */,
 				307C862E17E9A78B007C1DE5 /* details.png in Resources */,
-				3022E01418F2C29600F3A9D5 /* event_icon.png in Resources */,
+				3022E02318F6568600F3A9D5 /* running_ready_del.png in Resources */,
+				3022E02F18F7EBE900F3A9D5 /* running_title.png in Resources */,
 				30DB01FB18C32652008863B8 /* item_table_bg.png in Resources */,
 				307C862F17E9A78B007C1DE5 /* details@2x.png in Resources */,
 				30594BC417F06B4F00E6A19B /* seg_selected_bg.png in Resources */,
@@ -2241,6 +2267,7 @@
 				0F0B64C718F3E27C003B0E15 /* UMSCommentDetailController.xib in Resources */,
 				0F0B64CD18F3E27C003B0E15 /* UMSnsAccountViewController.xib in Resources */,
 				0F0B64C918F3E27C003B0E15 /* UMSCommentInputControlleriPad.xib in Resources */,
+				3022E02C18F7ACCF00F3A9D5 /* event_icon.png in Resources */,
 				3013D4A818C0D273005F4C07 /* exfat_male.png in Resources */,
 				3005CFFB1854B1C000D83648 /* traineeExpandTable_bg.png in Resources */,
 				30DB021318C5D2C3008863B8 /* DazStarOutline.png in Resources */,

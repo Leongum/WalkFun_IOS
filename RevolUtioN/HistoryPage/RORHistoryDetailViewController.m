@@ -118,7 +118,7 @@
     [super viewWillAppear:animated];
     
     //如果完成了任务
-    if ([delegate isKindOfClass:[RORRunningViewController class]]){
+    if (1){//[delegate isKindOfClass:[RORRunningViewController class]]){
         
         //显示结果页面
         ReportViewController *reportViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"ReportViewController"];
@@ -211,8 +211,10 @@
     
     NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
     NSNumber *userLevel = [userInfoList valueForKey:@"userLevel"];
-    
-    if (userLevel.integerValue<userBase.userDetail.level.integerValue){
+    if (userLevel.intValue == 0){
+        [userInfoList setValue:userBase.userDetail.level forKey:@"userLevel"];
+        [RORUserUtils writeToUserInfoPList:userInfoList];
+    } else if (userLevel.integerValue<userBase.userDetail.level.integerValue){
         [self performLevelUp];
     }
 }
@@ -221,15 +223,7 @@
 -(void)performLevelUp{
     PooViewController *pooController = [mainStoryboard instantiateViewControllerWithIdentifier:@"levelUpCongratsCoverViewController"];
     [coverViewQueue addObject:pooController];
-
-//    CoverView *coverView = (CoverView *)pooController.view;
-//    [coverView addCoverBgImage];
-//    [coverView appear:self];
-//    
-//    [self addChildViewController:pooController];
-//    [self.view addSubview:pooController.view];
-//    [self didMoveToParentViewController:pooController];
-    
+ 
     CABasicAnimation *heartsBurst = [CABasicAnimation animationWithKeyPath:@"emitterCells.heart.birthRate"];
 	heartsBurst.fromValue		= [NSNumber numberWithFloat:2.0];
 	heartsBurst.toValue			= [NSNumber numberWithFloat:  0.0];

@@ -101,13 +101,14 @@
     //如果已经集满了三次日常任务，但没有兑换奖励，则接不到新的任务
     NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
     [self.missionStoneButton setTitle:[NSString stringWithFormat:@"%ld/3",(long)missionProcess.integerValue] forState:UIControlStateNormal];
-    if (missionProcess.integerValue >= 0){//todo
+    if (missionProcess.integerValue >= 3){//todo
         [self.missionStoneButton setEnabled:YES];
         return;
     }
     [self.missionStoneButton setEnabled:NO];
 }
 
+//3次任务换随机奖励
 - (IBAction)missionStoneAction:(id)sender {
     Reward_Details *thisReward = [RORUserServices getRandomReward:userInfo.userId];
     while (!thisReward) {
@@ -164,7 +165,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    if([newLocation.timestamp timeIntervalSinceNow] <= (60 * 2)){
+    if([newLocation.timestamp timeIntervalSinceNow] >= (60 * 2)){
         userLocation = newLocation;
         if (!wasFound){
             wasFound = YES;

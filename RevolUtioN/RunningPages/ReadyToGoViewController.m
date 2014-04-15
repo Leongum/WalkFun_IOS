@@ -51,7 +51,6 @@
         userBase = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self endIndicator:self];
-            
             self.baseFightLabel.text = [NSString stringWithFormat:@"%d", userBase.userDetail.fight.intValue];
             self.basePowerLabel.text = [NSString stringWithFormat:@"%d", userBase.userDetail.power.intValue];
             self.extraFightLabel.text = [NSString stringWithFormat:@"%d",userBase.userDetail.fightPlus.intValue];
@@ -69,36 +68,37 @@
     powerAdded = 0;
     
     if (selectedFriend){
-        [self.friendButton setTitle:selectedFriend.nickName forState:UIControlStateNormal];
+        self.friendLabel.text = selectedFriend.nickName;
         fightAdded += (selectedFriend.userDetail.fight.intValue +
                        selectedFriend.userDetail.fightPlus.intValue)/5;
-        self.cancelFriendButton.alpha = 1;
+        [self.cancelFriendButton setBackgroundImage:[UIImage imageNamed:@"running_ready_del.png"] forState:UIControlStateNormal];
     } else {
-        [self.friendButton setTitle:@"带个伙伴" forState:UIControlStateNormal];
-        self.cancelFriendButton.alpha = 0;
+        self.friendLabel.text = @"带个伙伴";
+        [self.cancelFriendButton setBackgroundImage:[UIImage imageNamed:@"running_ready_add.png"] forState:UIControlStateNormal];
     }
     
     if (selectedItem){
-        [self.buffButton setTitle:@"" forState:UIControlStateNormal];
-        [self.buffButton setBackgroundImage:[RORVirtualProductService getImageOf:selectedItem] forState:UIControlStateNormal];
-        self.cancelBuffButton.alpha = 1;
+        self.itemLabel.text = @"";
+        self.itemImage.image = [RORVirtualProductService getImageOf:selectedItem];
+        [self.cancelBuffButton setBackgroundImage:[UIImage imageNamed:@"running_ready_del.png"] forState:UIControlStateNormal];
         
         [self calculateItemEffect];
         self.extraFightLabel.text = [NSString stringWithFormat:@"%d",fightAdded];
         self.extraPowerLabel.text = [NSString stringWithFormat:@"%d", powerAdded];
     } else {
         if (todayItem){
-            [self.buffButton setTitle:@"" forState:UIControlStateNormal];
-            [self.buffButton setBackgroundImage:[RORVirtualProductService getImageOf:todayItem] forState:UIControlStateNormal];
+            self.itemLabel.text = @"";
+            self.itemImage.image = [RORVirtualProductService getImageOf:todayItem];
         } else {
-            [self.buffButton setTitle:@"加强一下" forState:UIControlStateNormal];
-            [self.buffButton setBackgroundImage:nil forState:UIControlStateNormal];
+            self.itemLabel.text = @"加强一下";
+            self.itemImage.image = nil;
         }
+        [self.cancelBuffButton setBackgroundImage:[UIImage imageNamed:@"running_ready_add.png"] forState:UIControlStateNormal];
         
         self.extraFightLabel.text = [NSString stringWithFormat:@"%d",fightAdded + userBase.userDetail.fightPlus.intValue];
         self.extraPowerLabel.text = [NSString stringWithFormat:@"%d",userBase.userDetail.powerPlus.intValue];
-        self.cancelBuffButton.alpha = 0;
     }
+    
 }
 
 -(void)calculateItemEffect{
@@ -184,30 +184,36 @@
     
 }
 
-- (IBAction)addBuffAction:(id)sender {
-    UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReadyUseItemViewController"];
-    if ([viewController respondsToSelector:@selector(setDelegate:)]){
-        [viewController setValue:self forKey:@"delegate"];
-    }
-    [[self parentViewController] presentViewController:viewController animated:YES completion:^(){}];
-}
-
-- (IBAction)addFriendAction:(id)sender {
-    UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReadyAddPartnerViewController"];
-    if ([viewController respondsToSelector:@selector(setDelegate:)]){
-        [viewController setValue:self forKey:@"delegate"];
-    }
-    [[self parentViewController] presentViewController:viewController animated:YES completion:^(){}];
-}
-
 - (IBAction)cancelBuffAction:(id)sender {
-    selectedItem = nil;
-    [self viewWillAppear:NO];
+    if (selectedItem){
+        selectedItem = nil;
+        [self viewWillAppear:NO];
+    } else {
+        UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReadyUseItemViewController"];
+        if ([viewController respondsToSelector:@selector(setDelegate:)]){
+            [viewController setValue:self forKey:@"delegate"];
+        }
+        [[self parentViewController] presentViewController:viewController animated:YES completion:^(){}];
+    }
 }
 
 - (IBAction)cancelFriendAction:(id)sender {
-    selectedFriend = nil;
-    [self viewWillAppear:NO];
+//    //等级限制
+//    if (userBase.userDetail.level.intValue<3){
+//        [self sendAlart:@"等级3解锁"];
+//        return;
+//    }
+    if (selectedFriend){
+        selectedFriend = nil;
+        [self viewWillAppear:NO];
+    } else {
+        UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReadyAddPartnerViewController"];
+        if ([viewController respondsToSelector:@selector(setDelegate:)]){
+            [viewController setValue:self forKey:@"delegate"];
+        }
+        [[self parentViewController] presentViewController:viewController animated:YES completion:^(){}];
+
+    }
 }
 
 

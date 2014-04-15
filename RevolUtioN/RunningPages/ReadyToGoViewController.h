@@ -28,8 +28,13 @@
 @property (strong, nonatomic) IBOutlet UILabel *extraFightLabel;
 @property (strong, nonatomic) IBOutlet UILabel *extraPowerLabel;
 
-@property (strong, nonatomic) IBOutlet UIButton *buffButton;
-@property (strong, nonatomic) IBOutlet UIButton *friendButton;
 @property (strong, nonatomic) IBOutlet UIButton *cancelBuffButton;
 @property (strong, nonatomic) IBOutlet UIButton *cancelFriendButton;
+@property (strong, nonatomic) IBOutlet UIImageView *itemImage;
+
+@property (strong, nonatomic) IBOutlet UILabel *itemLabel;
+@property (strong, nonatomic) IBOutlet UILabel *friendLabel;
+
+@property (strong, nonatomic) IBOutlet UIView *itemView;
+@property (strong, nonatomic) IBOutlet UIView *friendView;
 @end

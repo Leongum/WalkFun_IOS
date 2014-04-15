@@ -33,7 +33,7 @@
     //todo:load content
     contentList = [RORFriendService fetchFriendFansList];
     
-    isItemAboutFight = (selectedItem.dropFlag.intValue==ItemTypeFight);
+    isItemAboutFight = (selectedItem.propFlag.intValue==ItemTypeFight);
     
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
@@ -64,7 +64,7 @@
                               if (toSelf){
                                   [self useItemTo:[RORUserUtils getUserId]];
                                   //save today's item
-                                  if (selectedItem.dropFlag.intValue == ItemTypeFight){
+                                  if (selectedItem.propFlag.intValue == ItemTypeFight){
                                       NSMutableDictionary *userInfoPList = [RORUserUtils getUserInfoPList];
                                       [userInfoPList setObject:[NSDate date] forKey:@"LatestUseItemDate"];
                                       [userInfoPList setObject:selectedItem.productId forKey:@"LatestUseItemId"];
@@ -193,7 +193,7 @@
                               if (toSelf)
                                   [self useItemTo:[RORUserUtils getUserId]];
                               else
-                                  [self useItemTo:selectedFriend.friendId];
+                                  [self useItemTo:selectedFriend.userId];
                           }];
     alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
     

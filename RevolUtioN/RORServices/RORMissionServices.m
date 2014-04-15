@@ -87,11 +87,11 @@
     NSManagedObjectContext *context = [RORContextUtils getShareContext];
     NSString *lastUpdateTime = [RORUserUtils getLastUpdateTime:@"DailyMissionGetTime"];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"YYYY/MM/dd"]; //设置日期格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"]; //设置日期格式
     NSDate *today = [NSDate date]; //当前日期
     NSDate *fetchDay = [dateFormatter dateFromString:lastUpdateTime];
-    BOOL b = [today isEqualToDate:fetchDay];//日期相同返回YES
-    if(b){
+//    BOOL b = [today isEqualToDate:fetchDay];//日期相同返回YES
+    if([RORUtils isTheDay:fetchDay equalTo:today]){
         NSMutableDictionary *userDict = [RORUserUtils getUserInfoPList];
         NSNumber * missionId =  [userDict valueForKey:@"dailyMissionId"];
         return [self fetchMission:missionId];
@@ -129,12 +129,13 @@
         return nil;
     
     NSDate *date = [userInfoList valueForKey:@"lastDailyMissionFinishedDate"];
-    NSDateFormatter *formattter = [[NSDateFormatter alloc] init];
-    [formattter setDateFormat:@"yyyyMMdd"];
-    NSNumber *lastNum = [RORDBCommon getNumberFromId:[formattter stringFromDate:date]];
-    NSNumber *newNem = [RORDBCommon getNumberFromId:[formattter stringFromDate:[NSDate date]]];
-    if (lastNum== nil || newNem.integerValue > lastNum.integerValue){
+//    NSDateFormatter *formattter = [[NSDateFormatter alloc] init];
+//    [formattter setDateFormat:@"yyyyMMdd"];
+//    NSString *lastNum = [formattter stringFromDate:date];
+//    NSString *newNem = [formattter stringFromDate:[NSDate date]];
+    if (date== nil || ![RORUtils isTheDay:date equalTo:[NSDate date]]){
         Mission *todayMission = [RORMissionServices fetchDailyMission];
+        
         return todayMission;
     }
     return nil;

@@ -277,15 +277,23 @@
                 fId = user.userId;
             else
                 fId = user.friendId;
-            User_Base *userBase =[RORUserServices fetchUser:fId];
-            if (!userBase)
-                userBase = [RORUserServices syncUserInfoById:fId];
-            if (userBase){
-                [friendInfoViewController setValue:userBase forKey:@"userBase"];
-                [self.navigationController pushViewController:friendInfoViewController animated:YES];
-            } else {
-                [self sendAlart:@"信息读取失败"];
-            }
+            
+            [self startIndicator:self];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                User_Base *userBase =[RORUserServices fetchUser:fId];
+                if (!userBase)
+                    userBase = [RORUserServices syncUserInfoById:fId];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (userBase){
+                        [self endIndicator:self];
+                        [friendInfoViewController setValue:userBase forKey:@"userBase"];
+                        [self.navigationController pushViewController:friendInfoViewController animated:YES];
+                    } else {
+                        [self sendAlart:@"信息读取失败"];
+                    }
+                });
+            });
+
         }
     } else {
         [self deFollowAction:[self.tableView cellForRowAtIndexPath:indexPath]];

@@ -121,7 +121,7 @@ static NSDate *syncTime;
     [settingDict setValue:DEFAULT_NET_WORK_MODE forKey:@"uploadMode"];
     [settingDict setValue:DEFAULT_WEIGHT forKey:@"weight"];
     [settingDict setValue:DEFAULT_HEIGHT forKey:@"height"];
-    [settingDict setValue:DEFAULT_SEX forKey:@"sex"];
+//    [settingDict setValue:DEFAULT_SEX forKey:@"sex"];
     [settingDict setValue:DEFAULT_SPEEDTYPE forKey:@"speedType"];
     [settingDict setValue:DEFAULT_ANIMATION forKey:@"loadingAnimation"];
     [settingDict writeToFile:path atomically:YES];

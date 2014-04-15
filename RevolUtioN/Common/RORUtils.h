@@ -75,4 +75,8 @@ _Pragma("clang diagnostic pop") \
 
 //两个date之间相差多少天的字条串
 +(NSInteger)daysBetweenDate1:(NSDate*)date1 andDate2:(NSDate*)date2;
+
+//两个date是否是同一天
++(BOOL)isTheDay:(NSDate *)day1 equalTo:(NSDate *)day2;
+
 @end

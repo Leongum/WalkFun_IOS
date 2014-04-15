@@ -31,6 +31,10 @@
 #define TIMER_INTERVAL delta_T
 #define MIN_PUSHPOINT_DISTANCE 5
 
+typedef struct {
+    double east, west, south, north;
+} DirectionMovement;
+
 @interface RORRunningBaseViewController : RORViewController<CLLocationManagerDelegate>{
     BOOL wasFound;
     BOOL isNetworkOK;
@@ -46,6 +50,7 @@
     vec_3 OldVn;
     INStepCounting *stepCounting;
     NSInteger currentStep;
+    DirectionMovement directionMoved;
     
     RORMultiPlaySound *allInOneSound;
     

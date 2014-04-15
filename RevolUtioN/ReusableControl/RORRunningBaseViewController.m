@@ -69,6 +69,11 @@
     itemCount = 0;
     fightCount = 0;
     stepsSinceLastFight = 0;
+    
+    directionMoved.east = 0;
+    directionMoved.west = 0;
+    directionMoved.south = 0;
+    directionMoved.north = 0;
 }
 
 -(void)viewDidUnload{

@@ -35,7 +35,7 @@
     for (int i=0; i<tmpList.count; i++){
         User_Prop *userItem = (User_Prop *)[tmpList objectAtIndex:i];
         Virtual_Product *thisItem = [RORVirtualProductService fetchVProduct:userItem.productId];
-        if (thisItem.dropFlag.intValue == ItemTypeFight){
+        if (thisItem.propFlag.intValue == ItemTypeFight){
             [contentList addObject:userItem];
             [itemList addObject:thisItem];
         }

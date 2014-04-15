@@ -78,6 +78,7 @@
         <attribute name="missionRule" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="missionTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="triggerActionId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="triggerDirection" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="triggerDistances" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="triggerFightId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="triggerNumbers" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -180,7 +181,6 @@
         <attribute name="valid" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Virtual_Product" representedClassName="Virtual_Product" syncable="YES">
-        <attribute name="dropFlag" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="dropPicList" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="effectiveRule" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="maxDropNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -190,6 +190,7 @@
         <attribute name="productDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="productId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="productName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="propFlag" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="virtualPrice" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
     </entity>
@@ -199,7 +200,7 @@
         <element name="Fight_Define" positionX="0" positionY="153" width="128" height="313"/>
         <element name="Friend" positionX="0" positionY="0" width="128" height="148"/>
         <element name="Friend_Sort" positionX="0" positionY="0" width="128" height="210"/>
-        <element name="Mission" positionX="0" positionY="0" width="128" height="298"/>
+        <element name="Mission" positionX="0" positionY="0" width="128" height="315"/>
         <element name="Recommend_App" positionX="0" positionY="0" width="128" height="165"/>
         <element name="User_Base" positionX="0" positionY="0" width="128" height="180"/>
         <element name="User_Detail" positionX="0" positionY="0" width="128" height="343"/>

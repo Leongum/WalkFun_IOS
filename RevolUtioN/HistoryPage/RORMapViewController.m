@@ -88,23 +88,28 @@
         CLLocationCoordinate2D eventCoor;
         eventCoor.latitude = we.lati.doubleValue;
         eventCoor.longitude = we.longi.doubleValue;
-        RORMapAnnotation *anno;
+        
         if ([we.eType isEqualToString:RULE_Type_Fight]){
-            anno = [[RORFightAnnotation alloc]initWithCoordinate:eventCoor];
+            RORFightAnnotation *anno = [[RORFightAnnotation alloc]initWithCoordinate:eventCoor];
             anno.title = [NSString stringWithFormat:@"战斗%@",we.eWin.intValue>0?@"胜利":@"失败"];
+            [mapView addAnnotation:anno];
         } else {
             Action_Define *actionEvent = [RORSystemService fetchActionDefine:we.eId];
             if ([actionEvent.actionName rangeOfString:@"金币"].location != NSNotFound) {//金币事件
-                anno = [[CoinAnnotation alloc]initWithCoordinate:eventCoor];
+                CoinAnnotation *anno = [[CoinAnnotation alloc]initWithCoordinate:eventCoor];
+                anno.title = actionEvent.actionName;
+                [mapView addAnnotation:anno];
             } else {//普通事件
-                anno = [[EventAnnotation alloc]initWithCoordinate:eventCoor];
+                EventAnnotation *anno = [[EventAnnotation alloc]initWithCoordinate:eventCoor];
+                anno.title = actionEvent.actionName;
+                [mapView addAnnotation:anno];
             }
-            anno.title = actionEvent.actionName;
         }
-        [mapView addAnnotation:anno];
     }
     
     [self center_map];
+    
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
 - (void)viewDidUnload{
@@ -214,63 +219,79 @@
 //#pragma mark Map View Delegate Methods
 - (MKAnnotationView *) mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>) annotation {
     
-    //    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"PIN_ANNOTATION"];
-    //    if(annotationView == nil) {
-    //        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
-    //                                                          reuseIdentifier:@"PIN_ANNOTATION"];
-    //    }
-    //    annotationView.canShowCallout = YES;
-    //    annotationView.pinColor = MKPinAnnotationColorRed;
-    //    annotationView.animatesDrop = YES;
-    //    annotationView.highlighted = YES;
-    //    annotationView.draggable = YES;
-    //    return annotationView;
     if ([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
-    // 处理我们自定义的Annotation
-    if ([annotation isKindOfClass:[RORMapAnnotation class]]) {
-        //        RORMapAnnotation *travellerAnnotation = (RORMapAnnotation *)annotation;
-        //        static NSString* travellerAnnotationIdentifier = @"TravellerAnnotationIdentifier";
-        static NSString *identifier = @"currentLocation";
-        //        SVPulsingAnnotationView *pulsingView = (SVPulsingAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-        
+    if ([annotation isKindOfClass:[RORStartAnnotation class]]) {
+        static NSString *identifier = @"startLocation";
         MKPinAnnotationView* pulsingView = (MKPinAnnotationView *)
         [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
         if (!pulsingView)
         {
-            // if an existing pin view was not available, create one
             pulsingView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-            //            MKAnnotationView* customPinView = [[MKAnnotationView alloc]
-            //                                                initWithAnnotation:annotation reuseIdentifier:identifier];
-            //加展开按钮
-            //            UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-            //            [rightButton addTarget:self
-            //                            action:@selector(showDetails:)
-            //                  forControlEvents:UIControlEventTouchUpInside];
-            //            pulsingView.rightCalloutAccessoryView = rightButton;
-            //
-            UIImage *image;
-            if ([annotation isKindOfClass:[RORStartAnnotation class]]){
-                image = [UIImage imageNamed:@"start_annotation.png"];
-            } else if ([annotation isKindOfClass:[ROREndAnnotation class]]){
-                image = [UIImage imageNamed:@"end_annotation.png"];
-            } else if ([annotation isKindOfClass:[RORFightAnnotation class]]){
-                image = [UIImage imageNamed:@"fight_icon.png"];
-            } else if ([annotation isKindOfClass:[EventAnnotation class]]){
-                image = [UIImage imageNamed:@"event_icon.png"];
-            } else if ([annotation isKindOfClass:[CoinAnnotation class]]){
-                image = [UIImage imageNamed:@"item_coin.png"];
-            }
-            
-            pulsingView.image = image;
+            pulsingView.image = [UIImage imageNamed:@"start_annotation.png"];
             pulsingView.canShowCallout = YES;
-            //
-            //            UIImageView *headImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:travellerAnnotation.headImage]];
-            //            pulsingView.leftCalloutAccessoryView = headImage; //设置最左边的头像
             return pulsingView;
+        } else {
+            pulsingView.annotation = annotation;
         }
-        else
+        return pulsingView;
+    }
+    if ([annotation isKindOfClass:[ROREndAnnotation class]]) {
+        static NSString *identifier = @"endLocation";
+        MKPinAnnotationView* pulsingView = (MKPinAnnotationView *)
+        [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (!pulsingView)
         {
+            pulsingView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            pulsingView.image = [UIImage imageNamed:@"end_annotation.png"];
+            pulsingView.canShowCallout = YES;
+            return pulsingView;
+        } else {
+            pulsingView.annotation = annotation;
+        }
+        return pulsingView;
+    }
+    if ([annotation isKindOfClass:[RORFightAnnotation class]]) {
+        static NSString *identifier = @"fightLocation";
+        MKPinAnnotationView* pulsingView = (MKPinAnnotationView *)
+        [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (!pulsingView)
+        {
+            pulsingView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            pulsingView.image = [UIImage imageNamed:@"fight_icon.png"];
+            pulsingView.canShowCallout = YES;
+            return pulsingView;
+        } else {
+            pulsingView.annotation = annotation;
+        }
+        return pulsingView;
+    }
+    if ([annotation isKindOfClass:[EventAnnotation class]]) {
+        static NSString *identifier = @"eventLocation";
+        MKPinAnnotationView* pulsingView = (MKPinAnnotationView *)
+        [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (!pulsingView)
+        {
+            pulsingView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            pulsingView.image = [UIImage imageNamed:@"event_icon.png"];
+            pulsingView.canShowCallout = YES;
+            return pulsingView;
+        } else {
+            pulsingView.annotation = annotation;
+        }
+        return pulsingView;
+    }
+    if ([annotation isKindOfClass:[CoinAnnotation class]]) {
+        static NSString *identifier = @"coinLocation";
+        MKPinAnnotationView* pulsingView = (MKPinAnnotationView *)
+        [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (!pulsingView)
+        {
+            pulsingView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            pulsingView.image = [UIImage imageNamed:@"anno_coin.png"];
+            pulsingView.canShowCallout = YES;
+            return pulsingView;
+        } else {
             pulsingView.annotation = annotation;
         }
         return pulsingView;

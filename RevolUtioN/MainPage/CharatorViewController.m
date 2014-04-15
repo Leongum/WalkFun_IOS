@@ -31,9 +31,16 @@
     charatorImageView = (UIImageView *)[self.view viewWithTag:1];
     charatorBumpImageView = (UIImageView *)[self.view viewWithTag:2];
     
-    behindCharatorView = (UIView *)[self.view viewWithTag:101];
+    onFaceView = (UIView *)[self.view viewWithTag:101];
     frontCharatorView = (UIView *)[self.view viewWithTag:100];
     flowContainerView = (UIView *)[self.view viewWithTag:102];
+    
+    GROUND_SIZE_WIDTH = frontCharatorView.frame.size.width;
+    FRONT_HEIGHT = frontCharatorView.frame.size.height;
+    FACE_HEIGHT = onFaceView.frame.size.height;
+    FACE_WIDTH = onFaceView.frame.size.width;
+    VASE_SIZE_HEIGHT = flowContainerView.frame.size.height;
+    VASE_SIZE_WIDTH = flowContainerView.frame.size.width;
     
     fatPV = nil;
     fightPV = nil;
@@ -58,7 +65,7 @@
     [super viewWillAppear:animated];
     if (userBase) {
         self.view.alpha = 1;
-        for (UIView *view in [behindCharatorView subviews])
+        for (UIView *view in [onFaceView subviews])
             [view removeFromSuperview];
         for (UIView *view in [frontCharatorView subviews])
             [view removeFromSuperview];
@@ -73,9 +80,9 @@
         fatPVFrameView = (UILabel *)[self.view viewWithTag:200];
         fightPVFrameView = (UILabel *)[self.view viewWithTag:201];
         fatPV = [self newProgressView:fatPVFrameView];
-        fightPV = [self newProgressView:fightPVFrameView];
+//        fightPV = [self newProgressView:fightPVFrameView];
         [self.view bringSubviewToFront:fatPVFrameView];
-        [self.view bringSubviewToFront:fightPVFrameView];
+//        [self.view bringSubviewToFront:fightPVFrameView];
     }
 }
 
@@ -91,7 +98,7 @@
         [fatPV setProgress:1];
     }
     //todo
-    [fightPV setProgress:userBase.userDetail.fight.doubleValue/300.f];
+//    [fightPV setProgress:userBase.userDetail.fight.doubleValue/300.f];
     if (userBase.userDetail.fightPlus.intValue>0){
         fightPVFrameView.text = [NSString stringWithFormat:@"%d+%d",userBase.userDetail.fight.intValue, userBase.userDetail.fightPlus.intValue];
     } else {
@@ -128,7 +135,7 @@
         NSNumber *quantity = [itemForDisplayDict objectForKey:itemId];
         [self addItem:itemId withQuantity:quantity];
     }
-    [self orderSubiews:behindCharatorView];
+    [self orderSubiews:onFaceView];
     [self orderSubiews:frontCharatorView];
     [self orderSubiews:flowContainerView];
 }
@@ -144,10 +151,15 @@
     } else {
         //如果是石头之类的
         NSDictionary *effectDict = [RORUtils explainActionEffetiveRule:item.effectiveRule];
-        if ([[effectDict allKeys] containsObject:RULE_Drop_Down])
+        if ([[effectDict allKeys] containsObject:RULE_Drop_Down]){
             for (int i=0; i<quantity.integerValue; i++){
                 [self makeNewItemImageView:item];
             }
+        } else if ([[effectDict allKeys] containsObject:RULE_On_Face]){
+            for (int i=0; i<quantity.integerValue; i++){
+                [self makeNewFaceImageView:item];
+            }
+        }
         haveBump = YES;
     }
 }
@@ -163,6 +175,18 @@
 
     [frontCharatorView addSubview:imageView];
 
+}
+
+-(void)makeNewFaceImageView:(Virtual_Product *)item{
+    double y = arc4random() % FACE_HEIGHT;
+    double x = arc4random() % FACE_WIDTH;
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ONFACE_SIZE, ONFACE_SIZE)];
+    
+    imageView.center = CGPointMake(x, y);
+    imageView.image = [RORVirtualProductService getRandomDropImageOf:item];
+    
+    [onFaceView addSubview:imageView];
+    
 }
 
 -(void)makeNewFlowerImageView:(Virtual_Product *)item{

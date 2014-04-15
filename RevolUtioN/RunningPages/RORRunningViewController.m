@@ -65,8 +65,8 @@
     
     //初始化战斗力
     userFight = userBase.userDetail.fight.doubleValue + userBase.userDetail.fightPlus.doubleValue + friendAddFight;
-    self.fightLabel.text = @"";
-//    self.fightLabel.text = [NSString stringWithFormat:@"%.0f", userFight];
+//    self.fightLabel.text = @"";
+    self.fightLabel.text = [NSString stringWithFormat:@"%.0f", userFight];
     
     //初始化各个标签
     timeLabel.text = [RORUtils transSecondToStandardFormat:0];
@@ -192,7 +192,28 @@
         switch (todayMission.missionTypeId.integerValue) {
             case MissionTypeStep:{
                 if (todayMission.triggerDistances){
-                    [todayMissionDict setObject:todayMission.triggerDistances forKey:@"distance"];
+                    if (todayMission.triggerDirection.intValue == MissionDirectionNone){
+                        //纯距离类任务
+                        [todayMissionDict setObject:todayMission.triggerDistances forKey:@"distance"];
+                    } else {
+                        //方向类任务
+                        switch (todayMission.triggerDirection.intValue) {
+                            case MissionDirectionEast:
+                                [todayMissionDict setObject:todayMission.triggerDistances forKey:@"east"];
+                                break;
+                            case MissionDirectionSouth:
+                                [todayMissionDict setObject:todayMission.triggerDistances forKey:@"south"];
+                                break;
+                            case MissionDirectionWest:
+                                [todayMissionDict setObject:todayMission.triggerDistances forKey:@"west"];
+                                break;
+                            case MissionDirectionNorth:
+                                [todayMissionDict setObject:todayMission.triggerDistances forKey:@"north"];
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 }
                 if (todayMission.triggerSteps){
                     [todayMissionDict setObject:todayMission.triggerSteps forKey:@"currentStep"];
@@ -231,6 +252,20 @@
                 if ([keyString isEqualToString:@"duration"]){
                     l.text = [NSString stringWithFormat:@"%d分钟",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue/60];
                 }
+                //方向
+                if ([keyString isEqualToString:@"north"]){
+                    l.text = [NSString stringWithFormat:@"向北%d米",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
+                }
+                if ([keyString isEqualToString:@"south"]){
+                    l.text = [NSString stringWithFormat:@"向南%d米",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
+                }
+                if ([keyString isEqualToString:@"west"]){
+                    l.text = [NSString stringWithFormat:@"向西%d米",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
+                }
+                if ([keyString isEqualToString:@"east"]){
+                    l.text = [NSString stringWithFormat:@"向东%d米",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
+                }
+                
                 i++;
             } else {
                 UILabel *l = (UILabel *)[self.todayMissionView viewWithTag:i];
@@ -263,6 +298,19 @@
                 }
                 if ([keyString isEqualToString:@"duration"]){
                     p = duration / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
+                }
+                //方向
+                if ([keyString isEqualToString:@"north"]){
+                    p = directionMoved.north / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
+                }
+                if ([keyString isEqualToString:@"south"]){
+                    p = directionMoved.south / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
+                }
+                if ([keyString isEqualToString:@"west"]){
+                    p = directionMoved.west / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
+                }
+                if ([keyString isEqualToString:@"east"]){
+                    p = directionMoved.east / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
                 }
                 
             } else {
@@ -346,12 +394,13 @@
 -(void)displayTimerInfo{
     timeLabel.text = [RORUtils transSecondToStandardFormat:duration];
     distanceLabel.text = [RORUtils formattedSteps:stepCounting.counter/0.8];
+    
 }
 
 -(void)timerSecondDot{
     [super timerSecondDot];
     [self pushPoint];
-    distanceLabel.text = [RORUtils outputDistance:distance];
+//    distanceLabel.text = [NSString stringWithFormat:@"%.0f",directionMoved.north];//[RORUtils outputDistance:distance];
 //    speedLabel.text = [RORUserUtils formatedSpeed:(double)(currentSpeed*3.6)];
     
     if (eventDisplayList.count > eventHappenedCount){
@@ -387,6 +436,22 @@
         
         NSLog(@"%f",deltaDistance);
         distance += [formerLocation distanceFromLocation:currentLocation];
+        
+        //找到与formerlocation经度相同，纬度不同的点，计算出的距离为南北方向位移
+        CLLocation *tmpLocation =[[CLLocation alloc]initWithLatitude:currentLocation.coordinate.latitude longitude:formerLocation.coordinate.longitude];
+        if (tmpLocation.coordinate.latitude > formerLocation.coordinate.latitude){
+            directionMoved.north += [formerLocation distanceFromLocation:tmpLocation];
+        } else {
+            directionMoved.south += [formerLocation distanceFromLocation:tmpLocation];
+        }
+        //找到与formerlocation纬度相同，经度不同的点，计算出的距离为东西方向位移
+        tmpLocation = [[CLLocation alloc]initWithLatitude:formerLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
+        if (tmpLocation.coordinate.longitude > formerLocation.coordinate.longitude){
+            directionMoved.west += [formerLocation distanceFromLocation:tmpLocation];
+        } else {
+            directionMoved.east += [formerLocation distanceFromLocation:tmpLocation];
+        }
+        
         formerLocation = currentLocation;
         [routePoints addObject:currentLocation];
     }
@@ -675,7 +740,7 @@
     if (((int)currentStep)%10 == 0){
         int x = arc4random() % 1000000;
         double roll = ((double)x)/10000.f;
-        double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0, rateEvent = 10;
+        double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0, rateEvent = 5;
         if (currentStep>WALKING_FIGHT_STAGE_II){
             stepsSinceLastFight++;
             
@@ -691,16 +756,16 @@
                     return;
                 }
             }
-            rate2 = stepsSinceLastFight*3/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 2;
+            rate2 = stepsSinceLastFight*10/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 2;
         }
         if (currentStep>WALKING_FIGHT_STAGE_III){
-            rate3 = 1.25 + stepsSinceLastFight*3/(WALKING_FIGHT_STAGE_IV - WALKING_FIGHT_STAGE_III);
-            rate2 = 0.75;//0.5;
+            rate3 = 2 + stepsSinceLastFight*3/(WALKING_FIGHT_STAGE_IV - WALKING_FIGHT_STAGE_III);
+            rate2 = 1;//0.5;
         }
         if (currentStep>WALKING_FIGHT_STAGE_IV){
-            rate4 = 0.5;//(currentStep - WALKING_FIGHT_STAGE_IV)*5/(WALKING_FIGHT_STAGE_V - WALKING_FIGHT_STAGE_IV) + 2;
-            rate3 = 0.5;//1;
-            rate2 = 0.3;//0.5;
+            rate4 = 0.6;//(currentStep - WALKING_FIGHT_STAGE_IV)*5/(WALKING_FIGHT_STAGE_V - WALKING_FIGHT_STAGE_IV) + 2;
+            rate3 = 1;//1;
+            rate2 = 0.4;//0.5;
         }
         
 //        if (currentStep>0){
@@ -834,7 +899,7 @@
     if (fightPowerCost>=userPower)
         return [NSNumber numberWithInteger:3];
     
-    if (userFight > fight.monsterMinFight.doubleValue){
+    if (userFight >= fight.monsterMinFight.doubleValue){
         double deltaMFight = fight.monsterMaxFight.doubleValue - fight.monsterMinFight.doubleValue;
         //传说级胜率50%-75%，普通级胜率75%-100%
         double rate = (userFight - fight.monsterMinFight.doubleValue)*25/deltaMFight + fight.monsterLevel.intValue==5?50:75;

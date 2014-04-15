@@ -7,6 +7,7 @@
 //
 
 #import "ReportViewController.h"
+#import "FTAnimation.h"
 
 @interface ReportViewController ()
 
@@ -29,7 +30,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.backButton.alpha = 0;
-    
+    winLabel.alpha = 0;
+    expLabel.alpha = 0;
+    coinLabel.alpha = 0;
+    itemLabel.alpha = 0;
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
@@ -44,6 +48,23 @@
     expLabel.text = expText;
     coinLabel.text = coinText;
     itemLabel.text = itemText;
+    winLabel.alpha = 1;
+    [winLabel popIn:0.25 delegate:self startSelector:nil stopSelector:@selector(expLabelAnimation)];
+}
+
+-(void)expLabelAnimation{
+    expLabel.alpha = 1;
+    [expLabel popIn:0.25 delegate:self startSelector:nil stopSelector:@selector(coinLabelAnimation)];
+}
+
+-(void)coinLabelAnimation{
+    coinLabel.alpha = 1;
+    [coinLabel popIn:0.25 delegate:self startSelector:nil stopSelector:@selector(itemLabelAnimation)];
+}
+
+-(void)itemLabelAnimation{
+    itemLabel.alpha = 1;
+    [itemLabel popIn:0.25 delegate:self];
 }
 
 -(void)customInit:(NSString *)win Exp:(NSString *)exp Coin:(NSString *)coin andItem:(NSString *)item{

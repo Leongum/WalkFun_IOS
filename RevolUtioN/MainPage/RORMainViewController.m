@@ -151,7 +151,7 @@
     } else {
         userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
         //还未设置性别
-        if ([userBase.sex isEqualToString:@"未知"]){
+        if ((![userBase.sex isEqualToString:@"男"]) && (![userBase.sex isEqualToString:@"女"])){
             UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"SexSelectionViewController"];
             [self presentViewController:loginViewController animated:NO completion:^(){}];
         } else {
@@ -177,7 +177,7 @@
     NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
     NSNumber *n = (NSNumber *)[dict objectForKey:@"PinchInstruction"];
     if (userBase && !n){
-        if (userBase.userDetail.level.intValue<2)
+        if (userBase.userDetail.level.intValue<3)
             return;
         
         CoverView *instructionCV = [[CoverView alloc]initWithFrame:self.view.frame];
@@ -187,6 +187,24 @@
         [instructionCV appear:self];
         
         [dict setObject:[NSNumber numberWithInt:1] forKey:@"PinchInstruction"];
+        [RORUserUtils writeToUserInfoPList:dict];
+    }
+}
+
+-(void)checkHistoryInstruction{
+    NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
+    NSNumber *n = (NSNumber *)[dict objectForKey:@"HistoryInstruction"];
+    if (userBase && !n && self.pageControl.currentPage == 1){
+        if (userBase.userDetail.level.intValue<2)
+            return;
+        
+        CoverView *instructionCV = [[CoverView alloc]initWithFrame:self.view.frame];
+        instructionCV.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+        [instructionCV addCoverBgImage:[UIImage imageNamed:@"intro_History.png"]];
+        [self.view addSubview:instructionCV];
+        [instructionCV appear:self];
+        
+        [dict setObject:[NSNumber numberWithInt:1] forKey:@"HistoryInstruction"];
         [RORUserUtils writeToUserInfoPList:dict];
     }
 }
