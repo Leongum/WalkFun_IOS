@@ -51,11 +51,11 @@
     self.basePowerConsume = [RORDBCommon getNumberFromId:[dict valueForKey:@"bPower"]];
     self.baseExperience = [RORDBCommon getNumberFromId:[dict valueForKey:@"bExperience"]];
     self.baseGold = [RORDBCommon getNumberFromId:[dict valueForKey:@"bGold"]];
-    self.fightWin = [RORDBCommon getStringFromId:[dict valueForKey:@"fWin"]];
+    self.fightWin = @"蹂躏之。|陷入苦战，最后使出饱含信念的一击将其击倒。|战斗中全程被压制，最后使出了封印已久的招式才险胜。";
     self.winGot = [RORDBCommon getStringFromId:[dict valueForKey:@"winGot"]];
     self.winGotRule = [RORDBCommon getStringFromId:[dict valueForKey:@"winRule"]];
-    self.fightLoose = [RORDBCommon getStringFromId:[dict valueForKey:@"fLoose"]];
-    self.triggerProbability =[RORDBCommon getNumberFromId:[dict valueForKey:@"tProb"]];
+    self.fightLoose = @"感觉好厉害的样子，绕道而行。|上前挑战，但被无视了。|与之大战三百回合，即将获胜之时却被逃走了。";
+    //self.triggerProbability =[RORDBCommon getNumberFromId:[dict valueForKey:@"tProb"]];
     self.minLevelLimit = [RORDBCommon getNumberFromId:[dict valueForKey:@"minLimit"]];
     self.maxLevelLimit = [RORDBCommon getNumberFromId:[dict valueForKey:@"maxLimit"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
