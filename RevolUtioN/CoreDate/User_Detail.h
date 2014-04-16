@@ -29,6 +29,10 @@
 @property (nonatomic, retain) NSNumber * totalDistance;
 @property (nonatomic, retain) NSNumber * totalSteps;
 @property (nonatomic, retain) NSNumber * totalWalkingTimes;
+@property (nonatomic, retain) NSNumber * totalFights;
+@property (nonatomic, retain) NSNumber * fightsWin;
+@property (nonatomic, retain) NSNumber * totalFriendFights;
+@property (nonatomic, retain) NSNumber * friendFightWin;
 @property (nonatomic, retain) NSNumber * missionCombo;
 @property (nonatomic, retain) NSString * propHaving;
 @property (nonatomic, retain) NSDate * updateTime;

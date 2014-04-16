@@ -27,6 +27,10 @@
 @property (nonatomic, retain) NSNumber * fightPlus;
 @property (nonatomic, retain) NSNumber * power;
 @property (nonatomic, retain) NSNumber * powerPlus;
+@property (nonatomic, retain) NSNumber * totalFights;
+@property (nonatomic, retain) NSNumber * fightsWin;
+@property (nonatomic, retain) NSNumber * totalFriendFights;
+@property (nonatomic, retain) NSNumber * friendFightWin;
 
 
 +(Friend *) removeAssociateForEntity:(Friend *)associatedEntity;

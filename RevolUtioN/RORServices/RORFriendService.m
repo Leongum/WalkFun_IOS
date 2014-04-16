@@ -115,10 +115,13 @@
             newFriend.sex = friendSort.sex;
             newFriend.level = friendSort.level;
             newFriend.userName = friendSort.friendName;
-            newFriend.userTitle = friendSort.userTitle;
             newFriend.fight = friendSort.fight;
             newFriend.fightPlus = friendSort.fightPlus;
             newFriend.power = friendSort.power;
+            newFriend.totalFights = friendSort.totalFights;
+            newFriend.fightsWin = friendSort.fightsWin;
+            newFriend.totalFriendFights = friendSort.totalFriendFights;
+            newFriend.friendFightWin = friendSort.friendFightWin;
         }
         [friendsDetails addObject:newFriend];
     }
@@ -145,10 +148,13 @@
             newFriend.sex = friendSort.sex;
             newFriend.level = friendSort.level;
             newFriend.userName = friendSort.friendName;
-            newFriend.userTitle = friendSort.userTitle;
             newFriend.fight = friendSort.fight;
             newFriend.fightPlus = friendSort.fightPlus;
             newFriend.power = friendSort.power;
+            newFriend.totalFights = friendSort.totalFights;
+            newFriend.fightsWin = friendSort.fightsWin;
+            newFriend.totalFriendFights = friendSort.totalFriendFights;
+            newFriend.friendFightWin = friendSort.friendFightWin;
         }
         [friendsDetails addObject:newFriend];
     }
@@ -175,10 +181,13 @@
             newFriend.sex = friendSort.sex;
             newFriend.level = friendSort.level;
             newFriend.userName = friendSort.friendName;
-            newFriend.userTitle = friendSort.userTitle;
             newFriend.fight = friendSort.fight;
             newFriend.fightPlus = friendSort.fightPlus;
             newFriend.power = friendSort.power;
+            newFriend.totalFights = friendSort.totalFights;
+            newFriend.fightsWin = friendSort.fightsWin;
+            newFriend.totalFriendFights = friendSort.totalFriendFights;
+            newFriend.friendFightWin = friendSort.friendFightWin;
         }
         [friendsDetails addObject:newFriend];
     }

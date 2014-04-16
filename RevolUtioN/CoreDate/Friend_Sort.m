@@ -11,15 +11,18 @@
 
 @implementation Friend_Sort
 
-@dynamic userTitle;
-@dynamic userTitlePic;
 @dynamic level;
 @dynamic sex;
 @dynamic friendName;
 @dynamic friendId;
 @dynamic power;
 @dynamic fatness;
-@dynamic fight,fightPlus;
+@dynamic fight;
+@dynamic fightPlus;
+@dynamic totalFights;
+@dynamic fightsWin;
+@dynamic totalFriendFights;
+@dynamic friendFightWin;
 
 +(Friend_Sort *) removeAssociateForEntity:(Friend_Sort *)associatedEntity{
     NSManagedObjectContext *context = [RORContextUtils getShareContext];
@@ -35,13 +38,15 @@
     self.friendId = [RORDBCommon getNumberFromId:[dict valueForKey:@"friendId"]];
     self.friendName = [RORDBCommon getStringFromId:[dict valueForKey:@"friendName"]];
     self.sex = [RORDBCommon getStringFromId:[dict valueForKey:@"sex"]];
-    self.level = [RORDBCommon getNumberFromId:[dict valueForKey:@"level"]];
-    self.userTitle = [RORDBCommon getStringFromId:[dict valueForKey:@"userTitle"]];
-    self.userTitlePic = [RORDBCommon getStringFromId:[dict valueForKey:@"userTitlePic"]];
+    self.level = [RORDBCommon getNumberFromId:[dict valueForKey:@"level"]];;
     self.power = [RORDBCommon getNumberFromId:[dict valueForKey:@"power"]];
     self.fatness = [RORDBCommon getNumberFromId:[dict valueForKey:@"fatness"]];
     self.fight = [RORDBCommon getNumberFromId:[dict valueForKey:@"fight"]];
     self.fightPlus = [RORDBCommon getNumberFromId:[dict valueForKey:@"fightPlus"]];
+    self.totalFights = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalFights"]];
+    self.fightsWin = [RORDBCommon getNumberFromId:[dict valueForKey:@"fightsWin"]];
+    self.totalFriendFights = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalFriendFights"]];
+    self.friendFightWin = [RORDBCommon getNumberFromId:[dict valueForKey:@"friendFightWin"]];
 }
 
 @end

@@ -15,22 +15,26 @@
 @synthesize nickName;
 @synthesize sex;
 @synthesize level;
-@synthesize userTitle;
-@synthesize userTitlePic;
 @synthesize power;
 @synthesize fatness;
 @synthesize fight;
+@synthesize totalFights;
+@synthesize fightsWin;
+@synthesize totalFriendFights;
+@synthesize friendFightWin;
 
 -(void)initWithDictionary:(NSDictionary *)dict{
     self.userId = [RORDBCommon getNumberFromId:[dict valueForKey:@"userId"]];
     self.nickName = [RORDBCommon getStringFromId:[dict valueForKey:@"nickName"]];
     self.sex = [RORDBCommon getStringFromId:[dict valueForKey:@"sex"]];
     self.level = [RORDBCommon getNumberFromId:[dict valueForKey:@"level"]];
-    self.userTitle = [RORDBCommon getStringFromId:[dict valueForKey:@"userTitle"]];
-    self.userTitlePic = [RORDBCommon getStringFromId:[dict valueForKey:@"userTitlePic"]];
     self.power = [RORDBCommon getNumberFromId:[dict valueForKey:@"power"]];
     self.fatness = [RORDBCommon getNumberFromId:[dict valueForKey:@"fatness"]];
     self.fight = [RORDBCommon getNumberFromId:[dict valueForKey:@"fight"]];
+    self.totalFights = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalFights"]];
+    self.fightsWin = [RORDBCommon getNumberFromId:[dict valueForKey:@"fightsWin"]];
+    self.totalFriendFights = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalFriendFights"]];
+    self.friendFightWin = [RORDBCommon getNumberFromId:[dict valueForKey:@"friendFightWin"]];
 }
 
 @end
