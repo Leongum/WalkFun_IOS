@@ -144,7 +144,11 @@
 }
 
 -(void)initUserInfoPlist{
-    [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:loggedInUserBase.userDetail.fight, @"fightPower", loggedInUserBase.userDetail.level,  @"userLevel", [NSNumber numberWithInteger:0],@"missionProcess", nil]];
+    NSMutableDictionary *userInfoPList = [RORUserUtils getUserInfoPList];
+    [userInfoPList setObject:loggedInUserBase.userDetail.fight forKey:@"fightPower"];
+    [userInfoPList setObject:loggedInUserBase.userDetail.level forKey:@"userLevel"];
+    [userInfoPList setObject:[NSNumber numberWithInteger:0] forKey:@"missionProcess"];
+    [RORUserUtils writeToUserInfoPList:userInfoPList];
 }
 
 - (BOOL) isLegalInput {
@@ -232,10 +236,10 @@
                                                       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                                           BOOL success = [self syncDataAfterLogin];
                                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                                              [self endIndicator:self];
                                                               if(success){
                                                                   [self dismissViewControllerAnimated:YES completion:^(){}];
                                                               }
-                                                              [self endIndicator:self];
                                                           });
                                                       });
                                                   }
@@ -255,10 +259,10 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 BOOL success = [self syncDataAfterLogin];
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [self endIndicator:self];
                     if(success){
                         [self dismissViewControllerAnimated:YES completion:^(){}];
                     }
-                    [self endIndicator:self];
                 });
             });
         }
@@ -270,33 +274,36 @@
 }
 
 -(BOOL)syncDataAfterLogin{
+    NSNumber *thisUserId = [RORUserUtils getUserId];
+    loggedInUserBase = [RORUserServices fetchUser:thisUserId];
+    
     [self initUserInfoPlist];
     //用户历史
-    BOOL history = [RORRunHistoryServices syncRunningHistories:[RORUserUtils getUserId]];
+    BOOL history = [RORRunHistoryServices syncRunningHistories:thisUserId];
     if(!history){
-        history = [RORRunHistoryServices syncRunningHistories:[RORUserUtils getUserId]];
+        history = [RORRunHistoryServices syncRunningHistories:thisUserId];
     }
     //用户好友信息
-    int friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
+    int friends = [RORFriendService syncFriends:thisUserId];
     if(friends<0){
-        friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
+        friends = [RORFriendService syncFriends:thisUserId];
     }
     //好友初步信息
-    BOOL friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
+    BOOL friendsort = [RORFriendService syncFriendSort:thisUserId];
     if(!friendsort){
-        friendsort = [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
+        friendsort = [RORFriendService syncFriendSort:thisUserId];
     }
     //用户mission list
-    BOOL missionHistory = [RORMissionHistoyService syncMissionHistories:[RORUserUtils getUserId]];
+    BOOL missionHistory = [RORMissionHistoyService syncMissionHistories:thisUserId];
     if(!missionHistory){
-        missionHistory = [RORMissionHistoyService syncMissionHistories:[RORUserUtils getUserId]];
+        missionHistory = [RORMissionHistoyService syncMissionHistories:thisUserId];
     }
     //用户道具
-    BOOL userPorp = [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
+    BOOL userPorp = [RORUserPropsService syncUserProps:thisUserId];
     if(!userPorp){
-        userPorp = [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
+        userPorp = [RORUserPropsService syncUserProps:thisUserId];
     }
-    [self endIndicator:self];
+
     if(!history || friends<0 || !friendsort || !missionHistory || !userPorp){
         [RORUserUtils logout];
         [self sendAlart:@"个人信息加载失败"];

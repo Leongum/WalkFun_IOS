@@ -100,24 +100,50 @@
 
 -(void)checkMissionProcess{
     NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
-    if (!missionStoneView){
-        missionStoneView = [[MissionStoneView alloc]initWithFrame:self.missionStoneButton.frame];
-        [self.view addSubview:missionStoneView];
-        [self.view bringSubviewToFront:self.missionStoneButton];
-    }
+//    if (!missionStoneView){
+//        missionStoneView = [[MissionStoneView alloc]initWithFrame:self.missionStoneButton.frame];
+//        [self.view addSubview:missionStoneView];
+//        [self.view bringSubviewToFront:self.missionStoneButton];
+//    }
     //如果已经集满了三次日常任务，但没有兑换奖励，则接不到新的任务
     NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
-    [missionStoneView showStones:missionProcess.intValue andAnimated:NO];
-    [self.missionStoneButton setTitle:[NSString stringWithFormat:@"%ld/3", (long)missionProcess.integerValue] forState:UIControlStateNormal];
-    if (missionProcess.integerValue >= 3){//todo
-        [self.missionStoneButton setEnabled:YES];
-        return;
+    missionDone = missionProcess.intValue;
+//    [missionStoneView showStones:missionProcess.intValue andAnimated:NO];
+//    [self.missionStoneButton setTitle:[NSString stringWithFormat:@"%ld/3", (long)missionProcess.integerValue] forState:UIControlStateNormal];
+    switch (missionDone) {
+        case 0:{
+            [self.missionStoneButton setBackgroundImage:[UIImage imageNamed:@"missionStone_0.png"] forState:UIControlStateNormal];
+            break;
+        }
+        case 1:{
+            [self.missionStoneButton setBackgroundImage:[UIImage imageNamed:@"missionStone_1.png"] forState:UIControlStateNormal];
+            break;
+        }
+        case 2:{
+            [self.missionStoneButton setBackgroundImage:[UIImage imageNamed:@"missionStone_2.png"] forState:UIControlStateNormal];
+            break;
+        }
+        case 3:{
+            [self.missionStoneButton setBackgroundImage:[UIImage imageNamed:@"missionStone_3.png"] forState:UIControlStateNormal];
+            break;
+        }
+        default:
+            break;
     }
-    [self.missionStoneButton setEnabled:NO];
+//    if (missionProcess.integerValue == 3){//todo
+//        [self.missionStoneButton setEnabled:YES];
+//        return;
+//    }
+    [self.missionStoneButton setEnabled:YES];
 }
 
 //3次任务换随机奖励
 - (IBAction)missionStoneAction:(id)sender {
+    if (missionDone<3){
+        [self sendNotification:[NSString stringWithFormat:@"再完成%d次日常任务领取奖励", 3-missionDone]];
+        return;
+    }
+    
     Reward_Details *thisReward = [RORUserServices getRandomReward:userInfo.userId];
     while (!thisReward) {
         thisReward = [RORUserServices getRandomReward:userInfo.userId];

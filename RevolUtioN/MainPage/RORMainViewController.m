@@ -167,9 +167,12 @@
 
 -(void)viewDidAppear:(BOOL)animated{
 //    [self checkLevelUp];
+    //检查是否需要显示提示信息
     [self checkPinchInstruction];
-    
+    [self checkHistoryInstruction];
+    //检查日常任务
     [self checkDailyMission];
+    //检查是否提示玩家去appstore评价
     [self checkSendToAppstore];
 }
 
@@ -220,9 +223,9 @@
         
         NSString *msg;
         if ([userBase.sex isEqualToString:@"男"])
-            msg = @"大爷，帮忙给个评价呗？";
+            msg = @"大爷，帮忙给个好评呗？么么哒！";
         else
-            msg = @"美女，帮忙给个评价呗？";
+            msg = @"美女，帮忙给个好评呗？么么哒！";
         UIAlertView *confirmView = [[UIAlertView alloc] initWithTitle:@"求评价" message:msg delegate:self cancelButtonTitle:@"走开" otherButtonTitles:@"好说好说", nil];
         [confirmView show];
         confirmView = nil;

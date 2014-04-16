@@ -30,6 +30,7 @@
     NSDate *lastWeatherUpdateTime;
     User_Base *userInfo;
     MissionStoneView *missionStoneView;
+    int missionDone;
     
     CLLocationManager *locationManager;
     UIViewController *charatorViewController;

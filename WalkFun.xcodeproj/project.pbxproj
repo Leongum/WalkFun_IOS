@@ -359,6 +359,10 @@
 		30DC91FD18FCDD1F006B6A4C /* talk_top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC91FC18FCDD1F006B6A4C /* talk_top_bg.png */; };
 		30DC91FF18FD1A78006B6A4C /* grass_male.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC91FE18FD1A78006B6A4C /* grass_male.png */; };
 		30DC920218FE45F8006B6A4C /* MissionStoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DC920118FE45F8006B6A4C /* MissionStoneView.m */; };
+		30DC920718FEF394006B6A4C /* missionStone_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC920318FEF394006B6A4C /* missionStone_0.png */; };
+		30DC920818FEF394006B6A4C /* missionStone_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC920418FEF394006B6A4C /* missionStone_1.png */; };
+		30DC920918FEF394006B6A4C /* missionStone_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC920518FEF394006B6A4C /* missionStone_2.png */; };
+		30DC920A18FEF394006B6A4C /* missionStone_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC920618FEF394006B6A4C /* missionStone_3.png */; };
 		30DFE7DF17C6748F00678780 /* submit.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DFE7DD17C6748F00678780 /* submit.png */; };
 		30E01E7E18B09D5A005BF080 /* ItemQuantityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E01E7D18B09D5A005BF080 /* ItemQuantityPicker.m */; };
 		30E6D0FD184F0AD200C93338 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 30E6D0FC184F0AD200C93338 /* lock.png */; };
@@ -896,6 +900,10 @@
 		30DC91FE18FD1A78006B6A4C /* grass_male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grass_male.png; sourceTree = "<group>"; };
 		30DC920018FE45F8006B6A4C /* MissionStoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MissionStoneView.h; path = MainPage/MissionStoneView.h; sourceTree = "<group>"; };
 		30DC920118FE45F8006B6A4C /* MissionStoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissionStoneView.m; path = MainPage/MissionStoneView.m; sourceTree = "<group>"; };
+		30DC920318FEF394006B6A4C /* missionStone_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missionStone_0.png; sourceTree = "<group>"; };
+		30DC920418FEF394006B6A4C /* missionStone_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missionStone_1.png; sourceTree = "<group>"; };
+		30DC920518FEF394006B6A4C /* missionStone_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missionStone_2.png; sourceTree = "<group>"; };
+		30DC920618FEF394006B6A4C /* missionStone_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missionStone_3.png; sourceTree = "<group>"; };
 		30DFE7DD17C6748F00678780 /* submit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = submit.png; sourceTree = "<group>"; };
 		30E01E7C18B09D5A005BF080 /* ItemQuantityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemQuantityPicker.h; path = Items/ItemQuantityPicker.h; sourceTree = "<group>"; };
 		30E01E7D18B09D5A005BF080 /* ItemQuantityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemQuantityPicker.m; path = Items/ItemQuantityPicker.m; sourceTree = "<group>"; };
@@ -1241,6 +1249,10 @@
 		30166A8717C3B84C0035C722 /* main */ = {
 			isa = PBXGroup;
 			children = (
+				30DC920318FEF394006B6A4C /* missionStone_0.png */,
+				30DC920418FEF394006B6A4C /* missionStone_1.png */,
+				30DC920518FEF394006B6A4C /* missionStone_2.png */,
+				30DC920618FEF394006B6A4C /* missionStone_3.png */,
 				3022DFB318D9883C00F3A9D5 /* PooHeart.png */,
 				30DB021418C6C90C008863B8 /* main_bottom_board.png */,
 				30DB021518C6C90C008863B8 /* main_mission_board.png */,
@@ -2094,6 +2106,7 @@
 				3005D00D1856B4EC00D83648 /* trainingTypeSeg_bg1.png in Resources */,
 				30984920186041990079E236 /* eyeClosed.png in Resources */,
 				3013D49A18C040DA005F4C07 /* slim_female.png in Resources */,
+				30DC920918FEF394006B6A4C /* missionStone_2.png in Resources */,
 				3005CFF118545D0E00D83648 /* traineeButton_bg.png in Resources */,
 				30D9207A186F0F3000C0528F /* trainingHistoryPageCell_bg.png in Resources */,
 				3005D00918561BC000D83648 /* creatAdvAddButton.png in Resources */,
@@ -2145,6 +2158,7 @@
 				30DB020518C45F68008863B8 /* running_machine.png in Resources */,
 				3022E02518F7961200F3A9D5 /* intro_History.png in Resources */,
 				30DFE7DF17C6748F00678780 /* submit.png in Resources */,
+				30DC920818FEF394006B6A4C /* missionStone_1.png in Resources */,
 				30D008D317F53FBB004E6747 /* challenge_S.m4a in Resources */,
 				30FAA24918688A4000E72650 /* countDown_bg.png in Resources */,
 				30C832AE1859CCD100EEE2F9 /* trainingDetailAdv_bg.png in Resources */,
@@ -2182,6 +2196,7 @@
 				3005CFE9185391F900D83648 /* searchTextField_bg.png in Resources */,
 				30804E9817F56D6E00F1A353 /* tencent_weibo.png in Resources */,
 				30FECBDA17DD94A6002C3C90 /* paper.png in Resources */,
+				30DC920A18FEF394006B6A4C /* missionStone_3.png in Resources */,
 				3005D0111856ECC000D83648 /* creatTrainingSwitchButton1_bg.png in Resources */,
 				30DB01FC18C32652008863B8 /* item_title_board.png in Resources */,
 				30989CA217F5D86700CA9F83 /* icon.png in Resources */,
@@ -2196,6 +2211,7 @@
 				303B87E91852DE0900FD44AC /* creatCustomButton_bg.png in Resources */,
 				3022DF9C18D6C00900F3A9D5 /* followButton_normal.png in Resources */,
 				3022E01F18F541E600F3A9D5 /* intro_Pinch.png in Resources */,
+				30DC920718FEF394006B6A4C /* missionStone_0.png in Resources */,
 				30C832B1185CAF9000EEE2F9 /* giveUpButton.png in Resources */,
 				30DB021718C6C90C008863B8 /* main_mission_board.png in Resources */,
 				30621D1B17DEFFA00063A007 /* red_left.png in Resources */,

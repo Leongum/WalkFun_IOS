@@ -164,8 +164,7 @@
         [message rangeOfString:@"无法"].location != NSNotFound ||
         [message rangeOfString:@"错误"].location != NSNotFound){
         [SVProgressHUD showErrorWithStatus:message];
-    } else if ([message rangeOfString:@"成功"].location != NSNotFound ||
-               [message rangeOfString:@"完成"].location != NSNotFound){
+    } else if ([message rangeOfString:@"成功"].location != NSNotFound){
         [SVProgressHUD showSuccessWithStatus:message];
     } else
         [SVProgressHUD showImage:nil status:message];
