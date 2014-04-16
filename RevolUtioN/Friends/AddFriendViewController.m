@@ -166,7 +166,7 @@
 {
     UITableViewCell *cell;
     
-    Search_Friend *user = [contentList objectAtIndex:indexPath.row];
+    Search_Friend *thisUser = [contentList objectAtIndex:indexPath.row];
     
     static NSString *CellIdentifier = @"friendCell";
     cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -176,11 +176,11 @@
     UILabel *userFightLabel = (UILabel *)[cell viewWithTag:104];
     UIButton *follow = (UIButton *)[cell viewWithTag:200];
 
-    userNameLabel.text = user.nickName;
-    userLevelLabel.text = [NSString stringWithFormat:@"Lv.%d", user.level.intValue];
-    userFightLabel.text = [NSString stringWithFormat:@"%d", user.fight.intValue];
-    userSexImage.image = [RORUserUtils getImageForUserSex:user.sex];
-    if ([RORFriendService getFollowStatus:user.userId] == FollowStatusNotFollowed){
+    userNameLabel.text = thisUser.nickName;
+    userLevelLabel.text = [NSString stringWithFormat:@"Lv.%d", thisUser.level.intValue];
+    userFightLabel.text = [NSString stringWithFormat:@"%d", thisUser.fight.intValue];
+    userSexImage.image = [RORUserUtils getImageForUserSex:thisUser.sex];
+    if ([RORFriendService getFollowStatus:thisUser.userId] == FollowStatusNotFollowed){
         [follow setTitle:@"关注" forState:UIControlStateNormal];
         [follow setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [follow removeTarget:self action:@selector(deFollow:) forControlEvents:UIControlEventTouchUpInside];

@@ -10,6 +10,6 @@
 #import "RORViewController.h"
 @interface RORLoadingViewController : RORViewController
 
-@property (strong, nonatomic) IBOutlet UILabel *loadingLabel;
+@property (strong, nonatomic) IBOutlet CUSFlashLabel *loadingLabel;
 
 @end

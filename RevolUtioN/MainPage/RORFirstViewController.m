@@ -100,9 +100,15 @@
 
 -(void)checkMissionProcess{
     NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+    if (!missionStoneView){
+        missionStoneView = [[MissionStoneView alloc]initWithFrame:self.missionStoneButton.frame];
+        [self.view addSubview:missionStoneView];
+        [self.view bringSubviewToFront:self.missionStoneButton];
+    }
     //如果已经集满了三次日常任务，但没有兑换奖励，则接不到新的任务
     NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
-    [self.missionStoneButton setTitle:[NSString stringWithFormat:@"%ld/3",(long)missionProcess.integerValue] forState:UIControlStateNormal];
+    [missionStoneView showStones:missionProcess.intValue andAnimated:NO];
+    [self.missionStoneButton setTitle:[NSString stringWithFormat:@"%ld/3", (long)missionProcess.integerValue] forState:UIControlStateNormal];
     if (missionProcess.integerValue >= 3){//todo
         [self.missionStoneButton setEnabled:YES];
         return;

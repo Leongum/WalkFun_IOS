@@ -111,6 +111,7 @@
             [self sendAlart:@"用户名密码输入错误，请重试"];
             return;
         }
+        loggedInUserBase = user;
         [self startIndicator:self];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             BOOL success = [self syncDataAfterLogin];
@@ -128,6 +129,8 @@
             User_Base *user = [RORUserServices registerUser:regDict];
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (user != nil){
+                    loggedInUserBase = user;
+                    [self initUserInfoPlist];
                     [self sendSuccess:@"注册成功"];
                     [self performSegueWithIdentifier:@"sexSetting" sender:self];
                 } else {
@@ -138,6 +141,10 @@
     }
     passwordTextField.text = @"";
     nicknameTextField.text = @"";
+}
+
+-(void)initUserInfoPlist{
+    [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:loggedInUserBase.userDetail.fight, @"fightPower", loggedInUserBase.userDetail.level,  @"userLevel", [NSNumber numberWithInteger:0],@"missionProcess", nil]];
 }
 
 - (BOOL) isLegalInput {
@@ -263,6 +270,7 @@
 }
 
 -(BOOL)syncDataAfterLogin{
+    [self initUserInfoPlist];
     //用户历史
     BOOL history = [RORRunHistoryServices syncRunningHistories:[RORUserUtils getUserId]];
     if(!history){
@@ -295,7 +303,7 @@
         return NO;
     }
     
-    [RORUserUtils initialUserInfoPlist];
+//    [RORUserUtils initialUserInfoPlist];
     return YES;
 }
 

@@ -393,8 +393,8 @@
 
 -(void)displayTimerInfo{
     timeLabel.text = [RORUtils transSecondToStandardFormat:duration];
-    distanceLabel.text = [RORUtils formattedSteps:stepCounting.counter/0.8];
-    
+    distanceLabel.text = [NSString stringWithFormat:@"%.0f", directionMoved.north];
+//    distanceLabel.text = [RORUtils formattedSteps:stepCounting.counter/0.8];
 }
 
 -(void)timerSecondDot{
@@ -734,12 +734,9 @@
 
 //如果触发了事件，返回事件，否则返回nil
 -(void)isEventHappen{
-    if (userPower == 0) {//没体力了，不会再遇到战斗
-        return;
-    }
     
     //10步随机一次战斗事件
-    if (((int)currentStep)%10 == 0){
+    if (((int)currentStep)%8 == 0){
         int x = arc4random() % 1000000;
         double roll = ((double)x)/10000.f;
         double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0, rateEvent = 5;
@@ -785,6 +782,10 @@
             fightStage = -1;
         }
         if (fightStage>0){
+            if (userPower == 0) {//没体力了，不会再遇到战斗
+                return;
+            }
+            
             NSArray *fightList = [RORSystemService fetchFightDefineByLevel:userBase.userDetail.level andStage:[NSNumber numberWithInteger:fightStage]];
             if (fightList){
                 Fight_Define *fightEvent = (Fight_Define *)[fightList objectAtIndex:arc4random() % fightList.count];
@@ -875,19 +876,21 @@
 
 -(void)calculatePowerForFight:(Fight_Define *)fight{
     if (fight.monsterLevel.intValue == 5){//传说级直接减完？
-        fightPowerCost = 80;
+        fightPowerCost = fight.basePowerConsume.intValue;
         return;
     }
     
 //    userFight = userBase.userDetail.fight.doubleValue + userBase.userDetail.fightPlus.doubleValue + friendAddFight.doubleValue;
     
-    if (userFight > fight.monsterMaxFight.doubleValue * 1.2){
-        fightPowerCost = fight.monsterLevel.intValue * 3;
+    if (userFight > fight.monsterMaxFight.doubleValue){
+        fightPowerCost = fight.basePowerConsume.intValue/2;
+    } else {
+        fightPowerCost = fight.basePowerConsume.intValue;
     }
     
-    fightPowerCost = (userFight - fight.monsterMinFight.doubleValue) * (fight.monsterLevel.intValue * 3) /
-                (fight.monsterMaxFight.doubleValue * 1.2 - fight.monsterMinFight.doubleValue) +
-                fight.monsterLevel.intValue * 3;
+//    fightPowerCost = (userFight - fight.monsterMinFight.doubleValue) * (fight.monsterLevel.intValue * 3) /
+//                (fight.monsterMaxFight.doubleValue * 1.2 - fight.monsterMinFight.doubleValue) +
+//                fight.monsterLevel.intValue * 3;
 }
 
 -(NSNumber *)checkWin:(Fight_Define *)fight{
@@ -895,7 +898,7 @@
     //非传说级，只要用户战斗力>怪物战斗力上限则直接胜利
     if (fight.monsterLevel.intValue<5){
         if (userFight > fight.monsterMaxFight.doubleValue)
-            return [NSNumber numberWithInteger:2];
+            return [NSNumber numberWithInteger:3];
     }
     
     //在耗尽体力时的奋力一战必胜，并记录奋力一击
@@ -910,10 +913,10 @@
         double roll = ((double)x)/10000.f;
         if (roll<rate){
             //胜利&战利品
-            return [NSNumber numberWithInteger:2 + (arc4random() % ([fight.fightWin componentsSeparatedByString:@"|"].count-1))*10];
+            return [NSNumber numberWithInteger:2 + (arc4random() % ([fight.fightWin componentsSeparatedByString:@"|"].count-2)+1)*10];
         } else {
             //只胜利
-            return [NSNumber numberWithInteger:1 + (arc4random() % ([fight.fightWin componentsSeparatedByString:@"|"].count-1))*10];
+            return [NSNumber numberWithInteger:1 + (arc4random() % ([fight.fightWin componentsSeparatedByString:@"|"].count-2)+1)*10];
         }
     }
     

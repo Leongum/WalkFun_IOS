@@ -18,6 +18,7 @@
 
 @interface RORLoginViewController : RORViewController{
     NSInteger segmentIndex;
+    User_Base *loggedInUserBase;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;

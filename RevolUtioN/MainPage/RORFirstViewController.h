@@ -20,6 +20,7 @@
 #import "LevelUpCongratsViewController.h"
 #import "THProgressView.h"
 #import "MissionStoneCongratsViewController.h"
+#import "MissionStoneView.h"
 
 @interface RORFirstViewController : MainPageViewController<CLLocationManagerDelegate>{
     BOOL wasFound;
@@ -28,6 +29,7 @@
     NSString *weatherInformation;
     NSDate *lastWeatherUpdateTime;
     User_Base *userInfo;
+    MissionStoneView *missionStoneView;
     
     CLLocationManager *locationManager;
     UIViewController *charatorViewController;

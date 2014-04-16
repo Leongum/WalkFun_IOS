@@ -358,6 +358,7 @@
 		30DBB72317EFE04400552391 /* challenge_pop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB72017EFE04400552391 /* challenge_pop_bg.png */; };
 		30DC91FD18FCDD1F006B6A4C /* talk_top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC91FC18FCDD1F006B6A4C /* talk_top_bg.png */; };
 		30DC91FF18FD1A78006B6A4C /* grass_male.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC91FE18FD1A78006B6A4C /* grass_male.png */; };
+		30DC920218FE45F8006B6A4C /* MissionStoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DC920118FE45F8006B6A4C /* MissionStoneView.m */; };
 		30DFE7DF17C6748F00678780 /* submit.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DFE7DD17C6748F00678780 /* submit.png */; };
 		30E01E7E18B09D5A005BF080 /* ItemQuantityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 30E01E7D18B09D5A005BF080 /* ItemQuantityPicker.m */; };
 		30E6D0FD184F0AD200C93338 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 30E6D0FC184F0AD200C93338 /* lock.png */; };
@@ -893,6 +894,8 @@
 		30DBB72017EFE04400552391 /* challenge_pop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = challenge_pop_bg.png; path = bg/challenge_pop_bg.png; sourceTree = "<group>"; };
 		30DC91FC18FCDD1F006B6A4C /* talk_top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = talk_top_bg.png; sourceTree = "<group>"; };
 		30DC91FE18FD1A78006B6A4C /* grass_male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grass_male.png; sourceTree = "<group>"; };
+		30DC920018FE45F8006B6A4C /* MissionStoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MissionStoneView.h; path = MainPage/MissionStoneView.h; sourceTree = "<group>"; };
+		30DC920118FE45F8006B6A4C /* MissionStoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissionStoneView.m; path = MainPage/MissionStoneView.m; sourceTree = "<group>"; };
 		30DFE7DD17C6748F00678780 /* submit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = submit.png; sourceTree = "<group>"; };
 		30E01E7C18B09D5A005BF080 /* ItemQuantityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemQuantityPicker.h; path = Items/ItemQuantityPicker.h; sourceTree = "<group>"; };
 		30E01E7D18B09D5A005BF080 /* ItemQuantityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemQuantityPicker.m; path = Items/ItemQuantityPicker.m; sourceTree = "<group>"; };
@@ -1839,6 +1842,8 @@
 				3022DFB618DACA3100F3A9D5 /* MissionCongratsLabel.m */,
 				3022E01B18F51FC900F3A9D5 /* MissionStoneCongratsViewController.h */,
 				3022E01C18F51FC900F3A9D5 /* MissionStoneCongratsViewController.m */,
+				30DC920018FE45F8006B6A4C /* MissionStoneView.h */,
+				30DC920118FE45F8006B6A4C /* MissionStoneView.m */,
 			);
 			name = MainPage;
 			sourceTree = "<group>";
@@ -2357,6 +2362,7 @@
 				3022DFEF18E19BF800F3A9D5 /* ReadyUseItemViewController.m in Sources */,
 				30750A6518B1DF8A00EC7B51 /* ItemIconView.m in Sources */,
 				30F4547117BCB519006CB66C /* INDeviceStatus.m in Sources */,
+				30DC920218FE45F8006B6A4C /* MissionStoneView.m in Sources */,
 				0F282F8F18B08D36003F44E8 /* RORUserPropsService.m in Sources */,
 				30750A7718B3B67A00EC7B51 /* RORLocationUtils.m in Sources */,
 				0FA751FC18927A0F0037342E /* RORMoreViewController.m in Sources */,

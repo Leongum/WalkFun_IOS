@@ -29,7 +29,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     titleView = [self.view viewWithTag:1];
-    
+    [self.missionNameLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    self.missionNameLabel.numberOfLines = 2;
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 

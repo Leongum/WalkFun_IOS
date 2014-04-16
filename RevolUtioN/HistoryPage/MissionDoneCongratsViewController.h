@@ -13,4 +13,5 @@
     UIView *titleView;
 }
 
+@property (strong, nonatomic) IBOutlet StrokeLabel *missionNameLabel;
 @end

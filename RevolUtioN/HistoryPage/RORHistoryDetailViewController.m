@@ -327,6 +327,9 @@
             [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
             eventLabel.numberOfLines = 0;
             UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+            [effectLabel setLineBreakMode:NSLineBreakByWordWrapping];
+            effectLabel.numberOfLines = 0;
+            UILabel *expLabel = (UILabel *)[cell viewWithTag:103];
             
             Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:walkEvent.eId];
             NSArray *meetText = [fightEvent.fightName componentsSeparatedByString:@"。"];
@@ -339,15 +342,22 @@
                 if (walkEvent.eWin.integerValue%10>1 && fightEvent.winGot)
                     effectLabel.text = [NSString stringWithFormat:@"获得：%@",fightEvent.winGot];
                 else
-                    effectLabel.text = [NSString stringWithFormat:@""];
+                    effectLabel.text = [NSString stringWithFormat:@"未获得战利品"];
             } else {
                 NSArray *winTextList = [fightEvent.fightLoose componentsSeparatedByString:@"|"];
                 [fightText appendString:[NSString stringWithFormat:@"，%@",(NSString *)[winTextList objectAtIndex:abs(walkEvent.eWin.intValue/10)]]];
-                effectLabel.text = [NSString stringWithFormat:@""];
+                effectLabel.text = [NSString stringWithFormat:@"未获得战利品"];
             }
             [fightText appendString:[meetText objectAtIndex:1]];
             eventLabel.text = fightText;
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:walkEvent.times.integerValue]];
+            double powerCost;
+            if (walkEvent.eWin.integerValue%10==3){
+                powerCost = fightEvent.basePowerConsume.doubleValue/2;
+            } else {
+                powerCost = fightEvent.basePowerConsume.doubleValue;
+            }
+            expLabel.text = [NSString stringWithFormat:@"经验值+%@  体力-%.0f", fightEvent.baseExperience, powerCost];
         }
     }
     [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];
@@ -359,7 +369,7 @@
     if (indexPath.row>0){
         Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row-1];
         if ([event.eType isEqualToString:RULE_Type_Fight]){
-            newCellHeight = 110;
+            newCellHeight = 140;
         }
     }
     return newCellHeight;

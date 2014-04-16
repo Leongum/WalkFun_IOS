@@ -33,6 +33,10 @@
 {
     [super viewDidLoad];
     self.backButton.alpha = 0;
+    
+    [self.loadingLabel setSpotlightColor:[UIColor blackColor]];
+    [self.loadingLabel setContentMode:UIViewContentModeBottom];
+
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
@@ -41,6 +45,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    [self.loadingLabel startAnimating];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [RORNetWorkUtils initCheckNetWork];
         NSLog(@"%hhd",[RORNetWorkUtils getIsConnetioned]);
