@@ -28,6 +28,10 @@
 @dynamic totalDistance;
 @dynamic totalSteps;
 @dynamic totalWalkingTimes;
+@dynamic totalFights;
+@dynamic fightsWin;
+@dynamic totalFriendFights;
+@dynamic friendFightWin;
 @dynamic missionCombo;
 @dynamic propHaving;
 @dynamic updateTime;
@@ -60,6 +64,10 @@
     self.totalDistance = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalDistance"]];
     self.totalSteps = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalSteps"]];
     self.totalWalkingTimes = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalWalkingTimes"]];
+    self.totalFights = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalFights"]];
+    self.fightsWin = [RORDBCommon getNumberFromId:[dict valueForKey:@"fightsWin"]];
+    self.totalFriendFights = [RORDBCommon getNumberFromId:[dict valueForKey:@"totalFriendFights"]];
+    self.friendFightWin = [RORDBCommon getNumberFromId:[dict valueForKey:@"friendFightWin"]];
     self.missionCombo = [RORDBCommon getNumberFromId:[dict valueForKey:@"missionCombo"]];
     self.propHaving = [RORDBCommon getStringFromId:[dict valueForKey:@"propHaving"]];
     self.updateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"updateTime"]];
@@ -84,6 +92,10 @@
     [tempDict setValue:self.totalDistance forKey:@"totalDistance"];
     [tempDict setValue:self.totalSteps forKey:@"totalSteps"];
     [tempDict setValue:self.totalWalkingTimes forKey:@"totalWalkingTimes"];
+    [tempDict setValue:self.totalFights forKey:@"totalFights"];
+    [tempDict setValue:self.fightsWin forKey:@"fightsWin"];
+    [tempDict setValue:self.totalFriendFights forKey:@"totalFriendFights"];
+    [tempDict setValue:self.friendFightWin forKey:@"friendFightWin"];
     [tempDict setValue:self.missionCombo forKey:@"missionCombo"];
     return tempDict;
 }

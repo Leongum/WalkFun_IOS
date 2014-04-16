@@ -57,14 +57,16 @@
         <attribute name="fatness" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="fight" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="fightPlus" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="fightsWin" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="friendFightWin" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="friendId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="friendName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="power" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="sex" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalDistance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="userTitle" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="userTitlePic" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="totalFights" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalFriendFights" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Mission" representedClassName="Mission" syncable="YES">
         <attribute name="experience" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
@@ -112,6 +114,8 @@
         <attribute name="fatness" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="fight" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="fightPlus" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fightsWin" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="friendFightWin" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="goldCoin" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="missionCombo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -122,6 +126,8 @@
         <attribute name="totalActiveTimes" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="totalCarlorie" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="totalDistance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="totalFights" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalFriendFights" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="totalSteps" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="totalWalkingTimes" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="updateTime" optional="YES" attributeType="Date" syncable="YES"/>
@@ -199,11 +205,11 @@
         <element name="Action_Define" positionX="0" positionY="0" width="128" height="238"/>
         <element name="Fight_Define" positionX="0" positionY="153" width="128" height="313"/>
         <element name="Friend" positionX="0" positionY="0" width="128" height="148"/>
-        <element name="Friend_Sort" positionX="0" positionY="0" width="128" height="210"/>
+        <element name="Friend_Sort" positionX="0" positionY="0" width="128" height="240"/>
         <element name="Mission" positionX="0" positionY="0" width="128" height="315"/>
         <element name="Recommend_App" positionX="0" positionY="0" width="128" height="165"/>
         <element name="User_Base" positionX="0" positionY="0" width="128" height="180"/>
-        <element name="User_Detail" positionX="0" positionY="0" width="128" height="343"/>
+        <element name="User_Detail" positionX="0" positionY="0" width="128" height="405"/>
         <element name="User_Mission_History" positionX="0" positionY="0" width="128" height="210"/>
         <element name="User_Prop" positionX="0" positionY="0" width="128" height="120"/>
         <element name="User_Running_History" positionX="0" positionY="0" width="128" height="480"/>
