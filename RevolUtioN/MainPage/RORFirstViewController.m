@@ -51,6 +51,7 @@
     [self.view sendSubviewToBack:charview];
     [charatorViewController didMoveToParentViewController:self];
     
+    lastWeatherUpdateTime = nil;
 }
 
 - (void)initControlsLayout{
@@ -72,11 +73,9 @@
         
         [RORUtils setFontFamily:APP_FONT forView:self.usernameLabel andSubViews:YES];
         //同步好友间的事件
-        int aQuantity = [RORFriendService syncActions:thisUserId];
+        int aQuantity = ((NSNumber *)[[RORUserUtils getUserInfoPList] objectForKey:@"MessageReceivedNumber"]).intValue;
         if (aQuantity>0)
             [self.msgButton setTitle:[NSString stringWithFormat:@"%d", aQuantity] forState:UIControlStateNormal];
-        
-        
     }
     if ([charatorViewController respondsToSelector:@selector(setUserBase:)]){
         [charatorViewController setValue:[RORUserServices fetchUser:[RORUserUtils getUserId]] forKey:@"userBase"];
@@ -87,7 +86,10 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self initPageData];
-    [self initLocationServcie];
+    if (!lastWeatherUpdateTime || [lastWeatherUpdateTime timeIntervalSinceNow]>1800){
+        [self initLocationServcie];
+        lastWeatherUpdateTime = [NSDate date];
+    }
     [self checkMissionProcess];
 }
 
@@ -165,7 +167,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    if([newLocation.timestamp timeIntervalSinceNow] >= (60 * 2)){
+    if([newLocation.timestamp timeIntervalSinceNow] < (60 * 2)){
         userLocation = newLocation;
         if (!wasFound){
             wasFound = YES;

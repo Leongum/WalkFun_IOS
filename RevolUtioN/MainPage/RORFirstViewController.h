@@ -26,6 +26,7 @@
     CLLocation *userLocation;
     NSString *cityName;
     NSString *weatherInformation;
+    NSDate *lastWeatherUpdateTime;
     User_Base *userInfo;
     
     CLLocationManager *locationManager;

@@ -168,6 +168,9 @@
 {
     //在此处理接收到的消息。
     NSLog(@"Receive remote notification : %@",userInfo);
+    int aQuantity = [RORFriendService syncActions:[RORUserUtils getUserId]];
+    [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:aQuantity], @"MessageReceivedNumber", nil]];
+    
     //用户好友信息
     int friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
     if(friends<0){

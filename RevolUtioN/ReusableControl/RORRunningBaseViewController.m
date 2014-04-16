@@ -157,8 +157,9 @@
         return [NSNumber numberWithInt:0];
     }
     userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
-    double health = 100;
-    double stepsPerFat = (100.f-health)/100.f*500 + 750;
+//    double health = 100;
+    //现在是250步减一点肥肉
+    double stepsPerFat = 250;// (100.f-health)/100.f*500 + 750;
     return [NSNumber numberWithDouble:-currentStep / stepsPerFat];
 }
 
