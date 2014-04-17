@@ -334,6 +334,13 @@
 - (IBAction)startButtonAction:(id)sender {
     if (!isStarted){
         isStarted = YES;
+        
+        //初始化好友战斗
+        //debug
+        friendFightStep = arc4random()%1000+500;//500步到1500之间会遇到好友
+        didFriendFight = NO;
+        followList = [RORFriendService fetchFriendFollowsList];
+        
         if (self.startTime == nil){
             self.startTime = [NSDate date];
             
@@ -682,7 +689,7 @@
                 effectLabel.text = @"";
             int timeInt = event.times.intValue;
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
-        } else {
+        } else if ([event.eType isEqualToString:RULE_Type_Fight]){
             identifier = @"fightCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
@@ -710,6 +717,32 @@
             [fightText appendString:[meetText objectAtIndex:1]];
             eventLabel.text = fightText;
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:event.times.integerValue]];
+        } else if ([event.eType isEqualToString:RULE_Type_Fight_Friend]){
+            identifier = @"fightCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+            [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
+            eventLabel.numberOfLines = 0;
+            Friend *fightFriend = [RORFriendService fetchUserFriend:userBase.userId withFriendId:event.eId];
+            
+            NSMutableString *fightString = [[NSMutableString alloc]init];
+            if (event.eWin.integerValue>0){
+                NSArray *winTextList = [FRIEND_FIGHT_SENTENCE_WIN componentsSeparatedByString:@"|"];
+                NSString *formatString = (NSString *)[winTextList objectAtIndex:event.eWin.intValue/10];
+                [fightString appendString:[NSString stringWithFormat:formatString, fightFriend.userName]];
+                effectLabel.text = @"获得：荣誉+1";
+            } else {
+                NSArray *winTextList = [FRIEND_FIGHT_SENTENCE_LOSE componentsSeparatedByString:@"|"];
+                NSString *formatString = (NSString *)[winTextList objectAtIndex:abs(event.eWin.intValue/10)];
+                [fightString appendString:[NSString stringWithFormat:formatString, fightFriend.userName]];
+                effectLabel.text = @"未获得战利品";
+            }
+            [fightString appendString:[NSString stringWithFormat:@"（等级%@战斗）", fightFriend.level]];
+            eventLabel.text = fightString;
+            eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:event.times.integerValue]];
+            
         }
     }
     bottomIndex = indexPath;
@@ -723,7 +756,7 @@
     newCellHeight = 75;
     if (indexPath.row>0){
         Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row-1];
-        if ([event.eType isEqualToString:RULE_Type_Fight]){
+        if (![event.eType isEqualToString:RULE_Type_Action]){
             newCellHeight = 110;
         }
     }
@@ -737,10 +770,25 @@
     
     //10步随机一次战斗事件
     if (((int)currentStep)%8 == 0){
+        int realCurrentStep = currentStep/0.8;
+        //判断是否遇到好友
+        if (realCurrentStep>friendFightStep && !didFriendFight){
+            int i=arc4random() % followList.count;
+            Friend *fightFriend = [followList objectAtIndex:i];
+            //不能相遇本次作伴的粉丝
+            while (fightFriend.friendId.intValue == thisWalkFriend.userId.intValue) {
+                i=arc4random() % followList.count;
+                fightFriend = [followList objectAtIndex:i];
+            }
+            [self eventDidHappened:[self makeWalkEvent:fightFriend]];
+            didFriendFight = YES;
+            return;
+        }
+        
         int x = arc4random() % 1000000;
         double roll = ((double)x)/10000.f;
         double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0, rateEvent = 5;
-        if (currentStep>WALKING_FIGHT_STAGE_II){
+        if (realCurrentStep>WALKING_FIGHT_STAGE_II){
             stepsSinceLastFight++;
             
             if (fightCount==0){//没有战斗发生，则先判断是否遇到稀有怪
@@ -757,11 +805,11 @@
             }
             rate2 = stepsSinceLastFight*10/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 2;
         }
-        if (currentStep>WALKING_FIGHT_STAGE_III){
+        if (realCurrentStep>WALKING_FIGHT_STAGE_III){
             rate3 = 2 + stepsSinceLastFight*3/(WALKING_FIGHT_STAGE_IV - WALKING_FIGHT_STAGE_III);
             rate2 = 1;//0.5;
         }
-        if (currentStep>WALKING_FIGHT_STAGE_IV){
+        if (realCurrentStep>WALKING_FIGHT_STAGE_IV){
             rate4 = 0.6;//(currentStep - WALKING_FIGHT_STAGE_IV)*5/(WALKING_FIGHT_STAGE_V - WALKING_FIGHT_STAGE_IV) + 2;
             rate3 = 1;//1;
             rate2 = 0.4;//0.5;
@@ -790,6 +838,7 @@
             if (fightList){
                 Fight_Define *fightEvent = (Fight_Define *)[fightList objectAtIndex:arc4random() % fightList.count];
                 [self eventDidHappened:[self makeWalkEvent:fightEvent]];
+                return;
             }
         } else if (fightStage<0) {
             if (eventWillList){
@@ -798,6 +847,7 @@
                     actionEvent = (Action_Define *)[eventWillList objectAtIndex:arc4random() % eventWillList.count];
                 }
                 [self eventDidHappened:[self makeWalkEvent:actionEvent]];
+                return;
             }
         }
     }
@@ -810,18 +860,6 @@
         [self eventDidHappened:[self makeWalkEvent:goldAction]];
         return;
     }
-
-//    for (int i=0; i<eventWillList.count; i++){
-//        Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
-//        int x = arc4random() % 1000000;
-//        double roll = ((double)x)/10000.f;
-//        double delta = 1;
-//
-//        if (roll < event.triggerProbability.doubleValue *delta){
-//            [self eventDidHappened:[self makeWalkEvent:event]];
-//            return;
-//        }
-//    }
 }
 
 -(Walk_Event *)makeWalkEvent:(id)event{
@@ -835,9 +873,10 @@
         walkEvent.eId = e.fightId;
         walkEvent.eType = RULE_Type_Fight;
         [self calculatePowerForFight:e];
-        walkEvent.eWin = [self checkWin:e];
-        
+        walkEvent.eWin = [self checkWin:e];//战斗可能未发生，所以要先判断战斗结果，再更新战斗体力消耗
         walkEvent.power = [NSNumber numberWithInteger:fightPowerCost];
+        [self refreshUserPower];
+
         if (walkEvent.eWin.intValue>1) {//战斗胜利且得到战利品
             [self refreshItemCount:e.winGotRule];
         }
@@ -845,19 +884,48 @@
             walkExperience += e.baseExperience.intValue;
             goldCount += e.baseGold.intValue;
         }
-        userPower -= fightPowerCost;
-        if (userPower<0)
-            userPower = 0;
-        [powerPV setProgress:((double)userPower/(double)userPowerMax) animated:YES];
-        self.powerFrame.text = [NSString stringWithFormat:@"%d", userPower];
         
         fightCount++;
         stepsSinceLastFight = 0;
+    } else if ([event isKindOfClass:[Friend class]]){//好友战斗
+        Friend *fightFriend = (Friend *)event;
+        walkEvent.eId = fightFriend.friendId;
+        walkEvent.eType = RULE_Type_Fight_Friend;
+        walkEvent.eWin = [self checkFriendWin:fightFriend];
+        fightPowerCost = 10;
+        [self refreshUserPower];
+        walkEvent.power = [NSNumber numberWithInteger:fightPowerCost];
     }
     walkEvent.times = [NSNumber numberWithInteger:duration];
     walkEvent.lati = [NSNumber numberWithDouble:formerLocation.coordinate.latitude];
     walkEvent.longi = [NSNumber numberWithDouble:formerLocation.coordinate.longitude];
     return walkEvent;
+}
+
+-(void)refreshUserPower{
+    userPower -= fightPowerCost;
+    if (userPower<0)
+        userPower = 0;
+    [powerPV setProgress:((double)userPower/(double)userPowerMax) animated:YES];
+    self.powerFrame.text = [NSString stringWithFormat:@"%d", userPower];
+}
+
+-(NSNumber *)checkFriendWin:(Friend *)fightFriend{
+    double totalFight = fightFriend.fight.intValue + fightFriend.fightPlus.intValue + userFight;
+    if (userFight/totalFight<0.1){
+        //被虐
+        return [NSNumber numberWithInt:-1];
+    } else if (userFight/totalFight>0.9){
+        //虐
+        return [NSNumber numberWithInt:3];
+    } else {
+        int roll = arc4random()%(int)totalFight;
+        if (roll<=userFight){//战胜
+            return [NSNumber numberWithInt:arc4random() % [FRIEND_FIGHT_SENTENCE_WIN componentsSeparatedByString:@"|"].count * 10 + 1];
+        } else {//战败
+            return [NSNumber numberWithInt:-(arc4random() % [FRIEND_FIGHT_SENTENCE_LOSE componentsSeparatedByString:@"|"].count * 10 + 1)];
+        }
+    }
 }
 
 -(void)refreshItemCount:(NSString *)rule{

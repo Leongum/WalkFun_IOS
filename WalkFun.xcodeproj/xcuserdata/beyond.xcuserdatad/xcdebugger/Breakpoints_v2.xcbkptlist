@@ -166,11 +166,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/RunningPages/RORRunningViewController.m"
-            timestampString = "419171354.566761"
+            timestampString = "419399173.441483"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "463"
-            endingLineNumber = "463"
+            startingLineNumber = "470"
+            endingLineNumber = "470"
             landmarkName = "-endButtonAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -214,11 +214,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/RORServices/RORFriendService.m"
-            timestampString = "418303938.981612"
+            timestampString = "419400161.096991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "364"
-            endingLineNumber = "364"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
             landmarkName = "+fetchRecommendFriends:"
             landmarkType = "5">
          </BreakpointContent>
@@ -261,22 +261,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RevolUtioN/RunningPages/RORRunningViewController.m"
-            timestampString = "419171354.566761"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "607"
-            endingLineNumber = "607"
-            landmarkName = "-isMissionDone"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "RevolUtioN/Items/ItemDetailCoverView.m"
             timestampString = "418288029.05707"
             startingColumnNumber = "9223372036854775807"
@@ -294,12 +278,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/RORServices/RORFriendService.m"
-            timestampString = "418303938.981612"
+            timestampString = "419400161.096991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "398"
-            endingLineNumber = "398"
-            landmarkName = "+deFollowFriend:"
+            startingLineNumber = "413"
+            endingLineNumber = "413"
+            landmarkName = "+followFriend:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -390,28 +374,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/RunningPages/RORRunningViewController.m"
-            timestampString = "419353523.301224"
+            timestampString = "419401948.571399"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "903"
-            endingLineNumber = "903"
+            startingLineNumber = "971"
+            endingLineNumber = "971"
             landmarkName = "-checkWin:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RevolUtioN/RunningPages/RORRunningViewController.m"
-            timestampString = "419353942.325104"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "838"
-            endingLineNumber = "838"
-            landmarkName = "-makeWalkEvent:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -428,6 +396,22 @@
             startingLineNumber = "148"
             endingLineNumber = "148"
             landmarkName = "-initUserInfoPlist"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RevolUtioN/RunningPages/RORRunningViewController.m"
+            timestampString = "419399555.923819"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "728"
+            endingLineNumber = "728"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

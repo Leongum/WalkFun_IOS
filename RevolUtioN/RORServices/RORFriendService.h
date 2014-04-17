@@ -18,6 +18,9 @@
 
 @interface RORFriendService : NSObject
 
+//获得userId的friendId好友
++(Friend *)fetchUserFriend:(NSNumber *) userId withFriendId:(NSNumber *) friendId;
+
 //同步用户好友信息
 +(int)syncFriends:(NSNumber *) userId;
 

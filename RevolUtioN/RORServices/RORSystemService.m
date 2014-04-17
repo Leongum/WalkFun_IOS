@@ -341,6 +341,10 @@
             
             if (we.eWin.integerValue>0)
                 winCount++;
+        } else if ([we.eType isEqualToString:RULE_Type_Fight_Friend]){
+            fightCount ++;
+            if (we.eWin.integerValue>0)
+                winCount++;
         }
     }
     [propgetString appendString:[NSString stringWithFormat:@"%d-", winCount]];

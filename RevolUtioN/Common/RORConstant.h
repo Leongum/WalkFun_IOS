@@ -84,6 +84,9 @@
 #define COLOR_MOSS [UIColor colorWithRed:0 green:128.f/255.f blue:64.f/255.f alpha:1]
 #define APP_FONT @"DFPWaWaW5"
 
+#define FRIEND_FIGHT_SENTENCE_WIN @"遇到%@并主动与之切磋武艺，几招过后轻松取胜，被围观群众投来崇拜的眼神。|巧遇%@与之切磋，大战250回合后终于艰难取胜。"
+#define FRIEND_FIGHT_SENTENCE_LOSE @"遇到%@并主动与之切磋武艺，结果连对方三招都没接住。|巧遇%@与之切磋，大战250回合后遗憾落败。"
+
 #endif
 
 #define RULE_Drop_Down @"D"
@@ -102,6 +105,7 @@
 #define RULE_Money @"M"
 #define RULE_Type_Action @"TA"
 #define RULE_Type_Fight @"TF"
+#define RULE_Type_Fight_Friend @"TFF"
 #define RULE_Type_Gold @"TG"
 
 typedef enum {MissionTypeStep = 0, MissionTypePickItem = 1, MissionTypeUseItem = 2} MissionTypeEnum;

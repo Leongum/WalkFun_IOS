@@ -319,7 +319,7 @@
             eventLabel.text = actionEvent.actionName;
             effectLabel.text = [NSString stringWithFormat:@"获得：%@",actionEvent.actionAttribute];
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:walkEvent.times.integerValue]];
-        } else {
+        } else if ([walkEvent.eType isEqualToString:RULE_Type_Fight]){
             identifier = @"fightCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
@@ -358,7 +358,35 @@
                 powerCost = fightEvent.basePowerConsume.doubleValue;
             }
             expLabel.text = [NSString stringWithFormat:@"经验值+%@  体力-%.0f", fightEvent.baseExperience, powerCost];
+        } else if ([walkEvent.eType isEqualToString:RULE_Type_Fight_Friend]){
+            identifier = @"fightCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+            UILabel *expLabel = (UILabel *)[cell viewWithTag:103];
+            [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
+            eventLabel.numberOfLines = 0;
+            Friend *fightFriend = [RORFriendService fetchUserFriend:userBase.userId withFriendId:walkEvent.eId];
+            
+            NSMutableString *fightString = [[NSMutableString alloc]init];
+            if (walkEvent.eWin.integerValue>0){
+                NSArray *winTextList = [FRIEND_FIGHT_SENTENCE_WIN componentsSeparatedByString:@"|"];
+                NSString *formatString = (NSString *)[winTextList objectAtIndex:walkEvent.eWin.intValue/10];
+                [fightString appendString:[NSString stringWithFormat:formatString, fightFriend.userName]];
+                effectLabel.text = @"获得：荣誉+1";
+            } else {
+                NSArray *winTextList = [FRIEND_FIGHT_SENTENCE_LOSE componentsSeparatedByString:@"|"];
+                NSString *formatString = (NSString *)[winTextList objectAtIndex:abs(walkEvent.eWin.intValue/10)];
+                [fightString appendString:[NSString stringWithFormat:formatString, fightFriend.userName]];
+                effectLabel.text = @"未获得战利品";
+            }
+            [fightString appendString:[NSString stringWithFormat:@"（等级%@战斗）", fightFriend.level]];
+            eventLabel.text = fightString;
+            eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:walkEvent.times.integerValue]];
+            expLabel.text = [NSString stringWithFormat:@"体力-%@", walkEvent.power];
         }
+
     }
     [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];
     return cell;
@@ -368,7 +396,7 @@
     double newCellHeight = 75;
     if (indexPath.row>0){
         Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row-1];
-        if ([event.eType isEqualToString:RULE_Type_Fight]){
+        if (![event.eType isEqualToString:RULE_Type_Action]){
             newCellHeight = 140;
         }
     }

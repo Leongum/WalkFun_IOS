@@ -26,7 +26,22 @@
         return nil;
     }
     if (!needContext) {
-        return[Friend removeAssociateForEntity:(Friend *) [fetchObject objectAtIndex:0]];
+        Friend *newFriend = [Friend removeAssociateForEntity:(Friend *) [fetchObject objectAtIndex:0]];
+        Friend_Sort * friendSort = [self fetchFriendSortDetails:friendId];
+        if(friendSort != nil){
+            newFriend.sex = friendSort.sex;
+            newFriend.level = friendSort.level;
+            newFriend.userName = friendSort.friendName;
+            newFriend.fight = friendSort.fight;
+            newFriend.fightPlus = friendSort.fightPlus;
+            newFriend.power = friendSort.power;
+            newFriend.totalFights = friendSort.totalFights;
+            newFriend.fightsWin = friendSort.fightsWin;
+            newFriend.totalFriendFights = friendSort.totalFriendFights;
+            newFriend.friendFightWin = friendSort.friendFightWin;
+        }
+
+        return newFriend;
     }
     return (Friend *) [fetchObject objectAtIndex:0];
 }

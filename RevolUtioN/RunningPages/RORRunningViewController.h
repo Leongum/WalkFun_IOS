@@ -44,6 +44,10 @@
     
     User_Base *thisWalkFriend;
     NSInteger friendAddFight;
+    
+    int friendFightStep;
+    BOOL didFriendFight;
+    NSArray *followList;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
