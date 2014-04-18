@@ -82,4 +82,7 @@ _Pragma("clang diagnostic pop") \
 //解析获得道具效果的字符串
 +(NSString *)explainItemEffectString:(NSString *)originalString;
 
+//按图片名，先从bundle找，没有去doc找，再没有去服务器要
++(UIImage *)getImageNamed:(NSString *)fileName;
+
 @end

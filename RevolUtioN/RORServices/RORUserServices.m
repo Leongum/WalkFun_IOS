@@ -212,23 +212,8 @@
 }
 
 +(UIImage *)getCharactorImageNamed:(NSString *)fileName{
-    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    // If you go to the folder below, you will find those pictures
-    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",docDir, fileName];
-    
-    UIImage *theImage = [UIImage imageNamed:fileName];
-    if (!theImage){
-        theImage = [UIImage imageWithContentsOfFile:pngFilePath];
-    }
-    if (!theImage) {
-        NSURL *imageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",PICTURE_HOST_URL,fileName]];
-        theImage = [[UIImage alloc]initWithData:[NSData dataWithContentsOfURL:imageUrl]];
-        if (theImage){
-            NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(theImage)];
-            [data1 writeToFile:pngFilePath atomically:YES];
-        }
-    }
-    return theImage;
+    return [RORUtils getImageNamed:fileName];
 }
+
 
 @end

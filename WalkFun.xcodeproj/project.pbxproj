@@ -376,6 +376,7 @@
 		30F4548117BCB564006CB66C /* INStepCounting.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F4548017BCB564006CB66C /* INStepCounting.m */; };
 		30F4548317BD10C5006CB66C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30F4548217BD10C5006CB66C /* CoreMotion.framework */; };
 		30F78705190150720041F9F4 /* data_board.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F78704190150720041F9F4 /* data_board.png */; };
+		30F7870C19018BE10041F9F4 /* badge_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F7870B19018BE10041F9F4 /* badge_0.png */; };
 		30FAA212186415E100E72650 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FAA210186415E100E72650 /* male.png */; };
 		30FAA213186415E100E72650 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FAA211186415E100E72650 /* female.png */; };
 		30FAA215186417DF00E72650 /* notSure.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FAA214186417DF00E72650 /* notSure.png */; };
@@ -927,6 +928,7 @@
 		30F4548017BCB564006CB66C /* INStepCounting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INStepCounting.m; sourceTree = "<group>"; };
 		30F4548217BD10C5006CB66C /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		30F78704190150720041F9F4 /* data_board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = data_board.png; sourceTree = "<group>"; };
+		30F7870B19018BE10041F9F4 /* badge_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badge_0.png; sourceTree = "<group>"; };
 		30FAA210186415E100E72650 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
 		30FAA211186415E100E72650 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
 		30FAA214186417DF00E72650 /* notSure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notSure.png; sourceTree = "<group>"; };
@@ -1284,6 +1286,7 @@
 		301C1F6817378AF30068B43B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				30F7870819018BA00041F9F4 /* badges */,
 				3022E02618F7ACBD00F3A9D5 /* annotation */,
 				30978DA017EDA57E00CA58B9 /* history */,
 				30DB01F518C32652008863B8 /* item */,
@@ -1940,6 +1943,15 @@
 			path = RevolUtioN/Animation;
 			sourceTree = "<group>";
 		};
+		30F7870819018BA00041F9F4 /* badges */ = {
+			isa = PBXGroup;
+			children = (
+				30F7870B19018BE10041F9F4 /* badge_0.png */,
+			);
+			name = badges;
+			path = Resources/badges;
+			sourceTree = "<group>";
+		};
 		30FC291A17607F6D00DEC042 /* icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -2154,6 +2166,7 @@
 				30DB020E18C5B54A008863B8 /* levelup_congrats.png in Resources */,
 				3022DF9D18D6C00900F3A9D5 /* add_friend.png in Resources */,
 				3022DF9F18D6C00900F3A9D5 /* fansButton_normal.png in Resources */,
+				30F7870C19018BE10041F9F4 /* badge_0.png in Resources */,
 				30C832AF1859CCD100EEE2F9 /* trainingDetailSimple_bg.png in Resources */,
 				0F0B64CE18F3E27C003B0E15 /* UMSShareListController.xib in Resources */,
 				3022DF9B18D6C00900F3A9D5 /* fansButton_selected.png in Resources */,

@@ -68,4 +68,6 @@
 +(NSInteger)getUserPowerLeft;
 +(void)saveUserPowerLeft:(NSInteger)powerLeft;
 
++(UIImage *)getImageForUserBadge:(NSNumber *)badgeNum;
+
 @end

@@ -45,8 +45,10 @@
 //@property (strong, nonatomic) IBOutlet UIImageView *testView;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *levelLabel;
-@property (strong, nonatomic) IBOutlet UILabel *userTitleLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *badgeImageView;
+@property (strong, nonatomic) IBOutlet UILabel *badgeLabel;
 @property (strong, nonatomic) IBOutlet UIControl *userInfoView;
+
 //todo
 @property (strong, nonatomic) IBOutlet StrokeLabel *fatLabel;
 @property (strong, nonatomic) IBOutlet StrokeLabel *healthLabel;

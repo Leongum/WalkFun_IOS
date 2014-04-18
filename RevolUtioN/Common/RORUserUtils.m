@@ -342,5 +342,12 @@ static NSDate *syncTime;
 +(void)saveUserPowerLeft:(NSInteger)powerLeft{
     [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:powerLeft], @"latestUserPowerLeft", [NSDate date], @"latestUserPowerDate",nil]];
 }
+
++(UIImage *)getImageForUserBadge:(NSNumber *)badgeNum{
+    NSString *fileName = [NSString stringWithFormat:@"badge_%d.png",badgeNum.intValue/20];
+    
+    return [RORUtils getImageNamed:fileName];
+}
+
 @end
 

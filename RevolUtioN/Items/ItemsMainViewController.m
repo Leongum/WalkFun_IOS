@@ -84,8 +84,8 @@
 
 - (IBAction)lingqianAction:(id)sender {
     //[LingQianSDK openRewardStore];
-    
-    [mallCoverView bgTap:self];
+//    [mallCoverView bgTap:self];
+    [self sendNotification:@"即将开放"];
 }
 
 - (IBAction)itemMallAction:(id)sender {
