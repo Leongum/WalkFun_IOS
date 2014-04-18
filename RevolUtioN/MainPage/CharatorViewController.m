@@ -47,6 +47,7 @@
     fightPV = nil;
     
     haveBump = NO;
+    faceColorIndex = 0;
     
     if (!userBase)
         self.view.alpha = 0;
@@ -72,17 +73,18 @@
             [view removeFromSuperview];
         for (UIView *view in [flowContainerView subviews])
             [view removeFromSuperview];
-        [self displayCharator];
+        //先显示道具效果，因为有些道具效果可能影响到角色形像
         [self displayItems];
+        [self displayCharator];
         [self displayProgresses];
         charatorBumpImageView.alpha = haveBump;
     }
     if (!fatPV){
         fatPVFrameView = (UILabel *)[self.view viewWithTag:200];
         fightPVFrameView = (UILabel *)[self.view viewWithTag:201];
-        fatPV = [self newProgressView:fatPVFrameView];
+//        fatPV = [self newProgressView:fatPVFrameView];
 //        fightPV = [self newProgressView:fightPVFrameView];
-        [self.view bringSubviewToFront:fatPVFrameView];
+//        [self.view bringSubviewToFront:fatPVFrameView];
 //        [self.view bringSubviewToFront:fightPVFrameView];
     }
 }
@@ -92,11 +94,11 @@
 
 -(void)displayProgresses{
     if (userBase.userId.intValue == [RORUserUtils getUserId].intValue){
-        [fatPV setProgress:((double)[RORUserUtils getUserPowerLeft])/(userBase.userDetail.power.doubleValue + userBase.userDetail.powerPlus.doubleValue)];
+//        [fatPV setProgress:((double)[RORUserUtils getUserPowerLeft])/(userBase.userDetail.power.doubleValue + userBase.userDetail.powerPlus.doubleValue)];
         fatPVFrameView.text = [NSString stringWithFormat:@"%d/%d", [RORUserUtils getUserPowerLeft], userBase.userDetail.power.intValue + userBase.userDetail.powerPlus.intValue];
     } else {
         fatPVFrameView.text = [NSString stringWithFormat:@"%d", userBase.userDetail.power.intValue + userBase.userDetail.powerPlus.intValue];
-        [fatPV setProgress:1];
+//        [fatPV setProgress:1];
     }
     //todo
 //    [fightPV setProgress:userBase.userDetail.fight.doubleValue/300.f];
@@ -110,6 +112,28 @@
 -(void)displayCharator{
     int fatInt = userBase.userDetail.fatness.integerValue;
     NSMutableString *charFileName = [[NSMutableString alloc]init];
+    switch (faceColorIndex) {
+        case 0:
+            break;
+        case 1://blaceColor
+            [charFileName appendFormat:@"black_"];
+            break;
+        case 2://white
+            [charFileName appendFormat:@"white_"];
+            break;
+        case 3://green
+            [charFileName appendFormat:@"green_"];
+            break;
+        case 4://blue
+            [charFileName appendFormat:@"blue_"];
+            break;
+        case 5://red
+            [charFileName appendFormat:@"red_"];
+            break;
+        default:
+            break;
+    }
+    
     if (fatInt<=20){
         [charFileName appendString:@"exslim_"];
     } else if (fatInt<=40) {
@@ -129,7 +153,7 @@
         maleGrassImageView.alpha = 0;
     }
     
-    charatorImageView.image = [UIImage imageNamed:charFileName];
+    charatorImageView.image = [RORUserServices getCharactorImageNamed:charFileName];
 }
 
 -(void)displayItems{
@@ -141,6 +165,8 @@
     [self orderSubiews:onFaceView];
     [self orderSubiews:frontCharatorView];
     [self orderSubiews:flowContainerView];
+    
+    [self rotateSubiews:onFaceView];
 }
 
 -(void)addItem:(NSNumber *)itemId withQuantity:(NSNumber *)quantity{
@@ -158,12 +184,16 @@
             for (int i=0; i<quantity.integerValue; i++){
                 [self makeNewItemImageView:item];
             }
-        } else if ([[effectDict allKeys] containsObject:RULE_On_Face]){
+            haveBump = YES;
+        }
+        if ([[effectDict allKeys] containsObject:RULE_On_Face]){
             for (int i=0; i<quantity.integerValue; i++){
                 [self makeNewFaceImageView:item];
             }
         }
-        haveBump = YES;
+        if ([[effectDict allKeys] containsObject:RULE_Face_Color]){
+            faceColorIndex = ((NSNumber *)[effectDict objectForKey:RULE_Face_Color]).intValue;
+        }
     }
 }
 
@@ -221,5 +251,14 @@
     }
 }
 
+-(void)rotateSubiews:(UIView *)thisView{
+    NSArray *viewList = [thisView subviews];
+    for (int i=0; i<viewList.count; i++){
+        UIView *view = (UIView *)[viewList objectAtIndex:i];
+        int roll = arc4random()%60;
+        roll-=30;
+        [Animations rotate:view andAnimationDuration:0 andWait:NO andAngle:roll];
+    }
+}
 
 @end

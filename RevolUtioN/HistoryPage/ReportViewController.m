@@ -14,7 +14,7 @@
 @end
 
 @implementation ReportViewController
-@synthesize winLabel, expLabel, coinLabel, itemLabel, commentLabel;
+@synthesize winLabel, expLabel, coinLabel, itemLabel,fatLabel, commentLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +34,8 @@
     expLabel.alpha = 0;
     coinLabel.alpha = 0;
     itemLabel.alpha = 0;
+    fatLabel.alpha = 0;
+    
     [commentLabel setLineBreakMode:NSLineBreakByWordWrapping];
     [commentLabel setTextAlignment:NSTextAlignmentCenter];
     commentLabel.numberOfLines = 0;
@@ -52,6 +54,7 @@
     expLabel.text = expText;
     coinLabel.text = coinText;
     itemLabel.text = itemText;
+    fatLabel.text = fatText;
     commentLabel.text = commentText;
     winLabel.alpha = 1;
     [winLabel popIn:0.25 delegate:self startSelector:nil stopSelector:@selector(expLabelAnimation)];
@@ -69,14 +72,20 @@
 
 -(void)itemLabelAnimation{
     itemLabel.alpha = 1;
-    [itemLabel popIn:0.25 delegate:self];
+    [itemLabel popIn:0.25 delegate:self startSelector:nil stopSelector:@selector(fatLabelAnimation)];
 }
 
--(void)customInit:(NSString *)win Exp:(NSString *)exp Coin:(NSString *)coin Item:(NSString *)item andComment:(NSString *)comment{
+-(void)fatLabelAnimation{
+    fatLabel.alpha = 1;
+    [fatLabel popIn:0.25 delegate:self];
+}
+
+-(void)customInit:(NSString *)win Exp:(NSString *)exp Coin:(NSString *)coin Item:(NSString *)item Fat:(NSString *)fat andComment:(NSString *)comment{
     winText = win;
     expText = exp;
     coinText= coin;
     itemText = item;
+    fatText = fat;
     commentText = comment;
     [self viewWillAppear:NO];
 }

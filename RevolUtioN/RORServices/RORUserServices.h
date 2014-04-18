@@ -47,4 +47,7 @@
 
 //向服务器同步用户token 信息
 + (void)updateUserDeviceToken;
+
+//返回角色图片，如果bundle中没有相应资源，看doc文件夹，doc下没有则向服务器请求
++(UIImage *)getCharactorImageNamed:(NSString *)fileName;
 @end

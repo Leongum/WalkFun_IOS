@@ -29,6 +29,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="main_bg_reverse.png" id="lUP-0S-Txr">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="item_table_bg.png" id="cf5-xH-azQ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -171,7 +175,7 @@
                                 </connections>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginButton.png" id="eAQ-fd-V9N">
-                                <rect key="frame" x="108" y="90" width="104" height="34"/>
+                                <rect key="frame" x="114" y="92" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2HG-Rx-Jca" customClass="StrokeLabel">
@@ -497,6 +501,7 @@
         <image name="item_table_bg.png" width="640" height="1136"/>
         <image name="loginButton.png" width="325" height="108"/>
         <image name="main_bg.jpg" width="640" height="1136"/>
+        <image name="main_bg_reverse.png" width="640" height="1136"/>
         <image name="redbutton_bg.png" width="221" height="96"/>
         <image name="searchViewCell_bg.png" width="541" height="154"/>
     </resources>

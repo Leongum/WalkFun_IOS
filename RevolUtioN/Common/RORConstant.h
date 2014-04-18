@@ -68,6 +68,8 @@
 
 #define UMENG_APPKEY @"5300735056240b04531ca01a"
 
+#define PICTURE_HOST_URL @"http://cyberace.qiniudn.com/"
+
 #define DEFAULT_NET_WORK_MODE @"All_Mode"
 #define NET_WORK_MODE_WIFI @"Only_Wifi"
 #define DEFAULT_SEX @"男"
@@ -91,6 +93,7 @@
 
 #define RULE_Drop_Down @"D"
 #define RULE_On_Face @"OF"
+#define RULE_Face_Color @"FC"
 #define RULE_Fatness @"F"
 #define RULE_Fight_Win @"FW"
 #define RULE_Fight_Loose @"FL"

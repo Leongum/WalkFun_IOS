@@ -53,6 +53,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *weatherInfoButtonView;
 @property (strong, nonatomic) IBOutlet UIView *charatorView;
 @property (strong, nonatomic) IBOutlet UIButton *msgButton;
+@property (strong, nonatomic) IBOutlet UIImageView *msgNoteImageView;
 
+@property (strong, nonatomic) IBOutlet UIImageView *bgImageView;
 @property (strong, nonatomic) IBOutlet UIButton *missionStoneButton;
 @end

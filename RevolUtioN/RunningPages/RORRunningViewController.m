@@ -400,7 +400,7 @@
 
 -(void)displayTimerInfo{
     timeLabel.text = [RORUtils transSecondToStandardFormat:duration];
-    distanceLabel.text = [NSString stringWithFormat:@"%.0f", directionMoved.north];
+    distanceLabel.text = [NSString stringWithFormat:@"%.0f", directionMoved.east];
 //    distanceLabel.text = [RORUtils formattedSteps:stepCounting.counter/0.8];
 }
 
@@ -454,9 +454,9 @@
         //找到与formerlocation纬度相同，经度不同的点，计算出的距离为东西方向位移
         tmpLocation = [[CLLocation alloc]initWithLatitude:formerLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
         if (tmpLocation.coordinate.longitude > formerLocation.coordinate.longitude){
-            directionMoved.west += [formerLocation distanceFromLocation:tmpLocation];
-        } else {
             directionMoved.east += [formerLocation distanceFromLocation:tmpLocation];
+        } else {
+            directionMoved.west += [formerLocation distanceFromLocation:tmpLocation];
         }
         
         formerLocation = currentLocation;

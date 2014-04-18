@@ -134,6 +134,7 @@
                                      Exp:[NSString stringWithFormat:@"%d", record.experience.intValue]
                                     Coin:[NSString stringWithFormat:@"%d", record.goldCoin.intValue]
                                     Item:[NSString stringWithFormat:@"%d", totalItems]
+                                    Fat:[NSString stringWithFormat:@"%d", record.fatness.intValue]
                                     andComment:commentText];
 
         [coverViewQueue addObject:reportViewController];

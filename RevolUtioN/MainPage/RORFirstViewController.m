@@ -49,6 +49,7 @@
     [self addChildViewController:charatorViewController];
     [self.view addSubview:charview];
     [self.view sendSubviewToBack:charview];
+    [self.view sendSubviewToBack:self.bgImageView];
     [charatorViewController didMoveToParentViewController:self];
     
     lastWeatherUpdateTime = nil;
@@ -74,8 +75,7 @@
         [RORUtils setFontFamily:APP_FONT forView:self.usernameLabel andSubViews:YES];
         //同步好友间的事件
         int aQuantity = ((NSNumber *)[[RORUserUtils getUserInfoPList] objectForKey:@"MessageReceivedNumber"]).intValue;
-        if (aQuantity>0)
-            [self.msgButton setTitle:[NSString stringWithFormat:@"%d", aQuantity] forState:UIControlStateNormal];
+        self.msgNoteImageView.alpha = (aQuantity>0);
     }
     if ([charatorViewController respondsToSelector:@selector(setUserBase:)]){
         [charatorViewController setValue:[RORUserServices fetchUser:[RORUserUtils getUserId]] forKey:@"userBase"];

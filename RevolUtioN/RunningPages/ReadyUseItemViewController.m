@@ -98,7 +98,12 @@
     User_Prop *userProp = [contentList objectAtIndex:indexPath.row];
     Virtual_Product *item = [RORVirtualProductService fetchVProduct:userProp.productId];
     
-    NSString *alertMessage = [NSString stringWithFormat:@"确定要使用【%@】吗？\n\n%@\n  ", userProp.productName, [RORUtils explainItemEffectString:item.productDescription]];
+    NSString *effectString = @"";
+    NSArray *itemInfoStringList = [item.productDescription componentsSeparatedByString:@"\\n\\n"];
+    if (itemInfoStringList.count>1)
+        effectString = [itemInfoStringList objectAtIndex:1];
+    
+    NSString *alertMessage = [NSString stringWithFormat:@"确定要使用【%@】吗？\n\n%@\n  ", userProp.productName, [RORUtils explainItemEffectString:effectString]];
     
     SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"使用道具" andMessage:alertMessage];
     [alertView addButtonWithTitle:@"取消"

@@ -29,6 +29,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="main_bg_reverse.png" id="XZn-fw-SCG">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="item_table_bg.png" id="h7z-E5-IcG">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -450,6 +454,7 @@
         <image name="item_table_bg.png" width="640" height="1136"/>
         <image name="item_title_board.png" width="640" height="171"/>
         <image name="itemmall_button.png" width="166" height="122"/>
+        <image name="main_bg_reverse.png" width="640" height="1136"/>
         <image name="redbutton_bg.png" width="221" height="96"/>
         <image name="running_end_bg.png" width="305" height="100"/>
         <image name="scrollPicker_bg.png" width="640" height="580"/>
