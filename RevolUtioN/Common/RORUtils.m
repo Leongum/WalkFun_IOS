@@ -458,5 +458,26 @@
     return theImage;
 }
 
++(NSString *)getRandomStringFromAllstrings:(NSString *)allString{
+    NSArray *stringList = [allString componentsSeparatedByString:@"|"];
+    return [stringList objectAtIndex:(arc4random() % stringList.count)];
+}
+
++(NSString *)getSentencebyRule:(NSString *)rule eId10:(int)eId10 andSentence:(NSString *)allSentence{
+    if ([rule isEqualToString:RULE_Type_Start]){
+        NSArray *sentenceList = [allSentence componentsSeparatedByString:@"|"];
+        NSString *theSentence = (NSString *)[sentenceList objectAtIndex:eId10];
+        return theSentence;
+    }
+    return nil;
+}
+
++(int)geteId10byRule:(NSString *)rule andSentence:(NSString *)allSentence{
+    if ([rule isEqualToString:RULE_Type_Start]){
+        NSArray *sentenceList = [allSentence componentsSeparatedByString:@"|"];
+        return arc4random()%sentenceList.count;
+    }
+    return -1;
+}
 
 @end

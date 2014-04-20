@@ -91,7 +91,7 @@
             self.itemImage.image = [RORVirtualProductService getImageOf:todayItem];
         } else {
             self.itemLabel.text = @"加强一下";
-            self.itemImage.image = nil;
+            self.itemImage.image = [UIImage imageNamed:@"running_ready_item_default.png"];
         }
         [self.cancelBuffButton setBackgroundImage:[UIImage imageNamed:@"running_ready_add.png"] forState:UIControlStateNormal];
         

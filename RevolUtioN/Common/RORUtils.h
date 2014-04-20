@@ -85,4 +85,12 @@ _Pragma("clang diagnostic pop") \
 //按图片名，先从bundle找，没有去doc找，再没有去服务器要
 +(UIImage *)getImageNamed:(NSString *)fileName;
 
+//在一个以@"|"分割的多个字符串组成的大字符串中，随机抽取其中一条返回
++(NSString *)getRandomStringFromAllstrings:(NSString *)allString;
+
+//根据WalkEvent的eType和eId十位数字获得对应的文字描述
++(NSString *)getSentencebyRule:(NSString *)rule eId10:(int)eId10 andSentence:(NSString *)allSentence;
+
++(int)geteId10byRule:(NSString *)rule andSentence:(NSString *)allSentence;
+
 @end

@@ -72,7 +72,7 @@
             [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:18]];
         self.levelLabel.text = [NSString stringWithFormat:@"Lv. %ld", (long)userInfo.userDetail.level.integerValue];
         self.badgeImageView.image = [RORUserUtils getImageForUserBadge:userInfo.userDetail.friendFightWin];
-//        self.badgeLabel.text = [NSString stringWithFormat:@"%d", userInfo.userDetail.friendFightWin.intValue%20];
+        self.badgeLabel.text = [NSString stringWithFormat:@"%d", userInfo.userDetail.friendFightWin.intValue%20];
         
         [RORUtils setFontFamily:APP_FONT forView:self.usernameLabel andSubViews:YES];
         //同步好友间的事件

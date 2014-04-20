@@ -229,6 +229,7 @@
         {
             pulsingView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
             pulsingView.image = [UIImage imageNamed:@"start_annotation.png"];
+            pulsingView.frame = CGRectMake(pulsingView.frame.origin.x, pulsingView.frame.origin.y, 30, 30);
             pulsingView.canShowCallout = YES;
             return pulsingView;
         } else {
@@ -243,7 +244,9 @@
         if (!pulsingView)
         {
             pulsingView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            
             pulsingView.image = [UIImage imageNamed:@"end_annotation.png"];
+            pulsingView.frame = CGRectMake(pulsingView.frame.origin.x, pulsingView.frame.origin.y, 30, 30);
             pulsingView.canShowCallout = YES;
             return pulsingView;
         } else {
@@ -259,6 +262,7 @@
         {
             pulsingView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
             pulsingView.image = [UIImage imageNamed:@"fight_icon.png"];
+            pulsingView.frame = CGRectMake(pulsingView.frame.origin.x, pulsingView.frame.origin.y, 25, 25);
             pulsingView.canShowCallout = YES;
             return pulsingView;
         } else {
@@ -274,6 +278,7 @@
         {
             pulsingView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
             pulsingView.image = [UIImage imageNamed:@"event_icon.png"];
+            pulsingView.frame = CGRectMake(pulsingView.frame.origin.x, pulsingView.frame.origin.y, 25, 25);
             pulsingView.canShowCallout = YES;
             return pulsingView;
         } else {
@@ -288,7 +293,8 @@
         if (!pulsingView)
         {
             pulsingView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-            pulsingView.image = [UIImage imageNamed:@"anno_coin.png"];
+            pulsingView.image = [UIImage imageNamed:@"coin.png"];
+            pulsingView.frame = CGRectMake(pulsingView.frame.origin.x, pulsingView.frame.origin.y, 10, 10);
             pulsingView.canShowCallout = YES;
             return pulsingView;
         } else {

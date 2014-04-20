@@ -70,9 +70,13 @@
 
 -(void)refreshView {
     self.userNameLabel.text = userBase.nickName;
+    self.badgeImageView.image = [RORUserUtils getImageForUserBadge:userBase.userDetail.friendFightWin];
+    self.badgeLabel.text = [NSString stringWithFormat:@"%d", userBase.userDetail.friendFightWin.intValue%20];
+    
     if ([charatorViewController respondsToSelector:@selector(setUserBase:)]){
         [charatorViewController setValue:userBase forKey:@"userBase"];
     }
+    
     [charatorViewController viewWillAppear:NO];
     if (latestFriendAction){
         int days = [RORUtils daysBetweenDate1:latestFriendAction.updateTime andDate2:[NSDate date]];

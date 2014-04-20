@@ -73,7 +73,11 @@
     distanceLabel.text = [RORUtils outputDistance:0];
     self.goldLabel.text = @"0";
     self.itemLabel.text = @"0";
-    self.friendLabel.text = thisWalkFriend.nickName;
+    if (thisWalkFriend) {
+        self.friendLabel.text = thisWalkFriend.nickName;
+    } else {
+        self.friendLabel.text = @"无";
+    }
     
     //初始化体力
     powerPV = [[THProgressView alloc] initWithFrame:self.powerFrame.frame];
@@ -166,6 +170,7 @@
 
 -(void)newProcessView:(UIView *)v{
     THProgressView *processView = [[THProgressView alloc] initWithFrame:v.frame];
+    processView.center = CGPointMake(processView.center.x, processView.center.y+10);
     processView.borderTintColor = [UIColor blackColor];
     processView.progressTintColor = [UIColor blackColor];
     [processView setProgress:0.f];
@@ -335,6 +340,9 @@
     if (!isStarted){
         isStarted = YES;
         
+        //生成出发事件
+        [self eventDidHappened:[self makeWalkEvent:@""]];
+        
         //初始化好友战斗
         //debug
         friendFightStep = arc4random()%1000+500;//500步到1500之间会遇到好友
@@ -400,8 +408,8 @@
 
 -(void)displayTimerInfo{
     timeLabel.text = [RORUtils transSecondToStandardFormat:duration];
-    distanceLabel.text = [NSString stringWithFormat:@"%.0f", directionMoved.east];
-//    distanceLabel.text = [RORUtils formattedSteps:stepCounting.counter/0.8];
+//    distanceLabel.text = [NSString stringWithFormat:@"%.0f", directionMoved.east];
+    distanceLabel.text = [RORUtils formattedSteps:stepCounting.counter/0.8];
 }
 
 -(void)timerSecondDot{
@@ -649,7 +657,7 @@
 #pragma mark Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger rows = eventDisplayList.count + (isStarted?1:0);
+    NSInteger rows = eventDisplayList.count;// + (isStarted?1:0);
     return rows;
 }
 
@@ -657,8 +665,77 @@
     NSString *identifier = nil;
     UITableViewCell *cell = nil;
     
+    Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row];
     
-    if (indexPath.row == 0) {
+    if ([event.eType isEqualToString:RULE_Type_Action]){
+        identifier = @"eventCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+        UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+        UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+        
+        Action_Define *actionEvent = [RORSystemService fetchActionDefine:event.eId];
+        eventLabel.text = actionEvent.actionName;
+        if (actionEvent.actionAttribute)
+            effectLabel.text = [NSString stringWithFormat:@"获得：%@",actionEvent.actionAttribute];
+        else
+            effectLabel.text = @"";
+        int timeInt = event.times.intValue;
+        eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
+    } else if ([event.eType isEqualToString:RULE_Type_Fight]){
+        identifier = @"fightCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+        UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+        UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+        [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        eventLabel.numberOfLines = 0;
+        
+        Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:event.eId];
+        NSArray *meetText = [fightEvent.fightName componentsSeparatedByString:@"。"];
+        NSMutableString *fightText = [[NSMutableString alloc]initWithString:[meetText objectAtIndex:0]];
+        if (event.eWin.integerValue>0){
+            NSArray *winTextList = [fightEvent.fightWin componentsSeparatedByString:@"|"];
+            [fightText appendString:[NSString stringWithFormat:@"，%@",(NSString *)[winTextList objectAtIndex:event.eWin.intValue/10]]];
+            
+            if (event.eWin.integerValue%10>1 && fightEvent.winGot)
+                effectLabel.text = [NSString stringWithFormat:@"获得：%@",fightEvent.winGot];
+            else
+                effectLabel.text = [NSString stringWithFormat:@""];
+        } else {
+            NSArray *winTextList = [fightEvent.fightLoose componentsSeparatedByString:@"|"];
+            [fightText appendString:[NSString stringWithFormat:@"，%@",(NSString *)[winTextList objectAtIndex:abs(event.eWin.intValue/10)]]];
+            effectLabel.text = [NSString stringWithFormat:@""];
+        }
+        [fightText appendString:[meetText objectAtIndex:1]];
+        eventLabel.text = fightText;
+        eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:event.times.integerValue]];
+    } else if ([event.eType isEqualToString:RULE_Type_Fight_Friend]){
+        identifier = @"fightCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
+        UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+        UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+        [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        eventLabel.numberOfLines = 0;
+        Friend *fightFriend = [RORFriendService fetchUserFriend:userBase.userId withFriendId:event.eId];
+        
+        NSMutableString *fightString = [[NSMutableString alloc]init];
+        if (event.eWin.integerValue>0){
+            NSArray *winTextList = [SENTENCE_FRIEND_FIGHT_WIN componentsSeparatedByString:@"|"];
+            NSString *formatString = (NSString *)[winTextList objectAtIndex:event.eWin.intValue/10];
+            [fightString appendString:[NSString stringWithFormat:formatString, fightFriend.userName]];
+            effectLabel.text = @"获得：荣誉+1";
+        } else {
+            NSArray *winTextList = [SENTENCE_FRIEND_FIGHT_LOSE componentsSeparatedByString:@"|"];
+            NSString *formatString = (NSString *)[winTextList objectAtIndex:abs(event.eWin.intValue/10)];
+            [fightString appendString:[NSString stringWithFormat:formatString, fightFriend.userName]];
+            effectLabel.text = @"未获得战利品";
+        }
+        [fightString appendString:[NSString stringWithFormat:@"（等级%@战斗）", fightFriend.level]];
+        eventLabel.text = fightString;
+        eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:event.times.integerValue]];
+    } else if ([event.eType isEqualToString:RULE_Type_Start]){
         identifier = @"eventCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         
@@ -667,83 +744,11 @@
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         eventTimeLabel.text = @"";
         if (thisWalkFriend!=nil)
-            eventLabel.text = [NSString stringWithFormat:@"与小伙伴%@一起从村里出发了",thisWalkFriend.nickName];
+            eventLabel.text = [NSString stringWithFormat:[RORUtils getSentencebyRule:RULE_Type_Start eId10:event.eId.intValue andSentence:SENTENCE_START_WALKING_WITH],thisWalkFriend.nickName];
         else
-            eventLabel.text = @"从村里出发了";
+            eventLabel.text = [RORUtils getSentencebyRule:RULE_Type_Start eId10:event.eId.intValue andSentence:SENTENCE_START_WALKING_ALONE];
         effectLabel.text = @"一切看起来都那么美好～";
-    } else {
-        Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row-1];
-        
-        if ([event.eType isEqualToString:RULE_Type_Action]){
-            identifier = @"eventCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
-            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
-            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
-            
-            Action_Define *actionEvent = [RORSystemService fetchActionDefine:event.eId];
-            eventLabel.text = actionEvent.actionName;
-            if (actionEvent.actionAttribute)
-                effectLabel.text = [NSString stringWithFormat:@"获得：%@",actionEvent.actionAttribute];
-            else
-                effectLabel.text = @"";
-            int timeInt = event.times.intValue;
-            eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
-        } else if ([event.eType isEqualToString:RULE_Type_Fight]){
-            identifier = @"fightCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
-            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
-            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
-            [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
-            eventLabel.numberOfLines = 0;
-            
-            Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:event.eId];
-            NSArray *meetText = [fightEvent.fightName componentsSeparatedByString:@"。"];
-            NSMutableString *fightText = [[NSMutableString alloc]initWithString:[meetText objectAtIndex:0]];
-            if (event.eWin.integerValue>0){
-                NSArray *winTextList = [fightEvent.fightWin componentsSeparatedByString:@"|"];
-                [fightText appendString:[NSString stringWithFormat:@"，%@",(NSString *)[winTextList objectAtIndex:event.eWin.intValue/10]]];
-                
-                if (event.eWin.integerValue%10>1 && fightEvent.winGot)
-                    effectLabel.text = [NSString stringWithFormat:@"获得：%@",fightEvent.winGot];
-                else
-                    effectLabel.text = [NSString stringWithFormat:@""];
-            } else {
-                NSArray *winTextList = [fightEvent.fightLoose componentsSeparatedByString:@"|"];
-                [fightText appendString:[NSString stringWithFormat:@"，%@",(NSString *)[winTextList objectAtIndex:abs(event.eWin.intValue/10)]]];
-                effectLabel.text = [NSString stringWithFormat:@""];
-            }
-            [fightText appendString:[meetText objectAtIndex:1]];
-            eventLabel.text = fightText;
-            eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:event.times.integerValue]];
-        } else if ([event.eType isEqualToString:RULE_Type_Fight_Friend]){
-            identifier = @"fightCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
-            UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
-            UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
-            [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
-            eventLabel.numberOfLines = 0;
-            Friend *fightFriend = [RORFriendService fetchUserFriend:userBase.userId withFriendId:event.eId];
-            
-            NSMutableString *fightString = [[NSMutableString alloc]init];
-            if (event.eWin.integerValue>0){
-                NSArray *winTextList = [FRIEND_FIGHT_SENTENCE_WIN componentsSeparatedByString:@"|"];
-                NSString *formatString = (NSString *)[winTextList objectAtIndex:event.eWin.intValue/10];
-                [fightString appendString:[NSString stringWithFormat:formatString, fightFriend.userName]];
-                effectLabel.text = @"获得：荣誉+1";
-            } else {
-                NSArray *winTextList = [FRIEND_FIGHT_SENTENCE_LOSE componentsSeparatedByString:@"|"];
-                NSString *formatString = (NSString *)[winTextList objectAtIndex:abs(event.eWin.intValue/10)];
-                [fightString appendString:[NSString stringWithFormat:formatString, fightFriend.userName]];
-                effectLabel.text = @"未获得战利品";
-            }
-            [fightString appendString:[NSString stringWithFormat:@"（等级%@战斗）", fightFriend.level]];
-            eventLabel.text = fightString;
-            eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:event.times.integerValue]];
-            
-        }
+
     }
     bottomIndex = indexPath;
     
@@ -755,8 +760,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     newCellHeight = 75;
     if (indexPath.row>0){
-        Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row-1];
-        if (![event.eType isEqualToString:RULE_Type_Action]){
+        Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row];
+        if ([event.eType isEqualToString:RULE_Type_Fight] || [event.eType isEqualToString:RULE_Type_Fight_Friend]){
             newCellHeight = 110;
         }
     }
@@ -895,6 +900,12 @@
         fightPowerCost = 10;
         [self refreshUserPower];
         walkEvent.power = [NSNumber numberWithInteger:fightPowerCost];
+    } else if ([event isKindOfClass:[NSString class]]){//出发事件
+        walkEvent.eType = RULE_Type_Start;
+        if (!thisWalkFriend)
+            walkEvent.eId = [NSNumber numberWithInt:[RORUtils geteId10byRule:RULE_Type_Start andSentence:SENTENCE_START_WALKING_ALONE]];
+        else
+            walkEvent.eId = [NSNumber numberWithInt:[RORUtils geteId10byRule:RULE_Type_Start andSentence:SENTENCE_START_WALKING_WITH]];
     }
     walkEvent.times = [NSNumber numberWithInteger:duration];
     walkEvent.lati = [NSNumber numberWithDouble:formerLocation.coordinate.latitude];
@@ -921,9 +932,9 @@
     } else {
         int roll = arc4random()%(int)totalFight;
         if (roll<=userFight){//战胜
-            return [NSNumber numberWithInt:arc4random() % [FRIEND_FIGHT_SENTENCE_WIN componentsSeparatedByString:@"|"].count * 10 + 1];
+            return [NSNumber numberWithInt:arc4random() % [SENTENCE_FRIEND_FIGHT_WIN componentsSeparatedByString:@"|"].count * 10 + 1];
         } else {//战败
-            return [NSNumber numberWithInt:-(arc4random() % [FRIEND_FIGHT_SENTENCE_LOSE componentsSeparatedByString:@"|"].count * 10 + 1)];
+            return [NSNumber numberWithInt:-(arc4random() % [SENTENCE_FRIEND_FIGHT_LOSE componentsSeparatedByString:@"|"].count * 10 + 1)];
         }
     }
 }

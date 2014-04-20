@@ -119,12 +119,16 @@
                     NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
                     int mp = missionProcess.intValue;
                     mp++;
-                    missionDoneLabel.text = [NSString stringWithFormat:@"%d/%d", mp, 3];
                     //修改plist中的任务相关标记
                     [userInfoList setObject:[NSNumber numberWithInteger:mp] forKey:@"missionProcess"];
                     [userInfoList setObject:[NSNumber numberWithInteger:-1] forKey:@"missionUseItemQuantity"];
                     [userInfoList setObject:[NSDate date] forKey:@"lastDailyMissionFinishedDate"];
                     [RORUserUtils writeToUserInfoPList:userInfoList];
+                    
+                    if (missionProcess.integerValue < 3)
+                        missionDoneLabel.text = [NSString stringWithFormat:@"再完成%d次任务获得奖励", 3-missionProcess.intValue];
+                    else
+                        missionDoneLabel.text = @"快去首页看看宝箱里有什么吧！";
                     return;
                 }
             }

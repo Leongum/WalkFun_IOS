@@ -14,14 +14,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="main_bg.jpg" id="kOm-ka-kbC">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
                             <view contentMode="scaleToFill" id="q7r-Mx-k0N" userLabel="charator frame view">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dMO-o7-IpH">
+                                        <rect key="frame" x="7" y="269" width="60" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" backgroundImage="missionStone_3.png">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="missionStoneAction:" destination="2" eventType="touchUpInside" id="QOH-G6-O3O"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DRW-xn-Txb" customClass="RORNormalButton">
                                         <rect key="frame" x="245" y="400" width="52" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -34,19 +43,6 @@
                                         </state>
                                         <connections>
                                             <segue destination="JBw-fO-nXG" kind="modal" modalTransitionStyle="coverVertical" animates="NO" id="IgT-Rd-Qa0"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dMO-o7-IpH">
-                                        <rect key="frame" x="7" y="269" width="60" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" backgroundImage="missionStone_3.png">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="missionStoneAction:" destination="2" eventType="touchUpInside" id="QOH-G6-O3O"/>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check.png" id="ojb-db-xaM">
@@ -149,7 +145,6 @@
                     <connections>
                         <outlet property="badgeImageView" destination="h27-rY-gxm" id="qkG-9b-bG9"/>
                         <outlet property="badgeLabel" destination="zUi-W9-pnY" id="IHV-Za-dvz"/>
-                        <outlet property="bgImageView" destination="kOm-ka-kbC" id="fkG-kw-Gme"/>
                         <outlet property="charatorView" destination="q7r-Mx-k0N" id="doG-9Y-waC"/>
                         <outlet property="levelLabel" destination="rd5-mB-BlH" id="siu-N9-8Qa"/>
                         <outlet property="missionStoneButton" destination="dMO-o7-IpH" id="xLe-wg-Sck"/>
@@ -550,11 +545,11 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <view contentMode="scaleToFill" id="khT-2e-bIK">
-                                <rect key="frame" x="236" y="428" width="80" height="132"/>
+                                <rect key="frame" x="236" y="418" width="80" height="142"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30分钟" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LiY-da-tZd" customClass="StrokeLabel">
-                                        <rect key="frame" x="0.0" y="58" width="80" height="21"/>
+                                        <rect key="frame" x="0.0" y="52" width="80" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -562,7 +557,7 @@
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30分钟" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UEj-SQ-W0q" customClass="StrokeLabel">
-                                        <rect key="frame" x="0.0" y="29" width="80" height="21"/>
+                                        <rect key="frame" x="0.0" y="26" width="80" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -577,8 +572,8 @@
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="随便跑跑" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MJh-K4-7XW">
-                                        <rect key="frame" x="0.0" y="99" width="80" height="33"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="随便走走" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MJh-K4-7XW">
+                                        <rect key="frame" x="0.0" y="109" width="80" height="33"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <nil key="highlightedColor"/>
@@ -644,6 +639,12 @@
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小伙伴名字" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0jy-Ai-xZr">
                                 <rect key="frame" x="0.0" y="527" width="97" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="随行小伙伴" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZhS-RP-6F6">
+                                <rect key="frame" x="0.0" y="505" width="97" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="highlightedColor"/>
@@ -2269,7 +2270,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" tag="200" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="missionDiamond.png" id="lBh-XX-QpB">
-                                <rect key="frame" x="137" y="345" width="47" height="47"/>
+                                <rect key="frame" x="128" y="337" width="64" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -2277,6 +2278,7 @@
                     </view>
                     <connections>
                         <outlet property="missionNameLabel" destination="rIv-8Z-yBX" id="e9u-XU-cB6"/>
+                        <outlet property="missionStoneImageView" destination="lBh-XX-QpB" id="v0c-Er-GFF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7JW-dX-F16" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2516,13 +2518,17 @@
                                 <rect key="frame" x="87" y="166" width="47" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vase.png" id="YAX-qI-qR7">
+                                <rect key="frame" x="6" y="365" width="67" height="69"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <view tag="102" contentMode="scaleToFill" id="ozF-B6-r70" userLabel="flowerContainer">
-                                <rect key="frame" x="43" y="380" width="30" height="10"/>
+                                <rect key="frame" x="21" y="382" width="37" height="10"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vase.png" id="3X9-jz-NzY">
-                                <rect key="frame" x="36" y="348" width="44" height="64"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vase_front.png" id="3X9-jz-NzY">
+                                <rect key="frame" x="6" y="365" width="67" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view tag="101" contentMode="scaleToFill" id="7GU-15-CYk" userLabel="charator face">
@@ -2862,7 +2868,7 @@
         <image name="main_mission_board.png" width="640" height="150"/>
         <image name="main_title_board.png" width="640" height="171"/>
         <image name="main_trafficlight_none.png" width="110" height="110"/>
-        <image name="missionDiamond.png" width="50" height="50"/>
+        <image name="missionDiamond.png" width="256" height="256"/>
         <image name="missionStone_3.png" width="119" height="60"/>
         <image name="normal_female.png" width="640" height="1136"/>
         <image name="normal_male.png" width="640" height="1136"/>
@@ -2883,7 +2889,8 @@
         <image name="talk_top_bg.png" width="600" height="300"/>
         <image name="tencent_weibo.png" width="110" height="110"/>
         <image name="textfield.png" width="320" height="60"/>
-        <image name="vase.png" width="208" height="248"/>
+        <image name="vase.png" width="268" height="276"/>
+        <image name="vase_front.png" width="268" height="276"/>
         <image name="weibo.png" width="110" height="110"/>
         <image name="write_us.png" width="88" height="88"/>
     </resources>

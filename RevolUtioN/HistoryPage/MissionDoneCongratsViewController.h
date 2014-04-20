@@ -14,4 +14,5 @@
 }
 
 @property (strong, nonatomic) IBOutlet StrokeLabel *missionNameLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *missionStoneImageView;
 @end

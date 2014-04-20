@@ -8,6 +8,7 @@
 
 #import "MissionDoneCongratsViewController.h"
 #import "Animations.h"
+#import "FTAnimation.h"
 
 @interface MissionDoneCongratsViewController ()
 
@@ -32,6 +33,7 @@
     [self.missionNameLabel setLineBreakMode:NSLineBreakByWordWrapping];
     self.missionNameLabel.numberOfLines = 2;
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
+    self.missionStoneImageView.alpha = 0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,6 +44,9 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [Animations rotate:titleView andAnimationDuration:0 andWait:NO andAngle:-18];
+    
+    self.missionStoneImageView.alpha = 1;
+    [self.missionStoneImageView popIn:0.5 delegate:self];
 }
 
 
