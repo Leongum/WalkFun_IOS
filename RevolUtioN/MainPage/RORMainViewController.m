@@ -170,7 +170,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-//    [self checkLevelUp];
+    //    [self checkLevelUp];
     //检查是否需要显示提示信息
     [self checkPinchInstruction];
     [self checkHistoryInstruction];
@@ -365,7 +365,7 @@
                               NSLog(@"OK Clicked");
                               [self cancelMission];
                           }];
-
+    
     alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
     
     alertView.willShowHandler = ^(SIAlertView *alertView) {

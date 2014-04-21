@@ -94,14 +94,11 @@
 
 -(void)displayProgresses{
     if (userBase.userId.intValue == [RORUserUtils getUserId].intValue){
-//        [fatPV setProgress:((double)[RORUserUtils getUserPowerLeft])/(userBase.userDetail.power.doubleValue + userBase.userDetail.powerPlus.doubleValue)];
         fatPVFrameView.text = [NSString stringWithFormat:@"%d/%d", [RORUserUtils getUserPowerLeft], userBase.userDetail.power.intValue + userBase.userDetail.powerPlus.intValue];
     } else {
         fatPVFrameView.text = [NSString stringWithFormat:@"%d", userBase.userDetail.power.intValue + userBase.userDetail.powerPlus.intValue];
-//        [fatPV setProgress:1];
     }
     //todo
-//    [fightPV setProgress:userBase.userDetail.fight.doubleValue/300.f];
     if (userBase.userDetail.fightPlus.intValue>0){
         fightPVFrameView.text = [NSString stringWithFormat:@"%d+%d",userBase.userDetail.fight.intValue, userBase.userDetail.fightPlus.intValue];
     } else {

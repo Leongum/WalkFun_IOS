@@ -71,8 +71,7 @@
         if (l>=8)
             [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:18]];
         self.levelLabel.text = [NSString stringWithFormat:@"Lv. %ld", (long)userInfo.userDetail.level.integerValue];
-        self.badgeImageView.image = [RORUserUtils getImageForUserBadge:userInfo.userDetail.friendFightWin];
-        self.badgeLabel.text = [NSString stringWithFormat:@"%d", userInfo.userDetail.friendFightWin.intValue%20];
+        [self.badgeView setFriendFightWin:userInfo.userDetail.friendFightWin];
         
         [RORUtils setFontFamily:APP_FONT forView:self.usernameLabel andSubViews:YES];
         //同步好友间的事件
@@ -102,16 +101,16 @@
 
 -(void)checkMissionProcess{
     NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
-//    if (!missionStoneView){
-//        missionStoneView = [[MissionStoneView alloc]initWithFrame:self.missionStoneButton.frame];
-//        [self.view addSubview:missionStoneView];
-//        [self.view bringSubviewToFront:self.missionStoneButton];
-//    }
+    //    if (!missionStoneView){
+    //        missionStoneView = [[MissionStoneView alloc]initWithFrame:self.missionStoneButton.frame];
+    //        [self.view addSubview:missionStoneView];
+    //        [self.view bringSubviewToFront:self.missionStoneButton];
+    //    }
     //如果已经集满了三次日常任务，但没有兑换奖励，则接不到新的任务
     NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
     missionDone = missionProcess.intValue;
-//    [missionStoneView showStones:missionProcess.intValue andAnimated:NO];
-//    [self.missionStoneButton setTitle:[NSString stringWithFormat:@"%ld/3", (long)missionProcess.integerValue] forState:UIControlStateNormal];
+    //    [missionStoneView showStones:missionProcess.intValue andAnimated:NO];
+    //    [self.missionStoneButton setTitle:[NSString stringWithFormat:@"%ld/3", (long)missionProcess.integerValue] forState:UIControlStateNormal];
     switch (missionDone) {
         case 0:{
             [self.missionStoneButton setBackgroundImage:[UIImage imageNamed:@"missionStone_0.png"] forState:UIControlStateNormal];
@@ -132,10 +131,10 @@
         default:
             break;
     }
-//    if (missionProcess.integerValue == 3){//todo
-//        [self.missionStoneButton setEnabled:YES];
-//        return;
-//    }
+    //    if (missionProcess.integerValue == 3){//todo
+    //        [self.missionStoneButton setEnabled:YES];
+    //        return;
+    //    }
     [self.missionStoneButton setEnabled:YES];
 }
 
@@ -180,7 +179,7 @@
     userLocation = nil;
     wasFound = NO;
     
-//    locationManager = [(RORAppDelegate *)[[UIApplication sharedApplication] delegate] sharedLocationManager];
+    //    locationManager = [(RORAppDelegate *)[[UIApplication sharedApplication] delegate] sharedLocationManager];
     locationManager = [[CLLocationManager alloc]init];
     locationManager.delegate = self;
     

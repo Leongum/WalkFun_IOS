@@ -435,9 +435,16 @@
     
     [self checkTodayMission];
     
+    //记录疲劳时间，从体力为零的时刻开始算
+    if (userPower==0)
+        secondsSince0power++;
+    else
+        secondsSince0power = -1;
+    
     //触发疲劳事件
-    if (duration>3600 && ((int)duration)%120==0){
-//        [self eventDidHappened:tiredAction];
+    if (secondsSince0power>300 && userPower < 1){
+        [self eventDidHappened:[self makeWalkEvent:tiredAction]];
+        [self stopTimer];
     }
 }
 
@@ -792,7 +799,7 @@
         
         int x = arc4random() % 1000000;
         double roll = ((double)x)/10000.f;
-        double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0, rateEvent = 5;
+        double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0, rateEvent = 3;
         if (realCurrentStep>WALKING_FIGHT_STAGE_II){
             stepsSinceLastFight++;
             

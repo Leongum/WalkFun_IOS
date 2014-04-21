@@ -131,10 +131,10 @@
         }
         ReportViewController *reportViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"ReportViewController"];
         [reportViewController customInit:[NSString stringWithFormat:@"%@", self.sumLabel.text]
-                                     Exp:[NSString stringWithFormat:@"%d", record.experience.intValue]
-                                    Coin:[NSString stringWithFormat:@"%d", record.goldCoin.intValue]
+                                     Exp:[NSString stringWithFormat:@"+%d", record.experience.intValue]
+                                    Coin:[NSString stringWithFormat:@"+%d", record.goldCoin.intValue]
                                     Item:[NSString stringWithFormat:@"%d", totalItems]
-                                    Fat:[NSString stringWithFormat:@"%d", record.fatness.intValue]
+                                    Fat:[NSString stringWithFormat:@"+%d", -record.fatness.intValue]
                                     andComment:commentText];
 
         [coverViewQueue addObject:reportViewController];
@@ -299,6 +299,8 @@
         UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+        [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        eventLabel.numberOfLines = 2;
         
         Action_Define *actionEvent = [RORSystemService fetchActionDefine:walkEvent.eId];
         eventLabel.text = actionEvent.actionName;
@@ -310,7 +312,7 @@
         UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
-        eventLabel.numberOfLines = 0;
+        eventLabel.numberOfLines = 3;
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         [effectLabel setLineBreakMode:NSLineBreakByWordWrapping];
         effectLabel.numberOfLines = 0;
@@ -377,6 +379,8 @@
         UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+        [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        eventLabel.numberOfLines = 0;
         eventTimeLabel.text = @"";
         if (record.friendName!=nil)
             eventLabel.text = [NSString stringWithFormat:[RORUtils getSentencebyRule:RULE_Type_Start eId10:walkEvent.eId.intValue andSentence:SENTENCE_START_WALKING_WITH],record.friendName];
@@ -391,10 +395,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    double newCellHeight = 75;
+    double newCellHeight = 90;
     if (indexPath.row>0){
-        Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row-1];
-        if (![event.eType isEqualToString:RULE_Type_Action]){
+        Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row];
+        if ([event.eType isEqualToString:RULE_Type_Fight_Friend] || [event.eType isEqualToString:RULE_Type_Fight]){
             newCellHeight = 140;
         }
     }

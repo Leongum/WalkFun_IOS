@@ -22,6 +22,7 @@
 #import "MissionStoneCongratsViewController.h"
 #import "MissionStoneView.h"
 
+
 @interface RORFirstViewController : MainPageViewController<CLLocationManagerDelegate>{
     BOOL wasFound;
     CLLocation *userLocation;
@@ -45,8 +46,7 @@
 //@property (strong, nonatomic) IBOutlet UIImageView *testView;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *levelLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *badgeImageView;
-@property (strong, nonatomic) IBOutlet UILabel *badgeLabel;
+@property (strong, nonatomic) IBOutlet BadgeView *badgeView;
 @property (strong, nonatomic) IBOutlet UIControl *userInfoView;
 
 //todo

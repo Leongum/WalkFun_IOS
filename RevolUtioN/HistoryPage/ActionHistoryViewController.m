@@ -31,6 +31,8 @@
     
     contentList = [RORFriendService fetchUserAction:[RORUserUtils getUserId]];
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
+    
+    [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:0], @"MessageReceivedNumber", nil]];
 }
 
 - (void)didReceiveMemoryWarning

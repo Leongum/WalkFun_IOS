@@ -89,7 +89,7 @@
         eventCoor.latitude = we.lati.doubleValue;
         eventCoor.longitude = we.longi.doubleValue;
         
-        if ([we.eType isEqualToString:RULE_Type_Fight]){
+        if ([we.eType isEqualToString:RULE_Type_Fight] || [we.eType isEqualToString:RULE_Type_Fight_Friend]){
             RORFightAnnotation *anno = [[RORFightAnnotation alloc]initWithCoordinate:eventCoor];
             anno.title = [NSString stringWithFormat:@"战斗%@",we.eWin.intValue>0?@"胜利":@"失败"];
             [mapView addAnnotation:anno];

@@ -69,6 +69,7 @@
     itemCount = 0;
     fightCount = 0;
     stepsSinceLastFight = 0;
+    secondsSince0power = -1;
     
     directionMoved.east = 0;
     directionMoved.west = 0;

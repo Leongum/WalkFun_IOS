@@ -70,6 +70,8 @@
 
 -(void)refreshView {
     self.userNameLabel.text = userBase.nickName;
+    self.levelLabel.text = [NSString stringWithFormat:@"Lv.%d",userBase.userDetail.level.intValue];
+    
     self.badgeImageView.image = [RORUserUtils getImageForUserBadge:userBase.userDetail.friendFightWin];
     self.badgeLabel.text = [NSString stringWithFormat:@"%d", userBase.userDetail.friendFightWin.intValue%20];
     

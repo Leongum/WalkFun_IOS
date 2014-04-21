@@ -70,7 +70,7 @@ typedef struct {
     NSMutableArray *eventSaveList;
     NSMutableArray *eventDisplayList;
     NSInteger eventHappenedCount;
-    int goldCount, itemCount, fightCount, stepsSinceLastFight;
+    int goldCount, itemCount, fightCount, stepsSinceLastFight, secondsSince0power;
     NSIndexPath *bottomIndex;
     
     NSTimer *repeatingTimer;
