@@ -342,6 +342,7 @@
         
         //生成出发事件
         [self eventDidHappened:[self makeWalkEvent:@""]];
+        eventHappenedCount++;
         
         //初始化好友战斗
         //debug
@@ -638,11 +639,11 @@
         runHistory.extraExperience = todayMission.experience;
         
         NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
-        NSInteger missionProcess = ((NSNumber *)[userInfoList valueForKey:@"missionProcess"]).integerValue;
+        NSInteger missionProcess = ((NSNumber *)[userInfoList valueForKey:@"missionProcess"]).intValue;
         //todo
         if (++missionProcess >3)
             missionProcess = 3;
-        [userInfoList setObject:[NSNumber numberWithInteger:missionProcess] forKey:@"missionProcess"];
+        [userInfoList setObject:[NSNumber numberWithInt:missionProcess] forKey:@"missionProcess"];
         [userInfoList setObject:[NSDate date] forKey:@"lastDailyMissionFinishedDate"];
         [RORUserUtils writeToUserInfoPList:userInfoList];
     } else {

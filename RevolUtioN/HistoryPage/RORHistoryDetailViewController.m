@@ -112,13 +112,19 @@
     
     userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
     
+    showCongrats = NO;
+    if ([delegate isKindOfClass:[RORRunningViewController class]]){
+        showCongrats = YES;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     //如果完成了任务
-    if (1){//[delegate isKindOfClass:[RORRunningViewController class]]){
+    if (showCongrats){//[delegate isKindOfClass:[RORRunningViewController class]]){
+        
+        showCongrats = NO;
         
         //显示结果页面
         NSString *commentText;
@@ -173,7 +179,7 @@
             NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
             NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
             
-            if (missionProcess.integerValue < 3)
+            if (missionProcess.intValue < 3)
                 missionDoneLabel.text = [NSString stringWithFormat:@"再完成%d次任务获得奖励", 3-missionProcess.intValue];
             else
                 missionDoneLabel.text = @"快去首页看看宝箱里有什么吧！";

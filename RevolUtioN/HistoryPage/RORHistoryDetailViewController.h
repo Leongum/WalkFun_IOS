@@ -36,6 +36,8 @@
     
     UIStoryboard *mainStoryboard;
     NSMutableArray *coverViewQueue;
+    
+    BOOL showCongrats;
 }
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 

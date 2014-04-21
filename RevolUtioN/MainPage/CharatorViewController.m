@@ -168,29 +168,28 @@
 
 -(void)addItem:(NSNumber *)itemId withQuantity:(NSNumber *)quantity{
     Virtual_Product *item = [RORVirtualProductService fetchVProduct:itemId];
-    if ([item.productName rangeOfString:@"花"].location != NSNotFound &&
-        [item.productName rangeOfString:@"花盆"].location == NSNotFound){
+    
+    //如果是石头之类的
+    NSDictionary *effectDict = [RORUtils explainActionEffetiveRule:item.effectiveRule];
+    if ([[effectDict allKeys] containsObject:RULE_Drop_Pot]) {
         //如果是花
         for (int i=0; i<quantity.integerValue; i++){
             [self makeNewFlowerImageView:item];
         }
-    } else {
-        //如果是石头之类的
-        NSDictionary *effectDict = [RORUtils explainActionEffetiveRule:item.effectiveRule];
-        if ([[effectDict allKeys] containsObject:RULE_Drop_Down]){
-            for (int i=0; i<quantity.integerValue; i++){
-                [self makeNewItemImageView:item];
-            }
-            haveBump = YES;
+    }
+    if ([[effectDict allKeys] containsObject:RULE_Drop_Down]){
+        for (int i=0; i<quantity.integerValue; i++){
+            [self makeNewItemImageView:item];
         }
-        if ([[effectDict allKeys] containsObject:RULE_On_Face]){
-            for (int i=0; i<quantity.integerValue; i++){
-                [self makeNewFaceImageView:item];
-            }
+        haveBump = YES;
+    }
+    if ([[effectDict allKeys] containsObject:RULE_On_Face]){
+        for (int i=0; i<quantity.integerValue; i++){
+            [self makeNewFaceImageView:item];
         }
-        if ([[effectDict allKeys] containsObject:RULE_Face_Color]){
-            faceColorIndex = ((NSNumber *)[effectDict objectForKey:RULE_Face_Color]).intValue;
-        }
+    }
+    if ([[effectDict allKeys] containsObject:RULE_Face_Color]){
+        faceColorIndex = ((NSNumber *)[effectDict objectForKey:RULE_Face_Color]).intValue;
     }
 }
 
@@ -222,10 +221,12 @@
 -(void)makeNewFlowerImageView:(Virtual_Product *)item{
     double y = arc4random() % VASE_SIZE_HEIGHT;
     double x = arc4random() % VASE_SIZE_WIDTH;
-    double width = arc4random() % 10 + 40;
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, width, width)];
-    imageView.center = CGPointMake(x, y-width/2);
-    imageView.image = [RORVirtualProductService getRandomDropImageOf:item];
+    double sizeRate = (arc4random() % 20 + 80.f)/100.f;
+    UIImage *thisImage = [RORVirtualProductService getRandomDropImageOf:item];
+    UIImageView *imageView = [[UIImageView alloc]initWithImage:thisImage];
+    imageView.frame = CGRectMake(0, 0, thisImage.size.width*sizeRate/2, thisImage.size.height*sizeRate/2);
+    imageView.center = CGPointMake(x, y-imageView.bounds.size.height/2);
+    
     [flowContainerView addSubview:imageView];
 }
 
