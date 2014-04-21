@@ -94,26 +94,38 @@
 
 #endif
 
+//是否可以掉落在地上
 #define RULE_Drop_Down @"D"
+//掉落在的花盆上
+#define RULE_Drop_Pot @"DP"
+//是否可以显示在脸上
 #define RULE_On_Face @"OF"
+//是否需要改变脸的颜色
 #define RULE_Face_Color @"FC"
+//标注肥肉的改变值
 #define RULE_Fatness @"F"
-#define RULE_Fight_Win @"FW"
-#define RULE_Fight_Loose @"FL"
-#define RULE_Flower_Pot @"FP"
+//标注肥肉的直接增加值
 #define RULE_Fight_Add @"FA"
+//标注肥肉的百分比真价值
 #define RULE_Fight_Percent @"FPE"
+//标注体力的临时上限增加
 #define RULE_Physical_Power_Add @"PPA"
+//标注体力的临时上限的增加的百分比
 #define RULE_Physical_Power_Percent @"PPP"
+//标注为道具。
 #define RULE_Prop_Yes @"PY"
+//标注不是道具
 #define RULE_Prop_No @"PN"
-#define RULE_Show_Position @"SP"
+//标注是否是钱
 #define RULE_Money @"M"
+//标注触发是一个action事件
 #define RULE_Type_Action @"TA"
+//标注触发是一个战斗事件
 #define RULE_Type_Fight @"TF"
+//标注触发是一个好友战斗事件
 #define RULE_Type_Fight_Friend @"TFF"
+//标注出发事件。
 #define RULE_Type_Start @"TS"
-#define RULE_Type_Gold @"TG"
 
 typedef enum {MissionTypeStep = 0, MissionTypePickItem = 1, MissionTypeUseItem = 2} MissionTypeEnum;
 typedef enum {MissionStatusDone = 0, MissionStatusUndone = 1} MissionStatusEnum;
