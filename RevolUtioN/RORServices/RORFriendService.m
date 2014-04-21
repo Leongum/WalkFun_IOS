@@ -277,9 +277,21 @@
     action.actionId = actionId;
     action.actionToId = actionToId;
     action.actionToName = actionToUserName;
-    action.updateTime = [RORUserUtils getSystemTime];
+    action.updateTime = [NSDate date];
     Action_Define *ad = [RORSystemService fetchActionDefine:action.actionId];
     action.actionName = ad.actionDescription;
+    
+    NSDictionary *effectDict = [RORUtils explainActionEffetiveRule:ad.effectiveRule];
+    if ([[effectDict allKeys] containsObject:RULE_Physical_Power_Add]){
+        NSNumber *value = [effectDict valueForKey:RULE_Physical_Power_Add];
+        [RORUserUtils saveUserPowerLeft:[RORUserUtils getUserPowerLeft] + value.integerValue];
+    }
+    if ([[effectDict allKeys] containsObject:RULE_Physical_Power_Percent]){
+        NSNumber *value = [effectDict valueForKey:RULE_Physical_Power_Percent];
+        User_Base *userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
+        int addValue = userBase.userDetail.power.intValue * value.intValue / 100;
+        [RORUserUtils saveUserPowerLeft:[RORUserUtils getUserPowerLeft] + addValue];
+    }
     
     BOOL successed = [self sycnCreateAction:action];
     //check uuid
@@ -315,9 +327,21 @@
                 NSNumber *actionFromId = [actionDict valueForKey:@"actionFromId"];
                 NSNumber *actionToId = [actionDict valueForKey:@"actionToId"];
                 if(actionFromId.integerValue != actionToId.integerValue){
-                Action *newAction = [NSEntityDescription insertNewObjectForEntityForName:@"Action" inManagedObjectContext:[RORContextUtils getShareContext]];
-                [newAction initWithDictionary:actionDict];
-                count ++;
+                    Action *newAction = [NSEntityDescription insertNewObjectForEntityForName:@"Action" inManagedObjectContext:[RORContextUtils getShareContext]];
+                    [newAction initWithDictionary:actionDict];
+                    Action_Define *ad = [RORSystemService fetchActionDefine:newAction.actionId];
+                    NSDictionary *effectDict = [RORUtils explainActionEffetiveRule:ad.effectiveRule];
+                    if ([[effectDict allKeys] containsObject:RULE_Physical_Power_Add]){
+                        NSNumber *value = [effectDict valueForKey:RULE_Physical_Power_Add];
+                        [RORUserUtils saveUserPowerLeft:[RORUserUtils getUserPowerLeft] + value.integerValue];
+                    }
+                    if ([[effectDict allKeys] containsObject:RULE_Physical_Power_Percent]){
+                        NSNumber *value = [effectDict valueForKey:RULE_Physical_Power_Percent];
+                        User_Base *userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
+                        int addValue = userBase.userDetail.power.intValue * value.intValue / 100;
+                        [RORUserUtils saveUserPowerLeft:[RORUserUtils getUserPowerLeft] + addValue];
+                    }
+                    count ++;
                 }
             }
             [RORContextUtils saveContext];

@@ -51,10 +51,18 @@
     self.basePowerConsume = [RORDBCommon getNumberFromId:[dict valueForKey:@"bPower"]];
     self.baseExperience = [RORDBCommon getNumberFromId:[dict valueForKey:@"bExperience"]];
     self.baseGold = [RORDBCommon getNumberFromId:[dict valueForKey:@"bGold"]];
-    self.fightWin = @"蹂躏之。|陷入苦战，最后使出饱含信念的一击将其击倒。|战斗中全程被压制，最后使出了封印已久的招式才险胜。|拼尽余下全部体力发出奋力一击，勉强获胜。";
+    if([RORDBCommon getStringFromId:[dict valueForKey:@"fightWin"]] != nil && ![[RORDBCommon getStringFromId:[dict valueForKey:@"fightWin"]] isEqualToString:@""]){
+        self.fightWin = [RORDBCommon getStringFromId:[dict valueForKey:@"fightWin"]];
+    }else{
+        self.fightWin = @"蹂躏之。|陷入苦战，最后使出饱含信念的一击将其击倒。|战斗中全程被压制，最后使出了封印已久的招式才险胜。|拼尽余下全部体力发出奋力一击，勉强获胜。";
+    }
     self.winGot = [RORDBCommon getStringFromId:[dict valueForKey:@"winGot"]];
     self.winGotRule = [RORDBCommon getStringFromId:[dict valueForKey:@"winRule"]];
-    self.fightLoose = @"感觉好厉害的样子，绕道而行。|上前挑战，但被无视了。|与之大战三百回合，即将获胜之时却被逃走了。";
+    if([RORDBCommon getStringFromId:[dict valueForKey:@"fightLoose"]] != nil && ![[RORDBCommon getStringFromId:[dict valueForKey:@"fightLoose"]] isEqualToString:@""]){
+        self.fightLoose = [RORDBCommon getStringFromId:[dict valueForKey:@"fightLoose"]];
+    }else{
+        self.fightLoose = @"感觉好厉害的样子，绕道而行。|上前挑战，但被无视了。|与之大战三百回合，即将获胜之时却被逃走了。";
+    }
     //self.triggerProbability =[RORDBCommon getNumberFromId:[dict valueForKey:@"tProb"]];
     self.minLevelLimit = [RORDBCommon getNumberFromId:[dict valueForKey:@"minLimit"]];
     self.maxLevelLimit = [RORDBCommon getNumberFromId:[dict valueForKey:@"maxLimit"]];

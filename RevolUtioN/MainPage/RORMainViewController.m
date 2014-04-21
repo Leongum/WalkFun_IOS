@@ -326,6 +326,9 @@
         BOOL run = [RORRunHistoryServices uploadRunningHistories];
         BOOL mission = [RORMissionHistoyService uploadMissionHistories];
         
+        int aQuantity = [RORFriendService syncActions:[RORUserUtils getUserId]];
+        [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:aQuantity], @"MessageReceivedNumber", nil]];
+        
         userBase = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
         //用户好友信息
         int friends = [RORFriendService syncFriends:[RORUserUtils getUserId]];
