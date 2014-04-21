@@ -25,8 +25,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self customInit];
+        [self setFriendFightWin:friendFightWin];
     }
-    [RORUtils setFontFamily:APP_FONT forView:self andSubViews:YES];
     return self;
 }
 
@@ -47,6 +47,10 @@
     badgeLabel = [[StrokeLabel alloc]initWithFrame:self.bounds];
     [badgeLabel setFont:[UIFont systemFontOfSize:14]];
     [badgeLabel setTextColor:[UIColor whiteColor]];
+    [badgeLabel setTextAlignment:NSTextAlignmentCenter];
+    [self addSubview:badgeLabel];
+    
+    [RORUtils setFontFamily:APP_FONT forView:self andSubViews:YES];
 }
 
 -(void)setFriendFightWin:(NSNumber *)friendFightWin{

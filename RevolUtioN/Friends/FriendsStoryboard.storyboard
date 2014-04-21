@@ -379,17 +379,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="badge_0.png" id="brv-Id-nDq">
+                                    <view contentMode="scaleToFill" id="84e-0W-YTw" userLabel="badge View" customClass="BadgeView">
                                         <rect key="frame" x="268" y="20" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Veo-R7-Mgx" customClass="StrokeLabel">
-                                        <rect key="frame" x="268" y="20" width="32" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oZi-XN-fOG" customClass="RORNormalButton">
                                         <rect key="frame" x="14" y="7" width="57" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -415,7 +409,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更新中..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rvi-zh-cHG" customClass="CUSFlashLabel">
-                                        <rect key="frame" x="127" y="67" width="66" height="21"/>
+                                        <rect key="frame" x="127" y="74" width="66" height="13"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -476,8 +470,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="badgeImageView" destination="brv-Id-nDq" id="Be5-HO-R1M"/>
-                        <outlet property="badgeLabel" destination="Veo-R7-Mgx" id="WAp-3m-xoV"/>
+                        <outlet property="badgeView" destination="84e-0W-YTw" id="oZs-OX-Wcz"/>
                         <outlet property="charatorView" destination="phl-Jg-8Vr" id="mQf-6R-JTx"/>
                         <outlet property="latestFriendActionDateLabel" destination="Ku0-UF-Hog" id="2eW-r2-DJP"/>
                         <outlet property="latestFriendActionDescriptionLabel" destination="OgT-t3-zPH" id="q8k-2t-Whc"/>
@@ -494,7 +487,6 @@
     </scenes>
     <resources>
         <image name="add_friend.png" width="76" height="76"/>
-        <image name="badge_0.png" width="128" height="128"/>
         <image name="delete_friend.png" width="76" height="76"/>
         <image name="fansButton_normal.png" width="147" height="89"/>
         <image name="female.png" width="50" height="50"/>

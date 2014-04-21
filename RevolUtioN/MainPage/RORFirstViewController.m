@@ -71,6 +71,7 @@
         if (l>=8)
             [self.usernameLabel setFont:[UIFont boldSystemFontOfSize:18]];
         self.levelLabel.text = [NSString stringWithFormat:@"Lv. %ld", (long)userInfo.userDetail.level.integerValue];
+        
         [self.badgeView setFriendFightWin:userInfo.userDetail.friendFightWin];
         
         [RORUtils setFontFamily:APP_FONT forView:self.usernameLabel andSubViews:YES];

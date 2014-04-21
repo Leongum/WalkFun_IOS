@@ -25,8 +25,7 @@
 @property (strong, nonatomic) IBOutlet KSLabel *latestWorkoutDateLabel;
 @property (strong, nonatomic) IBOutlet KSLabel * latestFriendActionDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *latestFriendActionDescriptionLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *badgeImageView;
-@property (strong, nonatomic) IBOutlet StrokeLabel *badgeLabel;
+@property (strong, nonatomic) IBOutlet BadgeView *badgeView;
 
 @property (strong, nonatomic) IBOutlet CUSFlashLabel *loadingLabel;
 
