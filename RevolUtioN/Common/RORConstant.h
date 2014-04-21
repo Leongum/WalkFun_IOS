@@ -96,6 +96,8 @@
 
 //是否可以掉落在地上
 #define RULE_Drop_Down @"D"
+//掉落在的花盆上
+#define RULE_Drop_Pot @"DP"
 //是否可以显示在脸上
 #define RULE_On_Face @"OF"
 //是否需要改变脸的颜色
