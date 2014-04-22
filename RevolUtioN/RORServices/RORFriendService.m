@@ -279,7 +279,7 @@
     action.actionToName = actionToUserName;
     action.updateTime = [NSDate date];
     Action_Define *ad = [RORSystemService fetchActionDefine:action.actionId];
-    action.actionName = ad.actionDescription;
+    action.actionName = ad.actionName;
     
     NSDictionary *effectDict = [RORUtils explainActionEffetiveRule:ad.effectiveRule];
     if ([[effectDict allKeys] containsObject:RULE_Physical_Power_Add]){
