@@ -32,7 +32,7 @@
         itemImageView.frame = CGRectMake(CGRectGetWidth(frame)/2-BIG_ITEM_SIZE/2, 105, BIG_ITEM_SIZE, BIG_ITEM_SIZE);
         [self addSubview:itemImageView];
         
-        NSArray *itemInfoStringList = [item.productDescription componentsSeparatedByString:@"\\n\\n"];
+        NSArray *itemInfoStringList = [item.productDescription componentsSeparatedByString:@"|"];
         
         //道具的作用
         itemEffectLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, itemImageView.frame.origin.y+itemImageView.frame.size.height+20, frame.size.width, 30)];

@@ -124,7 +124,7 @@
     [itemDescLabel setLineBreakMode:NSLineBreakByWordWrapping];
     itemDescLabel.numberOfLines = 0;
     
-    NSArray *itemInfoStringList = [item.productDescription componentsSeparatedByString:@"\\n\\n"];
+    NSArray *itemInfoStringList = [item.productDescription componentsSeparatedByString:@"|"];
     if (itemInfoStringList.count>1)
         itemDescLabel.text = [itemInfoStringList objectAtIndex:1];
     else

@@ -79,7 +79,7 @@
     
     Virtual_Product *thisItem = [itemList objectAtIndex:indexPath.row];
     UILabel *itemEffectLabel = (UILabel *)[cell viewWithTag:101];
-    NSArray *itemInfoStringList = [thisItem.productDescription componentsSeparatedByString:@"\\n\\n"];
+    NSArray *itemInfoStringList = [thisItem.productDescription componentsSeparatedByString:@"|"];
     if (itemInfoStringList.count>1)
         itemEffectLabel.text = [itemInfoStringList objectAtIndex:1];
     else
@@ -99,7 +99,7 @@
     Virtual_Product *item = [RORVirtualProductService fetchVProduct:userProp.productId];
     
     NSString *effectString = @"";
-    NSArray *itemInfoStringList = [item.productDescription componentsSeparatedByString:@"\\n\\n"];
+    NSArray *itemInfoStringList = [item.productDescription componentsSeparatedByString:@"|"];
     if (itemInfoStringList.count>1)
         effectString = [itemInfoStringList objectAtIndex:1];
     
