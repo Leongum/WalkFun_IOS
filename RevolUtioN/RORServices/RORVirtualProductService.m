@@ -118,6 +118,11 @@
     // If you go to the folder below, you will find those pictures
     NSArray *imageURLStringList = [item.dropPicList componentsSeparatedByString:@"|"];
     int index = arc4random() % imageURLStringList.count;
+    if (imageURLStringList.count>1)
+        index = 1;
+    if (index>0) {
+        NSLog(@"%@",[imageURLStringList objectAtIndex:index]);
+    }
     NSURL *imageUrl = [NSURL URLWithString:[RORDBCommon getStringFromId:[imageURLStringList objectAtIndex:index]]];
     NSString *fileName = [self getFileNameFrom:imageUrl];
     NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@",docDir, fileName];

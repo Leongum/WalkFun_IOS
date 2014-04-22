@@ -236,6 +236,8 @@
     UILabel *userLevelLabel = (UILabel *)[cell viewWithTag:101];
     UIImageView *userSexImage = (UIImageView *)[cell viewWithTag:103];
     UILabel *friendStatusLabel = (UILabel *)[cell viewWithTag:104];
+    BadgeView *badgeView = (BadgeView *)[cell viewWithTag:105];
+    [badgeView setFriendFightWin:user.friendFightWin];
     UIButton *deleteButton = (UIButton *)[cell viewWithTag:200];
     
     userNameLabel.text = user.userName;

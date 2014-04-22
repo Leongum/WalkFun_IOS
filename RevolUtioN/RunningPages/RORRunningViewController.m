@@ -427,7 +427,7 @@
             [Animations moveUp:self.paperView andAnimationDuration:0.3 andWait:NO andLength:newCellHeight<self.paperView.frame.origin.y+218?newCellHeight:self.paperView.frame.origin.y+218];
         }
     }
-    if (!isAWalking){// && currentStep > 70 && distance>50) {//debug
+    if (!isAWalking && currentStep > 70 && distance>70) {//debug
         isAWalking = YES;
         UIImage* image = [UIImage imageNamed:@"green_btn_bg.png"];
         [endButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -437,15 +437,18 @@
     [self checkTodayMission];
     
     //记录疲劳时间，从体力为零的时刻开始算
-    if (userPower==0)
+    if (userPower==0){
         secondsSince0power++;
-    else
+    } else {
         secondsSince0power = -1;
-    
+        isTired = NO;
+    }
     //触发疲劳事件
-    if (secondsSince0power>300 && userPower < 1){
-        [self eventDidHappened:[self makeWalkEvent:tiredAction]];
-        [self stopTimer];
+    if (secondsSince0power>300 && userPower < 1 && tiredAction){
+        if (tiredAction && !isTired)
+            [self eventDidHappened:[self makeWalkEvent:tiredAction]];
+        isTired = YES;
+        tiredStepCount++;
     }
 }
 
@@ -681,6 +684,8 @@
         UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+        [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        eventLabel.numberOfLines = 0;
         
         Action_Define *actionEvent = [RORSystemService fetchActionDefine:event.eId];
         eventLabel.text = actionEvent.actionName;
@@ -749,6 +754,8 @@
         
         UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
+        [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        eventLabel.numberOfLines = 0;
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         eventTimeLabel.text = @"";
         if (thisWalkFriend!=nil)
@@ -766,7 +773,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    newCellHeight = 75;
+    newCellHeight = 110;
     if (indexPath.row>0){
         Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row];
         if ([event.eType isEqualToString:RULE_Type_Fight] || [event.eType isEqualToString:RULE_Type_Fight_Friend]){
@@ -780,6 +787,10 @@
 
 //如果触发了事件，返回事件，否则返回nil
 -(void)isEventHappen{
+    //走路确认之前不会触发事件
+    if (!isAWalking) {
+        return;
+    }
     
     //10步随机一次战斗事件
     if (((int)currentStep)%8 == 0){
@@ -816,22 +827,17 @@
                     return;
                 }
             }
-            rate2 = stepsSinceLastFight*10/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 2;
+            rate2 = stepsSinceLastFight*7/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 2;
         }
         if (realCurrentStep>WALKING_FIGHT_STAGE_III){
             rate3 = 2 + stepsSinceLastFight*3/(WALKING_FIGHT_STAGE_IV - WALKING_FIGHT_STAGE_III);
-            rate2 = 1;//0.5;
+            rate2 = 1;
         }
         if (realCurrentStep>WALKING_FIGHT_STAGE_IV){
-            rate4 = 0.6;//(currentStep - WALKING_FIGHT_STAGE_IV)*5/(WALKING_FIGHT_STAGE_V - WALKING_FIGHT_STAGE_IV) + 2;
-            rate3 = 1;//1;
-            rate2 = 0.4;//0.5;
+            rate4 = 2 + stepsSinceLastFight*3/(WALKING_FIGHT_STAGE_V - WALKING_FIGHT_STAGE_IV);
+            rate3 = 1;
         }
         
-//        if (currentStep>0){
-//            rate2 = 50;
-//            //debug
-//        }
         int fightStage = 0;
         if (roll<rate4){//高级怪
             fightStage = FightStageHard;
@@ -856,22 +862,30 @@
         } else if (fightStage<0) {
             if (eventWillList){
                 Action_Define *actionEvent = (Action_Define *)[eventWillList objectAtIndex:arc4random() % eventWillList.count];
-                while (actionEvent==goldAction) {
+                while (actionEvent.actionId.intValue == goldAction.actionId.intValue ||
+                       actionEvent.actionId.intValue == tiredAction.actionId.intValue) {
                     actionEvent = (Action_Define *)[eventWillList objectAtIndex:arc4random() % eventWillList.count];
                 }
                 [self eventDidHappened:[self makeWalkEvent:actionEvent]];
+                if (actionEvent.triggerProbability.intValue>0){
+                    fightPowerCost = -actionEvent.triggerProbability.intValue;
+                    if (userPower==0)//如果从0体力恢复出体力可以继续战斗了，那么重置”无战斗持续步数”
+                        stepsSinceLastFight = 0;
+                    [self refreshUserPower];
+                }
                 return;
             }
         }
     }
-    
-    //捡金币
-    int x = arc4random() % 1000000;
-    double roll = ((double)x)/10000.f;
-    double delta = 1;
-    if (roll < goldAction.triggerProbability.doubleValue * delta){
-        [self eventDidHappened:[self makeWalkEvent:goldAction]];
-        return;
+    if (!isTired && goldAction) {
+        //捡金币
+        int x = arc4random() % 1000000;
+        double roll = ((double)x)/10000.f;
+        double delta = 1;
+        if (roll < 2.5 * delta){
+            [self eventDidHappened:[self makeWalkEvent:goldAction]];
+            return;
+        }
     }
 }
 
@@ -923,6 +937,7 @@
 
 -(void)refreshUserPower{
     userPower -= fightPowerCost;
+    fightPowerCost = 0;
     if (userPower<0)
         userPower = 0;
     [powerPV setProgress:((double)userPower/(double)userPowerMax) animated:YES];
@@ -985,7 +1000,7 @@
     //非传说级，只要用户战斗力>怪物战斗力上限则直接胜利
     if (fight.monsterLevel.intValue<5){
         if (userFight > fight.monsterMaxFight.doubleValue)
-            return [NSNumber numberWithInteger:3];
+            return [NSNumber numberWithInteger:3 + (arc4random() % ([fight.fightWin componentsSeparatedByString:@"|"].count-1))*10];
     }
     
     //在耗尽体力时的奋力一战必胜，并记录奋力一击

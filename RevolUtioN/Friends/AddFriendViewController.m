@@ -175,7 +175,9 @@
     UIImageView *userSexImage = (UIImageView *)[cell viewWithTag:103];
     UILabel *userFightLabel = (UILabel *)[cell viewWithTag:104];
     UIButton *follow = (UIButton *)[cell viewWithTag:200];
-
+    BadgeView *badgeView = (BadgeView *)[cell viewWithTag:105];
+    [badgeView setFriendFightWin:thisUser.friendFightWin];
+    
     userNameLabel.text = thisUser.nickName;
     userLevelLabel.text = [NSString stringWithFormat:@"Lv.%d", thisUser.level.intValue];
     userFightLabel.text = [NSString stringWithFormat:@"%d", thisUser.fight.intValue];

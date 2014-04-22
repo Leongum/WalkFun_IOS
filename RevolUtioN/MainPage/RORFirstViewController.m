@@ -238,7 +238,7 @@
                 }
                 if(pm25info != nil){
                     pm25 = [[pm25info objectForKey:@"aqi"] integerValue];
-                    weatherInformation = [NSString stringWithFormat:@"%@\n PM2.5: %d%@  ", weatherInformation,  pm25,[pm25info objectForKey:@"pm2_5"]];
+                    weatherInformation = [NSString stringWithFormat:@"%@\n PM2.5: %@  ", weatherInformation, [pm25info objectForKey:@"pm2_5"]];
                 }
                 int index = -1;
                 if(temp < 38 && pm25 < 300){

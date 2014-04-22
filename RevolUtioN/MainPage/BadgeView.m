@@ -45,7 +45,8 @@
     
     //荣誉点数
     badgeLabel = [[StrokeLabel alloc]initWithFrame:self.bounds];
-    [badgeLabel setFont:[UIFont systemFontOfSize:14]];
+    [badgeLabel setFont:[UIFont systemFontOfSize:7.f / 16.f * CGRectGetWidth(self.bounds)]];
+    badgeLabel.lineWidth = 3.f / 32.f * CGRectGetWidth(self.bounds);
     [badgeLabel setTextColor:[UIColor whiteColor]];
     [badgeLabel setTextAlignment:NSTextAlignmentCenter];
     [self addSubview:badgeLabel];

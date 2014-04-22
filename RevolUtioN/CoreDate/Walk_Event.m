@@ -18,6 +18,7 @@
 @synthesize lati;
 @synthesize longi;
 @synthesize power;
+@synthesize fId;
 
 -(id)initWithDictionary:(NSDictionary *)dict{
     self = [super init];
@@ -29,6 +30,7 @@
         self.lati = [RORDBCommon getNumberFromId:[dict valueForKey:@"lati"]];
         self.longi = [RORDBCommon getNumberFromId:[dict valueForKey:@"longi"]];
         self.power = [RORDBCommon getNumberFromId:[dict valueForKey:@"power"]];
+        self.fId = [RORDBCommon getNumberFromId:[dict valueForKey:@"fId"]];
     }
     return self;
 }
@@ -42,7 +44,8 @@
     [tempoDict setValue:self.lati forKey:@"lati"];
     [tempoDict setValue:self.longi forKey:@"longi"];
     [tempoDict setValue:self.power forKey:@"power"];
-
+    [tempoDict setValue:self.fId forKey:@"fId"];
+    
     return tempoDict;
 }
 @end

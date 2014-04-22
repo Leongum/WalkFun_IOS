@@ -76,6 +76,8 @@ typedef struct {
     NSTimer *repeatingTimer;
     BOOL isStarted;
     BOOL isAWalking;
+    BOOL isTired;
+    int tiredStepCount;
     
     User_Base *userBase;
     

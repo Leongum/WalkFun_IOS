@@ -52,10 +52,10 @@
     eventWillList = [RORSystemService fetchAllActionDefine:ActionDefineRun];
     for (int i=0; i<eventWillList.count; i++){
         Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
-        if (event.triggerProbability.integerValue<0){
+        if (event.triggerProbability.intValue==-1){
             tiredAction = event;
         }
-        if ([event.actionName rangeOfString:@"金币"].location != NSNotFound){
+        if (event.triggerProbability.intValue==-2){
             goldAction = event;
         }
     }
@@ -70,6 +70,8 @@
     fightCount = 0;
     stepsSinceLastFight = 0;
     secondsSince0power = -1;
+    isTired = NO;
+    tiredStepCount = 0;
     
     directionMoved.east = 0;
     directionMoved.west = 0;
@@ -161,7 +163,7 @@
 //    double health = 100;
     //现在是250步减一点肥肉
     double stepsPerFat = 250;// (100.f-health)/100.f*500 + 750;
-    return [NSNumber numberWithDouble:-currentStep / stepsPerFat];
+    return [NSNumber numberWithDouble: - (currentStep - tiredStepCount) / stepsPerFat];
 }
 
 -(NSNumber *)calculateHealth{

@@ -401,7 +401,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    double newCellHeight = 90;
+    double newCellHeight = 110;
     if (indexPath.row>0){
         Walk_Event *event = [eventDisplayList objectAtIndex:indexPath.row];
         if ([event.eType isEqualToString:RULE_Type_Fight_Friend] || [event.eType isEqualToString:RULE_Type_Fight]){
