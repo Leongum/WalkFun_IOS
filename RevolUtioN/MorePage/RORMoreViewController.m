@@ -35,6 +35,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.backButton.alpha = 0;
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -91,12 +92,30 @@
         case 1:{
             identifier = @"announcementCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            UIView *msgNote = (UIView *)[cell viewWithTag:200];
+            NSDictionary *settingDict = [RORUserUtils getUserSettingsPList];
+            NSNumber *fdv= [settingDict objectForKey:@"formerDescVersion"];
+            NSNumber *dv = [settingDict objectForKey:@"DescVersion"];
+            if ((!fdv) || fdv.intValue < dv.intValue){
+                msgNote.alpha = 1;
+            } else
+                msgNote.alpha = 0;
             break;
         }
         case 2:
         {
             identifier = @"aboutCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            UIView *msgNote = (UIView *)[cell viewWithTag:3];
+
+            NSDictionary *settingDict = [RORUserUtils getUserSettingsPList];
+            NSNumber *mainVersion = [settingDict objectForKey:@"MainVersion"];
+            NSNumber *subVersion = [settingDict objectForKey:@"SubVersion"];
+            if (mainVersion.intValue > CURRENT_VERSION_MAIN ||
+                subVersion.intValue > CURRENT_VERSION_SUB){
+                msgNote.alpha = 1;
+            } else
+                msgNote.alpha = 0;
             break;
         }
         case 3:

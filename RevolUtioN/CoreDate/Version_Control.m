@@ -17,6 +17,7 @@
 @synthesize subVersion;
 @synthesize systemTime;
 @synthesize version;
+@synthesize descVersion;
 @synthesize missionLastUpdateTime;
 @synthesize fightDefineUpdateTime;
 @synthesize recommendLastUpdateTime;
@@ -27,6 +28,7 @@
     self.platform = [RORDBCommon getStringFromId:[dict valueForKey:@"platform"]];
     self.version = [RORDBCommon getNumberFromId:[dict valueForKey:@"version"]];
     self.subVersion = [RORDBCommon getNumberFromId:[dict valueForKey:@"subVersion"]];
+    self.descVersion = [RORDBCommon getNumberFromId:[dict valueForKey:@"descVersion"]];
     self.decs = [RORDBCommon getStringFromId:[dict valueForKey:@"description"]];
     self.systemTime = [RORDBCommon getDateFromId:[dict valueForKey:@"systemTime"]];
     self.missionLastUpdateTime = [RORDBCommon getDateFromId:[dict valueForKey:@"missionLastUpdateTime"]];

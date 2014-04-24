@@ -165,9 +165,21 @@
                 UIViewController *controller =(UIViewController *)[contentViews objectAtIndex:i];
                 [controller viewWillAppear:NO];
             }
-            //同步好友间的事件
+            //看是否有新的恩仇录
             NSNumber *aQnum = (NSNumber *)[[RORUserUtils getUserInfoPList] objectForKey:@"MessageReceivedNumber"];
-            self.msgNoteImageView.alpha = (aQnum && aQnum.intValue>0);
+            //看是否有新的公告
+            NSDictionary *settingDict = [RORUserUtils getUserSettingsPList];
+            NSNumber *fdv= [settingDict objectForKey:@"formerDescVersion"];
+            NSNumber *dv = [settingDict objectForKey:@"DescVersion"];
+            //看是否有新版本
+            NSNumber *mainVersion = [settingDict objectForKey:@"MainVersion"];
+            NSNumber *subVersion = [settingDict objectForKey:@"SubVersion"];
+            if (((!fdv) || fdv.intValue < dv.intValue) || //有新公告
+                    (aQnum && aQnum.intValue>0) || //有新恩仇录
+                (mainVersion.intValue > CURRENT_VERSION_MAIN || subVersion.intValue > CURRENT_VERSION_SUB)) //有新版本
+                self.msgNoteImageView.alpha = 1;
+            else
+                self.msgNoteImageView.alpha = 0;
         }
     }
     self.missionView.center = CGPointMake(self.missionView.center.x, missionBoardCenterY);

@@ -17,11 +17,13 @@
 @property (nonatomic, retain) NSNumber * subVersion;
 @property (nonatomic, retain) NSDate * systemTime;
 @property (nonatomic, retain) NSNumber * version;
+@property (nonatomic, retain) NSNumber * descVersion;
 @property (nonatomic, retain) NSDate * missionLastUpdateTime;
 @property (nonatomic, retain) NSDate * fightDefineUpdateTime;
 @property (nonatomic, retain) NSDate *recommendLastUpdateTime;
 @property (nonatomic, retain) NSDate *productLastUpdateTime;
 @property (nonatomic, retain) NSDate *actionDefineUpdateTime;
+
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 @end

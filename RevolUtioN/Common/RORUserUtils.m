@@ -238,6 +238,7 @@ static NSDate *syncTime;
 +(void)syncSystemData{
     //sync version
     Version_Control *version = [RORSystemService syncVersion:@"ios"];
+    
     if(version != nil){
         NSString *missionLastUpdateTime = [RORUserUtils getLastUpdateTime:@"MissionUpdateTime"];
         NSString *recommendLastUpdateTime = [RORUserUtils getLastUpdateTime:@"RecommendLastUpdateTime"];
@@ -328,15 +329,12 @@ static NSDate *syncTime;
     
     NSNumber *latestPowerLeft = [userDict objectForKey:@"latestUserPowerLeft"];
     int delta = -(int)([latestDate timeIntervalSinceNow]/120);
-    if (delta>1){
-        
-        NSInteger powerLeft = latestPowerLeft.integerValue + delta;
-        if (powerLeft>powerMax)
-            powerLeft = powerMax;
-        [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:powerLeft], @"latestUserPowerLeft", [NSDate date], @"latestUserPowerDate",nil]];
-        return powerLeft;
-    }
-    return latestPowerLeft.integerValue;
+
+    NSInteger powerLeft = latestPowerLeft.integerValue + delta;
+    if (powerLeft>powerMax)
+        powerLeft = powerMax;
+    [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:powerLeft], @"latestUserPowerLeft", [NSDate date], @"latestUserPowerDate",nil]];
+    return powerLeft;
 }
 
 +(void)saveUserPowerLeft:(NSInteger)powerLeft{

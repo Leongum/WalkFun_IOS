@@ -55,9 +55,13 @@
             identifier = @"versionCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%d.%d", CURRENT_VERSION_MAIN, CURRENT_VERSION_SUB];
+
+            NSDictionary *settingDict = [RORUserUtils getUserSettingsPList];
+            NSNumber *mainVersion = [settingDict objectForKey:@"MainVersion"];
+            NSNumber *subVersion = [settingDict objectForKey:@"SubVersion"];
             Version_Control *version = [RORSystemService syncVersion:@"ios"];
-            if (version.version.integerValue != CURRENT_VERSION_MAIN ||
-                version.subVersion.integerValue != CURRENT_VERSION_SUB){
+            if (mainVersion.intValue != CURRENT_VERSION_MAIN ||
+                subVersion.intValue != CURRENT_VERSION_SUB){
                 hasNewVersion = YES;
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"%@(点击更新%d.%d)",cell.detailTextLabel.text, version.version.integerValue, version.subVersion.integerValue];
             }

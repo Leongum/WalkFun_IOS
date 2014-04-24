@@ -98,11 +98,18 @@
     } else {
         fatPVFrameView.text = [NSString stringWithFormat:@"%d", userBase.userDetail.power.intValue + userBase.userDetail.powerPlus.intValue];
     }
-    //todo
-    if (userBase.userDetail.fightPlus.intValue>0){
-        fightPVFrameView.text = [NSString stringWithFormat:@"%d+%d",userBase.userDetail.fight.intValue, userBase.userDetail.fightPlus.intValue];
+    if (userBase.userDetail.powerPlus.intValue>0){
+        [fatPVFrameView setTextColor:[UIColor yellowColor]];
     } else {
-        fightPVFrameView.text = [NSString stringWithFormat:@"%d",userBase.userDetail.fight.intValue];
+        [fatPVFrameView setTextColor:[UIColor whiteColor]];
+    }
+    
+    //todo
+    fightPVFrameView.text = [NSString stringWithFormat:@"%d",userBase.userDetail.fight.intValue + userBase.userDetail.fightPlus.intValue];
+    if (userBase.userDetail.fightPlus.intValue>0){
+        [fightPVFrameView setTextColor:[UIColor yellowColor]];
+    } else {
+        [fightPVFrameView setTextColor:[UIColor whiteColor]];
     }
 }
 

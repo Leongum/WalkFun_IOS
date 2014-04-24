@@ -22,6 +22,9 @@
         
         NSLog(@"%@",versionEntity.systemTime);
         [self saveSystimeTime:[RORUtils getStringFromDate:versionEntity.systemTime]];
+        
+        [RORUserUtils writeToUserSettingsPList:[NSDictionary dictionaryWithObjectsAndKeys:versionEntity.version, @"MainVersion", versionEntity.subVersion, @"SubVersion", versionEntity.descVersion, @"DescVersion", versionEntity.decs, @"VersionDescription", nil]];
+        
         return versionEntity;
     } else {
         NSLog(@"sync with host error: can't get version info. Status Code: %d", [httpResponse responseStatus]);
