@@ -44,7 +44,8 @@
 #pragma mark - Actions
 
 -(IBAction)backAction:(id)sender{
-    [self dismissViewControllerAnimated:YES completion:^(){}];
+//    [self dismissViewControllerAnimated:YES completion:^(){}];
+    [super backAction:sender];
 }
 
 #pragma mark - Table view data source

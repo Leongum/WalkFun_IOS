@@ -306,7 +306,7 @@
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
-        eventLabel.numberOfLines = 2;
+        eventLabel.numberOfLines = 3;
         
         Action_Define *actionEvent = [RORSystemService fetchActionDefine:walkEvent.eId];
         eventLabel.text = actionEvent.actionName;
@@ -386,13 +386,12 @@
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
-        eventLabel.numberOfLines = 0;
+        eventLabel.numberOfLines = 3;
         eventTimeLabel.text = @"";
         if (record.friendName!=nil)
             eventLabel.text = [NSString stringWithFormat:[RORUtils getSentencebyRule:RULE_Type_Start eId10:walkEvent.eId.intValue andSentence:SENTENCE_START_WALKING_WITH],record.friendName];
         else
             eventLabel.text = [RORUtils getSentencebyRule:RULE_Type_Start eId10:walkEvent.eId.intValue andSentence:SENTENCE_START_WALKING_ALONE];
-        //                eventLabel.text = [RORUtils getRandomStringFromAllstrings:SENTENCE_START_WALKING_ALONE];
         effectLabel.text = @"一切看起来都那么美好～";
     }
 

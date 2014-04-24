@@ -31,6 +31,7 @@
 	// Do any additional setup after loading the view.
     parent = (RORViewController*)[self parentViewController];
     weixinSharing = NO;
+    [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
 -(void)setShareImage:(UIImage *)image{

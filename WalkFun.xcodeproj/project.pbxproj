@@ -382,6 +382,7 @@
 		30F787121903ADEF0041F9F4 /* running_ready_item_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F787111903ADEF0041F9F4 /* running_ready_item_default.png */; };
 		30F787141903B3E30041F9F4 /* vase_front.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F787131903B3E30041F9F4 /* vase_front.png */; };
 		30F78717190513A70041F9F4 /* BadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F78716190513A70041F9F4 /* BadgeView.m */; };
+		30F7871A190834D20041F9F4 /* AnnouncementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F78719190834D20041F9F4 /* AnnouncementViewController.m */; };
 		30FAA212186415E100E72650 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FAA210186415E100E72650 /* male.png */; };
 		30FAA213186415E100E72650 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FAA211186415E100E72650 /* female.png */; };
 		30FAA215186417DF00E72650 /* notSure.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FAA214186417DF00E72650 /* notSure.png */; };
@@ -940,6 +941,8 @@
 		30F787131903B3E30041F9F4 /* vase_front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vase_front.png; sourceTree = "<group>"; };
 		30F78715190513A70041F9F4 /* BadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BadgeView.h; path = MainPage/BadgeView.h; sourceTree = "<group>"; };
 		30F78716190513A70041F9F4 /* BadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BadgeView.m; path = MainPage/BadgeView.m; sourceTree = "<group>"; };
+		30F78718190834D20041F9F4 /* AnnouncementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnnouncementViewController.h; path = MorePage/AnnouncementViewController.h; sourceTree = "<group>"; };
+		30F78719190834D20041F9F4 /* AnnouncementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AnnouncementViewController.m; path = MorePage/AnnouncementViewController.m; sourceTree = "<group>"; };
 		30FAA210186415E100E72650 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
 		30FAA211186415E100E72650 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
 		30FAA214186417DF00E72650 /* notSure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notSure.png; sourceTree = "<group>"; };
@@ -1221,6 +1224,8 @@
 				30989CCD17F80FB000CA9F83 /* RORAboutViewController.m */,
 				30D2DF0D188003D40093A426 /* RORRecommendViewController.h */,
 				30D2DF0E188003D40093A426 /* RORRecommendViewController.m */,
+				30F78718190834D20041F9F4 /* AnnouncementViewController.h */,
+				30F78719190834D20041F9F4 /* AnnouncementViewController.m */,
 			);
 			name = RORMorePage;
 			sourceTree = "<group>";
@@ -2460,6 +2465,7 @@
 				0FA7521818927A410037342E /* RORLoginViewController.m in Sources */,
 				3022E00D18F2942200F3A9D5 /* EventAnnotation.m in Sources */,
 				30DB021F18C85BB5008863B8 /* THProgressView.m in Sources */,
+				30F7871A190834D20041F9F4 /* AnnouncementViewController.m in Sources */,
 				3022E01018F2943600F3A9D5 /* CoinAnnotation.m in Sources */,
 				0FDE82CC18927B4E0082B1BF /* RORUserClientHandler.m in Sources */,
 				0FA7514C1892791A0037342E /* RORMissionServices.m in Sources */,

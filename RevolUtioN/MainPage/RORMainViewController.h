@@ -41,6 +41,7 @@
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet UILabel *missionContentLabel;
 @property (strong, nonatomic) IBOutlet UIView *missionView;
+@property (strong, nonatomic) IBOutlet UIImageView *msgNoteImageView;
 
 @property (strong, nonatomic) NSMutableArray *contentViews;
 

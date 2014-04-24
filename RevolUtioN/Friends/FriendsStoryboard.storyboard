@@ -9,7 +9,9 @@
         <scene sceneID="sFC-Jo-lif">
             <objects>
                 <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="ceZ-yW-sCq" sceneMemberID="viewController">
+                    <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yba-k2-qAp">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -191,6 +193,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="WRr-yz-Ydr"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="endDeletingButton" destination="yZr-lS-Sxn" id="p6J-W6-Pf7"/>
                         <outlet property="expandButton" destination="RmS-3i-N2v" id="qD2-1J-5Dz"/>
@@ -353,6 +358,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="k02-Ou-yED"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="refreshRecommendButton" destination="QsP-OU-6dP" id="ja7-EO-vIe"/>
                         <outlet property="searchTextField" destination="LGx-dj-u1w" id="5mK-wj-MMp"/>
@@ -478,6 +486,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="首页" id="hgy-Yz-KYr"/>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="badgeView" destination="84e-0W-YTw" id="oZs-OX-Wcz"/>

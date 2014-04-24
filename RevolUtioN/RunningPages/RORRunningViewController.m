@@ -685,7 +685,7 @@
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
-        eventLabel.numberOfLines = 0;
+        eventLabel.numberOfLines = 3;
         
         Action_Define *actionEvent = [RORSystemService fetchActionDefine:event.eId];
         eventLabel.text = actionEvent.actionName;
@@ -702,7 +702,7 @@
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
-        eventLabel.numberOfLines = 0;
+        eventLabel.numberOfLines = 3;
         
         Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:event.eId];
         NSArray *meetText = [fightEvent.fightName componentsSeparatedByString:@"。"];
@@ -730,7 +730,7 @@
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
-        eventLabel.numberOfLines = 0;
+        eventLabel.numberOfLines = 3;
         Friend *fightFriend = [RORFriendService fetchUserFriend:userBase.userId withFriendId:event.eId];
         
         NSMutableString *fightString = [[NSMutableString alloc]init];
@@ -755,7 +755,7 @@
         UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
-        eventLabel.numberOfLines = 0;
+        eventLabel.numberOfLines = 3;
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         eventTimeLabel.text = @"";
         if (thisWalkFriend!=nil)

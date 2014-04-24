@@ -165,6 +165,9 @@
                 UIViewController *controller =(UIViewController *)[contentViews objectAtIndex:i];
                 [controller viewWillAppear:NO];
             }
+            //同步好友间的事件
+            NSNumber *aQnum = (NSNumber *)[[RORUserUtils getUserInfoPList] objectForKey:@"MessageReceivedNumber"];
+            self.msgNoteImageView.alpha = (aQnum && aQnum.intValue>0);
         }
     }
     self.missionView.center = CGPointMake(self.missionView.center.x, missionBoardCenterY);

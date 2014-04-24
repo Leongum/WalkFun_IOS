@@ -70,7 +70,7 @@
 #pragma mark Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 4;
 }
 
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -78,13 +78,28 @@
     UITableViewCell *cell = nil;
 
     switch (indexPath.row) {
-        case 0:
+        case 0:{
+            identifier = @"notebookCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            UIView *msgNote = (UIView *)[cell viewWithTag:200];
+            //同步好友间的事件
+            NSNumber *aQnum = (NSNumber *)[[RORUserUtils getUserInfoPList] objectForKey:@"MessageReceivedNumber"];
+            msgNote.alpha = (aQnum && aQnum.intValue>0);
+
+            break;
+        }
+        case 1:{
+            identifier = @"announcementCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            break;
+        }
+        case 2:
         {
             identifier = @"aboutCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             break;
         }
-        case 1:
+        case 3:
         {
             identifier = @"recommendCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -96,9 +111,9 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//
+//}
 
 - (IBAction)feedbackAction:(id)sender {
     [UMFeedback showFeedback:self withAppkey:UMENG_APPKEY];

@@ -75,9 +75,6 @@
         [self.badgeView setFriendFightWin:userInfo.userDetail.friendFightWin];
         
         [RORUtils setFontFamily:APP_FONT forView:self.usernameLabel andSubViews:YES];
-        //同步好友间的事件
-        int aQuantity = ((NSNumber *)[[RORUserUtils getUserInfoPList] objectForKey:@"MessageReceivedNumber"]).intValue;
-        self.msgNoteImageView.alpha = (aQuantity>0);
     }
     if ([charatorViewController respondsToSelector:@selector(setUserBase:)]){
         [charatorViewController setValue:[RORUserServices fetchUser:[RORUserUtils getUserId]] forKey:@"userBase"];
