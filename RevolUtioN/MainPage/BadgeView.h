@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RORViewController.h"
 
-@interface BadgeView : UIView{
+@interface BadgeView : UIControl{
     UIImageView *badgeImageView;
     StrokeLabel *badgeLabel;
 }

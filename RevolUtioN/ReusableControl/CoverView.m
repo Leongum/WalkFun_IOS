@@ -35,9 +35,26 @@
 //    [self addCoverBgImage];
 //}
 
--(void)addCoverBgImage{
-    UIImage *image = [RORUtils captureScreen];
-    bgImage = [UIUtils grayscale:image type:1];
+//-(void)addCoverBgImage:(UIImage *)bgi{
+//    UIImage *image = bgi;
+//    bgImage = [UIUtils grayscale:image type:1];
+//    if (!bgImageView){
+//        bgImageView = [[UIImageView alloc]initWithImage:bgImage];
+//        bgImageView.frame = self.frame;
+//        bgImageView.center = CGPointMake(bgImageView.frame.size.width/2, bgImageView.frame.size.height/2);
+//        bgImageView.alpha = 1;
+//        [self addSubview:bgImageView];
+//        [self sendSubviewToBack:bgImageView];
+//    } else {
+//        bgImageView.image = bgImage;
+//    }
+//}
+
+-(void)addCoverBgImage:(UIImage *)bg grayed:(BOOL)grayed{
+    if (grayed)
+        bgImage = [UIUtils grayscale:bg type:1];
+    else
+        bgImage = bg;
     if (!bgImageView){
         bgImageView = [[UIImageView alloc]initWithImage:bgImage];
         bgImageView.frame = self.frame;
@@ -47,19 +64,6 @@
         [self sendSubviewToBack:bgImageView];
     } else {
         bgImageView.image = bgImage;
-    }
-}
-
--(void)addCoverBgImage:(UIImage *)bg{
-    if (!bgImageView){
-        bgImageView = [[UIImageView alloc]initWithImage:bg];
-        bgImageView.frame = self.frame;
-        bgImageView.center = CGPointMake(bgImageView.frame.size.width/2, bgImageView.frame.size.height/2);
-        bgImageView.alpha = 1;
-        [self addSubview:bgImageView];
-        [self sendSubviewToBack:bgImageView];
-    } else {
-        bgImageView.image = bg;
     }
 }
 

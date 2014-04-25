@@ -57,22 +57,22 @@
     fatLabel.text = fatText;
     commentLabel.text = commentText;
     winLabel.alpha = 1;
-    [winLabel popIn:0.25 delegate:self startSelector:nil stopSelector:@selector(expLabelAnimation)];
+    [winLabel popIn:0.25 delegate:self startSelector:nil stopSelector:@selector(itemLabelAnimation)];
 }
 
 -(void)expLabelAnimation{
     expLabel.alpha = 1;
-    [expLabel popIn:0.25 delegate:self startSelector:nil stopSelector:@selector(coinLabelAnimation)];
+    [expLabel popIn:0.25 delegate:self startSelector:nil stopSelector:@selector(fatLabelAnimation)];
 }
 
 -(void)coinLabelAnimation{
     coinLabel.alpha = 1;
-    [coinLabel popIn:0.25 delegate:self startSelector:nil stopSelector:@selector(itemLabelAnimation)];
+    [coinLabel popIn:0.25 delegate:self startSelector:nil stopSelector:@selector(expLabelAnimation)];
 }
 
 -(void)itemLabelAnimation{
     itemLabel.alpha = 1;
-    [itemLabel popIn:0.25 delegate:self startSelector:nil stopSelector:@selector(fatLabelAnimation)];
+    [itemLabel popIn:0.25 delegate:self startSelector:nil stopSelector:@selector(coinLabelAnimation)];
 }
 
 -(void)fatLabelAnimation{

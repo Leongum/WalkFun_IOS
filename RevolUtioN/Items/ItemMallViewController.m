@@ -87,7 +87,7 @@
 
 //选择某件道具后弹出该道具的购买页面
 -(void)showItemQuantityCover{
-    [self.itemQuantityCoverView addCoverBgImage];
+    [self.itemQuantityCoverView addCoverBgImage:[RORUtils captureScreen] grayed:YES];
     [self.view addSubview:self.itemQuantityCoverView];
     [self.itemQuantityCoverView appear:self];
     [self.pickView reloadAllComponents];

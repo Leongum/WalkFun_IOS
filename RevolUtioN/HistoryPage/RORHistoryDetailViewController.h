@@ -14,14 +14,13 @@
 #import "RORStartAnnotation.h"
 #import "ROREndAnnotation.h"
 #import "RORMissionHistoyService.h"
-#import "CoverView.h"
 #import "PooViewController.h"
 #import "ItemIconView.h"
 #import "ReportViewController.h"
 
 #define ICON_SIZE_ITEM 50
 
-@interface RORHistoryDetailViewController : RORViewController <MKMapViewDelegate, WFCoverViewDelegate>{
+@interface RORHistoryDetailViewController : RORViewController <MKMapViewDelegate>{
     NSMutableArray *improvedRoute;
     BOOL expanded;
     double centerLoc;
@@ -35,7 +34,6 @@
     User_Base *userBase;
     
     UIStoryboard *mainStoryboard;
-    NSMutableArray *coverViewQueue;
     
     BOOL showCongrats;
 }

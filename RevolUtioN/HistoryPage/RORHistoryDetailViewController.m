@@ -45,7 +45,6 @@
 {
     
     [super viewDidLoad];
-    coverViewQueue = [[NSMutableArray alloc]init];
     
     self.backButton.alpha = 0;
 
@@ -190,26 +189,6 @@
     }
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [self dequeueCoverView];
-}
-
--(void)dequeueCoverView{
-    for (UIViewController *viewController in coverViewQueue){
-        CoverView *congratsCoverView = (CoverView *)viewController.view;
-        congratsCoverView.delegate = self;
-        [congratsCoverView addCoverBgImage];
-        [congratsCoverView appear:self];
-        
-        [self addChildViewController:viewController];
-        [self.view addSubview:congratsCoverView];
-        [self didMoveToParentViewController:viewController];
-
-        [coverViewQueue removeObject:viewController];
-        break;
-    }
-}
-
 - (void)viewDidUnload {
     [self setStepLabel:nil];
     [self setDurationLabel:nil];
@@ -323,6 +302,7 @@
         [effectLabel setLineBreakMode:NSLineBreakByWordWrapping];
         effectLabel.numberOfLines = 0;
         UILabel *expLabel = (UILabel *)[cell viewWithTag:103];
+        UIImageView *iconImageView = (UIImageView *)[cell viewWithTag:200];
         
         Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:walkEvent.eId];
         NSArray *meetText = [fightEvent.fightName componentsSeparatedByString:@"。"];
@@ -351,6 +331,9 @@
             powerCost = fightEvent.basePowerConsume.doubleValue;
         }
         expLabel.text = [NSString stringWithFormat:@"经验值+%@  体力-%.0f", fightEvent.baseExperience, powerCost];
+        
+        iconImageView.image = [UIUtils getFightImageByStage:fightEvent.monsterLevel];
+
     } else if ([walkEvent.eType isEqualToString:RULE_Type_Fight_Friend]){
         identifier = @"fightCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -410,10 +393,6 @@
     return newCellHeight;
 }
 
-#pragma mark - Cover View Delegate
 
--(void)coverViewDidDismissed:(id)view{
-    [self dequeueCoverView];
-}
 
 @end

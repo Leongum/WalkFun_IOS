@@ -40,6 +40,8 @@
 //                                                 name:SVProgressHUDDidAppearNotification
 //                                               object:nil];
     
+    //初始化cover view队列
+    coverViewQueue = [[NSMutableArray alloc]init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleNotification:)
@@ -74,7 +76,36 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self endIndicator:self];
+//    [self endIndicator:self];
+    [self dequeueCoverView];
+}
+
+-(void)dequeueCoverView{
+    for (id obj in coverViewQueue){
+        if ([obj isKindOfClass:[UIViewController class]]){
+            UIViewController *viewController = (UIViewController *)obj;
+            CoverView *congratsCoverView = (CoverView *)viewController.view;
+            congratsCoverView.delegate = self;
+            [congratsCoverView addCoverBgImage:[RORUtils captureScreen] grayed:YES];
+            [congratsCoverView appear:self];
+            
+            [self addChildViewController:viewController];
+            [self.view addSubview:congratsCoverView];
+            [self didMoveToParentViewController:viewController];
+            
+            [coverViewQueue removeObject:viewController];
+            break;
+        } else if ([obj isKindOfClass:[CoverView class]]){
+            CoverView *congratsCoverView = (CoverView *)obj;
+            congratsCoverView.delegate = self;
+            [congratsCoverView appear:self];
+            
+            [self.view addSubview:congratsCoverView];
+            
+            [coverViewQueue removeObject:obj];
+            break;
+        }
+    }
 }
 
 -(BOOL)prefersStatusBarHidden{
@@ -249,4 +280,9 @@ activity indicator
     self.progressView.progress += .1;
 }
 
+#pragma mark - Cover View Delegate
+
+-(void)coverViewDidDismissed:(id)view{
+    [self dequeueCoverView];
+}
 @end

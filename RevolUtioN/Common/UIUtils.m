@@ -193,5 +193,10 @@
     
     return effectedImage;
 }
+
++(UIImage *)getFightImageByStage:(NSNumber *)fightStage{
+    return [UIImage imageNamed:[NSString stringWithFormat:@"fight_icon_%@.png", fightStage]];
+}
+
 @end
 

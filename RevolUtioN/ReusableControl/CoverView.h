@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RORUtils.h"
+#import "UIUtils.h"
+
 @protocol WFCoverViewDelegate
 @optional
 - (void) coverViewDidDismissed:(id)view;
@@ -22,7 +23,7 @@
 
 -(IBAction)appear:(id)sender;
 -(IBAction)bgTap:(id)sender;
--(void)addCoverBgImage;
--(void)addCoverBgImage:(UIImage *)bg;
+//-(void)addCoverBgImage;
+-(void)addCoverBgImage:(UIImage *)bg grayed:(BOOL)grayed;
 
 @end

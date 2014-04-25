@@ -11,10 +11,8 @@
 #import "RORAppDelegate.h"
 #import <CoreLocation/CoreLocation.h>
 #import "RORConstant.h"
-#import "RORSystemService.h"
 #import "RORDBCommon.h"
 #import "RORShareCoverViewController.h"
-#import "RORSystemService.h"
 #import "UIUtils.h"
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \

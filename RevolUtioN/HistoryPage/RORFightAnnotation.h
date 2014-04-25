@@ -8,6 +8,9 @@
 
 #import "RORMapAnnotation.h"
 
-@interface RORFightAnnotation : RORMapAnnotation
+@interface RORFightAnnotation : RORMapAnnotation{
+}
+
+@property (strong, nonatomic) NSNumber *fightStage;
 
 @end

@@ -99,7 +99,7 @@
     itemDescLabel.text = [itemInfoStringList objectAtIndex:0];
     
     [useButton addTarget:self action:@selector(useItemAction:) forControlEvents:UIControlEventTouchUpInside];
-    [itemDetailCoverView addCoverBgImage];
+    [itemDetailCoverView addCoverBgImage:[RORUtils captureScreen] grayed:YES];
     [parentViewController.view addSubview:itemDetailCoverView];
     
     [RORUtils setFontFamily:APP_FONT forView:itemDetailCoverView andSubViews:YES];

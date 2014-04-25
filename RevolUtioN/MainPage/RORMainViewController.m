@@ -101,10 +101,11 @@
                     
                     //显示任务完成提示
                     UIViewController *missionDoneViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"missionCongratsVIewController"];
-                    CoverView *congratsCoverView = (CoverView *)missionDoneViewController.view;
-                    [congratsCoverView addCoverBgImage];
-                    [self.view addSubview:congratsCoverView];
-                    [congratsCoverView appear:self];
+                    [coverViewQueue addObject:missionDoneViewController];
+//                    CoverView *congratsCoverView = (CoverView *)missionDoneViewController.view;
+//                    [congratsCoverView addCoverBgImage:[RORUtils captureScreen] grayed:YES];
+//                    [self.view addSubview:congratsCoverView];
+//                    [congratsCoverView appear:self];
                     
                     UIView *missionCongratsView = missionDoneViewController.view;
                     UILabel *missionNameLabel = (UILabel *)[missionCongratsView viewWithTag:100];
@@ -180,34 +181,83 @@
                 self.msgNoteImageView.alpha = 1;
             else
                 self.msgNoteImageView.alpha = 0;
+            
+            //检查是否需要显示提示信息
+            [self checkPinchInstruction];
+            [self checkMissionStoneInstruction];
+            [self checkMainPageInstruction];
+            [self checkFirstOpenInstruction];
+            [self checkHistoryInstruction];
         }
     }
     self.missionView.center = CGPointMake(self.missionView.center.x, missionBoardCenterY);
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    //    [self checkLevelUp];
-    //检查是否需要显示提示信息
-    [self checkPinchInstruction];
-    [self checkHistoryInstruction];
     //检查日常任务
     [self checkDailyMission];
     //检查是否提示玩家去appstore评价
     [self checkSendToAppstore];
+    
+    [super viewDidAppear:animated];
+}
+
+-(void)checkMainPageInstruction{
+    NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
+    NSNumber *n = (NSNumber *)[dict objectForKey:@"MainPageInstruction"];
+    NSNumber *foi = (NSNumber *)[dict objectForKey:@"FirstOpenInstruction"];
+    if (userBase && !n && self.pageControl.currentPage == 1 && foi){
+        if (userBase.userDetail.level.intValue<2)
+            return;
+        
+        CoverView *instructionCV = [[CoverView alloc]initWithFrame:self.view.frame];
+        instructionCV.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+        [instructionCV addCoverBgImage:[UIImage imageNamed:@"intro_mainpage.png"] grayed:NO];
+        [coverViewQueue addObject:instructionCV];
+        
+        [dict setObject:[NSNumber numberWithInt:1] forKey:@"MainPageInstruction"];
+        [RORUserUtils writeToUserInfoPList:dict];
+    }
+}
+
+-(void)checkMissionStoneInstruction{
+    NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
+    NSNumber *n = (NSNumber *)[dict objectForKey:@"MissionStoneInstruction"];
+    NSNumber *mpi = (NSNumber *)[dict objectForKey:@"MainPageInstruction"];
+    if (userBase && !n && mpi && self.pageControl.currentPage == 1){
+        CoverView *instructionCV = [[CoverView alloc]initWithFrame:self.view.frame];
+        instructionCV.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+        [instructionCV addCoverBgImage:[UIImage imageNamed:@"intro_missionstone.png"] grayed:NO];
+        [coverViewQueue addObject:instructionCV];
+        
+        [dict setObject:[NSNumber numberWithInt:1] forKey:@"MissionStoneInstruction"];
+        [RORUserUtils writeToUserInfoPList:dict];
+    }
+}
+
+-(void)checkFirstOpenInstruction{
+    NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
+    NSNumber *n = (NSNumber *)[dict objectForKey:@"FirstOpenInstruction"];
+    if (userBase && !n){
+        CoverView *instructionCV = [[CoverView alloc]initWithFrame:self.view.frame];
+        instructionCV.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+        [instructionCV addCoverBgImage:[UIImage imageNamed:@"intro_firstopen.png"] grayed:NO];
+        [coverViewQueue addObject:instructionCV];
+        
+        [dict setObject:[NSNumber numberWithInt:1] forKey:@"FirstOpenInstruction"];
+        [RORUserUtils writeToUserInfoPList:dict];
+    }
 }
 
 -(void)checkPinchInstruction{
     NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
     NSNumber *n = (NSNumber *)[dict objectForKey:@"PinchInstruction"];
-    if (userBase && !n){
-        if (userBase.userDetail.level.intValue<3)
-            return;
-        
+    NSNumber *msi = (NSNumber *)[dict objectForKey:@"MissionStoneInstruction"];
+    if (userBase && !n && msi){
         CoverView *instructionCV = [[CoverView alloc]initWithFrame:self.view.frame];
         instructionCV.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
-        [instructionCV addCoverBgImage:[UIImage imageNamed:@"intro_Pinch.png"]];
-        [self.view addSubview:instructionCV];
-        [instructionCV appear:self];
+        [instructionCV addCoverBgImage:[UIImage imageNamed:@"intro_Pinch.png"] grayed:NO];
+        [coverViewQueue addObject:instructionCV];
         
         [dict setObject:[NSNumber numberWithInt:1] forKey:@"PinchInstruction"];
         [RORUserUtils writeToUserInfoPList:dict];
@@ -223,9 +273,8 @@
         
         CoverView *instructionCV = [[CoverView alloc]initWithFrame:self.view.frame];
         instructionCV.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
-        [instructionCV addCoverBgImage:[UIImage imageNamed:@"intro_History.png"]];
-        [self.view addSubview:instructionCV];
-        [instructionCV appear:self];
+        [instructionCV addCoverBgImage:[UIImage imageNamed:@"intro_History.png"] grayed:NO];
+        [coverViewQueue addObject:instructionCV];
         
         [dict setObject:[NSNumber numberWithInt:1] forKey:@"HistoryInstruction"];
         [RORUserUtils writeToUserInfoPList:dict];
@@ -435,7 +484,7 @@
 - (IBAction)ready2StartAction:(id)sender {
     ReadyToGoViewController *readyController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReadyToGoViewController"];
     CoverView *coverView = (CoverView *)readyController.view;
-    [coverView addCoverBgImage];
+    [coverView addCoverBgImage:[RORUtils captureScreen] grayed:YES];
     [coverView appear:self];
     
     [self addChildViewController:readyController];

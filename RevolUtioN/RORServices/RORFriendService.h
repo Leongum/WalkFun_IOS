@@ -15,6 +15,7 @@
 #import "Friend_Sort.h"
 #import "Action.h"
 #import "Search_Friend.h"
+#import "RORSystemService.h"
 
 @interface RORFriendService : NSObject
 

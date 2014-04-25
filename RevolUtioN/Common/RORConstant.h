@@ -83,13 +83,12 @@
 #define PLAN_PAGE_SIZE 10
 #define FRIENDS_PAGE_SIZE 10
 
-#define COLOR_MOSS [UIColor colorWithRed:0 green:128.f/255.f blue:64.f/255.f alpha:1]
-#define APP_FONT @"DFPWaWaW5"
 
+#define APP_FONT @"DFPWaWaW5"
 
 #define SENTENCE_START_WALKING_ALONE @"独自一人从村里出发了|从村里出发了|毫无悬念的一个人从村里出发了"
 #define SENTENCE_START_WALKING_WITH @"与小伙伴%@一起从村里出发了"
-#define SENTENCE_FRIEND_FIGHT_WIN @"遇到%@并主动与之切磋武艺，几招过后轻松取胜，被围观群众投来崇拜的眼神。|巧遇%@与之切磋，大战250回合后终于艰难取胜。"
+#define SENTENCE_FRIEND_FIGHT_WIN @"遇到%@并主动与之切磋武艺，几招过后轻松取胜，被围观群众投来崇拜的目光。|巧遇%@与之切磋，大战250回合后终于艰难取胜。"
 #define SENTENCE_FRIEND_FIGHT_LOSE @"遇到%@并主动与之切磋武艺，结果连对方三招都没接住。|巧遇%@与之切磋，大战250回合后遗憾落败。"
 
 #endif

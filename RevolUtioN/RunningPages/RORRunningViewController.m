@@ -701,6 +701,7 @@
         UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+        UIImageView *iconImageView = (UIImageView *)[cell viewWithTag:200];
         [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
         eventLabel.numberOfLines = 3;
         
@@ -723,6 +724,8 @@
         [fightText appendString:[meetText objectAtIndex:1]];
         eventLabel.text = fightText;
         eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:event.times.integerValue]];
+        iconImageView.image = [UIUtils getFightImageByStage:fightEvent.monsterLevel];
+        
     } else if ([event.eType isEqualToString:RULE_Type_Fight_Friend]){
         identifier = @"fightCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -834,8 +837,9 @@
             rate2 = 1;
         }
         if (realCurrentStep>WALKING_FIGHT_STAGE_IV){
-            rate4 = 2 + stepsSinceLastFight*3/(WALKING_FIGHT_STAGE_V - WALKING_FIGHT_STAGE_IV);
-            rate3 = 1;
+            rate4 = 1.8 + stepsSinceLastFight*2/(WALKING_FIGHT_STAGE_V - WALKING_FIGHT_STAGE_IV);
+            rate3 = 0.9;
+            rate2 = 0.3;
         }
         
         int fightStage = 0;
@@ -911,7 +915,7 @@
             walkExperience += e.baseExperience.intValue;
             goldCount += e.baseGold.intValue;
         }
-        
+        walkEvent.fId = e.monsterLevel;
         fightCount++;
         stepsSinceLastFight = 0;
     } else if ([event isKindOfClass:[Friend class]]){//好友战斗

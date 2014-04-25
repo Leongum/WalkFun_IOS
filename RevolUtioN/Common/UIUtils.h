@@ -19,4 +19,6 @@ colorType colorSum[640][1136];
 
 + (UIImage*) grayscale:(UIImage*)anImage type:(char)type;
 
++(UIImage *)getFightImageByStage:(NSNumber *)fightStage;
+
 @end

@@ -9,5 +9,6 @@
 #import "RORFightAnnotation.h"
 
 @implementation RORFightAnnotation
+@synthesize fightStage;
 
 @end

@@ -53,6 +53,8 @@
     [charatorViewController didMoveToParentViewController:self];
     
     lastWeatherUpdateTime = nil;
+    
+    [self.badgeView addTarget:self action:@selector(badgeViewAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)initControlsLayout{
@@ -150,7 +152,7 @@
     
     MissionStoneCongratsViewController *missionStoneCongratsViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"MissionStoneCongratsViewController"];
     CoverView *congratsCoverView = (CoverView *)missionStoneCongratsViewController.view;
-    [congratsCoverView addCoverBgImage];
+    [congratsCoverView addCoverBgImage:[RORUtils captureScreen] grayed:YES];
     [[self parentViewController].view addSubview:congratsCoverView];
     [congratsCoverView appear:self];
     
@@ -192,6 +194,10 @@
         // start the compass
         [locationManager startUpdatingLocation];
     }
+}
+
+-(IBAction)badgeViewAction:(id)sender{
+    [self sendNotification:@"通过探险过程中的“好友战斗”胜利获得。"];
 }
 
 #pragma mark - core location delegate
