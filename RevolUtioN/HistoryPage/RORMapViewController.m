@@ -91,11 +91,14 @@
         
         if ([we.eType isEqualToString:RULE_Type_Fight] || [we.eType isEqualToString:RULE_Type_Fight_Friend]){
             RORFightAnnotation *anno = [[RORFightAnnotation alloc]initWithCoordinate:eventCoor];
-            anno.title = [NSString stringWithFormat:@"战斗%@",we.eWin.intValue>0?@"胜利":@"失败"];
-            if ([we.eType isEqualToString:RULE_Type_Fight])
+            
+            if ([we.eType isEqualToString:RULE_Type_Fight]){
                 anno.fightStage = we.fId;
-            else
+                anno.title = [NSString stringWithFormat:@"%@怪物,战斗%@",FightStage_toString[we.fId.intValue],(we.eWin.intValue>0?@"胜利":@"失败")];
+            }else{
+                anno.title = [NSString stringWithFormat:@"好友PK,战斗%@",we.eWin.intValue>0?@"胜利":@"失败"];
                 anno.fightStage = [NSNumber numberWithInt:FightStageEasy];
+            }
             [mapView addAnnotation:anno];
         } else {
             Action_Define *actionEvent = [RORSystemService fetchActionDefine:we.eId];
@@ -300,7 +303,7 @@
             pulsingView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
             pulsingView.image = [UIImage imageNamed:@"coin.png"];
             pulsingView.frame = CGRectMake(pulsingView.frame.origin.x, pulsingView.frame.origin.y, 10, 10);
-            pulsingView.canShowCallout = YES;
+            pulsingView.canShowCallout = NO;
             return pulsingView;
         } else {
             pulsingView.annotation = annotation;

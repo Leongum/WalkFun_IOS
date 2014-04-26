@@ -20,7 +20,6 @@
 #import "LevelUpCongratsViewController.h"
 #import "THProgressView.h"
 #import "MissionStoneCongratsViewController.h"
-#import "MissionStoneView.h"
 
 
 @interface RORFirstViewController : MainPageViewController<CLLocationManagerDelegate>{
@@ -30,33 +29,27 @@
     NSString *weatherInformation;
     NSDate *lastWeatherUpdateTime;
     User_Base *userInfo;
-    MissionStoneView *missionStoneView;
     int missionDone;
     
     CLLocationManager *locationManager;
-    UIViewController *charatorViewController;
+    CharatorViewController *charatorViewController;
     UIStoryboard *mainStoryboard;
+    
+    NSTimer *repeatingTimer;
 }
 @property (strong, nonatomic) IBOutlet UIView *selfTitleView;
 
 //@property (strong,nonatomic)NSManagedObjectContext *context;
 @property (copy, nonatomic) NSString *userName;
 @property (nonatomic) NSNumber *userId;
-@property (strong, nonatomic) IBOutlet UIButton *runButton;
 //@property (strong, nonatomic) IBOutlet UIImageView *testView;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *levelLabel;
 @property (strong, nonatomic) IBOutlet BadgeView *badgeView;
 @property (strong, nonatomic) IBOutlet UIControl *userInfoView;
 
-//todo
-@property (strong, nonatomic) IBOutlet StrokeLabel *fatLabel;
-@property (strong, nonatomic) IBOutlet StrokeLabel *healthLabel;
 @property (strong, nonatomic) IBOutlet UIButton *weatherInfoButtonView;
 @property (strong, nonatomic) IBOutlet UIView *charatorView;
-@property (strong, nonatomic) IBOutlet UIButton *msgButton;
-@property (strong, nonatomic) IBOutlet UIImageView *msgNoteImageView;
 
-@property (strong, nonatomic) IBOutlet UIImageView *bgImageView;
 @property (strong, nonatomic) IBOutlet UIButton *missionStoneButton;
 @end

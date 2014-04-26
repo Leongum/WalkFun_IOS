@@ -582,6 +582,12 @@
                 }
                 else{
                     [self sendAlart:@"上传失败，请手动同步记录"];
+                    
+                    NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
+                    NSNumber *syncIns = [dict objectForKey:@"SyncInstruction"];
+                    if (!syncIns)
+                        [dict setObject:[NSNumber numberWithInt:-1] forKey:@"SyncInstruction"];
+                    [RORUserUtils writeToUserInfoPList:dict];
                 }
                 [self performSegue];
             });
@@ -643,7 +649,7 @@
         
         NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
         NSInteger missionProcess = ((NSNumber *)[userInfoList valueForKey:@"missionProcess"]).intValue;
-        //todo
+        
         if (++missionProcess >3)
             missionProcess = 3;
         [userInfoList setObject:[NSNumber numberWithInt:missionProcess] forKey:@"missionProcess"];
@@ -661,6 +667,30 @@
     }
     if ([destination respondsToSelector:@selector(setRecord:)]){
         [destination setValue:record forKey:@"record"];
+    }
+}
+
+-(IBAction)fightIconAction:(id)sender{
+    FightIconButton *btn = (FightIconButton*)sender;
+    
+    switch (btn.fightStage) {
+        case FightStageFunny:
+            [self sendNotification:@"搞笑级"];
+            break;
+        case FightStageEasy:
+            [self sendNotification:@"普通级"];
+            break;
+        case FightStageNormal:
+            [self sendNotification:@"强力级"];
+            break;
+        case FightStageHard:
+            [self sendNotification:@"稀有级"];
+            break;
+        case FightStageLegend:
+            [self sendNotification:@"传说级"];
+            break;
+        default:
+            break;
     }
 }
 
@@ -696,16 +726,19 @@
         int timeInt = event.times.intValue;
         eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:timeInt]];
     } else if ([event.eType isEqualToString:RULE_Type_Fight]){
+        Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:event.eId];
+
         identifier = @"fightCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
-        UIImageView *iconImageView = (UIImageView *)[cell viewWithTag:200];
         [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
         eventLabel.numberOfLines = 3;
+        FightIconButton *iconImageView = (FightIconButton *)[cell viewWithTag:200];
+        iconImageView.fightStage = fightEvent.monsterLevel.intValue;
+        [iconImageView addTarget:self action:@selector(fightIconAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:event.eId];
         NSArray *meetText = [fightEvent.fightName componentsSeparatedByString:@"。"];
         NSMutableString *fightText = [[NSMutableString alloc]initWithString:[meetText objectAtIndex:0]];
         if (event.eWin.integerValue>0){
@@ -724,8 +757,6 @@
         [fightText appendString:[meetText objectAtIndex:1]];
         eventLabel.text = fightText;
         eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:event.times.integerValue]];
-        iconImageView.image = [UIUtils getFightImageByStage:fightEvent.monsterLevel];
-        
     } else if ([event.eType isEqualToString:RULE_Type_Fight_Friend]){
         identifier = @"fightCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -734,6 +765,11 @@
         UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
         [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
         eventLabel.numberOfLines = 3;
+        
+        FightIconButton *iconImageView = (FightIconButton *)[cell viewWithTag:200];
+        iconImageView.fightStage = FightStageEasy;
+        [iconImageView addTarget:self action:@selector(fightIconAction:) forControlEvents:UIControlEventTouchUpInside];
+        
         Friend *fightFriend = [RORFriendService fetchUserFriend:userBase.userId withFriendId:event.eId];
         
         NSMutableString *fightString = [[NSMutableString alloc]init];

@@ -385,10 +385,14 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" tag="200" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fight_icon_2.png" id="MgX-Jh-Nk9">
+                                                        <button opaque="NO" tag="200" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="jR9-0X-z6u" customClass="FightIconButton">
                                                             <rect key="frame" x="40" y="6" width="24" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </imageView>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <state key="normal" backgroundImage="fight_icon_2.png">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                        </button>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="textfield.png" id="NxC-oq-z7K">
                                                             <rect key="frame" x="40" y="71" width="240" height="39"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -918,7 +922,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="如果你看到这段文字，说明网络连接有问题" id="bHS-TW-eeX">
-                                <rect key="frame" x="46" y="108" width="229" height="388"/>
+                                <rect key="frame" x="46" y="125" width="229" height="371"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
@@ -1592,10 +1596,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="200" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fight_icon_2.png" id="6jm-8K-Qpm">
-                                                    <rect key="frame" x="40" y="0.0" width="24" height="24"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1小时12分12秒" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M8t-M9-hFE">
                                                     <rect key="frame" x="70" y="1" width="210" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -1627,6 +1627,14 @@
                                                     <rect key="frame" x="40" y="101" width="240" height="39"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <button opaque="NO" tag="200" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="UfX-9c-8LD" customClass="FightIconButton">
+                                                    <rect key="frame" x="40" y="0.0" width="24" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <state key="normal" backgroundImage="fight_icon_2.png">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2091,7 +2099,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="152"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新浪微博: @Cyberace_赛跑乐" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wE3-1P-D6O">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新浪微博: @报告村长App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wE3-1P-D6O">
                                         <rect key="frame" x="34" y="53" width="212" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -2100,7 +2108,7 @@
                                         <color key="shadowColor" red="0.87133290819999998" green="0.52737826860000003" blue="0.073111852800000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信（订阅号）: Cyberace" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ha4-j0-Ucf">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信（订阅号）: 报告村长" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ha4-j0-Ucf">
                                         <rect key="frame" x="34" y="77" width="212" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -2110,7 +2118,7 @@
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="btnFeedback" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mHq-Vp-XUT" customClass="RORNormalButton">
-                                        <rect key="frame" x="256" y="63" width="44" height="44"/>
+                                        <rect key="frame" x="249" y="60" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" backgroundImage="write_us.png">
@@ -2440,7 +2448,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UHQ-2B-evv" customClass="RORNormalButton">
-                                        <rect key="frame" x="6" y="460" width="55" height="55"/>
+                                        <rect key="frame" x="38" y="459" width="55" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="weibo.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2450,7 +2458,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JWF-hp-QAE" customClass="RORNormalButton">
-                                        <rect key="frame" x="195" y="460" width="55" height="55"/>
+                                        <rect key="frame" x="227" y="459" width="55" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="renren.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2459,18 +2467,8 @@
                                             <action selector="btnShareToRenren:" destination="VPo-IU-Qcj" eventType="touchUpInside" id="294-wX-gyj"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gMz-4w-OMR" customClass="RORNormalButton">
-                                        <rect key="frame" x="258" y="460" width="55" height="55"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" backgroundImage="tencent_weibo.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="btnShareToTencentWeibo:" destination="VPo-IU-Qcj" eventType="touchUpInside" id="WkF-NA-Xqw"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Gnz-zG-eY0" customClass="RORNormalButton">
-                                        <rect key="frame" x="132" y="460" width="55" height="55"/>
+                                        <rect key="frame" x="164" y="459" width="55" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="QQ_friend.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2480,7 +2478,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9Xh-W4-c36" customClass="RORNormalButton">
-                                        <rect key="frame" x="69" y="460" width="55" height="55"/>
+                                        <rect key="frame" x="101" y="459" width="55" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="QQ.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2645,7 +2643,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exslim_male.png" id="eoQ-Wf-Obc" userLabel="CharatorImage View - normal_female.png">
+                            <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="normal_female.png" id="eoQ-Wf-Obc" userLabel="CharatorImage View - normal_female.png">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -2654,7 +2652,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view tag="100" contentMode="scaleToFill" id="EdA-DD-bXy" userLabel="before charator ground">
-                                <rect key="frame" x="57" y="451" width="207" height="29"/>
+                                <rect key="frame" x="57" y="451" width="207" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -3003,7 +3001,6 @@
         <image name="data_board.png" width="640" height="54"/>
         <image name="details.png" width="64" height="64"/>
         <image name="event_icon.png" width="50" height="50"/>
-        <image name="exslim_male.png" width="640" height="1136"/>
         <image name="eyeClosed.png" width="128" height="128"/>
         <image name="fight_icon_2.png" width="50" height="50"/>
         <image name="finishrunning_pop_bg.png" width="432" height="364"/>
@@ -3023,7 +3020,7 @@
         <image name="item_mall_bg.png" width="640" height="1136"/>
         <image name="item_mall_cell.png" width="640" height="168"/>
         <image name="levelup_congrats.png" width="640" height="1136"/>
-        <image name="loading_bg.jpg" width="640" height="1135"/>
+        <image name="loading_bg.jpg" width="640" height="1136"/>
         <image name="loginButton.png" width="325" height="108"/>
         <image name="loginButtonContainer.png" width="640" height="1136"/>
         <image name="logo.png" width="640" height="397"/>
@@ -3053,12 +3050,11 @@
         <image name="submit.png" width="139" height="139"/>
         <image name="sync_apply.png" width="110" height="110"/>
         <image name="talk_top_bg.png" width="600" height="300"/>
-        <image name="tencent_weibo.png" width="110" height="110"/>
         <image name="textfield.png" width="320" height="60"/>
         <image name="vase.png" width="268" height="276"/>
         <image name="vase_front.png" width="268" height="276"/>
         <image name="weibo.png" width="110" height="110"/>
-        <image name="write_us.png" width="88" height="88"/>
+        <image name="write_us.png" width="128" height="128"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

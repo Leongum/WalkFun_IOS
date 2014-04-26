@@ -188,6 +188,7 @@
             [self checkMainPageInstruction];
             [self checkFirstOpenInstruction];
             [self checkHistoryInstruction];
+            [self checkHistoryInstruction];
         }
     }
     self.missionView.center = CGPointMake(self.missionView.center.x, missionBoardCenterY);
@@ -277,6 +278,20 @@
         [coverViewQueue addObject:instructionCV];
         
         [dict setObject:[NSNumber numberWithInt:1] forKey:@"HistoryInstruction"];
+        [RORUserUtils writeToUserInfoPList:dict];
+    }
+}
+
+-(void)checkSyncInstruction{
+    NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
+    NSNumber *syncIns = [dict objectForKey:@"SyncInstruction"];
+    if (syncIns && (syncIns.intValue<0 || userBase.userDetail.level.intValue>3)){
+        CoverView *instructionCV = [[CoverView alloc]initWithFrame:self.view.frame];
+        instructionCV.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+        [instructionCV addCoverBgImage:[UIImage imageNamed:@"intro_sync.png"] grayed:NO];
+        [coverViewQueue addObject:instructionCV];
+        
+        [dict setObject:[NSNumber numberWithInt:1] forKey:@"SyncInstruction"];
         [RORUserUtils writeToUserInfoPList:dict];
     }
 }
@@ -460,7 +475,7 @@
         if (alertType == ALERT_TYPE_GIVEUPMISSION)
             [self cancelMission];
         else if (alertType == ALERT_TYPE_TOAPPSTORE)
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/sai-pao-le-zhuan-ye-you-you/id718299464?mt=8"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_URL]];
     }
 }
 

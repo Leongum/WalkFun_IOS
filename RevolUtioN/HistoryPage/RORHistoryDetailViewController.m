@@ -264,6 +264,10 @@
         [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(IBAction)fightIconAction:(id)sender{
+    FightIconButton *btn = (FightIconButton*)sender;
+    [self sendNotification:FightStage_toString[btn.fightStage]];
+}
 
 #pragma mark -
 #pragma mark Table view data source
@@ -289,9 +293,14 @@
         
         Action_Define *actionEvent = [RORSystemService fetchActionDefine:walkEvent.eId];
         eventLabel.text = actionEvent.actionName;
-        effectLabel.text = [NSString stringWithFormat:@"获得：%@",actionEvent.actionAttribute];
+        if (actionEvent.actionAttribute)
+            effectLabel.text = [NSString stringWithFormat:@"获得：%@",actionEvent.actionAttribute];
+        else
+            effectLabel.text = @"";
         eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:walkEvent.times.integerValue]];
     } else if ([walkEvent.eType isEqualToString:RULE_Type_Fight]){
+        Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:walkEvent.eId];
+
         identifier = @"fightCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
@@ -302,9 +311,10 @@
         [effectLabel setLineBreakMode:NSLineBreakByWordWrapping];
         effectLabel.numberOfLines = 0;
         UILabel *expLabel = (UILabel *)[cell viewWithTag:103];
-        UIImageView *iconImageView = (UIImageView *)[cell viewWithTag:200];
+        FightIconButton *iconImageView = (FightIconButton *)[cell viewWithTag:200];
+        iconImageView.fightStage = fightEvent.monsterLevel.intValue;
+        [iconImageView addTarget:self action:@selector(fightIconAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:walkEvent.eId];
         NSArray *meetText = [fightEvent.fightName componentsSeparatedByString:@"。"];
         NSMutableString *fightText = [[NSMutableString alloc]initWithString:[meetText objectAtIndex:0]];
         
@@ -331,18 +341,19 @@
             powerCost = fightEvent.basePowerConsume.doubleValue;
         }
         expLabel.text = [NSString stringWithFormat:@"经验值+%@  体力-%.0f", fightEvent.baseExperience, powerCost];
-        
-        iconImageView.image = [UIUtils getFightImageByStage:fightEvent.monsterLevel];
-
     } else if ([walkEvent.eType isEqualToString:RULE_Type_Fight_Friend]){
         identifier = @"fightCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
         UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
-        UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
-        UILabel *expLabel = (UILabel *)[cell viewWithTag:103];
         [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
         eventLabel.numberOfLines = 0;
+        UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
+        UILabel *expLabel = (UILabel *)[cell viewWithTag:103];
+        FightIconButton *iconImageView = (FightIconButton *)[cell viewWithTag:200];
+        iconImageView.fightStage = FightStageEasy;
+        [iconImageView addTarget:self action:@selector(fightIconAction:) forControlEvents:UIControlEventTouchUpInside];
+        
         Friend *fightFriend = [RORFriendService fetchUserFriend:userBase.userId withFriendId:walkEvent.eId];
         
         NSMutableString *fightString = [[NSMutableString alloc]init];
@@ -361,6 +372,7 @@
         eventLabel.text = fightString;
         eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:walkEvent.times.integerValue]];
         expLabel.text = [NSString stringWithFormat:@"体力-%@", walkEvent.power];
+        
     }else if ([walkEvent.eType isEqualToString:RULE_Type_Start]){ //出发事件
         identifier = @"eventCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];

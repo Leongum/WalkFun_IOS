@@ -179,11 +179,6 @@
     
 }
 
--(void)useItem:(NSNumber *)itemId{
-    //todo
-    
-}
-
 - (IBAction)cancelBuffAction:(id)sender {
     if (selectedItem){
         selectedItem = nil;

@@ -19,4 +19,13 @@ NSString *const CounterNumberImageInteger_toString[] ={
     @"5.png",
 };
 
+NSString *const FightStage_toString[] ={
+    nil,
+    @"逗逼",
+    @"普通",
+    @"强力",
+    @"稀有",
+    @"传说",
+};
+
 @end

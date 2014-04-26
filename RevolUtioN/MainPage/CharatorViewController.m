@@ -104,13 +104,16 @@
         [fatPVFrameView setTextColor:[UIColor whiteColor]];
     }
     
-    //todo
     fightPVFrameView.text = [NSString stringWithFormat:@"%d",userBase.userDetail.fight.intValue + userBase.userDetail.fightPlus.intValue];
     if (userBase.userDetail.fightPlus.intValue>0){
         [fightPVFrameView setTextColor:[UIColor yellowColor]];
     } else {
         [fightPVFrameView setTextColor:[UIColor whiteColor]];
     }
+}
+
+-(void)refreshUserData{
+    [self displayProgresses];
 }
 
 -(void)displayCharator{

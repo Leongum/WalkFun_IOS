@@ -75,4 +75,9 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    Recommend_App *app = [contentList objectAtIndex:indexPath.row];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:app.appAddress]];
+}
+
 @end

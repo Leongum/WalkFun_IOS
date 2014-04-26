@@ -26,7 +26,6 @@
         [itemNameLabel setTextAlignment:NSTextAlignmentCenter];
         [self addSubview:itemNameLabel];
         
-        //todo:图片
         UIImage *iconImage = [RORVirtualProductService getImageOf:item];
         itemImageView = [[UIImageView alloc]initWithImage:iconImage];
         itemImageView.frame = CGRectMake(CGRectGetWidth(frame)/2-BIG_ITEM_SIZE/2, 105, BIG_ITEM_SIZE, BIG_ITEM_SIZE);
@@ -51,7 +50,6 @@
         itemDescriptionLabel.text = [itemInfoStringList objectAtIndex:0];
         [itemDescriptionLabel setLineBreakMode:NSLineBreakByWordWrapping];
         itemDescriptionLabel.numberOfLines = 0;
-        //todo: 多行显示
         [self addSubview:itemDescriptionLabel];
         
         itemUseButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 110, 49)];

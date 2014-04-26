@@ -48,13 +48,14 @@
     
     [self addChildViewController:charatorViewController];
     [self.view addSubview:charview];
-    [self.view sendSubviewToBack:charview];
-    [self.view sendSubviewToBack:self.bgImageView];
     [charatorViewController didMoveToParentViewController:self];
     
     lastWeatherUpdateTime = nil;
     
     [self.badgeView addTarget:self action:@selector(badgeViewAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //启动个人页面中，体力数值的刷新timer
+    [NSThread detachNewThreadSelector:@selector(startTimer) toTarget:self withObject:nil];
 }
 
 - (void)initControlsLayout{
@@ -101,16 +102,11 @@
 
 -(void)checkMissionProcess{
     NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
-    //    if (!missionStoneView){
-    //        missionStoneView = [[MissionStoneView alloc]initWithFrame:self.missionStoneButton.frame];
-    //        [self.view addSubview:missionStoneView];
-    //        [self.view bringSubviewToFront:self.missionStoneButton];
-    //    }
+    
     //如果已经集满了三次日常任务，但没有兑换奖励，则接不到新的任务
     NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
     missionDone = missionProcess.intValue;
-    //    [missionStoneView showStones:missionProcess.intValue andAnimated:NO];
-    //    [self.missionStoneButton setTitle:[NSString stringWithFormat:@"%ld/3", (long)missionProcess.integerValue] forState:UIControlStateNormal];
+    
     switch (missionDone) {
         case 0:{
             [self.missionStoneButton setBackgroundImage:[UIImage imageNamed:@"missionStone_0.png"] forState:UIControlStateNormal];
@@ -131,10 +127,6 @@
         default:
             break;
     }
-    //    if (missionProcess.integerValue == 3){//todo
-    //        [self.missionStoneButton setEnabled:YES];
-    //        return;
-    //    }
     [self.missionStoneButton setEnabled:YES];
 }
 
@@ -172,7 +164,6 @@
 -(void)prepareControlsForAnimation{
     self.weatherInfoButtonView.alpha = 1;
     self.userInfoView.alpha = 1;
-    self.runButton.alpha = 1;
 }
 
 - (void)initLocationServcie{
@@ -295,7 +286,6 @@
     [self setWeatherInfoButtonView:nil];
     [self setUserName:nil];
     [self setUserId:nil];
-    [self setRunButton:nil];
     [self setUsernameLabel:nil];
     [self setLevelLabel:nil];
     [self setUserInfoView:nil];
@@ -314,5 +304,21 @@
     UIViewController *historyViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"historyListViewController"];
     [self presentViewController:historyViewController animated:YES completion:^(){}];
 }
+
+
+-(void)startTimer{
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:120 target:self selector:@selector(timerDot) userInfo:nil repeats:YES];
+    repeatingTimer = timer;
+    [[NSRunLoop currentRunLoop] run];
+}
+
+- (void)timerDot{
+    [self performSelectorOnMainThread:@selector(displayTimerInfo) withObject:nil waitUntilDone:YES];
+}
+
+-(void)displayTimerInfo{
+    [charatorViewController refreshUserData];
+}
+
 
 @end

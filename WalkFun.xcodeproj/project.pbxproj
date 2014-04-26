@@ -294,7 +294,6 @@
 		30DBB72317EFE04400552391 /* challenge_pop_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DBB72017EFE04400552391 /* challenge_pop_bg.png */; };
 		30DC91FD18FCDD1F006B6A4C /* talk_top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC91FC18FCDD1F006B6A4C /* talk_top_bg.png */; };
 		30DC91FF18FD1A78006B6A4C /* grass_male.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC91FE18FD1A78006B6A4C /* grass_male.png */; };
-		30DC920218FE45F8006B6A4C /* MissionStoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DC920118FE45F8006B6A4C /* MissionStoneView.m */; };
 		30DC920718FEF394006B6A4C /* missionStone_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC920318FEF394006B6A4C /* missionStone_0.png */; };
 		30DC920818FEF394006B6A4C /* missionStone_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC920418FEF394006B6A4C /* missionStone_1.png */; };
 		30DC920918FEF394006B6A4C /* missionStone_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 30DC920518FEF394006B6A4C /* missionStone_2.png */; };
@@ -329,6 +328,8 @@
 		30F7872F190A3F1F0041F9F4 /* intro_firstopen.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F7872C190A3F1F0041F9F4 /* intro_firstopen.png */; };
 		30F78730190A3F1F0041F9F4 /* intro_mainpage.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F7872D190A3F1F0041F9F4 /* intro_mainpage.png */; };
 		30F78731190A3F1F0041F9F4 /* intro_missionstone.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F7872E190A3F1F0041F9F4 /* intro_missionstone.png */; };
+		30F78733190AA92E0041F9F4 /* intro_sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F78732190AA92E0041F9F4 /* intro_sync.png */; };
+		30F78736190C1BBA0041F9F4 /* FightIconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F78735190C1BBA0041F9F4 /* FightIconButton.m */; };
 		30FAA212186415E100E72650 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FAA210186415E100E72650 /* male.png */; };
 		30FAA213186415E100E72650 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FAA211186415E100E72650 /* female.png */; };
 		30FAA215186417DF00E72650 /* notSure.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FAA214186417DF00E72650 /* notSure.png */; };
@@ -786,8 +787,6 @@
 		30DBB72017EFE04400552391 /* challenge_pop_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = challenge_pop_bg.png; path = bg/challenge_pop_bg.png; sourceTree = "<group>"; };
 		30DC91FC18FCDD1F006B6A4C /* talk_top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = talk_top_bg.png; sourceTree = "<group>"; };
 		30DC91FE18FD1A78006B6A4C /* grass_male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grass_male.png; sourceTree = "<group>"; };
-		30DC920018FE45F8006B6A4C /* MissionStoneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MissionStoneView.h; path = MainPage/MissionStoneView.h; sourceTree = "<group>"; };
-		30DC920118FE45F8006B6A4C /* MissionStoneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissionStoneView.m; path = MainPage/MissionStoneView.m; sourceTree = "<group>"; };
 		30DC920318FEF394006B6A4C /* missionStone_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missionStone_0.png; sourceTree = "<group>"; };
 		30DC920418FEF394006B6A4C /* missionStone_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missionStone_1.png; sourceTree = "<group>"; };
 		30DC920518FEF394006B6A4C /* missionStone_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missionStone_2.png; sourceTree = "<group>"; };
@@ -832,6 +831,9 @@
 		30F7872C190A3F1F0041F9F4 /* intro_firstopen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_firstopen.png; sourceTree = "<group>"; };
 		30F7872D190A3F1F0041F9F4 /* intro_mainpage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_mainpage.png; sourceTree = "<group>"; };
 		30F7872E190A3F1F0041F9F4 /* intro_missionstone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_missionstone.png; sourceTree = "<group>"; };
+		30F78732190AA92E0041F9F4 /* intro_sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_sync.png; sourceTree = "<group>"; };
+		30F78734190C1BBA0041F9F4 /* FightIconButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FightIconButton.h; path = HistoryPage/FightIconButton.h; sourceTree = "<group>"; };
+		30F78735190C1BBA0041F9F4 /* FightIconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FightIconButton.m; path = HistoryPage/FightIconButton.m; sourceTree = "<group>"; };
 		30FAA210186415E100E72650 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
 		30FAA211186415E100E72650 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
 		30FAA214186417DF00E72650 /* notSure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notSure.png; sourceTree = "<group>"; };
@@ -1545,6 +1547,7 @@
 		30984932186206750079E236 /* instruction */ = {
 			isa = PBXGroup;
 			children = (
+				30F78732190AA92E0041F9F4 /* intro_sync.png */,
 				30F7872C190A3F1F0041F9F4 /* intro_firstopen.png */,
 				30F7872D190A3F1F0041F9F4 /* intro_mainpage.png */,
 				30F7872E190A3F1F0041F9F4 /* intro_missionstone.png */,
@@ -1661,6 +1664,8 @@
 				3022E00C18F2942200F3A9D5 /* EventAnnotation.m */,
 				3022E00E18F2943600F3A9D5 /* CoinAnnotation.h */,
 				3022E00F18F2943600F3A9D5 /* CoinAnnotation.m */,
+				30F78734190C1BBA0041F9F4 /* FightIconButton.h */,
+				30F78735190C1BBA0041F9F4 /* FightIconButton.m */,
 			);
 			name = RORHistoryPage;
 			sourceTree = "<group>";
@@ -1700,8 +1705,6 @@
 				3022DFB618DACA3100F3A9D5 /* MissionCongratsLabel.m */,
 				3022E01B18F51FC900F3A9D5 /* MissionStoneCongratsViewController.h */,
 				3022E01C18F51FC900F3A9D5 /* MissionStoneCongratsViewController.m */,
-				30DC920018FE45F8006B6A4C /* MissionStoneView.h */,
-				30DC920118FE45F8006B6A4C /* MissionStoneView.m */,
 				30F78715190513A70041F9F4 /* BadgeView.h */,
 				30F78716190513A70041F9F4 /* BadgeView.m */,
 			);
@@ -2052,6 +2055,7 @@
 				0F0B64CC18F3E27C003B0E15 /* UMSLoginViewController.xib in Resources */,
 				3022DFD918E012BC00F3A9D5 /* friend_add_nextPage_disabled.png in Resources */,
 				3022DFDB18E01FE700F3A9D5 /* history_detail_title.png in Resources */,
+				30F78733190AA92E0041F9F4 /* intro_sync.png in Resources */,
 				30F7870F1902542E0041F9F4 /* anno_event.png in Resources */,
 				30F78725190A00400041F9F4 /* fight_icon_5.png in Resources */,
 				30DC91FD18FCDD1F006B6A4C /* talk_top_bg.png in Resources */,
@@ -2174,6 +2178,7 @@
 				30989CCB17F7D72A00CA9F83 /* RORImageView.m in Sources */,
 				30692D56181132B300DA01EC /* RORInstructionPageViewController.m in Sources */,
 				0FA7518B189279A90037342E /* RORConstant.m in Sources */,
+				30F78736190C1BBA0041F9F4 /* FightIconButton.m in Sources */,
 				0FA7516F1892798F0037342E /* ROREndAnnotation.m in Sources */,
 				0FA751D8189279CB0037342E /* User_Base.m in Sources */,
 				0FDE82F4189383160082B1BF /* Action.m in Sources */,
@@ -2188,7 +2193,6 @@
 				3022DFEF18E19BF800F3A9D5 /* ReadyUseItemViewController.m in Sources */,
 				30750A6518B1DF8A00EC7B51 /* ItemIconView.m in Sources */,
 				30F4547117BCB519006CB66C /* INDeviceStatus.m in Sources */,
-				30DC920218FE45F8006B6A4C /* MissionStoneView.m in Sources */,
 				0F282F8F18B08D36003F44E8 /* RORUserPropsService.m in Sources */,
 				30750A7718B3B67A00EC7B51 /* RORLocationUtils.m in Sources */,
 				0FA751FC18927A0F0037342E /* RORMoreViewController.m in Sources */,

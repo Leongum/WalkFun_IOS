@@ -18,6 +18,7 @@
 #import "RORRunningBaseViewController.h"
 #import "THProgressView.h"
 #import "StrokeLabel.h"
+#import "FightIconButton.h"
 
 #define WALKING_FIGHT_STAGE_I 200
 #define WALKING_FIGHT_STAGE_II 200

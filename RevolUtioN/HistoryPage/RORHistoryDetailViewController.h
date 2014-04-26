@@ -17,6 +17,7 @@
 #import "PooViewController.h"
 #import "ItemIconView.h"
 #import "ReportViewController.h"
+#import "FightIconButton.h"
 
 #define ICON_SIZE_ITEM 50
 

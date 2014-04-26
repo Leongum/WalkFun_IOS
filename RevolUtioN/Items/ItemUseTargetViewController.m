@@ -30,7 +30,7 @@
 	// Do any additional setup after loading the view.
 
     self.backButton.alpha = 0;
-    //todo:load content
+    
     contentList = [RORFriendService fetchFriendFansList];
     
     isItemAboutFight = (selectedItem.propFlag.intValue==ItemTypeFight);
@@ -93,7 +93,6 @@
 }
 
 -(void)useItemTo:(NSNumber *)userId{
-    //todo
     User_Base *toThisUser = [RORUserServices fetchUser:userId];
     if (!toThisUser)
         toThisUser = [RORUserServices syncUserInfoById:userId];

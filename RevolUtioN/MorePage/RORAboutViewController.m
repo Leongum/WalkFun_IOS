@@ -83,11 +83,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0 && hasNewVersion){
-        //todo:: change url.
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/cyberace/id718299464?ls=1&mt=8"]];
-    }
-    if (indexPath.row == 1){
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.cyberace.cc"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_URL]];
     }
 }
 

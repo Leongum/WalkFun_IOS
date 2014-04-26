@@ -12,6 +12,9 @@
 //define test service host
 #define SERVICE_HOST @"http://121.199.56.231:8080/walkfun/service/api"
 
+//define service host
+//#define SERVICE_HOST @"http://www.cyberace.cc:9090/service/api"
+
 #define CURRENT_VERSION_MAIN 1
 #define CURRENT_VERSION_SUB 0
 
@@ -69,6 +72,8 @@
 #define UMENG_APPKEY @"5300735056240b04531ca01a"
 
 #define PICTURE_HOST_URL @"http://cyberace.qiniudn.com/"
+
+#define APP_URL @"https://itunes.apple.com/us/app/bao-gao-cun-zhang-ji-bu-yang/id869432635?ls=1&mt=8"
 
 #define DEFAULT_NET_WORK_MODE @"All_Mode"
 #define NET_WORK_MODE_WIFI @"Only_Wifi"
@@ -145,6 +150,7 @@ typedef struct {
 } Version;
 
 NSString *const CounterNumberImageInteger_toString[6];
+NSString *const FightStage_toString[6];
 
 @interface RORConstant : NSObject
 

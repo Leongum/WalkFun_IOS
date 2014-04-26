@@ -329,11 +329,12 @@ static NSDate *syncTime;
     
     NSNumber *latestPowerLeft = [userDict objectForKey:@"latestUserPowerLeft"];
     int delta = -(int)([latestDate timeIntervalSinceNow]/120);
-
     NSInteger powerLeft = latestPowerLeft.integerValue + delta;
-    if (powerLeft>powerMax)
-        powerLeft = powerMax;
-    [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:powerLeft], @"latestUserPowerLeft", [NSDate date], @"latestUserPowerDate",nil]];
+    if (delta>0){
+        if (powerLeft>powerMax)
+            powerLeft = powerMax;
+        [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:powerLeft], @"latestUserPowerLeft", [NSDate date], @"latestUserPowerDate",nil]];
+    }
     return powerLeft;
 }
 

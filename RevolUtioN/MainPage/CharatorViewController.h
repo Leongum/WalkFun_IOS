@@ -30,4 +30,6 @@
 
 @property (strong, nonatomic)    User_Base *userBase;
 
+
+-(void)refreshUserData;
 @end

@@ -91,7 +91,7 @@
         self.latestFriendActionDescriptionLabel.text = [NSString stringWithFormat:@"%@%@", latestFriendAction.actionFromName, actDesString];
     } else {
         self.latestFriendActionDateLabel.text = @"";
-        self.latestFriendActionDescriptionLabel.text = @"最近没什么人理这吃货";
+        self.latestFriendActionDescriptionLabel.text = @"最近没什么人理这家伙";
     }
     if (latestWorkout){
         int days = [RORUtils daysBetweenDate1:latestWorkout.missionEndTime andDate2:[NSDate date]];

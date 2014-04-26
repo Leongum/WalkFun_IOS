@@ -28,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
-    [self.announceTextField setFont:[UIFont fontWithName:APP_FONT size:15]];
+    [self.announceTextField setFont:[UIFont fontWithName:APP_FONT size:16]];
     
     NSMutableDictionary *settingDict = [RORUserUtils getUserSettingsPList];
     [settingDict setObject:[settingDict objectForKey:@"DescVersion"] forKey:@"formerDescVersion"];
