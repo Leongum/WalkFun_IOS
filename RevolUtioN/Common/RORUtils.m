@@ -354,7 +354,8 @@
     if (!viewController){
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
         viewController =  [storyboard instantiateViewControllerWithIdentifier:@"shareCoverViewController"];
-        
+        UIImageView *bgImageView = (UIImageView *)[viewController.view viewWithTag:2];
+        bgImageView.image = [UIUtils grayscale:[RORUtils captureScreen] type:1];
         CGRect frame = delegate.view.frame;
         frame.origin.x = 0;
         frame.origin.y = 0;

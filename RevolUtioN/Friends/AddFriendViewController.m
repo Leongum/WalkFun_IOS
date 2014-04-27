@@ -63,8 +63,8 @@
     //todo 这个URL是app的URL还是什么？
     //设置微信好友或者朋友圈的分享url,下面是微信好友，微信朋友圈对应wechatTimelineData
     [UMSocialData defaultData].extConfig.wechatSessionData.url = APP_URL;
-    [UMSocialData defaultData].extConfig.wechatSessionData.shareText = @"2.一款不错的app，一起来用吧，哦哈哈哈哈！";
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"1.一款不错的app，一起来用吧，哦哈哈哈哈";
+    [UMSocialData defaultData].extConfig.wechatSessionData.shareText = @"咦？你怎么还没去村长那报到？";
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"报告村长";
     //设置分享内容和回调对象
     [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
 }
