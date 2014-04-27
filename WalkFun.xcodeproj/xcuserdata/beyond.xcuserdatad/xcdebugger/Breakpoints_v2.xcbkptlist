@@ -245,7 +245,7 @@
                   symbolName = "-[ItemDetailCoverView initWithFrame:andUserItem:]"
                   moduleName = "WalkFun"
                   urlString = "file:///Users/beyond/development/WalkFun_IOS/RevolUtioN/Items/ItemDetailCoverView.m"
-                  timestampString = "420269719.647477"
+                  timestampString = "420281519.548435"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "59"
@@ -259,7 +259,7 @@
                   symbolName = "-[ItemDetailCoverView initWithFrame:andUserItem:]"
                   moduleName = "WalkFun"
                   urlString = "file:///Users/beyond/development/WalkFun_IOS/RevolUtioN/Items/ItemDetailCoverView.m"
-                  timestampString = "420269722.743438"
+                  timestampString = "420281522.624269"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "59"
@@ -339,22 +339,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RevolUtioN/MainPage/RORLoginViewController.m"
-            timestampString = "419363228.765828"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "-initUserInfoPlist"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "RevolUtioN/ReusableControl/RORRunningBaseViewController.m"
             timestampString = "419841593.306139"
             startingColumnNumber = "9223372036854775807"
@@ -387,7 +371,7 @@
                   symbolName = "-[RORRunningViewController isEventHappen]"
                   moduleName = "WalkFun"
                   urlString = "file:///Users/beyond/development/WalkFun_IOS/RevolUtioN/RunningPages/RORRunningViewController.m"
-                  timestampString = "420269719.652833"
+                  timestampString = "420281519.552398"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "922"
@@ -401,7 +385,7 @@
                   symbolName = "-[RORRunningViewController isEventHappen]"
                   moduleName = "WalkFun"
                   urlString = "file:///Users/beyond/development/WalkFun_IOS/RevolUtioN/RunningPages/RORRunningViewController.m"
-                  timestampString = "420269722.746399"
+                  timestampString = "420281522.627152"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "922"
