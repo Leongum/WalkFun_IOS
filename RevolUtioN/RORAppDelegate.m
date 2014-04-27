@@ -101,11 +101,11 @@
     //sns share umeng
     [UMSocialData setAppKey:UMENG_APPKEY];
     //设置微信AppId
-    [UMSocialWechatHandler setWXAppId:@"wx44395fcdd8983c6b" url:@"http://www.cyberace.cc"];
+    [UMSocialWechatHandler setWXAppId:@"wx44395fcdd8983c6b" url:@"http://www.cyberace.cc/bgcz.html"];
     //打开Qzone的SSO开关
     [UMSocialConfig setSupportQzoneSSO:YES importClasses:@[[QQApiInterface class],[TencentOAuth class]]];
     //设置手机QQ的AppId，指定你的分享url，若传nil，将使用友盟的网址
-    [UMSocialConfig setQQAppId:@"101022066" url:@"http://www.cyberace.cc" importClasses:@[[QQApiInterface class],[TencentOAuth class]]];
+    [UMSocialConfig setQQAppId:@"101022066" url:@"http://www.cyberace.cc/bgcz.html" importClasses:@[[QQApiInterface class],[TencentOAuth class]]];
     //打开新浪微博的SSO开关
     [UMSocialConfig setSupportSinaSSO:YES];
     

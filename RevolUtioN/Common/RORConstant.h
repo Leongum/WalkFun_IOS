@@ -71,7 +71,7 @@
 
 #define UMENG_APPKEY @"5300735056240b04531ca01a"
 
-#define PICTURE_HOST_URL @"http://cyberace.qiniudn.com/"
+#define PICTURE_HOST_URL @"http://walkfun.qiniudn.com/"
 
 #define APP_URL @"https://itunes.apple.com/us/app/bao-gao-cun-zhang-ji-bu-yang/id869432635?ls=1&mt=8"
 
