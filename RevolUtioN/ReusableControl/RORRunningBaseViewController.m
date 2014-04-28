@@ -68,6 +68,7 @@
     goldCount = 0;
     itemCount = 0;
     fightCount = 0;
+    fightFriendCount = 0;
     stepsSinceLastFight = 0;
     secondsSince0power = -1;
     isTired = NO;

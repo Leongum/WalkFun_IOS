@@ -187,7 +187,7 @@
             [self checkMissionStoneInstruction];
             [self checkMainPageInstruction];
             [self checkFirstOpenInstruction];
-            [self checkHistoryInstruction];
+            [self checkSyncInstruction];
             [self checkHistoryInstruction];
         }
     }

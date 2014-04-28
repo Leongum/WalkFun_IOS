@@ -227,6 +227,16 @@
                     [todayMissionDict setObject:todayMission.triggerTimes forKey:@"duration"];
                 }
                 titleLabel.text = @"今日任务";
+            }
+            case MissionTypeFight: {
+                if (todayMission.triggerFightId){
+                    if (todayMission.triggerFightId.intValue ==1){//战斗
+                        [todayMissionDict setObject:todayMission.triggerNumbers forKey:@"fight"];
+                    } else if (todayMission.triggerFightId.intValue ==2){//好友战斗
+                        [todayMissionDict setObject:todayMission.triggerNumbers forKey:@"fightfriend"];
+                    }
+                }
+                titleLabel.text = @"今日任务";
                 break;
             }
             case MissionTypePickItem:{
@@ -270,7 +280,14 @@
                 if ([keyString isEqualToString:@"east"]){
                     l.text = [NSString stringWithFormat:@"向东%d米",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
                 }
-                
+                //战斗
+                if ([keyString isEqualToString:@"fightfriend"]){
+                    l.text = [NSString stringWithFormat:@"%d场PK",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
+                }
+                if ([keyString isEqualToString:@"fight"]){
+                    l.text = [NSString stringWithFormat:@"%d场战斗",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
+                }
+
                 i++;
             } else {
                 UILabel *l = (UILabel *)[self.todayMissionView viewWithTag:i];
@@ -317,7 +334,14 @@
                 if ([keyString isEqualToString:@"east"]){
                     p = directionMoved.east / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
                 }
-                
+                //战斗
+                if ([keyString isEqualToString:@"fightfriend"]){
+                    p = fightFriendCount / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
+                }
+                if ([keyString isEqualToString:@"fight"]){
+                    p = fightCount / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
+                }
+
             } else {
                 p = cMissionItemQuantity / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
             }
@@ -962,6 +986,7 @@
         fightPowerCost = 10;
         [self refreshUserPower];
         walkEvent.power = [NSNumber numberWithInteger:fightPowerCost];
+        fightFriendCount++;
     } else if ([event isKindOfClass:[NSString class]]){//出发事件
         walkEvent.eType = RULE_Type_Start;
         if (!thisWalkFriend)

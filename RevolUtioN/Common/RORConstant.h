@@ -131,7 +131,7 @@
 //标注出发事件。
 #define RULE_Type_Start @"TS"
 
-typedef enum {MissionTypeStep = 0, MissionTypePickItem = 1, MissionTypeUseItem = 2} MissionTypeEnum;
+typedef enum {MissionTypeStep = 0, MissionTypePickItem = 1, MissionTypeUseItem = 2, MissionTypeFight = 3} MissionTypeEnum;
 typedef enum {MissionStatusDone = 0, MissionStatusUndone = 1} MissionStatusEnum;
 typedef enum {FightStageFunny = 1, FightStageEasy = 2, FightStageNormal = 3, FightStageHard = 4, FightStageLegend = 5} FightStageEnum;
 
