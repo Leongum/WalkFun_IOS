@@ -39,6 +39,8 @@
 }
 
 -(void)customInit{
+    [self setBackgroundColor: [UIColor clearColor]];
+    
     //徽章图片
     badgeImageView = [[UIImageView alloc]initWithFrame:self.bounds];
     [self addSubview:badgeImageView];
@@ -48,6 +50,7 @@
     [badgeLabel setFont:[UIFont systemFontOfSize:7.f / 16.f * CGRectGetWidth(self.bounds)]];
     badgeLabel.lineWidth = 3.f / 32.f * CGRectGetWidth(self.bounds);
     [badgeLabel setTextColor:[UIColor whiteColor]];
+    [badgeLabel setBackgroundColor:[UIColor clearColor]];
     [badgeLabel setTextAlignment:NSTextAlignmentCenter];
     [self addSubview:badgeLabel];
     

@@ -258,32 +258,30 @@
                 [self newProcessView:l];
                 if ([keyString isEqualToString:@"distance"]){
                     l.text = [NSString stringWithFormat:@"%gkm",((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue/1000];
-                    continue;
-                }
+                } else
                 if ([keyString isEqualToString:@"currentStep"]){
                     l.text = [NSString stringWithFormat:@"%d步",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
-                    i++;
-                }
+                } else
                 if ([keyString isEqualToString:@"duration"]){
                     l.text = [NSString stringWithFormat:@"%d分钟",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue/60];
-                }
+                } else
                 //方向
                 if ([keyString isEqualToString:@"north"]){
                     l.text = [NSString stringWithFormat:@"向北%d米",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
-                }
+                } else
                 if ([keyString isEqualToString:@"south"]){
                     l.text = [NSString stringWithFormat:@"向南%d米",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
-                }
+                } else
                 if ([keyString isEqualToString:@"west"]){
                     l.text = [NSString stringWithFormat:@"向西%d米",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
-                }
+                } else
                 if ([keyString isEqualToString:@"east"]){
                     l.text = [NSString stringWithFormat:@"向东%d米",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
-                }
+                } else
                 //战斗
                 if ([keyString isEqualToString:@"fightfriend"]){
                     l.text = [NSString stringWithFormat:@"%d场PK",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
-                }
+                } else
                 if ([keyString isEqualToString:@"fight"]){
                     l.text = [NSString stringWithFormat:@"%d场战斗",((NSNumber *)[todayMissionDict objectForKey:keys]).intValue];
                 }
@@ -316,7 +314,7 @@
                     p = distance / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
                 }
                 if ([keyString isEqualToString:@"currentStep"]){
-                    p = currentStep / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
+                    p = currentStep/ 0.8 / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;
                 }
                 if ([keyString isEqualToString:@"duration"]){
                     p = duration / ((NSNumber *)[todayMissionDict objectForKey:keys]).doubleValue;

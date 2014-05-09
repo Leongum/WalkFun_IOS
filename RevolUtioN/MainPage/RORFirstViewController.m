@@ -48,6 +48,7 @@
     
     [self addChildViewController:charatorViewController];
     [self.view addSubview:charview];
+    [self.view sendSubviewToBack:charview];
     [charatorViewController didMoveToParentViewController:self];
     
     lastWeatherUpdateTime = nil;
@@ -136,29 +137,39 @@
         [self sendNotification:[NSString stringWithFormat:@"再完成%d次日常任务领取奖励", 3-missionDone]];
         return;
     }
-    
-    Reward_Details *thisReward = [RORUserServices getRandomReward:userInfo.userId];
-    while (!thisReward) {
-        thisReward = [RORUserServices getRandomReward:userInfo.userId];
-    }
-    
-    MissionStoneCongratsViewController *missionStoneCongratsViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"MissionStoneCongratsViewController"];
-    CoverView *congratsCoverView = (CoverView *)missionStoneCongratsViewController.view;
-    [congratsCoverView addCoverBgImage:[RORUtils captureScreen] grayed:YES];
-    [[self parentViewController].view addSubview:congratsCoverView];
-    [congratsCoverView appear:self];
-    
-    if (thisReward.rewardMoney){
-        [missionStoneCongratsViewController showGold:thisReward.rewardMoney];
-    } else {
-        [missionStoneCongratsViewController showItem:[RORVirtualProductService fetchVProduct:thisReward.rewardPropId]];
-    }
-    
-    //重置
-    [self.missionStoneButton setTitle:@"0/3" forState:UIControlStateNormal];
-    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
-    [userInfoList setObject:[NSNumber numberWithInteger:0] forKey:@"missionProcess"];
-    [RORUserUtils writeToUserInfoPList:userInfoList];
+    [self startIndicator:self];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        Reward_Details *thisReward = [RORUserServices getRandomReward:userInfo.userId];
+        if (!thisReward) {
+            thisReward = [RORUserServices getRandomReward:userInfo.userId];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+        if (thisReward) {
+            MissionStoneCongratsViewController *missionStoneCongratsViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"MissionStoneCongratsViewController"];
+            CoverView *congratsCoverView = (CoverView *)missionStoneCongratsViewController.view;
+            [congratsCoverView addCoverBgImage:[RORUtils captureScreen] grayed:YES];
+            [[self parentViewController].view addSubview:congratsCoverView];
+            [congratsCoverView appear:self];
+            
+            if (thisReward.rewardMoney){
+                [missionStoneCongratsViewController showGold:thisReward.rewardMoney];
+            } else {
+                [missionStoneCongratsViewController showItem:[RORVirtualProductService fetchVProduct:thisReward.rewardPropId]];
+            }
+            
+            //重置
+            NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+            [userInfoList setObject:[NSNumber numberWithInteger:0] forKey:@"missionProcess"];
+            [RORUserUtils writeToUserInfoPList:userInfoList];
+            
+            [self checkMissionProcess];
+            
+            [self endIndicator:self];
+        } else {
+            [self sendAlart:@"网络错误！"];
+        }
+        });
+    });
 }
 
 -(void)prepareControlsForAnimation{
@@ -170,7 +181,6 @@
     userLocation = nil;
     wasFound = NO;
     
-    //    locationManager = [(RORAppDelegate *)[[UIApplication sharedApplication] delegate] sharedLocationManager];
     locationManager = [[CLLocationManager alloc]init];
     locationManager.delegate = self;
     

@@ -152,14 +152,14 @@
     
     //未登录
     if ([RORUserUtils getUserId].integerValue<0) {
-        UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginNavigatorController"];
-        [self presentViewController:loginViewController animated:NO completion:^(){}];
+//        UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginNavigatorController"];
+//        [self presentViewController:loginViewController animated:NO completion:NULL];
     } else {
         userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
         //还未设置性别
         if ((![userBase.sex isEqualToString:@"男"]) && (![userBase.sex isEqualToString:@"女"])){
-            UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"SexSelectionViewController"];
-            [self presentViewController:loginViewController animated:NO completion:^(){}];
+//            UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"SexSelectionViewController"];
+//            [self presentViewController:loginViewController animated:NO completion:^(){}];
         } else {
             //刷新页面
             for (int i=0; i<PAGE_QUANTITY; i++){
@@ -195,6 +195,16 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    if ([RORUserUtils getUserId].integerValue<0) {
+        UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginNavigatorController"];
+        [self presentViewController:loginViewController animated:NO completion:NULL];
+    } else {
+        if ((![userBase.sex isEqualToString:@"男"]) && (![userBase.sex isEqualToString:@"女"])){
+            UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"SexSelectionViewController"];
+            [self presentViewController:loginViewController animated:NO completion:^(){}];
+        }
+    }
+    
     //检查日常任务
     [self checkDailyMission];
     //检查是否提示玩家去appstore评价

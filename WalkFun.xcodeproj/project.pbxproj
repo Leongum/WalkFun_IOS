@@ -1206,12 +1206,12 @@
 		301C1F6D1737B5B80068B43B /* bg */ = {
 			isa = PBXGroup;
 			children = (
-				3022DFC418DBF6D600F3A9D5 /* alert_bg.png */,
 				30984932186206750079E236 /* instruction */,
 				30804E8417F5663300F1A353 /* loading */,
 				307C861617E97A90007C1DE5 /* running */,
 				30166A8717C3B84C0035C722 /* main */,
 				303B87E41852DE0900FD44AC /* Training */,
+				3022DFC418DBF6D600F3A9D5 /* alert_bg.png */,
 				30989CC717F7356300CA9F83 /* running_end_bg.png */,
 				30594BC317F06B4F00E6A19B /* seg_selected_bg.png */,
 				30DBB72017EFE04400552391 /* challenge_pop_bg.png */,
@@ -2383,8 +2383,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bingyang Zhao (8RLLL2GT4J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bingyang Zhao (8RLLL2GT4J)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2435,8 +2435,8 @@
 		302FD0491727D870004DA005 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bingyang Zhao (8RLLL2GT4J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bingyang Zhao (8RLLL2GT4J)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/UMeng/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",

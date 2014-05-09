@@ -266,7 +266,7 @@
 
 -(IBAction)fightIconAction:(id)sender{
     FightIconButton *btn = (FightIconButton*)sender;
-    [self sendNotification:FightStage_toString[btn.fightStage]];
+    [self sendNotification:[NSString stringWithFormat:@"%@怪物",FightStage_toString[btn.fightStage]]];
 }
 
 #pragma mark -

@@ -91,10 +91,10 @@
 
 #define APP_FONT @"DFPWaWaW5"
 
-#define SENTENCE_START_WALKING_ALONE @"独自一人从村里出发了|从村里出发了|毫无悬念的一个人从村里出发了"
+#define SENTENCE_START_WALKING_ALONE @"独自一人从村里出发了|从村里出发了|毫无悬念的一个人走出村庄"
 #define SENTENCE_START_WALKING_WITH @"与小伙伴%@一起从村里出发了"
-#define SENTENCE_FRIEND_FIGHT_WIN @"遇到%@并主动与之切磋武艺，几招过后轻松取胜，被围观群众投来崇拜的目光。|巧遇%@与之切磋，大战250回合后终于艰难取胜。"
-#define SENTENCE_FRIEND_FIGHT_LOSE @"遇到%@并主动与之切磋武艺，结果连对方三招都没接住。|巧遇%@与之切磋，大战250回合后遗憾落败。"
+#define SENTENCE_FRIEND_FIGHT_WIN @"遇到%@并主动与之切磋武艺，几招过后轻松取胜，被围观群众投来崇拜的目光。|巧遇%@与之切磋，大战250回合后终于艰难取胜。|与%@于小树林中比武，结果不费吹灰之力便战胜对方。|与%@于小河边比试，赢得比想像中要轻松许多。|与%@于一座教堂前切磋，费尽九牛二虎之力才侥幸取胜。"
+#define SENTENCE_FRIEND_FIGHT_LOSE @"遇到%@并主动与之切磋武艺，结果连对方三招都没接住。|巧遇%@与之切磋，大战250回合后遗憾落败。|与%@于小树林中比武，结果对方好像没费吹灰之力。|与%@于小河边比试，虽然输了但也打出了水平。|与%@于一座教堂前切磋，输得比想像中要快许多。"
 
 #endif
 
