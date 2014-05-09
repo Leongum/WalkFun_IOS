@@ -27,9 +27,9 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (readonly,strong,nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (readonly,strong,nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (readonly,strong,nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (readonly,strong) NSManagedObjectContext *managedObjectContext;
+@property (readonly,strong) NSManagedObjectModel *managedObjectModel;
+@property (readonly,strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (strong, nonatomic) NSDictionary *userInfo;
 @property (readonly) NetworkStatus networkStatus;
 @property (strong, nonatomic, readonly) CMMotionManager *sharedMotionManager;
