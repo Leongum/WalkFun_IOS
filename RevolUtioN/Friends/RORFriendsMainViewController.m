@@ -43,6 +43,12 @@
     followList = [RORFriendService fetchFriendFollowsList];
     fansList = [RORFriendService fetchFriendFansList];
     friendList = [RORFriendService fetchFriendEachFansList];
+ 
+    //把cover view挪到mainViewController
+    [self.filterCoverView removeFromSuperview];
+    [self.parentViewController.view addSubview:self.filterCoverView];
+    [self.parentViewController.view bringSubviewToFront:self.filterCoverView];
+    self.filterCoverView.alpha = 0;
     
     [self initFriendDisplayBool];
     [self refreshTableView];
@@ -64,36 +70,30 @@
     }
     showFollow = showFollowNum.boolValue;
     showFans = showFansNum.boolValue;
-    
-    [self refreshFriendDisplayButton];
+    [self arrangeButtons];
+//    [self refreshFriendDisplayButton];
 }
 
 -(void)refreshFriendDisplayButton{
-    if (showFollow && showFans){
-        self.titleLabel.text = @"我的好友";
-    } else if (showFollow) {
-        self.titleLabel.text = @"我的关注";
-    } else if (showFans) {
-        self.titleLabel.text = @"我的粉丝";
-    } else {
-        self.titleLabel.text = @"";
-    }
+//    if (showFollow && showFans){
+//        self.titleLabel.text = @"我的好友";
+//    } else if (showFollow) {
+//        self.titleLabel.text = @"我的关注";
+//    } else if (showFans) {
+//        self.titleLabel.text = @"我的粉丝";
+//    } else {
+//        self.titleLabel.text = @"";
+//    }
     
-    if (showFollow){
-//        [self.showFollowButton setBackgroundColor:[UIColor redColor]];
-        [self.showFollowButton setBackgroundImage:[UIImage imageNamed:@"followButton_selected.png"] forState:UIControlStateNormal];
-//        self.startDeletingButton.enabled = YES;
-    } else{
-//        [self.showFollowButton setBackgroundColor:[UIColor clearColor]];
-        [self.showFollowButton setBackgroundImage:[UIImage imageNamed:@"followButton_normal.png"] forState:UIControlStateNormal];
-//        self.startDeletingButton.enabled = NO;
-    }
-    if (showFans){
-//        [self.showFansButton setBackgroundColor:[UIColor redColor]];
-        [self.showFansButton setBackgroundImage:[UIImage imageNamed:@"fansButton_selected.png"] forState:UIControlStateNormal];
-    } else
-//        [self.showFansButton setBackgroundColor:[UIColor clearColor]];
-    [self.showFansButton setBackgroundImage:[UIImage imageNamed:@"fansButton_normal.png"] forState:UIControlStateNormal];
+//    if (showFollow){
+//        [self.showFollowButton setBackgroundImage:[UIImage imageNamed:@"followButton_selected.png"] forState:UIControlStateNormal];
+//    } else{
+//        [self.showFollowButton setBackgroundImage:[UIImage imageNamed:@"followButton_normal.png"] forState:UIControlStateNormal];
+//    }
+//    if (showFans){
+//        [self.showFansButton setBackgroundImage:[UIImage imageNamed:@"fansButton_selected.png"] forState:UIControlStateNormal];
+//    } else
+//    [self.showFansButton setBackgroundImage:[UIImage imageNamed:@"fansButton_normal.png"] forState:UIControlStateNormal];
 
     [self saveFriendDisplayPlist];
 }
@@ -110,9 +110,62 @@
 
 - (IBAction)clickShowFollowButton:(id)sender{
     showFollow = !showFollow;
-    [self refreshFriendDisplayButton];
-    [self refreshTableView];
+//    [self refreshFriendDisplayButton];
+//    [self refreshTableView];
+    
+    self.filterCoverView.alpha = 1;
 }
+
+- (IBAction)hideCoverViewAction:(id)sender {
+    self.filterCoverView.alpha = 0;
+}
+
+- (IBAction)showFriendAction:(id)sender {
+    showFans = YES;
+    showFollow = YES;
+    [self arrangeButtons];
+    [self refreshTableView];
+    [self saveFriendDisplayPlist];
+    [self hideCoverViewAction:self];
+}
+
+- (IBAction)showFansAction:(id)sender {
+    showFollow = NO;
+    showFans = YES;
+    [self arrangeButtons];
+    [self refreshTableView];
+    [self saveFriendDisplayPlist];
+    [self hideCoverViewAction:self];
+}
+
+- (IBAction)showFollowAction:(id)sender {
+    showFans = NO;
+    showFollow = YES;
+    [self arrangeButtons];
+    [self refreshTableView];
+    [self saveFriendDisplayPlist];
+    [self hideCoverViewAction:self];
+}
+
+-(void)arrangeButtons{
+    if (showFollow && showFans) {
+        self.followFilterButton.center = CGPointMake(160, 132);
+        self.fansFilterButton.center = CGPointMake(160, 85);
+        self.friendFilterButton.center = CGPointMake(160, 38);
+        [self.showFollowButton setTitle:@"互相关注" forState:UIControlStateNormal];
+    } else if (showFollow && !showFans){
+        self.followFilterButton.center = CGPointMake(160, 38);
+        self.fansFilterButton.center = CGPointMake(160, 132);
+        self.friendFilterButton.center = CGPointMake(160, 85);
+        [self.showFollowButton setTitle:@"我的关注" forState:UIControlStateNormal];
+    } else if (showFans && !showFollow) {
+        self.followFilterButton.center = CGPointMake(160, 132);
+        self.fansFilterButton.center = CGPointMake(160, 38);
+        self.friendFilterButton.center = CGPointMake(160, 85);
+        [self.showFollowButton setTitle:@"我的粉丝" forState:UIControlStateNormal];
+    }
+}
+
 
 - (IBAction)clickShowFansButton:(id)sender{
     showFans = !showFans;

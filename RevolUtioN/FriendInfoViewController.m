@@ -65,6 +65,9 @@
     [self.loadingLabel setContentMode:UIViewContentModeBottom];
     [self.loadingLabel startAnimating];
     
+    [self.latestFriendActionDescriptionLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    self.latestFriendActionDescriptionLabel.numberOfLines = 2;
+    
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 

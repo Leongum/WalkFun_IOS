@@ -70,6 +70,8 @@
     dateLabel.text = formatDateString;
     
     UILabel *desLabel = (UILabel *)[cell viewWithTag:101];
+    [desLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    desLabel.numberOfLines = 2;
     desLabel.text = [NSString stringWithFormat:@"%@%@",action.actionFromId.integerValue==[RORUserUtils getUserId].integerValue?@"你":action.actionFromName, action.actionName];
 
     [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];

@@ -71,7 +71,7 @@
 #pragma mark Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -120,6 +120,12 @@
         }
         case 3:
         {
+            identifier = @"gradeCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            break;
+        }
+        case 4:
+        {
             identifier = @"recommendCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             break;
@@ -130,9 +136,11 @@
 }
 
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 3) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_URL]];
+    }
+}
 
 - (IBAction)feedbackAction:(id)sender {
     [UMFeedback showFeedback:self withAppkey:UMENG_APPKEY];

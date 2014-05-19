@@ -29,10 +29,14 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIButton *expandButton;
 
-@property (strong, nonatomic) IBOutlet UIButton *showFollowButton;
-@property (strong, nonatomic) IBOutlet UIButton *showFansButton;
 @property (strong, nonatomic) IBOutlet UIButton *endDeletingButton;
 @property (strong, nonatomic) IBOutlet UIButton *startDeletingButton;
 
-@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet CoverView *filterCoverView;
+@property (strong, nonatomic) IBOutlet UIButton *showFollowButton;
+@property (strong, nonatomic) IBOutlet RORNormalButton *fansFilterButton;
+@property (strong, nonatomic) IBOutlet RORNormalButton *followFilterButton;
+@property (strong, nonatomic) IBOutlet RORNormalButton *friendFilterButton;
+
+
 @end

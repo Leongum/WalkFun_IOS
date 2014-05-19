@@ -49,6 +49,10 @@
     for (UIView * view in [self subviews]){
         [view removeFromSuperview];
     }
+    
+    if (content==nil)
+        return;
+    
     self.contentSize =
     CGSizeMake(0,
                (content.count/COUNT_LINE+1)*(SIZE_ITEM_ICON + MARGIN_BETWEEN_LINES)
