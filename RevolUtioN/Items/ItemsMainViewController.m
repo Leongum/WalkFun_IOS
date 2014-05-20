@@ -50,9 +50,7 @@
     } else
         itemList = nil;
     
-    if (itemList) {
-        [self.userItemScrollView initContent:itemList];
-    }
+    [self.userItemScrollView initContent:itemList];
     
     [self refreshTitleLayout:currentOffset];
 }

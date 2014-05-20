@@ -1106,6 +1106,8 @@
 		3001498D1750F428005DAF1D /* RORMorePage */ = {
 			isa = PBXGroup;
 			children = (
+				30DB022318CD8DB2008863B8 /* ActionHistoryViewController.h */,
+				30DB022418CD8DB2008863B8 /* ActionHistoryViewController.m */,
 				0FA751F418927A0F0037342E /* RORMoreViewController.h */,
 				0FA751F518927A0F0037342E /* RORMoreViewController.m */,
 				30989CCC17F80FB000CA9F83 /* RORAboutViewController.h */,
@@ -1652,8 +1654,6 @@
 				0FA751E3189279E70037342E /* RORHistoryViewController.m */,
 				0FA751E4189279E70037342E /* RORMapViewController.h */,
 				0FA751E5189279E70037342E /* RORMapViewController.m */,
-				30DB022318CD8DB2008863B8 /* ActionHistoryViewController.h */,
-				30DB022418CD8DB2008863B8 /* ActionHistoryViewController.m */,
 				3022DFF918ED3B3700F3A9D5 /* MissionDoneCongratsViewController.h */,
 				3022DFFA18ED3B3700F3A9D5 /* MissionDoneCongratsViewController.m */,
 				3022E00018EDC1BD00F3A9D5 /* ReportViewController.h */,
