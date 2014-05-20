@@ -71,7 +71,7 @@
 #pragma mark Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 6;
 }
 
 - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -102,7 +102,12 @@
                 msgNote.alpha = 0;
             break;
         }
-        case 2:
+        case 2:{
+            identifier = @"instructionCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            break;
+        }
+        case 3:
         {
             identifier = @"aboutCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -118,13 +123,13 @@
                 msgNote.alpha = 0;
             break;
         }
-        case 3:
+        case 4:
         {
             identifier = @"gradeCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             break;
         }
-        case 4:
+        case 5:
         {
             identifier = @"recommendCell";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];

@@ -38,6 +38,8 @@
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
     
     [self.itemQuantityCoverView removeFromSuperview];
+    [self.selectedItemDescription setLineBreakMode:NSLineBreakByWordWrapping];
+    self.selectedItemDescription.numberOfLines = 2;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -93,8 +95,13 @@
     [self.pickView reloadAllComponents];
     [self.pickView selectRow:0 inComponent:0 animated:NO];
     selectedQuantity = 1;
-    self.totalCost.text = [NSString stringWithFormat:@"%d", selectedItem.virtualPrice.integerValue];
+    
+    [self.buyButton setTitle:[NSString stringWithFormat:@"%d", selectedItem.virtualPrice.integerValue] forState:UIControlStateNormal];
     self.selectedItemNameLabel.text = selectedItem.productName;
+    self.selectedItemIcon.image = [RORVirtualProductService getImageOf:selectedItem];
+    NSArray *itemInfoStringList = [selectedItem.productDescription componentsSeparatedByString:@"|"];
+    self.selectedItemEffectLabel.text = [itemInfoStringList objectAtIndex:1];
+    self.selectedItemDescription.text = [itemInfoStringList objectAtIndex:0];
 }
 
 #pragma mark -
@@ -140,11 +147,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     selectedItem = [contentList objectAtIndex:indexPath.row];
-    if (userMoney / selectedItem.virtualPrice.integerValue > 0){
+//    if (userMoney / selectedItem.virtualPrice.integerValue > 0){
         [self showItemQuantityCover];
-    } else {
-        [self sendAlart:@"好像买不起"];
-    }
+//    } else {
+//        [self sendAlart:@"好像买不起"];
+//    }
 }
 
 #pragma mark -
@@ -173,7 +180,9 @@
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     selectedQuantity = (row+1);
-    self.totalCost.text = [NSString stringWithFormat:@"%d", selectedQuantity*selectedItem.virtualPrice.integerValue];
-    [self.totalCost pop:0.5 delegate:self];
+//    self.totalCost.text = [NSString stringWithFormat:@"%d", selectedQuantity*selectedItem.virtualPrice.integerValue];
+    
+    [self.buyButton setTitle:[NSString stringWithFormat:@"%d", selectedQuantity*selectedItem.virtualPrice.integerValue] forState:UIControlStateNormal];
+    [self.buyButton pop:0.5 delegate:self];
 }
 @end

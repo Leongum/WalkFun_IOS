@@ -233,6 +233,8 @@
 		308C165E186982F4005B0198 /* RORShareCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 308C165D186982F4005B0198 /* RORShareCoverViewController.m */; };
 		308C1663186EA507005B0198 /* icon@2x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 308C1662186EA507005B0198 /* icon@2x120.png */; };
 		308C1666186EF1FB005B0198 /* RORPaperSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 308C1665186EF1FB005B0198 /* RORPaperSegmentControl.m */; };
+		3090EEC2192B0002003DB4EE /* InstructionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3090EEC1192B0002003DB4EE /* InstructionViewController.m */; };
+		3090EEC4192B4477003DB4EE /* item_buy_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3090EEC3192B4477003DB4EE /* item_buy_button.png */; };
 		30978DA317EDA57E00CA58B9 /* history_detail_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30978DA117EDA57E00CA58B9 /* history_detail_bg.png */; };
 		30984920186041990079E236 /* eyeClosed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3098491E186041990079E236 /* eyeClosed.png */; };
 		30984937186207780079E236 /* RORIntroCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30984936186207780079E236 /* RORIntroCoverView.m */; };
@@ -712,6 +714,9 @@
 		308C1662186EA507005B0198 /* icon@2x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x120.png"; sourceTree = "<group>"; };
 		308C1664186EF1FB005B0198 /* RORPaperSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORPaperSegmentControl.h; path = ReusableControl/RORPaperSegmentControl.h; sourceTree = "<group>"; };
 		308C1665186EF1FB005B0198 /* RORPaperSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORPaperSegmentControl.m; path = ReusableControl/RORPaperSegmentControl.m; sourceTree = "<group>"; };
+		3090EEC0192B0002003DB4EE /* InstructionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstructionViewController.h; path = MorePage/InstructionViewController.h; sourceTree = "<group>"; };
+		3090EEC1192B0002003DB4EE /* InstructionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstructionViewController.m; path = MorePage/InstructionViewController.m; sourceTree = "<group>"; };
+		3090EEC3192B4477003DB4EE /* item_buy_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item_buy_button.png; sourceTree = "<group>"; };
 		30978DA117EDA57E00CA58B9 /* history_detail_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history_detail_bg.png; sourceTree = "<group>"; };
 		3098491E186041990079E236 /* eyeClosed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeClosed.png; sourceTree = "<group>"; };
 		30984935186207780079E236 /* RORIntroCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORIntroCoverView.h; path = ReusableControl/RORIntroCoverView.h; sourceTree = "<group>"; };
@@ -1116,6 +1121,8 @@
 				30D2DF0E188003D40093A426 /* RORRecommendViewController.m */,
 				30F78718190834D20041F9F4 /* AnnouncementViewController.h */,
 				30F78719190834D20041F9F4 /* AnnouncementViewController.m */,
+				3090EEC0192B0002003DB4EE /* InstructionViewController.h */,
+				3090EEC1192B0002003DB4EE /* InstructionViewController.m */,
 			);
 			name = RORMorePage;
 			sourceTree = "<group>";
@@ -1714,6 +1721,7 @@
 		30DB01F518C32652008863B8 /* item */ = {
 			isa = PBXGroup;
 			children = (
+				3090EEC3192B4477003DB4EE /* item_buy_button.png */,
 				3022DFC618DFDEA000F3A9D5 /* item_coin.png */,
 				3022DFC718DFDEA000F3A9D5 /* item_mall_backButton.png */,
 				3022DFC818DFDEA000F3A9D5 /* item_mall_bg.png */,
@@ -2117,6 +2125,7 @@
 				30DB021318C5D2C3008863B8 /* DazStarOutline.png in Resources */,
 				3022DFE918E076DC00F3A9D5 /* history_cell_tail.png in Resources */,
 				3022DFE818E076DC00F3A9D5 /* history_cell_section.png in Resources */,
+				3090EEC4192B4477003DB4EE /* item_buy_button.png in Resources */,
 				0F0B64CF18F3E27C003B0E15 /* UMSocialSDKResourcesNew.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2203,6 +2212,7 @@
 				30F4547317BCB519006CB66C /* INMatrix.m in Sources */,
 				0FDE83061893A3930082B1BF /* RORRunHistoryClientHandler.m in Sources */,
 				30F4547517BCB519006CB66C /* INTimeWindow.m in Sources */,
+				3090EEC2192B0002003DB4EE /* InstructionViewController.m in Sources */,
 				30F4547617BCB519006CB66C /* INVector.m in Sources */,
 				30F4548117BCB564006CB66C /* INStepCounting.m in Sources */,
 				30750A7418B3395D00EC7B51 /* MainPageViewController.m in Sources */,

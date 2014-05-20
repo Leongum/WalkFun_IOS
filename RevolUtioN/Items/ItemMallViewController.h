@@ -21,13 +21,17 @@
 }
 
 @property (strong, nonatomic) IBOutlet ItemQuantityPicker *itemQuantityCoverView;
-@property (strong, nonatomic) IBOutlet UILabel *totalCost;
 @property (strong, nonatomic) IBOutlet UILabel *selectedItemNameLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *selectedItemIcon;
+@property (strong, nonatomic) IBOutlet UILabel *selectedItemEffectLabel;
+@property (strong, nonatomic) IBOutlet UILabel *selectedItemDescription;
+
 @property (strong, nonatomic) IBOutlet RORNormalButton *buyButton;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIPickerView *pickView;
 @property (strong, nonatomic) IBOutlet UILabel *moneyLabel;
 
 @property (strong, nonatomic)     User_Base * userBase;
+
 
 @end

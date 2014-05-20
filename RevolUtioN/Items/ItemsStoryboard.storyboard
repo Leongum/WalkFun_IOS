@@ -372,11 +372,15 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scrollPicker_bg.png" id="i8c-AR-e8n">
-                                        <rect key="frame" x="0.0" y="141" width="320" height="290"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </imageView>
+                                    <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="tdO-Jb-RC9">
+                                        <rect key="frame" x="58" y="189" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
                                     <pickerView contentMode="scaleToFill" id="k8V-2Q-cYj">
-                                        <rect key="frame" x="54" y="203" width="213" height="162"/>
+                                        <rect key="frame" x="54" y="237" width="213" height="162"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <connections>
                                             <outlet property="dataSource" destination="ES1-Vs-yEC" id="KTD-Hk-WSc"/>
@@ -384,20 +388,21 @@
                                         </connections>
                                     </pickerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ddc-UU-JHe" userLabel="buy-Button" customClass="RORNormalButton">
-                                        <rect key="frame" x="105" y="460" width="110" height="49"/>
+                                        <rect key="frame" x="84" y="407" width="153" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                        <size key="titleShadowOffset" width="0.0" height="1"/>
-                                        <state key="normal" title="购买" backgroundImage="green_btn_bg.png">
-                                            <color key="titleColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" red="0.0015501191857696232" green="0.74948182397959184" blue="0.0024050403003554187" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <inset key="contentEdgeInsets" minX="17" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <size key="titleShadowOffset" width="0.0" height="-1"/>
+                                        <state key="normal" title="88888" backgroundImage="item_buy_button.png">
+                                            <color key="titleColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="buyAction:" destination="ES1-Vs-yEC" eventType="touchUpInside" id="OcT-WL-yAk"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tEQ-cc-0fk">
-                                        <rect key="frame" x="43" y="149" width="235" height="39"/>
+                                        <rect key="frame" x="43" y="136" width="235" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
@@ -405,12 +410,21 @@
                                         <color key="shadowColor" red="0.75872131549999999" green="0.75998485329999999" blue="0.22224754969999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 112345" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h1x-ff-DS5" customClass="StrokeLabel">
-                                        <rect key="frame" x="123" y="390" width="77" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="effect" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HEz-om-ymo">
+                                        <rect key="frame" x="106" y="189" width="161" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="foG-fI-S8J">
+                                        <rect key="frame" x="106" y="205" width="161" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -444,9 +458,11 @@
                         <outlet property="itemQuantityCoverView" destination="zWW-Co-HMS" id="79Z-J2-q0w"/>
                         <outlet property="moneyLabel" destination="G21-cg-Pqd" id="1ze-ha-YO3"/>
                         <outlet property="pickView" destination="k8V-2Q-cYj" id="U1J-vX-7SR"/>
+                        <outlet property="selectedItemDescription" destination="foG-fI-S8J" id="oPh-M0-Br2"/>
+                        <outlet property="selectedItemEffectLabel" destination="HEz-om-ymo" id="NmH-Oa-3vZ"/>
+                        <outlet property="selectedItemIcon" destination="tdO-Jb-RC9" id="W9f-KH-uOV"/>
                         <outlet property="selectedItemNameLabel" destination="tEQ-cc-0fk" id="7cw-vD-oyA"/>
                         <outlet property="tableView" destination="RrS-oP-blt" id="Mhc-XD-E6l"/>
-                        <outlet property="totalCost" destination="h1x-ff-DS5" id="7nZ-Ft-z8a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J5T-Cz-O3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -460,6 +476,7 @@
         <image name="friend_add_cell.png" width="640" height="172"/>
         <image name="green_btn_bg.png" width="221" height="96"/>
         <image name="history_title.png" width="640" height="204"/>
+        <image name="item_buy_button.png" width="305" height="100"/>
         <image name="item_mall_backButton.png" width="115" height="115"/>
         <image name="item_mall_bg.png" width="640" height="1136"/>
         <image name="item_mall_cell.png" width="640" height="168"/>
@@ -469,7 +486,7 @@
         <image name="itemmall_button.png" width="166" height="122"/>
         <image name="redbutton_bg.png" width="221" height="96"/>
         <image name="running_end_bg.png" width="305" height="100"/>
-        <image name="scrollPicker_bg.png" width="640" height="580"/>
+        <image name="scrollPicker_bg.png" width="640" height="1136"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
