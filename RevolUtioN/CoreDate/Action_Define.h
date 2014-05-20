@@ -26,7 +26,7 @@
 @property (nonatomic, retain) NSNumber * maxLevelLimit;
 @property (nonatomic, retain) NSDate * updateTime;
 
-+(Action_Define *) removeAssociateForEntity:(Action_Define *)associatedEntity;
++(Action_Define *) removeAssociateForEntity:(Action_Define *)associatedEntity withContext:(NSManagedObjectContext *) context;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 

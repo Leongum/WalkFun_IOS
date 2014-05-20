@@ -20,9 +20,9 @@
 @property (nonatomic, retain) NSString * actionName;
 @property (nonatomic, retain) NSDate * updateTime;
 
-+(Action *) initUnassociateEntity;
++(Action *) initUnassociateEntity:(NSManagedObjectContext *) context;
 
-+(Action *) removeAssociateForEntity:(Action *)associatedEntity;
++(Action *) removeAssociateForEntity:(Action *)associatedEntity withContext:(NSManagedObjectContext *) context;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 

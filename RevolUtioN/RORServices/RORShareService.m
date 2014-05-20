@@ -12,7 +12,8 @@
 
 //login return YES, register return NO.
 + (BOOL)loginFromSNS:(UMSocialAccountEntity *)userInfo{
-    User_Base *user = [User_Base intiUnassociateEntity];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
+    User_Base *user = [User_Base intiUnassociateEntity:context];
     user.userName = userInfo.usid;
     user.nickName = userInfo.userName;
     user.sex = @"未知";

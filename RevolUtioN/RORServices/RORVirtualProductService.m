@@ -12,20 +12,25 @@
 
 //open out
 +(Virtual_Product *)fetchVProduct:(NSNumber *) productId{
-    return [self fetchVProduct:productId withContext:NO];
+    return [self fetchVProduct:productId withContext:nil];
 }
 
-+(Virtual_Product *)fetchVProduct:(NSNumber *) productId withContext:(BOOL) needContext{
++(Virtual_Product *)fetchVProduct:(NSNumber *) productId withContext:(NSManagedObjectContext *) context{
     NSString *table=@"Virtual_Product";
     NSString *query = @"productId = %@";
     NSArray *params = [NSArray arrayWithObjects:productId, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    Boolean needContext =true;
+    if(context == nil){
+        context = [RORContextUtils getPrivateContext];
+        needContext = false;
+    }
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     Virtual_Product *vProduct = (Virtual_Product *) [fetchObject objectAtIndex:0];
     if(!needContext){
-        return [Virtual_Product removeAssociateForEntity:vProduct];
+        return [Virtual_Product removeAssociateForEntity:vProduct withContext:context];
     }
     return vProduct;
 }
@@ -33,7 +38,7 @@
 //open out
 + (BOOL)syncVProduct{
     NSError *error = nil;
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
     NSString *lastUpdateTime = [RORUserUtils getLastUpdateTime:@"VirtualProductUpdateTime"];
     
     RORHttpResponse *httpResponse =[RORVirtualProductClientHandler getVirtualProducts:lastUpdateTime];
@@ -42,13 +47,13 @@
         NSArray *vProductList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
         for (NSDictionary *vProductDict in vProductList){
             NSNumber *productId = [vProductDict valueForKey:@"productId"];
-            Virtual_Product *vProductEntity = [self fetchVProduct:productId withContext:YES];
+            Virtual_Product *vProductEntity = [self fetchVProduct:productId withContext:context];
             if(vProductEntity == nil)
                 vProductEntity = [NSEntityDescription insertNewObjectForEntityForName:@"Virtual_Product" inManagedObjectContext:context];
             [vProductEntity initWithDictionary:vProductDict];
         }
         
-        [RORContextUtils saveContext];
+        [RORContextUtils saveContext:context];
         [RORUserUtils saveLastUpdateTime:@"VirtualProductUpdateTime"];
     } else {
         NSLog(@"sync with host error: can't sync virtual product Status Code: %d", [httpResponse responseStatus]);
@@ -62,19 +67,24 @@
     return [self fetchAllVProduct:NO];
 }
 
-+(NSArray *)fetchAllVProduct:(BOOL) needContext{
++(NSArray *)fetchAllVProduct:(NSManagedObjectContext *) context{
     NSString *table=@"Virtual_Product";
     NSString *query = @"1 = %@";
     NSArray *params = [NSArray arrayWithObjects:[NSNumber numberWithInteger:1], nil];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"productId" ascending:YES];
     NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+    Boolean needContext =true;
+    if(context == nil){
+        context = [RORContextUtils getPrivateContext];
+        needContext = false;
+    }
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     NSMutableArray *vProductsDetails = [NSMutableArray arrayWithCapacity:10];
     for (Virtual_Product *vProduct in fetchObject) {
-        [vProductsDetails addObject:[Virtual_Product removeAssociateForEntity:vProduct]];
+        [vProductsDetails addObject:[Virtual_Product removeAssociateForEntity:vProduct withContext:context]];
     }
     return [(NSArray*)vProductsDetails mutableCopy];
 }

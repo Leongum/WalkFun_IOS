@@ -20,15 +20,13 @@
 @dynamic updateTime;
 
 
-+(Action *) initUnassociateEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(Action *) initUnassociateEntity:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Action" inManagedObjectContext:context];
     Action *unassociatedEntity = [[Action alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     return unassociatedEntity;
 }
 
-+(Action *) removeAssociateForEntity:(Action *)associatedEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(Action *) removeAssociateForEntity:(Action *)associatedEntity  withContext:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Action" inManagedObjectContext:context];
     Action *unassociatedEntity = [[Action alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     for (NSString *attr in [[entity attributesByName] allKeys]) {

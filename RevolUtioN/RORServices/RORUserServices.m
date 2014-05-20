@@ -22,40 +22,50 @@
 
 //open out
 + (User_Base *)fetchUserBaseById:(NSNumber *) userId{
-    return  [self fetchUserBaseById:userId withContext:NO];
+    return  [self fetchUserBaseById:userId withContext:nil];
 }
 
-+ (User_Base *)fetchUserBaseById:(NSNumber *) userId withContext:(BOOL) needContext{
++ (User_Base *)fetchUserBaseById:(NSNumber *) userId withContext:(NSManagedObjectContext *) context{
     NSString *table=@"User_Base";
     NSString *query = @"userId = %@";
     NSArray *params = [NSArray arrayWithObjects:userId, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    Boolean needContext =true;
+    if(context == nil){
+        context = [RORContextUtils getPrivateContext];
+        needContext = false;
+    }
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     User_Base *userInfo = (User_Base *) [fetchObject objectAtIndex:0];
     if (!needContext) {
-        return [User_Base removeAssociateForEntity:userInfo];
+        return [User_Base removeAssociateForEntity:userInfo withContext:context];
     }
     return userInfo;
 }
 
 //open out
 +(User_Detail *)fetchUserDetailByUserId:(NSNumber *) userId{
-    return [self fetchUserDetailByUserId:userId withContext:NO];
+    return [self fetchUserDetailByUserId:userId withContext:nil];
 }
 
-+(User_Detail *)fetchUserDetailByUserId:(NSNumber *) userId withContext:(BOOL) needContext{
++(User_Detail *)fetchUserDetailByUserId:(NSNumber *) userId withContext:(NSManagedObjectContext *) context{
     NSString *table=@"User_Detail";
     NSString *query = @"userId = %@";
     NSArray *params = [NSArray arrayWithObjects:userId, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    Boolean needContext =true;
+    if(context == nil){
+        context = [RORContextUtils getPrivateContext];
+        needContext = false;
+    }
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     User_Detail *userDetails = (User_Detail *) [fetchObject objectAtIndex:0];
     if (!needContext) {
-        return[User_Detail removeAssociateForEntity:userDetails];
+        return[User_Detail removeAssociateForEntity:userDetails withContext:context];
     }
     return   userDetails;
 }
@@ -125,7 +135,9 @@
 +(User_Base *)syncUserFromResponse:(RORHttpResponse *)httpResponse{
     NSError *error;
     User_Base *user = nil;
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
     if ([httpResponse responseStatus] == 200){
+
         NSDictionary *userInfoDic = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
         
         NSNumber *userId = [userInfoDic valueForKey:@"userId"];
@@ -135,18 +147,18 @@
                 return localUser;
             }
         }
-        user = [self fetchUserBaseById:userId withContext:YES];
-        User_Detail *userDetails = [self fetchUserDetailByUserId:userId withContext:YES];
+        user = [self fetchUserBaseById:userId withContext:context];
+        User_Detail *userDetails = [self fetchUserDetailByUserId:userId withContext:context];
         
         if(user == nil)
-            user = [NSEntityDescription insertNewObjectForEntityForName:@"User_Base" inManagedObjectContext:[RORContextUtils getShareContext]];
+            user = [NSEntityDescription insertNewObjectForEntityForName:@"User_Base" inManagedObjectContext:context];
         [user initWithDictionary:userInfoDic];
         
         if(userDetails == nil)
-            userDetails = [NSEntityDescription insertNewObjectForEntityForName:@"User_Detail" inManagedObjectContext:[RORContextUtils getShareContext]];
+            userDetails = [NSEntityDescription insertNewObjectForEntityForName:@"User_Detail" inManagedObjectContext:context];
         [userDetails initWithDictionary:userInfoDic];
         
-        [RORContextUtils saveContext];
+        [RORContextUtils saveContext:context];
         user.userDetail = userDetails;
     }
     else if([httpResponse responseStatus] == 406 && [[httpResponse errorMessage] isEqualToString:@"LOGIN_CHECK_FAIL"]){
@@ -156,7 +168,7 @@
         NSLog(@"sync with host error: can't get user's info. Status Code: %d", [httpResponse responseStatus]);
         return user;
     }
-    return [User_Base removeAssociateForEntity:user];
+    return [User_Base removeAssociateForEntity:user withContext:context];
 }
 
 //open out

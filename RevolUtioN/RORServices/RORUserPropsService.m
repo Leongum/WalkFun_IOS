@@ -12,21 +12,26 @@
 
 //open out
 +(NSArray*)fetchUserProps:(NSNumber*)userId{
-    return [self fetchUserProps:userId withContext:NO];
+    return [self fetchUserProps:userId withContext:nil];
 }
 
-+(NSArray*)fetchUserProps:(NSNumber*)userId withContext:(BOOL) needContext{
++(NSArray*)fetchUserProps:(NSNumber*)userId withContext:(NSManagedObjectContext *) context{
     NSString *table=@"User_Prop";
     NSString *query = @"userId = %@ and ownNumber>0";
     NSArray *params = [NSArray arrayWithObjects:userId, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    Boolean needContext =true;
+    if(context == nil){
+        context = [RORContextUtils getPrivateContext];
+        needContext = false;
+    }
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     if(!needContext){
         NSMutableArray *userProps = [[NSMutableArray alloc] init];
         for (User_Prop *userProp in fetchObject) {
-            [userProps addObject:[User_Prop removeAssociateForEntity:userProp]];
+            [userProps addObject:[User_Prop removeAssociateForEntity:userProp withContext:context]];
         }
         return [userProps copy];
     }
@@ -35,19 +40,24 @@
 
 //open out
 +(User_Prop *)fetchUserPropByPropId:(NSNumber *) userId withPropId:(NSNumber *) propId{
-    return [self fetchUserPropByPropId:userId withPropId:propId withContext:NO];
+    return [self fetchUserPropByPropId:userId withPropId:propId withContext:nil];
 }
 
-+(User_Prop *)fetchUserPropByPropId:(NSNumber *) userId withPropId:(NSNumber *) propId withContext:(BOOL) needContext{
++(User_Prop *)fetchUserPropByPropId:(NSNumber *) userId withPropId:(NSNumber *) propId withContext:(NSManagedObjectContext *) context{
     NSString *table=@"User_Prop";
     NSString *query = @"userId = %@ and productId = %@";
     NSArray *params = [NSArray arrayWithObjects:userId,propId, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    Boolean needContext =true;
+    if(context == nil){
+        context = [RORContextUtils getPrivateContext];
+        needContext = false;
+    }
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     if (!needContext) {
-        return[User_Prop removeAssociateForEntity:(User_Prop *) [fetchObject objectAtIndex:0]];
+        return[User_Prop removeAssociateForEntity:(User_Prop *) [fetchObject objectAtIndex:0] withContext:context];
     }
     return (User_Prop *) [fetchObject objectAtIndex:0];
 }
@@ -57,24 +67,24 @@
     //if(![RORNetWorkUtils getDoUploadable])return NO;
     NSError *error = nil;
     NSString *lastUpdateTime = [RORUserUtils getLastUpdateTime:@"UserPropUpdateTime"];
-    
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
     RORHttpResponse *httpResponse =[RORUserClientHandler getUserProps:userId withLastUpdateTime:lastUpdateTime];
     if ([httpResponse responseStatus]  == 200){
         NSArray *userPropsList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
         for (NSDictionary *userPropDict in userPropsList){
             NSNumber *userId = [userPropDict valueForKey:@"userId"];
             NSNumber *propId = [userPropDict valueForKey:@"productId"];
-            User_Prop *userPropEntity = [self fetchUserPropByPropId:userId withPropId:propId withContext:YES];
+            User_Prop *userPropEntity = [self fetchUserPropByPropId:userId withPropId:propId withContext:context];
             //use local data insteade of service data when update in local.
             if(userPropEntity!= nil && userPropEntity.updateTime == nil){
                 continue;
             }
             if(userPropEntity == nil)
-                userPropEntity = [NSEntityDescription insertNewObjectForEntityForName:@"User_Prop" inManagedObjectContext:[RORContextUtils getShareContext]];
+                userPropEntity = [NSEntityDescription insertNewObjectForEntityForName:@"User_Prop" inManagedObjectContext:context];
             
             [userPropEntity initWithDictionary:userPropDict];
         }
-        [RORContextUtils saveContext];
+        [RORContextUtils saveContext:context];
         [RORUserUtils saveLastUpdateTime:@"UserPropUpdateTime"];
         return YES;
     } else {

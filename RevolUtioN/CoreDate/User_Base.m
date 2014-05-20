@@ -24,21 +24,19 @@
 
 @synthesize userDetail;
 
-+(User_Base *) intiUnassociateEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(User_Base *) intiUnassociateEntity:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"User_Base" inManagedObjectContext:context];
     User_Base *unassociatedEntity = [[User_Base alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     return unassociatedEntity;
 }
 
-+(User_Base *) removeAssociateForEntity:(User_Base *)associatedEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(User_Base *) removeAssociateForEntity:(User_Base *)associatedEntity withContext:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"User_Base" inManagedObjectContext:context];
     User_Base *unassociatedEntity = [[User_Base alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     for (NSString *attr in [[entity attributesByName] allKeys]) {
         [unassociatedEntity setValue:[associatedEntity valueForKey:attr] forKey:attr];
     }
-    unassociatedEntity.userDetail = [User_Detail removeAssociateForEntity:associatedEntity.userDetail];
+    unassociatedEntity.userDetail = [User_Detail removeAssociateForEntity:associatedEntity.userDetail withContext:context];
     return unassociatedEntity;
 }
 

@@ -29,7 +29,7 @@
 @property (nonatomic, retain) NSNumber * maxLevelLimit;
 @property (nonatomic, retain) NSDate * updateTime;
 
-+(Mission *) removeAssociateForEntity:(Mission *)associatedEntity;
++(Mission *) removeAssociateForEntity:(Mission *)associatedEntity withContext:(NSManagedObjectContext *) context;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 @end

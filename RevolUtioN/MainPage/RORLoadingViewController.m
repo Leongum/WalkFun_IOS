@@ -45,15 +45,19 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [RORNetWorkUtils initCheckNetWork];
-    NSLog(@"%hhd",[RORNetWorkUtils getIsConnetioned]);
-
-    [RORUserUtils syncSystemData];
-
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
-    UINavigationController *navigationController =  [storyboard instantiateViewControllerWithIdentifier:@"RORMainViewController"];
-
-    [self presentViewController:navigationController animated:NO completion:NULL];
+    [self.loadingLabel startAnimating];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [RORNetWorkUtils initCheckNetWork];
+        NSLog(@"%hhd",[RORNetWorkUtils getIsConnetioned]);
+        
+        [RORUserUtils syncSystemData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+            UINavigationController *navigationController =  [storyboard instantiateViewControllerWithIdentifier:@"RORMainViewController"];
+            
+            [self presentViewController:navigationController animated:NO completion:NULL];
+        });
+    });
 }
 
 - (void)didReceiveMemoryWarning

@@ -41,9 +41,9 @@
 @property (nonatomic, retain) NSNumber * friendId;
 @property (nonatomic, retain) NSString * friendName;
 
-+(User_Running_History *) intiUnassociateEntity;
++(User_Running_History *) intiUnassociateEntity:(NSManagedObjectContext *) context;
 
-+(User_Running_History *) removeAssociateForEntity:(User_Running_History *)associatedEntity;
++(User_Running_History *) removeAssociateForEntity:(User_Running_History *)associatedEntity withContext:(NSManagedObjectContext *) context;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 

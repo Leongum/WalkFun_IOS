@@ -24,9 +24,9 @@
 @property (nonatomic, retain) NSString * missionStatusComment;
 @property (nonatomic, retain) NSDate * updateTime;
 
-+(User_Mission_History *) intiUnassociateEntity;
++(User_Mission_History *) intiUnassociateEntity:(NSManagedObjectContext *) context;
 
-+(User_Mission_History *) removeAssociateForEntity:(User_Mission_History *)associatedEntity;
++(User_Mission_History *) removeAssociateForEntity:(User_Mission_History *)associatedEntity withContext:(NSManagedObjectContext *) context;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 

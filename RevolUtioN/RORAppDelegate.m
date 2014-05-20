@@ -14,6 +14,7 @@
 
 @implementation RORAppDelegate
 @synthesize managedObjectContext =_managedObjectContext;
+@synthesize rootObjectContext =_rootObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize runningStatus;
@@ -25,17 +26,6 @@
         runningStatus = NO;
     }
     return self;
-}
-
-- (void)saveContext{
-    NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    if (managedObjectContext !=nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            NSLog(@"Unresolvederror %@, %@", error, [error userInfo]);
-            abort();
-        }
-    }
 }
 
 - (CMMotionManager *)sharedMotionManager
@@ -217,101 +207,112 @@
 
 // If the context doesn't already exist, it is created and bound to thepersistent store coordinator for the application.
 
-- (NSManagedObjectContext *)managedObjectContext
+//- (NSManagedObjectContext *)managedObjectContext
+//{
+//    if (_managedObjectContext !=nil) {
+//        return _managedObjectContext;
+//    }
+//    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+//    if (coordinator != nil) {
+//        _managedObjectContext = [[NSManagedObjectContext alloc]init];
+//        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+//    }
+//    return _managedObjectContext;
+//}
 
-{
-    
-    if (_managedObjectContext !=nil) {
-        
-        return _managedObjectContext;
-        
+-(NSManagedObjectContext *)rootObjectContext {
+    if (nil != _rootObjectContext) {
+        return _rootObjectContext;
     }
-    
-    
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    
     if (coordinator != nil) {
-        
-        _managedObjectContext = [[NSManagedObjectContext alloc]init];
-        
-        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-        
+        _rootObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        [_rootObjectContext setPersistentStoreCoordinator:coordinator];
     }
-    
-    return _managedObjectContext;
-    
+    return _rootObjectContext;
 }
 
+- (NSManagedObjectContext *)managedObjectContext
+{
+    if (nil != _managedObjectContext) {
+        return _managedObjectContext;
+    }
+    
+    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    _managedObjectContext.parentContext = [self rootObjectContext];
+    return _managedObjectContext;
+}
 
+- (void)saveContext
+{
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSManagedObjectContext *rootObjectContext = [self rootObjectContext];
+    
+    if (nil == managedObjectContext) {
+        return;
+    }
+    if ([managedObjectContext hasChanges]) {
+        NSLog(@"Main context need to save");
+        [managedObjectContext performBlockAndWait:^{
+            NSError *error = nil;
+            if (![managedObjectContext save:&error]) {
+                NSLog(@"Save main context failed and error is %@", error);
+            }
+        }];
+    }
+    
+    if (nil == rootObjectContext) {
+        return;
+    }
+    if ([rootObjectContext hasChanges]) {
+        NSLog(@"Root context need to save");
+        [rootObjectContext performBlockAndWait:^ {
+            NSError *error = nil;
+            if (![_rootObjectContext save:&error]) {
+                NSLog(@"Save root context failed and error is %@", error);
+            }
+        }];
+        
+    }
+}
 
 // Returns the managed object model for the application.
-
 // If the model doesn't already exist, it is created from the application'smodel.
-
 - (NSManagedObjectModel *)managedObjectModel
-
 {
-    
     if (_managedObjectModel !=nil) {
-        
         return _managedObjectModel;
-        
     }
     
     //这里一定要注意，这里的iWeather就是你刚才建立的数据模型的名字，一定要一致。否则会报错。
-//    NSString *path = @"RORCoreData";
-//    NSURL *modelURL = [NSURL fileURLWithPath:[path stringByAppendingPathExtension:@"momd"]];
+    //    NSString *path = @"RORCoreData";
+    //    NSURL *modelURL = [NSURL fileURLWithPath:[path stringByAppendingPathExtension:@"momd"]];
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"RORCoreData" withExtension:@"mom"];
-    
     _managedObjectModel = [[NSManagedObjectModel alloc]initWithContentsOfURL:modelURL];
-    
     return _managedObjectModel;
-    
 }
 
 
-
 // Returns the persistent store coordinator for the application.
-
 // If the coordinator doesn't already exist, it is created and theapplication's store added to it.
-
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-
 {
-    
     if (_persistentStoreCoordinator !=nil) {
-        
         return _persistentStoreCoordinator;
-        
     }
-    
-
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
                              [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
                              [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
     
-    
     //这里的iWeaher.sqlite，也应该与数据模型的名字保持一致。
-    
     NSURL *storeURL = [[self applicationDocumentsDirectory]URLByAppendingPathComponent:@"RORCoreData.sqlite"];
-    
-    
-    
     NSError *error = nil;
-    
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:[self managedObjectModel]];
-    
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
-        
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        
         abort();
-        
     }
-    
-    
-    
     return _persistentStoreCoordinator;
     
 }
@@ -331,10 +332,8 @@
 // Returns the URL to the application's Documents directory.
 
 - (NSURL*)applicationDocumentsDirectory
-
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    
 }
 
 #pragma mark - core location delegate

@@ -18,9 +18,9 @@
 @property (nonatomic, retain) NSNumber * userId;
 @property (nonatomic, retain) NSDate * updateTime;
 
-+(User_Prop *) intiUnassociateEntity;
++(User_Prop *) intiUnassociateEntity:(NSManagedObjectContext *) context;
 
-+(User_Prop *) removeAssociateForEntity:(User_Prop *)associatedEntity;
++(User_Prop *) removeAssociateForEntity:(User_Prop *)associatedEntity withContext:(NSManagedObjectContext *) context;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 

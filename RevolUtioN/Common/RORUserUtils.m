@@ -181,7 +181,8 @@ static NSDate *syncTime;
     [logoutDict writeToFile:path atomically:YES];
     userId = [NSNumber numberWithInteger:-1];
     NSArray *tables = [NSArray arrayWithObjects:@"Action",@"Friend",@"Friend_Sort",@"User_Base",@"User_Detail",@"User_Prop",@"User_Running_History",@"User_Mission_History", nil];
-    [RORContextUtils clearTableData:tables];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
+    [RORContextUtils clearTableData:tables withContext:context];
 }
 
 + (void)saveLastUpdateTime: (NSString *) key{

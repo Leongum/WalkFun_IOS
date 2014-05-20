@@ -150,7 +150,7 @@
             Mission *doneMission = [RORMissionServices fetchMission:record.missionId];
 
             //保存任务数据
-            User_Mission_History *mh = [User_Mission_History intiUnassociateEntity];
+            User_Mission_History *mh = [User_Mission_History intiUnassociateEntity:[RORContextUtils getPrivateContext]];
             mh.userId = [RORUserUtils getUserId];
             mh.userName = [RORUserUtils getUserName];
             mh.missionId = record.missionId;

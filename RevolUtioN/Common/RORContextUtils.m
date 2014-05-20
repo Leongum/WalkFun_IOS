@@ -10,25 +10,37 @@
 
 @implementation RORContextUtils
 
-static NSManagedObjectContext *context = nil;
 
-+(NSManagedObjectContext *)getShareContext{
-    if(context == nil){
-        RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
-        context = delegate.managedObjectContext;
-    }
-    return context;
+//***************** private ***************
++(NSManagedObjectContext *)generatePrivateContextWithParent:(NSManagedObjectContext *)parentContext {
+    NSManagedObjectContext *privateContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    privateContext.parentContext = parentContext;
+    return privateContext;
 }
 
-+(void)saveContext{
++(NSManagedObjectContext *)generateStraightPrivateContextWithParent:(NSManagedObjectContext *)mainContext {
+    NSManagedObjectContext *privateContext = [[NSManagedObjectContext alloc] init];
+    privateContext.persistentStoreCoordinator = mainContext.persistentStoreCoordinator;
+    return privateContext;
+}
+
+//***************** public ***************
++(NSManagedObjectContext *)getPrivateContext{
+    RORAppDelegate *delegate = (RORAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext  *context = delegate.managedObjectContext;
+    return [self generatePrivateContextWithParent:context];
+}
+
++(void)saveContext:(NSManagedObjectContext *) context{
     NSError *error = nil;
-    if (![[self getShareContext] save:&error]) {
+    if (![context save:&error]) {
         NSLog(@"%@",[error localizedDescription]);
     }
+    RORAppDelegate *appDelegate = (RORAppDelegate *)[UIApplication sharedApplication].delegate;
+    [appDelegate saveContext];
 }
 
-+(NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query{
-    [self getShareContext];
++(NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query withContext:(NSManagedObjectContext *) context{
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:tableName inManagedObjectContext:context];
@@ -46,8 +58,7 @@ static NSManagedObjectContext *context = nil;
     return fetchObject;
 }
 
-+(NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query withOrderBy:(NSArray *) sortParams{
-    [self getShareContext];
++(NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query withOrderBy:(NSArray *) sortParams withContext:(NSManagedObjectContext *) context{
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:tableName inManagedObjectContext:context];
@@ -66,8 +77,7 @@ static NSManagedObjectContext *context = nil;
     return fetchObject;
 }
 
-+(NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query withOrderBy:(NSArray *) sortParams withLimit:(int)limitNumber{
-    [self getShareContext];
++(NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query withOrderBy:(NSArray *) sortParams withLimit:(int)limitNumber withContext:(NSManagedObjectContext *) context{
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:tableName inManagedObjectContext:context];
@@ -86,8 +96,7 @@ static NSManagedObjectContext *context = nil;
     return fetchObject;
 }
 
-+(void)deleteFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query{
-    [self getShareContext];
++(void)deleteFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query withContext:(NSManagedObjectContext *) context{
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:tableName inManagedObjectContext:context];
@@ -101,11 +110,10 @@ static NSManagedObjectContext *context = nil;
     for (NSManagedObject *info in fetchObject) {
         [context deleteObject:info];
     }
-    [self saveContext];
+    [self saveContext:context];
 }
 
-+ (void)clearTableData:(NSArray *) tableArray{
-    [self getShareContext];
++ (void)clearTableData:(NSArray *) tableArray withContext:(NSManagedObjectContext *) context{
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
     for(NSString *table in tableArray){
         NSEntityDescription *entity = [NSEntityDescription entityForName:table inManagedObjectContext:context];
@@ -116,6 +124,6 @@ static NSManagedObjectContext *context = nil;
             [context deleteObject:info];
         }
     }
-    [self saveContext];
+    [self saveContext:context];
 }
 @end

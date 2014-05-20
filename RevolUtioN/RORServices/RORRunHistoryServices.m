@@ -21,20 +21,25 @@
 
 //open out
 +(User_Running_History *)fetchRunHistoryByRunId:(NSString *) runUuid{
-    return [self fetchRunHistoryByRunId:runUuid withContext:NO];
+    return [self fetchRunHistoryByRunId:runUuid withContext:nil];
 }
 
-+(User_Running_History *)fetchRunHistoryByRunId:(NSString *) runUuid withContext:(BOOL) needContext{
++(User_Running_History *)fetchRunHistoryByRunId:(NSString *) runUuid withContext:(NSManagedObjectContext *) context{
     
     NSString *table=@"User_Running_History";
     NSString *query = @"runUuid = %@";
     NSArray *params = [NSArray arrayWithObjects:runUuid, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    Boolean needContext = true;
+    if(context == nil){
+        context = [RORContextUtils getPrivateContext];
+        needContext = false;
+    }
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     if (!needContext) {
-        return [User_Running_History removeAssociateForEntity:(User_Running_History *) [fetchObject objectAtIndex:0]];
+        return [User_Running_History removeAssociateForEntity:(User_Running_History *) [fetchObject objectAtIndex:0] withContext:context];
     }
     return (User_Running_History *) [fetchObject objectAtIndex:0];
     
@@ -42,23 +47,28 @@
 
 //open out
 +(NSArray*)fetchRunHistoryByUserId:(NSNumber*)userId{
-    return [self fetchRunHistoryByUserId:userId withContext:NO];
+    return [self fetchRunHistoryByUserId:userId withContext:nil];
 }
 
-+(NSArray*)fetchRunHistoryByUserId:(NSNumber*)userId withContext:(BOOL) needContext{
++(NSArray*)fetchRunHistoryByUserId:(NSNumber*)userId withContext:(NSManagedObjectContext *) context{
     NSString *table=@"User_Running_History";
     NSString *query = @"userId = %@";
     NSArray *params = [NSArray arrayWithObjects:userId, nil];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"missionStartTime" ascending:NO];
     NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+    Boolean needContext = true;
+    if(context == nil){
+        context = [RORContextUtils getPrivateContext];
+        needContext = false;
+    }
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     if(!needContext){
         NSMutableArray *historyList = [[NSMutableArray alloc] init];
         for (User_Running_History *histroy in fetchObject) {
-            [historyList addObject:[User_Running_History removeAssociateForEntity:histroy]];
+            [historyList addObject:[User_Running_History removeAssociateForEntity:histroy withContext:context]];
         }
         return [historyList copy];
     }
@@ -70,7 +80,7 @@
     //if(![RORNetWorkUtils getDoUploadable])return NO;
     NSNumber *userId = [RORUserUtils getUserId];
     if(userId.integerValue > 0){
-        NSArray *dataList = [self fetchUnsyncedRunHistories:NO];
+        NSArray *dataList = [self fetchUnsyncedRunHistories:nil];
         if([dataList count] > 0){
             NSMutableArray *array = [[NSMutableArray alloc] init];
             for (User_Running_History *history in dataList) {
@@ -94,20 +104,25 @@
     return YES;
 }
 
-+(NSArray *)fetchUnsyncedRunHistories:(BOOL) needContext{
++(NSArray *)fetchUnsyncedRunHistories:(NSManagedObjectContext *) context{
     
     NSNumber *userId = [RORUserUtils getUserId];
     NSString *table=@"User_Running_History";
     NSString *query = @"userId = %@ and commitTime = nil";
     NSArray *params = [NSArray arrayWithObjects:userId, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    Boolean needContext = true;
+    if(context == nil){
+        context = [RORContextUtils getPrivateContext];
+        needContext = false;
+    }
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     if(!needContext){
         NSMutableArray *historyList = [[NSMutableArray alloc] init];
         for (User_Running_History *histroy in fetchObject) {
-            User_Running_History *newHistory = [User_Running_History removeAssociateForEntity:histroy];
+            User_Running_History *newHistory = [User_Running_History removeAssociateForEntity:histroy withContext: context];
             [historyList addObject:newHistory];
         }
         return [historyList copy];
@@ -117,7 +132,8 @@
 
 +(void)updateUnsyncedRunHistories{
     NSNumber *userId = [RORUserUtils getUserId];
-    NSArray *fetchObject = [self fetchUnsyncedRunHistories:YES];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
+    NSArray *fetchObject = [self fetchUnsyncedRunHistories:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return;
     }
@@ -125,7 +141,7 @@
         info.userId = userId;
         info.commitTime = [RORUserUtils getSystemTime];
     }
-    [RORContextUtils saveContext];
+    [RORContextUtils saveContext:context];
 }
 
 //open out
@@ -135,17 +151,17 @@
     NSString *lastUpdateTime = [RORUserUtils getLastUpdateTime:@"RunningHistoryUpdateTime"];
     
     RORHttpResponse *httpResponse =[RORRunHistoryClientHandler getRunHistories:userId withLastUpdateTime:lastUpdateTime];
-    
+     NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
     if ([httpResponse responseStatus]  == 200){
         NSArray *runHistoryList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
         for (NSDictionary *runHistoryDict in runHistoryList){
             NSString *runUuid = [runHistoryDict valueForKey:@"runUuid"];
-            User_Running_History *runHistoryEntity = [self fetchRunHistoryByRunId:runUuid withContext:YES];
+            User_Running_History *runHistoryEntity = [self fetchRunHistoryByRunId:runUuid withContext:context];
             if(runHistoryEntity == nil)
-                runHistoryEntity = [NSEntityDescription insertNewObjectForEntityForName:@"User_Running_History" inManagedObjectContext:[RORContextUtils getShareContext]];
+                runHistoryEntity = [NSEntityDescription insertNewObjectForEntityForName:@"User_Running_History" inManagedObjectContext:context];
             [runHistoryEntity initWithDictionary:runHistoryDict];
         }
-        [RORContextUtils saveContext];
+        [RORContextUtils saveContext:context];
         [RORUserUtils saveLastUpdateTime:@"RunningHistoryUpdateTime"];
         return YES;
     } else {
@@ -178,7 +194,7 @@
 + (BOOL) saveRunInfoToDB:(User_Running_History *)runningHistory{
     //check uuid
     if(runningHistory.runUuid != nil){
-        NSManagedObjectContext *context = [RORContextUtils getShareContext];
+        NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
         User_Running_History *runHistory = [NSEntityDescription insertNewObjectForEntityForName:@"User_Running_History" inManagedObjectContext:context];
         //loop through all attributes and assign then to the clone
         NSDictionary *attributes = [[NSEntityDescription
@@ -189,7 +205,7 @@
             [runHistory setValue:[runningHistory valueForKey:attr] forKey:attr];
         }
         runHistory.commitTime = nil;
-        [RORContextUtils saveContext];
+        [RORContextUtils saveContext:context];
     }
     return YES;
 }
@@ -201,13 +217,14 @@
     NSArray *params = [NSArray arrayWithObjects:missionUuid, nil];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"sequence" ascending:YES];
     NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     NSMutableArray *historyList = [[NSMutableArray alloc] init];
     for (User_Running_History *histroy in fetchObject) {
-        User_Running_History *newHistory = [User_Running_History removeAssociateForEntity:histroy];
+        User_Running_History *newHistory = [User_Running_History removeAssociateForEntity:histroy withContext:context];
         [historyList addObject:newHistory];
     }
     return [historyList copy];

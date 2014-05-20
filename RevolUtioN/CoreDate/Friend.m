@@ -29,8 +29,7 @@
 @synthesize totalFriendFights;
 @synthesize friendFightWin;
 
-+(Friend *) removeAssociateForEntity:(Friend *)associatedEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(Friend *) removeAssociateForEntity:(Friend *)associatedEntity  withContext:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Friend" inManagedObjectContext:context];
     Friend *unassociatedEntity = [[Friend alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     for (NSString *attr in [[entity attributesByName] allKeys]) {
@@ -59,8 +58,7 @@
     return tempDict;
 }
 
-+(Friend *) intiUnassociateEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(Friend *) intiUnassociateEntity:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Friend" inManagedObjectContext:context];
     Friend *unassociatedEntity = [[Friend alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     return unassociatedEntity;

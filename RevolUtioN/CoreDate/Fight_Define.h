@@ -12,26 +12,26 @@
 
 @interface Fight_Define : NSManagedObject
 
-@property (retain) NSNumber * fightId;
-@property (retain) NSNumber * inUsing;
-@property (retain) NSString * fightName;
-@property (retain) NSNumber * minLevelLimit;
-@property (retain) NSNumber * maxLevelLimit;
-@property (retain) NSString * monsterName;
-@property (retain) NSNumber * monsterLevel;
-@property (retain) NSNumber * monsterMaxFight;
-@property (retain) NSNumber * monsterMinFight;
-@property (retain) NSNumber * basePowerConsume;
-@property (retain) NSNumber * baseExperience;
-@property (retain) NSNumber * baseGold;
-@property (retain) NSString * fightWin;
-@property (retain) NSString * winGot;
-@property (retain) NSString * winGotRule;
-@property (retain) NSString * fightLoose;
-@property (retain) NSNumber * triggerProbability;
-@property (retain) NSDate * updateTime;
+@property (nonatomic, retain) NSNumber * fightId;
+@property (nonatomic, retain) NSNumber * inUsing;
+@property (nonatomic, retain) NSString * fightName;
+@property (nonatomic, retain) NSNumber * minLevelLimit;
+@property (nonatomic, retain) NSNumber * maxLevelLimit;
+@property (nonatomic, retain) NSString * monsterName;
+@property (nonatomic, retain) NSNumber * monsterLevel;
+@property (nonatomic, retain) NSNumber * monsterMaxFight;
+@property (nonatomic, retain) NSNumber * monsterMinFight;
+@property (nonatomic, retain) NSNumber * basePowerConsume;
+@property (nonatomic, retain) NSNumber * baseExperience;
+@property (nonatomic, retain) NSNumber * baseGold;
+@property (nonatomic, retain) NSString * fightWin;
+@property (nonatomic, retain) NSString * winGot;
+@property (nonatomic, retain) NSString * winGotRule;
+@property (nonatomic, retain) NSString * fightLoose;
+@property (nonatomic, retain) NSNumber * triggerProbability;
+@property (nonatomic, retain) NSDate * updateTime;
 
-+(Fight_Define *) removeAssociateForEntity:(Fight_Define *)associatedEntity;
++(Fight_Define *) removeAssociateForEntity:(Fight_Define *)associatedEntity withContext:(NSManagedObjectContext *) context;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 

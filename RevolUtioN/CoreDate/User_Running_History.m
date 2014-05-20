@@ -42,15 +42,13 @@
 @dynamic friendId;
 @dynamic friendName;
 
-+(User_Running_History *) intiUnassociateEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(User_Running_History *) intiUnassociateEntity:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"User_Running_History" inManagedObjectContext:context];
     User_Running_History *unassociatedEntity = [[User_Running_History alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     return unassociatedEntity;
 }
 
-+(User_Running_History *) removeAssociateForEntity:(User_Running_History *)associatedEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(User_Running_History *) removeAssociateForEntity:(User_Running_History *)associatedEntity withContext:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"User_Running_History" inManagedObjectContext:context];
     User_Running_History *unassociatedEntity = [[User_Running_History alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     for (NSString *attr in [[entity attributesByName] allKeys]) {

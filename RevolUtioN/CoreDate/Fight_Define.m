@@ -30,8 +30,7 @@
 @dynamic triggerProbability;
 @dynamic updateTime;
 
-+(Fight_Define *) removeAssociateForEntity:(Fight_Define *)associatedEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(Fight_Define *) removeAssociateForEntity:(Fight_Define *)associatedEntity withContext:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Fight_Define" inManagedObjectContext:context];
     Fight_Define *unassociatedEntity = [[Fight_Define alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     for (NSString *attr in [[entity attributesByName] allKeys]) {

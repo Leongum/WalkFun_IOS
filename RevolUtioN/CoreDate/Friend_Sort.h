@@ -25,7 +25,7 @@
 @property (nonatomic, retain) NSNumber * totalFriendFights;
 @property (nonatomic, retain) NSNumber * friendFightWin;
 
-+(Friend_Sort *) removeAssociateForEntity:(Friend_Sort *)associatedEntity;
++(Friend_Sort *) removeAssociateForEntity:(Friend_Sort *)associatedEntity withContext:(NSManagedObjectContext *) context;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 

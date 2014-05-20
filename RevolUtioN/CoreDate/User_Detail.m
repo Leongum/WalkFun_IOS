@@ -36,8 +36,7 @@
 @dynamic propHaving;
 @dynamic updateTime;
 
-+(User_Detail *) removeAssociateForEntity:(User_Detail *)associatedEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(User_Detail *) removeAssociateForEntity:(User_Detail *)associatedEntity withContext:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"User_Detail" inManagedObjectContext:context];
     User_Detail *unassociatedEntity = [[User_Detail alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     for (NSString *attr in [[entity attributesByName] allKeys]) {

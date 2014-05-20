@@ -30,8 +30,7 @@
     self.sequence = [RORDBCommon getNumberFromId:[dict valueForKey:@"sequence"]];
 }
 
-+(Recommend_App *) removeAssociateForEntity:(Recommend_App *)associatedEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(Recommend_App *) removeAssociateForEntity:(Recommend_App *)associatedEntity withContext:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Recommend_App" inManagedObjectContext:context];
     Recommend_App *unassociatedEntity = [[Recommend_App alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     for (NSString *attr in [[entity attributesByName] allKeys]) {

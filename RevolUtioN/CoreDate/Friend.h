@@ -33,11 +33,11 @@
 @property (nonatomic, retain) NSNumber * friendFightWin;
 
 
-+(Friend *) removeAssociateForEntity:(Friend *)associatedEntity;
++(Friend *) removeAssociateForEntity:(Friend *)associatedEntity withContext:(NSManagedObjectContext *) context;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 
 -(NSMutableDictionary *)transToDictionary;
 
-+(Friend *) intiUnassociateEntity;
++(Friend *) intiUnassociateEntity:(NSManagedObjectContext *) context;
 @end

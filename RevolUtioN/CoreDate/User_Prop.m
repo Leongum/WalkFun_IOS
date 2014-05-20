@@ -17,15 +17,13 @@
 @dynamic userId;
 @dynamic updateTime;
 
-+(User_Prop *) intiUnassociateEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(User_Prop *) intiUnassociateEntity:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"User_Prop" inManagedObjectContext:context];
     User_Prop *unassociatedEntity = [[User_Prop alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     return unassociatedEntity;
 }
 
-+(User_Prop *) removeAssociateForEntity:(User_Prop *)associatedEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(User_Prop *) removeAssociateForEntity:(User_Prop *)associatedEntity withContext:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"User_Prop" inManagedObjectContext:context];
     User_Prop *unassociatedEntity = [[User_Prop alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     for (NSString *attr in [[entity attributesByName] allKeys]) {

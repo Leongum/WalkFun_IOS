@@ -29,8 +29,7 @@
 @dynamic minLevelLimit;
 @dynamic updateTime;
 
-+(Mission *) removeAssociateForEntity:(Mission *)associatedEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(Mission *) removeAssociateForEntity:(Mission *)associatedEntity withContext:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Mission" inManagedObjectContext:context];
     Mission *unassociatedEntity = [[Mission alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     for (NSString *attr in [[entity attributesByName] allKeys]) {

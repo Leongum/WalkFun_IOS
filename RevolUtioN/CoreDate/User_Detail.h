@@ -37,7 +37,7 @@
 @property (nonatomic, retain) NSString * propHaving;
 @property (nonatomic, retain) NSDate * updateTime;
 
-+(User_Detail *) removeAssociateForEntity:(User_Detail *)associatedEntity;
++(User_Detail *) removeAssociateForEntity:(User_Detail *)associatedEntity withContext:(NSManagedObjectContext *) context;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 

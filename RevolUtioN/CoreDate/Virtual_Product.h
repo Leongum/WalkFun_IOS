@@ -25,7 +25,7 @@
 @property (nonatomic, retain) NSNumber * maxLevelLimit;
 @property (nonatomic, retain) NSNumber *maxDropNum;
 
-+(Virtual_Product *) removeAssociateForEntity:(Virtual_Product *)associatedEntity;
++(Virtual_Product *) removeAssociateForEntity:(Virtual_Product *)associatedEntity withContext:(NSManagedObjectContext *) context;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 

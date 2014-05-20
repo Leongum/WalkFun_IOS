@@ -24,8 +24,7 @@
 @dynamic totalFriendFights;
 @dynamic friendFightWin;
 
-+(Friend_Sort *) removeAssociateForEntity:(Friend_Sort *)associatedEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(Friend_Sort *) removeAssociateForEntity:(Friend_Sort *)associatedEntity withContext:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Friend_Sort" inManagedObjectContext:context];
     Friend_Sort *unassociatedEntity = [[Friend_Sort alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     for (NSString *attr in [[entity attributesByName] allKeys]) {

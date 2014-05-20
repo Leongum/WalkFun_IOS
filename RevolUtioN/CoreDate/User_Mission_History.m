@@ -23,15 +23,13 @@
 @dynamic missionStatusComment;
 @dynamic updateTime;
 
-+(User_Mission_History *) intiUnassociateEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(User_Mission_History *) intiUnassociateEntity:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"User_Mission_History" inManagedObjectContext:context];
     User_Mission_History *unassociatedEntity = [[User_Mission_History alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     return unassociatedEntity;
 }
 
-+(User_Mission_History *) removeAssociateForEntity:(User_Mission_History *)associatedEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(User_Mission_History *) removeAssociateForEntity:(User_Mission_History *)associatedEntity withContext:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"User_Mission_History" inManagedObjectContext:context];
     User_Mission_History *unassociatedEntity = [[User_Mission_History alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     for (NSString *attr in [[entity attributesByName] allKeys]) {

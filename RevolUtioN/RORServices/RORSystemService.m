@@ -41,7 +41,7 @@
 //open out
 + (BOOL)syncFightDefine{
     NSError *error = nil;
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
     NSString *lastUpdateTime = [RORUserUtils getLastUpdateTime:@"FightDefineLastUpdateTime"];
     
     RORHttpResponse *httpResponse =[RORSystemClientHandler getFightDefine:lastUpdateTime];
@@ -50,13 +50,13 @@
         NSArray *fightDefineList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
         for (NSDictionary *fightDict in fightDefineList){
             NSNumber *fightId = [fightDict valueForKey:@"id"];
-            Fight_Define *fightEntity = [self fetchFightDefineInfo:fightId withContext:YES];
+            Fight_Define *fightEntity = [self fetchFightDefineInfo:fightId withContext:context];
             if(fightEntity == nil)
                 fightEntity = (Fight_Define *)[NSEntityDescription insertNewObjectForEntityForName:@"Fight_Define" inManagedObjectContext:context];
             [fightEntity initWithDictionary:fightDict];
         }
         
-        [RORContextUtils saveContext];
+        [RORContextUtils saveContext:context];
         [RORUserUtils saveLastUpdateTime:@"FightDefineLastUpdateTime"];
     } else {
         NSLog(@"sync with host error: can't get sync fight define list. Status Code: %d", [httpResponse responseStatus]);
@@ -70,16 +70,21 @@
     return [self fetchFightDefineInfo:fightId withContext:NO];
 }
 
-+ (Fight_Define *)fetchFightDefineInfo:(NSNumber *) appId withContext:(BOOL) needContext{
++ (Fight_Define *)fetchFightDefineInfo:(NSNumber *) appId withContext:(NSManagedObjectContext *) context{
     NSString *table=@"Fight_Define";
     NSString *query = @"fightId = %@";
     NSArray *params = [NSArray arrayWithObjects:appId, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    Boolean needContext =true;
+    if(context == nil){
+        needContext = false;
+        context = [RORContextUtils getPrivateContext];
+    }
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     if (!needContext) {
-        return [Fight_Define removeAssociateForEntity:(Fight_Define *) [fetchObject objectAtIndex:0]];
+        return [Fight_Define removeAssociateForEntity:(Fight_Define *) [fetchObject objectAtIndex:0] withContext:context];
     }
     return  (Fight_Define *) [fetchObject objectAtIndex:0];
 }
@@ -91,13 +96,14 @@
     NSArray *params = [NSArray arrayWithObjects:level,level, nil];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"monsterMinFight" ascending:YES];
     NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     NSMutableArray *fightDefineList = [[NSMutableArray alloc] init];
     for (Fight_Define *fightDefine in fetchObject) {
-        Fight_Define *newFight = [Fight_Define removeAssociateForEntity:fightDefine];
+        Fight_Define *newFight = [Fight_Define removeAssociateForEntity:fightDefine withContext:context];
         [fightDefineList addObject:newFight];
     }
     return [fightDefineList copy];
@@ -110,13 +116,14 @@
     NSArray *params = [NSArray arrayWithObjects:level,level, stage, nil];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"monsterMinFight" ascending:YES];
     NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     NSMutableArray *fightDefineList = [[NSMutableArray alloc] init];
     for (Fight_Define *fightDefine in fetchObject) {
-        Fight_Define *newFight = [Fight_Define removeAssociateForEntity:fightDefine];
+        Fight_Define *newFight = [Fight_Define removeAssociateForEntity:fightDefine withContext:context];
         [fightDefineList addObject:newFight];
     }
     return [fightDefineList copy];
@@ -125,7 +132,7 @@
 //open out
 + (BOOL)syncRecommendApp{
     NSError *error = nil;
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
     NSString *lastUpdateTime = [RORUserUtils getLastUpdateTime:@"RecommendLastUpdateTime"];
     
     RORHttpResponse *httpResponse =[RORSystemClientHandler getRecommendApp:lastUpdateTime];
@@ -140,7 +147,7 @@
             [recommendEntity initWithDictionary:recommendDict];
         }
         
-        [RORContextUtils saveContext];
+        [RORContextUtils saveContext:context];
         [RORUserUtils saveLastUpdateTime:@"RecommendLastUpdateTime"];
     } else {
         NSLog(@"sync with host error: can't get sync message list. Status Code: %d", [httpResponse responseStatus]);
@@ -153,7 +160,8 @@
     NSString *table=@"Recommend_App";
     NSString *query = @"appId = %@";
     NSArray *params = [NSArray arrayWithObjects:appId, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
@@ -168,13 +176,14 @@
     NSArray *params = [NSArray arrayWithObjects:[NSNumber numberWithInt:1], nil];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"sequence" ascending:YES];
     NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     NSMutableArray *recommendList = [[NSMutableArray alloc] init];
     for (Recommend_App *recommed in fetchObject) {
-        Recommend_App *newrecommed = [Recommend_App removeAssociateForEntity:recommed];
+        Recommend_App *newrecommed = [Recommend_App removeAssociateForEntity:recommed withContext:context];
         [recommendList addObject:newrecommed];
     }
     return [recommendList copy];
@@ -183,7 +192,7 @@
 //open out
 + (BOOL)syncActionDefine{
     NSError *error = nil;
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
     NSString *lastUpdateTime = [RORUserUtils getLastUpdateTime:@"ActionDefineLastUpdateTime"];
     
     RORHttpResponse *httpResponse =[RORSystemClientHandler getActionDefine:lastUpdateTime];
@@ -198,7 +207,7 @@
             [actionEntity initWithDictionary:actionDict];
         }
         
-        [RORContextUtils saveContext];
+        [RORContextUtils saveContext:context];
         [RORUserUtils saveLastUpdateTime:@"ActionDefineLastUpdateTime"];
     } else {
         NSLog(@"sync with host error: can't get sync action define. Status Code: %d", [httpResponse responseStatus]);
@@ -212,7 +221,8 @@
     NSString *table=@"Action_Define";
     NSString *query = @"actionId = %@";
     NSArray *params = [NSArray arrayWithObjects:actionId, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
@@ -226,13 +236,14 @@
     NSArray *params = [NSArray arrayWithObjects:[NSNumber numberWithInteger:(NSInteger)actionType], nil];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"triggerProbability" ascending:YES];
     NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     NSMutableArray *actionList = [[NSMutableArray alloc] init];
     for (Action_Define *actionDefine in fetchObject) {
-        Action_Define *newAction = [Action_Define removeAssociateForEntity:actionDefine];
+        Action_Define *newAction = [Action_Define removeAssociateForEntity:actionDefine withContext:context];
         [actionList addObject:newAction];
     }
     return [actionList copy];

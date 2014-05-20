@@ -24,9 +24,9 @@
 
 @property (nonatomic, retain) User_Detail * userDetail;
 
-+(User_Base *) intiUnassociateEntity;
++(User_Base *) intiUnassociateEntity:(NSManagedObjectContext *) context;
 
-+(User_Base *) removeAssociateForEntity:(User_Base *)associatedEntity;
++(User_Base *) removeAssociateForEntity:(User_Base *)associatedEntity withContext:(NSManagedObjectContext *) context;
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 

@@ -23,6 +23,6 @@
 
 -(void)initWithDictionary:(NSDictionary *)dict;
 
-+(Recommend_App *) removeAssociateForEntity:(Recommend_App *)associatedEntity;
++(Recommend_App *) removeAssociateForEntity:(Recommend_App *)associatedEntity withContext:(NSManagedObjectContext *) context;
 
 @end

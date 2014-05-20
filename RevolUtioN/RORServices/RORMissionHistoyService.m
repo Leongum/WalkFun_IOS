@@ -14,20 +14,25 @@
 
 //open out
 +(User_Mission_History *)fetchMissionHistoryByMissionUuid:(NSString *) missionUuid{
-    return [self fetchMissionHistoryByMissionUuid:missionUuid withContext:NO];
+    return [self fetchMissionHistoryByMissionUuid:missionUuid withContext:nil];
 }
 
-+(User_Mission_History *)fetchMissionHistoryByMissionUuid:(NSString *) missionUuid withContext:(BOOL) needContext{
++(User_Mission_History *)fetchMissionHistoryByMissionUuid:(NSString *) missionUuid withContext:(NSManagedObjectContext *) context{
     
     NSString *table=@"User_Mission_History";
     NSString *query = @"missionUuid = %@";
     NSArray *params = [NSArray arrayWithObjects:missionUuid, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    Boolean needContext = true;
+    if (context == nil) {
+        needContext = false;
+        context = [RORContextUtils getPrivateContext];
+    }
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withContext: context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     if (!needContext) {
-        return [User_Mission_History removeAssociateForEntity:(User_Mission_History *) [fetchObject objectAtIndex:0]];
+        return [User_Mission_History removeAssociateForEntity:(User_Mission_History *) [fetchObject objectAtIndex:0] withContext:context];
     }
     return (User_Mission_History *) [fetchObject objectAtIndex:0];
     
@@ -35,23 +40,28 @@
 
 //open out
 +(NSArray*)fetchFinishedMissionHistoryByUserId:(NSNumber*)userId{
-    return [self fetchFinishedMissionHistoryByUserId:userId withContext:NO];
+    return [self fetchFinishedMissionHistoryByUserId:userId withContext:nil];
 }
 
-+(NSArray*)fetchFinishedMissionHistoryByUserId:(NSNumber*)userId withContext:(BOOL) needContext{
++(NSArray*)fetchFinishedMissionHistoryByUserId:(NSNumber*)userId withContext:(NSManagedObjectContext *) context{
     NSString *table=@"User_Mission_History";
     NSString *query = @"userId = %@";
     NSArray *params = [NSArray arrayWithObjects:userId, nil];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:NO];
     NSArray *sortParams = [NSArray arrayWithObject:sortDescriptor];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams];
+    Boolean needContext = true;
+    if(context == nil){
+        context = [RORContextUtils getPrivateContext];
+        needContext = false;
+    }
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withOrderBy:sortParams withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     if(!needContext){
         NSMutableArray *historyList = [[NSMutableArray alloc] init];
         for (User_Mission_History *histroy in fetchObject) {
-            [historyList addObject:[User_Mission_History removeAssociateForEntity:histroy]];
+            [historyList addObject:[User_Mission_History removeAssociateForEntity:histroy withContext:context]];
         }
         return [historyList copy];
     }
@@ -63,7 +73,7 @@
     //if(![RORNetWorkUtils getDoUploadable])return NO;
     NSNumber *userId = [RORUserUtils getUserId];
     if(userId.integerValue > 0){
-        NSArray *dataList = [self fetchUnsyncedMissionHistories:NO];
+        NSArray *dataList = [self fetchUnsyncedMissionHistories:nil];
         if([dataList count] > 0){
             NSMutableArray *array = [[NSMutableArray alloc] init];
             for (User_Mission_History *history in dataList) {
@@ -85,20 +95,25 @@
     return YES;
 }
 
-+(NSArray *)fetchUnsyncedMissionHistories:(BOOL) needContext{
++(NSArray *)fetchUnsyncedMissionHistories:(NSManagedObjectContext *) context{
     
     NSNumber *userId = [RORUserUtils getUserId];
     NSString *table=@"User_Mission_History";
     NSString *query = @"userId = %@ and updateTime = nil";
     NSArray *params = [NSArray arrayWithObjects:userId, nil];
-    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query];
+    Boolean needContext = true;
+    if(context == nil){
+        context = [RORContextUtils getPrivateContext];
+        needContext = false;
+    }
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withContext: context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
     if(!needContext){
         NSMutableArray *historyList = [[NSMutableArray alloc] init];
         for (User_Mission_History *histroy in fetchObject) {
-            User_Mission_History *newHistory = [User_Mission_History removeAssociateForEntity:histroy];
+            User_Mission_History *newHistory = [User_Mission_History removeAssociateForEntity:histroy withContext:context];
             [historyList addObject:newHistory];
         }
         return [historyList copy];
@@ -107,14 +122,15 @@
 }
 
 +(void)updateUnsyncedMissionHistories{
-    NSArray *fetchObject = [self fetchUnsyncedMissionHistories:YES];
+    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
+    NSArray *fetchObject = [self fetchUnsyncedMissionHistories:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return;
     }
     for (User_Mission_History *info in fetchObject) {
         info.updateTime = [RORUserUtils getSystemTime];
     }
-    [RORContextUtils saveContext];
+    [RORContextUtils saveContext:context];
 }
 
 //open out
@@ -122,23 +138,23 @@
     //if(![RORNetWorkUtils getDoUploadable])return NO;
     NSError *error = nil;
     NSString *lastUpdateTime = [RORUserUtils getLastUpdateTime:@"MissionHistoryUpdateTime"];
-    
+     NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
     RORHttpResponse *httpResponse =[RORRunHistoryClientHandler getMissionHistories:userId withLastUpdateTime:lastUpdateTime];
     if ([httpResponse responseStatus]  == 200){
         NSArray *missionHistoryList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
         for (NSDictionary *missionHistoryDict in missionHistoryList){
             NSString *missionUuid = [missionHistoryDict valueForKey:@"missionUuid"];
-            User_Mission_History *missionHistoryEntity = [self fetchMissionHistoryByMissionUuid:missionUuid withContext:YES];
+            User_Mission_History *missionHistoryEntity = [self fetchMissionHistoryByMissionUuid:missionUuid withContext:context];
             //use local data insteade of service data when update in local.
             if(missionHistoryEntity!= nil && missionHistoryEntity.updateTime == nil){
                 continue;
             }
             if(missionHistoryEntity == nil)
-                missionHistoryEntity = [NSEntityDescription insertNewObjectForEntityForName:@"User_Mission_History" inManagedObjectContext:[RORContextUtils getShareContext]];
+                missionHistoryEntity = [NSEntityDescription insertNewObjectForEntityForName:@"User_Mission_History" inManagedObjectContext:context];
             
             [missionHistoryEntity initWithDictionary:missionHistoryDict];
         }
-        [RORContextUtils saveContext];
+        [RORContextUtils saveContext:context];
         [RORUserUtils saveLastUpdateTime:@"MissionHistoryUpdateTime"];
         return YES;
     } else {
@@ -152,20 +168,21 @@
 + (BOOL) saveMissionHistoryInfoToDB:(User_Mission_History *)missionHistory{
     //check uuid
     if(missionHistory.missionUuid != nil){
+        NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
         NSString *missionUuid = missionHistory.missionUuid;
-        User_Mission_History *missionHistoryEntity = [self fetchMissionHistoryByMissionUuid:missionUuid withContext:YES];
+        User_Mission_History *missionHistoryEntity = [self fetchMissionHistoryByMissionUuid:missionUuid withContext:context];
         if(missionHistoryEntity == nil)
-            missionHistoryEntity = [NSEntityDescription insertNewObjectForEntityForName:@"User_Mission_History" inManagedObjectContext:[RORContextUtils getShareContext]];
+            missionHistoryEntity = [NSEntityDescription insertNewObjectForEntityForName:@"User_Mission_History" inManagedObjectContext:context];
         //loop through all attributes and assign then to the clone
         NSDictionary *attributes = [[NSEntityDescription
                                      entityForName:@"User_Mission_History"
-                                     inManagedObjectContext:[RORContextUtils getShareContext]] attributesByName];
+                                     inManagedObjectContext:context] attributesByName];
         
         for (NSString *attr in [attributes allKeys]) {
             [missionHistoryEntity setValue:[missionHistory valueForKey:attr] forKey:attr];
         }
         missionHistoryEntity.updateTime = nil;
-        [RORContextUtils saveContext];
+        [RORContextUtils saveContext:context];
     }
     return YES;
 }

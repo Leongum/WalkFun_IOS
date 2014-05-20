@@ -88,7 +88,7 @@
                 //如果使用道具的任务完成了
                 if (missionUseItemQuantity.integerValue == 0){
                     //保存任务数据
-                    User_Mission_History *mh = [User_Mission_History intiUnassociateEntity];
+                    User_Mission_History *mh = [User_Mission_History intiUnassociateEntity:[RORContextUtils getPrivateContext]];
                     mh.userId = [RORUserUtils getUserId];
                     mh.userName = [RORUserUtils getUserName];
                     mh.missionId = todayMission.missionId;
@@ -152,14 +152,14 @@
     
     //未登录
     if ([RORUserUtils getUserId].integerValue<0) {
-//        UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginNavigatorController"];
-//        [self presentViewController:loginViewController animated:NO completion:NULL];
+        //        UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginNavigatorController"];
+        //        [self presentViewController:loginViewController animated:NO completion:NULL];
     } else {
         userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
         //还未设置性别
         if ((![userBase.sex isEqualToString:@"男"]) && (![userBase.sex isEqualToString:@"女"])){
-//            UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"SexSelectionViewController"];
-//            [self presentViewController:loginViewController animated:NO completion:^(){}];
+            //            UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"SexSelectionViewController"];
+            //            [self presentViewController:loginViewController animated:NO completion:^(){}];
         } else {
             //刷新页面
             for (int i=0; i<PAGE_QUANTITY; i++){
@@ -176,7 +176,7 @@
             NSNumber *mainVersion = [settingDict objectForKey:@"MainVersion"];
             NSNumber *subVersion = [settingDict objectForKey:@"SubVersion"];
             if (((!fdv) || fdv.intValue < dv.intValue) || //有新公告
-                    (aQnum && aQnum.intValue>0) || //有新恩仇录
+                (aQnum && aQnum.intValue>0) || //有新恩仇录
                 (mainVersion.intValue > CURRENT_VERSION_MAIN || subVersion.intValue > CURRENT_VERSION_SUB)) //有新版本
                 self.msgNoteImageView.alpha = 1;
             else

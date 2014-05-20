@@ -24,8 +24,7 @@
 @dynamic maxLevelLimit;
 @dynamic minLevelLimit;
 
-+(Virtual_Product *) removeAssociateForEntity:(Virtual_Product *)associatedEntity{
-    NSManagedObjectContext *context = [RORContextUtils getShareContext];
++(Virtual_Product *) removeAssociateForEntity:(Virtual_Product *)associatedEntity withContext:(NSManagedObjectContext *) context{
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Virtual_Product" inManagedObjectContext:context];
     Virtual_Product *unassociatedEntity = [[Virtual_Product alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
     for (NSString *attr in [[entity attributesByName] allKeys]) {

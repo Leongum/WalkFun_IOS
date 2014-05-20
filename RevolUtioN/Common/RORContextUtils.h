@@ -11,18 +11,18 @@
 
 @interface RORContextUtils : NSObject
 
-+ (NSManagedObjectContext *)getShareContext;
++(NSManagedObjectContext *)getPrivateContext;
 
-+ (void)saveContext;
++(void)saveContext:(NSManagedObjectContext *) context;
 
-+ (NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query;
++ (NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query withContext:(NSManagedObjectContext *) context;
 
-+ (NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query withOrderBy:(NSArray *) sortParams;
++ (NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query withOrderBy:(NSArray *) sortParams withContext:(NSManagedObjectContext *) context;
 
-+(NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query withOrderBy:(NSArray *) sortParams withLimit:(int)limitNumber;
++(NSArray *)fetchFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query withOrderBy:(NSArray *) sortParams withLimit:(int)limitNumber withContext:(NSManagedObjectContext *) context;
 
-+ (void)deleteFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query;
++ (void)deleteFromDelegate:(NSString *) tableName withParams:(NSArray *) params withPredicate:(NSString *) query withContext:(NSManagedObjectContext *) context;
 
-+ (void)clearTableData:(NSArray *) tableArray;
++ (void)clearTableData:(NSArray *) tableArray withContext:(NSManagedObjectContext *) context;
 
 @end
