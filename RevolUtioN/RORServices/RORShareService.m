@@ -10,9 +10,12 @@
 
 @implementation RORShareService
 
-//login return YES, register return NO.
-+ (BOOL)loginFromSNS:(UMSocialAccountEntity *)userInfo{
+//login return 0, register return 1. error return -1
++ (int)loginFromSNS:(UMSocialAccountEntity *)userInfo{
     NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
+    if(userInfo == nil || userInfo.usid == nil){
+        return -1;
+    }
     User_Base *user = [User_Base intiUnassociateEntity:context];
     user.userName = userInfo.usid;
     user.nickName = userInfo.userName;
@@ -33,10 +36,14 @@
                                  user.deviceId, @"deviceId",
                                  user.platformInfo, @"platformInfo",
                                  nil];
-        [RORUserServices registerUser:regDict];
-        return NO;
+        loginUser = [RORUserServices registerUser:regDict];
+        if(loginUser != nil){
+            return 1;
+        }else{
+            return -1;
+        }
     }
-    return YES;
+    return 0;
 }
 
 +(void)LQ_Runreward:(User_Running_History *)bestRecord{

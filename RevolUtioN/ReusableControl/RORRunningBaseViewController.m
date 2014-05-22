@@ -50,13 +50,15 @@
     
     //初始化事件列表
     eventWillList = [RORSystemService fetchAllActionDefine:ActionDefineRun];
-    for (int i=0; i<eventWillList.count; i++){
-        Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
-        if (event.triggerProbability.intValue==-1){
-            tiredAction = event;
-        }
-        if (event.triggerProbability.intValue==-2){
-            goldAction = event;
+    if(eventWillList){
+        for (int i=0; i<eventWillList.count; i++){
+            Action_Define *event = (Action_Define *)[eventWillList objectAtIndex:i];
+            if (event.triggerProbability.intValue==-1){
+                tiredAction = event;
+            }
+            if (event.triggerProbability.intValue==-2){
+                goldAction = event;
+            }
         }
     }
     eventHappenedList = [[NSMutableArray alloc]init];

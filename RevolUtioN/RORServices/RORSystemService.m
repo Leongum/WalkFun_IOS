@@ -67,7 +67,7 @@
 
 //open out
 + (Fight_Define *)fetchFightDefineInfo:(NSNumber *) fightId {
-    return [self fetchFightDefineInfo:fightId withContext:NO];
+    return [self fetchFightDefineInfo:fightId withContext:nil];
 }
 
 + (Fight_Define *)fetchFightDefineInfo:(NSNumber *) appId withContext:(NSManagedObjectContext *) context{
@@ -201,7 +201,7 @@
         NSArray *actionList = [NSJSONSerialization JSONObjectWithData:[httpResponse responseData] options:NSJSONReadingMutableLeaves error:&error];
         for (NSDictionary *actionDict in actionList){
             NSNumber *actionId = [actionDict valueForKey:@"actionId"];
-            Action_Define *actionEntity = [self fetchActionDefine:actionId];
+            Action_Define *actionEntity = [self fetchActionDefine:actionId withContext:context];
             if(actionEntity == nil)
                 actionEntity = [NSEntityDescription insertNewObjectForEntityForName:@"Action_Define" inManagedObjectContext:context];
             [actionEntity initWithDictionary:actionDict];
@@ -218,15 +218,26 @@
 
 //open out
 + (Action_Define *)fetchActionDefine:(NSNumber *) actionId {
+    return [self fetchActionDefine:actionId withContext:nil];
+}
+
++ (Action_Define *)fetchActionDefine:(NSNumber *) actionId withContext:(NSManagedObjectContext *) context{
     NSString *table=@"Action_Define";
     NSString *query = @"actionId = %@";
     NSArray *params = [NSArray arrayWithObjects:actionId, nil];
-    NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
+    Boolean needContext = true;
+    if(context == nil){
+        needContext =false;
+        context = [RORContextUtils getPrivateContext];
+    }
     NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withContext:context];
     if (fetchObject == nil || [fetchObject count] == 0) {
         return nil;
     }
-    return  (Action_Define *) [fetchObject objectAtIndex:0];
+    if(needContext){
+        return (Action_Define *)[fetchObject objectAtIndex:0];
+    }
+    return  (Action_Define *)[Action_Define removeAssociateForEntity:[fetchObject objectAtIndex:0] withContext:context];
 }
 
 //open out

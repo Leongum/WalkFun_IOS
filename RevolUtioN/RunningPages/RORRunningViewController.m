@@ -857,7 +857,7 @@
     if (((int)currentStep)%8 == 0){
         int realCurrentStep = currentStep/0.8;
         //判断是否遇到好友
-        if (realCurrentStep>friendFightStep && !didFriendFight){
+        if (realCurrentStep>friendFightStep && !didFriendFight && followList.count > 0){
             int i=arc4random() % followList.count;
             Friend *fightFriend = [followList objectAtIndex:i];
             //不能相遇本次作伴的粉丝

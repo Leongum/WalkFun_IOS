@@ -74,7 +74,9 @@
 +(User_Base *)registerUser:(NSDictionary *)registerDic{
     RORHttpResponse *httpResponse = [RORUserClientHandler createUserInfoByUserDic:registerDic];
     User_Base *userBase = [self syncUserFromResponse:httpResponse];
-    [self saveUserInfoToList:userBase];
+    if(userBase != nil){
+        [self saveUserInfoToList:userBase];
+    }
     return userBase;
 }
 
@@ -95,8 +97,10 @@
     if(userName == nil || password == nil) return nil;
     RORHttpResponse *httpResponse = [RORUserClientHandler getUserInfoByUserNameAndPassword:userName withPassword:password];
     User_Base *userBase = [self syncUserFromResponse:httpResponse];
-    [self saveUserInfoToList:userBase];
-    [self updateUserDeviceToken];
+    if(userBase != nil){
+        [self saveUserInfoToList:userBase];
+        [self updateUserDeviceToken];
+    }
     return userBase;
 }
 

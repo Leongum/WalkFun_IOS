@@ -14,7 +14,7 @@
 @interface RORShareService : NSObject
 
 //login return YES, register return NO.
-+ (BOOL)loginFromSNS:(UMSocialAccountEntity *)userInfo;
++ (int)loginFromSNS:(UMSocialAccountEntity *)userInfo;
 
 //lingqian shwo reward
 +(void)LQ_Runreward:(User_Running_History *)bestRecord;

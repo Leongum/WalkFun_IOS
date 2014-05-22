@@ -37,7 +37,11 @@ static NSDate *syncTime;
 
 + (NSString *)getDeviceToken{
     NSMutableDictionary *userDict = [self getUserInfoPList];
-    return [userDict valueForKey:@"deviceToken"];
+    NSString *deviceToken = [userDict valueForKey:@"deviceToken"];
+    if (!([deviceToken isEqual:@""] || deviceToken == nil))
+        return deviceToken;
+    else
+        return @"no_device_id";
 }
 
 + (NSNumber *)getDownLoaded{

@@ -245,7 +245,7 @@
 }
 
 +(Friend_Sort *)fetchFriendSortDetails:(NSNumber *) friendId{
-    return [self fetchFriendSortDetails:friendId withContext:NO];
+    return [self fetchFriendSortDetails:friendId withContext:nil];
 }
 
 +(Friend_Sort *)fetchFriendSortDetails:(NSNumber *) friendId withContext:(NSManagedObjectContext *) context{

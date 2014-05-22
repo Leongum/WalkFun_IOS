@@ -229,9 +229,9 @@
                                                   NSLog(@"SNS account response %@", accountResponse);
                                                   NSDictionary *snsAccountDic = [UMSocialAccountManager socialAccountDictionary];
                                                   UMSocialAccountEntity *account = [snsAccountDic valueForKey:type];
-                                                  
-                                                  BOOL islogin = [RORShareService loginFromSNS:account];
-                                                  if(islogin){
+                                                  //login return 0, register return 1. error return -1
+                                                  int islogin = [RORShareService loginFromSNS:account];
+                                                  if(islogin == 0){
                                                       [self startIndicator:self];
                                                       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                                           BOOL success = [self syncDataAfterLogin];
@@ -243,8 +243,10 @@
                                                           });
                                                       });
                                                   }
-                                                  else{
+                                                  else if(islogin == 1){
                                                       [self performSegueWithIdentifier:@"sexSetting" sender:self];
+                                                  }else{
+                                                      [self sendAlart:@"登录失败。请重试"];
                                                   }
                                               }];
                                           }
@@ -254,7 +256,7 @@
         UMSocialAccountEntity *account = [snsAccountDic valueForKey:type];
         
         BOOL islogin = [RORShareService loginFromSNS:account];
-        if(islogin){
+        if(islogin == 0){
             [self startIndicator:self];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 BOOL success = [self syncDataAfterLogin];
@@ -266,8 +268,10 @@
                 });
             });
         }
-        else{
+        else if(islogin == 1){
             [self performSegueWithIdentifier:@"sexSetting" sender:self];
+        }else{
+            [self sendAlart:@"登录失败。请重试"];
         }
     }
     
