@@ -71,7 +71,6 @@
     missionBoardCenterY = self.missionView.center.y;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backendSyncMethod:) name:@"Notification_GetUserDetails" object:nil];
-    lastSyncTime = [NSDate date];
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
@@ -445,7 +444,6 @@
 
 - (void) backendSyncMethod: (NSNotification*) aNotification
 {
-    if (!lastSyncTime || [lastSyncTime timeIntervalSinceNow]>10800){
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [RORUserUtils syncSystemData];
         [RORUserUtils syncUserData];
@@ -454,10 +452,8 @@
                 UIViewController *controller =(UIViewController *)[contentViews objectAtIndex:i];
                 [controller viewWillAppear:NO];
             }
-            lastSyncTime = [NSDate date];
         });
     });
-    }
 }
 
 

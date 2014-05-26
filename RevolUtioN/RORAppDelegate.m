@@ -72,8 +72,9 @@
     n = [NSNumber numberWithInteger:n.integerValue+1];
     [dict setObject:n forKey:@"AppOpenCounter"];
     [RORUserUtils writeToUserInfoPList:dict];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_GetUserDetails" object:nil userInfo:nil];
+    if (!runningStatus){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_GetUserDetails" object:nil userInfo:nil];
+    }
 }
 
 -(void)applicationWillResignActive:(UIApplication *)application{
