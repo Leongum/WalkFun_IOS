@@ -32,7 +32,7 @@
     double missionBoardCenterY;
     Mission *todayMission;
     BOOL isFolded;
-    
+    NSDate *lastSyncTime;
     int alertType;
 }
 @property (strong)			CAEmitterLayer	*heartsEmitter;

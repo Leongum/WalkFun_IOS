@@ -72,6 +72,8 @@
     n = [NSNumber numberWithInteger:n.integerValue+1];
     [dict setObject:n forKey:@"AppOpenCounter"];
     [RORUserUtils writeToUserInfoPList:dict];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_GetUserDetails" object:nil userInfo:nil];
 }
 
 -(void)applicationWillResignActive:(UIApplication *)application{
@@ -122,6 +124,7 @@
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge)];
     // Override point for customization after application launch.
+    
     return YES;
 }
 

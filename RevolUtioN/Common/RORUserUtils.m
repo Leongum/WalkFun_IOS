@@ -10,6 +10,9 @@
 #import "RORMissionServices.h"
 #import "RORUserServices.h"
 #import "RORVirtualProductService.h"
+#import "RORMissionHistoyService.h"
+#import "RORRunHistoryServices.h"
+#import "RORUserPropsService.h"
 
 static NSNumber *userId = nil;
 
@@ -289,6 +292,21 @@ static NSDate *syncTime;
         //sync userInfo.
         [RORUserServices syncUserInfoById:userId];
     }
+}
+
++(void)syncUserData{
+    [RORRunHistoryServices uploadRunningHistories];
+    [RORMissionHistoyService uploadMissionHistories];
+    
+    int aQuantity = [RORFriendService syncActions:[RORUserUtils getUserId]];
+    [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:aQuantity], @"MessageReceivedNumber", nil]];
+
+    //用户好友信息
+    [RORFriendService syncFriends:[RORUserUtils getUserId]];
+    //好友初步信息
+    [RORFriendService syncFriendSort:[RORUserUtils getUserId]];
+    //用户道具
+    [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
 }
 
 +(UIImage *)getImageForUserSex:(NSString *)sexString{

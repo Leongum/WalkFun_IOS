@@ -59,6 +59,8 @@
 
 +(void)syncSystemData;
 
++(void)syncUserData;
+
 +(UIImage *)getImageForUserSex:(NSString *)sexString;
 
 //解析propHaving字段为道具id及显示个数的dictionary
