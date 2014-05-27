@@ -103,8 +103,9 @@
     
     RORHttpResponse *httpResponse = [RORVirtualProductClientHandler createVProductBuyInfo:[RORUserUtils getUserId] withBuyInfo: buyEnity.transToDictionary];
     if ([httpResponse responseStatus] == 200){
-        [self syncUserProps:[RORUserUtils getUserId]];
-        [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_GetUserDetails" object:nil userInfo:nil];
+        //[self syncUserProps:[RORUserUtils getUserId]];
+        //[RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
         return YES;
     } else {
         NSLog(@"error: statCode = %@", [httpResponse errorMessage]);

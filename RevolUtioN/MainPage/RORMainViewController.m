@@ -70,7 +70,8 @@
     
     missionBoardCenterY = self.missionView.center.y;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backendSyncMethod:) name:@"Notification_GetUserDetails" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allBackendSyncMethod:) name:@"Notification_GetUserAndSystemDetails" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userBackendSyncMethod:) name:@"Notification_GetUserDetails" object:nil];
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
@@ -442,16 +443,25 @@
 }
 
 
-- (void) backendSyncMethod: (NSNotification*) aNotification
+- (void) allBackendSyncMethod: (NSNotification*) aNotification
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [RORUserUtils syncSystemData];
         [RORUserUtils syncUserData];
+        userBase = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
         dispatch_async(dispatch_get_main_queue(), ^{
-            for (int i=0; i<PAGE_QUANTITY; i++){
-                UIViewController *controller =(UIViewController *)[contentViews objectAtIndex:i];
-                [controller viewWillAppear:NO];
-            }
+            [self viewWillAppear:NO];
+        });
+    });
+}
+
+- (void) userBackendSyncMethod: (NSNotification*) aNotification
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [RORUserUtils syncUserData];
+        userBase = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self viewWillAppear:NO];
         });
     });
 }
