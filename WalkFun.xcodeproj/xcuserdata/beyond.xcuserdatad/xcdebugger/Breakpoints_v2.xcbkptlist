@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/MainPage/RORLoadingViewController.m"
-            timestampString = "419329812.64132"
+            timestampString = "422282126.352182"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70">
+            startingLineNumber = "99"
+            endingLineNumber = "99">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -45,7 +45,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "273"
             endingLineNumber = "273"
-            landmarkName = "-managedObjectModel"
+            landmarkName = "-saveContext"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -237,36 +237,6 @@
             endingLineNumber = "59"
             landmarkName = "-initWithFrame:andUserItem:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ItemDetailCoverView initWithFrame:andUserItem:]"
-                  moduleName = "WalkFun"
-                  urlString = "file:///Users/beyond/development/WalkFun_IOS/RevolUtioN/Items/ItemDetailCoverView.m"
-                  timestampString = "422185375.733224"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "3462">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ItemDetailCoverView initWithFrame:andUserItem:]"
-                  moduleName = "WalkFun"
-                  urlString = "file:///Users/beyond/development/WalkFun_IOS/RevolUtioN/Items/ItemDetailCoverView.m"
-                  timestampString = "422185378.716209"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "3458">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -308,11 +278,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/RunningPages/RORRunningViewController.m"
-            timestampString = "420435064.964181"
+            timestampString = "422814928.335415"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1039"
-            endingLineNumber = "1039"
+            startingLineNumber = "1048"
+            endingLineNumber = "1048"
             landmarkName = "-refreshItemCount:"
             landmarkType = "5">
          </BreakpointContent>
@@ -324,43 +294,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/RunningPages/RORRunningViewController.m"
-            timestampString = "420435064.964181"
+            timestampString = "422814928.335415"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "920"
-            endingLineNumber = "920"
+            startingLineNumber = "929"
+            endingLineNumber = "929"
             landmarkName = "-isEventHappen"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[RORRunningViewController isEventHappen]"
-                  moduleName = "WalkFun"
-                  urlString = "file:///Users/beyond/development/WalkFun_IOS/RevolUtioN/RunningPages/RORRunningViewController.m"
-                  timestampString = "422185375.739847"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "920"
-                  endingLineNumber = "920"
-                  offsetFromSymbolStart = "2386">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[RORRunningViewController isEventHappen]"
-                  moduleName = "WalkFun"
-                  urlString = "file:///Users/beyond/development/WalkFun_IOS/RevolUtioN/RunningPages/RORRunningViewController.m"
-                  timestampString = "422185378.717753"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "920"
-                  endingLineNumber = "920"
-                  offsetFromSymbolStart = "2346">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RevolUtioN/MainPage/SexSelectionViewController.m"
+            timestampString = "422350655.463353"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "-didSelectSexAction"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -370,12 +326,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolUtioN/RunningPages/RORRunningViewController.m"
-            timestampString = "422170492.127343"
+            timestampString = "422815211.704526"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "1114"
+            endingLineNumber = "1114"
+            landmarkName = "-eventDidHappened:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

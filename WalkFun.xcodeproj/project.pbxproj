@@ -235,6 +235,8 @@
 		308C1666186EF1FB005B0198 /* RORPaperSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 308C1665186EF1FB005B0198 /* RORPaperSegmentControl.m */; };
 		3090EEC2192B0002003DB4EE /* InstructionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3090EEC1192B0002003DB4EE /* InstructionViewController.m */; };
 		3090EEC4192B4477003DB4EE /* item_buy_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3090EEC3192B4477003DB4EE /* item_buy_button.png */; };
+		3090EEC7192C43EE003DB4EE /* InstructionCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3090EEC6192C43EE003DB4EE /* InstructionCoverView.m */; };
+		3090EEC9192C60AC003DB4EE /* ins_head_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3090EEC8192C60AC003DB4EE /* ins_head_image.png */; };
 		30978DA317EDA57E00CA58B9 /* history_detail_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 30978DA117EDA57E00CA58B9 /* history_detail_bg.png */; };
 		30984920186041990079E236 /* eyeClosed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3098491E186041990079E236 /* eyeClosed.png */; };
 		30984937186207780079E236 /* RORIntroCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30984936186207780079E236 /* RORIntroCoverView.m */; };
@@ -264,6 +266,7 @@
 		30BDBE69182A3BA4001829D5 /* RORFriendsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BDBE68182A3BA4001829D5 /* RORFriendsMainViewController.m */; };
 		30C1218817EA963B0077CBD3 /* RORCountDownCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C1218717EA963B0077CBD3 /* RORCountDownCoverView.m */; };
 		30C1219117EC99EA0077CBD3 /* RORBreathingControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C1219017EC99EA0077CBD3 /* RORBreathingControl.m */; };
+		30CF1FA31933A10D00790DB9 /* friend_follow_switch_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 30CF1FA21933A10D00790DB9 /* friend_follow_switch_button.png */; };
 		30D008D317F53FBB004E6747 /* challenge_S.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 30D008D017F53FBB004E6747 /* challenge_S.m4a */; };
 		30D008D417F53FBB004E6747 /* challenge_normal.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 30D008D117F53FBB004E6747 /* challenge_normal.m4a */; };
 		30D008D517F53FBB004E6747 /* challenge_F.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 30D008D217F53FBB004E6747 /* challenge_F.m4a */; };
@@ -717,6 +720,9 @@
 		3090EEC0192B0002003DB4EE /* InstructionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstructionViewController.h; path = MorePage/InstructionViewController.h; sourceTree = "<group>"; };
 		3090EEC1192B0002003DB4EE /* InstructionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstructionViewController.m; path = MorePage/InstructionViewController.m; sourceTree = "<group>"; };
 		3090EEC3192B4477003DB4EE /* item_buy_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item_buy_button.png; sourceTree = "<group>"; };
+		3090EEC5192C43EE003DB4EE /* InstructionCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InstructionCoverView.h; path = ReusableControl/InstructionCoverView.h; sourceTree = "<group>"; };
+		3090EEC6192C43EE003DB4EE /* InstructionCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InstructionCoverView.m; path = ReusableControl/InstructionCoverView.m; sourceTree = "<group>"; };
+		3090EEC8192C60AC003DB4EE /* ins_head_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ins_head_image.png; sourceTree = "<group>"; };
 		30978DA117EDA57E00CA58B9 /* history_detail_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history_detail_bg.png; sourceTree = "<group>"; };
 		3098491E186041990079E236 /* eyeClosed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyeClosed.png; sourceTree = "<group>"; };
 		30984935186207780079E236 /* RORIntroCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORIntroCoverView.h; path = ReusableControl/RORIntroCoverView.h; sourceTree = "<group>"; };
@@ -754,6 +760,7 @@
 		30C1218717EA963B0077CBD3 /* RORCountDownCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORCountDownCoverView.m; path = ReusableControl/RORCountDownCoverView.m; sourceTree = "<group>"; };
 		30C1218F17EC99EA0077CBD3 /* RORBreathingControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORBreathingControl.h; path = ReusableControl/RORBreathingControl.h; sourceTree = "<group>"; };
 		30C1219017EC99EA0077CBD3 /* RORBreathingControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORBreathingControl.m; path = ReusableControl/RORBreathingControl.m; sourceTree = "<group>"; };
+		30CF1FA21933A10D00790DB9 /* friend_follow_switch_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_follow_switch_button.png; sourceTree = "<group>"; };
 		30D008D017F53FBB004E6747 /* challenge_S.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = challenge_S.m4a; path = Resources/sound/challenge_S.m4a; sourceTree = "<group>"; };
 		30D008D117F53FBB004E6747 /* challenge_normal.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = challenge_normal.m4a; path = Resources/sound/challenge_normal.m4a; sourceTree = "<group>"; };
 		30D008D217F53FBB004E6747 /* challenge_F.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = challenge_F.m4a; path = Resources/sound/challenge_F.m4a; sourceTree = "<group>"; };
@@ -1455,6 +1462,8 @@
 		30692D531811327000DA01EC /* Instruction */ = {
 			isa = PBXGroup;
 			children = (
+				3090EEC5192C43EE003DB4EE /* InstructionCoverView.h */,
+				3090EEC6192C43EE003DB4EE /* InstructionCoverView.m */,
 				30692D54181132B300DA01EC /* RORInstructionPageViewController.h */,
 				30692D55181132B300DA01EC /* RORInstructionPageViewController.m */,
 			);
@@ -1533,6 +1542,7 @@
 		3098492D1860E4580079E236 /* friends */ = {
 			isa = PBXGroup;
 			children = (
+				30CF1FA21933A10D00790DB9 /* friend_follow_switch_button.png */,
 				3022DFF718EBEE8D00F3A9D5 /* friend_add_cell_disabled.png */,
 				3022DFD818E012BC00F3A9D5 /* friend_add_nextPage_disabled.png */,
 				3022DFD018E00C6600F3A9D5 /* friend_add_cell.png */,
@@ -1556,6 +1566,7 @@
 		30984932186206750079E236 /* instruction */ = {
 			isa = PBXGroup;
 			children = (
+				3090EEC8192C60AC003DB4EE /* ins_head_image.png */,
 				30F78732190AA92E0041F9F4 /* intro_sync.png */,
 				30F7872C190A3F1F0041F9F4 /* intro_firstopen.png */,
 				30F7872D190A3F1F0041F9F4 /* intro_mainpage.png */,
@@ -1962,6 +1973,7 @@
 			files = (
 				30989CE617F9324B00CA9F83 /* write_us.png in Resources */,
 				3022DFE718E076DC00F3A9D5 /* history_cell_normal.png in Resources */,
+				3090EEC9192C60AC003DB4EE /* ins_head_image.png in Resources */,
 				30F78730190A3F1F0041F9F4 /* intro_mainpage.png in Resources */,
 				3022DFA018D6C00900F3A9D5 /* followButton_selected.png in Resources */,
 				30DB01FF18C3397D008863B8 /* main_title_board.png in Resources */,
@@ -1994,6 +2006,7 @@
 				30F7873A190CBB030041F9F4 /* weixin.png in Resources */,
 				30FAA212186415E100E72650 /* male.png in Resources */,
 				30DB022718CDBBA0008863B8 /* coin.png in Resources */,
+				30CF1FA31933A10D00790DB9 /* friend_follow_switch_button.png in Resources */,
 				30D008D417F53FBB004E6747 /* challenge_normal.m4a in Resources */,
 				3013D49818C040DA005F4C07 /* fat_female.png in Resources */,
 				30DB020E18C5B54A008863B8 /* levelup_congrats.png in Resources */,
@@ -2251,6 +2264,7 @@
 				3022DFAC18D96F4300F3A9D5 /* KSLabel.m in Sources */,
 				0FA751ED189279E70037342E /* RORMapViewController.m in Sources */,
 				0FA751C7189279CB0037342E /* Friend.m in Sources */,
+				3090EEC7192C43EE003DB4EE /* InstructionCoverView.m in Sources */,
 				0FA7515B1892796E0037342E /* RORCheckBox.m in Sources */,
 				30D2DF0F188003D40093A426 /* RORRecommendViewController.m in Sources */,
 				0F0D099B18DC290E000C8962 /* Walk_Event.m in Sources */,

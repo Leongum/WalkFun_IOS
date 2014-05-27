@@ -449,7 +449,7 @@
             [Animations moveUp:self.paperView andAnimationDuration:0.3 andWait:NO andLength:newCellHeight<self.paperView.frame.origin.y+218?newCellHeight:self.paperView.frame.origin.y+218];
         }
     }
-    if (!isAWalking && currentStep > 70 && distance>70) {//debug
+    if (!isAWalking){// && currentStep > 70 && distance>70) {//debug
         isAWalking = YES;
         UIImage* image = [UIImage imageNamed:@"green_btn_bg.png"];
         [endButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -510,8 +510,10 @@
     
     if (isAWalking){
         [self.saveButton setEnabled:YES];
-        [self.saveButton setTitle:@"保存" forState:UIControlStateNormal];
-        [self.saveButton setBackgroundImage:[UIImage imageNamed:@"running_end_bg.png"] forState:UIControlStateNormal];
+        [self.saveButton setTitle:@"确定回村吗？" forState:UIControlStateNormal];
+//        [self.saveButton setBackgroundImage:[UIImage imageNamed:@"running_end_bg.png"] forState:UIControlStateNormal];
+        [self.saveButton setBackgroundImage:nil forState:UIControlStateNormal];
+
     } else {
         [self.saveButton setEnabled:NO];
         [self.saveButton setTitle:@"你走的也太少了吧" forState:UIControlStateNormal];
@@ -569,8 +571,12 @@
 }
 
 - (IBAction)btnDeleteRunHistory:(id)sender {
-    [self prepareForQuit];
-    [self dismissViewControllerAnimated:YES completion:^(){}];
+    if (isAWalking){
+        [self btnSaveRun:self];
+    } else {
+        [self prepareForQuit];
+        [self dismissViewControllerAnimated:YES completion:^(){}];
+    }
 }
 
 
@@ -872,7 +878,9 @@
         
         int x = arc4random() % 1000000;
         double roll = ((double)x)/10000.f;
-        double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0, rateEvent = 3;
+        double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0, rateEvent = 30;
+        //, rateEvent = 3;
+        //debug
         if (realCurrentStep>WALKING_FIGHT_STAGE_II){
             stepsSinceLastFight++;
             
@@ -888,7 +896,8 @@
                     return;
                 }
             }
-            rate2 = stepsSinceLastFight*7/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 2;
+//            rate2 = stepsSinceLastFight*7/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 2;
+            rate2 = 30;//debug
         }
         if (realCurrentStep>WALKING_FIGHT_STAGE_III){
             rate3 = 2 + stepsSinceLastFight*3/(WALKING_FIGHT_STAGE_IV - WALKING_FIGHT_STAGE_III);

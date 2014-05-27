@@ -20,6 +20,7 @@
 #import "StrokeLabel.h"
 #import "CUSFlashLabel.h"
 #import "BadgeView.h"
+#import "InstructionCoverView.h"
 
 #define BACKBUTTON_FRAME_TOP CGRectMake(0, 0, 70, 70)
 

@@ -20,6 +20,14 @@
 
 @implementation RORLoadingViewController
 
+NSString *const loadingNote[] ={
+    @"正在加载资源文件",
+    @"正在努力加载资源文件",
+    @"真的在努力加载资源文件",
+    @"你的网速有点慢，但我还在努力",
+    @"资源文件马上就要加载完毕",
+};
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -34,9 +42,10 @@
     [super viewDidLoad];
     self.backButton.alpha = 0;
     
-    [self.loadingLabel setSpotlightColor:[UIColor blackColor]];
-    [self.loadingLabel setContentMode:UIViewContentModeBottom];
-
+//    [self.loadingLabel setSpotlightColor:[UIColor blackColor]];
+//    [self.loadingLabel setContentMode:UIViewContentModeBottom];
+    
+    self.loadingLabel.text = loadingNote[timerCount];
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
@@ -59,6 +68,26 @@
             [self presentViewController:navigationController animated:NO completion:NULL];
         });
     });
+    
+    [NSThread detachNewThreadSelector:@selector(startTimer) toTarget:self withObject:nil];
+}
+
+-(void)startTimer{
+    timerCount = 0;
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timerDot) userInfo:nil repeats:YES];
+    repeatingTimer = timer;
+    [[NSRunLoop currentRunLoop] run];
+}
+
+- (void)timerDot{
+    timerCount++;
+    if (timerCount>4)
+        timerCount = 1;
+    [self performSelectorOnMainThread:@selector(displayLoadingNote) withObject:nil waitUntilDone:YES];
+}
+
+-(void)displayLoadingNote{
+    self.loadingLabel.text = loadingNote[timerCount];
 }
 
 - (void)didReceiveMemoryWarning

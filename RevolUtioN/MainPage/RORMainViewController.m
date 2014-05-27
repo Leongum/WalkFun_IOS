@@ -73,6 +73,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allBackendSyncMethod:) name:@"Notification_GetUserAndSystemDetails" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userBackendSyncMethod:) name:@"Notification_GetUserDetails" object:nil];
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
+    
 }
 
 -(void)checkDailyMission{
@@ -185,12 +186,11 @@
                 self.msgNoteImageView.alpha = 0;
             
             //检查是否需要显示提示信息
-            [self checkPinchInstruction];
-            [self checkMissionStoneInstruction];
-            [self checkMainPageInstruction];
-            [self checkFirstOpenInstruction];
-            [self checkSyncInstruction];
-            [self checkHistoryInstruction];
+//            [self checkPinchInstruction];
+//            [self checkMissionStoneInstruction];
+//            [self checkMainPageInstruction];
+//            [self checkSyncInstruction];
+//            [self checkHistoryInstruction];
         }
     }
     self.missionView.center = CGPointMake(self.missionView.center.x, missionBoardCenterY);
@@ -207,6 +207,8 @@
         }
     }
     
+    [self checkFirstOpenInstruction];
+
     //检查日常任务
     [self checkDailyMission];
     //检查是否提示玩家去appstore评价
@@ -249,17 +251,12 @@
 }
 
 -(void)checkFirstOpenInstruction{
-    NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
-    NSNumber *n = (NSNumber *)[dict objectForKey:@"FirstOpenInstruction"];
-    if (userBase && !n){
-        CoverView *instructionCV = [[CoverView alloc]initWithFrame:self.view.frame];
-        instructionCV.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
-        [instructionCV addCoverBgImage:[UIImage imageNamed:@"intro_firstopen.png"] grayed:NO];
-        [coverViewQueue addObject:instructionCV];
-        
-        [dict setObject:[NSNumber numberWithInt:1] forKey:@"FirstOpenInstruction"];
-        [RORUserUtils writeToUserInfoPList:dict];
-    }
+    startInstruction = [[InstructionCoverView alloc]initWithFrame:self.view.bounds thisKey:@"FirstOpenInstruction"  andActiveRegionFrame:self.ready2StartButton.frame];
+    [startInstruction addNoteText:@"当你准备开始走路了，点击这里准备出发"];
+    [startInstruction addTriggerForerunnerKey:nil minLevel:0];
+    [startInstruction addAction:self withSelector:@selector(ready2StartAction:)];
+    [startInstruction setOnlyChoice:YES];
+    [coverViewQueue addObject:startInstruction];
 }
 
 -(void)checkPinchInstruction{
@@ -297,7 +294,9 @@
 -(void)checkSyncInstruction{
     NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
     NSNumber *syncIns = [dict objectForKey:@"SyncInstruction"];
-    if (syncIns && (syncIns.intValue<0 || userBase.userDetail.level.intValue>3)){
+    if (!syncIns)
+        return;
+    if (syncIns.intValue<0 && userBase.userDetail.level.intValue>3){
         CoverView *instructionCV = [[CoverView alloc]initWithFrame:self.view.frame];
         instructionCV.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
         [instructionCV addCoverBgImage:[UIImage imageNamed:@"intro_sync.png"] grayed:NO];
