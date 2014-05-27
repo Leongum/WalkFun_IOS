@@ -22,6 +22,12 @@
         
         NSLog(@"%@",versionEntity.systemTime);
         [self saveSystimeTime:[RORUtils getStringFromDate:versionEntity.systemTime]];
+        if (!versionEntity.descVersion)
+            versionEntity.descVersion = [NSNumber numberWithInt:CURRENT_VERSION_DESC];
+        if (!versionEntity.version)
+            versionEntity.version = [NSNumber numberWithInt:CURRENT_VERSION_MAIN];
+        if (!versionEntity.subVersion)
+            versionEntity.subVersion = [NSNumber numberWithInt:CURRENT_VERSION_SUB];
         
         [RORUserUtils writeToUserSettingsPList:[NSDictionary dictionaryWithObjectsAndKeys:versionEntity.version, @"MainVersion", versionEntity.subVersion, @"SubVersion", versionEntity.descVersion, @"DescVersion", versionEntity.decs, @"VersionDescription", nil]];
         

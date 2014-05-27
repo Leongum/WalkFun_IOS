@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "RORViewController.h"
-@interface RORLoadingViewController : RORViewController
+@interface RORLoadingViewController : RORViewController{
+    NSTimer *repeatingTimer;
+    int timerCount;
+}
 
 @property (strong, nonatomic) IBOutlet CUSFlashLabel *loadingLabel;
 

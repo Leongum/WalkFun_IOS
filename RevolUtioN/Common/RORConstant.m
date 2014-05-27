@@ -28,4 +28,18 @@ NSString *const FightStage_toString[] ={
     @"传说",
 };
 
+NSString *const InstructionOrder_toString[] ={
+    @"FirstOpenInstruction",
+    @"StartWalkingInstruction",
+    @"CheckHistoryInstruction",
+    @"ShareHistoryInstruction",
+    @"ItemPageInstruction",
+    @"ItemMallInstruction"
+    @"UseFightingItemInstruction",
+    @"FriendPageInstruction",
+    @"AddFriendInstruction",
+    @"WalkingFriendInstruction",
+    @"MissionStoneInstruction"
+};
+
 @end

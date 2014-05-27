@@ -95,7 +95,15 @@
             
             [coverViewQueue removeObject:viewController];
             break;
-        } else if ([obj isKindOfClass:[CoverView class]]){
+        } else if ([obj isKindOfClass:[InstructionCoverView class]]){
+            InstructionCoverView *insCoverView = (InstructionCoverView *)obj;
+            insCoverView.delegate = self;
+            [insCoverView appear:self];
+            [self.view addSubview:insCoverView];
+            
+            [coverViewQueue removeObject:obj];
+            break;
+        }else if ([obj isKindOfClass:[CoverView class]]){
             CoverView *congratsCoverView = (CoverView *)obj;
             congratsCoverView.delegate = self;
             [congratsCoverView appear:self];

@@ -17,6 +17,7 @@
 
 #define CURRENT_VERSION_MAIN 1
 #define CURRENT_VERSION_SUB 0
+#define CURRENT_VERSION_DESC 1
 
 // --- user api ---
 #define USER_LOGIN_URL [SERVICE_HOST stringByAppendingString:@"/account/login/%@/%@"]
@@ -151,6 +152,7 @@ typedef struct {
 
 NSString *const CounterNumberImageInteger_toString[6];
 NSString *const FightStage_toString[6];
+NSString *const InstructionOrder_toString[10];
 
 @interface RORConstant : NSObject
 

@@ -31,6 +31,15 @@
     self.backButton.alpha = 0;
     
     contentList = [RORFriendService fetchFriendFansList];
+    [self startIndicator:self];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (Friend *userFriend in contentList){
+            [RORUserServices syncUserInfoById:userFriend.userId];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self endIndicator:self];
+        });
+    });
     cdDict = [[NSMutableDictionary alloc]init];
     
     for (Friend *userFriend in contentList){
@@ -77,8 +86,7 @@
     }
     
     User_Base *thisFriend = [RORUserServices fetchUser:userFriend.userId];
-    if (!thisFriend)
-        thisFriend = [RORUserServices syncUserInfoById:userFriend.userId];
+    
     UILabel *friendNameLabel = (UILabel *)[cell viewWithTag:100];
     friendNameLabel.text = thisFriend.nickName;
     UILabel *friendFightLabel = (UILabel *)[cell viewWithTag:101];

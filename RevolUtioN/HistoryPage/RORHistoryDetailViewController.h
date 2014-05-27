@@ -37,20 +37,15 @@
     UIStoryboard *mainStoryboard;
     
     BOOL showCongrats;
+    
+    NSString *dateString, *durationString, *sumString, *totalStepString;
 }
-@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
-
-@property (strong, nonatomic) IBOutlet UIView *testContainer;
 
 @property (weak, nonatomic) RORViewController *delegate;
 
-@property (weak, nonatomic) IBOutlet UILabel *stepLabel;
-@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
 @property (strong, nonatomic) User_Running_History *record;
-@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UILabel *sumLabel;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *itemGetScrollView;
 
