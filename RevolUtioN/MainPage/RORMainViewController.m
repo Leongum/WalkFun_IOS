@@ -152,7 +152,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [MobClick beginLogPageView:@"RORMainViewController"];
     //未登录
     if ([RORUserUtils getUserId].integerValue<0) {
         //        UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginNavigatorController"];
@@ -194,6 +194,13 @@
         }
     }
     self.missionView.center = CGPointMake(self.missionView.center.x, missionBoardCenterY);
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"RORMainViewController"];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -377,6 +384,7 @@
         UIViewController *controller =[contentViews objectAtIndex:self.pageControl.currentPage];
         [controller viewWillAppear:NO];
     }
+    [MobClick event:@"slideClick"];
 }
 
 -(void)refreshPageTitles:(UIScrollView *)scrollView{
@@ -444,18 +452,21 @@
 
 - (void) allBackendSyncMethod: (NSNotification*) aNotification
 {
+    [MobClick event:@"allSyncCallTimes"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [RORUserUtils syncSystemData];
         [RORUserUtils syncUserData];
         userBase = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self viewWillAppear:NO];
+            [self checkDailyMission];
         });
     });
 }
 
 - (void) userBackendSyncMethod: (NSNotification*) aNotification
 {
+     [MobClick event:@"userInfoSycnCall"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [RORUserUtils syncUserData];
         userBase = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
@@ -467,6 +478,7 @@
 
 
 - (IBAction)settingsAction:(id)sender {
+    [MobClick event:@"settingClick"];
     UIViewController *moreViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"moreViewController"];
     [self presentViewController:moreViewController animated:YES completion:^(){}];
 }
@@ -508,8 +520,10 @@
     if (buttonIndex == 0) {
         return;
     }else if(buttonIndex == 1){
-        if (alertType == ALERT_TYPE_GIVEUPMISSION)
+        if (alertType == ALERT_TYPE_GIVEUPMISSION){
             [self cancelMission];
+            [MobClick event:@"giveupEventClick"];
+        }
         else if (alertType == ALERT_TYPE_TOAPPSTORE)
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_URL]];
     }
@@ -533,6 +547,7 @@
 }
 
 - (IBAction)ready2StartAction:(id)sender {
+    [MobClick event:@"runClick"];
     ReadyToGoViewController *readyController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReadyToGoViewController"];
     CoverView *coverView = (CoverView *)readyController.view;
     [coverView addCoverBgImage:[RORUtils captureScreen] grayed:YES];

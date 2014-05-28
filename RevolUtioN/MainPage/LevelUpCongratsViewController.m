@@ -45,6 +45,16 @@
     //背景光转动的动画
 //    [self startBgAnimation];
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"LevelUpCongratsViewController"];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"LevelUpCongratsViewController"];
+}
 
 -(void)viewDidAppear:(BOOL)animated{
     self.titleLabel.alpha = 1;

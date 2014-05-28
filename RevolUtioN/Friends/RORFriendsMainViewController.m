@@ -39,7 +39,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [MobClick beginLogPageView:@"RORFriendsMainViewController"];
     followList = [RORFriendService fetchFriendFollowsList];
     fansList = [RORFriendService fetchFriendFansList];
     friendList = [RORFriendService fetchFriendEachFansList];
@@ -58,6 +58,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"RORFriendsMainViewController"];
 }
 
 -(void)initFriendDisplayBool{
@@ -121,6 +127,7 @@
 }
 
 - (IBAction)showFriendAction:(id)sender {
+    [MobClick event:@"friendClcik"];
     showFans = YES;
     showFollow = YES;
     [self arrangeButtons];
@@ -130,6 +137,7 @@
 }
 
 - (IBAction)showFansAction:(id)sender {
+    [MobClick event:@"fanClick"];
     showFollow = NO;
     showFans = YES;
     [self arrangeButtons];
@@ -139,6 +147,7 @@
 }
 
 - (IBAction)showFollowAction:(id)sender {
+    [MobClick event:@"followClick"];
     showFans = NO;
     showFollow = YES;
     [self arrangeButtons];
@@ -174,6 +183,7 @@
 }
 
 - (IBAction)startDeletingAction:(id)sender {
+    [MobClick event:@"removeClick"];
     self.endDeletingButton.alpha = 1;
     [self.endDeletingButton slideInFrom:kFTAnimationTop duration:0.1 delegate:self];
     [self refreshTableView];
@@ -189,6 +199,7 @@
 }
 
 - (IBAction)followAction:(id)sender{
+    [MobClick event:@"followFriendClick"];
     NSInteger row = [self rowOfButton:sender];
     deletingFriend = (Friend *)[contentList objectAtIndex:row];
     [self startIndicator:self];
@@ -212,6 +223,7 @@
 }
 
 - (IBAction)deFollowAction:(id)sender{
+    [MobClick event:@"defollowFriendClick"];
     NSInteger row = [self rowOfButton:sender];
     deletingFriend = (Friend *)[contentList objectAtIndex:row];
     [self startIndicator:self];

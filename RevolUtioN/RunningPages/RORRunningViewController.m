@@ -45,8 +45,14 @@
 //initial all when view appears
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    [MobClick beginLogPageView:@"RORRunningViewController"];
     [self controllerInit];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"RORRunningViewController"];
 }
 
 -(void)controllerInit{
@@ -507,7 +513,7 @@
 
 - (IBAction)endButtonAction:(id)sender {
 //    [self stopTimer];
-    
+    [MobClick event:@"finishedClick"];
     if (isAWalking){
         [self.saveButton setEnabled:YES];
         [self.saveButton setTitle:@"确定回村吗？" forState:UIControlStateNormal];
@@ -550,7 +556,7 @@
     
     if (self.endTime == nil)
         self.endTime = [NSDate date];
-    
+    [MobClick event:@"saveClick"];
     [self prepareForQuit];
     [self saveRunInfo];
 }

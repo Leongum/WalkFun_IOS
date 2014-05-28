@@ -41,7 +41,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    
+    [MobClick beginLogPageView:@"ItemsMainViewController"];
     if ([RORUserUtils getUserId].integerValue>0){
         itemList = [RORUserPropsService fetchUserProps:[RORUserUtils getUserId]];
         
@@ -55,12 +55,18 @@
     [self refreshTitleLayout:currentOffset];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"ItemsMainViewController"];
+}
+
 
 #pragma mark Actions
 
 - (IBAction)mallAction:(id)sender {
     
-    
+    [MobClick event:@"itemMallClick"];
     UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"ItemsStoryboard" bundle:[NSBundle mainBundle]];
     UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"mallCoverViewController"];
     mallCoverView = (CoverView *)itemViewController.view;

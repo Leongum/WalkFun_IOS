@@ -107,6 +107,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self refreshView];
+    [MobClick beginLogPageView:@"FriendInfoViewController"];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -125,6 +126,12 @@
             self.loadingLabel.alpha = 0;
         });
     });
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"FriendInfoViewController"];
 }
 
 - (void)didReceiveMemoryWarning

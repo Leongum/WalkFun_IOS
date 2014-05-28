@@ -118,6 +118,8 @@
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             if (isSucceeded){
+                NSDictionary *dict = @{@"useItem" : selectedItem.productName};
+                [MobClick event:@"itemUseClick" attributes:dict];
                 [self sendSuccess:@"使用成功"];
             } else {
                 [self sendAlart:@"网络错误！"];

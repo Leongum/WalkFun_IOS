@@ -94,11 +94,13 @@
         lastWeatherUpdateTime = [NSDate date];
     }
     [self checkMissionProcess];
+    [MobClick beginLogPageView:@"RORFirstViewController"];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [locationManager stopUpdatingLocation];
     [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"RORFirstViewController"];
 }
 
 -(void)checkMissionProcess{
@@ -133,10 +135,15 @@
 
 //3次任务换随机奖励
 - (IBAction)missionStoneAction:(id)sender {
+
     if (missionDone<3){
+        NSDictionary *dict = @{@"currentTimes" : [NSNumber numberWithInt:missionDone]};
+        [MobClick event:@"rewardClick" attributes:dict];
         [self sendNotification:[NSString stringWithFormat:@"再完成%d次日常任务领取奖励", 3-missionDone]];
         return;
     }
+    NSDictionary *dict = @{@"currentTimes" : [NSNumber numberWithInt:3]};
+    [MobClick event:@"rewardClick" attributes:dict];
     [self startIndicator:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         Reward_Details *thisReward = [RORUserServices getRandomReward:userInfo.userId];
@@ -198,6 +205,7 @@
 }
 
 -(IBAction)badgeViewAction:(id)sender{
+    [MobClick event:@"honorClick"];
     [self sendNotification:@"通过探险过程中的“好友战斗”胜利获得。"];
 }
 
@@ -303,6 +311,7 @@
 }
 
 - (IBAction)weatherPopAction:(id)sender{
+    [MobClick event:@"weatherClick"];
     if ([weatherInformation rangeOfString:@"失败"].location == NSNotFound){
         [self sendNotification:weatherInformation];
     } else
@@ -310,6 +319,7 @@
 }
 
 - (IBAction)showHistoryAction:(id)sender {
+    [MobClick event:@"historyClick"];
     mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
     UIViewController *historyViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"historyListViewController"];
     [self presentViewController:historyViewController animated:YES completion:^(){}];

@@ -51,6 +51,13 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.nicknameTextField.alpha = 0;
+    [MobClick beginLogPageView:@"RORLoginViewController"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"RORLoginViewController"];
 }
 
 -(IBAction)backAction:(id)sender{

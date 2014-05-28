@@ -49,6 +49,16 @@
     [self.missionStoneImageView popIn:0.5 delegate:self];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"MissionDoneCongratsViewController"];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"MissionDoneCongratsViewController"];
+}
 
 /*
 #pragma mark - Navigation

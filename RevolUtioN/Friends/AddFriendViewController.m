@@ -53,11 +53,20 @@
         });
     });
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"AddFriendViewController"];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"AddFriendViewController"];
+}
 #pragma mark - Actions
 
 - (IBAction)invateWeixinAction:(id)sender {
-    
+    [MobClick event:@"inviteClick"];
     [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeApp;
     
     //todo 这个URL是app的URL还是什么？
@@ -93,6 +102,7 @@
 
 - (IBAction)refreshRecommendAction:(id)sender {
     recommendPage++;
+    [MobClick event:@"recommendRefreshClick"];
     [self startIndicator:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSArray *tmpList = [RORFriendService fetchRecommendFriends:[NSNumber numberWithInteger:recommendPage]];
@@ -112,6 +122,7 @@
 }
 
 - (IBAction)follow:(id)sender{
+    [MobClick event:@"followFriendClick"];
     NSInteger row = [self rowOfButton:sender];
     addingFriend = (Search_Friend *)[contentList objectAtIndex:row];
     [self startIndicator:self];
@@ -129,6 +140,7 @@
 }
 
 - (IBAction)deFollow:(id)sender{
+    [MobClick event:@"defollowFriendClick"];
     NSInteger row = [self rowOfButton:sender];
     addingFriend = (Search_Friend *)[contentList objectAtIndex:row];
     [self startIndicator:self];

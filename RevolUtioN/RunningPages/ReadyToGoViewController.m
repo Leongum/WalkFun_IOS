@@ -98,7 +98,7 @@
         self.extraFightLabel.text = [NSString stringWithFormat:@"%d",fightAdded + userBase.userDetail.fightPlus.intValue];
         self.extraPowerLabel.text = [NSString stringWithFormat:@"%d",userBase.userDetail.powerPlus.intValue];
     }
-    
+    [MobClick beginLogPageView:@"ReadyToGoViewController"];
 }
 
 -(void)calculateItemEffect{
@@ -140,7 +140,7 @@
 
 - (IBAction)startAction:(id)sender {
     
-    
+    [MobClick event:@"goClick"];
     User_Base *toThisUser = [RORUserServices fetchUser:[RORUserUtils getUserId]];
     if (!toThisUser)
         toThisUser = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
@@ -184,6 +184,7 @@
         selectedItem = nil;
         [self viewWillAppear:NO];
     } else {
+        [MobClick event:@"itemEnhanceClick"];
         UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReadyUseItemViewController"];
         if ([viewController respondsToSelector:@selector(setDelegate:)]){
             [viewController setValue:self forKey:@"delegate"];
@@ -202,6 +203,7 @@
         selectedFriend = nil;
         [self viewWillAppear:NO];
     } else {
+        [MobClick event:@"withFriendClick"];
         UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReadyAddPartnerViewController"];
         if ([viewController respondsToSelector:@selector(setDelegate:)]){
             [viewController setValue:self forKey:@"delegate"];
@@ -211,5 +213,9 @@
     }
 }
 
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"ReadyToGoViewController"];
+}
 @end

@@ -33,6 +33,17 @@
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"MissionStoneCongratsViewController"];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"MissionStoneCongratsViewController"];
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     [Animations rotate:titleView andAnimationDuration:0 andWait:NO andAngle:-18];
 }
