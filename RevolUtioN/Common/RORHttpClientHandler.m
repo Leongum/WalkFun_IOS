@@ -20,7 +20,7 @@
     //set http headers
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"gzip" forHTTPHeaderField:@"Content-Encoding" ];
-    [request setTimeoutInterval:10];
+    [request setTimeoutInterval:5];
     NSString *key = [NSString stringWithFormat:@"%@#%@",[RORUserUtils getUserUuid],[RORUserUtils getUserId]];
     [request addValue:key forHTTPHeaderField:@"X-CLIENT-KEY"];
     
@@ -41,7 +41,7 @@
     //set http headers
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"gzip" forHTTPHeaderField:@"Content-Encoding" ];
-    [request setTimeoutInterval:10];
+    [request setTimeoutInterval:5];
     NSString *key = [NSString stringWithFormat:@"%@#%@",[RORUserUtils getUserUuid],[RORUserUtils getUserId]];
     [request addValue:key forHTTPHeaderField:@"X-CLIENT-KEY"];
     
@@ -62,7 +62,7 @@
     [request setHTTPMethod:@"GET"];
     //set http headers
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setTimeoutInterval:10];
+    [request setTimeoutInterval:5];
     NSString *key = [NSString stringWithFormat:@"%@#%@",[RORUserUtils getUserUuid],[RORUserUtils getUserId]];
     [request addValue:key forHTTPHeaderField:@"X-CLIENT-KEY"];
     
@@ -81,7 +81,7 @@
         NSString *headerField = [NSString stringWithFormat:@"%@", header];
         [request addValue:[headers objectForKey:headerField] forHTTPHeaderField:headerField];
     }
-    [request setTimeoutInterval:10];
+    [request setTimeoutInterval:5];
     NSString *key = [NSString stringWithFormat:@"%@#%@",[RORUserUtils getUserUuid],[RORUserUtils getUserId]];
     [request addValue:key forHTTPHeaderField:@"X-CLIENT-KEY"];
     

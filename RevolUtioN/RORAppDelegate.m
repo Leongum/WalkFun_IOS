@@ -73,7 +73,7 @@
     [dict setObject:n forKey:@"AppOpenCounter"];
     [RORUserUtils writeToUserInfoPList:dict];
     if (!runningStatus){
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_GetUserDetails" object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_GetUserAndSystemDetails" object:nil userInfo:nil];
     }
 }
 

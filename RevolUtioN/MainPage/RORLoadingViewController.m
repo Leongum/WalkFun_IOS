@@ -57,10 +57,10 @@ NSString *const loadingNote[] ={
     [self.loadingLabel startAnimating];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [RORNetWorkUtils initCheckNetWork];
-        NSLog(@"%hhd",[RORNetWorkUtils getIsConnetioned]);
-        
-        [RORUserUtils syncSystemData];
-        [RORUserUtils syncUserData];
+        if([RORNetWorkUtils getIsConnetioned]){
+            [RORUserUtils syncSystemData];
+            [RORUserUtils syncUserData];
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
             UINavigationController *navigationController =  [storyboard instantiateViewControllerWithIdentifier:@"RORMainViewController"];

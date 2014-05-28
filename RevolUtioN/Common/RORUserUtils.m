@@ -286,11 +286,11 @@ static NSDate *syncTime;
             [RORSystemService syncFightDefine];
         }
         [self saveLastUpdateTimeUseLocalTime:@"lastSyncSystemDataTime"];
-    }
-    NSNumber *userId = [RORUserUtils getUserId];
-    if([userId intValue] > 0){
-        //sync userInfo.
-        [RORUserServices syncUserInfoById:userId];
+        NSNumber *userId = [RORUserUtils getUserId];
+        if([userId intValue] > 0){
+            //sync userInfo.
+            [RORUserServices syncUserInfoById:userId];
+        }
     }
 }
 

@@ -47,6 +47,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [moreTableView reloadData];
+    [MobClick beginLogPageView:@"RORMoreViewController"];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -59,6 +60,12 @@
 - (void)viewDidUnload {
     [self setMoreTableView:nil];
     [super viewDidUnload];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"RORMoreViewController"];
 }
 
 #pragma mark - Action

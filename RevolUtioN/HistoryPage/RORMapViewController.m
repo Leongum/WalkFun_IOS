@@ -119,6 +119,17 @@
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"RORMapViewController"];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"RORMapViewController"];
+}
+
 - (void)viewDidUnload{
     [self setMapView:nil];
     [self setRouteLine:nil];

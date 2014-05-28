@@ -56,6 +56,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"ReadyAddPartnerViewController"];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"ReadyAddPartnerViewController"];
+}
+
 #pragma mark - Navigation
 
 -(IBAction)backAction:(id)sender{

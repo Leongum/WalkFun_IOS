@@ -59,7 +59,16 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"ItemMallViewController"];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"ItemMallViewController"];
+}
 
 #pragma mark Actions
 
@@ -74,6 +83,8 @@
         isServiceSuccess = [RORUserPropsService buyUserProps:selectedItem.productId withBuyNumbers:[NSNumber numberWithInt:selectedQuantity]];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (isServiceSuccess){
+                NSDictionary *dict = @{@"buyItem" : selectedItem.productName};
+                [MobClick event:@"itemBuyClick" attributes:dict];
                 userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
                 userMoney = userBase.userDetail.goldCoin.integerValue;
                 [self sendNotification:@"购买成功"];

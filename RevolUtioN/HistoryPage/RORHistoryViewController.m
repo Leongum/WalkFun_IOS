@@ -221,6 +221,7 @@
         [destination setValue:self forKey:@"delegate"];
     }
     if ([destination respondsToSelector:@selector(setRecord:)]){
+        [MobClick event:@"runhistoryDetailClick"];
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         //        NSLog(@"%d->%d", indexPath.section, indexPath.row);
         NSString *date_str = [sortedDateList objectAtIndex:indexPath.section];

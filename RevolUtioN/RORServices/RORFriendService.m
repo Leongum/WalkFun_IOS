@@ -108,8 +108,9 @@
     BOOL successed = [self sycnCreateOrUpdateFriend:friend];
     //check uuid
     if(successed){
-        [self syncFriends:[RORUserUtils getUserId]];
-        [self syncFriendSort:[RORUserUtils getUserId]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_GetUserDetails" object:nil userInfo:nil];
+        //[self syncFriends:[RORUserUtils getUserId]];
+        //[self syncFriendSort:[RORUserUtils getUserId]];
         return YES;
     }
     return NO;
@@ -321,8 +322,10 @@
             [newAction setValue:[action valueForKey:attr] forKey:attr];
         }
         [RORContextUtils saveContext:context];
-        [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
-        [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_GetUserDetails" object:nil userInfo:nil];
+//        [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
+//        [self syncActions:[RORUserUtils getUserId]];
+//        [RORUserPropsService syncUserProps:[RORUserUtils getUserId]];
         return YES;
     }
     return NO;
