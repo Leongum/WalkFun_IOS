@@ -267,6 +267,8 @@
 		30C1218817EA963B0077CBD3 /* RORCountDownCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C1218717EA963B0077CBD3 /* RORCountDownCoverView.m */; };
 		30C1219117EC99EA0077CBD3 /* RORBreathingControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C1219017EC99EA0077CBD3 /* RORBreathingControl.m */; };
 		30CF1FA31933A10D00790DB9 /* friend_follow_switch_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 30CF1FA21933A10D00790DB9 /* friend_follow_switch_button.png */; };
+		30CF1FA5193479F900790DB9 /* semilucent.png in Resources */ = {isa = PBXBuildFile; fileRef = 30CF1FA4193479F900790DB9 /* semilucent.png */; };
+		30CF1FA819347D1A00790DB9 /* NoteAnimationCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CF1FA719347D1A00790DB9 /* NoteAnimationCoverView.m */; };
 		30D008D317F53FBB004E6747 /* challenge_S.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 30D008D017F53FBB004E6747 /* challenge_S.m4a */; };
 		30D008D417F53FBB004E6747 /* challenge_normal.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 30D008D117F53FBB004E6747 /* challenge_normal.m4a */; };
 		30D008D517F53FBB004E6747 /* challenge_F.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 30D008D217F53FBB004E6747 /* challenge_F.m4a */; };
@@ -761,6 +763,9 @@
 		30C1218F17EC99EA0077CBD3 /* RORBreathingControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RORBreathingControl.h; path = ReusableControl/RORBreathingControl.h; sourceTree = "<group>"; };
 		30C1219017EC99EA0077CBD3 /* RORBreathingControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RORBreathingControl.m; path = ReusableControl/RORBreathingControl.m; sourceTree = "<group>"; };
 		30CF1FA21933A10D00790DB9 /* friend_follow_switch_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_follow_switch_button.png; sourceTree = "<group>"; };
+		30CF1FA4193479F900790DB9 /* semilucent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = semilucent.png; path = bg/semilucent.png; sourceTree = "<group>"; };
+		30CF1FA619347D1A00790DB9 /* NoteAnimationCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoteAnimationCoverView.h; path = ReusableControl/NoteAnimationCoverView.h; sourceTree = "<group>"; };
+		30CF1FA719347D1A00790DB9 /* NoteAnimationCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoteAnimationCoverView.m; path = ReusableControl/NoteAnimationCoverView.m; sourceTree = "<group>"; };
 		30D008D017F53FBB004E6747 /* challenge_S.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = challenge_S.m4a; path = Resources/sound/challenge_S.m4a; sourceTree = "<group>"; };
 		30D008D117F53FBB004E6747 /* challenge_normal.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = challenge_normal.m4a; path = Resources/sound/challenge_normal.m4a; sourceTree = "<group>"; };
 		30D008D217F53FBB004E6747 /* challenge_F.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = challenge_F.m4a; path = Resources/sound/challenge_F.m4a; sourceTree = "<group>"; };
@@ -1222,6 +1227,7 @@
 		301C1F6D1737B5B80068B43B /* bg */ = {
 			isa = PBXGroup;
 			children = (
+				30CF1FA4193479F900790DB9 /* semilucent.png */,
 				30984932186206750079E236 /* instruction */,
 				30804E8417F5663300F1A353 /* loading */,
 				307C861617E97A90007C1DE5 /* running */,
@@ -1657,6 +1663,8 @@
 				30FC340D18AE791600D3AC3A /* CoverView.m */,
 				30750A6F18B23F9600EC7B51 /* FixedCoverView.h */,
 				30750A7018B23F9600EC7B51 /* FixedCoverView.m */,
+				30CF1FA619347D1A00790DB9 /* NoteAnimationCoverView.h */,
+				30CF1FA719347D1A00790DB9 /* NoteAnimationCoverView.m */,
 			);
 			name = ReusableControl;
 			sourceTree = "<group>";
@@ -2131,6 +2139,7 @@
 				30DB021618C6C90C008863B8 /* main_bottom_board.png in Resources */,
 				0F0B64C718F3E27C003B0E15 /* UMSCommentDetailController.xib in Resources */,
 				0F0B64CD18F3E27C003B0E15 /* UMSnsAccountViewController.xib in Resources */,
+				30CF1FA5193479F900790DB9 /* semilucent.png in Resources */,
 				0F0B64C918F3E27C003B0E15 /* UMSCommentInputControlleriPad.xib in Resources */,
 				3022E02C18F7ACCF00F3A9D5 /* event_icon.png in Resources */,
 				30F78723190A00400041F9F4 /* fight_icon_3.png in Resources */,
@@ -2276,6 +2285,7 @@
 				0F07A2BE18AE1844003774B9 /* Simple_User_Run_History.m in Sources */,
 				0FDE8300189387BB0082B1BF /* User_Detail.m in Sources */,
 				0FF314C618BC3AF0001C0D21 /* Virtual_Product_Buy.m in Sources */,
+				30CF1FA819347D1A00790DB9 /* NoteAnimationCoverView.m in Sources */,
 				0FA7516E1892798F0037342E /* RORChallengeLevelView.m in Sources */,
 				30FECBBB17D83AE5002C3C90 /* RORNotificationView.m in Sources */,
 				3022DFC318DAEC2300F3A9D5 /* SIAlertView.m in Sources */,

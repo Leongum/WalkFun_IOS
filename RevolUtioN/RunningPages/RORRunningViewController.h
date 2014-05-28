@@ -21,7 +21,8 @@
 #import "FightIconButton.h"
 
 #define WALKING_FIGHT_STAGE_I 200
-#define WALKING_FIGHT_STAGE_II 200
+#define WALKING_FIGHT_STAGE_II 0
+//#define WALKING_FIGHT_STAGE_II 200
 #define WALKING_FIGHT_STAGE_III 600
 #define WALKING_FIGHT_STAGE_IV 1000
 #define WALKING_FIGHT_STAGE_V 2200
@@ -49,6 +50,8 @@
     int friendFightStep;
     BOOL didFriendFight;
     NSArray *followList;
+    
+    InstructionCoverView *instruction;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

@@ -36,7 +36,7 @@
     [self setBackgroundColor:[UIColor clearColor]];
     self.alpha = 0;
     [bgView setAutoresizingMask:UIViewAutoresizingFlexibleHeight| UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin];
-    [bgView setImage:[UIImage imageNamed:@"coverview_bg.png"]];
+    [bgView setImage:[UIImage imageNamed:@"semilucent.png"]];
     //        bgView.alpha = 0.5;
     [self addSubview:bgView];
     

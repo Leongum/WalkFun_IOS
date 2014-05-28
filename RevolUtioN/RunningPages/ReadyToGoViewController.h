@@ -17,6 +17,8 @@
     User_Base *userBase;
     
     int fightAdded, powerAdded;
+    
+    InstructionCoverView *startInstruction;
 }
 
 @property (strong, nonatomic)Virtual_Product *selectedItem;
@@ -37,4 +39,6 @@
 
 @property (strong, nonatomic) IBOutlet UIView *itemView;
 @property (strong, nonatomic) IBOutlet UIView *friendView;
+
+@property (strong, nonatomic) IBOutlet RORNormalButton *startButton;
 @end

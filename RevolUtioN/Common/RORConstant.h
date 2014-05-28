@@ -152,7 +152,8 @@ typedef struct {
 
 NSString *const CounterNumberImageInteger_toString[6];
 NSString *const FightStage_toString[6];
-NSString *const InstructionOrder_toString[10];
+NSString *const InstructionOrder_toString[11];
+NSString *const WalkingNote_toString[5];
 
 @interface RORConstant : NSObject
 

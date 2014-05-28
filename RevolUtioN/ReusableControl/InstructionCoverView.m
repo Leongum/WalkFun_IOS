@@ -19,6 +19,10 @@
         thisKey = key;
         onlyChoice = NO;
         
+        UIImageView *bg = [[UIImageView alloc]initWithFrame:self.bounds];
+        bg.image = [UIImage imageNamed:@"semilucent.png"];
+        [self addSubview:bg];
+        
         activeRegion = [[UIControl alloc]initWithFrame: arf];
         [activeRegion setBackgroundColor:[UIColor whiteColor]];
         [activeRegion addTarget:self action:@selector(bgTap:) forControlEvents:UIControlEventTouchDown];

@@ -98,7 +98,21 @@
         self.extraFightLabel.text = [NSString stringWithFormat:@"%d",fightAdded + userBase.userDetail.fightPlus.intValue];
         self.extraPowerLabel.text = [NSString stringWithFormat:@"%d",userBase.userDetail.powerPlus.intValue];
     }
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [self checkFirstStartInstruction];
     
+    [super viewDidAppear:animated];
+}
+
+-(void)checkFirstStartInstruction{
+    startInstruction = [[InstructionCoverView alloc]initWithFrame:self.view.bounds thisKey:InstructionOrder_toString[1]  andActiveRegionFrame:self.startButton.frame];
+    [startInstruction addNoteText:@"点“出发”就可以开始记录走路了！"];
+    [startInstruction addTriggerForerunnerKey:InstructionOrder_toString[0] minLevel:0];
+    [startInstruction addAction:self withSelector:@selector(startAction:)];
+    [startInstruction setOnlyChoice:YES];
+    [coverViewQueue addObject:startInstruction];
 }
 
 -(void)calculateItemEffect{

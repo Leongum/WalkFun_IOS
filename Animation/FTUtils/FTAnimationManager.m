@@ -368,16 +368,16 @@ NSString *const kFTAnimationWasInteractionEnabledKey = @"kFTAnimationWasInteract
 #pragma mark -
 -(CAAnimation *)moveUpFor:(UIView *)view duration:(NSTimeInterval)duration length:(double)length delegate:(id)delegate startSelector:(SEL)startSelector
              stopSelector:(SEL)stopSelector{
-    CGPoint path[4] = {
+    CGPoint path[2] = {
         view.center,
-        CGPointMake(view.center.x, view.center.y+length*1.04),
-        CGPointMake(view.center.x, view.center.y+length*0.98),
+//        CGPointMake(view.center.x, view.center.y+length*1.04),
+//        CGPointMake(view.center.x, view.center.y+length*0.98),
         CGPointMake(view.center.x, view.center.y+length)
     };
     
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     CGMutablePathRef thePath = CGPathCreateMutable();
-    CGPathAddLines(thePath, NULL, path, 4);
+    CGPathAddLines(thePath, NULL, path, 2);
     
 	animation.path = thePath;
 	CGPathRelease(thePath);
@@ -391,16 +391,16 @@ NSString *const kFTAnimationWasInteractionEnabledKey = @"kFTAnimationWasInteract
 
 -(CAAnimation *)moveRightFor:(UIView *)view duration:(NSTimeInterval)duration length:(double)length delegate:(id)delegate startSelector:(SEL)startSelector
                 stopSelector:(SEL)stopSelector{
-    CGPoint path[4] = {
+    CGPoint path[2] = {
         view.center,
-        CGPointMake(view.center.x+length*1.04, view.center.y),
-        CGPointMake(view.center.x+length*0.98, view.center.y),
+//        CGPointMake(view.center.x+length*1.04, view.center.y),
+//        CGPointMake(view.center.x+length*0.98, view.center.y),
         CGPointMake(view.center.x+length, view.center.y)
     };
     
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     CGMutablePathRef thePath = CGPathCreateMutable();
-    CGPathAddLines(thePath, NULL, path, 4);
+    CGPathAddLines(thePath, NULL, path, 2);
     
 	animation.path = thePath;
 	CGPathRelease(thePath);

@@ -250,7 +250,7 @@
 }
 
 -(void)checkFirstOpenInstruction{
-    startInstruction = [[InstructionCoverView alloc]initWithFrame:self.view.bounds thisKey:@"FirstOpenInstruction"  andActiveRegionFrame:self.ready2StartButton.frame];
+    startInstruction = [[InstructionCoverView alloc]initWithFrame:self.view.bounds thisKey:InstructionOrder_toString[0]  andActiveRegionFrame:self.ready2StartButton.frame];
     [startInstruction addNoteText:@"当你准备开始走路了，点击这里准备出发"];
     [startInstruction addTriggerForerunnerKey:nil minLevel:0];
     [startInstruction addAction:self withSelector:@selector(ready2StartAction:)];

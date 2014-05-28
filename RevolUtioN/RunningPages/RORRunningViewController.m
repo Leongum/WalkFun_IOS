@@ -47,6 +47,19 @@
     [super viewWillAppear:animated];
 
     [self controllerInit];
+    
+    //add instruction
+    instruction  = [[InstructionCoverView alloc]initWithFrame:self.view.bounds thisKey:InstructionOrder_toString[2]  andActiveRegionFrame:CGRectMake(320, 0, 0, 0)];
+    [instruction addNoteText:@"计步功能已经启动了，带上手机出门走走看会发生什么吧！"];
+    [instruction addTriggerForerunnerKey:InstructionOrder_toString[1] minLevel:0];
+    [instruction addAction:self withSelector:nil];
+    [instruction setOnlyChoice:NO];
+    [coverViewQueue addObject:instruction];
+    
+    //进页面后直接开始记步
+    [self startButtonAction:self];
+    routePoints = [[NSMutableArray alloc]init];
+    isAWalking = NO;
 }
 
 -(void)controllerInit{
@@ -91,12 +104,6 @@
     userPower = userPowerMax;
     self.powerFrame.text = [NSString stringWithFormat:@"%ld",(long)userPower];
     walkExperience = 0;
-    
-    //进页面后直接开始记步
-    [self startButtonAction:self];
-    routePoints = [[NSMutableArray alloc]init];
-    isAWalking = NO;
-    
 }
 
 -(void)navigationInit{
@@ -431,15 +438,19 @@
 
 -(void)displayTimerInfo{
     timeLabel.text = [RORUtils transSecondToStandardFormat:duration];
-//    distanceLabel.text = [NSString stringWithFormat:@"%.0f", directionMoved.east];
     distanceLabel.text = [RORUtils formattedSteps:stepCounting.counter/0.8];
 }
 
 -(void)timerSecondDot{
     [super timerSecondDot];
+    
+    if (((int)duration)%6==0 && eventDisplayList.count==0){
+        NoteAnimationCoverView *noteCover = [[NoteAnimationCoverView alloc]initWithFrame:self.view.bounds andNoteText:WalkingNote_toString[arc4random()%5]];
+        [coverViewQueue addObject:noteCover];
+        [self dequeueCoverView];
+    }
+    
     [self pushPoint];
-//    distanceLabel.text = [NSString stringWithFormat:@"%.0f",directionMoved.north];//[RORUtils outputDistance:distance];
-//    speedLabel.text = [RORUserUtils formatedSpeed:(double)(currentSpeed*3.6)];
     
     if (eventDisplayList.count > eventHappenedCount){
         eventHappenedCount = eventDisplayList.count;
@@ -855,7 +866,7 @@
 //如果触发了事件，返回事件，否则返回nil
 -(void)isEventHappen{
     //走路确认之前不会触发事件
-    if (!isAWalking) {
+    if (!isAWalking && userBase.userDetail.level.intValue>1) {
         return;
     }
     
@@ -879,7 +890,8 @@
         int x = arc4random() % 1000000;
         double roll = ((double)x)/10000.f;
         double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0, rateEvent = 30;
-        //, rateEvent = 3;
+        //rateEvent = 3;
+        
         //debug
         if (realCurrentStep>WALKING_FIGHT_STAGE_II){
             stepsSinceLastFight++;
@@ -896,8 +908,8 @@
                     return;
                 }
             }
-//            rate2 = stepsSinceLastFight*7/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 2;
-            rate2 = 30;//debug
+            rate2 = stepsSinceLastFight*7/(WALKING_FIGHT_STAGE_III - WALKING_FIGHT_STAGE_II) + 2;
+//            rate2 = 30;//debug
         }
         if (realCurrentStep>WALKING_FIGHT_STAGE_III){
             rate3 = 2 + stepsSinceLastFight*3/(WALKING_FIGHT_STAGE_IV - WALKING_FIGHT_STAGE_III);
@@ -907,6 +919,11 @@
             rate4 = 1.8 + stepsSinceLastFight*2/(WALKING_FIGHT_STAGE_V - WALKING_FIGHT_STAGE_IV);
             rate3 = 0.9;
             rate2 = 0.3;
+        }
+        //用户第一次走的时候事件和战斗机率增加
+        if (userBase.userDetail.level.intValue==1){
+            rate2 += 10;
+            rateEvent = 10;
         }
         
         int fightStage = 0;

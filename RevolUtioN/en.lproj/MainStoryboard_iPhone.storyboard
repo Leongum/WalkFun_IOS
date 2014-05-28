@@ -564,7 +564,7 @@
                                         <rect key="frame" x="35" y="162" width="250" height="211"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="确定回村吗？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8ul-oJ-Jcp">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="回村" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8ul-oJ-Jcp">
                                         <rect key="frame" x="79" y="177" width="162" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
@@ -580,7 +580,7 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <size key="titleShadowOffset" width="0.0" height="1"/>
-                                        <state key="normal" title="确定" backgroundImage="running_end_bg.png">
+                                        <state key="normal" title="确定回村吗？" backgroundImage="running_end_bg.png">
                                             <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -597,7 +597,7 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <size key="titleShadowOffset" width="0.0" height="1"/>
-                                        <state key="normal" title="取消" backgroundImage="running_end_bg.png">
+                                        <state key="normal" title="确定" backgroundImage="running_end_bg.png">
                                             <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -1493,6 +1493,7 @@
                         <outlet property="itemImage" destination="IIi-3C-pd4" id="0gf-yz-nJ2"/>
                         <outlet property="itemLabel" destination="288-5n-Zqc" id="yoa-bd-Gho"/>
                         <outlet property="itemView" destination="Vq7-mM-q4Q" id="C82-jr-5xw"/>
+                        <outlet property="startButton" destination="1Ga-q5-Lac" id="txC-fa-8RF"/>
                         <segue destination="VcK-Gx-lSI" kind="modal" identifier="StartWalkingAction" modalTransitionStyle="coverVertical" id="Jen-09-LzO"/>
                     </connections>
                 </viewController>

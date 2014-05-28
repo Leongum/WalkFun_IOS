@@ -31,6 +31,7 @@ NSString *const FightStage_toString[] ={
 NSString *const InstructionOrder_toString[] ={
     @"FirstOpenInstruction",
     @"StartWalkingInstruction",
+    @"FirstWalkInstruction",
     @"CheckHistoryInstruction",
     @"ShareHistoryInstruction",
     @"ItemPageInstruction",
@@ -40,6 +41,14 @@ NSString *const InstructionOrder_toString[] ={
     @"AddFriendInstruction",
     @"WalkingFriendInstruction",
     @"MissionStoneInstruction"
+};
+
+NSString *const WalkingNote_toString[] ={
+    @"出门走走才会有触发事件哦",
+    @"喂，你好懒哦！",
+    @"走起来！加油，加油……",
+    @"别一直盯着我看，先走起来！",
+    @"出门走碰到事件的机率更高哦"
 };
 
 @end

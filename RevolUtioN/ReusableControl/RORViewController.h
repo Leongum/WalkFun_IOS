@@ -21,6 +21,7 @@
 #import "CUSFlashLabel.h"
 #import "BadgeView.h"
 #import "InstructionCoverView.h"
+#import "NoteAnimationCoverView.h"
 
 #define BACKBUTTON_FRAME_TOP CGRectMake(0, 0, 70, 70)
 
@@ -45,6 +46,7 @@
 -(void)sendSuccess:(NSString *)message;
 -(void)sendAlart:(NSString *)message;
 
+-(void)dequeueCoverView;
 - (IBAction)startIndicator:(id)sender;
 - (IBAction)endIndicator:(id)sender;
 - (IBAction)startProgress:(id)sender;
