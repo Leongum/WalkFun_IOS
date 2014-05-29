@@ -36,7 +36,7 @@
     [self addTarget:self action:@selector(touchUp:) forControlEvents:UIControlEventTouchUpOutside];
     self.adjustsImageWhenHighlighted = NO;
     self.showsTouchWhenHighlighted = NO;
-    sound = [[RORPlaySound alloc]initForPlayingSoundEffectWith:@"button.mp3"];
+    sound = [[RORPlaySound alloc]initForPlayingSoundEffectWith:@"button.mp3" withType:AVAudioSessionCategoryAmbient];
 }
 
 /*

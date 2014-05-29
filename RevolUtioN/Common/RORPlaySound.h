@@ -43,9 +43,12 @@
  */
 -(id)initForPlayingSoundEffectWith:(NSString *)filename;
 
+-(id)initForPlayingSoundEffectWith:(NSString *)filename withType:(NSString *)type;
 /**
  *  @brief  播放音效
  */
 -(void)play;
+
+-(void)playSystem;
 
 @end
