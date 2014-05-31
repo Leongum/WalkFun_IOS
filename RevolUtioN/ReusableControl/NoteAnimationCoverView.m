@@ -15,6 +15,9 @@
 - (id)initWithFrame:(CGRect)frame andNoteText:(NSString *)t{
     self = [super initWithFrame:frame];
     if (self) {
+        CGPoint thisCenter = self.center;
+        self.frame = CGRectMake(0, 0, self.frame.size.width, 200);
+        self.center = thisCenter;
         
         contentLabel = [[MissionCongratsLabel alloc]initWithFrame:self.bounds];
         [contentLabel setLineBreakMode:NSLineBreakByWordWrapping];
@@ -28,6 +31,11 @@
         
         contentLabel.alpha = 0;
         self.alpha = 0;
+        
+        if (t.length > 6)
+            delta = ((double)t.length)/6.f;
+        else
+            delta = 1;
     }
     return self;
 }
@@ -40,15 +48,11 @@
 
 -(IBAction)flyUpAnimation:(id)sender{
     [delegate coverViewDidDismissed:self];
-
-    [contentLabel moveUp:2 length:-100 delegate:self startSelector:@selector(contentFadeOutAnimation:) stopSelector:@selector(afterDismissed:)];
+    [contentLabel moveUp:1.5*delta length:-100 delegate:self startSelector:@selector(contentFadeOutAnimation:) stopSelector:@selector(afterDismissed:)];
 }
 
 -(IBAction)contentFadeOutAnimation:(id)sender{
-    [contentLabel fadeOut:1 delegate:self startSelector:nil stopSelector:@selector(startNextAnimation:)];
-}
-
--(IBAction)startNextAnimation:(id)sender{
+    [contentLabel fadeOut:1*delta delegate:self startSelector:nil stopSelector:nil];
 }
 
 -(IBAction)afterDismissed:(id)sender{

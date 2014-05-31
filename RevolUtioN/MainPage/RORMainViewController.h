@@ -33,8 +33,6 @@
     Mission *todayMission;
     BOOL isFolded;
     int alertType;
-    
-    InstructionCoverView *startInstruction;
 }
 @property (strong)			CAEmitterLayer	*heartsEmitter;
 
@@ -44,6 +42,7 @@
 @property (strong, nonatomic) IBOutlet UIView *missionView;
 @property (strong, nonatomic) IBOutlet UIImageView *msgNoteImageView;
 @property (strong, nonatomic) IBOutlet RORNormalButton *ready2StartButton;
+@property (strong, nonatomic) NSString *noteString;
 
 @property (strong, nonatomic) NSMutableArray *contentViews;
 

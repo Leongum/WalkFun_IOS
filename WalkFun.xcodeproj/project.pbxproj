@@ -269,6 +269,8 @@
 		30CF1FA31933A10D00790DB9 /* friend_follow_switch_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 30CF1FA21933A10D00790DB9 /* friend_follow_switch_button.png */; };
 		30CF1FA5193479F900790DB9 /* semilucent.png in Resources */ = {isa = PBXBuildFile; fileRef = 30CF1FA4193479F900790DB9 /* semilucent.png */; };
 		30CF1FA819347D1A00790DB9 /* NoteAnimationCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CF1FA719347D1A00790DB9 /* NoteAnimationCoverView.m */; };
+		30CF1FAA193622A500790DB9 /* ins_active_region.png in Resources */ = {isa = PBXBuildFile; fileRef = 30CF1FA9193622A500790DB9 /* ins_active_region.png */; };
+		30CF1FAC1939B41800790DB9 /* friend_follow_switch_button1.png in Resources */ = {isa = PBXBuildFile; fileRef = 30CF1FAB1939B41800790DB9 /* friend_follow_switch_button1.png */; };
 		30D008D317F53FBB004E6747 /* challenge_S.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 30D008D017F53FBB004E6747 /* challenge_S.m4a */; };
 		30D008D417F53FBB004E6747 /* challenge_normal.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 30D008D117F53FBB004E6747 /* challenge_normal.m4a */; };
 		30D008D517F53FBB004E6747 /* challenge_F.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 30D008D217F53FBB004E6747 /* challenge_F.m4a */; };
@@ -766,6 +768,8 @@
 		30CF1FA4193479F900790DB9 /* semilucent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = semilucent.png; path = bg/semilucent.png; sourceTree = "<group>"; };
 		30CF1FA619347D1A00790DB9 /* NoteAnimationCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoteAnimationCoverView.h; path = ReusableControl/NoteAnimationCoverView.h; sourceTree = "<group>"; };
 		30CF1FA719347D1A00790DB9 /* NoteAnimationCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoteAnimationCoverView.m; path = ReusableControl/NoteAnimationCoverView.m; sourceTree = "<group>"; };
+		30CF1FA9193622A500790DB9 /* ins_active_region.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ins_active_region.png; sourceTree = "<group>"; };
+		30CF1FAB1939B41800790DB9 /* friend_follow_switch_button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_follow_switch_button1.png; sourceTree = "<group>"; };
 		30D008D017F53FBB004E6747 /* challenge_S.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = challenge_S.m4a; path = Resources/sound/challenge_S.m4a; sourceTree = "<group>"; };
 		30D008D117F53FBB004E6747 /* challenge_normal.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = challenge_normal.m4a; path = Resources/sound/challenge_normal.m4a; sourceTree = "<group>"; };
 		30D008D217F53FBB004E6747 /* challenge_F.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = challenge_F.m4a; path = Resources/sound/challenge_F.m4a; sourceTree = "<group>"; };
@@ -1548,6 +1552,7 @@
 		3098492D1860E4580079E236 /* friends */ = {
 			isa = PBXGroup;
 			children = (
+				30CF1FAB1939B41800790DB9 /* friend_follow_switch_button1.png */,
 				30CF1FA21933A10D00790DB9 /* friend_follow_switch_button.png */,
 				3022DFF718EBEE8D00F3A9D5 /* friend_add_cell_disabled.png */,
 				3022DFD818E012BC00F3A9D5 /* friend_add_nextPage_disabled.png */,
@@ -1572,6 +1577,7 @@
 		30984932186206750079E236 /* instruction */ = {
 			isa = PBXGroup;
 			children = (
+				30CF1FA9193622A500790DB9 /* ins_active_region.png */,
 				3090EEC8192C60AC003DB4EE /* ins_head_image.png */,
 				30F78732190AA92E0041F9F4 /* intro_sync.png */,
 				30F7872C190A3F1F0041F9F4 /* intro_firstopen.png */,
@@ -2000,8 +2006,10 @@
 				30BDBE66182A3603001829D5 /* FriendsStoryboard.storyboard in Resources */,
 				0F0B64CA18F3E27C003B0E15 /* UMShareEditViewController.xib in Resources */,
 				3022E01818F2D3DE00F3A9D5 /* running_ready_item.png in Resources */,
+				30CF1FAA193622A500790DB9 /* ins_active_region.png in Resources */,
 				3022DFCD18DFDEA000F3A9D5 /* item_mall_bg.png in Resources */,
 				30692D3F180D800200DA01EC /* logo.png in Resources */,
+				30CF1FAC1939B41800790DB9 /* friend_follow_switch_button1.png in Resources */,
 				3022DFD318E00C6600F3A9D5 /* friend_add_cell.png in Resources */,
 				3022DFC518DBF6D600F3A9D5 /* alert_bg.png in Resources */,
 				30692D5C18117C2500DA01EC /* SVProgressHUD.bundle in Resources */,

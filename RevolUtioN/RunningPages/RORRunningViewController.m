@@ -392,7 +392,7 @@
 
             UIImage* image = [UIImage imageNamed:@"redbutton_bg.png"];
             [endButton setBackgroundImage:image forState:UIControlStateNormal];
-            [endButton setTitle:@"放弃" forState:UIControlStateNormal];
+//            [endButton setTitle:@"回村" forState:UIControlStateNormal];
             [endButton addTarget:self action:@selector(endButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             
             //init inertia navigation
@@ -450,7 +450,7 @@
 -(void)timerSecondDot{
     [super timerSecondDot];
     
-    if (((int)duration)%6==0 && eventDisplayList.count==0){
+    if (((int)duration)%10==0 && eventDisplayList.count==1 && !self.coverView.alpha){
         NoteAnimationCoverView *noteCover = [[NoteAnimationCoverView alloc]initWithFrame:self.view.bounds andNoteText:WalkingNote_toString[arc4random()%5]];
         [coverViewQueue addObject:noteCover];
         [self dequeueCoverView];
@@ -470,7 +470,7 @@
         isAWalking = YES;
         UIImage* image = [UIImage imageNamed:@"green_btn_bg.png"];
         [endButton setBackgroundImage:image forState:UIControlStateNormal];
-        [endButton setTitle:@"完成" forState:UIControlStateNormal];
+//        [endButton setTitle:@"回村" forState:UIControlStateNormal];
     }
     
     [self checkTodayMission];

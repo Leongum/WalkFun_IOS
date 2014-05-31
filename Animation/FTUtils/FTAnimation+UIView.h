@@ -307,6 +307,8 @@ custom animation elastic. First scale smaller.
  */
 -(void)pop:(NSTimeInterval)duration delegate:(id)delegate;
 
+-(void)pop:(NSTimeInterval)duration delegate:(id)delegate startSelector:(SEL)startSelector stopSelector:(SEL)stopSelector;
+
 - (void)popUp:(NSTimeInterval)duration delegate:(id)delegate targetPoint:(CGPoint)targetPoint;
 
 - (void)popDown:(NSTimeInterval)duration delegate:(id)delegate targetPoint:(CGPoint)targetPoint targetScale:(double)targetScale;

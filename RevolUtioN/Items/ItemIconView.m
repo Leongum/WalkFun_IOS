@@ -7,6 +7,7 @@
 //
 
 #import "ItemIconView.h"
+#import "RORMainViewController.h"
 
 @implementation ItemIconView
 @synthesize userItem, delegate, isUsable;
@@ -64,7 +65,7 @@
     
     //获得mainViewController
     parentViewController = (UIViewController *)self.delegate;
-    while ([parentViewController parentViewController]) {
+    while (![parentViewController isKindOfClass:[RORMainViewController class]] && [parentViewController parentViewController]) {
         parentViewController = [parentViewController parentViewController];
     }
     
@@ -108,6 +109,9 @@
     UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"ItemUseTargetViewController"];
     if ([itemViewController respondsToSelector:@selector(setSelectedItem:)]){
         [itemViewController setValue:item forKey:@"selectedItem"];
+    }
+    if ([itemViewController respondsToSelector:@selector(setDelegate:)]){
+        [itemViewController setValue:parentViewController forKey:@"delegate"];
     }
     [parentViewController presentViewController:itemViewController animated:YES completion:^(){}];
     

@@ -24,19 +24,23 @@
         [self addSubview:bg];
         
         activeRegion = [[UIControl alloc]initWithFrame: arf];
-        [activeRegion setBackgroundColor:[UIColor whiteColor]];
+        [activeRegion setBackgroundColor:[UIColor clearColor]];
         [activeRegion addTarget:self action:@selector(bgTap:) forControlEvents:UIControlEventTouchDown];
+        activeRegionBg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"ins_active_region.png"]];
+        activeRegionBg.frame = activeRegion.bounds;
+        [activeRegion addSubview:activeRegionBg];
         
-        if (activeRegion.frame.origin.x>self.frame.size.height/2){
+        if (activeRegion.frame.origin.y<self.frame.size.height/2){
             headImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, self.frame.size.height/2, self.bounds.size.width, 125)];
-            noteTextLabel = [[UILabel alloc]initWithFrame:CGRectMake(INSTRUCTION_SIZE_HEADIMAGE+20, self.frame.size.height/2, self.bounds.size.width-INSTRUCTION_SIZE_HEADIMAGE-20, 125)];
+            noteTextLabel = [[UILabel alloc]initWithFrame:CGRectMake(INSTRUCTION_SIZE_HEADIMAGE+20, self.frame.size.height/2, self.bounds.size.width-INSTRUCTION_SIZE_HEADIMAGE-30, 125)];
         } else {
             headImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, self.frame.size.height/2-125, self.bounds.size.width, 125)];
-            noteTextLabel = [[UILabel alloc]initWithFrame:CGRectMake(INSTRUCTION_SIZE_HEADIMAGE+20, self.frame.size.height/2-125, self.bounds.size.width-INSTRUCTION_SIZE_HEADIMAGE-20, 125)];
+            noteTextLabel = [[UILabel alloc]initWithFrame:CGRectMake(INSTRUCTION_SIZE_HEADIMAGE+20, self.frame.size.height/2-125, self.bounds.size.width-INSTRUCTION_SIZE_HEADIMAGE-30, 125)];
         }
         headImageView.image = [UIImage imageNamed:@"ins_head_image.png"];
         [noteTextLabel setLineBreakMode:NSLineBreakByWordWrapping];
         noteTextLabel.numberOfLines = 3;
+        [noteTextLabel setFont:[UIFont systemFontOfSize:20]];
         
         headImageView.alpha = 0;
         noteTextLabel.alpha = 0;
@@ -51,27 +55,36 @@
     return self;
 }
 
--(IBAction)appear:(id)sender{
+-(BOOL)need2Appear{
     NSMutableDictionary *userInfo = [RORUserUtils getUserInfoPList];
     NSNumber *n;
     //如果前驱事件还未发生，则不弹出
     if (forerunnerKey){
         n = (NSNumber *)[userInfo objectForKey:forerunnerKey];
         if (!n){
-            return;
+            return NO;
         }
     }
     //如果已经弹出过，则不弹出
     n = (NSNumber *)[userInfo objectForKey:thisKey];
-    if (n)
-        return;
+    if (n){
+        return NO;
+    }
     User_Base *userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
     //如果还没登录，则不弹出
-    if (!userBase)
-        return;
+    if (!userBase){
+        return NO;
+    }
+    
     //如果还未达到触发等级，则不弹出
-    if (userBase.userDetail.level.intValue<minLevel)
-        return;
+    if (userBase.userDetail.level.intValue<minLevel){
+        return NO;
+    }
+    return YES;
+}
+
+-(IBAction)appear:(id)sender{
+    NSMutableDictionary *userInfo = [RORUserUtils getUserInfoPList];
     
     //记录为已弹出
     [userInfo setObject:[NSNumber numberWithInt:1] forKey:thisKey];
@@ -81,12 +94,17 @@
     headImageView.alpha = 1;
     noteTextLabel.alpha = 1;
     [headImageView slideInFrom:kFTAnimationLeft duration:0.3 delegate:self startSelector:nil stopSelector:nil];
-    [noteTextLabel slideInFrom:kFTAnimationRight duration:0.3 delegate:self startSelector:nil stopSelector:nil];
+    [noteTextLabel slideInFrom:kFTAnimationRight duration:0.3 delegate:self startSelector:nil stopSelector:@selector(actionRegionAnimation:)];
+}
+
+-(IBAction)actionRegionAnimation:(id)sender{
+    [activeRegionBg pop:3 delegate:self startSelector:nil stopSelector:@selector(actionRegionAnimation:)];
 }
 
 -(void)bgTap:(id)sender{
-    if (!onlyChoice || sender == activeRegion)
-        [super bgTap:sender];
+    if (!onlyChoice || sender == activeRegion){
+        [self fadeOut:0.2 delegate:self startSelector:nil stopSelector:@selector(afterDismissed:)];
+    }
 }
 
 -(void)addNoteText:(NSString *)nt{
@@ -102,5 +120,9 @@
     [activeRegion addTarget:delegate action:action forControlEvents:UIControlEventTouchUpInside];
 }
 
+-(IBAction)afterDismissed:(id)sender{
+    [delegate coverViewDidDismissed:self];
+    [self removeFromSuperview];
+}
 
 @end

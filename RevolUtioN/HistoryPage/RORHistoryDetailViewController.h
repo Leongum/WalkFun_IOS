@@ -38,7 +38,7 @@
     
     BOOL showCongrats;
     
-    NSString *dateString, *durationString, *sumString, *totalStepString;
+    NSString *dateString, *durationString, *sumString, *totalStepString, *winString;
 }
 
 @property (weak, nonatomic) RORViewController *delegate;

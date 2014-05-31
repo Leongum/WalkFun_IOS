@@ -32,13 +32,11 @@ NSString *const InstructionOrder_toString[] ={
     @"FirstOpenInstruction",
     @"StartWalkingInstruction",
     @"FirstWalkInstruction",
-    @"CheckHistoryInstruction",
-    @"ShareHistoryInstruction",
     @"ItemPageInstruction",
-    @"ItemMallInstruction"
-    @"UseFightingItemInstruction",
+    @"ItemMallInstruction",
     @"FriendPageInstruction",
     @"AddFriendInstruction",
+    @"UseFightingItemInstruction",
     @"WalkingFriendInstruction",
     @"MissionStoneInstruction"
 };

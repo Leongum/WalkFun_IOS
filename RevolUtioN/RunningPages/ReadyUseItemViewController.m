@@ -40,6 +40,7 @@
             [itemList addObject:thisItem];
         }
     }
+    self.noItemLabel.alpha = (contentList.count<1);
     
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }

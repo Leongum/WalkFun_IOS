@@ -13,7 +13,7 @@
 @end
 
 @implementation ItemUseTargetViewController
-@synthesize selectedItem;
+@synthesize selectedItem, delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -69,6 +69,14 @@
                                       [userInfoPList setObject:[NSDate date] forKey:@"LatestUseItemDate"];
                                       [userInfoPList setObject:selectedItem.productId forKey:@"LatestUseItemId"];
                                       [RORUserUtils writeToUserInfoPList:userInfoPList];
+                                  }
+                                  if (selectedItem.propFlag.intValue == ItemTypeFight){
+                                      NSArray *itemInfoStringList = [selectedItem.productDescription componentsSeparatedByString:@"|"];
+                                      NSString *noteString;
+                                      if (itemInfoStringList.count>1)
+                                          noteString = [RORUtils explainItemEffectString:[itemInfoStringList objectAtIndex:1]];
+                                      if (noteString.length>0)
+                                          [delegate setValue:noteString forKey:@"noteString"];
                                   }
                               }
                               else

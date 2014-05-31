@@ -16,5 +16,6 @@
 
 @property (strong, nonatomic) id delegate;
 @property (strong, nonatomic)    User_Base *userBase;
+@property (strong, nonatomic) IBOutlet UILabel *noItemLabel;
 
 @end

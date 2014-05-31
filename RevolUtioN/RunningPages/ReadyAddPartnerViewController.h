@@ -14,6 +14,7 @@
 }
 
 @property (strong, nonatomic) id delegate;
+@property (strong, nonatomic) IBOutlet UILabel *noFriendLabel;
 
 
 @end

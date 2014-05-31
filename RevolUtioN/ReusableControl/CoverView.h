@@ -23,6 +23,8 @@
 
 -(IBAction)appear:(id)sender;
 -(IBAction)bgTap:(id)sender;
+-(IBAction)afterDismissed:(id)sender;
+
 //-(void)addCoverBgImage;
 -(void)addCoverBgImage:(UIImage *)bg grayed:(BOOL)grayed;
 

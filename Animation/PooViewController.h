@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RORViewController.h"
 
 @class CAEmitterLayer;
 
-@interface PooViewController : UIViewController
+@interface PooViewController : RORViewController
 
 @property (strong)			CAEmitterLayer	*heartsEmitter;
 

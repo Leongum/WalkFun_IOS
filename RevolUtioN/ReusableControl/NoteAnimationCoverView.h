@@ -12,6 +12,7 @@
 
 @interface NoteAnimationCoverView : CoverView{
     MissionCongratsLabel *contentLabel;
+    double delta;
 }
 
 - (id)initWithFrame:(CGRect)frame andNoteText:(NSString *)t;

@@ -81,6 +81,7 @@
 }
 
 -(void)dequeueCoverView{
+    NSMutableArray *delList = [[NSMutableArray alloc]init];
     for (id obj in coverViewQueue){
         if ([obj isKindOfClass:[UIViewController class]]){
             UIViewController *viewController = (UIViewController *)obj;
@@ -93,15 +94,21 @@
             [self.view addSubview:congratsCoverView];
             [self didMoveToParentViewController:viewController];
             
-            [coverViewQueue removeObject:viewController];
+//            [coverViewQueue removeObject:viewController];
+            [delList addObject:viewController];
             break;
         } else if ([obj isKindOfClass:[InstructionCoverView class]]){
             InstructionCoverView *insCoverView = (InstructionCoverView *)obj;
             insCoverView.delegate = self;
-            [insCoverView appear:self];
-            [self.view addSubview:insCoverView];
-            
-            [coverViewQueue removeObject:obj];
+            if ([insCoverView need2Appear]){
+                [insCoverView appear:self];
+                [self.view addSubview:insCoverView];
+            } else {
+                [delList addObject:obj];
+//                [coverViewQueue removeObject:obj];
+                continue;
+            }
+            [delList addObject:obj];
             break;
         }else if ([obj isKindOfClass:[CoverView class]]){
             CoverView *congratsCoverView = (CoverView *)obj;
@@ -110,10 +117,12 @@
             
             [self.view addSubview:congratsCoverView];
             
-            [coverViewQueue removeObject:obj];
+            [delList addObject:obj];
+//            [coverViewQueue removeObject:obj];
             break;
         }
     }
+    [coverViewQueue removeObjectsInArray:delList];
 }
 
 -(BOOL)prefersStatusBarHidden{

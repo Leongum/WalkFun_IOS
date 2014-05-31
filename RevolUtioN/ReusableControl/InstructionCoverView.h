@@ -15,6 +15,7 @@
     UIControl *activeRegion;
     UILabel *noteTextLabel;
     UIImageView *headImageView;
+    UIImageView *activeRegionBg;
 }
 
 @property (nonatomic, strong) id delegate;
@@ -30,5 +31,6 @@
 -(void)addNoteText:(NSString *)nt;
 -(void)addTriggerForerunnerKey:(NSString *)frk minLevel:(int)ml;
 -(void)addAction:(id)target withSelector:(SEL)action;
+-(BOOL)need2Appear;
 
 @end

@@ -31,6 +31,7 @@
     self.backButton.alpha = 0;
     
     contentList = [RORFriendService fetchFriendFansList];
+    self.noFriendLabel.alpha = (contentList.count<1);
     [self startIndicator:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         for (Friend *userFriend in contentList){
@@ -46,6 +47,7 @@
         int days = [RORUtils daysBetweenDate1:userFriend.lastWalkTime andDate2:[NSDate date]];
         [cdDict setObject:[NSNumber numberWithInt:days] forKey:userFriend.userId];
     }
+    
     
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
 }

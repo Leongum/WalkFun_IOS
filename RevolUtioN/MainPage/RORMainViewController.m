@@ -16,7 +16,7 @@
 @end
 
 @implementation RORMainViewController
-@synthesize contentViews;
+@synthesize contentViews, noteString;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,7 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    noteString = nil;
     self.backButton.alpha = 0;
     
 	// Do any additional setup after loading the view.
@@ -186,7 +186,7 @@
                 self.msgNoteImageView.alpha = 0;
             
             //检查是否需要显示提示信息
-//            [self checkPinchInstruction];
+            [self checkPinchInstruction];
 //            [self checkMissionStoneInstruction];
 //            [self checkMainPageInstruction];
 //            [self checkSyncInstruction];
@@ -215,11 +215,23 @@
     }
     
     [self checkFirstOpenInstruction];
+    [self checkItemPageInstruction];
+    [self checkFriendPageInstruction];
 
     //检查日常任务
     [self checkDailyMission];
     //检查是否提示玩家去appstore评价
     [self checkSendToAppstore];
+    
+    if (noteString!=nil){
+        NSArray *stringList = [noteString componentsSeparatedByString:@"\n"];
+        for (NSString *itString in stringList){
+            NoteAnimationCoverView *noteCover = [[NoteAnimationCoverView alloc]initWithFrame:self.view.bounds andNoteText:itString];
+            [coverViewQueue addObject:noteCover];
+        }
+//        [self dequeueCoverView];
+        noteString = nil;
+    }
     
     [super viewDidAppear:animated];
 }
@@ -258,18 +270,54 @@
 }
 
 -(void)checkFirstOpenInstruction{
-    startInstruction = [[InstructionCoverView alloc]initWithFrame:self.view.bounds thisKey:InstructionOrder_toString[0]  andActiveRegionFrame:self.ready2StartButton.frame];
+    InstructionCoverView *startInstruction = [[InstructionCoverView alloc]initWithFrame:self.view.bounds thisKey:InstructionOrder_toString[0]  andActiveRegionFrame:self.ready2StartButton.frame];
     [startInstruction addNoteText:@"当你准备开始走路了，点击这里准备出发"];
     [startInstruction addTriggerForerunnerKey:nil minLevel:0];
     [startInstruction addAction:self withSelector:@selector(ready2StartAction:)];
-    [startInstruction setOnlyChoice:YES];
+    [startInstruction setOnlyChoice:NO];
     [coverViewQueue addObject:startInstruction];
+}
+
+-(void)checkItemPageInstruction{
+    InstructionCoverView *itemPageInstruction = [[InstructionCoverView alloc]initWithFrame:self.view.bounds thisKey:InstructionOrder_toString[3]  andActiveRegionFrame:CGRectMake(350, 0, 0, 0)];
+    [itemPageInstruction addNoteText:@"向右滑动，可以进入道具页面"];
+    [itemPageInstruction addTriggerForerunnerKey:InstructionOrder_toString[2] minLevel:0];
+    [itemPageInstruction addAction:self withSelector:nil];
+    [itemPageInstruction setOnlyChoice:NO];
+    [coverViewQueue addObject:itemPageInstruction];
+}
+
+-(void)checkItemMallInstruction{
+    InstructionCoverView *instruction = [[InstructionCoverView alloc]initWithFrame:self.view.bounds thisKey:InstructionOrder_toString[4]  andActiveRegionFrame:CGRectMake(209, 10, 83, 61)];
+    [instruction addNoteText:@"点这里可以进入道具商城"];
+    [instruction addTriggerForerunnerKey:InstructionOrder_toString[3] minLevel:0];
+    [instruction addAction:itemViewController withSelector:@selector(mallAction:)];
+    [instruction setOnlyChoice:NO];
+    [coverViewQueue addObject:instruction];
+}
+
+-(void)checkFriendPageInstruction{
+    InstructionCoverView *instruction = [[InstructionCoverView alloc]initWithFrame:self.view.bounds thisKey:InstructionOrder_toString[5]  andActiveRegionFrame:CGRectMake(350, 0, 0, 0)];
+    [instruction addNoteText:@"向左滑动，可以进入好友页面"];
+    [instruction addTriggerForerunnerKey:InstructionOrder_toString[4] minLevel:0];
+    [instruction addAction:self withSelector:nil];
+    [instruction setOnlyChoice:NO];
+    [coverViewQueue addObject:instruction];
+}
+
+-(void)checkAddFriendInstruction{
+    InstructionCoverView *instruction = [[InstructionCoverView alloc]initWithFrame:self.view.bounds thisKey:InstructionOrder_toString[6]  andActiveRegionFrame:CGRectMake(256, 18, 38, 38)];
+    [instruction addNoteText:@"点这里可以添加好友"];
+    [instruction addTriggerForerunnerKey:InstructionOrder_toString[5] minLevel:0];
+    [instruction addAction:itemViewController withSelector:@selector(mallAction:)];
+    [instruction setOnlyChoice:NO];
+    [coverViewQueue addObject:instruction];
 }
 
 -(void)checkPinchInstruction{
     NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
     NSNumber *n = (NSNumber *)[dict objectForKey:@"PinchInstruction"];
-    NSNumber *msi = (NSNumber *)[dict objectForKey:@"MissionStoneInstruction"];
+    NSNumber *msi = (NSNumber *)[dict objectForKey:InstructionOrder_toString[6]];
     if (userBase && !n && msi){
         CoverView *instructionCV = [[CoverView alloc]initWithFrame:self.view.frame];
         instructionCV.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
@@ -277,39 +325,6 @@
         [coverViewQueue addObject:instructionCV];
         
         [dict setObject:[NSNumber numberWithInt:1] forKey:@"PinchInstruction"];
-        [RORUserUtils writeToUserInfoPList:dict];
-    }
-}
-
--(void)checkHistoryInstruction{
-    NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
-    NSNumber *n = (NSNumber *)[dict objectForKey:@"HistoryInstruction"];
-    if (userBase && !n && self.pageControl.currentPage == 1){
-        if (userBase.userDetail.level.intValue<2)
-            return;
-        
-        CoverView *instructionCV = [[CoverView alloc]initWithFrame:self.view.frame];
-        instructionCV.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
-        [instructionCV addCoverBgImage:[UIImage imageNamed:@"intro_History.png"] grayed:NO];
-        [coverViewQueue addObject:instructionCV];
-        
-        [dict setObject:[NSNumber numberWithInt:1] forKey:@"HistoryInstruction"];
-        [RORUserUtils writeToUserInfoPList:dict];
-    }
-}
-
--(void)checkSyncInstruction{
-    NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
-    NSNumber *syncIns = [dict objectForKey:@"SyncInstruction"];
-    if (!syncIns)
-        return;
-    if (syncIns.intValue<0 && userBase.userDetail.level.intValue>3){
-        CoverView *instructionCV = [[CoverView alloc]initWithFrame:self.view.frame];
-        instructionCV.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
-        [instructionCV addCoverBgImage:[UIImage imageNamed:@"intro_sync.png"] grayed:NO];
-        [coverViewQueue addObject:instructionCV];
-        
-        [dict setObject:[NSNumber numberWithInt:1] forKey:@"SyncInstruction"];
         [RORUserUtils writeToUserInfoPList:dict];
     }
 }
@@ -385,6 +400,25 @@
         [controller viewWillAppear:NO];
     }
     [MobClick event:@"slideClick"];
+    
+    NSMutableDictionary *userInfoDict = [RORUserUtils getUserInfoPList];
+    if (![userInfoDict objectForKey:InstructionOrder_toString[3]] && page == 0){
+        [userInfoDict setObject:[NSNumber numberWithInt:1] forKey:InstructionOrder_toString[3]];
+        [RORUserUtils writeToUserInfoPList:userInfoDict];
+    }
+    if (![userInfoDict objectForKey:InstructionOrder_toString[6]] && page == 2){
+        [userInfoDict setObject:[NSNumber numberWithInt:1] forKey:InstructionOrder_toString[6]];
+        [RORUserUtils writeToUserInfoPList:userInfoDict];
+    }
+    
+    if (page == 0){
+        [self checkItemMallInstruction];
+        [self dequeueCoverView];
+    }
+    if (page == 2){
+        [self checkAddFriendInstruction];
+        [self dequeueCoverView];
+    }
 }
 
 -(void)refreshPageTitles:(UIScrollView *)scrollView{
@@ -415,6 +449,13 @@
         MainPageViewController *controller =(MainPageViewController *)[contentViews objectAtIndex:self.pageControl.currentPage];
         [controller viewWillAppear:NO];
     }
+}
+
+- (IBAction)showHistoryAction:(id)sender {
+    [MobClick event:@"historyClick"];
+    mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+    UIViewController *historyViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"historyListViewController"];
+    [self presentViewController:historyViewController animated:YES completion:^(){}];
 }
 
 //其实这里是同步按钮的事件 - -

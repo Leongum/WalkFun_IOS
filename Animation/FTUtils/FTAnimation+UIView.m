@@ -183,6 +183,11 @@
     [self.layer addAnimation:anim forKey:kFTAnimationPopIn];
 }
 
+-(void)pop:(NSTimeInterval)duration delegate:(id)delegate startSelector:(SEL)startSelector stopSelector:(SEL)stopSelector{
+    CAAnimation *anim = [[FTAnimationManager sharedManager] popAnimationFor:self duration:duration delegate:delegate startSelector:startSelector stopSelector:stopSelector];
+    [self.layer addAnimation:anim forKey:kFTAnimationPopIn];
+}
+
 - (void)popUp:(NSTimeInterval)duration delegate:(id)delegate targetPoint:(CGPoint)targetPoint{
     CAAnimation *anim = [[FTAnimationManager sharedManager] popUpAnimationFor:self duration:duration delegate:delegate targetPoint:(CGPoint)targetPoint
                                                                 startSelector:nil stopSelector:nil];

@@ -318,13 +318,6 @@
         [self sendAlart:weatherInformation];
 }
 
-- (IBAction)showHistoryAction:(id)sender {
-    [MobClick event:@"historyClick"];
-    mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
-    UIViewController *historyViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"historyListViewController"];
-    [self presentViewController:historyViewController animated:YES completion:^(){}];
-}
-
 
 -(void)startTimer{
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:120 target:self selector:@selector(timerDot) userInfo:nil repeats:YES];

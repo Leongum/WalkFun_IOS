@@ -81,6 +81,7 @@
         [ss appendString:[NSString stringWithFormat:@"%@", [pgStringList objectAtIndex:0]]];
     }
     sumString = [NSString stringWithFormat:@"获得%@场战斗胜利。\n获得%@个金币。",ss,record.goldCoin];
+    winString = [NSString stringWithFormat:@"%@", ss];
     
     //展示获得的道具
     if (((NSString *)[pgStringList objectAtIndex:1]).length>0){
@@ -132,7 +133,7 @@
             commentText = @"干得漂亮！";
         }
         ReportViewController *reportViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"ReportViewController"];
-        [reportViewController customInit:[NSString stringWithFormat:@"%@", sumString]
+        [reportViewController customInit:[NSString stringWithFormat:@"%@", winString]
                                      Exp:[NSString stringWithFormat:@"+%d", record.experience.intValue]
                                     Coin:[NSString stringWithFormat:@"+%d", record.goldCoin.intValue]
                                     Item:[NSString stringWithFormat:@"%d", totalItems]

@@ -112,7 +112,7 @@
     [startInstruction addNoteText:@"点“出发”就可以开始记录走路了！"];
     [startInstruction addTriggerForerunnerKey:InstructionOrder_toString[0] minLevel:0];
     [startInstruction addAction:self withSelector:@selector(startAction:)];
-    [startInstruction setOnlyChoice:YES];
+    [startInstruction setOnlyChoice:NO];
     [coverViewQueue addObject:startInstruction];
 }
 

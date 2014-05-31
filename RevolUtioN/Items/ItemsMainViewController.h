@@ -27,4 +27,7 @@
 @property (strong, nonatomic) IBOutlet UIView *itemMainTitleView;
 @property (strong, nonatomic) IBOutlet UILabel *moneyLabel;
 
+
+- (IBAction)mallAction:(id)sender;
+
 @end

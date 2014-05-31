@@ -14,6 +14,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.backButton.alpha = 0;
+    
 	// Do any additional setup after loading the view, typically from a nib.
     
 	self.heartsEmitter = [CAEmitterLayer layer];

@@ -24,4 +24,5 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) Virtual_Product *selectedItem;
+@property (strong, nonatomic) id delegate;
 @end

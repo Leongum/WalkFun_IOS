@@ -32,7 +32,6 @@
                 NSLog(@"Failed to create sound ");
             }
         }
-        
     }
     return self;
 }
@@ -50,8 +49,7 @@
             
             player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
             [player prepareToPlay];
-            [player setVolume:1];
-
+            [player setVolume:0.2];
         }
     }
     return self;
