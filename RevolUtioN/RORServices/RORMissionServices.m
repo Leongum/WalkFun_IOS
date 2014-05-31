@@ -64,7 +64,6 @@
 }
 
 //open out
-//debug
 +(NSArray *)fetchMissionList{
     return [self fetchMissionList:0 withContext:nil];
 }

@@ -48,5 +48,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *itemGetScrollView;
+@property (strong, nonatomic) IBOutlet UIImageView *leftShadow;
+@property (strong, nonatomic) IBOutlet UIImageView *rightShadow;
 
 @end

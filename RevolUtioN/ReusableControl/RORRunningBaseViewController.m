@@ -210,7 +210,7 @@
     if (stepCounting.counter>currentStep) {
         currentStep = stepCounting.counter;
         //debug
-//        if (isAWalking)
+        if (isAWalking)
             [self isEventHappen];
     }
 }

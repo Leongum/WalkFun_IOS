@@ -29,7 +29,9 @@
     // Do any additional setup after loading the view.
     
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
-    [self.instructionTextView setFont:[UIFont fontWithName:APP_FONT size:16]];
+    [self.instructionTextView setFont:[UIFont systemFontOfSize:14]];
+    
+    self.instructionTextView.text = GAME_RULE;
 }
 
 - (void)didReceiveMemoryWarning

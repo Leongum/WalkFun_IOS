@@ -271,6 +271,8 @@
 		30CF1FA819347D1A00790DB9 /* NoteAnimationCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CF1FA719347D1A00790DB9 /* NoteAnimationCoverView.m */; };
 		30CF1FAA193622A500790DB9 /* ins_active_region.png in Resources */ = {isa = PBXBuildFile; fileRef = 30CF1FA9193622A500790DB9 /* ins_active_region.png */; };
 		30CF1FAC1939B41800790DB9 /* friend_follow_switch_button1.png in Resources */ = {isa = PBXBuildFile; fileRef = 30CF1FAB1939B41800790DB9 /* friend_follow_switch_button1.png */; };
+		30CF1FAF193A14F500790DB9 /* item_list_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 30CF1FAD193A14F500790DB9 /* item_list_left.png */; };
+		30CF1FB0193A14F500790DB9 /* item_list_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 30CF1FAE193A14F500790DB9 /* item_list_right.png */; };
 		30D008D317F53FBB004E6747 /* challenge_S.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 30D008D017F53FBB004E6747 /* challenge_S.m4a */; };
 		30D008D417F53FBB004E6747 /* challenge_normal.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 30D008D117F53FBB004E6747 /* challenge_normal.m4a */; };
 		30D008D517F53FBB004E6747 /* challenge_F.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 30D008D217F53FBB004E6747 /* challenge_F.m4a */; };
@@ -770,6 +772,8 @@
 		30CF1FA719347D1A00790DB9 /* NoteAnimationCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoteAnimationCoverView.m; path = ReusableControl/NoteAnimationCoverView.m; sourceTree = "<group>"; };
 		30CF1FA9193622A500790DB9 /* ins_active_region.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ins_active_region.png; sourceTree = "<group>"; };
 		30CF1FAB1939B41800790DB9 /* friend_follow_switch_button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_follow_switch_button1.png; sourceTree = "<group>"; };
+		30CF1FAD193A14F500790DB9 /* item_list_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item_list_left.png; sourceTree = "<group>"; };
+		30CF1FAE193A14F500790DB9 /* item_list_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = item_list_right.png; sourceTree = "<group>"; };
 		30D008D017F53FBB004E6747 /* challenge_S.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = challenge_S.m4a; path = Resources/sound/challenge_S.m4a; sourceTree = "<group>"; };
 		30D008D117F53FBB004E6747 /* challenge_normal.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = challenge_normal.m4a; path = Resources/sound/challenge_normal.m4a; sourceTree = "<group>"; };
 		30D008D217F53FBB004E6747 /* challenge_F.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = challenge_F.m4a; path = Resources/sound/challenge_F.m4a; sourceTree = "<group>"; };
@@ -1535,6 +1539,8 @@
 		30978DA017EDA57E00CA58B9 /* history */ = {
 			isa = PBXGroup;
 			children = (
+				30CF1FAD193A14F500790DB9 /* item_list_left.png */,
+				30CF1FAE193A14F500790DB9 /* item_list_right.png */,
 				3022E00318EDC1EE00F3A9D5 /* history_report_normal.png */,
 				3022DFE418E076DC00F3A9D5 /* history_cell_normal.png */,
 				3022DFE518E076DC00F3A9D5 /* history_cell_section.png */,
@@ -2130,6 +2136,7 @@
 				3022E02F18F7EBE900F3A9D5 /* running_title.png in Resources */,
 				30DB01FB18C32652008863B8 /* item_table_bg.png in Resources */,
 				30594BC417F06B4F00E6A19B /* seg_selected_bg.png in Resources */,
+				30CF1FB0193A14F500790DB9 /* item_list_right.png in Resources */,
 				0F07AC4217E98FA00009C8A8 /* switch_off.png in Resources */,
 				30FAA215186417DF00E72650 /* notSure.png in Resources */,
 				3022DFF818EBEE8D00F3A9D5 /* friend_add_cell_disabled.png in Resources */,
@@ -2150,6 +2157,7 @@
 				30CF1FA5193479F900790DB9 /* semilucent.png in Resources */,
 				0F0B64C918F3E27C003B0E15 /* UMSCommentInputControlleriPad.xib in Resources */,
 				3022E02C18F7ACCF00F3A9D5 /* event_icon.png in Resources */,
+				30CF1FAF193A14F500790DB9 /* item_list_left.png in Resources */,
 				30F78723190A00400041F9F4 /* fight_icon_3.png in Resources */,
 				3013D4A818C0D273005F4C07 /* exfat_male.png in Resources */,
 				30DB021318C5D2C3008863B8 /* DazStarOutline.png in Resources */,

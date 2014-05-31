@@ -83,6 +83,9 @@
     sumString = [NSString stringWithFormat:@"获得%@场战斗胜利。\n获得%@个金币。",ss,record.goldCoin];
     winString = [NSString stringWithFormat:@"%@", ss];
     
+    self.rightShadow.alpha = 0;
+    self.leftShadow.alpha = 0;
+    
     //展示获得的道具
     if (((NSString *)[pgStringList objectAtIndex:1]).length>0){
         NSDictionary *itemDict = [RORUtils explainActionEffetiveRule:[pgStringList objectAtIndex:1]];
@@ -102,6 +105,8 @@
             
             totalItems += itemQuantity.integerValue;
         }
+        self.rightShadow.alpha = ([itemDict allKeys].count>5);
+        self.leftShadow.alpha = ([itemDict allKeys].count>5);
     }
     
 

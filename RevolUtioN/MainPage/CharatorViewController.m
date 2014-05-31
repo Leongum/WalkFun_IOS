@@ -27,6 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view.
     charatorImageView = (UIImageView *)[self.view viewWithTag:1];
     charatorBumpImageView = (UIImageView *)[self.view viewWithTag:2];
@@ -48,6 +49,8 @@
     
     haveBump = NO;
     faceColorIndex = 0;
+    bumpFrame = charatorBumpImageView.frame;
+    bumpCenter = charatorBumpImageView.center;
     
     if (!userBase)
         self.view.alpha = 0;
@@ -64,6 +67,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    bumpSize = 0;
+
     [super viewWillAppear:animated];
     if (userBase) {
         self.view.alpha = 1;
@@ -78,6 +83,10 @@
         [self displayCharator];
         [self displayProgresses];
         charatorBumpImageView.alpha = haveBump;
+        if (bumpSize>30)
+            bumpSize = 30;
+        charatorBumpImageView.frame = CGRectMake(0,0, bumpFrame.size.width + bumpSize*3, bumpFrame.size.height + bumpSize*3);
+        charatorBumpImageView.center = bumpCenter;
     }
     if (!fatPV){
         fatPVFrameView = (UILabel *)[self.view viewWithTag:200];
@@ -190,6 +199,7 @@
     if ([[effectDict allKeys] containsObject:RULE_Drop_Down]){
         for (int i=0; i<quantity.integerValue; i++){
             [self makeNewItemImageView:item];
+            bumpSize++;
         }
         haveBump = YES;
     }

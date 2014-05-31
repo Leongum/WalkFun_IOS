@@ -46,17 +46,11 @@
         todayItem = nil;
     
     //加载用户个人信息
-    [self startIndicator:self];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self endIndicator:self];
-            self.baseFightLabel.text = [NSString stringWithFormat:@"%d", userBase.userDetail.fight.intValue];
-            self.basePowerLabel.text = [NSString stringWithFormat:@"%d", userBase.userDetail.power.intValue];
-            self.extraFightLabel.text = [NSString stringWithFormat:@"%d",userBase.userDetail.fightPlus.intValue];
-            self.extraPowerLabel.text = [NSString stringWithFormat:@"%d",userBase.userDetail.powerPlus.intValue];
-        });
-    });
+    userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
+    self.baseFightLabel.text = [NSString stringWithFormat:@"%d", userBase.userDetail.fight.intValue];
+    self.basePowerLabel.text = [NSString stringWithFormat:@"%d", userBase.userDetail.power.intValue];
+    self.extraFightLabel.text = [NSString stringWithFormat:@"%d",userBase.userDetail.fightPlus.intValue];
+    self.extraPowerLabel.text = [NSString stringWithFormat:@"%d",userBase.userDetail.powerPlus.intValue];
     
     
     [RORUtils setFontFamily:APP_FONT forView:self.view andSubViews:YES];
@@ -173,6 +167,7 @@
             [RORUserUtils writeToUserInfoPList:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:-1], @"thisWalkFriendId", nil]];
         }
         
+        userBase = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             CoverView *coverView = (CoverView *)self.view;

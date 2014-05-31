@@ -922,7 +922,7 @@
                                 <rect key="frame" x="46" y="125" width="229" height="371"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="textColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.34060108420000001" green="0.22128146439999999" blue="0.1413489704" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -1794,6 +1794,14 @@
                                     <action selector="shareAction:" destination="59h-pf-nvn" eventType="touchUpInside" id="f40-Wm-lBW"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="item_list_left.png" id="4Se-qT-Hl8">
+                                <rect key="frame" x="14" y="504" width="15" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="item_list_right.png" id="9dm-ak-GKt">
+                                <rect key="frame" x="293" y="504" width="15" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1806,6 +1814,8 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="itemGetScrollView" destination="8tD-aj-uyd" id="a1F-2H-jTz"/>
+                        <outlet property="leftShadow" destination="4Se-qT-Hl8" id="M53-B6-Qws"/>
+                        <outlet property="rightShadow" destination="9dm-ak-GKt" id="Om7-eo-hHp"/>
                         <outlet property="tableView" destination="kZ3-Ok-rI1" id="HUk-ui-VhZ"/>
                     </connections>
                 </viewController>
@@ -2373,7 +2383,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="siteCell" rowHeight="50" id="edp-Ne-wFR">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="siteCell" rowHeight="50" id="edp-Ne-wFR">
                                         <rect key="frame" x="0.0" y="227" width="250" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="edp-Ne-wFR" id="pbZ-De-zaR">
@@ -2461,8 +2471,8 @@
                                 <rect key="frame" x="46" y="125" width="229" height="371"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="14"/>
+                                <color key="textColor" red="0.34060108418367352" green="0.22128146439479532" blue="0.14134897043206043" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="玩法介绍" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rx8-zb-5FL" customClass="StrokeLabel">
@@ -3178,6 +3188,8 @@
         <image name="history_detail_title.png" width="640" height="204"/>
         <image name="history_report_normal.png" width="640" height="1136"/>
         <image name="history_title.png" width="640" height="204"/>
+        <image name="item_list_left.png" width="30" height="106"/>
+        <image name="item_list_right.png" width="30" height="106"/>
         <image name="item_mall_backButton.png" width="115" height="115"/>
         <image name="item_mall_bg.png" width="640" height="1136"/>
         <image name="item_mall_cell.png" width="640" height="168"/>

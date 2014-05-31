@@ -86,8 +86,8 @@
 {
     //todo:: need remove
     //umeng analytics
-    [MobClick setLogEnabled:YES];  // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
-    [MobClick setAppVersion:@"1.0"]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+    [MobClick setLogEnabled:NO];  // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
+    [MobClick setAppVersion:@"1.1"]; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
     [MobClick startWithAppkey:UMENG_APPKEY reportPolicy:(ReportPolicy) REALTIME channelId:nil];
     [MobClick checkUpdate];
     

@@ -23,6 +23,10 @@
 
     NSDictionary *itemForDisplayDict;
     BOOL haveBump;
+    int bumpSize;
+    CGRect bumpFrame;
+    CGPoint bumpCenter;
+    
     int faceColorIndex;
     
     int GROUND_SIZE_WIDTH, FACE_HEIGHT,FACE_WIDTH, FRONT_HEIGHT, VASE_SIZE_WIDTH, VASE_SIZE_HEIGHT;

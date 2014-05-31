@@ -315,7 +315,7 @@
 
 -(void)checkTodayMission{
     //debug
-    if (todayMission != nil){// && isAWalking){
+    if (todayMission != nil && isAWalking){
         int i=0;
         for (id keys in [todayMissionDict allKeys]){
             THProgressView *pv = [processViewList objectAtIndex:i];
@@ -466,7 +466,7 @@
             [Animations moveUp:self.paperView andAnimationDuration:0.3 andWait:NO andLength:newCellHeight<self.paperView.frame.origin.y+218?newCellHeight:self.paperView.frame.origin.y+218];
         }
     }
-    if (!isAWalking){// && currentStep > 70 && distance>70) {//debug
+    if (!isAWalking && currentStep > 70 && distance>70) {//debug
         isAWalking = YES;
         UIImage* image = [UIImage imageNamed:@"green_btn_bg.png"];
         [endButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -895,10 +895,8 @@
         
         int x = arc4random() % 1000000;
         double roll = ((double)x)/10000.f;
-        double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0, rateEvent = 30;
-        //rateEvent = 3;
+        double rate5 = 0, rate4 = 0, rate3 = 0, rate2 = 0, rateEvent = 3;
         
-        //debug
         if (realCurrentStep>WALKING_FIGHT_STAGE_II){
             stepsSinceLastFight++;
             
@@ -929,7 +927,7 @@
         //用户第一次走的时候事件和战斗机率增加
         if (userBase.userDetail.level.intValue==1){
             rate2 += 10;
-            rateEvent = 10;
+            rateEvent += 10;
         }
         
         int fightStage = 0;
