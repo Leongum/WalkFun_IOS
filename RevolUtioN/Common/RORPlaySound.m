@@ -38,6 +38,12 @@
 
 -(id)initForPlayingSoundEffectWith:(NSString *)filename
 {
+    return [self initForPlayingSoundEffectWith:filename withType:AVAudioSessionCategoryPlayback];
+}
+
+
+-(id)initForPlayingSoundEffectWith:(NSString *)filename withType:(NSString *)type
+{
     self = [super init];
     if (self) {
         NSURL *fileURL = [[NSBundle mainBundle] URLForResource:filename withExtension:nil];
@@ -45,11 +51,11 @@
         {
             AVAudioSession *session = [AVAudioSession sharedInstance];
             [session setActive:YES error:nil];
-            [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+            [session setCategory:type error:nil];
             
             player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
             [player prepareToPlay];
-            [player setVolume:0.2];
+            [player setVolume:1];
         }
     }
     return self;

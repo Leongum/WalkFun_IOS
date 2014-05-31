@@ -48,7 +48,7 @@
     //加载用户个人信息
     [self startIndicator:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        userBase = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
+        userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self endIndicator:self];
             self.baseFightLabel.text = [NSString stringWithFormat:@"%d", userBase.userDetail.fight.intValue];
