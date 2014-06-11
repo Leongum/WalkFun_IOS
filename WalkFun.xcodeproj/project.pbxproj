@@ -179,7 +179,6 @@
 		3022E01F18F541E600F3A9D5 /* intro_Pinch.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E01E18F541E600F3A9D5 /* intro_Pinch.png */; };
 		3022E02218F6568600F3A9D5 /* running_ready_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E02018F6568600F3A9D5 /* running_ready_add.png */; };
 		3022E02318F6568600F3A9D5 /* running_ready_del.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E02118F6568600F3A9D5 /* running_ready_del.png */; };
-		3022E02518F7961200F3A9D5 /* intro_History.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E02418F7961200F3A9D5 /* intro_History.png */; };
 		3022E02B18F7ACCF00F3A9D5 /* anno_coin.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E02818F7ACCF00F3A9D5 /* anno_coin.png */; };
 		3022E02C18F7ACCF00F3A9D5 /* event_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E02918F7ACCF00F3A9D5 /* event_icon.png */; };
 		3022E02F18F7EBE900F3A9D5 /* running_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 3022E02E18F7EBE900F3A9D5 /* running_title.png */; };
@@ -334,10 +333,6 @@
 		30F78729190A2D2B0041F9F4 /* badge_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F78726190A2D2B0041F9F4 /* badge_1.png */; };
 		30F7872A190A2D2B0041F9F4 /* badge_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F78727190A2D2B0041F9F4 /* badge_2.png */; };
 		30F7872B190A2D2B0041F9F4 /* badge_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F78728190A2D2B0041F9F4 /* badge_3.png */; };
-		30F7872F190A3F1F0041F9F4 /* intro_firstopen.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F7872C190A3F1F0041F9F4 /* intro_firstopen.png */; };
-		30F78730190A3F1F0041F9F4 /* intro_mainpage.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F7872D190A3F1F0041F9F4 /* intro_mainpage.png */; };
-		30F78731190A3F1F0041F9F4 /* intro_missionstone.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F7872E190A3F1F0041F9F4 /* intro_missionstone.png */; };
-		30F78733190AA92E0041F9F4 /* intro_sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F78732190AA92E0041F9F4 /* intro_sync.png */; };
 		30F78736190C1BBA0041F9F4 /* FightIconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F78735190C1BBA0041F9F4 /* FightIconButton.m */; };
 		30F78739190CBB030041F9F4 /* weixin_friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F78737190CBB030041F9F4 /* weixin_friend.png */; };
 		30F7873A190CBB030041F9F4 /* weixin.png in Resources */ = {isa = PBXBuildFile; fileRef = 30F78738190CBB030041F9F4 /* weixin.png */; };
@@ -646,7 +641,6 @@
 		3022E01E18F541E600F3A9D5 /* intro_Pinch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_Pinch.png; sourceTree = "<group>"; };
 		3022E02018F6568600F3A9D5 /* running_ready_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = running_ready_add.png; sourceTree = "<group>"; };
 		3022E02118F6568600F3A9D5 /* running_ready_del.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = running_ready_del.png; sourceTree = "<group>"; };
-		3022E02418F7961200F3A9D5 /* intro_History.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_History.png; sourceTree = "<group>"; };
 		3022E02818F7ACCF00F3A9D5 /* anno_coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = anno_coin.png; path = Resources/icons/annotation/anno_coin.png; sourceTree = "<group>"; };
 		3022E02918F7ACCF00F3A9D5 /* event_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event_icon.png; path = Resources/icons/annotation/event_icon.png; sourceTree = "<group>"; };
 		3022E02E18F7EBE900F3A9D5 /* running_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = running_title.png; sourceTree = "<group>"; };
@@ -851,10 +845,6 @@
 		30F78726190A2D2B0041F9F4 /* badge_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badge_1.png; sourceTree = "<group>"; };
 		30F78727190A2D2B0041F9F4 /* badge_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badge_2.png; sourceTree = "<group>"; };
 		30F78728190A2D2B0041F9F4 /* badge_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = badge_3.png; sourceTree = "<group>"; };
-		30F7872C190A3F1F0041F9F4 /* intro_firstopen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_firstopen.png; sourceTree = "<group>"; };
-		30F7872D190A3F1F0041F9F4 /* intro_mainpage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_mainpage.png; sourceTree = "<group>"; };
-		30F7872E190A3F1F0041F9F4 /* intro_missionstone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_missionstone.png; sourceTree = "<group>"; };
-		30F78732190AA92E0041F9F4 /* intro_sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_sync.png; sourceTree = "<group>"; };
 		30F78734190C1BBA0041F9F4 /* FightIconButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FightIconButton.h; path = HistoryPage/FightIconButton.h; sourceTree = "<group>"; };
 		30F78735190C1BBA0041F9F4 /* FightIconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FightIconButton.m; path = HistoryPage/FightIconButton.m; sourceTree = "<group>"; };
 		30F78737190CBB030041F9F4 /* weixin_friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weixin_friend.png; sourceTree = "<group>"; };
@@ -1585,11 +1575,6 @@
 			children = (
 				30CF1FA9193622A500790DB9 /* ins_active_region.png */,
 				3090EEC8192C60AC003DB4EE /* ins_head_image.png */,
-				30F78732190AA92E0041F9F4 /* intro_sync.png */,
-				30F7872C190A3F1F0041F9F4 /* intro_firstopen.png */,
-				30F7872D190A3F1F0041F9F4 /* intro_mainpage.png */,
-				30F7872E190A3F1F0041F9F4 /* intro_missionstone.png */,
-				3022E02418F7961200F3A9D5 /* intro_History.png */,
 				3022E01E18F541E600F3A9D5 /* intro_Pinch.png */,
 			);
 			name = instruction;
@@ -1994,7 +1979,6 @@
 				30989CE617F9324B00CA9F83 /* write_us.png in Resources */,
 				3022DFE718E076DC00F3A9D5 /* history_cell_normal.png in Resources */,
 				3090EEC9192C60AC003DB4EE /* ins_head_image.png in Resources */,
-				30F78730190A3F1F0041F9F4 /* intro_mainpage.png in Resources */,
 				3022DFA018D6C00900F3A9D5 /* followButton_selected.png in Resources */,
 				30DB01FF18C3397D008863B8 /* main_title_board.png in Resources */,
 				30F78739190CBB030041F9F4 /* weixin_friend.png in Resources */,
@@ -2041,7 +2025,6 @@
 				30166AA317C3C6260035C722 /* back_bg.png in Resources */,
 				0F0B64C518F3E27C003B0E15 /* UMSocialLocalizable.strings in Resources */,
 				30DB020518C45F68008863B8 /* running_machine.png in Resources */,
-				3022E02518F7961200F3A9D5 /* intro_History.png in Resources */,
 				30DFE7DF17C6748F00678780 /* submit.png in Resources */,
 				30DC920818FEF394006B6A4C /* missionStone_1.png in Resources */,
 				30D008D317F53FBB004E6747 /* challenge_S.m4a in Resources */,
@@ -2071,7 +2054,6 @@
 				30A6D9FB17CE2BF800D1116E /* main_login_bg.png in Resources */,
 				3022DF9E18D6C00900F3A9D5 /* delete_friend.png in Resources */,
 				3005CFE9185391F900D83648 /* searchTextField_bg.png in Resources */,
-				30F78731190A3F1F0041F9F4 /* intro_missionstone.png in Resources */,
 				30FECBDA17DD94A6002C3C90 /* paper.png in Resources */,
 				30DC920A18FEF394006B6A4C /* missionStone_3.png in Resources */,
 				30DB01FC18C32652008863B8 /* item_title_board.png in Resources */,
@@ -2098,7 +2080,6 @@
 				0F0B64CC18F3E27C003B0E15 /* UMSLoginViewController.xib in Resources */,
 				3022DFD918E012BC00F3A9D5 /* friend_add_nextPage_disabled.png in Resources */,
 				3022DFDB18E01FE700F3A9D5 /* history_detail_title.png in Resources */,
-				30F78733190AA92E0041F9F4 /* intro_sync.png in Resources */,
 				30F7870F1902542E0041F9F4 /* anno_event.png in Resources */,
 				30F78725190A00400041F9F4 /* fight_icon_5.png in Resources */,
 				30DC91FD18FCDD1F006B6A4C /* talk_top_bg.png in Resources */,
@@ -2108,7 +2089,6 @@
 				3022DFCB18DFDEA000F3A9D5 /* item_coin.png in Resources */,
 				30F7872A190A2D2B0041F9F4 /* badge_2.png in Resources */,
 				30DB020718C45F68008863B8 /* running_rope.png in Resources */,
-				30F7872F190A3F1F0041F9F4 /* intro_firstopen.png in Resources */,
 				3022E00418EDC1EE00F3A9D5 /* history_report_normal.png in Resources */,
 				30989CAB17F5D87800CA9F83 /* Default-568h@2x.png in Resources */,
 				30DB020418C45F68008863B8 /* finishrunning_pop_bg.png in Resources */,
@@ -2475,7 +2455,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = WalkFun;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "E5797C1E-FC8B-48A6-A8A5-94F0A829E6FB";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -2505,7 +2485,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = WalkFun;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "E5797C1E-FC8B-48A6-A8A5-94F0A829E6FB";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				"VALID_ARCHS[sdk=*]" = "armv7 armv7s";

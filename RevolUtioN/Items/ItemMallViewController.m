@@ -158,11 +158,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     selectedItem = [contentList objectAtIndex:indexPath.row];
-//    if (userMoney / selectedItem.virtualPrice.integerValue > 0){
+    if (userMoney / selectedItem.virtualPrice.integerValue > 0){
         [self showItemQuantityCover];
-//    } else {
-//        [self sendAlart:@"好像买不起"];
-//    }
+    } else {
+        [self sendAlart:@"好像买不起，再攒点钱再来吧"];
+    }
 }
 
 #pragma mark -
