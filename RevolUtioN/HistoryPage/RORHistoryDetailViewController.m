@@ -277,24 +277,26 @@
 }
 
 - (IBAction)shareAction:(id)sender {
+    HistoryShareView *testView = [[HistoryShareView alloc]initWithFrame:CGRectMake(0, 0, 320, 0)];
+    for (int i=0; i<eventDisplayList.count+1; i++){
+//        UIImage *image =[RORUtils getImageFromView:];
+        UIView *iv = [self viewForRow:i];
+        iv.frame = CGRectMake(0, 0, iv.frame.size.width, iv.frame.size.height);
+        [testView add:iv];
+    }
     
+    NSString *msg = [NSString stringWithFormat:@"#报告村长#，我刚才出去探险，碰到了%d件奇奇怪怪的事情",eventDisplayList.count];
+    
+    [RORUtils popShareCoverViewFor:self withImage:[testView getImage] title:@"分享这个页面" andMessage:msg animated:YES];
 }
 
-#pragma mark -
-#pragma mark Table view data source
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger rows = eventDisplayList.count+1;
-    return rows;
-}
-
-- (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(UITableViewCell*)viewForRow:(int)row{
     NSString *identifier = nil;
     UITableViewCell *cell = nil;
     
-    if (indexPath.row==0){
+    if (row==0){
         identifier = @"sumCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
         UILabel *dateLabel = (UILabel *)[cell viewWithTag:101];
         UILabel *durationLabel = (UILabel *)[cell viewWithTag:102];
         UILabel *totalStepLabel = (UILabel *)[cell viewWithTag:103];
@@ -307,10 +309,10 @@
         totalStepLabel.text = totalStepString;
         sumLabel.text = sumString;
     } else {
-        Walk_Event *walkEvent = [eventDisplayList objectAtIndex:indexPath.row-1];
+        Walk_Event *walkEvent = [eventDisplayList objectAtIndex:row-1];
         if ([walkEvent.eType isEqualToString:RULE_Type_Action]){
             identifier = @"eventCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
             UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
             UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
             UILabel *effectLabel = (UILabel *)[cell viewWithTag:102];
@@ -326,9 +328,9 @@
             eventTimeLabel.text = [NSString stringWithFormat:@"%@的时候",[RORUtils transSecondToStandardFormat:walkEvent.times.integerValue]];
         } else if ([walkEvent.eType isEqualToString:RULE_Type_Fight]){
             Fight_Define *fightEvent = [RORSystemService fetchFightDefineInfo:walkEvent.eId];
-
+            
             identifier = @"fightCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
             UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
             UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
             [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
@@ -369,7 +371,7 @@
             expLabel.text = [NSString stringWithFormat:@"经验值+%@  体力-%.0f", fightEvent.baseExperience, powerCost];
         } else if ([walkEvent.eType isEqualToString:RULE_Type_Fight_Friend]){
             identifier = @"fightCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
             UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
             UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
             [eventLabel setLineBreakMode:NSLineBreakByWordWrapping];
@@ -401,7 +403,7 @@
             
         }else if ([walkEvent.eType isEqualToString:RULE_Type_Start]){ //出发事件
             identifier = @"eventCell";
-            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
             
             UILabel *eventTimeLabel = (UILabel *)[cell viewWithTag:100];
             UILabel *eventLabel = (UILabel *)[cell viewWithTag:101];
@@ -416,9 +418,22 @@
             effectLabel.text = @"一切看起来都那么美好～";
         }
     }
-
+    
     [RORUtils setFontFamily:APP_FONT forView:cell andSubViews:YES];
     return cell;
+}
+
+#pragma mark -
+#pragma mark Table view data source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSInteger rows = eventDisplayList.count+1;
+    return rows;
+}
+
+- (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    return [self viewForRow:indexPath.row];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

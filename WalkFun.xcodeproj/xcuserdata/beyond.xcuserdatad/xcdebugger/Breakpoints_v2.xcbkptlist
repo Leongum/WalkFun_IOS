@@ -14,7 +14,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
-            endingLineNumber = "99">
+            endingLineNumber = "99"
+            landmarkName = "@implementation RORLoadingViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -237,36 +239,6 @@
             endingLineNumber = "59"
             landmarkName = "-initWithFrame:andUserItem:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ItemDetailCoverView initWithFrame:andUserItem:]"
-                  moduleName = "WalkFun"
-                  urlString = "file:///Users/beyond/development/WalkFun_IOS/RevolUtioN/Items/ItemDetailCoverView.m"
-                  timestampString = "423219294.638271"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "3462">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ItemDetailCoverView initWithFrame:andUserItem:]"
-                  moduleName = "WalkFun"
-                  urlString = "file:///Users/beyond/development/WalkFun_IOS/RevolUtioN/Items/ItemDetailCoverView.m"
-                  timestampString = "423219297.622393"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "3458">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -315,36 +287,6 @@
             endingLineNumber = "944"
             landmarkName = "-isEventHappen"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[RORRunningViewController isEventHappen]"
-                  moduleName = "WalkFun"
-                  urlString = "file:///Users/beyond/development/WalkFun_IOS/RevolUtioN/RunningPages/RORRunningViewController.m"
-                  timestampString = "423219294.640183"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "946"
-                  endingLineNumber = "946"
-                  offsetFromSymbolStart = "2604">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[RORRunningViewController isEventHappen]"
-                  moduleName = "WalkFun"
-                  urlString = "file:///Users/beyond/development/WalkFun_IOS/RevolUtioN/RunningPages/RORRunningViewController.m"
-                  timestampString = "423219297.623797"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "946"
-                  endingLineNumber = "946"
-                  offsetFromSymbolStart = "2564">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -440,6 +382,70 @@
             startingLineNumber = "124"
             endingLineNumber = "124"
             landmarkName = "-afterDismissed:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RevolUtioN/Common/RORUserUtils.m"
+            timestampString = "424942099.308557"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "+getUserId"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RevolUtioN/HistoryPage/RORHistoryDetailViewController.m"
+            timestampString = "425207630.554652"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
+            landmarkName = "-shareAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RevolUtioN/HistoryPage/RORHistoryDetailViewController.m"
+            timestampString = "425207858.023471"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
+            landmarkName = "-viewForRow:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RevolUtioN/HistoryPage/HistoryShareView.m"
+            timestampString = "425225391.481915"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "-getImage"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

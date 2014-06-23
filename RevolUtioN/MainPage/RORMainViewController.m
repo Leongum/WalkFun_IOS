@@ -204,6 +204,8 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    self.missionView.center = CGPointMake(self.missionView.center.x, missionBoardCenterY);
+
     if ([RORUserUtils getUserId].integerValue<0) {
         UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginNavigatorController"];
         [self presentViewController:loginViewController animated:NO completion:NULL];
