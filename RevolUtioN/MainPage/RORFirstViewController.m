@@ -95,12 +95,18 @@
     }
     [self checkMissionProcess];
     [MobClick beginLogPageView:@"RORFirstViewController"];
+    [MTA trackPageViewBegin:@"RORFirstViewController"];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [locationManager stopUpdatingLocation];
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"RORFirstViewController"];
+}
+
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"RORFirstViewController"];
 }
 
 -(void)checkMissionProcess{
@@ -139,11 +145,13 @@
     if (missionDone<3){
         NSDictionary *dict = @{@"currentTimes" : [NSNumber numberWithInt:missionDone]};
         [MobClick event:@"rewardClick" attributes:dict];
+        [MTA trackCustomKeyValueEvent:@"rewardClick" props:dict];
         [self sendNotification:[NSString stringWithFormat:@"再完成%d次日常任务领取奖励", 3-missionDone]];
         return;
     }
     NSDictionary *dict = @{@"currentTimes" : [NSNumber numberWithInt:3]};
     [MobClick event:@"rewardClick" attributes:dict];
+    [MTA trackCustomKeyValueEvent:@"rewardClick" props:dict];
     [self startIndicator:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         Reward_Details *thisReward = [RORUserServices getRandomReward:userInfo.userId];
@@ -206,6 +214,7 @@
 
 -(IBAction)badgeViewAction:(id)sender{
     [MobClick event:@"honorClick"];
+    [MTA trackCustomKeyValueEvent:@"honorClick" props:nil];
     [self sendNotification:@"通过探险过程中的“好友战斗”胜利获得。"];
 }
 
@@ -312,6 +321,7 @@
 
 - (IBAction)weatherPopAction:(id)sender{
     [MobClick event:@"weatherClick"];
+     [MTA trackCustomKeyValueEvent:@"weatherClick" props:nil];
     if ([weatherInformation rangeOfString:@"失败"].location == NSNotFound){
         [self sendNotification:weatherInformation];
     } else

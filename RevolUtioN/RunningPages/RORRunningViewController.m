@@ -46,6 +46,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"RORRunningViewController"];
+    [MTA trackPageViewBegin:@"RORRunningViewController"];
     [self controllerInit];
     
     //add instruction
@@ -66,6 +67,11 @@
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"RORRunningViewController"];
+}
+
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"RORRunningViewController"];
 }
 
 -(void)controllerInit{
@@ -525,6 +531,7 @@
 - (IBAction)endButtonAction:(id)sender {
 //    [self stopTimer];
     [MobClick event:@"finishedClick"];
+    [MTA trackCustomKeyValueEvent:@"finishedClick" props:nil];
     if (isAWalking){
         [self.saveButton setEnabled:YES];
         [self.saveButton setTitle:@"确定回村吗？" forState:UIControlStateNormal];
@@ -568,6 +575,7 @@
     if (self.endTime == nil)
         self.endTime = [NSDate date];
     [MobClick event:@"saveClick"];
+    [MTA trackCustomKeyValueEvent:@"saveClick" props:nil];
     [self prepareForQuit];
     [self saveRunInfo];
 }

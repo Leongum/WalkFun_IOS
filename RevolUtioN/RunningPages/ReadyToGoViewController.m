@@ -93,6 +93,7 @@
         self.extraPowerLabel.text = [NSString stringWithFormat:@"%d",userBase.userDetail.powerPlus.intValue];
     }
     [MobClick beginLogPageView:@"ReadyToGoViewController"];
+    [MTA trackPageViewBegin:@"ReadyToGoViewController"];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -150,6 +151,7 @@
 - (IBAction)startAction:(id)sender {
     
     [MobClick event:@"goClick"];
+    [MTA trackCustomKeyValueEvent:@"goClick" props:nil];
     User_Base *toThisUser = [RORUserServices fetchUser:[RORUserUtils getUserId]];
     if (!toThisUser)
         toThisUser = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
@@ -195,6 +197,7 @@
         [self viewWillAppear:NO];
     } else {
         [MobClick event:@"itemEnhanceClick"];
+        [MTA trackCustomKeyValueEvent:@"itemEnhanceClick" props:nil];
         UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReadyUseItemViewController"];
         if ([viewController respondsToSelector:@selector(setDelegate:)]){
             [viewController setValue:self forKey:@"delegate"];
@@ -214,6 +217,7 @@
         [self viewWillAppear:NO];
     } else {
         [MobClick event:@"withFriendClick"];
+        [MTA trackCustomKeyValueEvent:@"withFriendClick" props:nil];
         UIViewController *viewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReadyAddPartnerViewController"];
         if ([viewController respondsToSelector:@selector(setDelegate:)]){
             [viewController setValue:self forKey:@"delegate"];
@@ -228,4 +232,10 @@
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"ReadyToGoViewController"];
 }
+
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"ReadyToGoViewController"];
+}
+
 @end

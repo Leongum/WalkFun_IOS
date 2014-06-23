@@ -45,11 +45,18 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"ActionHistoryViewController"];
+    [MTA trackPageViewBegin:@"ActionHistoryViewController"];
 }
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"ActionHistoryViewController"];
+}
+
+-(void) viewDidDisappear:(BOOL)animated {
+     [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"ActionHistoryViewController"];
 }
 
 #pragma mark - Actions

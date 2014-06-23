@@ -45,6 +45,7 @@
 		0F282FF118B33422003F44E8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F282FF018B33422003F44E8 /* Security.framework */; };
 		0F282FF318B3342C003F44E8 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F282FF218B3342C003F44E8 /* libiconv.dylib */; };
 		0F59A17217BCA4BD000DEFEF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BB0B071769A2E70009A847 /* SystemConfiguration.framework */; };
+		0F5B53B119540CD600531E6C /* libmtasdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5B53AE19540CD600531E6C /* libmtasdk.a */; };
 		0F8501DE17C1C63E0005993E /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8501DD17C1C63E0005993E /* libstdc++.dylib */; };
 		0F8501E017C1C68E0005993E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8501DF17C1C68E0005993E /* libsqlite3.dylib */; };
 		0F8501E317C1C9510005993E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F8501D517C1C6160005993E /* CoreTelephony.framework */; };
@@ -425,6 +426,9 @@
 		0F282FAA18B23EEB003F44E8 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0F282FF018B33422003F44E8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0F282FF218B3342C003F44E8 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		0F5B53AE19540CD600531E6C /* libmtasdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmtasdk.a; sourceTree = "<group>"; };
+		0F5B53AF19540CD600531E6C /* MTA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTA.h; sourceTree = "<group>"; };
+		0F5B53B019540CD600531E6C /* MTAConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTAConfig.h; sourceTree = "<group>"; };
 		0F8501D517C1C6160005993E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		0F8501DD17C1C63E0005993E /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		0F8501DF17C1C68E0005993E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -895,6 +899,7 @@
 				0F0B64D318F3E27C003B0E15 /* libWeChatSDK.a in Frameworks */,
 				0F19301E1884DED400E74BB1 /* AdSupport.framework in Frameworks */,
 				3098B4FC1806972300029164 /* AVFoundation.framework in Frameworks */,
+				0F5B53B119540CD600531E6C /* libmtasdk.a in Frameworks */,
 				0F282FA318B23E6F003F44E8 /* libMobClickLibrary.a in Frameworks */,
 				0F282FA818B23E89003F44E8 /* libUMFeedback.a in Frameworks */,
 				0F8501E017C1C68E0005993E /* libsqlite3.dylib in Frameworks */,
@@ -1037,6 +1042,16 @@
 			);
 			name = UMFeedback;
 			path = UMeng/UMFeedback;
+			sourceTree = "<group>";
+		};
+		0F5B53AD19540CD600531E6C /* Mtaqq */ = {
+			isa = PBXGroup;
+			children = (
+				0F5B53AE19540CD600531E6C /* libmtasdk.a */,
+				0F5B53AF19540CD600531E6C /* MTA.h */,
+				0F5B53B019540CD600531E6C /* MTAConfig.h */,
+			);
+			path = Mtaqq;
 			sourceTree = "<group>";
 		};
 		0F7F39841792DEB600B1C720 /* RORServices */ = {
@@ -1268,6 +1283,7 @@
 		302FCFF81727D870004DA005 = {
 			isa = PBXGroup;
 			children = (
+				0F5B53AD19540CD600531E6C /* Mtaqq */,
 				3022DFBE18DAEC2300F3A9D5 /* SIAlertView */,
 				30DB021C18C85BB5008863B8 /* THProgressView */,
 				30DB021818C6CF17008863B8 /* THLabel */,
@@ -2451,11 +2467,12 @@
 					"${SRCROOT}/UMeng/UMAnalytics",
 					"$(SRCROOT)/UMeng/UMSocial_Sdk_3.3.6",
 					"$(SRCROOT)/UMeng/UMSocial_Sdk_Extra_Frameworks/Wechat",
+					"$(PROJECT_DIR)/Mtaqq",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = WalkFun;
-				PROVISIONING_PROFILE = "E5797C1E-FC8B-48A6-A8A5-94F0A829E6FB";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -2465,8 +2482,8 @@
 		302FD0491727D870004DA005 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Bingyang Zhao (8RLLL2GT4J)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bingyang Zhao (8RLLL2GT4J)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/UMeng/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
@@ -2481,11 +2498,12 @@
 					"${SRCROOT}/UMeng/UMAnalytics",
 					"$(SRCROOT)/UMeng/UMSocial_Sdk_3.3.6",
 					"$(SRCROOT)/UMeng/UMSocial_Sdk_Extra_Frameworks/Wechat",
+					"$(PROJECT_DIR)/Mtaqq",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = WalkFun;
-				PROVISIONING_PROFILE = "E5797C1E-FC8B-48A6-A8A5-94F0A829E6FB";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				"VALID_ARCHS[sdk=*]" = "armv7 armv7s";

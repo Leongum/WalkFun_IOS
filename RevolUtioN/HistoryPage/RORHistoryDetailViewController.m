@@ -123,6 +123,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"RORHistoryDetailViewController"];
+      [MTA trackPageViewBegin:@"RORHistoryDetailViewController"];
     //如果完成了任务
     if (showCongrats){//[delegate isKindOfClass:[RORRunningViewController class]]){
         
@@ -198,6 +199,11 @@
     [MobClick endLogPageView:@"RORHistoryDetailViewController"];
 }
 
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"RORHistoryDetailViewController"];
+}
+
 - (void)viewDidUnload {
     [self setRecord:nil];
     [self setDelegate:nil];
@@ -222,6 +228,7 @@
 //弹出升级提示页面
 -(void)performLevelUp{
     [MobClick event:@"levelUpTimes"];
+    [MTA trackCustomKeyValueEvent:@"levelUpTimes" props:nil];
     PooViewController *pooController = [mainStoryboard instantiateViewControllerWithIdentifier:@"levelUpCongratsCoverViewController"];
     [coverViewQueue addObject:pooController];
  

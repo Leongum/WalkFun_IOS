@@ -222,6 +222,7 @@
     }
     if ([destination respondsToSelector:@selector(setRecord:)]){
         [MobClick event:@"runhistoryDetailClick"];
+        [MTA trackCustomKeyValueEvent:@"runhistoryDetailClick" props:nil];
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         //        NSLog(@"%d->%d", indexPath.section, indexPath.row);
         NSString *date_str = [sortedDateList objectAtIndex:indexPath.section];

@@ -62,11 +62,16 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"ReadyAddPartnerViewController"];
+    [MTA trackPageViewBegin:@"ReadyAddPartnerViewController"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"ReadyAddPartnerViewController"];
+}
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"ReadyAddPartnerViewController"];
 }
 
 #pragma mark - Navigation

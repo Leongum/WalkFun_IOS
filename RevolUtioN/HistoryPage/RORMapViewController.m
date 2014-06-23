@@ -123,11 +123,17 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"RORMapViewController"];
+    [MTA trackPageViewBegin:@"RORMapViewController"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"RORMapViewController"];
+}
+
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"RORMapViewController"];
 }
 
 - (void)viewDidUnload{

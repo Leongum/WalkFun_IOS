@@ -44,11 +44,17 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"InstructionViewController"];
+    [MTA trackPageViewBegin:@"InstructionViewController"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"InstructionViewController"];
 }
+-(void) viewDidDisappear:(BOOL)animated {
+     [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"InstructionViewController"];
+}
+
 
 @end

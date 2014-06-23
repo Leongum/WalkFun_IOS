@@ -42,11 +42,17 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"RORRecommendViewController"];
+    [MTA trackPageViewBegin:@"RORRecommendViewController"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"RORRecommendViewController"];
+}
+
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"RORRecommendViewController"];
 }
 
 -(IBAction)backAction:(id)sender{

@@ -57,16 +57,24 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"AddFriendViewController"];
+    [MTA trackPageViewBegin:@"AddFriendViewController"];
+
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"AddFriendViewController"];
 }
+
+-(void) viewDidDisappear:(BOOL)animated {
+     [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"AddFriendViewController"];
+}
 #pragma mark - Actions
 
 - (IBAction)invateWeixinAction:(id)sender {
     [MobClick event:@"inviteClick"];
+    [MTA trackCustomKeyValueEvent:@"inviteClick" props:nil];
     [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeApp;
     
     //todo 这个URL是app的URL还是什么？
@@ -103,6 +111,7 @@
 - (IBAction)refreshRecommendAction:(id)sender {
     recommendPage++;
     [MobClick event:@"recommendRefreshClick"];
+     [MTA trackCustomKeyValueEvent:@"recommendRefreshClick" props:nil];
     [self startIndicator:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSArray *tmpList = [RORFriendService fetchRecommendFriends:[NSNumber numberWithInteger:recommendPage]];
@@ -123,6 +132,7 @@
 
 - (IBAction)follow:(id)sender{
     [MobClick event:@"followFriendClick"];
+    [MTA trackCustomKeyValueEvent:@"followFriendClick" props:nil];
     NSInteger row = [self rowOfButton:sender];
     addingFriend = (Search_Friend *)[contentList objectAtIndex:row];
     [self startIndicator:self];
@@ -141,6 +151,7 @@
 
 - (IBAction)deFollow:(id)sender{
     [MobClick event:@"defollowFriendClick"];
+    [MTA trackCustomKeyValueEvent:@"defollowFriendClick" props:nil];
     NSInteger row = [self rowOfButton:sender];
     addingFriend = (Search_Friend *)[contentList objectAtIndex:row];
     [self startIndicator:self];

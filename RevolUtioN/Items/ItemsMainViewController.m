@@ -42,6 +42,7 @@
     
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"ItemsMainViewController"];
+    [MTA trackPageViewBegin:@"ItemsMainViewController"];
     if ([RORUserUtils getUserId].integerValue>0){
         itemList = [RORUserPropsService fetchUserProps:[RORUserUtils getUserId]];
         
@@ -61,6 +62,11 @@
     [MobClick endLogPageView:@"ItemsMainViewController"];
 }
 
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"ItemsMainViewController"];
+}
+
 
 
 #pragma mark Actions
@@ -68,6 +74,7 @@
 - (IBAction)mallAction:(id)sender {
     
     [MobClick event:@"itemMallClick"];
+    [MTA trackCustomKeyValueEvent:@"itemMallClick" props:nil];
     UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"ItemsStoryboard" bundle:[NSBundle mainBundle]];
     UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"mallCoverViewController"];
     mallCoverView = (CoverView *)itemViewController.view;

@@ -53,11 +53,16 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"MissionDoneCongratsViewController"];
+    [MTA trackPageViewBegin:@"MissionDoneCongratsViewController"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"MissionDoneCongratsViewController"];
+}
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"MissionDoneCongratsViewController"];
 }
 
 /*

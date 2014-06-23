@@ -14,6 +14,8 @@
 #import <TencentOpenAPI/QQApiInterface.h>  
 #import "MobClick.h"
 #import "UMSocial.h"
+#import "MTA.h"
+#import "MTAConfig.h"
 #import "UMSocialWechatHandler.h"
 #import "RORFriendService.h"
 #import "RORUserServices.h"

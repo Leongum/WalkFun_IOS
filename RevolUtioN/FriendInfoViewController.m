@@ -108,6 +108,12 @@
     [super viewWillAppear:animated];
     [self refreshView];
     [MobClick beginLogPageView:@"FriendInfoViewController"];
+    [MTA trackPageViewBegin:@"FriendInfoViewController"];
+}
+
+-(void) viewDidDisappear:(BOOL)animated {
+     [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"FriendInfoViewController"];
 }
 
 -(void)viewDidAppear:(BOOL)animated{

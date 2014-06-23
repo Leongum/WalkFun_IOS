@@ -41,12 +41,18 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"RORAboutViewController"];
+    [MTA trackPageViewBegin:@"RORAboutViewController"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"RORAboutViewController"];
 }
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"RORAboutViewController"];
+}
+
 #pragma mark -
 #pragma mark Table view data source
 

@@ -52,12 +52,18 @@
     [super viewWillAppear:animated];
     self.nicknameTextField.alpha = 0;
     [MobClick beginLogPageView:@"RORLoginViewController"];
+    [MTA trackPageViewBegin:@"RORLoginViewController"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"RORLoginViewController"];
+}
+
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"RORLoginViewController"];
 }
 
 -(IBAction)backAction:(id)sender{

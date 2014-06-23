@@ -153,6 +153,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"RORMainViewController"];
+    [MTA trackPageViewBegin:@"RORMainViewController"];
     //未登录
     if ([RORUserUtils getUserId].integerValue<0) {
         //        UIViewController *loginViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"RORLoginNavigatorController"];
@@ -201,6 +202,11 @@
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"RORMainViewController"];
+}
+
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"RORMainViewController"];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -400,6 +406,8 @@
         [controller viewWillAppear:NO];
     }
     [MobClick event:@"slideClick"];
+    [MTA trackCustomKeyValueEvent:@"slideClick" props:nil];
+
     
     NSMutableDictionary *userInfoDict = [RORUserUtils getUserInfoPList];
     if (![userInfoDict objectForKey:InstructionOrder_toString[3]] && page == 0){
@@ -453,6 +461,7 @@
 
 - (IBAction)showHistoryAction:(id)sender {
     [MobClick event:@"historyClick"];
+    [MTA trackCustomKeyValueEvent:@"historyClick" props:nil];
     mainStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
     UIViewController *historyViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"historyListViewController"];
     [self presentViewController:historyViewController animated:YES completion:^(){}];
@@ -494,6 +503,7 @@
 - (void) allBackendSyncMethod: (NSNotification*) aNotification
 {
     [MobClick event:@"allSyncCallTimes"];
+    [MTA trackCustomKeyValueEvent:@"allSyncCallTimes" props:nil];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [RORUserUtils syncSystemData];
         [RORUserUtils syncUserData];
@@ -507,7 +517,8 @@
 
 - (void) userBackendSyncMethod: (NSNotification*) aNotification
 {
-     [MobClick event:@"userInfoSycnCall"];
+    [MobClick event:@"userInfoSycnCall"];
+    [MTA trackCustomKeyValueEvent:@"userInfoSycnCall" props:nil];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [RORUserUtils syncUserData];
         userBase = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
@@ -520,6 +531,7 @@
 
 - (IBAction)settingsAction:(id)sender {
     [MobClick event:@"settingClick"];
+    [MTA trackCustomKeyValueEvent:@"settingClick" props:nil];
     UIViewController *moreViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"moreViewController"];
     [self presentViewController:moreViewController animated:YES completion:^(){}];
 }
@@ -564,6 +576,7 @@
         if (alertType == ALERT_TYPE_GIVEUPMISSION){
             [self cancelMission];
             [MobClick event:@"giveupEventClick"];
+            [MTA trackCustomKeyValueEvent:@"giveupEventClick" props:nil];
         }
         else if (alertType == ALERT_TYPE_TOAPPSTORE)
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_URL]];
@@ -589,6 +602,8 @@
 
 - (IBAction)ready2StartAction:(id)sender {
     [MobClick event:@"runClick"];
+    [MTA trackCustomKeyValueEvent:@"runClick" props:nil];
+
     ReadyToGoViewController *readyController = [mainStoryboard instantiateViewControllerWithIdentifier:@"ReadyToGoViewController"];
     CoverView *coverView = (CoverView *)readyController.view;
     [coverView addCoverBgImage:[RORUtils captureScreen] grayed:YES];

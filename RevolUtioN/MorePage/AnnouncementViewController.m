@@ -47,11 +47,17 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"AnnouncementViewController"];
+    [MTA trackPageViewBegin:@"AnnouncementViewController"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"AnnouncementViewController"];
+}
+
+-(void) viewDidDisappear:(BOOL)animated {
+     [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"AnnouncementViewController"];
 }
 
 /*

@@ -55,11 +55,16 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"ReadyUseItemViewController"];
+    [MTA trackPageViewBegin:@"ReadyUseItemViewController"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"ReadyUseItemViewController"];
+}
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"ReadyUseItemViewController"];
 }
 
 #pragma mark - Navigation

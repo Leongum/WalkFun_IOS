@@ -63,12 +63,19 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"ItemMallViewController"];
+    [MTA trackPageViewBegin:@"ItemMallViewController"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"ItemMallViewController"];
 }
+
+-(void) viewDidDisappear:(BOOL)animated {
+     [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"ItemMallViewController"];
+}
+
 
 #pragma mark Actions
 
@@ -85,6 +92,7 @@
             if (isServiceSuccess){
                 NSDictionary *dict = @{@"buyItem" : selectedItem.productName};
                 [MobClick event:@"itemBuyClick" attributes:dict];
+                [MTA trackCustomKeyValueEvent:@"itemBuyClick" props:dict];
                 userBase = [RORUserServices fetchUser:[RORUserUtils getUserId]];
                 userMoney = userBase.userDetail.goldCoin.integerValue;
                 [self sendNotification:@"购买成功"];

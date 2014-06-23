@@ -49,12 +49,18 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"LevelUpCongratsViewController"];
+     [MTA trackPageViewBegin:@"LevelUpCongratsViewController"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"LevelUpCongratsViewController"];
 }
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"LevelUpCongratsViewController"];
+}
+
 
 -(void)viewDidAppear:(BOOL)animated{
     self.titleLabel.alpha = 1;

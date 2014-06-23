@@ -40,6 +40,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"RORFriendsMainViewController"];
+    [MTA trackPageViewBegin:@"RORFriendsMainViewController"];
     followList = [RORFriendService fetchFriendFollowsList];
     fansList = [RORFriendService fetchFriendFansList];
     friendList = [RORFriendService fetchFriendEachFansList];
@@ -64,6 +65,10 @@
 {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"RORFriendsMainViewController"];
+}
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [MTA trackPageViewEnd:@"RORFriendsMainViewController"];
 }
 
 -(void)initFriendDisplayBool{
@@ -128,6 +133,7 @@
 
 - (IBAction)showFriendAction:(id)sender {
     [MobClick event:@"friendClcik"];
+     [MTA trackCustomKeyValueEvent:@"friendClcik" props:nil];
     showFans = YES;
     showFollow = YES;
     [self arrangeButtons];
@@ -138,6 +144,7 @@
 
 - (IBAction)showFansAction:(id)sender {
     [MobClick event:@"fanClick"];
+    [MTA trackCustomKeyValueEvent:@"fanClick" props:nil];
     showFollow = NO;
     showFans = YES;
     [self arrangeButtons];
@@ -148,6 +155,7 @@
 
 - (IBAction)showFollowAction:(id)sender {
     [MobClick event:@"followClick"];
+    [MTA trackCustomKeyValueEvent:@"followClick" props:nil];
     showFans = NO;
     showFollow = YES;
     [self arrangeButtons];
@@ -184,6 +192,7 @@
 
 - (IBAction)startDeletingAction:(id)sender {
     [MobClick event:@"removeClick"];
+     [MTA trackCustomKeyValueEvent:@"removeClick" props:nil];
     self.endDeletingButton.alpha = 1;
     [self.endDeletingButton slideInFrom:kFTAnimationTop duration:0.1 delegate:self];
     [self refreshTableView];
@@ -200,6 +209,7 @@
 
 - (IBAction)followAction:(id)sender{
     [MobClick event:@"followFriendClick"];
+     [MTA trackCustomKeyValueEvent:@"followFriendClick" props:nil];
     NSInteger row = [self rowOfButton:sender];
     deletingFriend = (Friend *)[contentList objectAtIndex:row];
     [self startIndicator:self];
@@ -224,6 +234,7 @@
 
 - (IBAction)deFollowAction:(id)sender{
     [MobClick event:@"defollowFriendClick"];
+     [MTA trackCustomKeyValueEvent:@"defollowFriendClick" props:nil];
     NSInteger row = [self rowOfButton:sender];
     deletingFriend = (Friend *)[contentList objectAtIndex:row];
     [self startIndicator:self];
