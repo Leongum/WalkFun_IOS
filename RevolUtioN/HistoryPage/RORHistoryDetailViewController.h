@@ -18,6 +18,7 @@
 #import "ItemIconView.h"
 #import "ReportViewController.h"
 #import "FightIconButton.h"
+#import "HistoryShareView.h"
 
 #define ICON_SIZE_ITEM 50
 

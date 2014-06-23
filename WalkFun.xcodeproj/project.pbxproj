@@ -346,6 +346,10 @@
 		30FC340818AE182500D3AC3A /* ItemsMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FC340718AE182500D3AC3A /* ItemsMainViewController.m */; };
 		30FC340B18AE75F300D3AC3A /* ItemMallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FC340A18AE75F300D3AC3A /* ItemMallViewController.m */; };
 		30FC340E18AE791600D3AC3A /* CoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FC340D18AE791600D3AC3A /* CoverView.m */; };
+		30FD1755195817E3005F0155 /* HistoryShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FD1754195817E3005F0155 /* HistoryShareView.m */; };
+		30FD1757195818E0005F0155 /* history_share_mid.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FD1756195818E0005F0155 /* history_share_mid.png */; };
+		30FD1759195855FF005F0155 /* history_share_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FD1758195855FF005F0155 /* history_share_top.png */; };
+		30FD175B195862DF005F0155 /* history_share_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FD175A195862DF005F0155 /* history_share_bottom.png */; };
 		30FE2C8118C1CFCD0077C5A0 /* vase.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FE2C8018C1CFCD0077C5A0 /* vase.png */; };
 		30FE2C8518C1EA7D0077C5A0 /* loginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FE2C8318C1EA7D0077C5A0 /* loginButton.png */; };
 		30FE2C8618C1EA7D0077C5A0 /* loginButtonContainer.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FE2C8418C1EA7D0077C5A0 /* loginButtonContainer.png */; };
@@ -865,6 +869,11 @@
 		30FC340A18AE75F300D3AC3A /* ItemMallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemMallViewController.m; path = Items/ItemMallViewController.m; sourceTree = "<group>"; };
 		30FC340C18AE791600D3AC3A /* CoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoverView.h; path = ReusableControl/CoverView.h; sourceTree = "<group>"; };
 		30FC340D18AE791600D3AC3A /* CoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoverView.m; path = ReusableControl/CoverView.m; sourceTree = "<group>"; };
+		30FD1753195817E3005F0155 /* HistoryShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HistoryShareView.h; path = HistoryPage/HistoryShareView.h; sourceTree = "<group>"; };
+		30FD1754195817E3005F0155 /* HistoryShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HistoryShareView.m; path = HistoryPage/HistoryShareView.m; sourceTree = "<group>"; };
+		30FD1756195818E0005F0155 /* history_share_mid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history_share_mid.png; sourceTree = "<group>"; };
+		30FD1758195855FF005F0155 /* history_share_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history_share_top.png; sourceTree = "<group>"; };
+		30FD175A195862DF005F0155 /* history_share_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history_share_bottom.png; sourceTree = "<group>"; };
 		30FE2C8018C1CFCD0077C5A0 /* vase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vase.png; sourceTree = "<group>"; };
 		30FE2C8318C1EA7D0077C5A0 /* loginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginButton.png; sourceTree = "<group>"; };
 		30FE2C8418C1EA7D0077C5A0 /* loginButtonContainer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginButtonContainer.png; sourceTree = "<group>"; };
@@ -1545,6 +1554,9 @@
 		30978DA017EDA57E00CA58B9 /* history */ = {
 			isa = PBXGroup;
 			children = (
+				30FD175A195862DF005F0155 /* history_share_bottom.png */,
+				30FD1758195855FF005F0155 /* history_share_top.png */,
+				30FD1756195818E0005F0155 /* history_share_mid.png */,
 				30CF1FAD193A14F500790DB9 /* item_list_left.png */,
 				30CF1FAE193A14F500790DB9 /* item_list_right.png */,
 				3022E00318EDC1EE00F3A9D5 /* history_report_normal.png */,
@@ -1685,6 +1697,8 @@
 		30BB0AFA1761C5AF0009A847 /* RORHistoryPage */ = {
 			isa = PBXGroup;
 			children = (
+				30FD1753195817E3005F0155 /* HistoryShareView.h */,
+				30FD1754195817E3005F0155 /* HistoryShareView.m */,
 				0FA751DE189279E70037342E /* RORHistoryDetailViewController.h */,
 				0FA751DF189279E70037342E /* RORHistoryDetailViewController.m */,
 				30DB020F18C5CCA1008863B8 /* LevelUpCongratsViewController.h */,
@@ -2015,6 +2029,7 @@
 				30CF1FAA193622A500790DB9 /* ins_active_region.png in Resources */,
 				3022DFCD18DFDEA000F3A9D5 /* item_mall_bg.png in Resources */,
 				30692D3F180D800200DA01EC /* logo.png in Resources */,
+				30FD175B195862DF005F0155 /* history_share_bottom.png in Resources */,
 				30CF1FAC1939B41800790DB9 /* friend_follow_switch_button1.png in Resources */,
 				3022DFD318E00C6600F3A9D5 /* friend_add_cell.png in Resources */,
 				3022DFC518DBF6D600F3A9D5 /* alert_bg.png in Resources */,
@@ -2053,6 +2068,7 @@
 				3013D4A918C0D273005F4C07 /* exslim_female.png in Resources */,
 				3013D49F18C05CBD005F4C07 /* normal_male.png in Resources */,
 				30DC91FF18FD1A78006B6A4C /* grass_male.png in Resources */,
+				30FD1757195818E0005F0155 /* history_share_mid.png in Resources */,
 				30DBB71F17EF300E00552391 /* textfield.png in Resources */,
 				3022DFDD18E06CDA00F3A9D5 /* history_detail_sum.png in Resources */,
 				0F0B64D118F3E27C003B0E15 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
@@ -2136,6 +2152,7 @@
 				0F07AC4217E98FA00009C8A8 /* switch_off.png in Resources */,
 				30FAA215186417DF00E72650 /* notSure.png in Resources */,
 				3022DFF818EBEE8D00F3A9D5 /* friend_add_cell_disabled.png in Resources */,
+				30FD1759195855FF005F0155 /* history_share_top.png in Resources */,
 				0F07AC4317E98FA00009C8A8 /* switch_on.png in Resources */,
 				30978DA317EDA57E00CA58B9 /* history_detail_bg.png in Resources */,
 				30DB020618C45F68008863B8 /* running_paper.png in Resources */,
@@ -2227,6 +2244,7 @@
 				0FDE82F4189383160082B1BF /* Action.m in Sources */,
 				0FDE82F7189383160082B1BF /* Friend_Sort.m in Sources */,
 				0FA75192189279A90037342E /* RORUserUtils.m in Sources */,
+				30FD1755195817E3005F0155 /* HistoryShareView.m in Sources */,
 				0FA7520C18927A300037342E /* main.m in Sources */,
 				30BDBE69182A3BA4001829D5 /* RORFriendsMainViewController.m in Sources */,
 				0FA751721892798F0037342E /* RORNormalButton.m in Sources */,

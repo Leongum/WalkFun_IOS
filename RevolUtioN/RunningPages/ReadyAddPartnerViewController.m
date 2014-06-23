@@ -111,9 +111,9 @@
     int addFight = thisFriend.userDetail.fight.intValue + thisFriend.userDetail.fightPlus.intValue;
     addFight/=5;
     friendFightLabel.text = [NSString stringWithFormat:@" +%d",addFight];
-    if (days<=4){
+    if (days<=2){
         UILabel *leftDaysLabel = (UILabel *)[cell viewWithTag:102];
-        leftDaysLabel.text = [NSString stringWithFormat:@"%d天", 5-days];
+        leftDaysLabel.text = [NSString stringWithFormat:@"%d天", 3-days];
     } else {
         UILabel *upLabel = (UILabel *)[cell viewWithTag:102];
         upLabel.alpha = (thisFriend.userDetail.fightPlus.integerValue>0);
@@ -127,7 +127,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Friend *userFriend = [contentList objectAtIndex:indexPath.row];
     int days = ((NSNumber *)[cdDict objectForKey:userFriend.userId]).intValue;
-    if (days>4){
+    if (days>2){
         User_Base *friend = [RORUserServices fetchUser:userFriend.userId];
         int addFight = friend.userDetail.fight.intValue + friend.userDetail.fightPlus.intValue;
         addFight/=5;
@@ -151,4 +151,5 @@
         [self sendAlart:@"让人家再歇歇嘛"];
     }
 }
+
 @end
