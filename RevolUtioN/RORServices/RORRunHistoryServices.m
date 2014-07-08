@@ -45,6 +45,27 @@
     
 }
 
++(User_Running_History *)fetchRunHistoryByMissionStartTime:(NSDate *) missionStartTime withContext:(NSManagedObjectContext *) context{
+    
+    NSString *table=@"User_Running_History";
+    NSString *query = @"missionStartTime = %@";
+    NSArray *params = [NSArray arrayWithObjects:missionStartTime, nil];
+    Boolean needContext = true;
+    if(context == nil){
+        context = [RORContextUtils getPrivateContext];
+        needContext = false;
+    }
+    NSArray *fetchObject = [RORContextUtils fetchFromDelegate:table withParams:params withPredicate:query withContext:context];
+    if (fetchObject == nil || [fetchObject count] == 0) {
+        return nil;
+    }
+    if (!needContext) {
+        return [User_Running_History removeAssociateForEntity:(User_Running_History *) [fetchObject objectAtIndex:0] withContext:context];
+    }
+    return (User_Running_History *) [fetchObject objectAtIndex:0];
+    
+}
+
 //open out
 +(NSArray*)fetchRunHistoryByUserId:(NSNumber*)userId{
     return [self fetchRunHistoryByUserId:userId withContext:nil];
@@ -196,7 +217,13 @@
     //check uuid
     if(runningHistory.runUuid != nil){
         NSManagedObjectContext *context = [RORContextUtils getPrivateContext];
-        User_Running_History *runHistory = [NSEntityDescription insertNewObjectForEntityForName:@"User_Running_History" inManagedObjectContext:context];
+        User_Running_History *runHistory = [self fetchRunHistoryByMissionStartTime:runningHistory.missionStartTime withContext:context];
+        
+        if (!runHistory)
+            runHistory = [NSEntityDescription insertNewObjectForEntityForName:@"User_Running_History" inManagedObjectContext:context];
+        
+//        [runHistory copyFromUserRunningHistory:runningHistory];
+        
         //loop through all attributes and assign then to the clone
         NSDictionary *attributes = [[NSEntityDescription
                                      entityForName:@"User_Running_History"
@@ -230,8 +257,6 @@
     }
     return [historyList copy];
 }
-
-
 
 
 @end

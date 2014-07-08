@@ -45,6 +45,8 @@
 
 +(User_Running_History *) removeAssociateForEntity:(User_Running_History *)associatedEntity withContext:(NSManagedObjectContext *) context;
 
+-(void)copyFromUserRunningHistory:(User_Running_History *)history;
+
 -(void)initWithDictionary:(NSDictionary *)dict;
 
 -(NSMutableDictionary *)transToDictionary;

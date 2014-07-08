@@ -75,22 +75,24 @@
     
     [MobClick event:@"itemMallClick"];
     [MTA trackCustomKeyValueEvent:@"itemMallClick" props:nil];
-    UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"ItemsStoryboard" bundle:[NSBundle mainBundle]];
-    UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"mallCoverViewController"];
-    mallCoverView = (CoverView *)itemViewController.view;
-    //debug
-//    [mallCoverView setBgImage:coverImage];
+    [self itemMallAction:self];
     
-    UIButton *itemMallButton = (UIButton *)[mallCoverView viewWithTag:200];
-    [itemMallButton addTarget:self action:@selector(itemMallAction:) forControlEvents:UIControlEventTouchUpInside];
-    UIButton *lingqingButton = (UIButton *)[mallCoverView viewWithTag:201];
-    [lingqingButton addTarget:self action:@selector(lingqianAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [mallCoverView addCoverBgImage:[RORUtils captureScreen] grayed:YES];
-    [[self parentViewController].view addSubview:mallCoverView];
-    [mallCoverView appear:self];
-    
-    [RORUtils setFontFamily:APP_FONT forView:mallCoverView andSubViews:YES];
+//    UIStoryboard *itemStoryboard = [UIStoryboard storyboardWithName:@"ItemsStoryboard" bundle:[NSBundle mainBundle]];
+//    UIViewController *itemViewController =  [itemStoryboard instantiateViewControllerWithIdentifier:@"mallCoverViewController"];
+//    mallCoverView = (CoverView *)itemViewController.view;
+//    //debug
+////    [mallCoverView setBgImage:coverImage];
+//    
+//    UIButton *itemMallButton = (UIButton *)[mallCoverView viewWithTag:200];
+//    [itemMallButton addTarget:self action:@selector(itemMallAction:) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *lingqingButton = (UIButton *)[mallCoverView viewWithTag:201];
+//    [lingqingButton addTarget:self action:@selector(lingqianAction:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [mallCoverView addCoverBgImage:[RORUtils captureScreen] grayed:YES];
+//    [[self parentViewController].view addSubview:mallCoverView];
+//    [mallCoverView appear:self];
+//    
+//    [RORUtils setFontFamily:APP_FONT forView:mallCoverView andSubViews:YES];
 
 }
 

@@ -77,77 +77,81 @@
 }
 
 -(void)checkDailyMission{
-    
-    todayMission = [RORMissionServices getTodayMission];
-    if (todayMission){
-        NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
-        NSNumber *missionUseItemQuantity = [userInfoList valueForKey:@"missionUseItemQuantity"];
-        if (todayMission.missionTypeId.integerValue == MissionTypeUseItem){
-            if (missionUseItemQuantity.integerValue<0 || missionUseItemQuantity==nil){
-                //接到使用道具的任务，初始化missionUseItemQuantity为总次数
-                [userInfoList setObject:todayMission.triggerNumbers forKey:@"missionUseItemQuantity"];
-                [RORUserUtils writeToUserInfoPList:userInfoList];
-            } else {
-                //如果使用道具的任务完成了
-                if (missionUseItemQuantity.integerValue == 0){
-                    //保存任务数据
-                    User_Mission_History *mh = [User_Mission_History intiUnassociateEntity:[RORContextUtils getPrivateContext]];
-                    mh.userId = [RORUserUtils getUserId];
-                    mh.userName = [RORUserUtils getUserName];
-                    mh.missionId = todayMission.missionId;
-                    mh.missionName = todayMission.missionName;
-                    mh.missionStatus = [NSNumber numberWithInteger: MissionStatusDone];
-                    mh.missionTypeId = todayMission.missionTypeId;
-                    mh.startTime = [NSDate date];
-                    mh.endTime = [NSDate date];
-                    [RORMissionHistoyService saveMissionHistoryInfoToDB:mh];
-                    
-                    //显示任务完成提示
-                    UIViewController *missionDoneViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"missionCongratsVIewController"];
-                    [coverViewQueue addObject:missionDoneViewController];
-//                    CoverView *congratsCoverView = (CoverView *)missionDoneViewController.view;
-//                    [congratsCoverView addCoverBgImage:[RORUtils captureScreen] grayed:YES];
-//                    [self.view addSubview:congratsCoverView];
-//                    [congratsCoverView appear:self];
-                    
-                    UIView *missionCongratsView = missionDoneViewController.view;
-                    UILabel *missionNameLabel = (UILabel *)[missionCongratsView viewWithTag:100];
-                    UILabel *missionGoldLabel = (UILabel *)[missionCongratsView viewWithTag:101];
-                    UILabel *missionExpLabel = (UILabel *)[missionCongratsView viewWithTag:102];
-                    UILabel *missionDoneLabel = (UILabel *)[missionCongratsView viewWithTag:103];
-                    
-                    missionNameLabel.text = todayMission.missionDescription;
-                    missionGoldLabel.text = [NSString stringWithFormat:@"+%d",todayMission.goldCoin.intValue];
-                    missionExpLabel.text = [NSString stringWithFormat:@"+%d",todayMission.experience.intValue];
-                    NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
-                    NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
-                    int mp = missionProcess.intValue;
-                    if (++mp>3)
-                        mp = 3;
-                    //修改plist中的任务相关标记
-                    [userInfoList setObject:[NSNumber numberWithInteger:mp] forKey:@"missionProcess"];
-                    [userInfoList setObject:[NSNumber numberWithInteger:-1] forKey:@"missionUseItemQuantity"];
-                    [userInfoList setObject:[NSDate date] forKey:@"lastDailyMissionFinishedDate"];
-                    [RORUserUtils writeToUserInfoPList:userInfoList];
-                    
-                    if (mp < 3)
-                        missionDoneLabel.text = [NSString stringWithFormat:@"再完成%d次任务获得奖励", 3-mp];
-                    else
-                        missionDoneLabel.text = @"快去首页看看宝箱里有什么吧！";
-                    return;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        todayMission = [RORMissionServices getTodayMission];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (todayMission){
+                NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+                NSNumber *missionUseItemQuantity = [userInfoList valueForKey:@"missionUseItemQuantity"];
+                if (todayMission.missionTypeId.integerValue == MissionTypeUseItem){
+                    if (missionUseItemQuantity.integerValue<0 || missionUseItemQuantity==nil){
+                        //接到使用道具的任务，初始化missionUseItemQuantity为总次数
+                        [userInfoList setObject:todayMission.triggerNumbers forKey:@"missionUseItemQuantity"];
+                        [RORUserUtils writeToUserInfoPList:userInfoList];
+                    } else {
+                        //如果使用道具的任务完成了
+                        if (missionUseItemQuantity.integerValue == 0){
+                            //保存任务数据
+                            User_Mission_History *mh = [User_Mission_History intiUnassociateEntity:[RORContextUtils getPrivateContext]];
+                            mh.userId = [RORUserUtils getUserId];
+                            mh.userName = [RORUserUtils getUserName];
+                            mh.missionId = todayMission.missionId;
+                            mh.missionName = todayMission.missionName;
+                            mh.missionStatus = [NSNumber numberWithInteger: MissionStatusDone];
+                            mh.missionTypeId = todayMission.missionTypeId;
+                            mh.startTime = [NSDate date];
+                            mh.endTime = [NSDate date];
+                            [RORMissionHistoyService saveMissionHistoryInfoToDB:mh];
+                            
+                            //显示任务完成提示
+                            UIViewController *missionDoneViewController =  [mainStoryboard instantiateViewControllerWithIdentifier:@"missionCongratsVIewController"];
+                            [coverViewQueue addObject:missionDoneViewController];
+                            //                    CoverView *congratsCoverView = (CoverView *)missionDoneViewController.view;
+                            //                    [congratsCoverView addCoverBgImage:[RORUtils captureScreen] grayed:YES];
+                            //                    [self.view addSubview:congratsCoverView];
+                            //                    [congratsCoverView appear:self];
+                            
+                            UIView *missionCongratsView = missionDoneViewController.view;
+                            UILabel *missionNameLabel = (UILabel *)[missionCongratsView viewWithTag:100];
+                            UILabel *missionGoldLabel = (UILabel *)[missionCongratsView viewWithTag:101];
+                            UILabel *missionExpLabel = (UILabel *)[missionCongratsView viewWithTag:102];
+                            UILabel *missionDoneLabel = (UILabel *)[missionCongratsView viewWithTag:103];
+                            
+                            missionNameLabel.text = todayMission.missionDescription;
+                            missionGoldLabel.text = [NSString stringWithFormat:@"+%d",todayMission.goldCoin.intValue];
+                            missionExpLabel.text = [NSString stringWithFormat:@"+%d",todayMission.experience.intValue];
+                            NSMutableDictionary *userInfoList = [RORUserUtils getUserInfoPList];
+                            NSNumber *missionProcess = (NSNumber *)[userInfoList objectForKey:@"missionProcess"];
+                            int mp = missionProcess.intValue;
+                            if (++mp>3)
+                                mp = 3;
+                            //修改plist中的任务相关标记
+                            [userInfoList setObject:[NSNumber numberWithInteger:mp] forKey:@"missionProcess"];
+                            [userInfoList setObject:[NSNumber numberWithInteger:-1] forKey:@"missionUseItemQuantity"];
+                            [userInfoList setObject:[NSDate date] forKey:@"lastDailyMissionFinishedDate"];
+                            [RORUserUtils writeToUserInfoPList:userInfoList];
+                            
+                            if (mp < 3)
+                                missionDoneLabel.text = [NSString stringWithFormat:@"再完成%d次任务获得奖励", 3-mp];
+                            else
+                                missionDoneLabel.text = @"快去首页看看宝箱里有什么吧！";
+                            return;
+                        }
+                    }
                 }
+                
+                if (missionUseItemQuantity.intValue>0){
+                    [userInfoList setObject:[NSNumber numberWithInteger:-1] forKey:@"missionUseItemQuantity"];
+                    [RORUserUtils writeToUserInfoPList:userInfoList];
+                }
+                
+                self.missionContentLabel.text = todayMission.missionDescription;
+                [Animations moveUp:self.missionView andAnimationDuration:1 andWait:NO andLength:100];
             }
-        }
-        
-        if (missionUseItemQuantity.intValue>0){
-            [userInfoList setObject:[NSNumber numberWithInteger:-1] forKey:@"missionUseItemQuantity"];
-            [RORUserUtils writeToUserInfoPList:userInfoList];
-        }
-        
-        self.missionContentLabel.text = todayMission.missionDescription;
-        [Animations moveUp:self.missionView andAnimationDuration:1 andWait:NO andLength:100];
-    }
-    isFolded = NO;
+            isFolded = NO;
+        });
+    });
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -386,7 +390,7 @@
 // at the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    if (!isFolded){
+    if (!isFolded && todayMission){
         [self hideorshowDailyMissionBoardAction:self];
     }
 }
@@ -512,7 +516,8 @@
         userBase = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self viewWillAppear:NO];
-            [self checkDailyMission];
+//            [self checkDailyMission];
+            [self viewDidAppear:NO];
         });
     });
 }
@@ -526,6 +531,7 @@
         userBase = [RORUserServices syncUserInfoById:[RORUserUtils getUserId]];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self viewWillAppear:NO];
+            [self viewDidAppear:NO];
         });
     });
 }

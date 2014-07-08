@@ -16,7 +16,7 @@
 #define SERVICE_HOST @"http://www.cyberace.cc:9090/service/api"
 
 #define CURRENT_VERSION_MAIN 1
-#define CURRENT_VERSION_SUB 1
+#define CURRENT_VERSION_SUB 2
 #define CURRENT_VERSION_DESC 1
 
 // --- user api ---

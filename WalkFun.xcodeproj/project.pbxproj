@@ -2490,7 +2490,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = WalkFun;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "E5797C1E-FC8B-48A6-A8A5-94F0A829E6FB";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -2500,8 +2500,8 @@
 		302FD0491727D870004DA005 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bingyang Zhao (8RLLL2GT4J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bingyang Zhao (8RLLL2GT4J)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/UMeng/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
@@ -2521,7 +2521,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = WalkFun;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "E5797C1E-FC8B-48A6-A8A5-94F0A829E6FB";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				"VALID_ARCHS[sdk=*]" = "armv7 armv7s";

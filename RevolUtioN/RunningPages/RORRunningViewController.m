@@ -481,6 +481,11 @@
     
     [self checkTodayMission];
     
+    if (((int)duration)%60==0 && isAWalking){
+        [self creatRunningHistory];
+        [RORRunHistoryServices saveRunInfoToDB:runHistory];
+    }
+    
     //记录疲劳时间，从体力为零的时刻开始算
     if (userPower==0){
         secondsSince0power++;
@@ -631,10 +636,10 @@
                 [RORFriendService syncFriends:[RORUserUtils getUserId]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(updated){
-                    [self sendSuccess:@"保存成功"];
+                    [self sendSuccess:@"上传成功"];
                 }
                 else{
-                    [self sendAlart:@"上传失败，请手动同步记录"];
+                    [self sendAlart:@"上传失败，在网络通畅的环境下将重新上传"];
                     
                     NSMutableDictionary *dict = [RORUserUtils getUserInfoPList];
                     NSNumber *syncIns = [dict objectForKey:@"SyncInstruction"];
@@ -649,7 +654,10 @@
 }
 
 -(void)creatRunningHistory{
-    runHistory = [User_Running_History intiUnassociateEntity:[RORContextUtils getPrivateContext]];
+    if (!runHistory)
+        //初始化记录实体
+        runHistory = [User_Running_History intiUnassociateEntity:[RORContextUtils getPrivateContext]];
+    
     runHistory.distance = [NSNumber numberWithDouble:distance];
     runHistory.duration = [NSNumber numberWithDouble:duration];
     runHistory.avgSpeed = [NSNumber numberWithDouble:(double)(distance/duration*3.6)];

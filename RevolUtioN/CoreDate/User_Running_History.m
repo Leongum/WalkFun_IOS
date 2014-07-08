@@ -90,6 +90,38 @@
     self.friendName = [RORDBCommon getStringFromId:[dict valueForKey:@"friendName"]];
 }
 
+-(void)copyFromUserRunningHistory:(User_Running_History *)history{
+    self.avgSpeed = [RORDBCommon getNumberFromId:history.avgSpeed];
+    self.comment = [RORDBCommon getStringFromId:history.comment];
+    self.distance = [RORDBCommon getNumberFromId:history.distance];
+    self.userId = [RORDBCommon getNumberFromId:history.userId];
+    self.runUuid= [RORDBCommon getStringFromId:history.runUuid];
+    self.missionTypeId = [RORDBCommon getNumberFromId:history.missionTypeId];
+    self.missionRoute = [RORDBCommon getStringFromId:history.missionRoute];
+    self.missionStartTime = [RORDBCommon getDateFromId:history.missionStartTime];
+    self.missionEndTime = [RORDBCommon getDateFromId:history.missionEndTime];
+    self.missionDate = [RORDBCommon getDateFromId:history.missionDate];
+    self.spendCarlorie = [RORDBCommon getNumberFromId:history.spendCarlorie];
+    self.duration = [RORDBCommon getNumberFromId:history.duration];
+    self.missionGrade = [RORDBCommon getNumberFromId:history.missionGrade];
+    self.goldCoin = [RORDBCommon getNumberFromId:history.goldCoin];
+    self.extraGoldCoin = [RORDBCommon getNumberFromId:history.extraGoldCoin];
+    self.experience = [RORDBCommon getNumberFromId:history.experience];
+    self.extraExperience = [RORDBCommon getNumberFromId:history.extraExperience];
+    self.fatness = [RORDBCommon getNumberFromId:history.fatness];
+    self.health = [RORDBCommon getNumberFromId:history.health];
+    self.missionId = [RORDBCommon getNumberFromId:history.missionId];
+    self.steps = [RORDBCommon getNumberFromId:history.steps];
+    self.commitTime = [RORDBCommon getDateFromId:history.commitTime];
+    self.valid = [RORDBCommon getNumberFromId:history.valid];
+    self.missionUuid = [RORDBCommon getStringFromId:history.missionUuid];
+    self.sequence = [RORDBCommon getNumberFromId:history.sequence];
+    self.propGet = [RORDBCommon getStringFromId:history.propGet];
+    self.actionIds = [RORDBCommon getStringFromId:history.actionIds];
+    self.friendId = [RORDBCommon getNumberFromId:history.friendId];
+    self.friendName = [RORDBCommon getStringFromId:history.friendName];
+}
+
 -(NSMutableDictionary *)transToDictionary{
     NSLog(@"%@",self);
     NSMutableDictionary *tempoDict = [[NSMutableDictionary alloc] init];

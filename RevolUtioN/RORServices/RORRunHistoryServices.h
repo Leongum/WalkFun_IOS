@@ -19,6 +19,9 @@
 //根据 run uuid 获取某一条跑步的具体信息
 + (User_Running_History *)fetchRunHistoryByRunId:(NSString *) runUuid;
 
+//根据开始时间取记录
++(User_Running_History *)fetchRunHistoryByMissionStartTime:(NSDate *) missionStartTime withContext:(NSManagedObjectContext *) context;
+    
 //上传本地还未上传的跑步历史记录
 + (BOOL)uploadRunningHistories;
 
